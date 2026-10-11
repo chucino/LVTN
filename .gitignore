@@ -1,0 +1,9 @@
+backup/
+!/backup/
+backup/*
+!/backup/.gitkeep
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
