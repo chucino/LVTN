@@ -1,21 +1,72 @@
 import { Module } from '@nestjs/common';
-import { createObserveModule } from '@nestjs/observe';
-import { AppController } from './app.controller.js';
-import { AppService } from './app.service.js';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { JwtModule } from '@nestjs/jwt';
+import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 
-export const { ObserveModule, ObserveInstrument } = createObserveModule();
+import { DatabaseModule } from './database/database.module.js';
+import { UsersModule } from './modules/users/users.module.js';
+import { MailModule } from './modules/mail/mail.module.js';
+import { AuthModule } from './modules/auth/auth.module.js';
+
+import { JwtAuthGuard } from './common/guards/jwt-auth.guard.js';
+import { HttpExceptionFilter } from './common/filters/http-exception.filter.js';
+import { TransformInterceptor } from './common/interceptors/transform.interceptor.js';
 
 @Module({
   imports: [
-    // Distributed tracing, auto-correlated logs, request/job metrics, error
-    // telemetry, alarms, and more — out of the box. Sign up at https://observe.nestjs.com
-    ObserveModule.forRoot({
-      appKey: 'YOUR_APP_KEY',
-      appSecret: 'YOUR_APP_SECRET',
-      serviceId: 'server',
+    // Quản lý biến môi trường toàn cục
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: '.env',
     }),
+
+    // Giới hạn tần suất request (chống brute force OTP và login)
+    ThrottlerModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: (config: ConfigService) => [
+        {
+          ttl: config.get<number>('THROTTLE_TTL', 60000),
+          limit: config.get<number>('THROTTLE_LIMIT', 20),
+        },
+      ],
+      inject: [ConfigService],
+    }),
+
+    // JWT Module toàn cục phục vụ JwtAuthGuard và các module
+    JwtModule.register({
+      global: true,
+    }),
+
+    // Module cơ sở dữ liệu MongoDB
+    DatabaseModule,
+
+    // Các module nghiệp vụ
+    UsersModule,
+    MailModule,
+    AuthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    // Guard JWT mặc định toàn cục cho toàn bộ hệ thống (dùng @Public() để mở)
+    {
+      provide: APP_GUARD,
+      useClass: JwtAuthGuard,
+    },
+    // Guard Throttler toàn cục
+    {
+      provide: APP_GUARD,
+      useClass: ThrottlerGuard,
+    },
+    // Exception filter tập trung
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+    // Interceptor chuẩn hóa format response
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TransformInterceptor,
+    },
+  ],
 })
 export class AppModule {}

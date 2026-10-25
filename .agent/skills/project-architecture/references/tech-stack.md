@@ -25,8 +25,8 @@ Mỗi công nghệ dùng cùng một khuôn mẫu (xem cuối file) để khi th
 
 | Hạng mục                               | Quyết định                                                                                                | Chi tiết ở mục             |
 | -------------------------------------- | --------------------------------------------------------------------------------------------------------- | -------------------------- |
-| Cơ sở dữ liệu                          | **PostgreSQL**                                                                                            | Cơ sở dữ liệu và ORM       |
-| ORM                                    | **Prisma** (kèm `@prisma/adapter-pg` và `pg`)                                                             | Cơ sở dữ liệu và ORM       |
+| Cơ sở dữ liệu                          | **MongoDB**                                                                                               | Cơ sở dữ liệu và ODM       |
+| ODM                                    | **Mongoose** (`@nestjs/mongoose`, `mongoose`)                                                             | Cơ sở dữ liệu và ODM       |
 | Xác thực                               | **Access token JWT ngắn hạn (giữ trong bộ nhớ client) + refresh token xoay vòng trong cookie `httpOnly`** | Xác thực (JWT + RBAC)      |
 | Băm mật khẩu                           | **argon2**                                                                                                | Xác thực (JWT + RBAC)      |
 | OTP                                    | **Lưu trong DB (bản băm), không dùng Redis**                                                              | Email và OTP               |
@@ -335,4 +335,5 @@ Ghi theo thời gian mỗi khi có công nghệ được thêm hoặc quyết đ
 ```md
 - 2026-10-02: Khởi tạo dự án — client: Vue 3 + Vite + TypeScript; server: NestJS + TypeScript (Prettier, oxlint, Vitest có sẵn). Giao diện dự kiến Vuetify + Tailwind CSS, icon lucide-vue-next.
 - 2026-10-03: Chốt các quyết định còn mở — PostgreSQL + Prisma (adapter-pg); JWT access ngắn hạn trong bộ nhớ + refresh token xoay vòng trong cookie httpOnly; argon2; OTP lưu DB; video YouTube Unlisted; QR VietQR dựng ở server; thanh toán thủ công + giả lập trước; chứng chỉ PDF bằng pdfkit; nội dung Markdown qua markdown-it + dompurify; ảnh đại diện lưu đĩa cục bộ; Chart.js; Vitest. Hoãn: hosting, dịch vụ webhook, cách chạy PostgreSQL khi phát triển, e2e giao diện.
+- 2026-10-11: Cập nhật quyết định DB theo lựa chọn của người dùng — Chuyển từ PostgreSQL + Prisma sang MongoDB + Mongoose (@nestjs/mongoose, mongoose); cấu hình gửi mail OTP bằng Gmail SMTP thật qua App Password ngay từ đầu.
 ```

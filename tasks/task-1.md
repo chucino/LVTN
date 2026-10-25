@@ -18,3 +18,33 @@
 - Tiếp tục: 2026-10-03 14:56 theo xác nhận của người dùng
 - Hoàn thành: 2026-10-03 14:58
 - Tóm tắt thay đổi: Bổ sung ignore root/client theo xác nhận; xóa ba thư mục server/src rỗng; giữ app.controller.ts, app.service.ts, app.module.ts và server/.gitignore nguyên trạng; đã báo cáo node_modules, ObserveModule và trạng thái Git. Không thao tác .git.
+
+## [x] #003 - Thiết lập MongoDB/Mongoose và xây dựng hệ thống Auth cho Server
+- Bắt đầu: 2026-10-11 14:38
+- Phạm vi: server
+- File liên quan: package.json, .agent/skills/project-architecture/references/tech-stack.md, .env.example, .env, src/main.ts, src/app.module.ts, src/common/, src/database/, src/modules/mail/, src/modules/users/, src/modules/auth/
+- Mô tả: Chuyển đổi công nghệ DB sang MongoDB + Mongoose theo lựa chọn của người dùng, tích hợp Gmail SMTP, xây dựng kiến trúc và module Auth hoàn chỉnh với RBAC, OTP, JWT Access/Refresh Token và bảo mật theo checklist.
+- Backup: backup/server/package.json.20261011-1438.bak, backup/.agent/skills/project-architecture/references/tech-stack.md.20261011-1438.bak, backup/server/src/app.module.ts.20261011-1441.bak, backup/server/src/main.ts.20261011-1441.bak, backup/server/src/app.controller.ts.20261011-1445.bak, backup/server/src/app.service.ts.20261011-1445.bak
+- Hoàn thành: 2026-10-11 14:48
+- Tóm tắt thay đổi: Chuyển DB sang MongoDB + Mongoose; tạo User schema, Otp schema, RefreshToken schema; tạo MailModule (Gmail SMTP); xây dựng AuthModule gồm 11 API endpoints (đăng ký OTP, xác thực OTP, gửi lại OTP, đăng nhập, xoay vòng refresh token qua httpOnly cookie, đăng xuất, quên mật khẩu chống dò email, đặt lại mật khẩu, getMe, và 2 route test RBAC cho Admin/Instructor); tích hợp JwtAuthGuard toàn cục, RolesGuard, HttpExceptionFilter, TransformInterceptor, Throttler rate limiting, Swagger UI; viết unit test Vitest 100% pass, oxlint 0 error.
+
+## [x] #004 - Đồng bộ thuộc tính sơ đồ lớp theo So_Do_Lop.md và thêm API Admin phân quyền tài khoản
+- Bắt đầu: 2026-10-25 20:58
+- Phạm vi: server
+- File liên quan: docs/So_Do_Lop.md, src/common/constants/user-status.enum.ts, src/modules/users/schemas/user.schema.ts, src/modules/users/users.service.ts, src/modules/auth/schemas/otp.schema.ts, src/modules/auth/dto/register.dto.ts, src/modules/auth/dto/assign-role.dto.ts, src/modules/auth/auth.service.ts, src/modules/auth/auth.controller.ts, src/modules/auth/auth.service.spec.ts
+- Mô tả: Rà soát và cập nhật thuộc tính các lớp User, Otp theo docs/So_Do_Lop.md (avatar, status, interestedCategories, codeHash, failedAttempts, dateOfBirth kiểu Date); thêm API Admin phân quyền cho tài khoản (PATCH /auth/users/:id/role); cập nhật DTOs, unit tests và tài liệu Postman.
+- Backup: backup/server/src/modules/users/schemas/user.schema.ts.20261025-2058.bak, backup/server/src/modules/users/users.service.ts.20261025-2058.bak, backup/server/src/modules/auth/schemas/otp.schema.ts.20261025-2058.bak, backup/server/src/modules/auth/auth.service.ts.20261025-2058.bak, backup/server/src/modules/auth/auth.controller.ts.20261025-2058.bak
+- Hoàn thành: 2026-10-25 21:03
+- Tóm tắt thay đổi: Đồng bộ User schema (thêm avatar, status UserStatus PENDING/ACTIVE/LOCKED, interestedCategories dạng ObjectId Category, dateOfBirth Date); đồng bộ Otp schema (codeHash, failedAttempts, purpose, expiresAt, isUsed); tạo AssignRoleDto và endpoint PATCH /auth/users/:id/role (bảo vệ quyền ADMIN, cấm tự hạ quyền admin của chính mình, thu hồi refresh token của user được phân quyền); cập nhật unit tests đạt 6/6 pass, oxlint 0 warnings/errors, build NestJS thành công.
+
+## [x] #005 - Tích hợp Auto-Seeder tài khoản ADMIN mặc định khi khởi chạy hệ thống
+- Bắt đầu: 2026-10-25 21:27
+- Phạm vi: server
+- File liên quan: src/modules/users/users.service.ts
+- Mô tả: Tự động khởi tạo tài khoản ADMIN mặc định (admin@nextcode.vn) khi server khởi động nếu cơ sở dữ liệu chưa có tài khoản Admin nào, giúp thuận tiện kiểm thử phân quyền ngay lập tức.
+- Backup: backup/server/src/modules/users/users.service.ts.20261025-2127.bak
+- Hoàn thành: 2026-10-25 21:28
+- Tóm tắt thay đổi: Thêm hook onApplicationBootstrap trong UsersService để tự động seed tài khoản admin@nextcode.vn với mật khẩu Admin@123456 nếu chưa có ADMIN nào trong DB; build và vitest 6/6 tests pass.
+
+
+
