@@ -76,7 +76,7 @@ const handleVerify = async () => {
     });
     successMessage.value = 'Xác thực tài khoản thành công! Đang chuyển hướng...';
     setTimeout(() => {
-      router.push('/dashboard');
+      router.replace('/');
     }, 1200);
   } catch (err: any) {
     errorMessage.value =

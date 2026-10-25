@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth.store';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 import { LogIn, Mail, Lock, Eye, EyeOff, ShieldAlert } from 'lucide-vue-next';
 
 const router = useRouter();
+const route = useRoute();
 const authStore = useAuthStore();
 
 const email = ref('');
@@ -25,7 +26,14 @@ const handleLogin = async () => {
       email: email.value.trim(),
       password: password.value,
     });
-    router.push('/dashboard');
+    const redirectTarget = route.query.redirect;
+    const destination =
+      typeof redirectTarget === 'string' &&
+      redirectTarget.startsWith('/') &&
+      !redirectTarget.startsWith('//')
+        ? redirectTarget
+        : '/';
+    router.replace(destination);
   } catch (err: any) {
     errorMessage.value =
       err.response?.data?.message || err.message || 'Đăng nhập không thành công';

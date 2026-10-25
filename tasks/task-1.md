@@ -72,3 +72,12 @@
 - Backup: backup/client/src/components/public/PublicHeader.vue.20261026-0004.bak, backup/client/src/pages/dashboard/DashboardPage.vue.20261026-0004.bak, backup/client/public/favicon.svg.20261026-0004.bak
 - Hoàn thành: 2026-10-26 00:10
 - Tóm tắt thay đổi: Dùng ảnh client/public/logo.jpg ở Header, Footer, AuthLayout và Dashboard; chuyển favicon trong client/index.html sang cùng ảnh JPEG. Giữ nguyên client/public/favicon.svg và client/public/logo.jpg đã có sẵn thay đổi trong worktree trước khi bắt đầu. Build/type-check thành công; browser xác nhận ảnh logo tải đúng 2048x2048 và favicon trỏ đến /logo.jpg. Còn cảnh báo build chunk lớn hơn 500 kB.
+
+## [x] #009 - Hoàn thiện điều hướng trang chủ sau Auth và từ Dashboard
+- Bắt đầu: 2026-10-26 00:38
+- Phạm vi: client
+- File liên quan: client/src/router/index.ts, client/src/pages/public/LoginPage.vue, client/src/pages/public/VerifyOtpPage.vue, client/src/pages/dashboard/DashboardPage.vue
+- Mô tả: Sau đăng nhập/đăng ký thành công ưu tiên quay lại trang đích an toàn được guard yêu cầu, mặc định về trang chủ; làm logo NextCode trên Dashboard thành liên kết về trang chủ để người dùng luôn điều hướng được.
+- Backup: backup/client/src/router/index.ts.20261026-0038.bak, backup/client/src/pages/dashboard/DashboardPage.vue.20261026-0038.bak
+- Hoàn thành: 2026-10-26 00:42
+- Tóm tắt thay đổi: Sau login, mặc định điều hướng về `/`; nếu guard truyền `redirect` nội bộ hợp lệ thì quay lại đúng trang được yêu cầu. Sau xác thực OTP đăng ký điều hướng về trang chủ. Người đã đăng nhập mở trang Login/Register cũng được chuyển về trang chủ thay vì Dashboard. Logo và tên NextCode trên Dashboard trở thành liên kết về `/`. `npm run build` và `git diff --check` thành công. Browser kiểm thử với API mock: login mặc định về trang chủ; truy cập Dashboard khi chưa đăng nhập rồi login thì trở lại Dashboard; logo Dashboard quay về trang chủ; xác thực OTP đăng ký quay về trang chủ. Dashboard hiện tại là Auth Portal hiển thị profile và công cụ kiểm thử Auth/RBAC, chưa phải dashboard học tập theo vai trò; chưa kiểm thử API thật.

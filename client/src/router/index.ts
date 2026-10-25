@@ -86,7 +86,7 @@ router.beforeEach(async (to, _, next) => {
 
   // Kiểm tra trang dành riêng cho khách chưa đăng nhập (login/register)
   if (to.meta.guestOnly && authStore.isAuthenticated) {
-    return next({ name: 'Dashboard' });
+    return next({ name: 'Home' });
   }
 
   next();

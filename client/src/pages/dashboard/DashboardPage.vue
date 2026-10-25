@@ -155,13 +155,17 @@ const formatDate = (dateString?: string | null) => {
     <!-- Navigation Header -->
     <header class="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-xl sticky top-0 z-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <div class="flex items-center gap-3">
+        <router-link
+          to="/"
+          aria-label="NextCode - Về trang chủ"
+          class="flex items-center gap-3 rounded-lg transition hover:opacity-80 focus-visible:outline focus-visible:outline-2 focus-visible:outline-indigo-400"
+        >
           <img src="/logo.jpg" alt="" class="w-9 h-9 rounded-xl bg-white object-contain p-1 shadow-md shadow-indigo-500/20" />
           <div>
             <span class="font-extrabold text-base tracking-tight bg-gradient-to-r from-white to-slate-300 bg-clip-text text-transparent">NextCode</span>
             <span class="text-[10px] ml-2 px-2 py-0.5 rounded-full bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 font-medium">Auth Portal</span>
           </div>
-        </div>
+        </router-link>
 
         <div class="flex items-center gap-3">
           <div class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/60 border border-slate-700/60 text-xs">
