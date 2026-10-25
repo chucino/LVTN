@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Code2, Sparkles } from 'lucide-vue-next';
+import { Sparkles } from 'lucide-vue-next';
 </script>
 
 <template>
@@ -18,9 +18,7 @@ import { Code2, Sparkles } from 'lucide-vue-next';
           <span>Nền tảng học lập trình trực tuyến</span>
         </div>
         <div class="flex items-center justify-center gap-2 text-2xl font-black tracking-tight text-white">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-600 to-cyan-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30">
-            <Code2 class="w-6 h-6" />
-          </div>
+          <img src="/logo.jpg" alt="" class="w-10 h-10 rounded-xl bg-white object-contain p-1 shadow-lg shadow-indigo-500/30" />
           <span class="bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">NextCode</span>
         </div>
         <p class="text-slate-400 text-sm mt-1">Học hôm nay, kiến tạo ngày mai</p>

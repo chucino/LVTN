@@ -64,3 +64,11 @@
 - Hoàn thành: 2026-10-25 23:37 (ghi nhận bổ sung sau khi triển khai; thời điểm hoàn tất code ở lượt trước không được ghi riêng)
 - Tóm tắt thay đổi: Đổi route `/` từ redirect dashboard sang trang chủ công khai bọc PublicLayout; thêm Header có tìm kiếm giao diện, trạng thái khách/đã đăng nhập, menu avatar và đăng xuất qua Auth store; thêm Footer dùng nội dung liên hệ giữ chỗ; xây Hero, lợi ích, khóa nổi bật/Free/Pro, quy trình 5 bước và CTA; thêm CourseCard cùng dữ liệu khóa học mẫu tách riêng. Tái sử dụng `isAuthenticated`, `refreshSession()`, `logout()` và endpoint `GET /auth/me` đã có ở frontend/backend, không thêm API. `npm run build` và `git diff --check` thành công; browser smoke test xác nhận trang chủ và guard chuyển khách chưa đăng nhập từ `/dashboard` sang `/login`, menu mobile có thể mở. Không xác minh được đăng nhập/đăng xuất thực tế vì API backend trả 502; kích thước viewport mobile trong browser tool không khớp kích thước đặt nên responsive geometry chưa được xác nhận đầy đủ. Dữ liệu khóa học vẫn là mẫu.
 
+## [x] #008 - Thay logo mặc định bằng logo NextCode do người dùng cung cấp
+- Bắt đầu: 2026-10-26 00:04
+- Phạm vi: client
+- File liên quan: client/public/logo.jpg, client/public/favicon.svg, client/src/components/public/PublicHeader.vue, client/src/components/public/PublicFooter.vue, client/src/layouts/AuthLayout.vue, client/src/pages/dashboard/DashboardPage.vue
+- Mô tả: Thay các biểu tượng thương hiệu mặc định bằng ảnh logo người dùng cung cấp trên giao diện công khai, Auth, Dashboard và favicon; giữ nguyên tên NextCode và nội dung giao diện còn lại.
+- Backup: backup/client/src/components/public/PublicHeader.vue.20261026-0004.bak, backup/client/src/pages/dashboard/DashboardPage.vue.20261026-0004.bak, backup/client/public/favicon.svg.20261026-0004.bak
+- Hoàn thành: 2026-10-26 00:10
+- Tóm tắt thay đổi: Dùng ảnh client/public/logo.jpg ở Header, Footer, AuthLayout và Dashboard; chuyển favicon trong client/index.html sang cùng ảnh JPEG. Giữ nguyên client/public/favicon.svg và client/public/logo.jpg đã có sẵn thay đổi trong worktree trước khi bắt đầu. Build/type-check thành công; browser xác nhận ảnh logo tải đúng 2048x2048 và favicon trỏ đến /logo.jpg. Còn cảnh báo build chunk lớn hơn 500 kB.

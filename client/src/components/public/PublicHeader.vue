@@ -5,7 +5,6 @@ import {
   Bell,
   BookOpen,
   ChevronDown,
-  Code2,
   LogOut,
   Menu,
   Search,
@@ -38,11 +37,11 @@ async function logout() {
   <header class="sticky top-0 z-40 border-b border-slate-800/80 bg-slate-950/90 backdrop-blur-xl">
     <div class="mx-auto flex min-h-[76px] max-w-7xl items-center gap-6 px-4 sm:px-6 lg:px-8">
       <router-link to="/" class="flex shrink-0 items-center gap-2.5" aria-label="NextCode - Trang chủ">
-        <span
-          class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-cyan-500 text-white shadow-lg shadow-indigo-900/40"
-        >
-          <Code2 class="h-6 w-6" />
-        </span>
+        <img
+          src="/logo.jpg"
+          alt=""
+          class="h-10 w-10 rounded-xl bg-white object-contain p-1 shadow-lg shadow-indigo-900/40"
+        />
         <span class="text-xl font-black tracking-tight text-white">Next<span class="text-cyan-300">Code</span></span>
       </router-link>
 

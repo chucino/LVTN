@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Code2, Github, Linkedin, Youtube } from 'lucide-vue-next';
+import { Github, Linkedin, Youtube } from 'lucide-vue-next';
 </script>
 
 <template>
@@ -7,9 +7,7 @@ import { Code2, Github, Linkedin, Youtube } from 'lucide-vue-next';
     <div class="mx-auto grid max-w-7xl gap-10 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
       <div class="md:col-span-2">
         <router-link to="/" class="inline-flex items-center gap-2.5">
-          <span class="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-indigo-600 to-cyan-500 text-white">
-            <Code2 class="h-5 w-5" />
-          </span>
+          <img src="/logo.jpg" alt="" class="h-9 w-9 rounded-xl bg-white object-contain p-1" />
           <span class="text-lg font-black text-white">Next<span class="text-cyan-300">Code</span></span>
         </router-link>
         <p class="mt-4 max-w-sm text-sm leading-6 text-slate-400">
