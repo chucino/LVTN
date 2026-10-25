@@ -55,5 +55,12 @@
 - Hoàn thành: 2026-10-25 21:55
 - Tóm tắt thay đổi: Hoàn thiện frontend Vue 3 + Tailwind CSS + Vuetify + Lucide icons: Thiết lập Axios Http client bảo mật (Access Token lưu trong memory Pinia, Refresh Token lưu tự động trong HttpOnly cookie, cơ chế xoay vòng và hàng đợi làm mới token khi gặp lỗi 401); Xây dựng đầy đủ các màn hình giao diện (LoginPage có nút điền nhanh admin, RegisterPage với đầy đủ các trường khớp So_Do_Lop.md, VerifyOtpPage có bộ đếm ngược 5 phút và nút gửi lại mã có cooldown 60s, ForgotPasswordPage, ResetPasswordPage, DashboardPage hiển thị profile, chức năng làm mới token, khu vực kiểm tra RBAC Guards cho Admin/Instructor, và giao diện quản trị phân quyền tài khoản cho Admin); Đã chạy build vue-tsc và vite thành công không có lỗi; Đã kiểm thử tự động toàn diện qua Browser Subagent thành công.
 
-
+## [x] #007 - Xây dựng layout công khai và trang chủ NextCode
+- Bắt đầu: 2026-10-25 23:15
+- Phạm vi: client
+- File liên quan: client/src/router/index.ts, client/src/layouts/PublicLayout.vue, client/src/components/public/PublicHeader.vue, client/src/components/public/PublicFooter.vue, client/src/pages/public/HomePage.vue, client/src/components/course/CourseCard.vue, client/src/data/courses.ts, client/src/types/course.ts
+- Mô tả: Thêm layout công khai responsive có Header/Footer và trang chủ NextCode theo phong cách Auth hiện có; tái sử dụng Auth store, Axios/API và router guard, không triển khai API khóa học hoặc trang đích giả.
+- Backup: backup/client/src/router/index.ts.20261025-2337.bak (tái dựng từ HEAD khi ghi nhận bổ sung; không được tạo trước lúc sửa router)
+- Hoàn thành: 2026-10-25 23:37 (ghi nhận bổ sung sau khi triển khai; thời điểm hoàn tất code ở lượt trước không được ghi riêng)
+- Tóm tắt thay đổi: Đổi route `/` từ redirect dashboard sang trang chủ công khai bọc PublicLayout; thêm Header có tìm kiếm giao diện, trạng thái khách/đã đăng nhập, menu avatar và đăng xuất qua Auth store; thêm Footer dùng nội dung liên hệ giữ chỗ; xây Hero, lợi ích, khóa nổi bật/Free/Pro, quy trình 5 bước và CTA; thêm CourseCard cùng dữ liệu khóa học mẫu tách riêng. Tái sử dụng `isAuthenticated`, `refreshSession()`, `logout()` và endpoint `GET /auth/me` đã có ở frontend/backend, không thêm API. `npm run build` và `git diff --check` thành công; browser smoke test xác nhận trang chủ và guard chuyển khách chưa đăng nhập từ `/dashboard` sang `/login`, menu mobile có thể mở. Không xác minh được đăng nhập/đăng xuất thực tế vì API backend trả 502; kích thước viewport mobile trong browser tool không khớp kích thước đặt nên responsive geometry chưa được xác nhận đầy đủ. Dữ liệu khóa học vẫn là mẫu.
 

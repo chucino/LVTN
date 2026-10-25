@@ -1,10 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { useAuthStore } from '@/stores/auth.store';
+import PublicLayout from '@/layouts/PublicLayout.vue';
 
 const routes = [
   {
     path: '/',
-    redirect: '/dashboard',
+    component: PublicLayout,
+    children: [
+      {
+        path: '',
+        name: 'Home',
+        component: () => import('@/pages/public/HomePage.vue'),
+        meta: { title: 'NextCode - Học hôm nay, kiến tạo ngày mai' },
+      },
+    ],
   },
   {
     path: '/login',

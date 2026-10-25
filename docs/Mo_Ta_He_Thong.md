@@ -206,7 +206,7 @@ Học viên đặt câu hỏi dưới từng bài giảng; giảng viên và h�
 
 ### 5.3. Thanh toán QR
 
-- Mã QR được tạo theo chuẩn **VietQR** từ: ngân hàng, số tài khoản, số tiền, nội dung chuyển khoản (mã đơn hàng).
+- Mã QR được tạo theo chuẩn **VNPAY** từ: ngân hàng, số tài khoản, số tiền, nội dung chuyển khoản (mã đơn hàng).
 - Mã đơn dùng chữ và số, không dấu, không khoảng trắng (ví dụ `DH3C7K2`) để ngân hàng không làm sai nội dung.
 - Khi nhận thông báo biến động số dư, hệ thống đối chiếu **mã đơn + số tiền**; hợp lệ thì xác nhận đơn và mở quyền học. Xử lý chống trùng khi nhận cùng một giao dịch nhiều lần.
 
@@ -220,7 +220,7 @@ Backend NestJS ── Cơ sở dữ liệu (PostgreSQL/MySQL)
    │      │
    │      ├── Gmail SMTP (OTP, thông báo)
    │      ├── Dịch vụ video (YouTube Unlisted / Vimeo / MP4)
-   │      └── Dịch vụ tạo QR VietQR + webhook ngân hàng
+   │      └── Dịch vụ tạo QR VNPAY + webhook ngân hàng
    └── Lịch tác vụ định kỳ (hủy đơn quá hạn)
 ```
 
