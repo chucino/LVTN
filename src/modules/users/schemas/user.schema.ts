@@ -1,5 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document, Types } from 'mongoose';
+import { Document, Schema as MongooseSchema, Types } from 'mongoose';
 import { Role } from '../../../common/constants/roles.enum.js';
 import { UserStatus } from '../../../common/constants/user-status.enum.js';
 
@@ -49,10 +49,11 @@ export class User {
   status: string;
 
   @Prop({
-    type: [{ type: Types.ObjectId, ref: 'Category' }],
+    // Chấp nhận cả string label lẫn ObjectId (Category module chưa triển khai)
+    type: [{ type: MongooseSchema.Types.Mixed }],
     default: [],
   })
-  interestedCategories: Types.ObjectId[];
+  interestedCategories: (Types.ObjectId | string)[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

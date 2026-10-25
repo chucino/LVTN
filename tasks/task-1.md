@@ -46,5 +46,14 @@
 - Hoàn thành: 2026-10-25 21:28
 - Tóm tắt thay đổi: Thêm hook onApplicationBootstrap trong UsersService để tự động seed tài khoản admin@nextcode.vn với mật khẩu Admin@123456 nếu chưa có ADMIN nào trong DB; build và vitest 6/6 tests pass.
 
+## [x] #006 - Thiết kế và xây dựng giao diện hoàn chỉnh cho nhánh Auth (Client Vue 3 + Vuetify + Tailwind)
+- Bắt đầu: 2026-10-25 21:43
+- Phạm vi: client
+- File liên quan: client/package.json, client/vite.config.ts, client/tsconfig.app.json, client/src/
+- Mô tả: Cài đặt vue-router, pinia, axios, lucide-vue-next; cấu hình alias @/; thiết lập Http client Axios kèm token interceptor & cookie refresh token; xây dựng Auth Pinia store; xây dựng giao diện thẩm mỹ cao (Đăng nhập, Đăng ký, Xác thực OTP, Quên mật khẩu, Đặt lại mật khẩu, Dashboard thông tin cá nhân, Kiểm tra RBAC và Giao diện Admin phân quyền tài khoản).
+- Backup: backup/client/package.json.20261025-2142.bak, backup/client/vite.config.ts.20261025-2142.bak, backup/client/tsconfig.app.json.20261025-2142.bak, backup/client/style.css.20261025-2142.bak
+- Hoàn thành: 2026-10-25 21:55
+- Tóm tắt thay đổi: Hoàn thiện frontend Vue 3 + Tailwind CSS + Vuetify + Lucide icons: Thiết lập Axios Http client bảo mật (Access Token lưu trong memory Pinia, Refresh Token lưu tự động trong HttpOnly cookie, cơ chế xoay vòng và hàng đợi làm mới token khi gặp lỗi 401); Xây dựng đầy đủ các màn hình giao diện (LoginPage có nút điền nhanh admin, RegisterPage với đầy đủ các trường khớp So_Do_Lop.md, VerifyOtpPage có bộ đếm ngược 5 phút và nút gửi lại mã có cooldown 60s, ForgotPasswordPage, ResetPasswordPage, DashboardPage hiển thị profile, chức năng làm mới token, khu vực kiểm tra RBAC Guards cho Admin/Instructor, và giao diện quản trị phân quyền tài khoản cho Admin); Đã chạy build vue-tsc và vite thành công không có lỗi; Đã kiểm thử tự động toàn diện qua Browser Subagent thành công.
+
 
 

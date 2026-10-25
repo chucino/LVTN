@@ -138,10 +138,10 @@ export class AuthService {
           : undefined,
         occupation: registerDto.occupation,
         avatar: registerDto.avatar,
-        interestedCategories: interestedCategories.map((id) =>
-          typeof id === 'string' && Types.ObjectId.isValid(id)
-            ? new Types.ObjectId(id)
-            : (id as any),
+        interestedCategories: interestedCategories.map((item) =>
+          typeof item === 'string' && Types.ObjectId.isValid(item)
+            ? new Types.ObjectId(item)
+            : item, // giữ nguyên string label nếu không phải ObjectId
         ),
       });
     } else {

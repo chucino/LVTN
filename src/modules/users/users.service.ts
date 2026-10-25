@@ -58,10 +58,10 @@ export class UsersService implements OnApplicationBootstrap {
       avatar: data.avatar ?? null,
       role: data.role ?? Role.STUDENT,
       status: data.status ?? UserStatus.PENDING,
-      interestedCategories: (data.interestedCategories ?? []).map((id) =>
-        typeof id === 'string' && Types.ObjectId.isValid(id)
-          ? new Types.ObjectId(id)
-          : id,
+      interestedCategories: (data.interestedCategories ?? []).map((item) =>
+        typeof item === 'string' && Types.ObjectId.isValid(item)
+          ? new Types.ObjectId(item)
+          : item, // giữ nguyên string label nếu không phải ObjectId
       ),
     };
 
