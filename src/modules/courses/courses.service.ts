@@ -229,7 +229,39 @@ export class CoursesService {
             targetAudience: 1,
             learningOutcomes: 1,
             requirements: 1,
-            chapters: 1,
+            chapters: {
+              $map: {
+                input: { $ifNull: ['$chapters', []] },
+                as: 'chapter',
+                in: {
+                  _id: '$$chapter._id',
+                  title: '$$chapter.title',
+                  order: '$$chapter.order',
+                  lessons: {
+                    $map: {
+                      input: { $ifNull: ['$$chapter.lessons', []] },
+                      as: 'lesson',
+                      in: {
+                        _id: '$$lesson._id',
+                        title: '$$lesson.title',
+                        order: '$$lesson.order',
+                        duration: '$$lesson.duration',
+                        hasQuiz: {
+                          $gt: [
+                            {
+                              $size: {
+                                $ifNull: ['$$lesson.quizQuestions', []],
+                              },
+                            },
+                            0,
+                          ],
+                        },
+                      },
+                    },
+                  },
+                },
+              },
+            },
           },
         },
         { $limit: 1 },

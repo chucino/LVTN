@@ -9,6 +9,25 @@ import {
 import { Category } from './category.schema.js';
 
 @Schema({ _id: true })
+export class QuizQuestion {
+  _id!: Types.ObjectId;
+
+  @Prop({ required: true, trim: true })
+  content!: string;
+
+  @Prop({ type: [String], required: true })
+  options!: string[];
+
+  @Prop({ required: true, min: 0 })
+  correctOption!: number;
+
+  @Prop({ required: true, trim: true })
+  explanation!: string;
+}
+
+export const QuizQuestionSchema = SchemaFactory.createForClass(QuizQuestion);
+
+@Schema({ _id: true })
 export class Lesson {
   _id!: Types.ObjectId;
 
@@ -29,6 +48,9 @@ export class Lesson {
 
   @Prop({ type: String, default: null })
   summary!: string | null;
+
+  @Prop({ type: [QuizQuestionSchema], default: [] })
+  quizQuestions!: QuizQuestion[];
 
   @Prop({ default: false })
   hasQuiz!: boolean;
@@ -53,7 +75,7 @@ export class Chapter {
 export const ChapterSchema = SchemaFactory.createForClass(Chapter);
 
 @Schema({
-  timestamps: { createdAt: true, updatedAt: false },
+  timestamps: true,
   collection: 'courses',
 })
 export class Course {
@@ -123,8 +145,14 @@ export class Course {
   @Prop({ type: String, default: null })
   thumbnail!: string | null;
 
+  @Prop({ type: String, default: null })
+  rejectReason!: string | null;
+
   @Prop({ type: [ChapterSchema], default: [] })
   chapters!: Chapter[];
+
+  createdAt!: Date;
+  updatedAt!: Date;
 }
 
 export const CourseSchema = SchemaFactory.createForClass(Course);

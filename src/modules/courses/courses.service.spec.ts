@@ -161,10 +161,22 @@ describe('CoursesService', () => {
               videoUrl: 'PLACEHOLDER_VIDEO',
               note: 'private note',
               summary: 'private summary',
+              quizQuestions: [
+                {
+                  _id: new Types.ObjectId(),
+                  content: 'Private question',
+                  options: ['A', 'B'],
+                  correctOption: 1,
+                  explanation: 'Private explanation',
+                },
+              ],
             },
           ],
         },
       ],
+      status: CourseStatus.APPROVED,
+      rejectReason: 'private rejection reason',
+      updatedAt: new Date(),
     } as CourseDetailAggregateRecord;
     const exec = vi.fn().mockResolvedValue([rawCourse]);
     aggregate.mockReturnValue({ exec });
@@ -182,6 +194,12 @@ describe('CoursesService', () => {
     expect(serialized).not.toContain('videoUrl');
     expect(serialized).not.toContain('note');
     expect(serialized).not.toContain('summary');
+    expect(serialized).not.toContain('quizQuestions');
+    expect(serialized).not.toContain('correctOption');
+    expect(serialized).not.toContain('explanation');
+    expect(serialized).not.toContain('rejectReason');
+    expect(serialized).not.toContain('updatedAt');
+    expect(serialized).not.toContain('status');
     expect(serialized).not.toContain('email');
     expect(serialized).not.toContain('passwordHash');
     expect(serialized).not.toContain('role');

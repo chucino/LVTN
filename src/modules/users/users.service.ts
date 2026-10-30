@@ -87,6 +87,41 @@ export class UsersService implements OnApplicationBootstrap {
     return this.userModel.findById(id).exec();
   }
 
+  async findActiveInstructors(): Promise<
+    Array<{ id: string; fullName: string; email: string }>
+  > {
+    const instructors = await this.userModel
+      .find(
+        { role: Role.INSTRUCTOR, status: UserStatus.ACTIVE },
+        { _id: 1, fullName: 1, email: 1 },
+      )
+      .sort({ fullName: 1, _id: 1 })
+      .lean()
+      .exec();
+
+    return instructors.map((instructor) => ({
+      id: instructor._id.toString(),
+      fullName: instructor.fullName,
+      email: instructor.email,
+    }));
+  }
+
+  async isActiveInstructor(id: string): Promise<boolean> {
+    if (!Types.ObjectId.isValid(id)) {
+      return false;
+    }
+
+    return Boolean(
+      await this.userModel
+        .exists({
+          _id: new Types.ObjectId(id),
+          role: Role.INSTRUCTOR,
+          status: UserStatus.ACTIVE,
+        })
+        .exec(),
+    );
+  }
+
   async markActive(email: string): Promise<UserDocument | null> {
     return this.userModel
       .findOneAndUpdate(
