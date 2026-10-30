@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { useRouter } from 'vue-router';
+import { computed, ref, watch } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 import {
   Bell,
   BookOpen,
@@ -15,7 +15,20 @@ import { useAuthStore } from '@/stores/auth.store';
 
 const authStore = useAuthStore();
 const router = useRouter();
+const route = useRoute();
 const mobileMenuOpen = ref(false);
+const searchValue = ref('');
+const isCourseRoute = computed(
+  () => route.name === 'Courses' || route.name === 'CourseDetail',
+);
+
+watch(
+  () => route.query.keyword,
+  (keyword) => {
+    searchValue.value = typeof keyword === 'string' ? keyword : '';
+  },
+  { immediate: true },
+);
 
 const initials = computed(() =>
   (authStore.user?.fullName ?? 'NextCode')
@@ -30,6 +43,17 @@ async function logout() {
   await authStore.logout();
   mobileMenuOpen.value = false;
   await router.push('/');
+}
+
+async function submitSearch() {
+  const keyword = searchValue.value.trim();
+  const query =
+    route.name === 'Courses'
+      ? { ...route.query, keyword: keyword || undefined, page: undefined }
+      : { keyword: keyword || undefined };
+
+  await router.push({ name: 'Courses', query });
+  mobileMenuOpen.value = false;
 }
 </script>
 
@@ -47,20 +71,33 @@ async function logout() {
 
       <nav class="hidden items-center gap-7 text-sm font-medium text-slate-300 lg:flex">
         <router-link to="/" class="transition hover:text-white">Trang chủ</router-link>
-        <a href="/#courses" class="transition hover:text-white">Khóa học</a>
+        <router-link
+          :to="{ name: 'Courses' }"
+          class="transition hover:text-white"
+          :class="isCourseRoute ? 'text-cyan-300' : ''"
+          :aria-current="isCourseRoute ? 'page' : undefined"
+        >
+          Khóa học
+        </router-link>
         <a href="/#about" class="transition hover:text-white">Giới thiệu</a>
       </nav>
 
-      <label class="ml-auto hidden w-full max-w-xs items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/80 px-3 py-2.5 text-slate-500 xl:flex">
-        <Search class="h-4 w-4 shrink-0" />
+      <form
+        class="ml-auto hidden w-full max-w-xs items-center gap-2 rounded-xl border border-slate-800 bg-slate-900/80 px-3 py-2.5 text-slate-500 xl:flex focus-within:border-indigo-400"
+        role="search"
+        @submit.prevent="submitSearch"
+      >
+        <button type="submit" class="rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300" aria-label="Tìm kiếm">
+          <Search class="h-4 w-4 shrink-0" />
+        </button>
         <input
           aria-label="Tìm kiếm khóa học"
           type="search"
           placeholder="Tìm khóa học..."
           class="min-w-0 flex-1 bg-transparent text-sm text-slate-200 outline-none placeholder:text-slate-500"
+          v-model="searchValue"
         />
-        <kbd class="rounded border border-slate-700 px-1.5 py-0.5 text-[10px]">⌘ K</kbd>
-      </label>
+      </form>
 
       <div v-if="!authStore.isAuthenticated" class="hidden shrink-0 items-center gap-3 lg:flex">
         <router-link
@@ -156,18 +193,33 @@ async function logout() {
     </div>
 
     <div v-if="mobileMenuOpen" class="border-t border-slate-800 bg-slate-950 px-4 pb-5 pt-4 lg:hidden">
-      <label class="mb-4 flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-slate-500">
-        <Search class="h-4 w-4" />
+      <form
+        class="mb-4 flex items-center gap-2 rounded-xl border border-slate-800 bg-slate-900 px-3 py-2.5 text-slate-500 focus-within:border-indigo-400"
+        role="search"
+        @submit.prevent="submitSearch"
+      >
+        <button type="submit" class="rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300" aria-label="Tìm kiếm">
+          <Search class="h-4 w-4" />
+        </button>
         <input
           aria-label="Tìm kiếm khóa học"
           type="search"
           placeholder="Tìm khóa học..."
           class="min-w-0 flex-1 bg-transparent text-sm text-slate-200 outline-none placeholder:text-slate-500"
+          v-model="searchValue"
         />
-      </label>
+      </form>
       <nav class="flex flex-col gap-1 text-sm font-medium text-slate-300">
         <router-link to="/" class="mobile-nav-link" @click="mobileMenuOpen = false">Trang chủ</router-link>
-        <a href="/#courses" class="mobile-nav-link" @click="mobileMenuOpen = false">Khóa học</a>
+        <router-link
+          :to="{ name: 'Courses' }"
+          class="mobile-nav-link"
+          :class="isCourseRoute ? 'text-cyan-300' : ''"
+          :aria-current="isCourseRoute ? 'page' : undefined"
+          @click="mobileMenuOpen = false"
+        >
+          Khóa học
+        </router-link>
         <a href="/#about" class="mobile-nav-link" @click="mobileMenuOpen = false">Giới thiệu</a>
       </nav>
       <div v-if="!authStore.isAuthenticated" class="mt-4 flex gap-3">

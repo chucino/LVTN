@@ -13,6 +13,18 @@ const routes = [
         component: () => import('@/pages/public/HomePage.vue'),
         meta: { title: 'NextCode - Học hôm nay, kiến tạo ngày mai' },
       },
+      {
+        path: 'courses',
+        name: 'Courses',
+        component: () => import('@/pages/public/CoursesPage.vue'),
+        meta: { title: 'Khóa học lập trình - NextCode' },
+      },
+      {
+        path: 'courses/:id',
+        name: 'CourseDetail',
+        component: () => import('@/pages/public/CourseDetailPage.vue'),
+        meta: { title: 'Chi tiết khóa học - NextCode' },
+      },
     ],
   },
   {

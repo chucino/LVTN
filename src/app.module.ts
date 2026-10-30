@@ -8,6 +8,7 @@ import { DatabaseModule } from './database/database.module.js';
 import { UsersModule } from './modules/users/users.module.js';
 import { MailModule } from './modules/mail/mail.module.js';
 import { AuthModule } from './modules/auth/auth.module.js';
+import { CoursesModule } from './modules/courses/courses.module.js';
 
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard.js';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter.js';
@@ -45,6 +46,7 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
     UsersModule,
     MailModule,
     AuthModule,
+    CoursesModule,
   ],
   providers: [
     // Guard JWT mặc định toàn cục cho toàn bộ hệ thống (dùng @Public() để mở)

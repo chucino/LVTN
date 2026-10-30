@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { onMounted, reactive } from 'vue';
 import {
   ArrowRight,
   Award,
@@ -12,14 +13,52 @@ import {
   Sparkles,
   TrendingUp,
 } from 'lucide-vue-next';
-import CourseCard from '@/components/course/CourseCard.vue';
-import { courses } from '@/data/courses';
+import CourseSection from '@/components/course/CourseSection.vue';
+import { getCourseErrorMessage } from '@/lib/course-format';
+import { coursesApi } from '@/services/courses.api';
 import { useAuthStore } from '@/stores/auth.store';
+import type { CourseCard as CourseCardType, CourseType } from '@/types/course';
 
 const authStore = useAuthStore();
-const featuredCourses = courses.filter((course) => course.featured);
-const freeCourses = courses.filter((course) => course.plan === 'Free');
-const proCourses = courses.filter((course) => course.plan === 'Pro');
+
+interface CourseCollectionState {
+  courses: CourseCardType[];
+  loading: boolean;
+  error: string | null;
+}
+
+const featured = reactive<CourseCollectionState>({
+  courses: [],
+  loading: true,
+  error: null,
+});
+const free = reactive<CourseCollectionState>({
+  courses: [],
+  loading: true,
+  error: null,
+});
+const pro = reactive<CourseCollectionState>({
+  courses: [],
+  loading: true,
+  error: null,
+});
+
+async function loadCollection(
+  state: CourseCollectionState,
+  type?: CourseType,
+): Promise<void> {
+  state.loading = true;
+  state.error = null;
+  try {
+    state.courses = type
+      ? (await coursesApi.getCourses({ type, page: 1, limit: 3 })).items
+      : await coursesApi.getFeaturedCourses(3);
+  } catch (error) {
+    state.error = getCourseErrorMessage(error);
+  } finally {
+    state.loading = false;
+  }
+}
 
 const benefits = [
   {
@@ -56,6 +95,12 @@ const learningSteps = [
   ['04', 'Theo dõi tiến độ', 'Học tiếp từ nơi bạn đã dừng và duy trì nhịp học.'],
   ['05', 'Hoàn thành', 'Khép lại lộ trình và ghi nhận thành quả học tập.'],
 ];
+
+onMounted(() => {
+  void loadCollection(featured);
+  void loadCollection(free, 'FREE');
+  void loadCollection(pro, 'PRO');
+});
 </script>
 
 <template>
@@ -78,13 +123,13 @@ const learningSteps = [
           Học lập trình với lộ trình rõ ràng, video bài giảng dễ xem lại và nội dung thực hành giúp bạn tiến bộ mỗi ngày.
         </p>
         <div class="mt-8 flex flex-col gap-3 sm:flex-row">
-          <a
-            href="#courses"
+          <router-link
+            :to="{ name: 'Courses' }"
             class="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-indigo-950/50 transition hover:brightness-110"
           >
             Khám phá khóa học
             <ArrowRight class="h-4 w-4" />
-          </a>
+          </router-link>
           <router-link
             :to="authStore.isAuthenticated ? '/dashboard' : '/login'"
             class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-900/60 px-5 py-3.5 text-sm font-semibold text-white transition hover:border-slate-500 hover:bg-slate-800"
@@ -180,50 +225,40 @@ const learningSteps = [
     </div>
   </section>
 
-  <section id="courses" class="scroll-mt-20">
-    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-        <div>
-          <p class="text-sm font-bold uppercase tracking-[0.18em] text-indigo-300">Bắt đầu hành trình</p>
-          <h2 class="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">Khóa học nổi bật</h2>
-        </div>
-        <p class="max-w-lg text-sm leading-6 text-slate-400">Một vài lựa chọn giúp bạn khám phá kiến thức lập trình theo từng cấp độ.</p>
-      </div>
-      <div class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-        <CourseCard v-for="course in featuredCourses" :key="course.id" :course="course" />
-      </div>
-    </div>
-  </section>
+  <CourseSection
+    id="courses"
+    eyebrow="Bắt đầu hành trình"
+    title="Khóa học nổi bật"
+    description="Một vài lựa chọn giúp bạn khám phá kiến thức lập trình theo từng cấp độ."
+    :courses="featured.courses"
+    :loading="featured.loading"
+    :error="featured.error"
+    @retry="loadCollection(featured)"
+  />
 
-  <section class="border-y border-slate-800/80 bg-slate-900/35">
-    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-        <div>
-          <p class="text-sm font-bold uppercase tracking-[0.18em] text-emerald-300">Bắt đầu miễn phí</p>
-          <h2 class="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">Khóa học Free</h2>
-        </div>
-        <p class="max-w-lg text-sm leading-6 text-slate-400">Khám phá kiến thức nền tảng và chọn nhịp học phù hợp với bạn.</p>
-      </div>
-      <div class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-        <CourseCard v-for="course in freeCourses" :key="course.id" :course="course" />
-      </div>
-    </div>
-  </section>
+  <div class="border-y border-slate-800/80 bg-slate-900/35">
+    <CourseSection
+      eyebrow="Bắt đầu miễn phí"
+      title="Khóa học Free"
+      description="Khám phá kiến thức nền tảng và chọn nhịp học phù hợp với bạn."
+      :courses="free.courses"
+      :loading="free.loading"
+      :error="free.error"
+      type="FREE"
+      @retry="loadCollection(free, 'FREE')"
+    />
+  </div>
 
-  <section>
-    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-        <div>
-          <p class="text-sm font-bold uppercase tracking-[0.18em] text-amber-200">Học sâu hơn</p>
-          <h2 class="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">Khóa học Pro</h2>
-        </div>
-        <p class="max-w-lg text-sm leading-6 text-slate-400">Lộ trình chi tiết hơn, nội dung chuyên sâu và nhiều thời gian thực hành.</p>
-      </div>
-      <div class="mt-8 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-        <CourseCard v-for="course in proCourses" :key="course.id" :course="course" />
-      </div>
-    </div>
-  </section>
+  <CourseSection
+    eyebrow="Học sâu hơn"
+    title="Khóa học Pro"
+    description="Lộ trình chi tiết hơn, nội dung chuyên sâu và nhiều thời gian thực hành."
+    :courses="pro.courses"
+    :loading="pro.loading"
+    :error="pro.error"
+    type="PRO"
+    @retry="loadCollection(pro, 'PRO')"
+  />
 
   <section class="border-y border-slate-800/80 bg-slate-900/35">
     <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
@@ -251,13 +286,13 @@ const learningSteps = [
       <p class="relative mx-auto mt-4 max-w-xl leading-7 text-slate-300">
         Chọn khóa học đầu tiên và bắt đầu xây dựng kỹ năng của bạn ngay hôm nay.
       </p>
-      <a
-        href="#courses"
+      <router-link
+        :to="{ name: 'Courses' }"
         class="relative mt-7 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-indigo-950 transition hover:bg-cyan-50"
       >
         Khám phá khóa học
         <ArrowRight class="h-4 w-4" />
-      </a>
+      </router-link>
     </div>
   </section>
 </template>

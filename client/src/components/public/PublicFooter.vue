@@ -24,7 +24,7 @@ import { Github, Linkedin, Youtube } from 'lucide-vue-next';
         <h2 class="text-sm font-bold text-white">Khám phá</h2>
         <ul class="mt-4 space-y-3 text-sm text-slate-400">
           <li><router-link to="/" class="transition hover:text-white">Trang chủ</router-link></li>
-          <li><a href="/#courses" class="transition hover:text-white">Khóa học</a></li>
+          <li><router-link :to="{ name: 'Courses' }" class="transition hover:text-white">Khóa học</router-link></li>
           <li><a href="/#about" class="transition hover:text-white">Giới thiệu</a></li>
         </ul>
       </div>

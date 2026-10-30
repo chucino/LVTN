@@ -81,3 +81,13 @@
 - Backup: backup/client/src/router/index.ts.20261026-0038.bak, backup/client/src/pages/dashboard/DashboardPage.vue.20261026-0038.bak
 - Hoàn thành: 2026-10-26 00:42
 - Tóm tắt thay đổi: Sau login, mặc định điều hướng về `/`; nếu guard truyền `redirect` nội bộ hợp lệ thì quay lại đúng trang được yêu cầu. Sau xác thực OTP đăng ký điều hướng về trang chủ. Người đã đăng nhập mở trang Login/Register cũng được chuyển về trang chủ thay vì Dashboard. Logo và tên NextCode trên Dashboard trở thành liên kết về `/`. `npm run build` và `git diff --check` thành công. Browser kiểm thử với API mock: login mặc định về trang chủ; truy cập Dashboard khi chưa đăng nhập rồi login thì trở lại Dashboard; logo Dashboard quay về trang chủ; xác thực OTP đăng ký quay về trang chủ. Dashboard hiện tại là Auth Portal hiển thị profile và công cụ kiểm thử Auth/RBAC, chưa phải dashboard học tập theo vai trò; chưa kiểm thử API thật.
+
+## [x] #010 - Xây dựng API công khai danh mục và khóa học
+
+- Bắt đầu: 2026-10-26 01:49
+- Phạm vi: server
+- File liên quan: .env.example, README.md, package.json, src/app.module.ts, src/common/constants/course*, src/modules/courses/, src/seeds/
+- Mô tả: Xây dựng schema Mongoose cho Category/Course với Chapter/Lesson nhúng, API công khai danh mục và khóa học có tìm kiếm/lọc/sắp xếp/phân trang, serializer an toàn, recalculateTotals, seed mẫu idempotent và kiểm thử.
+- Backup: backup/server/package.json.20261026-0149.bak; backup/server/src/app.module.ts.20261026-0149.bak
+- Hoàn thành: 2026-10-26 02:07
+- Tóm tắt thay đổi: Thêm Category/Course schema với Chapter/Lesson nhúng, enum/trình độ dùng chung, API công khai GET /categories, GET /courses, GET /courses/featured, GET /courses/:id; lọc/sắp xếp theo giá hiệu lực và phân trang ở MongoDB; serializer allow-list bảo vệ videoUrl/note/summary và dữ liệu User; thêm recalculateTotals, dữ liệu seed idempotent 5 danh mục/2 instructor/11 khóa, chặn production, npm run seed và hướng dẫn README. Không thêm migration vì dự án dùng MongoDB/Mongoose. Build/lint pass, 12/12 unit tests pass; seed chạy 2 lần; HTTP smoke test các filter/sort/page, 404 khóa chưa duyệt, bảo mật chi tiết, Swagger và Auth login/me pass.
