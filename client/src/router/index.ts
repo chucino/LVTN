@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import { useAuthStore } from '@/stores/auth.store';
 import PublicLayout from '@/layouts/PublicLayout.vue';
+import type { Role } from '@/types/auth';
 
 const routes = [
   {
@@ -64,6 +65,40 @@ const routes = [
     meta: { requiresAuth: true, title: 'Bảng điều khiển - NextCode' },
   },
   {
+    path: '/manage',
+    component: () => import('@/layouts/ManageLayout.vue'),
+    meta: {
+      requiresAuth: true,
+      roles: ['INSTRUCTOR', 'ADMIN'] as Role[],
+    },
+    children: [
+      {
+        path: 'courses',
+        name: 'ManageCourses',
+        component: () => import('@/pages/manage/ManageCoursesPage.vue'),
+        meta: { title: 'Quản lý khóa học - NextCode' },
+      },
+      {
+        path: 'courses/new',
+        name: 'ManageCourseCreate',
+        component: () => import('@/pages/manage/ManageCourseEditPage.vue'),
+        meta: { title: 'Tạo khóa học - NextCode' },
+      },
+      {
+        path: 'courses/:id/edit',
+        name: 'ManageCourseEdit',
+        component: () => import('@/pages/manage/ManageCourseEditPage.vue'),
+        meta: { title: 'Chỉnh sửa khóa học - NextCode' },
+      },
+    ],
+  },
+  {
+    path: '/forbidden',
+    name: 'Forbidden',
+    component: () => import('@/pages/ForbiddenPage.vue'),
+    meta: { title: 'Không có quyền truy cập - NextCode' },
+  },
+  {
     path: '/:pathMatch(.*)*',
     redirect: '/',
   },
@@ -77,7 +112,7 @@ export const router = createRouter({
 // Navigation guard
 let sessionRestored = false;
 
-router.beforeEach(async (to, _, next) => {
+router.beforeEach(async (to) => {
   const authStore = useAuthStore();
 
   // Thử khôi phục session bằng cookie refresh token một lần lúc đầu
@@ -93,15 +128,23 @@ router.beforeEach(async (to, _, next) => {
 
   // Kiểm tra yêu cầu đăng nhập
   if (to.meta.requiresAuth && !authStore.isAuthenticated) {
-    return next({ name: 'Login', query: { redirect: to.fullPath } });
+    return { name: 'Login', query: { redirect: to.fullPath } };
   }
 
   // Kiểm tra trang dành riêng cho khách chưa đăng nhập (login/register)
   if (to.meta.guestOnly && authStore.isAuthenticated) {
-    return next({ name: 'Home' });
+    return { name: 'Home' };
   }
 
-  next();
+  const allowedRoles = to.meta.roles as Role[] | undefined;
+  if (
+    allowedRoles &&
+    (!authStore.user || !allowedRoles.includes(authStore.user.role))
+  ) {
+    return { name: 'Forbidden' };
+  }
+
+  return true;
 });
 
 export default router;

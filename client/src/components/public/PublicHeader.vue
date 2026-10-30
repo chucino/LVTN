@@ -16,6 +16,9 @@ import { useAuthStore } from '@/stores/auth.store';
 const authStore = useAuthStore();
 const router = useRouter();
 const route = useRoute();
+const canManageCourses = computed(
+  () => authStore.user?.role === 'INSTRUCTOR' || authStore.user?.role === 'ADMIN',
+);
 const mobileMenuOpen = ref(false);
 const searchValue = ref('');
 const isCourseRoute = computed(
@@ -160,6 +163,13 @@ async function submitSearch() {
             <button type="button" disabled class="account-menu-item">
               <UserRound class="h-4 w-4" /> Hồ sơ
             </button>
+            <router-link
+              v-if="canManageCourses"
+              :to="{ name: 'ManageCourses' }"
+              class="account-menu-item hover:bg-slate-800 hover:text-white"
+            >
+              <BookOpen class="h-4 w-4" /> Quản lý khóa học
+            </router-link>
             <button type="button" disabled class="account-menu-item">Chứng chỉ</button>
             <button type="button" disabled class="account-menu-item">Cài đặt</button>
             <button type="button" class="account-menu-item text-rose-300 hover:bg-rose-500/10" @click="logout">
@@ -235,6 +245,14 @@ async function submitSearch() {
       <div v-else class="mt-4 space-y-1 border-t border-slate-800 pt-3">
         <p class="px-3 py-2 text-xs text-slate-400">{{ authStore.user?.fullName }}</p>
         <button type="button" disabled class="mobile-nav-link w-full text-left opacity-60">Khóa học của tôi</button>
+        <router-link
+          v-if="canManageCourses"
+          :to="{ name: 'ManageCourses' }"
+          class="mobile-nav-link flex items-center gap-2 text-cyan-200 hover:text-white"
+          @click="mobileMenuOpen = false"
+        >
+          <BookOpen class="h-4 w-4" /> Quản lý khóa học
+        </router-link>
         <button
           type="button"
           disabled

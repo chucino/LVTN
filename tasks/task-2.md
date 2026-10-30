@@ -44,3 +44,18 @@
 - Còn lại:
   - Chạy kiểm thử tích hợp theo checklist trên database không production, gồm role/ownership, lifecycle, tính tổng, API công khai và Auth.
   - Cập nhật `docs/So_Do_Lop.md` sau khi xác nhận schema: `Course.rejectReason`, `Course.updatedAt`, `Lesson.quizQuestions` và quy ước `correctOption` 0-based.
+
+## [ ] #013 - Xây giao diện frontend quản lý khóa học
+
+- Bắt đầu: 2026-10-30 20:22
+- Phạm vi: client
+- File liên quan: client/src/router/index.ts, client/src/components/public/PublicHeader.vue, client/src/layouts/ManageLayout.vue, client/src/pages/manage/ManageCoursesPage.vue, client/src/pages/manage/ManageCourseEditPage.vue, client/src/components/manage/, client/src/composables/, client/src/services/manage-courses.api.ts, client/src/types/manage-course.ts, client/src/lib/manage-course-format.ts
+- Mô tả: Xây khu vực quản lý khóa học cho INSTRUCTOR và ADMIN, tái sử dụng Auth/Axios, hỗ trợ danh sách, tạo/sửa khóa, nội dung, quiz và vòng đời duyệt.
+- Backup:
+  - backup/client/src/router/index.ts.20261030-2022.bak
+  - backup/client/src/components/public/PublicHeader.vue.20261030-2022.bak
+  - backup/client/src/pages/manage/ManageCourseEditPage.vue.20261030-2100.bak
+- Hoàn thành: Implementation xong; kiểm thử tích hợp theo vai trò còn chờ
+- Tóm tắt thay đổi: Thêm service/type/composable quản lý khóa học, layout riêng, danh sách có lọc đồng bộ query URL, form tạo/sửa, tab nội dung và trạng thái, CRUD chương/bài/trắc nghiệm, action theo permissions; thêm role guard và mục menu desktop/mobile chỉ cho INSTRUCTOR/ADMIN. Sửa lỗi Vue template truy cập ref lồng trong `editor`/`catalog` khiến màn hình tạo khóa luôn hiện skeleton và cảnh báo lỗi rỗng bằng cách bind ref qua các biến top-level. Giữ nguyên Auth, PublicLayout, dashboard và API backend.
+- Kiểm thử: `cd client && npm run build` đạt (vue-tsc + Vite); `git diff --check` đạt sau thay đổi; browser xác nhận guest vào `/manage/courses/new` được chuyển tới Login và sau khi đăng nhập bằng tài khoản test có sẵn, biểu mẫu tạo khóa cùng danh mục/giảng viên tải lên (không gửi POST), sau đó đăng xuất; trước đó `/forbidden` hiển thị đúng, `/courses` vẫn mở và không tràn ngang ở viewport 390px. Không có script lint/test riêng trong client. Build vẫn cảnh báo chunk JS > 500 kB. Chưa xác minh POST tạo khóa với backend thật.
+- Còn lại: Chưa chạy luồng CRUD/duyệt thật với tài khoản giảng viên, Admin và học viên; cần xác minh trên backend + MongoDB local/test. Chưa kiểm thử trực quan giao diện quản lý sau đăng nhập ở desktop/tablet/mobile do không có phiên/tài khoản kiểm thử được xác nhận trong môi trường này.
