@@ -22,6 +22,7 @@ export class ManageCategoryDto {
 }
 
 export class ManageCoursePermissionsDto {
+  @ApiProperty() canEditInfo!: boolean;
   @ApiProperty() canEdit!: boolean;
   @ApiProperty() canSubmit!: boolean;
   @ApiProperty() canWithdraw!: boolean;

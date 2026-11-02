@@ -5,6 +5,7 @@ export type ManageCourseSort = 'updated_desc' | 'newest' | 'title_asc';
 export type ManageCourseTab = 'info' | 'content' | 'status';
 
 export interface ManageCoursePermissions {
+  canEditInfo: boolean;
   canEdit: boolean;
   canSubmit: boolean;
   canWithdraw: boolean;

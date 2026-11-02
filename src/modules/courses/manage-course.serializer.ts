@@ -78,11 +78,12 @@ export function getManageCoursePermissions(
   const canManageOwn = isAdmin || isOwner;
 
   return {
+    canEditInfo: isAdmin,
     canEdit: isAdmin || (isOwner && [CourseStatus.DRAFT, CourseStatus.APPROVED].includes(status)),
     canSubmit: canManageOwn && status === CourseStatus.DRAFT,
     canWithdraw: canManageOwn && status === CourseStatus.PENDING,
     canDelete:
-      (canManageOwn && status === CourseStatus.DRAFT) ||
+      (isAdmin && status === CourseStatus.DRAFT) ||
       (isAdmin && status === CourseStatus.HIDDEN),
     canApprove:
       isAdmin && [CourseStatus.PENDING, CourseStatus.HIDDEN].includes(status),

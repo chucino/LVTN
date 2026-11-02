@@ -3,7 +3,7 @@ import { ref, onMounted, onUnmounted, computed } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useAuthStore } from '@/stores/auth.store';
 import AuthLayout from '@/layouts/AuthLayout.vue';
-import { ShieldCheck, RotateCw, ShieldAlert, CheckCircle } from 'lucide-vue-next';
+import { RotateCw, ShieldAlert, CheckCircle } from 'lucide-vue-next';
 
 const router = useRouter();
 const route = useRoute();
@@ -14,18 +14,18 @@ const otp = ref('');
 const errorMessage = ref<string | null>(null);
 const successMessage = ref<string | null>(null);
 
-// Countdown timer cho OTP hết hạn (5 phút = 300s)
 const expireSeconds = ref(300);
 let expireTimer: any = null;
 
-// Cooldown gửi lại OTP (60s)
 const resendCooldown = ref(60);
 let cooldownTimer: any = null;
 
 const formatTime = (seconds: number) => {
   const m = Math.floor(seconds / 60);
   const s = seconds % 60;
-  return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+  const mm = m < 10 ? `0${m}` : `${m}`;
+  const ss = s < 10 ? `0${s}` : `${s}`;
+  return `${mm}:${ss}`;
 };
 
 const isOtpValid = computed(() => otp.value.trim().length === 6);
@@ -36,7 +36,6 @@ onMounted(() => {
     return;
   }
 
-  // Bắt đầu đếm ngược hết hạn
   expireTimer = setInterval(() => {
     if (expireSeconds.value > 0) {
       expireSeconds.value--;
@@ -45,7 +44,6 @@ onMounted(() => {
     }
   }, 1000);
 
-  // Bắt đầu đếm ngược cooldown gửi lại
   cooldownTimer = setInterval(() => {
     if (resendCooldown.value > 0) {
       resendCooldown.value--;
@@ -74,7 +72,7 @@ const handleVerify = async () => {
       email: email.value.trim().toLowerCase(),
       otp: otp.value.trim(),
     });
-    successMessage.value = 'Xác thực tài khoản thành công! Đang chuyển hướng...';
+    successMessage.value = 'Xác thực tài khoản thành công. Đang chuyển hướng...';
     setTimeout(() => {
       router.replace('/');
     }, 1200);
@@ -113,79 +111,74 @@ const handleResendOtp = async () => {
 
 <template>
   <AuthLayout>
-    <div class="text-center mb-6">
-      <div class="w-12 h-12 rounded-2xl bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 mx-auto flex items-center justify-center mb-3">
-        <ShieldCheck class="w-6 h-6" />
-      </div>
-      <h2 class="text-xl font-bold text-white tracking-tight">Xác thực mã OTP</h2>
-      <p class="text-slate-400 text-sm mt-1">
-        Mã xác nhận 6 chữ số đã được gửi đến:
+    <div class="mb-6">
+      <h2 class="text-2xl font-normal text-ink">Xác thực mã OTP</h2>
+      <p class="mt-1 text-base text-muted">
+        Mã xác nhận gồm 6 chữ số đã được gửi tới <strong class="font-medium text-ink">{{ email }}</strong>.
       </p>
-      <div class="mt-1 font-semibold text-indigo-400 text-sm">{{ email }}</div>
     </div>
 
-    <!-- Error Alert -->
     <div
       v-if="errorMessage"
-      class="mb-4 p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-start gap-2.5 animate-in fade-in"
+      role="alert"
+      class="mb-4 flex items-start gap-2.5 bg-brand-surface p-4 text-sm text-ink"
     >
-      <ShieldAlert class="w-5 h-5 flex-shrink-0 mt-0.5" />
+      <ShieldAlert class="mt-0.5 h-5 w-5 shrink-0 text-brand-soft" />
       <span>{{ errorMessage }}</span>
     </div>
 
-    <!-- Success Alert -->
     <div
       v-if="successMessage"
-      class="mb-4 p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm flex items-start gap-2.5 animate-in fade-in"
+      role="status"
+      class="mb-4 flex items-start gap-2.5 bg-surface-2 p-4 text-sm text-ink"
     >
-      <CheckCircle class="w-5 h-5 flex-shrink-0 mt-0.5" />
+      <CheckCircle class="mt-0.5 h-5 w-5 shrink-0 text-ink" />
       <span>{{ successMessage }}</span>
     </div>
 
-    <form @submit.prevent="handleVerify" class="space-y-4">
+    <form class="space-y-5" @submit.prevent="handleVerify">
       <div>
-        <label class="block text-center text-xs font-semibold text-slate-300 uppercase tracking-wider mb-2">
-          Nhập mã 6 chữ số
+        <label for="otp-input" class="mb-2 block text-sm font-medium text-ink">
+          Nhập mã xác thực 6 chữ số
         </label>
         <input
+          id="otp-input"
           v-model="otp"
           type="text"
+          inputmode="numeric"
           maxlength="6"
           required
           autofocus
-          placeholder="••••••"
-          class="w-full text-center text-3xl font-mono font-bold tracking-[0.5em] py-3.5 bg-slate-950/70 border border-slate-700/80 rounded-2xl text-white placeholder-slate-600 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30 transition-all"
+          aria-describedby="otp-timer-note"
+          placeholder="123456"
+          class="manage-input py-3.5 text-center text-2xl tracking-[0.35em] tabular-nums"
         />
-        <div class="flex items-center justify-between text-xs text-slate-400 mt-2 px-1">
+        <div id="otp-timer-note" class="mt-2 flex items-center justify-between text-xs text-muted">
           <span>Thời hạn hiệu lực mã:</span>
-          <span :class="expireSeconds < 60 ? 'text-red-400 font-bold' : 'text-slate-300 font-mono'">
+          <span :class="expireSeconds < 60 ? 'text-brand-soft font-medium' : 'text-ink tabular-nums'">
             {{ formatTime(expireSeconds) }}
           </span>
         </div>
       </div>
 
-      <!-- Submit Button -->
       <button
         type="submit"
         :disabled="authStore.loading || !isOtpValid"
-        class="w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-medium text-sm shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2 transition-all transform active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed"
+        class="manage-button-primary flex w-full items-center justify-center gap-2"
       >
-        <span v-if="authStore.loading" class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-        <ShieldCheck v-else class="w-4 h-4" />
         <span>{{ authStore.loading ? 'Đang xác thực...' : 'Kích hoạt tài khoản' }}</span>
       </button>
 
-      <!-- Resend Button -->
-      <div class="text-center pt-2">
+      <div class="pt-2">
         <button
           type="button"
-          @click="handleResendOtp"
           :disabled="resendCooldown > 0 || authStore.loading"
-          class="text-xs font-medium text-slate-400 hover:text-slate-200 transition-colors inline-flex items-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
+          class="inline-flex items-center gap-1.5 text-sm text-muted transition-colors hover:text-ink disabled:opacity-50"
+          @click="handleResendOtp"
         >
-          <RotateCw class="w-3.5 h-3.5" :class="{ 'animate-spin': authStore.loading }" />
+          <RotateCw class="h-3.5 w-3.5" :class="{ 'animate-spin': authStore.loading }" />
           <span v-if="resendCooldown > 0">Gửi lại mã sau ({{ resendCooldown }}s)</span>
-          <span v-else class="text-indigo-400 hover:underline">Gửi lại mã OTP</span>
+          <span v-else class="text-ink underline underline-offset-4">Gửi lại mã OTP</span>
         </button>
       </div>
     </form>

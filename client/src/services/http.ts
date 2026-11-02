@@ -1,5 +1,12 @@
 import axios, { AxiosError, type InternalAxiosRequestConfig } from 'axios';
 
+function getCurrentClientPort(): string {
+  if (typeof window !== 'undefined' && window.location?.port) {
+    return window.location.port;
+  }
+  return '5173';
+}
+
 // Instance Axios tập trung
 export const http = axios.create({
   baseURL: '/api/v1',
@@ -23,9 +30,10 @@ export const setAuthTokenHandlers = (
   logoutHandler = logout;
 };
 
-// Request Interceptor: Tự động đính kèm Bearer token
+// Request Interceptor: Tự động đính kèm Bearer token và cổng hiện tại (X-Client-Port)
 http.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
+    config.headers['X-Client-Port'] = getCurrentClientPort();
     if (accessTokenGetter) {
       const token = accessTokenGetter();
       if (token && !config.headers.Authorization) {

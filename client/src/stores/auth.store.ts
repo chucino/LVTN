@@ -185,6 +185,10 @@ export const useAuthStore = defineStore('auth', () => {
     }
   }
 
+  function syncUser(nextUser: User) {
+    user.value = nextUser;
+  }
+
   async function assignRole(userId: string, role: Role) {
     loading.value = true;
     error.value = null;
@@ -223,5 +227,6 @@ export const useAuthStore = defineStore('auth', () => {
     refreshSession,
     logout,
     assignRole,
+    syncUser,
   };
 });

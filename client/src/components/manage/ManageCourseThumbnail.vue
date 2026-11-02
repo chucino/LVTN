@@ -14,8 +14,8 @@ watch(() => props.src, () => {
 </script>
 
 <template>
-  <div class="relative flex h-12 w-16 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-slate-700 bg-slate-800 text-cyan-200">
-    <BookOpen v-if="!src || failed" class="h-5 w-5" aria-hidden="true" />
+  <div class="relative flex h-12 w-16 shrink-0 items-center justify-center overflow-hidden bg-surface-2 text-muted">
+    <BookOpen v-if="!src || failed" class="h-4 w-4" aria-hidden="true" />
     <img v-if="src && !failed" :src="src" :alt="`Ảnh khóa học ${title}`" class="absolute inset-0 h-full w-full object-cover" @error="failed = true" />
   </div>
 </template>

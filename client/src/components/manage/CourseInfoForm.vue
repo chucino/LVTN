@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { computed, reactive, watch } from 'vue';
-import { AlertTriangle, Image, Plus, Trash2 } from 'lucide-vue-next';
+import { computed, onBeforeUnmount, reactive, ref, watch } from 'vue';
+import { AlertTriangle, Image, Plus, Trash2, Upload, X } from 'lucide-vue-next';
 import { COURSE_LEVELS } from '@/types/course';
 import type { Category, CourseLevel, CourseType } from '@/types/course';
 import type {
@@ -8,6 +8,9 @@ import type {
   ManageCoursePayload,
   ManageInstructorOption,
 } from '@/types/manage-course';
+
+const MAX_IMAGE_SIZE_BYTES = 5 * 1024 * 1024; // 5MB
+const ALLOWED_IMAGE_MIMES = new Set(['image/jpeg', 'image/png', 'image/webp']);
 
 const props = defineProps<{
   course: ManageCourseDetail | null;
@@ -19,7 +22,7 @@ const props = defineProps<{
   catalogLoading?: boolean;
 }>();
 const emit = defineEmits<{
-  save: [payload: ManageCoursePayload];
+  save: [payload: ManageCoursePayload, thumbnailFile: File | null];
   dirty: [value: boolean];
 }>();
 
@@ -57,9 +60,28 @@ function blankForm(): CourseForm {
 
 const form = reactive<CourseForm>(blankForm());
 const errors = reactive<Record<string, string>>({});
+const fileInputRef = ref<HTMLInputElement | null>(null);
+const selectedFile = ref<File | null>(null);
+const localPreviewUrl = ref<string>('');
 let initialValue = '';
 
+function revokeLocalPreview() {
+  if (localPreviewUrl.value) {
+    URL.revokeObjectURL(localPreviewUrl.value);
+    localPreviewUrl.value = '';
+  }
+}
+
+function resetFileSelection() {
+  revokeLocalPreview();
+  selectedFile.value = null;
+  if (fileInputRef.value) {
+    fileInputRef.value.value = '';
+  }
+}
+
 function resetForm(course: ManageCourseDetail | null) {
+  resetFileSelection();
   const next = course
     ? {
         title: course.title,
@@ -84,7 +106,13 @@ function resetForm(course: ManageCourseDetail | null) {
 
 watch(() => props.course, resetForm, { immediate: true, deep: true });
 
-const isDirty = computed(() => JSON.stringify(form) !== initialValue);
+onBeforeUnmount(() => {
+  revokeLocalPreview();
+});
+
+const isDirty = computed(
+  () => JSON.stringify(form) !== initialValue || selectedFile.value !== null,
+);
 watch(isDirty, (dirty) => emit('dirty', dirty), { immediate: true });
 
 watch(
@@ -106,17 +134,61 @@ const readOnlyReason = computed(() => {
   if (!props.course || !props.readOnly) return '';
   if (props.course.status === 'PENDING') return 'Khóa học đang chờ duyệt nên hiện không thể chỉnh sửa.';
   if (props.course.status === 'HIDDEN') return 'Khóa học đang bị ẩn và tài khoản hiện tại chỉ có quyền xem.';
+  if (!props.isAdmin) {
+    return 'Thông tin khóa học nền do Quản trị viên thiết lập và phân công. Giảng viên chỉ xem thông tin tại đây và quản lý Chương, Bài giảng, Trắc nghiệm ở tab Nội dung.';
+  }
   return 'Tài khoản hiện tại chỉ có quyền xem khóa học này.';
 });
+
 const thumbnailPreview = computed(() => {
-  if (!form.thumbnail.trim()) return '';
-  try {
-    const url = new URL(form.thumbnail);
-    return url.protocol === 'https:' ? url.href : '';
-  } catch {
-    return '';
-  }
+  if (localPreviewUrl.value) return localPreviewUrl.value;
+  return form.thumbnail.trim();
 });
+
+function formatFileSize(bytes: number): string {
+  if (bytes < 1024) return `${bytes} B`;
+  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+}
+
+function triggerFilePicker() {
+  if (props.readOnly || props.busy) return;
+  fileInputRef.value?.click();
+}
+
+function handleFileChange(event: Event) {
+  const input = event.target as HTMLInputElement;
+  const file = input.files?.[0];
+  if (!file) return;
+
+  delete errors.thumbnail;
+
+  if (!ALLOWED_IMAGE_MIMES.has(file.type)) {
+    errors.thumbnail = 'Chỉ chấp nhận file ảnh định dạng JPG, PNG hoặc WEBP.';
+    input.value = '';
+    return;
+  }
+
+  if (file.size <= 0 || file.size > MAX_IMAGE_SIZE_BYTES) {
+    errors.thumbnail = 'Dung lượng ảnh không được vượt quá 5MB.';
+    input.value = '';
+    return;
+  }
+
+  revokeLocalPreview();
+  selectedFile.value = file;
+  localPreviewUrl.value = URL.createObjectURL(file);
+}
+
+function clearThumbnail() {
+  if (props.readOnly || props.busy) return;
+  delete errors.thumbnail;
+  if (selectedFile.value) {
+    resetFileSelection();
+    return;
+  }
+  form.thumbnail = '';
+}
 
 function addOutcome() {
   if (form.learningOutcomes.length < 10) form.learningOutcomes.push('');
@@ -150,13 +222,11 @@ function validate(): boolean {
   if (discountPrice !== null && (!Number.isInteger(discountPrice) || discountPrice <= 0 || discountPrice >= price || discountPrice > 100_000_000)) {
     errors.discountPrice = 'Giá ưu đãi phải lớn hơn 0 và thấp hơn giá gốc.';
   }
-  if (form.thumbnail.trim()) {
-    try {
-      if (new URL(form.thumbnail).protocol !== 'https:' || form.thumbnail.length > 500) {
-        errors.thumbnail = 'Ảnh phải là URL HTTPS không quá 500 ký tự.';
-      }
-    } catch {
-      errors.thumbnail = 'Vui lòng nhập URL ảnh HTTPS hợp lệ.';
+  if (selectedFile.value) {
+    if (!ALLOWED_IMAGE_MIMES.has(selectedFile.value.type)) {
+      errors.thumbnail = 'Chỉ chấp nhận file ảnh định dạng JPG, PNG hoặc WEBP.';
+    } else if (selectedFile.value.size <= 0 || selectedFile.value.size > MAX_IMAGE_SIZE_BYTES) {
+      errors.thumbnail = 'Dung lượng ảnh không được vượt quá 5MB.';
     }
   }
   if (props.isAdmin && !form.instructorId) errors.instructorId = 'Admin cần chọn giảng viên phụ trách.';
@@ -188,13 +258,13 @@ function save() {
     discountPrice: form.type === 'FREE' ? null : discountPrice,
     thumbnail: form.thumbnail.trim() || null,
   };
-  if (!props.course && props.isAdmin) payload.instructorId = form.instructorId;
-  emit('save', payload);
+  if (props.isAdmin) payload.instructorId = form.instructorId;
+  emit('save', payload, selectedFile.value);
 }
 </script>
 
 <template>
-  <form class="manage-panel space-y-6 p-4 sm:p-6" novalidate @submit.prevent="save">
+  <form data-ui class="space-y-6 bg-surface p-5 sm:p-6" novalidate @submit.prevent="save">
     <div v-if="readOnly" class="manage-alert-warning">
       <AlertTriangle class="h-4 w-4 shrink-0" />
       <span>{{ readOnlyReason }}</span>
@@ -202,36 +272,36 @@ function save() {
 
     <div class="grid gap-5 lg:grid-cols-2">
       <label class="manage-field lg:col-span-2">
-        Tên khóa học <span class="text-rose-300">*</span>
+        <span>Tên khóa học <span class="text-brand-soft">*</span></span>
         <input v-model="form.title" class="manage-input" type="text" minlength="5" maxlength="150" :disabled="readOnly" autocomplete="off" />
         <span v-if="errors.title" class="manage-field-error">{{ errors.title }}</span>
       </label>
 
       <label class="manage-field lg:col-span-2">
-        Mô tả <span class="text-rose-300">*</span>
+        <span>Mô tả <span class="text-brand-soft">*</span></span>
         <textarea v-model="form.description" class="manage-input min-h-32" minlength="20" maxlength="5000" :disabled="readOnly" />
-        <span class="text-right text-xs text-slate-500">{{ form.description.length }}/5000</span>
+        <span class="text-right text-xs tabular-nums text-muted">{{ form.description.length }}/5000</span>
         <span v-if="errors.description" class="manage-field-error">{{ errors.description }}</span>
       </label>
 
       <label class="manage-field">
-        Loại khóa học <span class="text-rose-300">*</span>
+        <span>Loại khóa học <span class="text-brand-soft">*</span></span>
         <select v-model="form.type" class="manage-input" :disabled="readOnly || !canChangeType">
           <option value="FREE">Free — miễn phí</option>
           <option value="PRO">Pro — có phí</option>
         </select>
-        <span v-if="!canChangeType" class="text-xs text-slate-500">Chỉ khóa Nháp mới được đổi loại khóa học.</span>
+        <span v-if="!canChangeType" class="text-xs text-muted">Chỉ khóa Nháp mới được đổi loại khóa học.</span>
       </label>
 
       <label class="manage-field">
-        Trình độ <span class="text-rose-300">*</span>
+        <span>Trình độ <span class="text-brand-soft">*</span></span>
         <select v-model="form.level" class="manage-input" :disabled="readOnly">
           <option v-for="level in COURSE_LEVELS" :key="level" :value="level">{{ level }}</option>
         </select>
       </label>
 
       <label class="manage-field">
-        Danh mục <span class="text-rose-300">*</span>
+        <span>Danh mục <span class="text-brand-soft">*</span></span>
         <select v-model="form.categoryId" class="manage-input" :disabled="readOnly || catalogLoading">
           <option value="" disabled>{{ catalogLoading ? 'Đang tải danh mục…' : 'Chọn danh mục' }}</option>
           <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
@@ -239,8 +309,8 @@ function save() {
         <span v-if="errors.categoryId" class="manage-field-error">{{ errors.categoryId }}</span>
       </label>
 
-      <label v-if="!props.course && isAdmin" class="manage-field">
-        Giảng viên phụ trách <span class="text-rose-300">*</span>
+      <label v-if="isAdmin" class="manage-field">
+        <span>Giảng viên phụ trách <span class="text-brand-soft">*</span></span>
         <select v-model="form.instructorId" class="manage-input" :disabled="catalogLoading">
           <option value="" disabled>Chọn giảng viên</option>
           <option v-for="instructor in instructors" :key="instructor.id" :value="instructor.id">{{ instructor.fullName }} — {{ instructor.email }}</option>
@@ -249,13 +319,13 @@ function save() {
       </label>
 
       <label class="manage-field lg:col-span-2">
-        Khóa học phù hợp với ai? <span class="text-rose-300">*</span>
+        <span>Khóa học phù hợp với ai? <span class="text-brand-soft">*</span></span>
         <textarea v-model="form.targetAudience" class="manage-input min-h-24" minlength="10" maxlength="1000" :disabled="readOnly" />
         <span v-if="errors.targetAudience" class="manage-field-error">{{ errors.targetAudience }}</span>
       </label>
 
       <fieldset class="manage-field lg:col-span-2">
-        <legend class="mb-2">Bạn học được gì? <span class="text-rose-300">*</span></legend>
+        <legend class="mb-2">Bạn học được gì? <span class="text-brand-soft">*</span></legend>
         <div class="space-y-2">
           <div v-for="(_, index) in form.learningOutcomes" :key="index" class="flex items-start gap-2">
             <label class="sr-only" :for="`outcome-${index}`">Mục tiêu học tập {{ index + 1 }}</label>
@@ -263,46 +333,102 @@ function save() {
             <button type="button" class="manage-icon-button text-rose-300" :disabled="readOnly || form.learningOutcomes.length <= 1" :aria-label="`Xóa mục tiêu ${index + 1}`" @click="removeOutcome(index)"><Trash2 class="h-4 w-4" /></button>
           </div>
         </div>
-        <button type="button" class="mt-2 inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-200 hover:text-white disabled:opacity-40" :disabled="readOnly || form.learningOutcomes.length >= 10" @click="addOutcome">
+        <button type="button" class="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-ink hover:text-brand-soft disabled:opacity-40" :disabled="readOnly || form.learningOutcomes.length >= 10" @click="addOutcome">
           <Plus class="h-4 w-4" /> Thêm mục tiêu
         </button>
         <span v-if="errors.learningOutcomes" class="manage-field-error">{{ errors.learningOutcomes }}</span>
       </fieldset>
 
       <label class="manage-field lg:col-span-2">
-        Yêu cầu đầu vào <span class="text-rose-300">*</span>
+        <span>Yêu cầu đầu vào <span class="text-brand-soft">*</span></span>
         <textarea v-model="form.requirements" class="manage-input min-h-24" minlength="5" maxlength="1000" :disabled="readOnly" />
         <span v-if="errors.requirements" class="manage-field-error">{{ errors.requirements }}</span>
       </label>
     </div>
 
-    <div class="rounded-2xl border border-slate-800 bg-slate-950/50 p-4">
-      <h2 class="mb-4 text-sm font-bold text-white">Giá và ảnh đại diện</h2>
+    <div class="bg-ground p-5">
+      <h2 class="mb-4 text-sm font-semibold text-ink">Giá và ảnh đại diện</h2>
       <div class="grid gap-5 sm:grid-cols-2">
         <label class="manage-field">
-          Giá (VNĐ)
-          <input v-model="form.price" class="manage-input" type="number" min="0" max="100000000" step="1" :disabled="readOnly || form.type === 'FREE'" />
+          <span>Giá (VNĐ)</span>
+          <input v-model="form.price" class="manage-input tabular-nums" type="number" min="0" max="100000000" step="1" :disabled="readOnly || form.type === 'FREE'" />
           <span v-if="errors.price" class="manage-field-error">{{ errors.price }}</span>
         </label>
         <label v-if="form.type === 'PRO'" class="manage-field">
-          Giá ưu đãi (tùy chọn)
-          <input v-model="form.discountPrice" class="manage-input" type="number" min="1" max="100000000" step="1" :disabled="readOnly" />
+          <span>Giá ưu đãi (tùy chọn)</span>
+          <input v-model="form.discountPrice" class="manage-input tabular-nums" type="number" min="1" max="100000000" step="1" :disabled="readOnly" />
           <span v-if="errors.discountPrice" class="manage-field-error">{{ errors.discountPrice }}</span>
         </label>
-        <label class="manage-field sm:col-span-2">
-          URL ảnh đại diện
-          <input v-model="form.thumbnail" class="manage-input" type="url" maxlength="500" placeholder="https://example.com/course-cover.jpg" :disabled="readOnly" />
-          <span v-if="errors.thumbnail" class="manage-field-error">{{ errors.thumbnail }}</span>
-        </label>
+
+        <div class="manage-field sm:col-span-2">
+          <span>Ảnh đại diện khóa học</span>
+          <input
+            ref="fileInputRef"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            class="sr-only"
+            :disabled="readOnly || busy"
+            @change="handleFileChange"
+          />
+
+          <div class="mt-1 flex flex-col gap-4 bg-surface p-4 sm:flex-row sm:items-center">
+            <div class="relative flex h-28 w-48 shrink-0 items-center justify-center overflow-hidden bg-ground">
+              <img
+                v-if="thumbnailPreview"
+                :src="thumbnailPreview"
+                alt="Xem trước ảnh đại diện khóa học"
+                class="h-full w-full object-cover"
+              />
+              <div v-else class="flex flex-col items-center gap-1.5 text-xs text-muted">
+                <Image class="h-6 w-6 text-muted" />
+                <span>Chưa có ảnh</span>
+              </div>
+              <span
+                v-if="selectedFile"
+                class="absolute bottom-1.5 left-1.5 bg-brand px-2 py-0.5 text-[11px] font-semibold text-white"
+              >
+                Xem trước (chưa lưu)
+              </span>
+            </div>
+
+            <div class="flex flex-1 flex-col gap-2">
+              <div class="flex flex-wrap items-center gap-2">
+                <button
+                  v-if="!readOnly"
+                  type="button"
+                  class="manage-button-secondary text-xs sm:text-sm"
+                  :disabled="busy"
+                  @click="triggerFilePicker"
+                >
+                  <Upload class="h-4 w-4" />
+                  {{ thumbnailPreview ? 'Chọn ảnh khác' : 'Tải ảnh từ máy' }}
+                </button>
+                <button
+                  v-if="!readOnly && thumbnailPreview"
+                  type="button"
+                  class="manage-button-danger text-xs sm:text-sm"
+                  :disabled="busy"
+                  @click="clearThumbnail"
+                >
+                  <X class="h-4 w-4" />
+                  {{ selectedFile ? 'Hủy ảnh mới chọn' : 'Xóa ảnh hiện tại' }}
+                </button>
+              </div>
+
+              <p v-if="selectedFile" class="text-xs text-ink">
+                Đã chọn: <strong class="font-semibold">{{ selectedFile.name }}</strong> ({{ formatFileSize(selectedFile.size) }}) — Ảnh sẽ được tải lên server khi bấm Lưu.
+              </p>
+              <p v-else class="text-xs text-muted">
+                Hỗ trợ định dạng JPG, PNG, WEBP (tối đa 5MB). Khuyến nghị tỉ lệ 16:9.
+              </p>
+              <span v-if="errors.thumbnail" class="manage-field-error">{{ errors.thumbnail }}</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div v-if="thumbnailPreview" class="mt-4 flex items-center gap-3">
-        <img :src="thumbnailPreview" alt="Xem trước ảnh đại diện khóa học" class="h-20 w-32 rounded-xl border border-slate-700 object-cover" />
-        <span class="inline-flex items-center gap-1.5 text-xs text-slate-400"><Image class="h-4 w-4" /> Xem trước ảnh</span>
-      </div>
-      <p v-else-if="form.thumbnail" class="mt-3 text-xs text-amber-200">Nhập URL HTTPS hợp lệ để xem trước ảnh.</p>
     </div>
 
-    <div class="flex flex-col-reverse gap-3 border-t border-slate-800 pt-5 sm:flex-row sm:justify-end">
+    <div class="flex flex-col-reverse gap-3 pt-2 sm:flex-row sm:justify-end">
       <router-link :to="{ name: 'ManageCourses' }" class="manage-button-secondary text-center">Quay lại danh sách</router-link>
       <button v-if="!readOnly" type="submit" class="manage-button-primary" :disabled="busy || catalogLoading">
         {{ busy ? 'Đang lưu…' : course ? 'Lưu thông tin' : 'Tạo khóa học' }}

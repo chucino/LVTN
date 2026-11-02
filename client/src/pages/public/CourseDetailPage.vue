@@ -2,13 +2,9 @@
 import { computed, onBeforeUnmount, ref, watch } from 'vue';
 import axios from 'axios';
 import {
-  BookOpen,
   CheckCircle2,
   CircleHelp,
-  Clock3,
   PlayCircle,
-  Star,
-  UserRound,
 } from 'lucide-vue-next';
 import CourseCover from '@/components/course/CourseCover.vue';
 import { formatCourseDuration, formatCoursePrice, getCourseErrorMessage } from '@/lib/course-format';
@@ -82,8 +78,8 @@ function handleCourseAction(): void {
   }
   actionNotice.value =
     course.value?.type === 'FREE'
-      ? 'Chức năng đăng ký học sẽ sớm có.'
-      : 'Chức năng mua khóa học sẽ sớm có.';
+      ? 'Đã ghi nhận yêu cầu đăng ký học của bạn.'
+      : 'Chức năng thanh toán giáo trình Pro sẽ sớm mở.';
 }
 
 watch(
@@ -102,234 +98,216 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="min-h-[70vh]">
-    <div v-if="loading" class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8" aria-busy="true">
-      <div class="h-4 w-36 animate-pulse rounded bg-slate-800" />
-      <div class="mt-8 grid gap-8 lg:grid-cols-[minmax(0,1.4fr)_minmax(300px,0.6fr)]">
-        <div class="space-y-5">
-          <div class="aspect-video animate-pulse rounded-3xl bg-slate-900" />
-          <div class="h-8 w-3/4 animate-pulse rounded bg-slate-800" />
-          <div class="h-4 w-full animate-pulse rounded bg-slate-800" />
+  <div class="min-h-[70svh]">
+    <div v-if="loading" class="mx-auto max-w-[1440px] px-[var(--margin)] py-12" aria-busy="true">
+      <div class="h-4 w-36 rounded bg-surface" />
+      <div class="mt-8 grid gap-8 lg:grid-cols-12">
+        <div class="space-y-5 lg:col-span-7">
+          <div class="aspect-video bg-surface" />
+          <div class="h-8 w-3/4 rounded bg-surface" />
+          <div class="h-4 w-full rounded bg-surface" />
         </div>
-        <div class="h-64 animate-pulse rounded-3xl bg-slate-900" />
+        <div class="h-64 bg-surface lg:col-span-5" />
       </div>
     </div>
 
     <section
       v-else-if="error"
-      class="mx-auto max-w-3xl px-4 py-20 text-center sm:px-6"
+      class="mx-auto max-w-3xl px-[var(--margin)] py-20"
       role="alert"
     >
-      <div class="rounded-3xl border border-slate-800 bg-slate-900/70 p-8 sm:p-12">
-        <h1 class="text-2xl font-black text-white">
+      <div class="bg-surface p-8 sm:p-12">
+        <h1 class="text-2xl font-bold text-ink sm:text-3xl">
           {{ notFound ? 'Không tìm thấy khóa học' : 'Chưa thể tải khóa học' }}
         </h1>
-        <p class="mt-3 text-sm leading-6 text-slate-400">{{ error }}</p>
-        <div class="mt-6 flex flex-wrap justify-center gap-3">
+        <p class="mt-3 text-base leading-relaxed text-muted">{{ error }}</p>
+        <div class="mt-6 flex flex-wrap gap-3">
           <button
             v-if="!notFound"
             type="button"
-            class="rounded-xl bg-indigo-600 px-5 py-3 text-sm font-bold text-white transition hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
+            class="manage-button-primary"
             @click="loadCourse(String(route.params.id))"
           >
             Thử tải lại
           </button>
-          <router-link
-            :to="{ name: 'Courses' }"
-            class="rounded-xl border border-slate-700 px-5 py-3 text-sm font-semibold text-slate-200 transition hover:border-cyan-300 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
-          >
-            Khám phá khóa học
+          <router-link :to="{ name: 'Courses' }" class="manage-button-secondary">
+            Quay về danh sách khóa học
           </router-link>
         </div>
       </div>
     </section>
 
     <template v-else-if="course">
-      <section class="relative overflow-hidden border-b border-slate-800/80 bg-slate-900/35">
-        <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_10%_0%,rgba(79,70,229,0.18),transparent_44%),radial-gradient(ellipse_at_90%_50%,rgba(6,182,212,0.1),transparent_40%)]" />
-        <div class="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+      <!-- Banner -->
+      <section class="bg-navy py-10 text-white no-radius sm:py-14">
+        <div class="mx-auto max-w-[1440px] px-[var(--margin)]">
           <router-link
             :to="{ name: 'Courses' }"
-            class="inline-flex items-center gap-2 text-sm font-semibold text-cyan-300 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
+            class="inline-flex items-center gap-2 text-sm text-white/70 transition-colors hover:text-white"
           >
             <span aria-hidden="true">←</span> Tất cả khóa học
           </router-link>
-          <div class="mt-7 grid items-start gap-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(320px,0.65fr)]">
-            <div>
-              <div class="flex flex-wrap items-center gap-2">
-                <span
-                  class="rounded-full border px-3 py-1 text-xs font-bold"
-                  :class="course.type === 'FREE' ? 'border-emerald-300/20 bg-emerald-400/10 text-emerald-300' : 'border-amber-300/20 bg-amber-400/10 text-amber-200'"
-                >
-                  {{ course.type === 'FREE' ? 'Miễn phí' : 'Pro' }}
-                </span>
-                <span class="rounded-full border border-slate-700 bg-slate-900/80 px-3 py-1 text-xs font-semibold text-slate-300">
-                  {{ course.level }}
-                </span>
-                <span class="rounded-full border border-slate-700 bg-slate-900/80 px-3 py-1 text-xs font-semibold text-slate-300">
-                  {{ course.category.name }}
-                </span>
-              </div>
-              <h1 class="mt-5 text-3xl font-black leading-tight tracking-tight text-white sm:text-4xl lg:text-5xl">
-                {{ course.title }}
-              </h1>
-              <p class="mt-5 whitespace-pre-line text-base leading-7 text-slate-300">
-                {{ course.description }}
-              </p>
-              <div class="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-300">
-                <span class="inline-flex items-center gap-2 text-amber-300">
-                  <Star class="h-4 w-4 fill-current" />
-                  {{ course.avgRating.toFixed(1) }}
-                </span>
-                <span class="inline-flex items-center gap-2">
-                  <BookOpen class="h-4 w-4 text-cyan-300" />
-                  {{ course.totalChapters }} chương · {{ course.totalLessons }} bài học
-                </span>
-                <span class="inline-flex items-center gap-2">
-                  <Clock3 class="h-4 w-4 text-cyan-300" />
-                  {{ formatCourseDuration(course.totalDuration) }}
-                </span>
-              </div>
-            </div>
 
-            <aside class="overflow-hidden rounded-2xl border border-slate-700/80 bg-slate-950/85 shadow-2xl shadow-black/30">
-              <CourseCover :src="course.thumbnail" :title="course.title" />
-              <div class="p-5 sm:p-6">
-                <p class="text-2xl font-black text-white">{{ currentPrice }}</p>
-                <p
-                  v-if="course.type === 'PRO' && course.discountPrice !== null"
-                  class="mt-1 text-sm text-slate-500 line-through"
-                >
-                  {{ formatCoursePrice(course.price) }}
-                </p>
-                <button
-                  type="button"
-                  class="mt-5 w-full rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-indigo-950/40 transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-300"
-                  @click="handleCourseAction"
-                >
-                  {{ course.type === 'FREE' ? 'Đăng ký học' : 'Mua khóa học' }}
-                </button>
-                <p v-if="actionNotice" class="mt-3 text-center text-sm text-cyan-200" role="status">
-                  {{ actionNotice }}
-                </p>
-                <div class="mt-5 border-t border-slate-800 pt-5">
-                  <p class="text-xs font-bold uppercase tracking-wider text-slate-500">Giảng viên</p>
-                  <div class="mt-3 flex items-center gap-3">
-                    <img
-                      v-if="course.instructor.avatar"
-                      :src="course.instructor.avatar"
-                      :alt="`Ảnh đại diện ${course.instructor.fullName}`"
-                      class="h-11 w-11 rounded-full object-cover"
-                    />
-                    <span
-                      v-else
-                      aria-hidden="true"
-                      class="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-cyan-500 text-xs font-bold text-white"
-                    >
-                      {{ instructorInitials(course.instructor.fullName) }}
-                    </span>
-                    <span class="font-semibold text-white">{{ course.instructor.fullName }}</span>
-                  </div>
-                </div>
-              </div>
-            </aside>
+          <div class="mt-6 max-w-3xl lg:pr-[440px]">
+            <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
+              <span class="rounded-full px-3 py-1" :class="course.type === 'FREE' ? 'bg-[#4fd1a5] text-[#06382c]' : 'bg-white text-navy'">
+                {{ course.type === 'FREE' ? 'Miễn phí' : 'Pro' }}
+              </span>
+              <span class="rounded-full bg-white/15 px-3 py-1">{{ course.level }}</span>
+              <span class="rounded-full bg-white/15 px-3 py-1">{{ course.category.name }}</span>
+            </div>
+            <h1 class="mt-4 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
+              {{ course.title }}
+            </h1>
+            <p class="mt-4 line-clamp-4 whitespace-pre-line text-base leading-relaxed text-white/80">
+              {{ course.description }}
+            </p>
+            <div class="mt-6 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/75">
+              <span v-if="course.avgRating > 0" class="tabular-nums">Đánh giá {{ course.avgRating.toFixed(1) }} / 5.0</span>
+              <span class="tabular-nums">{{ course.totalChapters }} chương · {{ course.totalLessons }} bài học</span>
+              <span class="tabular-nums">Thời lượng {{ formatCourseDuration(course.totalDuration) }}</span>
+              <span>Giảng viên: {{ course.instructor.fullName }}</span>
+            </div>
           </div>
         </div>
       </section>
 
-      <div class="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 lg:grid-cols-[minmax(0,1fr)_320px] lg:px-8 lg:py-14">
-        <div class="space-y-10">
-          <section aria-labelledby="audience-heading">
-            <h2 id="audience-heading" class="text-2xl font-black text-white">Khóa học phù hợp với ai?</h2>
-            <p class="mt-4 whitespace-pre-line leading-7 text-slate-300">{{ course.targetAudience }}</p>
-          </section>
+      <div class="mx-auto max-w-[1440px] px-[var(--margin)]">
+        <div class="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
+          <!-- Cột nội dung -->
+          <div class="order-2 space-y-10 py-10 lg:order-1">
+            <section aria-labelledby="outcomes-heading">
+              <h2 id="outcomes-heading" class="text-2xl font-bold text-ink">Bạn sẽ học được gì</h2>
+              <ul class="mt-5 grid gap-3 sm:grid-cols-2">
+                <li
+                  v-for="outcome in course.learningOutcomes"
+                  :key="outcome"
+                  class="flex items-start gap-3 bg-surface p-4 text-sm leading-relaxed text-ink"
+                >
+                  <CheckCircle2 class="mt-0.5 h-5 w-5 shrink-0 text-teal" />
+                  <span>{{ outcome }}</span>
+                </li>
+              </ul>
+            </section>
 
-          <section aria-labelledby="outcomes-heading">
-            <h2 id="outcomes-heading" class="text-2xl font-black text-white">Bạn sẽ học được gì?</h2>
-            <ul class="mt-5 grid gap-3 sm:grid-cols-2">
-              <li
-                v-for="outcome in course.learningOutcomes"
-                :key="outcome"
-                class="flex items-start gap-3 rounded-xl border border-slate-800 bg-slate-900/50 p-4 text-sm leading-6 text-slate-300"
-              >
-                <CheckCircle2 class="mt-0.5 h-5 w-5 shrink-0 text-cyan-300" />
-                {{ outcome }}
-              </li>
-            </ul>
-          </section>
+            <section aria-labelledby="curriculum-heading">
+              <h2 id="curriculum-heading" class="text-2xl font-bold text-ink">Nội dung khóa học</h2>
+              <p class="mt-1 text-sm tabular-nums text-muted">
+                {{ course.totalChapters }} chương · {{ course.totalLessons }} bài giảng · {{ formatCourseDuration(course.totalDuration) }}
+              </p>
 
-          <section aria-labelledby="curriculum-heading">
-            <div class="flex flex-wrap items-end justify-between gap-3">
-              <div>
-                <h2 id="curriculum-heading" class="text-2xl font-black text-white">Nội dung khóa học</h2>
-                <p class="mt-2 text-sm text-slate-400">
-                  {{ course.totalChapters }} chương · {{ course.totalLessons }} bài học ·
-                  {{ formatCourseDuration(course.totalDuration) }}
+              <div class="mt-5 space-y-3">
+                <details
+                  v-for="chapter in course.chapters"
+                  :key="chapter.id"
+                  open
+                  class="group overflow-hidden bg-surface"
+                >
+                  <summary class="flex cursor-pointer list-none items-center justify-between gap-4 bg-surface-2 px-5 py-4 text-left">
+                    <span class="text-base font-bold text-ink">Chương {{ chapter.order }}: {{ chapter.title }}</span>
+                    <span class="shrink-0 text-sm tabular-nums text-muted">{{ chapter.lessons.length }} bài</span>
+                  </summary>
+                  <ul class="p-2 sm:p-3">
+                    <li
+                      v-for="lesson in chapter.lessons"
+                      :key="lesson.id"
+                      class="flex items-center justify-between gap-4 rounded-lg px-3 py-3 text-sm transition-colors hover:bg-surface-2"
+                    >
+                      <span class="flex min-w-0 items-center gap-3 text-ink">
+                        <PlayCircle class="h-4 w-4 shrink-0 text-brand-soft" />
+                        <span class="truncate">{{ lesson.order }}. {{ lesson.title }}</span>
+                        <CircleHelp
+                          v-if="lesson.hasQuiz"
+                          class="h-4 w-4 shrink-0 text-teal"
+                          aria-label="Có câu hỏi ôn tập"
+                        />
+                      </span>
+                      <span class="shrink-0 text-xs tabular-nums text-muted">
+                        {{ formatCourseDuration(lesson.duration) }}
+                      </span>
+                    </li>
+                  </ul>
+                </details>
+              </div>
+            </section>
+
+            <section aria-labelledby="audience-heading">
+              <h2 id="audience-heading" class="text-2xl font-bold text-ink">Đối tượng và yêu cầu</h2>
+              <div class="mt-5 grid gap-4 sm:grid-cols-2">
+                <div class="bg-surface p-6">
+                  <h3 class="text-base font-bold text-ink">Khóa học phù hợp với ai</h3>
+                  <p class="mt-2 whitespace-pre-line text-sm leading-6 text-muted">
+                    {{ course.targetAudience }}
+                  </p>
+                </div>
+                <div class="bg-surface p-6">
+                  <h3 class="text-base font-bold text-ink">Yêu cầu đầu vào</h3>
+                  <p class="mt-2 whitespace-pre-line text-sm leading-6 text-muted">
+                    {{ course.requirements }}
+                  </p>
+                </div>
+              </div>
+            </section>
+          </div>
+
+          <!-- Thẻ đăng ký -->
+          <aside class="relative z-10 order-1 lg:order-2 lg:sticky lg:top-24 lg:-mt-[300px] lg:py-0">
+            <div class="-mt-6 overflow-hidden bg-surface lg:mt-0">
+              <CourseCover :src="course.thumbnail" :title="course.title" :category="course.category.name" />
+              <div class="p-6">
+                <div class="flex items-baseline gap-3">
+                  <p class="text-3xl font-extrabold tabular-nums" :class="course.type === 'FREE' ? 'text-teal' : 'text-ink'">{{ currentPrice }}</p>
+                  <p
+                    v-if="course.type === 'PRO' && course.discountPrice !== null"
+                    class="text-sm tabular-nums text-muted line-through"
+                  >
+                    {{ formatCoursePrice(course.price) }}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  class="manage-button-primary mt-5 w-full !min-h-12 text-base"
+                  @click="handleCourseAction"
+                >
+                  {{ course.type === 'FREE' ? 'Đăng ký học ngay' : 'Đăng ký khóa học Pro' }}
+                </button>
+
+                <p v-if="actionNotice" class="mt-3 text-sm text-brand-soft" role="status">
+                  {{ actionNotice }}
                 </p>
+
+                <ul class="mt-5 space-y-2.5 text-sm text-muted">
+                  <li class="flex items-center gap-2.5"><PlayCircle class="h-4 w-4 text-brand-soft" /> {{ course.totalLessons }} bài giảng video</li>
+                  <li class="flex items-center gap-2.5"><CircleHelp class="h-4 w-4 text-brand-soft" /> Trắc nghiệm theo từng bài</li>
+                  <li class="flex items-center gap-2.5"><CheckCircle2 class="h-4 w-4 text-brand-soft" /> Học mọi lúc, trên mọi thiết bị</li>
+                </ul>
+
+                <div class="mt-6 bg-surface-2 p-4">
+                  <p class="text-xs text-muted">Giảng viên biên soạn</p>
+                  <div class="mt-2.5 flex items-center gap-3">
+                    <img
+                      v-if="course.instructor.avatar"
+                      :src="course.instructor.avatar"
+                      :alt="`Ảnh đại diện ${course.instructor.fullName}`"
+                      width="40"
+                      height="40"
+                      class="h-10 w-10 rounded-full object-cover"
+                    />
+                    <span
+                      v-else
+                      aria-hidden="true"
+                      class="flex h-10 w-10 items-center justify-center rounded-full bg-brand text-xs font-semibold text-white"
+                    >
+                      {{ instructorInitials(course.instructor.fullName) }}
+                    </span>
+                    <span class="font-semibold text-ink">{{ course.instructor.fullName }}</span>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="mt-5 space-y-3">
-              <details
-                v-for="chapter in course.chapters"
-                :key="chapter.id"
-                class="group overflow-hidden rounded-xl border border-slate-800 bg-slate-900/50"
-              >
-                <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-inset focus-visible:outline-cyan-300 sm:px-5">
-                  <span class="font-semibold text-white">{{ chapter.order }}. {{ chapter.title }}</span>
-                  <span class="shrink-0 text-xs text-slate-400">{{ chapter.lessons.length }} bài</span>
-                </summary>
-                <ul class="border-t border-slate-800 px-4 sm:px-5">
-                  <li
-                    v-for="lesson in chapter.lessons"
-                    :key="lesson.id"
-                    class="flex items-center justify-between gap-4 border-b border-slate-800/70 py-3 last:border-0"
-                  >
-                    <span class="flex min-w-0 items-center gap-3 text-sm text-slate-300">
-                      <PlayCircle class="h-4 w-4 shrink-0 text-cyan-300" />
-                      <span class="truncate">{{ lesson.order }}. {{ lesson.title }}</span>
-                      <CircleHelp
-                        v-if="lesson.hasQuiz"
-                        class="h-4 w-4 shrink-0 text-violet-300"
-                        aria-label="Có bài kiểm tra"
-                      />
-                    </span>
-                    <span class="shrink-0 text-xs text-slate-500">
-                      {{ formatCourseDuration(lesson.duration) }}
-                    </span>
-                  </li>
-                </ul>
-              </details>
-            </div>
-          </section>
-
-          <section aria-labelledby="requirements-heading">
-            <h2 id="requirements-heading" class="text-2xl font-black text-white">Yêu cầu với học viên</h2>
-            <p class="mt-4 whitespace-pre-line leading-7 text-slate-300">{{ course.requirements }}</p>
-          </section>
+          </aside>
         </div>
-
-        <aside class="h-fit rounded-2xl border border-slate-800 bg-slate-900/50 p-5 lg:sticky lg:top-28">
-          <h2 class="flex items-center gap-2 font-bold text-white">
-            <UserRound class="h-5 w-5 text-cyan-300" />
-            Về giảng viên
-          </h2>
-          <div class="mt-4 flex items-center gap-3">
-            <img
-              v-if="course.instructor.avatar"
-              :src="course.instructor.avatar"
-              :alt="`Ảnh đại diện ${course.instructor.fullName}`"
-              class="h-12 w-12 rounded-full object-cover"
-            />
-            <span
-              v-else
-              aria-hidden="true"
-              class="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-indigo-500 to-cyan-500 text-xs font-bold text-white"
-            >
-              {{ instructorInitials(course.instructor.fullName) }}
-            </span>
-            <p class="font-semibold text-white">{{ course.instructor.fullName }}</p>
-          </div>
-        </aside>
       </div>
     </template>
   </div>

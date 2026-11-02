@@ -117,7 +117,8 @@ export class CourseManageController {
   }
 
   @Post('courses')
-  @ApiOperation({ summary: 'Tạo khóa học ở trạng thái DRAFT' })
+  @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Tạo khóa học ở trạng thái DRAFT (Chỉ ADMIN)' })
   @CourseDetailResponse(HttpStatus.CREATED)
   @ManageApiErrors()
   createCourse(
@@ -140,7 +141,8 @@ export class CourseManageController {
   }
 
   @Patch('courses/:id')
-  @ApiOperation({ summary: 'Cập nhật thông tin khóa học' })
+  @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Cập nhật thông tin khóa học (Chỉ ADMIN)' })
   @CourseDetailResponse()
   @ManageApiErrors()
   updateCourse(
@@ -152,7 +154,8 @@ export class CourseManageController {
   }
 
   @Delete('courses/:id')
-  @ApiOperation({ summary: 'Xóa khóa học ở trạng thái được phép' })
+  @Roles(Role.ADMIN)
+  @ApiOperation({ summary: 'Xóa khóa học ở trạng thái được phép (Chỉ ADMIN)' })
   @ApiResponse({ status: 200, description: 'Khóa học đã được xóa' })
   @ManageApiErrors()
   deleteCourse(

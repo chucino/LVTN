@@ -3,20 +3,20 @@ import { ShieldX } from 'lucide-vue-next';
 </script>
 
 <template>
-  <main class="flex min-h-screen items-center justify-center bg-slate-950 px-4 text-slate-100">
-    <section class="w-full max-w-lg rounded-3xl border border-slate-800 bg-slate-900/80 p-8 text-center shadow-2xl shadow-black/30">
-      <div class="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-rose-400/20 bg-rose-500/10 text-rose-300">
-        <ShieldX class="h-7 w-7" />
+  <main class="flex min-h-svh items-center justify-center bg-ground px-[var(--margin)] text-ink">
+    <section class="w-full max-w-lg bg-surface p-8 sm:p-10">
+      <div class="mb-5 flex h-12 w-12 items-center justify-center bg-brand-surface text-brand-soft">
+        <ShieldX class="h-6 w-6" />
       </div>
-      <h1 class="text-2xl font-bold text-white">Bạn không có quyền truy cập</h1>
-      <p class="mt-2 text-sm leading-6 text-slate-400">
-        Khu vực quản lý khóa học chỉ dành cho giảng viên và quản trị viên.
+      <h1 class="text-3xl font-normal text-ink">Bạn không có quyền truy cập</h1>
+      <p class="mt-3 text-base leading-relaxed text-muted">
+        Khu vực quản trị chỉ dành cho giảng viên được phân công và quản trị viên hệ thống.
       </p>
       <router-link
         to="/"
-        class="mt-6 inline-flex rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-5 py-3 text-sm font-bold text-white"
+        class="mt-6 inline-flex bg-brand px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-brand-hover"
       >
-        Về trang chủ
+        Về trang chủ NextCode
       </router-link>
     </section>
   </main>

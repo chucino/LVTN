@@ -1,9 +1,9 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import { useAuthStore } from '@/stores/auth.store';
 import PublicLayout from '@/layouts/PublicLayout.vue';
 import type { Role } from '@/types/auth';
 
-const routes = [
+const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: PublicLayout,
@@ -25,6 +25,12 @@ const routes = [
         name: 'CourseDetail',
         component: () => import('@/pages/public/CourseDetailPage.vue'),
         meta: { title: 'Chi tiết khóa học - NextCode' },
+      },
+      {
+        path: 'profile',
+        name: 'Profile',
+        component: () => import('@/pages/student/ProfilePage.vue'),
+        meta: { requiresAuth: true, title: 'Hồ sơ cá nhân - NextCode' },
       },
     ],
   },
@@ -60,18 +66,18 @@ const routes = [
   },
   {
     path: '/dashboard',
-    name: 'Dashboard',
-    component: () => import('@/pages/dashboard/DashboardPage.vue'),
-    meta: { requiresAuth: true, title: 'Bảng điều khiển - NextCode' },
-  },
-  {
-    path: '/manage',
     component: () => import('@/layouts/ManageLayout.vue'),
     meta: {
       requiresAuth: true,
       roles: ['INSTRUCTOR', 'ADMIN'] as Role[],
     },
     children: [
+      {
+        path: '',
+        name: 'Dashboard',
+        component: () => import('@/pages/dashboard/DashboardPage.vue'),
+        meta: { title: 'Trang quản trị - NextCode' },
+      },
       {
         path: 'courses',
         name: 'ManageCourses',
@@ -82,7 +88,10 @@ const routes = [
         path: 'courses/new',
         name: 'ManageCourseCreate',
         component: () => import('@/pages/manage/ManageCourseEditPage.vue'),
-        meta: { title: 'Tạo khóa học - NextCode' },
+        meta: {
+          title: 'Tạo khóa học nền - NextCode',
+          roles: ['ADMIN'] as Role[],
+        },
       },
       {
         path: 'courses/:id/edit',
@@ -90,7 +99,29 @@ const routes = [
         component: () => import('@/pages/manage/ManageCourseEditPage.vue'),
         meta: { title: 'Chỉnh sửa khóa học - NextCode' },
       },
+      {
+        path: 'users',
+        name: 'ManageUsers',
+        component: () => import('@/pages/manage/ManageUsersPage.vue'),
+        meta: {
+          title: 'Quản lý người dùng - NextCode',
+          roles: ['ADMIN'] as Role[],
+        },
+      },
     ],
+  },
+  {
+    path: '/manage',
+    redirect: { name: 'Dashboard' },
+  },
+  {
+    path: '/manage/:pathMatch(.*)*',
+    redirect: (to) => {
+      const rest = Array.isArray(to.params.pathMatch)
+        ? to.params.pathMatch.join('/')
+        : to.params.pathMatch || '';
+      return { path: `/dashboard/${rest}`, query: to.query };
+    },
   },
   {
     path: '/forbidden',

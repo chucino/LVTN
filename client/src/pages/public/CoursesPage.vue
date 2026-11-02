@@ -150,8 +150,12 @@ function buildQuery(): LocationQueryRaw {
   if (filters.minRating) query.minRating = filters.minRating;
   if (filters.sort !== 'newest') query.sort = filters.sort;
   if (filters.page > 1) query.page = String(filters.page);
-  if (filters.limit !== 12) query.limit = String(filters.limit);
+  if (filters.limit !== 12) query.limit = String(limitValue());
   return query;
+}
+
+function limitValue(): number {
+  return filters.limit;
 }
 
 async function applyFilters(): Promise<void> {
@@ -272,78 +276,75 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="min-h-[70vh]">
-    <section class="relative overflow-hidden border-b border-slate-800/80 bg-slate-900/35">
-      <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_15%_0%,rgba(79,70,229,0.18),transparent_44%),radial-gradient(ellipse_at_90%_50%,rgba(6,182,212,0.1),transparent_40%)]" />
-      <div class="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <p class="text-sm font-bold uppercase tracking-[0.18em] text-cyan-300">
-          Khám phá NextCode
-        </p>
-        <h1 class="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">
-          Tìm khóa học phù hợp với bạn
+  <div class="min-h-[70svh]">
+    <section class="bg-surface py-10 no-radius sm:py-14">
+      <div class="mx-auto max-w-[1440px] px-[var(--margin)]">
+        <h1 class="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+          Tất cả khóa học
         </h1>
-        <p class="mt-3 max-w-2xl leading-7 text-slate-400">
-          Tìm kiếm theo chủ đề, trình độ và ngân sách để chọn lộ trình học lập trình tiếp theo.
+        <p class="mt-2 max-w-2xl text-base text-muted">
+          Tìm khóa học theo chủ đề, trình độ và hình thức học để chọn lộ trình phù hợp với bạn.
         </p>
-        <label class="mt-6 flex max-w-2xl items-center gap-3 rounded-xl border border-slate-700 bg-slate-950/80 px-4 py-3 focus-within:border-indigo-400">
+
+        <label class="mt-6 flex max-w-2xl items-center gap-3 rounded-full bg-surface-2 px-5 py-3.5">
           <span class="sr-only">Tìm kiếm khóa học</span>
-          <svg class="h-5 w-5 shrink-0 text-slate-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
+          <svg class="h-5 w-5 shrink-0 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
             <circle cx="11" cy="11" r="7" stroke-width="1.8" />
             <path d="m20 20-4-4" stroke-width="1.8" stroke-linecap="round" />
           </svg>
           <input
             v-model="keywordInput"
             type="search"
-            placeholder="Ví dụ: JavaScript, Python..."
-            class="min-w-0 flex-1 bg-transparent text-sm text-white outline-none placeholder:text-slate-500"
+            placeholder="Tìm theo tên khóa học, ngôn ngữ lập trình..."
+            class="min-w-0 flex-1 bg-transparent text-base text-ink outline-none placeholder:text-muted"
           />
         </label>
       </div>
     </section>
 
-    <div class="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <div class="mb-5 flex items-center justify-between gap-4 lg:hidden">
-        <p class="text-sm text-slate-400">
+    <div class="mx-auto max-w-[1440px] px-[var(--margin)] py-12 sm:py-16">
+      <div class="mb-6 flex items-center justify-between gap-4 lg:hidden">
+        <p class="text-sm text-muted">
           {{ results?.total ?? 0 }} khóa học
         </p>
         <button
           type="button"
-          class="rounded-lg border border-slate-700 px-4 py-2 text-sm font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
+          class="bg-surface px-4 py-2.5 text-sm font-medium text-ink"
           :aria-expanded="mobileFiltersOpen"
           aria-controls="course-filters"
           @click="mobileFiltersOpen = !mobileFiltersOpen"
         >
-          {{ mobileFiltersOpen ? 'Ẩn bộ lọc' : 'Bộ lọc' }}
+          {{ mobileFiltersOpen ? 'Ẩn bộ lọc' : 'Bộ lọc tìm kiếm' }}
         </button>
       </div>
 
-      <div class="grid gap-8 lg:grid-cols-[250px_minmax(0,1fr)]">
+      <div class="grid gap-10 lg:grid-cols-[260px_minmax(0,1fr)]">
         <aside
           id="course-filters"
-          class="h-fit rounded-2xl border border-slate-800 bg-slate-900/60 p-5"
+          class="h-fit bg-surface p-6"
           :class="mobileFiltersOpen ? 'block' : 'hidden lg:block'"
           aria-label="Bộ lọc khóa học"
         >
           <div class="flex items-center justify-between">
-            <h2 class="font-bold text-white">Bộ lọc</h2>
+            <h2 class="text-lg font-normal text-ink">Bộ lọc</h2>
             <button
               type="button"
-              class="text-xs font-semibold text-cyan-300 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
+              class="text-sm text-muted underline underline-offset-4 transition-colors hover:text-ink"
               @click="clearFilters"
             >
-              Xóa tất cả
+              Đặt lại
             </button>
           </div>
 
           <fieldset class="mt-6">
-            <legend class="text-sm font-semibold text-slate-200">Loại khóa học</legend>
+            <legend class="text-sm font-medium text-ink">Hình thức</legend>
             <div class="mt-3 grid grid-cols-3 gap-2">
               <button
                 v-for="option in [{ label: 'Tất cả', value: '' }, { label: 'Free', value: 'FREE' }, { label: 'Pro', value: 'PRO' }]"
                 :key="option.value || 'all'"
                 type="button"
-                class="rounded-lg border px-2 py-2 text-xs font-semibold transition focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
-                :class="filters.type === option.value ? 'border-indigo-400 bg-indigo-500/15 text-white' : 'border-slate-700 text-slate-400 hover:text-white'"
+                class="px-2 py-2 text-sm font-medium transition-colors"
+                :class="filters.type === option.value ? 'bg-brand text-white' : 'bg-surface-2 text-muted hover:text-ink'"
                 :aria-pressed="filters.type === option.value"
                 @click="selectType(option.value as '' | CourseType)"
               >
@@ -352,11 +353,11 @@ onBeforeUnmount(() => {
             </div>
           </fieldset>
 
-          <label class="mt-6 block text-sm font-semibold text-slate-200">
+          <label class="mt-6 block text-sm font-medium text-ink">
             Danh mục
             <select
               v-model="filters.categoryId"
-              class="mt-2 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-white focus:border-indigo-400 focus:outline-none"
+              class="mt-2 w-full bg-surface-2 px-3 py-2.5 text-sm text-ink outline-none"
               @change="applyFilters"
             >
               <option value="">Tất cả danh mục</option>
@@ -364,16 +365,16 @@ onBeforeUnmount(() => {
                 {{ category.name }}
               </option>
             </select>
-            <span v-if="categoriesError" class="mt-2 block text-xs font-normal text-amber-200" role="status">
+            <span v-if="categoriesError" class="mt-2 block text-xs font-normal text-brand-soft" role="status">
               {{ categoriesError }}
             </span>
           </label>
 
-          <label class="mt-5 block text-sm font-semibold text-slate-200">
+          <label class="mt-5 block text-sm font-medium text-ink">
             Trình độ
             <select
               v-model="filters.level"
-              class="mt-2 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-white focus:border-indigo-400 focus:outline-none"
+              class="mt-2 w-full bg-surface-2 px-3 py-2.5 text-sm text-ink outline-none"
               @change="applyFilters"
             >
               <option value="">Tất cả trình độ</option>
@@ -382,7 +383,7 @@ onBeforeUnmount(() => {
           </label>
 
           <fieldset class="mt-5">
-            <legend class="text-sm font-semibold text-slate-200">Khoảng giá (VNĐ)</legend>
+            <legend class="text-sm font-medium text-ink">Khoảng học phí (VNĐ)</legend>
             <div class="mt-2 grid grid-cols-2 gap-2">
               <label class="sr-only" for="min-price">Giá thấp nhất</label>
               <input
@@ -391,7 +392,7 @@ onBeforeUnmount(() => {
                 type="number"
                 min="0"
                 placeholder="Từ"
-                class="min-w-0 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-white placeholder:text-slate-500 focus:border-indigo-400 focus:outline-none"
+                class="min-w-0 bg-surface-2 px-3 py-2.5 text-sm text-ink placeholder:text-muted outline-none"
                 @change="applyFilters"
               />
               <label class="sr-only" for="max-price">Giá cao nhất</label>
@@ -401,17 +402,17 @@ onBeforeUnmount(() => {
                 type="number"
                 min="0"
                 placeholder="Đến"
-                class="min-w-0 rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-white placeholder:text-slate-500 focus:border-indigo-400 focus:outline-none"
+                class="min-w-0 bg-surface-2 px-3 py-2.5 text-sm text-ink placeholder:text-muted outline-none"
                 @change="applyFilters"
               />
             </div>
           </fieldset>
 
-          <label class="mt-5 block text-sm font-semibold text-slate-200">
+          <label class="mt-5 block text-sm font-medium text-ink">
             Đánh giá tối thiểu
             <select
               v-model="filters.minRating"
-              class="mt-2 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-white focus:border-indigo-400 focus:outline-none"
+              class="mt-2 w-full bg-surface-2 px-3 py-2.5 text-sm text-ink outline-none"
               @change="applyFilters"
             >
               <option value="">Tất cả đánh giá</option>
@@ -421,11 +422,11 @@ onBeforeUnmount(() => {
             </select>
           </label>
 
-          <label class="mt-5 block text-sm font-semibold text-slate-200">
+          <label class="mt-5 block text-sm font-medium text-ink">
             Sắp xếp
             <select
               v-model="filters.sort"
-              class="mt-2 w-full rounded-lg border border-slate-700 bg-slate-950 px-3 py-2.5 text-sm text-white focus:border-indigo-400 focus:outline-none"
+              class="mt-2 w-full bg-surface-2 px-3 py-2.5 text-sm text-ink outline-none"
               @change="applyFilters"
             >
               <option v-for="option in COURSE_SORT_OPTIONS" :key="option.value" :value="option.value">
@@ -436,33 +437,33 @@ onBeforeUnmount(() => {
         </aside>
 
         <section aria-label="Kết quả khóa học" aria-live="polite">
-          <div class="mb-5 hidden items-center justify-between lg:flex">
-            <p class="text-sm text-slate-400">
+          <div class="mb-6 hidden items-center justify-between lg:flex">
+            <p class="text-base text-muted">
               <template v-if="results">
-                Tìm thấy <span class="font-semibold text-white">{{ results.total }}</span> khóa học
+                Tìm thấy <span class="font-medium text-ink">{{ results.total }}</span> giáo trình
               </template>
             </p>
             <button
               type="button"
-              class="text-sm font-semibold text-cyan-300 transition hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
+              class="text-sm text-ink underline underline-offset-4 transition-colors hover:text-brand-soft"
               @click="clearFilters"
             >
               Xóa bộ lọc
             </button>
           </div>
 
-          <div v-if="filterError" role="alert" class="mb-5 rounded-xl border border-amber-400/30 bg-amber-400/10 p-4 text-sm text-amber-100">
+          <div v-if="filterError" role="alert" class="mb-6 bg-brand-surface p-4 text-sm text-ink">
             {{ filterError }}
           </div>
-          <div v-else-if="error" role="alert" class="mb-5 rounded-xl border border-rose-400/20 bg-rose-400/5 p-5 text-sm text-rose-200">
+          <div v-else-if="error" role="alert" class="mb-6 bg-brand-surface p-6 text-base text-ink">
             <p>{{ error }}</p>
-            <button type="button" class="mt-3 font-semibold underline underline-offset-4" @click="loadResults(route.query)">
+            <button type="button" class="mt-3 font-medium underline underline-offset-4" @click="loadResults(route.query)">
               Thử tải lại
             </button>
           </div>
           <div
             v-else-if="loading"
-            class="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3"
+            class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3"
             aria-label="Đang tải khóa học"
             aria-busy="true"
           >
@@ -470,29 +471,29 @@ onBeforeUnmount(() => {
           </div>
           <div
             v-else-if="results?.items.length === 0"
-            class="rounded-2xl border border-slate-800 bg-slate-900/50 px-6 py-16 text-center"
+            class="bg-surface px-8 py-16"
           >
-            <h2 class="text-lg font-bold text-white">Chưa tìm thấy khóa học phù hợp</h2>
-            <p class="mt-2 text-sm text-slate-400">Hãy thử đổi từ khóa hoặc xóa bớt bộ lọc.</p>
-            <button type="button" class="mt-5 rounded-lg bg-indigo-500 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-400" @click="clearFilters">
-              Xóa bộ lọc
+            <h2 class="text-2xl font-normal text-ink">Chưa tìm thấy giáo trình phù hợp</h2>
+            <p class="mt-2 text-base text-muted">Hãy thử đổi từ khóa hoặc đặt lại bộ lọc tìm kiếm.</p>
+            <button type="button" class="mt-6 bg-brand px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-hover" @click="clearFilters">
+              Đặt lại bộ lọc
             </button>
           </div>
           <template v-else-if="results">
-            <div class="mb-4 text-sm text-slate-400 lg:hidden">
-              Tìm thấy <span class="font-semibold text-white">{{ results.total }}</span> khóa học
+            <div class="mb-4 text-sm text-muted lg:hidden">
+              Tìm thấy <span class="font-medium text-ink">{{ results.total }}</span> giáo trình
             </div>
-            <div class="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
               <CourseCard v-for="course in results.items" :key="course.id" :course="course" />
             </div>
             <nav
               v-if="results.totalPages > 1"
-              class="mt-8 flex flex-wrap items-center justify-center gap-2"
+              class="mt-10 flex flex-wrap items-center justify-center gap-2"
               aria-label="Phân trang"
             >
               <button
                 type="button"
-                class="rounded-lg border border-slate-700 px-3 py-2 text-sm text-slate-200 disabled:opacity-40"
+                class="bg-surface px-4 py-2.5 text-sm text-ink disabled:opacity-40"
                 :disabled="filters.page <= 1"
                 @click="setPage(filters.page - 1)"
               >
@@ -502,8 +503,8 @@ onBeforeUnmount(() => {
                 v-for="page in pageNumbers"
                 :key="page"
                 type="button"
-                class="h-10 min-w-10 rounded-lg border px-3 text-sm font-semibold focus-visible:outline focus-visible:outline-2 focus-visible:outline-cyan-300"
-                :class="page === filters.page ? 'border-indigo-400 bg-indigo-500 text-white' : 'border-slate-700 text-slate-300 hover:text-white'"
+                class="h-10 min-w-10 px-3 text-sm font-medium transition-colors"
+                :class="page === filters.page ? 'bg-brand text-white' : 'bg-surface text-muted hover:text-ink'"
                 :aria-current="page === filters.page ? 'page' : undefined"
                 @click="setPage(page)"
               >
@@ -511,7 +512,7 @@ onBeforeUnmount(() => {
               </button>
               <button
                 type="button"
-                class="rounded-lg border border-slate-700 px-3 py-2 text-sm text-slate-200 disabled:opacity-40"
+                class="bg-surface px-4 py-2.5 text-sm text-ink disabled:opacity-40"
                 :disabled="filters.page >= results.totalPages"
                 @click="setPage(filters.page + 1)"
               >

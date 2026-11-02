@@ -4,7 +4,7 @@ import PublicHeader from '@/components/public/PublicHeader.vue';
 </script>
 
 <template>
-  <div class="min-h-screen bg-slate-950 text-slate-100">
+  <div class="min-h-svh text-ink">
     <PublicHeader />
     <main>
       <router-view />

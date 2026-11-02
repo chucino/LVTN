@@ -1,7 +1,6 @@
 import {
   ApiProperty,
   ApiPropertyOptional,
-  OmitType,
   PartialType,
 } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
@@ -30,6 +29,52 @@ import {
 } from '../../../common/constants/course.enum.js';
 
 const PLACEHOLDER_VIDEO = 'PLACEHOLDER_VIDEO';
+export const LOCAL_COURSE_THUMBNAIL_PATTERN =
+  /^\/public\/images\/courses\/[a-zA-Z0-9_-]+\.(?:jpg|jpeg|png|webp)$/;
+export const LOCAL_LESSON_VIDEO_PATTERN =
+  /^\/public\/videos\/[a-zA-Z0-9_-]+\.(?:mp4|webm)$/;
+
+const YOUTUBE_HOSTS = new Set([
+  'www.youtube.com',
+  'youtube.com',
+  'www.youtube-nocookie.com',
+  'youtube-nocookie.com',
+]);
+
+export function extractYouTubeVideoId(raw: string): string | null {
+  if (typeof raw !== 'string') return null;
+  const trimmed = raw.trim();
+  if (!trimmed) return null;
+
+  let candidateUrl = trimmed;
+  if (/^<iframe\b/i.test(trimmed)) {
+    if (!/^<iframe\b[^>]*>\s*<\/iframe>$/i.test(trimmed)) {
+      return null;
+    }
+    const srcMatch = trimmed.match(/\bsrc\s*=\s*(?:"([^"]+)"|'([^']+)')/i);
+    candidateUrl = (srcMatch?.[1] ?? srcMatch?.[2] ?? '').trim();
+    if (!candidateUrl) return null;
+  }
+
+  try {
+    const parsed = new URL(candidateUrl);
+    if (parsed.protocol !== 'https:' || !YOUTUBE_HOSTS.has(parsed.hostname.toLowerCase())) {
+      return null;
+    }
+    const embedMatch = parsed.pathname.match(/^\/embed\/([a-zA-Z0-9_-]{11})(?:\/)?$/);
+    return embedMatch?.[1] ?? null;
+  } catch {
+    return null;
+  }
+}
+
+export function buildCanonicalYouTubeIframe(videoId: string): string {
+  return `<iframe width="560" height="315" src="https://www.youtube.com/embed/${videoId}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>`;
+}
+
+export function isYouTubeIframeInput(raw: string): boolean {
+  return typeof raw === 'string' && /^<iframe\b/i.test(raw.trim()) && extractYouTubeVideoId(raw) !== null;
+}
 
 export enum ManageCourseSort {
   UPDATED_DESC = 'updated_desc',
@@ -141,10 +186,27 @@ export class CreateManageCourseDto {
   @Max(100_000_000)
   discountPrice?: number | null;
 
-  @ApiPropertyOptional({ example: 'https://example.com/course.png', nullable: true, maxLength: 500 })
+  @ApiPropertyOptional({
+    example: '/public/images/courses/1730300000000-550e8400-e29b-41d4-a716-446655440000.webp',
+    nullable: true,
+    maxLength: 500,
+    description: 'Đường dẫn ảnh đã tải lên (/public/images/courses/...) hoặc URL HTTPS',
+  })
   @IsOptional()
-  @IsUrl({ protocols: ['https'], require_protocol: true })
+  @IsString()
   @MaxLength(500)
+  @ValidateIf(
+    (object: CreateManageCourseDto) =>
+      typeof object.thumbnail === 'string' &&
+      !LOCAL_COURSE_THUMBNAIL_PATTERN.test(object.thumbnail),
+  )
+  @IsUrl(
+    { protocols: ['https'], require_protocol: true },
+    {
+      message:
+        'Ảnh đại diện phải là đường dẫn ảnh đã tải lên (/public/images/courses/...) hoặc URL HTTPS hợp lệ',
+    },
+  )
   thumbnail?: string | null;
 
   @ApiPropertyOptional({
@@ -156,10 +218,9 @@ export class CreateManageCourseDto {
   instructorId?: string;
 }
 
-export class UpdateManageCourseDto extends PartialType(
-  OmitType(CreateManageCourseDto, ['instructorId'] as const),
-  { skipNullProperties: false },
-) {}
+export class UpdateManageCourseDto extends PartialType(CreateManageCourseDto, {
+  skipNullProperties: false,
+}) {}
 
 export class RejectManageCourseDto {
   @ApiProperty({ example: 'Nội dung khóa học cần bổ sung thêm bài thực hành.', minLength: 10, maxLength: 500 })
@@ -197,14 +258,26 @@ export class CreateLessonDto {
   title!: string;
 
   @ApiProperty({
-    example: 'https://example.com/lesson.mp4',
-    description: `URL HTTPS hoặc giá trị giữ chỗ chính xác "${PLACEHOLDER_VIDEO}".`,
-    maxLength: 500,
+    example: '/public/videos/1730300000000-550e8400-e29b-41d4-a716-446655440000.mp4',
+    description: `Mã nhúng <iframe> YouTube (khóa FREE), đường dẫn video đã tải lên (/public/videos/...), URL HTTPS hoặc "${PLACEHOLDER_VIDEO}".`,
+    maxLength: 2000,
   })
-  @ValidateIf((object: CreateLessonDto) => object.videoUrl !== PLACEHOLDER_VIDEO)
   @IsString()
-  @MaxLength(500)
-  @IsUrl({ protocols: ['https'], require_protocol: true })
+  @MaxLength(2000)
+  @ValidateIf(
+    (object: CreateLessonDto) =>
+      object.videoUrl !== PLACEHOLDER_VIDEO &&
+      (typeof object.videoUrl !== 'string' ||
+        (!LOCAL_LESSON_VIDEO_PATTERN.test(object.videoUrl) &&
+          extractYouTubeVideoId(object.videoUrl) === null)),
+  )
+  @IsUrl(
+    { protocols: ['https'], require_protocol: true },
+    {
+      message:
+        'Video phải là mã nhúng <iframe> YouTube hợp lệ, đường dẫn video đã tải lên (/public/videos/...) hoặc URL HTTPS',
+    },
+  )
   videoUrl!: string;
 
   @ApiProperty({ example: 420, minimum: 1, maximum: 36000, description: 'Thời lượng tính bằng giây.' })

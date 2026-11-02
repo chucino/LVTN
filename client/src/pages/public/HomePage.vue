@@ -1,23 +1,16 @@
 <script setup lang="ts">
-import { onMounted, reactive } from 'vue';
-import {
-  ArrowRight,
-  Award,
-  BookOpenCheck,
-  Check,
-  Code2,
-  GraduationCap,
-  Laptop,
-  PlayCircle,
-  Route,
-  Sparkles,
-  TrendingUp,
-} from 'lucide-vue-next';
+import { computed, onMounted, reactive, ref } from 'vue';
+import { ArrowRight, BarChart3, CheckCircle2, ListChecks, PlayCircle } from 'lucide-vue-next';
 import CourseSection from '@/components/course/CourseSection.vue';
-import { getCourseErrorMessage } from '@/lib/course-format';
+import HeroCodeWindow from '@/components/illustrations/HeroCodeWindow.vue';
+import LanguageBadges from '@/components/illustrations/LanguageBadges.vue';
+import {
+  formatCourseDuration,
+  getCourseErrorMessage,
+} from '@/lib/course-format';
 import { coursesApi } from '@/services/courses.api';
 import { useAuthStore } from '@/stores/auth.store';
-import type { CourseCard as CourseCardType, CourseType } from '@/types/course';
+import type { Category, CourseCard as CourseCardType, CourseType } from '@/types/course';
 
 const authStore = useAuthStore();
 
@@ -42,6 +35,7 @@ const pro = reactive<CourseCollectionState>({
   loading: true,
   error: null,
 });
+const categories = ref<Category[]>([]);
 
 async function loadCollection(
   state: CourseCollectionState,
@@ -60,237 +54,399 @@ async function loadCollection(
   }
 }
 
-const benefits = [
+// Bộ tính nhịp học dựa trên thời lượng khóa học thật từ API
+const fallbackCourses: Array<{
+  id: string;
+  title: string;
+  level: string;
+  type: CourseType;
+  totalLessons: number;
+  totalDuration: number;
+}> = [
   {
-    icon: Laptop,
-    title: 'Học mọi lúc, mọi nơi',
-    description: 'Chủ động sắp xếp thời gian học trên thiết bị bạn yêu thích.',
+    id: '',
+    title: 'Nền tảng JavaScript & Tư duy bất đồng bộ',
+    level: 'Cơ bản',
+    type: 'FREE',
+    totalLessons: 24,
+    totalDuration: 32400, // 9 giờ
   },
   {
-    icon: Route,
-    title: 'Lộ trình rõ ràng',
-    description: 'Nội dung được sắp xếp theo từng bước, dễ theo dõi và thực hành.',
+    id: '',
+    title: 'Kiến trúc Backend với NestJS, TypeScript & MongoDB',
+    level: 'Trung cấp',
+    type: 'PRO',
+    totalLessons: 42,
+    totalDuration: 64800, // 18 giờ
   },
   {
-    icon: PlayCircle,
-    title: 'Video xem lại',
-    description: 'Học theo tốc độ của riêng bạn và xem lại bài giảng bất cứ lúc nào.',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Theo dõi tiến độ',
-    description: 'Biết mình đã học đến đâu để duy trì động lực mỗi ngày.',
-  },
-  {
-    icon: Award,
-    title: 'Nhận chứng chỉ',
-    description: 'Ghi nhận nỗ lực sau khi hoàn thành lộ trình khóa học.',
+    id: '',
+    title: 'Phát triển Giao diện Web với Vue 3 & Pinia',
+    level: 'Nâng cao',
+    type: 'PRO',
+    totalLessons: 36,
+    totalDuration: 50400, // 14 giờ
   },
 ];
 
-const learningSteps = [
-  ['01', 'Chọn khóa học', 'Tìm chủ đề và lộ trình phù hợp với mục tiêu của bạn.'],
-  ['02', 'Bắt đầu học', 'Khám phá bài giảng video theo từng bước rõ ràng.'],
-  ['03', 'Thực hành', 'Củng cố kiến thức qua bài tập và dự án học tập.'],
-  ['04', 'Theo dõi tiến độ', 'Học tiếp từ nơi bạn đã dừng và duy trì nhịp học.'],
-  ['05', 'Hoàn thành', 'Khép lại lộ trình và ghi nhận thành quả học tập.'],
+const plannerCourses = computed(() => {
+  const map = new Map<string, CourseCardType>();
+  for (const c of [...featured.courses, ...free.courses, ...pro.courses]) {
+    if (!map.has(c.id)) map.set(c.id, c);
+  }
+  const realList = Array.from(map.values()).slice(0, 5);
+  if (realList.length > 0) {
+    return realList.map((c) => ({
+      id: c.id,
+      title: c.title,
+      level: c.level,
+      type: c.type,
+      totalLessons: Math.max(1, c.totalLessons),
+      totalDuration: c.totalDuration > 0 ? c.totalDuration : Math.max(1, c.totalLessons) * 900,
+    }));
+  }
+  return fallbackCourses;
+});
+
+const selectedCourseIndex = ref(0);
+const hoursPerWeek = ref(6);
+const hourPresets = [3, 5, 6, 8, 10, 14];
+
+const activePlannerCourse = computed(() => {
+  const list = plannerCourses.value;
+  return list[selectedCourseIndex.value] ?? list[0] ?? fallbackCourses[0]!;
+});
+
+const plannerSummary = computed(() => {
+  const course = activePlannerCourse.value;
+  // Tính cả thời gian xem video và thời gian tự gõ lại code / làm trắc nghiệm (nhân hệ số 2)
+  const videoHours = Math.max(0.5, course.totalDuration / 3600);
+  const practiceHours = videoHours * 2;
+  const weeks = Math.max(1, Math.ceil(practiceHours / hoursPerWeek.value));
+  const lessonsPerWeek = Math.max(1, Math.ceil(course.totalLessons / weeks));
+  const targetDate = new Date();
+  targetDate.setDate(targetDate.getDate() + weeks * 7);
+  const formattedDate = targetDate.toLocaleDateString('vi-VN', {
+    day: '2-digit',
+    month: '2-digit',
+    year: 'numeric',
+  });
+  return {
+    videoDurationLabel: formatCourseDuration(course.totalDuration),
+    practiceHours: Math.round(practiceHours),
+    weeks,
+    lessonsPerWeek,
+    formattedDate,
+  };
+});
+
+const steps = [
+  {
+    icon: PlayCircle,
+    title: 'Xem bài giảng video',
+    text: 'Mỗi chương chia thành các bài ngắn. Dừng, tua lại và học tiếp bất cứ lúc nào.',
+  },
+  {
+    icon: ListChecks,
+    title: 'Làm trắc nghiệm sau bài',
+    text: 'Câu hỏi kèm giải thích đáp án giúp bạn kiểm tra mình đã hiểu bài hay chưa.',
+  },
+  {
+    icon: BarChart3,
+    title: 'Theo dõi tiến độ',
+    text: 'Hồ sơ cá nhân lưu lại các khóa đã đăng ký và bài đang học dở.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Khóa học Free và khóa học Pro khác nhau như thế nào?',
+    a: 'Khóa Free miễn phí hoàn toàn, tập trung vào kiến thức nền tảng với video YouTube nhúng hoặc video tải lên máy chủ. Khóa Pro đi sâu vào dự án thực tế, video lưu trên máy chủ NextCode kèm ghi chép, tóm tắt và câu hỏi kiểm tra từng bài.',
+  },
+  {
+    q: 'Thời lượng bài học và tiến độ được ghi nhận ra sao?',
+    a: 'Mỗi bài giảng video được trích xuất thời lượng thực tế tự động khi đăng tải. Bạn có thể tạm dừng, xem lại bất kỳ đoạn nào và tiếp tục học trên mọi thiết bị.',
+  },
+  {
+    q: 'Làm sao để giảng viên xuất bản một khóa học lên NextCode?',
+    a: 'Quản trị viên tạo khung khóa học và phân công giảng viên phụ trách. Giảng viên biên soạn chương, tải video, thiết lập câu hỏi trắc nghiệm rồi gửi duyệt trước khi khóa học hiển thị công khai.',
+  },
+  {
+    q: 'Thông tin trên chứng chỉ hoàn thành khóa học lấy từ đâu?',
+    a: 'Họ và tên in trên chứng chỉ được lấy từ trang Hồ sơ cá nhân của bạn. Bạn có thể cập nhật họ tên, ngày sinh và ảnh đại diện bất cứ lúc nào.',
+  },
 ];
 
 onMounted(() => {
   void loadCollection(featured);
   void loadCollection(free, 'FREE');
   void loadCollection(pro, 'PRO');
+  coursesApi
+    .getCategories()
+    .then((list) => {
+      categories.value = list;
+    })
+    .catch(() => {
+      categories.value = [];
+    });
 });
 </script>
 
 <template>
-  <section class="relative isolate overflow-hidden">
-    <div class="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_15%_20%,rgba(79,70,229,0.2),transparent_42%),radial-gradient(ellipse_at_85%_30%,rgba(6,182,212,0.12),transparent_38%)]" />
-    <div class="mx-auto grid w-full min-w-0 max-w-7xl grid-cols-1 items-center gap-12 px-4 py-16 sm:px-6 sm:py-24 lg:grid-cols-[1.05fr_0.95fr] lg:px-8 lg:py-28">
-      <div class="min-w-0">
-        <span class="inline-flex items-center gap-2 rounded-full border border-indigo-400/20 bg-indigo-400/10 px-3.5 py-2 text-xs font-semibold text-indigo-200 sm:text-sm">
-          <Sparkles class="h-4 w-4 text-cyan-300" />
-          Học lập trình theo cách của bạn
-        </span>
-        <h1 class="mt-6 max-w-2xl text-4xl font-black leading-tight tracking-tight text-white sm:text-5xl lg:text-6xl">
-          Từng bước code nên
-          <span class="bg-gradient-to-r from-indigo-300 via-violet-300 to-cyan-300 bg-clip-text text-transparent">
-            tương lai
-          </span>
-          của bạn.
-        </h1>
-        <p class="mt-6 max-w-xl text-base leading-7 text-slate-300 sm:text-lg sm:leading-8">
-          Học lập trình với lộ trình rõ ràng, video bài giảng dễ xem lại và nội dung thực hành giúp bạn tiến bộ mỗi ngày.
+  <!-- HERO -->
+  <section class="overflow-hidden bg-surface no-radius">
+    <div class="mx-auto grid max-w-[1440px] items-center gap-12 px-[var(--margin)] py-14 lg:grid-cols-2 lg:py-20">
+      <div class="enter-rise min-w-0">
+        <p class="inline-flex items-center gap-2 rounded-full bg-tint px-3.5 py-1.5 text-sm font-semibold text-brand-soft">
+          <span class="h-2 w-2 rounded-full bg-brand" />
+          Học lập trình có lộ trình
         </p>
-        <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <h1 class="mt-5 text-3xl font-extrabold leading-[1.15] tracking-tight text-ink sm:text-5xl">
+          Học lập trình bài bản cùng NextCode.
+        </h1>
+        <p class="mt-5 max-w-xl text-lg leading-relaxed text-muted">
+          Từ kiến thức nền tảng đến dự án thực tế: bài giảng video chia theo chương, trắc nghiệm sau mỗi bài và theo dõi tiến độ ngay trong hồ sơ của bạn.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
           <router-link
             :to="{ name: 'Courses' }"
-            class="inline-flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-cyan-500 px-5 py-3.5 text-sm font-bold text-white shadow-lg shadow-indigo-950/50 transition hover:brightness-110"
+            class="inline-flex items-center gap-2 bg-brand px-6 py-3.5 text-base font-semibold text-white transition-colors hover:bg-brand-hover"
           >
             Khám phá khóa học
             <ArrowRight class="h-4 w-4" />
           </router-link>
           <router-link
-            :to="authStore.isAuthenticated ? '/dashboard' : '/login'"
-            class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-900/60 px-5 py-3.5 text-sm font-semibold text-white transition hover:border-slate-500 hover:bg-slate-800"
+            :to="{ name: 'Courses', query: { type: 'FREE' } }"
+            class="inline-flex items-center gap-2 bg-surface-2 px-6 py-3.5 text-base font-semibold text-ink transition-colors hover:bg-surface-3"
           >
-            Bắt đầu học
-            <PlayCircle class="h-4 w-4 text-cyan-300" />
+            Học thử miễn phí
           </router-link>
         </div>
-        <div class="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-sm text-slate-400">
-          <span class="inline-flex items-center gap-2"><Check class="h-4 w-4 text-emerald-400" /> Học theo tiến độ riêng</span>
-          <span class="inline-flex items-center gap-2"><Check class="h-4 w-4 text-emerald-400" /> Có khóa học miễn phí</span>
-        </div>
+        <ul class="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-sm text-muted">
+          <li class="inline-flex items-center gap-2"><CheckCircle2 class="h-4 w-4 text-teal" /> Khóa Free không mất phí</li>
+          <li class="inline-flex items-center gap-2"><CheckCircle2 class="h-4 w-4 text-teal" /> Trắc nghiệm kèm giải thích</li>
+          <li class="inline-flex items-center gap-2"><CheckCircle2 class="h-4 w-4 text-teal" /> Học trên mọi thiết bị</li>
+        </ul>
       </div>
 
-      <div class="relative mx-auto w-full min-w-0 max-w-xl">
-        <div class="absolute inset-0 rounded-[2rem] bg-gradient-to-br from-indigo-500/20 to-cyan-500/10 blur-2xl" />
-        <div class="relative overflow-hidden rounded-[1.75rem] border border-slate-700/80 bg-slate-900/90 p-5 shadow-2xl shadow-black/40 sm:p-7">
-          <div class="flex items-center justify-between border-b border-slate-800 pb-5">
-            <div class="flex items-center gap-3">
-              <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-500/15 text-indigo-300">
-                <Code2 class="h-6 w-6" />
-              </span>
-              <div>
-                <p class="text-sm font-bold text-white">Hành trình học tập</p>
-                <p class="mt-1 text-xs text-slate-400">Tiến bộ qua từng bài học</p>
-              </div>
-            </div>
-            <span class="rounded-full bg-emerald-400/10 px-3 py-1 text-xs font-semibold text-emerald-300">Đang học</span>
-          </div>
-          <div class="mt-6 rounded-2xl border border-slate-800 bg-slate-950/80 p-5">
-            <div class="flex items-center justify-between">
-              <div>
-                <p class="text-xs text-slate-400">Khóa học gợi ý</p>
-                <p class="mt-1 text-lg font-bold text-white">Lập trình Web</p>
-              </div>
-              <span class="rounded-xl bg-cyan-400/10 p-3 text-cyan-300"><Laptop class="h-5 w-5" /></span>
-            </div>
-            <div class="mt-5 flex items-center justify-between text-xs text-slate-400">
-              <span>Tiến độ học tập</span>
-              <span class="font-semibold text-white">65%</span>
-            </div>
-            <div class="mt-2 h-2 overflow-hidden rounded-full bg-slate-800">
-              <div class="h-full w-[65%] rounded-full bg-gradient-to-r from-indigo-500 to-cyan-400" />
-            </div>
-            <div class="mt-5 flex items-center gap-3 rounded-xl border border-slate-800 bg-slate-900/70 p-3">
-              <span class="flex h-9 w-9 items-center justify-center rounded-lg bg-violet-400/10 text-violet-300">
-                <BookOpenCheck class="h-4 w-4" />
-              </span>
-              <div class="min-w-0 flex-1">
-                <p class="truncate text-xs font-semibold text-white">Bài học tiếp theo</p>
-                <p class="mt-1 truncate text-xs text-slate-400">Tạo giao diện web đầu tiên</p>
-              </div>
-              <PlayCircle class="h-5 w-5 text-cyan-300" />
-            </div>
-          </div>
-          <div class="mt-4 grid grid-cols-2 gap-3">
-            <div class="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
-              <GraduationCap class="h-5 w-5 text-indigo-300" />
-              <p class="mt-3 text-lg font-bold text-white">Từng bước</p>
-              <p class="mt-1 text-xs text-slate-400">Lộ trình dễ theo</p>
-            </div>
-            <div class="rounded-xl border border-slate-800 bg-slate-950/60 p-4">
-              <Award class="h-5 w-5 text-cyan-300" />
-              <p class="mt-3 text-lg font-bold text-white">Bền vững</p>
-              <p class="mt-1 text-xs text-slate-400">Học để tiến xa hơn</p>
-            </div>
-          </div>
-        </div>
+      <div class="enter-rise-1 min-w-0 pb-6 sm:px-4">
+        <HeroCodeWindow />
       </div>
     </div>
   </section>
 
-  <section id="about" class="scroll-mt-24 border-y border-slate-800/80 bg-slate-900/35">
-    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-      <div class="mx-auto max-w-2xl text-center">
-        <p class="text-sm font-bold uppercase tracking-[0.18em] text-cyan-300">Học tập hiệu quả</p>
-        <h2 class="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">Một lộ trình, nhiều cách để tiến bộ</h2>
-        <p class="mt-4 leading-7 text-slate-400">Tập trung vào trải nghiệm học linh hoạt, dễ tiếp cận và có định hướng.</p>
-      </div>
-      <div class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-        <article
-          v-for="benefit in benefits"
-          :key="benefit.title"
-          class="rounded-2xl border border-slate-800 bg-slate-950/70 p-5 transition hover:border-indigo-500/40"
+  <!-- CÔNG NGHỆ -->
+  <section class="py-10">
+    <div class="mx-auto max-w-[1440px] px-[var(--margin)]">
+      <p class="mb-4 text-sm font-semibold text-muted">Công nghệ bạn sẽ học</p>
+      <LanguageBadges />
+    </div>
+  </section>
+
+  <!-- DANH MỤC -->
+  <section v-if="categories.length" class="py-10">
+    <div class="mx-auto max-w-[1440px] px-[var(--margin)]">
+      <h2 class="text-2xl font-bold text-ink sm:text-3xl">Chọn lĩnh vực bạn quan tâm</h2>
+      <div class="mt-6 flex flex-wrap gap-3">
+        <router-link
+          v-for="category in categories"
+          :key="category.id"
+          :to="{ name: 'Courses', query: { categoryId: category.id } }"
+          class="bg-surface px-5 py-3 text-sm font-semibold text-ink transition-colors hover:bg-tint hover:text-brand-soft"
         >
-          <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-indigo-500/10 text-indigo-300">
-            <component :is="benefit.icon" class="h-5 w-5" />
-          </span>
-          <h3 class="mt-4 font-bold text-white">{{ benefit.title }}</h3>
-          <p class="mt-2 text-sm leading-6 text-slate-400">{{ benefit.description }}</p>
-        </article>
+          {{ category.name }}
+        </router-link>
       </div>
     </div>
   </section>
 
   <CourseSection
-    id="courses"
-    eyebrow="Bắt đầu hành trình"
     title="Khóa học nổi bật"
-    description="Một vài lựa chọn giúp bạn khám phá kiến thức lập trình theo từng cấp độ."
+    description="Những khóa học được học viên quan tâm và đánh giá cao."
     :courses="featured.courses"
     :loading="featured.loading"
     :error="featured.error"
     @retry="loadCollection(featured)"
   />
 
-  <div class="border-y border-slate-800/80 bg-slate-900/35">
-    <CourseSection
-      eyebrow="Bắt đầu miễn phí"
-      title="Khóa học Free"
-      description="Khám phá kiến thức nền tảng và chọn nhịp học phù hợp với bạn."
-      :courses="free.courses"
-      :loading="free.loading"
-      :error="free.error"
-      type="FREE"
-      @retry="loadCollection(free, 'FREE')"
-    />
-  </div>
-
-  <CourseSection
-    eyebrow="Học sâu hơn"
-    title="Khóa học Pro"
-    description="Lộ trình chi tiết hơn, nội dung chuyên sâu và nhiều thời gian thực hành."
-    :courses="pro.courses"
-    :loading="pro.loading"
-    :error="pro.error"
-    type="PRO"
-    @retry="loadCollection(pro, 'PRO')"
-  />
-
-  <section class="border-y border-slate-800/80 bg-slate-900/35">
-    <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
-      <div class="mx-auto max-w-2xl text-center">
-        <p class="text-sm font-bold uppercase tracking-[0.18em] text-cyan-300">Đơn giản và có định hướng</p>
-        <h2 class="mt-3 text-3xl font-black tracking-tight text-white sm:text-4xl">Quy trình học 5 bước</h2>
+  <!-- CÁCH HỌC + BỘ TÍNH LỘ TRÌNH -->
+  <section id="lo-trinh" class="scroll-mt-24 bg-surface py-16 no-radius lg:py-20">
+    <div class="mx-auto max-w-[1440px] px-[var(--margin)]">
+      <div class="max-w-2xl">
+        <h2 class="text-2xl font-bold text-ink sm:text-3xl">Cách học trên NextCode</h2>
+        <p class="mt-2 text-base text-muted">Ba bước lặp lại ở mỗi bài, giúp bạn nhớ kiến thức lâu hơn.</p>
       </div>
-      <div class="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-        <article v-for="step in learningSteps" :key="step[0]" class="relative rounded-2xl border border-slate-800 bg-slate-950/70 p-5">
-          <span class="text-sm font-black tracking-wider text-indigo-300">{{ step[0] }}</span>
-          <h3 class="mt-3 font-bold text-white">{{ step[1] }}</h3>
-          <p class="mt-2 text-sm leading-6 text-slate-400">{{ step[2] }}</p>
-        </article>
+
+      <div class="mt-8 grid gap-5 md:grid-cols-3">
+        <div v-for="step in steps" :key="step.title" class="bg-ground p-6">
+          <span class="flex h-11 w-11 items-center justify-center rounded-xl bg-tint text-brand-soft">
+            <component :is="step.icon" class="h-5 w-5" />
+          </span>
+          <h3 class="mt-4 text-lg font-bold text-ink">{{ step.title }}</h3>
+          <p class="mt-2 text-sm leading-6 text-muted">{{ step.text }}</p>
+        </div>
+      </div>
+
+      <!-- Bộ tính lộ trình -->
+      <div class="mt-12 grid gap-6 bg-ground p-5 sm:p-8 lg:grid-cols-12">
+        <div class="lg:col-span-5">
+          <h3 class="text-xl font-bold text-ink">Lên lịch học của bạn</h3>
+          <p class="mt-1 text-sm text-muted">Chọn khóa học và số giờ học mỗi tuần để biết ngày dự kiến hoàn thành.</p>
+
+          <div class="mt-5 space-y-2" role="radiogroup" aria-label="Chọn khóa học">
+            <button
+              v-for="(course, index) in plannerCourses"
+              :key="course.id || course.title"
+              type="button"
+              role="radio"
+              :aria-checked="selectedCourseIndex === index"
+              class="w-full px-4 py-3 text-left text-sm transition-colors"
+              :class="selectedCourseIndex === index ? 'bg-brand text-white' : 'bg-surface text-ink hover:bg-tint'"
+              @click="selectedCourseIndex = index"
+            >
+              <span class="block font-semibold">{{ course.title }}</span>
+              <span class="mt-0.5 block text-xs tabular-nums" :class="selectedCourseIndex === index ? 'text-white/80' : 'text-muted'">
+                {{ course.level }} · {{ course.totalLessons }} bài · {{ formatCourseDuration(course.totalDuration) }}
+              </span>
+            </button>
+          </div>
+
+          <p class="mt-6 text-sm font-semibold text-ink">Số giờ học mỗi tuần</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            <button
+              v-for="preset in hourPresets"
+              :key="preset"
+              type="button"
+              class="px-4 py-2 text-sm font-semibold tabular-nums transition-colors"
+              :class="hoursPerWeek === preset ? 'bg-brand text-white' : 'bg-surface text-ink hover:bg-tint'"
+              :aria-pressed="hoursPerWeek === preset"
+              @click="hoursPerWeek = preset"
+            >
+              {{ preset }} giờ
+            </button>
+          </div>
+        </div>
+
+        <div class="flex flex-col justify-between bg-navy p-6 text-white lg:col-span-7 sm:p-8">
+          <div>
+            <p class="text-sm text-white/70">Dự kiến hoàn thành khóa học vào</p>
+            <p class="mt-1 text-4xl font-extrabold tabular-nums sm:text-5xl" aria-live="polite">{{ plannerSummary.formattedDate }}</p>
+          </div>
+          <dl class="mt-8 grid grid-cols-3 gap-4 text-sm">
+            <div class="bg-white/10 p-4">
+              <dt class="text-white/70">Thời gian học</dt>
+              <dd class="mt-1 text-2xl font-bold tabular-nums">{{ plannerSummary.weeks }} tuần</dd>
+            </div>
+            <div class="bg-white/10 p-4">
+              <dt class="text-white/70">Nhịp học</dt>
+              <dd class="mt-1 text-2xl font-bold tabular-nums">{{ plannerSummary.lessonsPerWeek }} bài/tuần</dd>
+            </div>
+            <div class="bg-white/10 p-4">
+              <dt class="text-white/70">Tổng giờ học</dt>
+              <dd class="mt-1 text-2xl font-bold tabular-nums">{{ plannerSummary.practiceHours }} giờ</dd>
+            </div>
+          </dl>
+          <p class="mt-6 text-xs leading-5 text-white/60">
+            Video {{ plannerSummary.videoDurationLabel }}, cộng thời gian gõ lại code và làm trắc nghiệm (ước tính gấp đôi thời lượng video).
+          </p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section class="px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
-    <div class="relative mx-auto max-w-7xl overflow-hidden rounded-3xl border border-indigo-400/20 bg-gradient-to-br from-indigo-950 via-slate-900 to-cyan-950 px-6 py-12 text-center sm:px-12 sm:py-16">
-      <div class="pointer-events-none absolute -right-20 -top-24 h-64 w-64 rounded-full bg-cyan-400/10 blur-3xl" />
-      <span class="relative mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-white/10 text-cyan-200">
-        <Sparkles class="h-6 w-6" />
-      </span>
-      <h2 class="relative mt-5 text-3xl font-black text-white sm:text-4xl">Sẵn sàng bắt đầu chưa?</h2>
-      <p class="relative mx-auto mt-4 max-w-xl leading-7 text-slate-300">
-        Chọn khóa học đầu tiên và bắt đầu xây dựng kỹ năng của bạn ngay hôm nay.
-      </p>
+  <CourseSection
+    title="Khóa học miễn phí"
+    description="Bắt đầu ngay không cần thanh toán, phù hợp để làm quen với lập trình."
+    type="FREE"
+    :courses="free.courses"
+    :loading="free.loading"
+    :error="free.error"
+    @retry="loadCollection(free, 'FREE')"
+  />
+
+  <CourseSection
+    title="Khóa học Pro"
+    description="Học sâu với dự án thực tế, video trên máy chủ riêng, ghi chép và tóm tắt từng bài."
+    type="PRO"
+    :courses="pro.courses"
+    :loading="pro.loading"
+    :error="pro.error"
+    @retry="loadCollection(pro, 'PRO')"
+  />
+
+  <!-- SO SÁNH FREE / PRO -->
+  <section id="bang-gia" class="scroll-mt-24 py-16 lg:py-20">
+    <div class="mx-auto max-w-[1100px] px-[var(--margin)]">
+      <h2 class="text-center text-2xl font-bold text-ink sm:text-3xl">So sánh khóa học Free và Pro</h2>
+      <div class="mt-8 overflow-x-auto bg-surface p-2 sm:p-4">
+        <table class="w-full min-w-[540px] text-left text-base">
+          <thead>
+            <tr class="bg-surface-2 text-sm text-muted">
+              <th class="px-4 py-3.5 font-medium">Hạng mục</th>
+              <th class="px-4 py-3.5 font-bold text-teal">Free</th>
+              <th class="px-4 py-3.5 font-bold text-brand-soft">Pro</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="px-4 py-4 text-muted">Chi phí</td>
+              <td class="px-4 py-4 text-ink">0đ</td>
+              <td class="px-4 py-4 text-ink">Theo từng khóa học</td>
+            </tr>
+            <tr class="bg-ground">
+              <td class="px-4 py-4 text-muted">Nguồn video</td>
+              <td class="px-4 py-4 text-ink">YouTube nhúng hoặc máy chủ</td>
+              <td class="px-4 py-4 text-ink">Máy chủ riêng</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-4 text-muted">Mục lục chương và bài</td>
+              <td class="px-4 py-4 text-ink">Đầy đủ</td>
+              <td class="px-4 py-4 text-ink">Đầy đủ, chuyên sâu</td>
+            </tr>
+            <tr class="bg-ground">
+              <td class="px-4 py-4 text-muted">Trắc nghiệm</td>
+              <td class="px-4 py-4 text-ink">Theo từng bài</td>
+              <td class="px-4 py-4 text-ink">Kèm giải thích đáp án</td>
+            </tr>
+            <tr>
+              <td class="px-4 py-4 text-muted">Ghi chép và tóm tắt</td>
+              <td class="px-4 py-4 text-muted">Không có</td>
+              <td class="px-4 py-4 text-ink">Có, theo từng bài</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- HỎI ĐÁP -->
+  <section id="hoi-dap" class="scroll-mt-24 pb-16 lg:pb-20">
+    <div class="mx-auto max-w-[900px] px-[var(--margin)]">
+      <h2 class="text-center text-2xl font-bold text-ink sm:text-3xl">Câu hỏi thường gặp</h2>
+      <div class="mt-8 space-y-3">
+        <details v-for="faq in faqs" :key="faq.q" class="group bg-surface p-5">
+          <summary class="flex cursor-pointer list-none items-center justify-between gap-4 text-base font-semibold text-ink">
+            {{ faq.q }}
+            <span class="text-xl text-brand-soft transition-transform group-open:rotate-45" aria-hidden="true">+</span>
+          </summary>
+          <p class="mt-3 text-sm leading-6 text-muted">{{ faq.a }}</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="px-[var(--margin)] pb-6">
+    <div class="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-6 bg-navy p-8 text-white sm:p-12 md:flex-row md:items-center">
+      <div>
+        <h2 class="text-2xl font-bold text-white sm:text-3xl">Sẵn sàng bắt đầu bài học đầu tiên?</h2>
+        <p class="mt-2 text-base text-white/70">Tạo tài khoản miễn phí và học thử ngay hôm nay.</p>
+      </div>
       <router-link
-        :to="{ name: 'Courses' }"
-        class="relative mt-7 inline-flex items-center gap-2 rounded-xl bg-white px-5 py-3 text-sm font-bold text-indigo-950 transition hover:bg-cyan-50"
+        :to="authStore.isAuthenticated ? { name: 'Courses' } : '/register'"
+        class="inline-flex shrink-0 items-center gap-2 bg-white px-6 py-3.5 text-base font-semibold text-navy transition-colors hover:bg-tint"
       >
-        Khám phá khóa học
+        {{ authStore.isAuthenticated ? 'Chọn khóa học' : 'Đăng ký miễn phí' }}
         <ArrowRight class="h-4 w-4" />
       </router-link>
     </div>

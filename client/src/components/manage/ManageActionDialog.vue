@@ -56,28 +56,29 @@ function cancel() {
 <template>
   <dialog
     ref="dialog"
-    class="manage-dialog m-auto w-[min(94vw,30rem)] rounded-2xl border border-slate-700 bg-slate-900 p-0 text-slate-100 shadow-2xl shadow-black/60 backdrop:bg-black/70"
+    data-ui
+    class="manage-dialog m-auto w-[min(94vw,30rem)] bg-surface p-0 text-ink backdrop:bg-black/75"
     aria-labelledby="manage-dialog-title"
     @cancel.prevent="cancel"
     @click.self="cancel"
   >
     <form class="p-5 sm:p-6" @submit.prevent="submit">
       <div class="flex items-start gap-3">
-        <div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-amber-400/20 bg-amber-500/10 text-amber-300">
-          <AlertTriangle class="h-5 w-5" />
+        <div class="flex h-9 w-9 shrink-0 items-center justify-center bg-surface-2 text-amber-300">
+          <AlertTriangle class="h-4 w-4" />
         </div>
         <div class="min-w-0 flex-1">
-          <h2 id="manage-dialog-title" class="text-lg font-bold text-white">{{ title }}</h2>
-          <p v-if="description" class="mt-1 whitespace-pre-line text-sm leading-6 text-slate-400">
+          <h2 id="manage-dialog-title" class="text-base font-semibold text-ink">{{ title }}</h2>
+          <p v-if="description" class="mt-1 whitespace-pre-line text-sm leading-6 text-muted">
             {{ description }}
           </p>
         </div>
-        <button type="button" class="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-white" aria-label="Đóng" :disabled="busy" @click="cancel">
+        <button type="button" class="p-1.5 text-muted hover:bg-surface-2 hover:text-ink" aria-label="Đóng" :disabled="busy" @click="cancel">
           <X class="h-4 w-4" />
         </button>
       </div>
 
-      <label v-if="requiresReason" class="mt-5 block text-sm font-medium text-slate-200">
+      <label v-if="requiresReason" class="mt-5 block text-sm font-medium text-ink">
         Lý do từ chối
         <textarea
           v-model="reason"
@@ -88,7 +89,7 @@ function cancel() {
           class="manage-input mt-2"
           placeholder="Nhập lý do từ 10 đến 500 ký tự"
         />
-        <span class="mt-1 block text-xs text-slate-500">{{ reason.trim().length }}/500 ký tự</span>
+        <span class="mt-1 block text-xs tabular-nums text-muted">{{ reason.trim().length }}/500 ký tự</span>
       </label>
 
       <div class="mt-6 flex flex-col-reverse justify-end gap-2 sm:flex-row">
@@ -103,7 +104,6 @@ function cancel() {
 
 <style scoped>
 .manage-dialog::backdrop {
-  background: rgb(2 6 23 / 0.72);
-  backdrop-filter: blur(4px);
+  background: rgb(15 23 42 / 0.55);
 }
 </style>

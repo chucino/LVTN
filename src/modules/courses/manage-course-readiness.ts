@@ -1,6 +1,7 @@
 import { CourseType } from '../../common/constants/course.enum.js';
 import { Course } from './schemas/course.schema.js';
 import { ManageReadinessDto } from './dto/manage-course-response.dto.js';
+import { isYouTubeIframeInput } from './dto/manage-course.dto.js';
 
 function hasText(value: string | null | undefined): boolean {
   return typeof value === 'string' && value.trim().length > 0;
@@ -67,6 +68,13 @@ export function getCourseReadiness(
       const lessonLabel = `${chapterLabel}, bài ${lessonIndex + 1} "${lesson.title}"`;
       if (!hasText(lesson.videoUrl)) {
         issues.push(`${lessonLabel} chưa có video.`);
+      } else if (
+        course.type === CourseType.PRO &&
+        isYouTubeIframeInput(lesson.videoUrl)
+      ) {
+        issues.push(
+          `${lessonLabel} đang dùng mã nhúng YouTube; khóa học PRO cần tải video lên hệ thống.`,
+        );
       }
       if (!Number.isInteger(lesson.duration) || lesson.duration <= 0) {
         issues.push(`${lessonLabel} chưa có thời lượng hợp lệ.`);

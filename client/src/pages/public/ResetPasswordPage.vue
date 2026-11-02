@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { useAuthStore } from '@/stores/auth.store';
 import AuthLayout from '@/layouts/AuthLayout.vue';
-import { Lock, KeyRound, CheckCircle, ShieldAlert } from 'lucide-vue-next';
+import { CheckCircle, ShieldAlert } from 'lucide-vue-next';
 
 const router = useRouter();
 const route = useRoute();
@@ -42,7 +42,7 @@ const handleResetPassword = async () => {
       newPassword: newPassword.value,
       confirmPassword: confirmPassword.value,
     });
-    successMessage.value = 'Đặt lại mật khẩu thành công! Đang chuyển về trang đăng nhập...';
+    successMessage.value = 'Đặt lại mật khẩu thành công. Đang chuyển về trang đăng nhập...';
     setTimeout(() => {
       router.push('/login');
     }, 1500);
@@ -55,113 +55,98 @@ const handleResetPassword = async () => {
 
 <template>
   <AuthLayout>
-    <div class="mb-5">
-      <h2 class="text-xl font-bold text-white tracking-tight">Thiết lập mật khẩu mới</h2>
-      <p class="text-slate-400 text-sm mt-0.5">
-        Nhập mã OTP đã nhận qua email và mật khẩu mới của bạn
+    <div class="mb-6">
+      <h2 class="text-2xl font-normal text-ink">Thiết lập mật khẩu mới</h2>
+      <p class="mt-1 text-base text-muted">
+        Nhập mã OTP đã nhận qua email và mật khẩu mới cho tài khoản của bạn.
       </p>
     </div>
 
-    <!-- Error Alert -->
     <div
       v-if="errorMessage"
-      class="mb-4 p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-start gap-2.5 animate-in fade-in"
+      role="alert"
+      class="mb-4 flex items-start gap-2.5 bg-brand-surface p-4 text-sm text-ink"
     >
-      <ShieldAlert class="w-5 h-5 flex-shrink-0 mt-0.5" />
+      <ShieldAlert class="mt-0.5 h-5 w-5 shrink-0 text-brand-soft" />
       <span>{{ errorMessage }}</span>
     </div>
 
-    <!-- Success Alert -->
     <div
       v-if="successMessage"
-      class="mb-4 p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-sm flex items-start gap-2.5 animate-in fade-in"
+      role="status"
+      class="mb-4 flex items-start gap-2.5 bg-surface-2 p-4 text-sm text-ink"
     >
-      <CheckCircle class="w-5 h-5 flex-shrink-0 mt-0.5" />
+      <CheckCircle class="mt-0.5 h-5 w-5 shrink-0 text-ink" />
       <span>{{ successMessage }}</span>
     </div>
 
-    <form @submit.prevent="handleResetPassword" class="space-y-3.5">
-      <!-- Email (readonly / editable) -->
+    <form class="space-y-4" @submit.prevent="handleResetPassword">
       <div>
-        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
-          Email
+        <label for="reset-email" class="mb-1.5 block text-sm font-medium text-ink">
+          Email tài khoản
         </label>
         <input
+          id="reset-email"
           v-model="email"
           type="email"
           required
-          placeholder="nguyenvana@gmail.com"
-          class="w-full px-3.5 py-2.5 bg-slate-950/60 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 transition-all"
+          placeholder="hocvien@nextcode.vn"
+          class="manage-input"
         />
       </div>
 
-      <!-- OTP -->
       <div>
-        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+        <label for="reset-otp" class="mb-1.5 block text-sm font-medium text-ink">
           Mã OTP (6 chữ số)
         </label>
-        <div class="relative">
-          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
-            <KeyRound class="w-4 h-4" />
-          </div>
-          <input
-            v-model="otp"
-            type="text"
-            maxlength="6"
-            required
-            placeholder="123456"
-            class="w-full pl-10 pr-4 py-2.5 bg-slate-950/60 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 font-mono tracking-widest text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
-          />
-        </div>
+        <input
+          id="reset-otp"
+          v-model="otp"
+          type="text"
+          inputmode="numeric"
+          maxlength="6"
+          required
+          placeholder="123456"
+          class="manage-input tracking-widest tabular-nums"
+        />
       </div>
 
-      <!-- New Password -->
       <div>
-        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+        <label for="reset-password" class="mb-1.5 block text-sm font-medium text-ink">
           Mật khẩu mới
         </label>
-        <div class="relative">
-          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
-            <Lock class="w-4 h-4" />
-          </div>
-          <input
-            v-model="newPassword"
-            type="password"
-            required
-            placeholder="Tối thiểu 6 ký tự"
-            class="w-full pl-10 pr-4 py-2.5 bg-slate-950/60 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
-          />
-        </div>
+        <input
+          id="reset-password"
+          v-model="newPassword"
+          type="password"
+          required
+          aria-describedby="reset-pw-hint"
+          placeholder="Tối thiểu 6 ký tự"
+          class="manage-input"
+        />
+        <span id="reset-pw-hint" class="mt-1 block text-xs text-muted">Tối thiểu 6 ký tự.</span>
       </div>
 
-      <!-- Confirm New Password -->
       <div>
-        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1">
+        <label for="reset-confirm" class="mb-1.5 block text-sm font-medium text-ink">
           Xác nhận mật khẩu mới
         </label>
-        <div class="relative">
-          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
-            <Lock class="w-4 h-4" />
-          </div>
-          <input
-            v-model="confirmPassword"
-            type="password"
-            required
-            placeholder="Nhập lại mật khẩu mới"
-            class="w-full pl-10 pr-4 py-2.5 bg-slate-950/60 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
-          />
-        </div>
+        <input
+          id="reset-confirm"
+          v-model="confirmPassword"
+          type="password"
+          required
+          placeholder="Nhập lại mật khẩu mới"
+          class="manage-input"
+        />
       </div>
 
-      <!-- Submit Button -->
       <button
         type="submit"
         :disabled="authStore.loading"
-        class="w-full mt-4 py-3 px-4 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-medium text-sm shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2 transition-all transform active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed"
+        class="manage-button-primary mt-4 flex w-full items-center justify-center gap-2"
       >
-        <span v-if="authStore.loading" class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-        <CheckCircle v-else class="w-4 h-4" />
-        <span>{{ authStore.loading ? 'Đang cập nhật...' : 'Cập nhật mật khẩu mới' }}</span>
+        <span>{{ authStore.loading ? 'Đang cập nhật...' : 'Lưu mật khẩu mới' }}</span>
       </button>
     </form>
   </AuthLayout>

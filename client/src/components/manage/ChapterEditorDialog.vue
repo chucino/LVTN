@@ -41,14 +41,14 @@ function save() {
 </script>
 
 <template>
-  <dialog ref="dialog" class="manage-dialog m-auto w-[min(94vw,28rem)] rounded-2xl border border-slate-700 bg-slate-900 p-0 text-slate-100 shadow-2xl backdrop:bg-black/70" @cancel.prevent="emit('cancel')">
+  <dialog ref="dialog" data-ui class="manage-dialog m-auto w-[min(94vw,28rem)] bg-surface p-0 text-ink backdrop:bg-black/75" @cancel.prevent="emit('cancel')">
     <form class="p-5 sm:p-6" @submit.prevent="save">
       <div class="flex items-center justify-between">
-        <h2 class="text-lg font-bold text-white">{{ title }}</h2>
-        <button type="button" class="rounded-lg p-2 text-slate-400 hover:bg-slate-800" aria-label="Đóng" :disabled="busy" @click="emit('cancel')"><X class="h-4 w-4" /></button>
+        <h2 class="text-base font-semibold text-ink">{{ title }}</h2>
+        <button type="button" class="p-1.5 text-muted hover:bg-surface-2 hover:text-ink" aria-label="Đóng" :disabled="busy" @click="emit('cancel')"><X class="h-4 w-4" /></button>
       </div>
       <label class="manage-field mt-5">
-        Tên chương
+        <span>Tên chương</span>
         <input v-model="value" class="manage-input" type="text" minlength="3" maxlength="150" autofocus />
         <span v-if="error" class="manage-field-error">{{ error }}</span>
       </label>
@@ -61,5 +61,7 @@ function save() {
 </template>
 
 <style scoped>
-.manage-dialog::backdrop { background: rgb(2 6 23 / 0.72); backdrop-filter: blur(4px); }
+.manage-dialog::backdrop {
+  background: rgb(15 23 42 / 0.55);
+}
 </style>

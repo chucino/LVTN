@@ -43,11 +43,52 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   /**
-   * Helper thiết lập cookie httpOnly cho refresh token
+   * Xác định cổng client (5173, 5174, 5175...) để cô lập cookie refreshToken theo từng cổng
+   * khi mở nhiều cổng trên cùng một trình duyệt Chrome.
    */
-  private setRefreshTokenCookie(res: Response, refreshToken: string) {
+  private resolveClientPort(req: Request): string | null {
+    const headerPort = req.headers['x-client-port'];
+    const rawHeaderPort = Array.isArray(headerPort) ? headerPort[0] : headerPort;
+    if (typeof rawHeaderPort === 'string' && /^\d{2,5}$/.test(rawHeaderPort.trim())) {
+      return rawHeaderPort.trim();
+    }
+
+    const originOrReferer = req.headers.origin || req.headers.referer;
+    if (typeof originOrReferer === 'string') {
+      try {
+        const parsed = new URL(originOrReferer);
+        if (/^\d{2,5}$/.test(parsed.port)) {
+          return parsed.port;
+        }
+      } catch {
+        // Ignore malformed Origin/Referer
+      }
+    }
+
+    return null;
+  }
+
+  private getRefreshTokenCookieName(req: Request): string {
+    const port = this.resolveClientPort(req);
+    return port ? `refreshToken_${port}` : 'refreshToken';
+  }
+
+  private getRefreshTokenFromCookies(req: Request): string | undefined {
+    const cookieName = this.getRefreshTokenCookieName(req);
+    return req.cookies?.[cookieName] ?? req.cookies?.refreshToken;
+  }
+
+  /**
+   * Helper thiết lập cookie httpOnly cho refresh token (cô lập theo cổng client nếu có)
+   */
+  private setRefreshTokenCookie(
+    req: Request,
+    res: Response,
+    refreshToken: string,
+  ) {
     const isProduction = process.env.NODE_ENV === 'production';
-    res.cookie('refreshToken', refreshToken, {
+    const cookieName = this.getRefreshTokenCookieName(req);
+    res.cookie(cookieName, refreshToken, {
       httpOnly: true,
       secure: isProduction,
       sameSite: 'lax',
@@ -57,10 +98,11 @@ export class AuthController {
   }
 
   /**
-   * Helper xóa cookie refresh token
+   * Helper xóa cookie refresh token của cổng hiện tại
    */
-  private clearRefreshTokenCookie(res: Response) {
-    res.clearCookie('refreshToken', {
+  private clearRefreshTokenCookie(req: Request, res: Response) {
+    const cookieName = this.getRefreshTokenCookieName(req);
+    res.clearCookie(cookieName, {
       httpOnly: true,
       sameSite: 'lax',
       path: '/',
@@ -86,10 +128,11 @@ export class AuthController {
   @ApiResponse({ status: 400, description: 'Mã OTP sai hoặc đã hết hạn' })
   async verifyRegisterOtp(
     @Body() verifyOtpDto: VerifyOtpDto,
+    @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
     const result = await this.authService.verifyRegisterOtp(verifyOtpDto);
-    this.setRefreshTokenCookie(res, result.refreshToken);
+    this.setRefreshTokenCookie(req, res, result.refreshToken);
 
     return {
       message: 'Kích hoạt tài khoản thành công',
@@ -116,10 +159,11 @@ export class AuthController {
   @ApiResponse({ status: 401, description: 'Email hoặc mật khẩu không chính xác hoặc chưa xác thực email' })
   async login(
     @Body() loginDto: LoginDto,
+    @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
     const result = await this.authService.login(loginDto);
-    this.setRefreshTokenCookie(res, result.refreshToken);
+    this.setRefreshTokenCookie(req, res, result.refreshToken);
 
     return {
       message: 'Đăng nhập thành công',
@@ -139,9 +183,9 @@ export class AuthController {
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const rawRefreshToken = req.cookies?.refreshToken;
-    const result = await this.authService.refresh(rawRefreshToken);
-    this.setRefreshTokenCookie(res, result.refreshToken);
+    const rawRefreshToken = this.getRefreshTokenFromCookies(req);
+    const result = await this.authService.refresh(rawRefreshToken ?? '');
+    this.setRefreshTokenCookie(req, res, result.refreshToken);
 
     return {
       accessToken: result.accessToken,
@@ -158,9 +202,9 @@ export class AuthController {
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const rawRefreshToken = req.cookies?.refreshToken;
+    const rawRefreshToken = this.getRefreshTokenFromCookies(req);
     await this.authService.logout(rawRefreshToken);
-    this.clearRefreshTokenCookie(res);
+    this.clearRefreshTokenCookie(req, res);
 
     return {
       message: 'Đăng xuất thành công',

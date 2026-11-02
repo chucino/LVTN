@@ -197,7 +197,7 @@ describe('CourseManageService', () => {
   it('computes permissions from both course state and ownership', () => {
     expect(
       getManageCoursePermissions(CourseStatus.DRAFT, instructorId, instructor),
-    ).toMatchObject({ canEdit: true, canSubmit: true, canDelete: true });
+    ).toMatchObject({ canEditInfo: false, canEdit: true, canSubmit: true, canDelete: false });
     expect(
       getManageCoursePermissions(CourseStatus.PENDING, instructorId, instructor),
     ).toMatchObject({ canEdit: false, canWithdraw: true });
@@ -209,7 +209,7 @@ describe('CourseManageService', () => {
         userId: new Types.ObjectId().toString(),
         role: Role.ADMIN,
       }),
-    ).toMatchObject({ canEdit: true, canApprove: true, canDelete: true });
+    ).toMatchObject({ canEditInfo: true, canEdit: true, canApprove: true, canDelete: true });
   });
 
   it('reports readiness blockers and non-blocking PRO lesson warnings', () => {
@@ -286,7 +286,7 @@ describe('CourseManageService', () => {
     course.status = CourseStatus.PENDING;
 
     await expect(
-      service.updateCourse(courseId.toString(), { title: 'Tiêu đề mới' }, instructor),
+      service.updateChapter(courseId.toString(), chapterId.toString(), { title: 'Chương mới' }, instructor),
     ).rejects.toThrow(ConflictException);
     expect(course.save).not.toHaveBeenCalled();
   });
@@ -295,6 +295,12 @@ describe('CourseManageService', () => {
     const response = await service.updateCourse(
       courseId.toString(),
       { type: CourseType.FREE, price: 500000 },
+      { userId: new Types.ObjectId().toString(), role: Role.ADMIN },
+    );
+    await expect(
+      service.updateCourse(courseId.toString(), { title: 'Test' }, instructor),
+    ).rejects.toThrow(ForbiddenException);
+    expect(instructor).toBeDefined(
       instructor,
     );
 
@@ -371,5 +377,110 @@ describe('CourseManageService', () => {
     expect(await validate(invalidCourse)).not.toHaveLength(0);
     expect(await validate(invalidQuestion)).not.toHaveLength(0);
     expect(await validate(nullableNote)).toHaveLength(0);
+
+    const validLocalThumb = plainToInstance(UpdateManageCourseDto, {
+      thumbnail: '/public/images/courses/1730300000000-550e8400.webp',
+    });
+    const invalidLocalThumb = plainToInstance(UpdateManageCourseDto, {
+      thumbnail: '/public/files/hack.exe',
+    });
+    expect(await validate(validLocalThumb)).toHaveLength(0);
+    expect(await validate(invalidLocalThumb)).not.toHaveLength(0);
+
+    const deleteLocalFile = vi.fn().mockResolvedValue(undefined);
+    const serviceWithUploads = new CourseManageService(
+      {
+        findById: vi.fn(() => ({ exec: findByIdExec })),
+        aggregate: aggregateMock,
+      } as unknown as Model<Course>,
+      {
+        exists: vi.fn(() => ({ exec: vi.fn().mockResolvedValue(true) })),
+      } as unknown as Model<Category>,
+      {} as UsersService,
+      { deleteLocalFile } as never,
+    );
+
+    course.thumbnail = '/public/images/courses/old-cover.png';
+    await serviceWithUploads.updateCourse(
+      courseId.toString(),
+      { thumbnail: '/public/images/courses/new-cover.webp' },
+      { userId: new Types.ObjectId().toString(), role: Role.ADMIN },
+    );
+
+    expect(deleteLocalFile).toHaveBeenCalledWith(
+      '/public/images/courses/old-cover.png',
+    );
+
+    const serviceForLessons = new CourseManageService(
+      {
+        findById: vi.fn(() => ({
+          exec: findByIdExec,
+          select: vi.fn(() => ({
+            lean: vi.fn(() => ({
+              exec: vi.fn().mockImplementation(async () => ({
+                chapters: course.chapters,
+              })),
+            })),
+          })),
+        })),
+        aggregate: aggregateMock,
+        updateOne: vi.fn(() => ({ exec: vi.fn().mockResolvedValue({}) })),
+      } as unknown as Model<Course>,
+      {
+        exists: vi.fn(() => ({ exec: vi.fn().mockResolvedValue(true) })),
+      } as unknown as Model<Category>,
+      {} as UsersService,
+      { deleteLocalFile } as never,
+    );
+
+    await expect(
+      serviceForLessons.addLesson(
+        courseId.toString(),
+        chapterId.toString(),
+        {
+          title: 'Bài Pro',
+          videoUrl:
+            '<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe>',
+          duration: 212,
+        },
+        instructor,
+      ),
+    ).rejects.toThrow(BadRequestException);
+
+    course.type = CourseType.FREE;
+    course.price = 0;
+    await serviceForLessons.addLesson(
+      courseId.toString(),
+      chapterId.toString(),
+      {
+        title: 'Bài Free YouTube',
+        videoUrl:
+          '<iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ?si=123" onload="alert(1)"></iframe>',
+        duration: 212,
+      },
+      instructor,
+    );
+    const addedYoutubeLesson = course.chapters[0]?.lessons[1];
+    expect(addedYoutubeLesson?.videoUrl).toContain(
+      'src="https://www.youtube.com/embed/dQw4w9WgXcQ"',
+    );
+    expect(addedYoutubeLesson?.videoUrl).not.toContain('onload=');
+
+    const firstLesson = course.chapters[0]!.lessons[0]!;
+    firstLesson.videoUrl = '/public/videos/old-lesson.mp4';
+
+    await serviceForLessons.updateLesson(
+      courseId.toString(),
+      chapterId.toString(),
+      lessonId.toString(),
+      {
+        videoUrl: '/public/videos/new-lesson.mp4',
+        duration: 300,
+      },
+      instructor,
+    );
+    expect(deleteLocalFile).toHaveBeenCalledWith(
+      '/public/videos/old-lesson.mp4',
+    );
   });
 });

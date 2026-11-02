@@ -2,6 +2,14 @@ backup/
 !/backup/
 backup/*
 !/backup/.gitkeep
+public/images/courses/*
+!/public/images/courses/.gitkeep
+public/images/avatars/*
+!/public/images/avatars/.gitkeep
+public/videos/*
+!/public/videos/.gitkeep
+public/files/*
+!/public/files/.gitkeep
 node_modules/
 dist/
 .env

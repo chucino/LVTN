@@ -1,5 +1,6 @@
 import { computed, ref } from 'vue';
 import { manageCourseService } from '@/services/manage-courses.api';
+import { uploadsService } from '@/services/uploads.api';
 import { getManageErrorMessage } from '@/lib/manage-course-format';
 import type {
   ManageCourseDetail,
@@ -56,14 +57,34 @@ export function useManageCourseEditor() {
     });
   }
 
-  async function create(payload: ManageCoursePayload) {
-    return perform('create', () => manageCourseService.create(payload));
+  async function create(
+    payload: ManageCoursePayload,
+    thumbnailFile: File | null = null,
+  ) {
+    return perform('create', async () => {
+      const nextPayload: ManageCoursePayload = { ...payload };
+      if (thumbnailFile) {
+        const uploaded = await uploadsService.uploadCourseThumbnail(thumbnailFile);
+        nextPayload.thumbnail = uploaded.url;
+      }
+      return manageCourseService.create(nextPayload);
+    });
   }
 
-  async function update(payload: Partial<ManageCoursePayload>) {
+  async function update(
+    payload: Partial<ManageCoursePayload>,
+    thumbnailFile: File | null = null,
+  ) {
     const current = course.value;
     if (!current) throw new Error('Chưa tải thông tin khóa học.');
-    return updateDetail(() => manageCourseService.update(current.id, payload));
+    return updateDetail(async () => {
+      const nextPayload: Partial<ManageCoursePayload> = { ...payload };
+      if (thumbnailFile) {
+        const uploaded = await uploadsService.uploadCourseThumbnail(thumbnailFile);
+        nextPayload.thumbnail = uploaded.url;
+      }
+      return manageCourseService.update(current.id, nextPayload);
+    });
   }
 
   async function transition(action: 'submit' | 'withdraw' | 'approve' | 'hide') {

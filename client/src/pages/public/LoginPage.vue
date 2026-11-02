@@ -3,7 +3,7 @@ import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth.store';
 import AuthLayout from '@/layouts/AuthLayout.vue';
-import { LogIn, Mail, Lock, Eye, EyeOff, ShieldAlert } from 'lucide-vue-next';
+import { Eye, EyeOff, ShieldAlert } from 'lucide-vue-next';
 
 const router = useRouter();
 const route = useRoute();
@@ -39,114 +39,87 @@ const handleLogin = async () => {
       err.response?.data?.message || err.message || 'Đăng nhập không thành công';
   }
 };
-
-const fillAdminCredentials = () => {
-  email.value = 'admin@nextcode.vn';
-  password.value = 'Admin@123456';
-};
 </script>
 
 <template>
   <AuthLayout>
     <div class="mb-6">
-      <h2 class="text-xl font-bold text-white tracking-tight">Chào mừng trở lại</h2>
-      <p class="text-slate-400 text-sm mt-0.5">Vui lòng nhập thông tin để truy cập hệ thống học tập</p>
+      <h2 class="text-2xl font-normal text-ink">Đăng nhập tài khoản</h2>
+      <p class="mt-1 text-base text-muted">
+        Nhập email và mật khẩu đã đăng ký với hệ thống NextCode.
+      </p>
     </div>
 
-    <!-- Error Alert -->
     <div
       v-if="errorMessage"
-      class="mb-5 p-3.5 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm flex items-start gap-2.5 animate-in fade-in slide-in-from-top-1"
+      role="alert"
+      class="mb-5 flex items-start gap-2.5 bg-brand-surface p-4 text-sm text-ink"
     >
-      <ShieldAlert class="w-5 h-5 flex-shrink-0 mt-0.5" />
+      <ShieldAlert class="mt-0.5 h-5 w-5 shrink-0 text-brand-soft" />
       <span>{{ errorMessage }}</span>
     </div>
 
-    <form @submit.prevent="handleLogin" class="space-y-4">
-      <!-- Email Field -->
+    <form class="space-y-5" @submit.prevent="handleLogin">
       <div>
-        <label class="block text-xs font-semibold text-slate-300 uppercase tracking-wider mb-1.5">Email</label>
-        <div class="relative">
-          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
-            <Mail class="w-4 h-4" />
-          </div>
-          <input
-            v-model="email"
-            type="email"
-            required
-            placeholder="name@example.com"
-            class="w-full pl-10 pr-4 py-2.5 bg-slate-950/60 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
-          />
-        </div>
+        <label for="login-email" class="mb-1.5 block text-sm font-medium text-ink">
+          Địa chỉ Email
+        </label>
+        <input
+          id="login-email"
+          v-model="email"
+          type="email"
+          required
+          autocomplete="email"
+          placeholder="hocvien@nextcode.vn"
+          class="manage-input"
+        />
       </div>
 
-      <!-- Password Field -->
       <div>
-        <div class="flex items-center justify-between mb-1.5">
-          <label class="text-xs font-semibold text-slate-300 uppercase tracking-wider">Mật khẩu</label>
+        <div class="mb-1.5 flex items-center justify-between">
+          <label for="login-password" class="text-sm font-medium text-ink">Mật khẩu</label>
           <router-link
             to="/forgot-password"
-            class="text-xs font-medium text-indigo-400 hover:text-indigo-300 transition-colors"
+            class="text-sm text-muted underline underline-offset-4 transition-colors hover:text-ink"
           >
             Quên mật khẩu?
           </router-link>
         </div>
         <div class="relative">
-          <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-500">
-            <Lock class="w-4 h-4" />
-          </div>
           <input
+            id="login-password"
             v-model="password"
             :type="showPassword ? 'text' : 'password'"
             required
-            placeholder="Nhập mật khẩu..."
-            class="w-full pl-10 pr-10 py-2.5 bg-slate-950/60 border border-slate-700/80 rounded-xl text-white placeholder-slate-500 text-sm focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-all"
+            autocomplete="current-password"
+            placeholder="Nhập mật khẩu của bạn"
+            class="manage-input pr-11"
           />
           <button
             type="button"
+            :aria-label="showPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'"
+            class="absolute inset-y-0 right-0 flex items-center pr-3.5 text-muted hover:text-ink"
             @click="showPassword = !showPassword"
-            class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-slate-500 hover:text-slate-300"
           >
-            <EyeOff v-if="showPassword" class="w-4 h-4" />
-            <Eye v-else class="w-4 h-4" />
+            <EyeOff v-if="showPassword" class="h-4 w-4" />
+            <Eye v-else class="h-4 w-4" />
           </button>
         </div>
       </div>
 
-      <!-- Submit Button -->
       <button
         type="submit"
         :disabled="authStore.loading"
-        class="w-full mt-2 py-3 px-4 rounded-xl bg-gradient-to-r from-indigo-600 via-indigo-500 to-cyan-500 hover:from-indigo-500 hover:to-cyan-400 text-white font-medium text-sm shadow-lg shadow-indigo-500/25 flex items-center justify-center gap-2 transition-all transform active:scale-[0.99] disabled:opacity-50 disabled:cursor-not-allowed"
+        class="manage-button-primary mt-2 flex w-full items-center justify-center gap-2"
       >
-        <span v-if="authStore.loading" class="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
-        <LogIn v-else class="w-4 h-4" />
-        <span>{{ authStore.loading ? 'Đang xác thực...' : 'Đăng nhập' }}</span>
+        <span>{{ authStore.loading ? 'Đang xác thực...' : 'Đăng nhập vào hệ thống' }}</span>
       </button>
     </form>
 
-    <!-- Quick test credentials helper -->
-    <div class="mt-6 pt-5 border-t border-slate-800/80">
-      <div class="flex items-center justify-between text-xs text-slate-400 mb-2">
-        <span>Tài khoản kiểm thử nhanh:</span>
-        <button
-          type="button"
-          @click="fillAdminCredentials"
-          class="text-indigo-400 hover:text-indigo-300 underline font-medium"
-        >
-          Điền tài khoản Admin
-        </button>
-      </div>
-      <div class="p-2.5 rounded-lg bg-slate-950/40 border border-slate-800 text-[11px] text-slate-400 font-mono">
-        admin@nextcode.vn / Admin@123456
-      </div>
-    </div>
-
-    <!-- Switch to Register -->
-    <div class="mt-5 text-center text-xs text-slate-400">
+    <div class="mt-6 text-sm text-muted">
       Chưa có tài khoản học viên?
-      <router-link to="/register" class="text-indigo-400 hover:text-indigo-300 font-semibold ml-1">
-        Đăng ký ngay
+      <router-link to="/register" class="ml-1 font-medium text-ink underline underline-offset-4 hover:text-brand-soft">
+        Đăng ký tài khoản mới
       </router-link>
     </div>
   </AuthLayout>

@@ -4,6 +4,7 @@ import {
   ForbiddenException,
   Injectable,
   NotFoundException,
+  Optional,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { HydratedDocument, Model, PipelineStage, Types } from 'mongoose';
@@ -13,6 +14,7 @@ import {
   CourseType,
 } from '../../common/constants/course.enum.js';
 import { UsersService } from '../users/users.service.js';
+import { UploadsService } from '../uploads/uploads.service.js';
 import {
   CreateChapterDto,
   CreateLessonDto,
@@ -27,6 +29,8 @@ import {
   UpdateLessonDto,
   UpdateManageCourseDto,
   UpdateQuizQuestionDto,
+  buildCanonicalYouTubeIframe,
+  extractYouTubeVideoId,
 } from './dto/manage-course.dto.js';
 import {
   ManageCourseDetailDto,
@@ -122,6 +126,27 @@ function assertNoQuizNotesForFree(
   }
 }
 
+function normalizeLessonVideoForCourse(
+  type: CourseType,
+  rawVideoUrl: string,
+): string {
+  const trimmed = rawVideoUrl.trim();
+  const isIframe = /^<iframe\b/i.test(trimmed);
+  const youtubeId = extractYouTubeVideoId(trimmed);
+  if (isIframe) {
+    if (!youtubeId) {
+      throw new BadRequestException('Mã nhúng <iframe> YouTube không hợp lệ');
+    }
+    if (type === CourseType.PRO) {
+      throw new BadRequestException(
+        'Khóa học PRO chỉ sử dụng video tải lên hệ thống, không dùng mã nhúng YouTube',
+      );
+    }
+    return buildCanonicalYouTubeIframe(youtubeId);
+  }
+  return trimmed;
+}
+
 @Injectable()
 export class CourseManageService {
   constructor(
@@ -130,6 +155,8 @@ export class CourseManageService {
     @InjectModel(Category.name)
     private readonly categoryModel: Model<Category>,
     private readonly usersService: UsersService,
+    @Optional()
+    private readonly uploadsService?: UploadsService,
   ) {}
 
   async listCourses(
@@ -229,6 +256,9 @@ export class CourseManageService {
     assertPricing(input.type, input.price, input.discountPrice ?? null);
     await this.assertCategoryExists(input.categoryId);
 
+    if (actor.role !== Role.ADMIN) {
+      throw new ForbiddenException('Chỉ quản trị viên mới có quyền tạo khóa học nền');
+    }
     let instructorId = actor.userId;
     if (actor.role === Role.ADMIN) {
       if (!input.instructorId) {
@@ -283,8 +313,18 @@ export class CourseManageService {
     input: UpdateManageCourseDto,
     actor: ManageCourseActor,
   ): Promise<ManageCourseDetailDto> {
+    if (actor.role !== Role.ADMIN) {
+      throw new ForbiddenException(
+        'Chỉ quản trị viên mới có quyền chỉnh sửa thông tin khóa học nền',
+      );
+    }
     const course = await this.findEditableCourse(id, actor);
     const nextType = input.type ?? course.type;
+    if (actor.role !== Role.ADMIN) {
+      throw new ForbiddenException(
+        'Chỉ quản trị viên mới có quyền chỉnh sửa thông tin khóa học nền',
+      );
+    }
     let nextPrice = input.price ?? course.price;
     let nextDiscountPrice =
       input.discountPrice === undefined
@@ -305,6 +345,14 @@ export class CourseManageService {
     assertPricing(nextType, nextPrice, nextDiscountPrice ?? null);
 
     if (input.categoryId) await this.assertCategoryExists(input.categoryId);
+    if (input.instructorId !== undefined) {
+      if (!(await this.usersService.isActiveInstructor(input.instructorId))) {
+        throw new BadRequestException(
+          'Giảng viên không tồn tại hoặc không ở trạng thái hoạt động',
+        );
+      }
+      course.instructorId = new Types.ObjectId(input.instructorId);
+    }
     if (input.title !== undefined) course.title = input.title;
     if (input.description !== undefined) course.description = input.description;
     if (input.type !== undefined) course.type = input.type;
@@ -325,6 +373,7 @@ export class CourseManageService {
     if (input.discountPrice !== undefined || nextType === CourseType.FREE) {
       course.discountPrice = nextDiscountPrice ?? null;
     }
+    const previousThumbnail = course.thumbnail;
     if (input.thumbnail !== undefined) course.thumbnail = input.thumbnail;
 
     if (input.type !== undefined && nextType === CourseType.FREE) {
@@ -337,6 +386,13 @@ export class CourseManageService {
     }
 
     await course.save();
+    if (
+      input.thumbnail !== undefined &&
+      previousThumbnail &&
+      previousThumbnail !== course.thumbnail
+    ) {
+      await this.uploadsService?.deleteLocalFile(previousThumbnail);
+    }
     return this.getCourse(id, actor);
   }
 
@@ -359,6 +415,13 @@ export class CourseManageService {
     if (result.deletedCount !== 1) {
       throw new ConflictException('Trạng thái khóa học đã thay đổi; vui lòng tải lại');
     }
+    await this.uploadsService?.deleteLocalFile(course.thumbnail);
+    const lessonVideos = course.chapters.flatMap((chapter) =>
+      chapter.lessons.map((lesson) => lesson.videoUrl),
+    );
+    await Promise.all(
+      lessonVideos.map((videoUrl) => this.uploadsService?.deleteLocalFile(videoUrl)),
+    );
     return { message: 'Đã xóa khóa học' };
   }
 
@@ -429,7 +492,12 @@ export class CourseManageService {
       (chapter) => idString(chapter._id) === chapterId.toLowerCase(),
     );
     if (chapterIndex < 0) throw new NotFoundException('Không tìm thấy chương');
+    const deletedVideoUrls =
+      course.chapters[chapterIndex]?.lessons.map((lesson) => lesson.videoUrl) ?? [];
     course.chapters.splice(chapterIndex, 1);
+    await Promise.all(
+      deletedVideoUrls.map((videoUrl) => this.uploadsService?.deleteLocalFile(videoUrl)),
+    );
     course.chapters.forEach((chapter, index) => {
       chapter.order = index + 1;
     });
@@ -475,7 +543,7 @@ export class CourseManageService {
       _id: new Types.ObjectId(),
       title: input.title,
       order: chapter.lessons.length + 1,
-      videoUrl: input.videoUrl,
+      videoUrl: normalizeLessonVideoForCourse(course.type, input.videoUrl),
       duration: input.duration,
       note: input.note ?? null,
       summary: input.summary ?? null,
@@ -499,11 +567,22 @@ export class CourseManageService {
     assertNoQuizNotesForFree(course.type, input);
     const lesson = this.findLesson(course, chapterId, lessonId);
     if (input.title !== undefined) lesson.title = input.title;
-    if (input.videoUrl !== undefined) lesson.videoUrl = input.videoUrl;
+    const previousVideoUrl = lesson.videoUrl;
+    if (input.videoUrl !== undefined) {
+      lesson.videoUrl = normalizeLessonVideoForCourse(course.type, input.videoUrl);
+    }
     if (input.duration !== undefined) lesson.duration = input.duration;
     if (input.note !== undefined) lesson.note = input.note;
     if (input.summary !== undefined) lesson.summary = input.summary;
-    return this.saveAndReturn(course, actor, input.duration !== undefined);
+    const updatedCourse = await this.saveAndReturn(course, actor, input.duration !== undefined);
+    if (
+      input.videoUrl !== undefined &&
+      previousVideoUrl &&
+      previousVideoUrl !== lesson.videoUrl
+    ) {
+      await this.uploadsService?.deleteLocalFile(previousVideoUrl);
+    }
+    return updatedCourse;
   }
 
   async deleteLesson(
@@ -518,7 +597,9 @@ export class CourseManageService {
       (lesson) => idString(lesson._id) === lessonId.toLowerCase(),
     );
     if (lessonIndex < 0) throw new NotFoundException('Không tìm thấy bài giảng');
+    const deletedVideoUrl = chapter.lessons[lessonIndex]?.videoUrl;
     chapter.lessons.splice(lessonIndex, 1);
+    await this.uploadsService?.deleteLocalFile(deletedVideoUrl);
     chapter.lessons.forEach((lesson, index) => {
       lesson.order = index + 1;
     });
@@ -751,6 +832,9 @@ export class CourseManageService {
   }
 
   private assertCanDelete(course: Course, actor: ManageCourseActor): void {
+    if (actor.role !== Role.ADMIN) {
+      throw new ForbiddenException('Chỉ quản trị viên mới có quyền xóa khóa học');
+    }
     const allowed =
       course.status === CourseStatus.DRAFT ||
       (actor.role === Role.ADMIN && course.status === CourseStatus.HIDDEN);
@@ -773,6 +857,13 @@ export class CourseManageService {
     recalculate = false,
   ): Promise<ManageCourseDetailDto> {
     await course.save();
+    if (
+      actor.role === Role.INSTRUCTOR &&
+      course.status === CourseStatus.APPROVED
+    ) {
+      course.status = CourseStatus.DRAFT;
+      await course.save();
+    }
     if (recalculate) {
       await recalculateCourseTotals(this.courseModel, course._id);
     }

@@ -32,12 +32,16 @@ const isCreating = computed(() => route.name === 'ManageCourseCreate');
 const courseId = computed(() => typeof route.params.id === 'string' ? route.params.id : '');
 const activeTab = computed<ManageCourseTab>(() => {
   const tab = route.query.tab;
-  return tab === 'content' || tab === 'status' ? tab : 'info';
+  if (tab === 'info' || tab === 'content' || tab === 'status') return tab;
+  return !isCreating.value && !isAdmin.value ? 'content' : 'info';
 });
 const pageTitle = computed(() => {
   if (isCreating.value) return 'Tạo khóa học';
   return editor.course.value?.title ?? 'Chỉnh sửa khóa học';
 });
+const isInfoReadOnly = computed(
+  () => !isCreating.value && Boolean(!editor.course.value?.permissions.canEditInfo),
+);
 const isReadOnly = computed(
   () => Boolean(editor.course.value && !editor.course.value.permissions.canEdit),
 );
@@ -90,15 +94,18 @@ watch(
 function setTab(tab: ManageCourseTab) {
   if (isCreating.value && tab !== 'info') return;
   void router.replace({
-    query: { ...route.query, tab: tab === 'info' ? undefined : tab },
+    query: { ...route.query, tab },
   });
 }
 
-async function saveInfo(payload: ManageCoursePayload) {
+async function saveInfo(
+  payload: ManageCoursePayload,
+  thumbnailFile: File | null = null,
+) {
   successMessage.value = '';
   try {
     if (isCreating.value) {
-      const created = await editor.create(payload);
+      const created = await editor.create(payload, thumbnailFile);
       dirty.value = false;
       successMessage.value = 'Đã tạo khóa học ở trạng thái Nháp.';
       await router.replace({
@@ -107,7 +114,7 @@ async function saveInfo(payload: ManageCoursePayload) {
         query: { tab: 'content' },
       });
     } else {
-      const updated = await editor.update(payload);
+      const updated = await editor.update(payload, thumbnailFile);
       dirty.value = false;
       successMessage.value = 'Đã lưu thông tin khóa học.';
       editor.course.value = updated;
@@ -141,17 +148,17 @@ async function handleStatusAction(
 </script>
 
 <template>
-  <section class="mx-auto max-w-5xl space-y-6">
+  <section data-ui class="mx-auto max-w-5xl space-y-6">
     <div class="flex flex-wrap items-center gap-3">
-      <router-link :to="{ name: 'ManageCourses' }" class="rounded-lg border border-slate-800 p-2 text-slate-400 transition hover:bg-slate-900 hover:text-white" aria-label="Quay lại danh sách khóa học">
+      <router-link :to="{ name: 'ManageCourses' }" class="bg-surface p-2 text-muted transition-colors hover:bg-surface-2 hover:text-ink" aria-label="Quay lại danh sách khóa học">
         <ArrowLeft class="h-4 w-4" />
       </router-link>
       <div class="min-w-0 flex-1">
-        <p class="text-xs font-bold uppercase tracking-[0.16em] text-cyan-300">{{ isCreating ? 'Course studio / New' : 'Course studio / Edit' }}</p>
-        <h1 class="mt-1 truncate text-2xl font-black text-white sm:text-3xl">{{ pageTitle }}</h1>
+        <p class="text-xs font-medium text-muted">{{ isCreating ? 'Course studio / Tạo mới' : 'Course studio / Biên soạn' }}</p>
+        <h1 class="mt-1 truncate font-display text-2xl font-normal text-ink sm:text-3xl">{{ pageTitle }}</h1>
       </div>
-      <span v-if="editorCourse" class="hidden items-center gap-1.5 rounded-full border border-slate-700 bg-slate-900 px-3 py-1.5 text-xs text-slate-300 sm:inline-flex">
-        <BookOpen class="h-3.5 w-3.5 text-cyan-300" />
+      <span v-if="editorCourse" class="hidden items-center gap-1.5 bg-surface px-3 py-1.5 text-xs tabular-nums text-muted sm:inline-flex">
+        <BookOpen class="h-3.5 w-3.5 text-brand-soft" />
         {{ editorCourse.totalChapters }} chương · {{ editorCourse.totalLessons }} bài
       </span>
     </div>
@@ -165,20 +172,20 @@ async function handleStatusAction(
       <CheckCircle2 class="h-4 w-4 shrink-0" /> {{ successMessage }}
     </div>
 
-    <div v-if="editorLoading" class="manage-panel space-y-4 p-5" aria-busy="true" aria-label="Đang tải khóa học">
-      <div class="h-10 animate-pulse rounded-lg bg-slate-800" />
-      <div class="h-32 animate-pulse rounded-lg bg-slate-800" />
-      <div class="h-24 animate-pulse rounded-lg bg-slate-800" />
+    <div v-if="editorLoading" class="space-y-4 bg-surface p-5" aria-busy="true" aria-label="Đang tải khóa học">
+      <div class="h-10 bg-surface-2" />
+      <div class="h-32 bg-surface-2" />
+      <div class="h-24 bg-surface-2" />
     </div>
 
     <template v-else-if="isCreating || editorCourse">
-      <div v-if="editorCourse" class="manage-panel flex gap-1 overflow-x-auto p-1.5" role="tablist" aria-label="Các phần quản lý khóa học">
+      <div v-if="editorCourse" class="flex gap-1 overflow-x-auto bg-surface p-1" role="tablist" aria-label="Các phần quản lý khóa học">
         <button
           v-for="tab in MANAGE_COURSE_TABS"
           :key="tab.value"
           type="button"
-          class="whitespace-nowrap rounded-xl px-4 py-2.5 text-sm font-semibold transition"
-          :class="activeTab === tab.value ? 'bg-indigo-500/20 text-cyan-200' : 'text-slate-400 hover:bg-slate-900 hover:text-white'"
+          class="whitespace-nowrap px-4 py-2 text-sm font-medium transition-colors"
+          :class="activeTab === tab.value ? 'bg-surface-2 text-ink' : 'text-muted hover:bg-ground hover:text-ink'"
           :aria-selected="activeTab === tab.value"
           role="tab"
           @click="setTab(tab.value)"
@@ -194,7 +201,7 @@ async function handleStatusAction(
         :instructors="catalogInstructors"
         :is-admin="isAdmin"
         :busy="editorIsSaving"
-        :read-only="isReadOnly"
+        :read-only="isInfoReadOnly"
         :catalog-loading="catalogLoading"
         @dirty="dirty = $event"
         @save="saveInfo"
@@ -216,7 +223,7 @@ async function handleStatusAction(
         @action="handleStatusAction"
       />
     </template>
-    <div v-else-if="editorError" class="manage-panel p-6 text-center text-sm text-slate-400">
+    <div v-else-if="editorError" class="bg-surface p-6 text-center text-sm text-muted">
       Không thể mở khóa học. Hãy kiểm tra quyền truy cập hoặc tải lại trang.
     </div>
   </section>

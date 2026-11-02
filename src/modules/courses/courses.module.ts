@@ -8,10 +8,12 @@ import { CourseManageController } from './course-manage.controller.js';
 import { CourseManageService } from './course-manage.service.js';
 import { RolesGuard } from '../../common/guards/roles.guard.js';
 import { UsersModule } from '../users/users.module.js';
+import { UploadsModule } from '../uploads/uploads.module.js';
 
 @Module({
   imports: [
     UsersModule,
+    UploadsModule,
     MongooseModule.forFeature([
       { name: Category.name, schema: CategorySchema },
       { name: Course.name, schema: CourseSchema },

@@ -5,30 +5,26 @@ defineProps<{ status: ManageCourseStatus }>();
 </script>
 
 <template>
-  <span class="inline-flex whitespace-nowrap rounded-full border px-2.5 py-1 text-xs font-semibold" :class="MANAGE_COURSE_STATUS[status].className">
+  <span class="inline-flex whitespace-nowrap px-2.5 py-1 text-xs font-medium" :class="MANAGE_COURSE_STATUS[status].className">
     {{ MANAGE_COURSE_STATUS[status].label }}
   </span>
 </template>
 
 <style scoped>
 .status-draft {
-  border-color: rgb(148 163 184 / 0.25);
-  background: rgb(148 163 184 / 0.1);
-  color: #cbd5e1;
+  background: var(--color-surface-2);
+  color: var(--color-ink);
 }
 .status-pending {
-  border-color: rgb(251 191 36 / 0.25);
-  background: rgb(251 191 36 / 0.1);
-  color: #fde68a;
+  background: #fef3c7;
+  color: #92400e;
 }
 .status-approved {
-  border-color: rgb(52 211 153 / 0.25);
-  background: rgb(52 211 153 / 0.1);
-  color: #6ee7b7;
+  background: var(--color-teal-tint);
+  color: #0f766e;
 }
 .status-hidden {
-  border-color: rgb(248 113 113 / 0.25);
-  background: rgb(248 113 113 / 0.1);
-  color: #fca5a5;
+  background: #fde8e8;
+  color: #b91c1c;
 }
 </style>

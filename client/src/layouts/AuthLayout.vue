@@ -1,38 +1,53 @@
 <script setup lang="ts">
-import { Sparkles } from 'lucide-vue-next';
+import { ArrowLeft, CheckCircle2 } from 'lucide-vue-next';
+import HeroCodeWindow from '@/components/illustrations/HeroCodeWindow.vue';
+
+const benefits = [
+  'Lưu tiến độ từng bài giảng',
+  'Làm trắc nghiệm sau mỗi bài',
+  'Học trên mọi thiết bị',
+];
 </script>
 
 <template>
-  <div class="min-h-screen w-full flex items-center justify-center p-4 bg-slate-950 relative overflow-hidden font-sans">
-    <!-- Decorative blurred gradient circles -->
-    <div class="absolute -top-32 -left-32 w-96 h-96 bg-indigo-600/30 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute -bottom-32 -right-32 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none"></div>
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-violet-600/10 rounded-full blur-3xl pointer-events-none"></div>
-
-    <!-- Main Card Container -->
-    <div class="w-full max-w-lg z-10">
-      <!-- Brand Logo & Header -->
-      <div class="text-center mb-6">
-        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-400 text-xs font-semibold mb-3">
-          <Sparkles class="w-3.5 h-3.5" />
-          <span>Nền tảng học lập trình trực tuyến</span>
+  <div class="min-h-svh text-ink">
+    <div class="mx-auto grid min-h-svh max-w-[1440px] lg:grid-cols-2">
+      <div class="flex flex-col px-[var(--margin)] py-8 sm:px-10">
+        <div class="flex items-center justify-between">
+          <router-link to="/" class="inline-flex items-center gap-2.5">
+            <img src="/logo.jpg" alt="Logo NextCode" width="36" height="36" class="h-9 w-9 rounded-lg bg-white object-contain p-1" />
+            <span class="text-xl font-bold text-ink">NextCode</span>
+          </router-link>
+          <router-link
+            to="/"
+            class="inline-flex items-center gap-2 text-sm font-medium text-muted transition-colors hover:text-ink"
+          >
+            <ArrowLeft class="h-4 w-4" />
+            Trang chủ
+          </router-link>
         </div>
-        <div class="flex items-center justify-center gap-2 text-2xl font-black tracking-tight text-white">
-          <img src="/logo.jpg" alt="" class="w-10 h-10 rounded-xl bg-white object-contain p-1 shadow-lg shadow-indigo-500/30" />
-          <span class="bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">NextCode</span>
+
+        <div class="flex flex-1 items-center py-10">
+          <div class="mx-auto w-full max-w-md bg-surface p-6 sm:p-8">
+            <slot />
+          </div>
         </div>
-        <p class="text-slate-400 text-sm mt-1">Học hôm nay, kiến tạo ngày mai</p>
       </div>
 
-      <!-- Glassmorphic Card -->
-      <div class="backdrop-blur-xl bg-slate-900/80 border border-slate-800 rounded-3xl p-6 sm:p-8 shadow-2xl shadow-black/60 relative">
-        <slot />
-      </div>
-
-      <!-- Footer text -->
-      <div class="text-center mt-6 text-xs text-slate-500">
-        &copy; 2026 NextCode Education. Đồ án Luận văn tốt nghiệp.
-      </div>
+      <aside class="hidden bg-navy px-12 py-16 text-white lg:flex lg:flex-col lg:justify-center no-radius" aria-label="Giới thiệu">
+        <h2 class="max-w-md text-3xl font-bold leading-tight text-white">
+          Học lập trình theo lộ trình rõ ràng, từng bài một.
+        </h2>
+        <ul class="mt-6 space-y-3 text-sm text-white/80">
+          <li v-for="item in benefits" :key="item" class="flex items-center gap-2.5">
+            <CheckCircle2 class="h-5 w-5 shrink-0 text-[#4fd1a5]" />
+            {{ item }}
+          </li>
+        </ul>
+        <div class="mt-14">
+          <HeroCodeWindow />
+        </div>
+      </aside>
     </div>
   </div>
 </template>

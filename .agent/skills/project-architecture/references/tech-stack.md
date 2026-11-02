@@ -275,8 +275,8 @@ Lý do không dùng Passport: bảo vệ bằng một guard JWT tự viết vớ
 ## Upload file
 
 - **Phạm vi**: chỉ **ảnh đại diện** cần upload lên server. Video không upload (xem mục Video).
-- **Lưu**: đĩa cục bộ trong `server/uploads/` (thêm vào `.gitignore`), tên file do server sinh ngẫu nhiên, **không dùng tên file người dùng gửi**.
-- **Giới hạn**: kích thước tối đa nhỏ (gợi ý 2MB), chỉ nhận ảnh png/jpg/webp, kiểm tra loại file ở server (không tin phần mở rộng hay `Content-Type` do client gửi).
+- **Lưu**: đĩa cục bộ trong thư mục `public/` của server, chia thành `public/images/` (`courses/`, `avatars/`), `public/videos/` và `public/files/` (thêm vào `.gitignore`), phục vụ tĩnh qua `/public/...`, tên file do server sinh ngẫu nhiên (UUID), **không dùng tên file người dùng gửi**.
+- **Giới hạn**: kích thước tối đa 5MB, chỉ nhận ảnh png/jpg/jpeg/webp, kiểm tra loại file ở server (bao gồm magic bytes, không tin phần mở rộng hay `Content-Type` do client gửi). Tự động xóa ảnh cũ khi khóa học đổi/xóa ảnh hoặc xóa khóa học.
 - **Hạn chế đã biết**: lưu đĩa cục bộ không phù hợp nếu triển khai lên nền tảng có ổ đĩa tạm thời; nếu gặp tình huống đó, hướng xử lý là chuyển sang dịch vụ lưu trữ đối tượng, làm bằng task riêng.
 
 ---
@@ -336,4 +336,5 @@ Ghi theo thời gian mỗi khi có công nghệ được thêm hoặc quyết đ
 - 2026-10-02: Khởi tạo dự án — client: Vue 3 + Vite + TypeScript; server: NestJS + TypeScript (Prettier, oxlint, Vitest có sẵn). Giao diện dự kiến Vuetify + Tailwind CSS, icon lucide-vue-next.
 - 2026-10-03: Chốt các quyết định còn mở — PostgreSQL + Prisma (adapter-pg); JWT access ngắn hạn trong bộ nhớ + refresh token xoay vòng trong cookie httpOnly; argon2; OTP lưu DB; video YouTube Unlisted; QR VietQR dựng ở server; thanh toán thủ công + giả lập trước; chứng chỉ PDF bằng pdfkit; nội dung Markdown qua markdown-it + dompurify; ảnh đại diện lưu đĩa cục bộ; Chart.js; Vitest. Hoãn: hosting, dịch vụ webhook, cách chạy PostgreSQL khi phát triển, e2e giao diện.
 - 2026-10-11: Cập nhật quyết định DB theo lựa chọn của người dùng — Chuyển từ PostgreSQL + Prisma sang MongoDB + Mongoose (@nestjs/mongoose, mongoose); cấu hình gửi mail OTP bằng Gmail SMTP thật qua App Password ngay từ đầu.
+- 2026-10-30: Chốt cấu hình Upload ảnh và file bằng Multer (`@nestjs/platform-express`, `@types/multer`) — Lưu trữ tĩnh trong `public/images/` (`courses/`, `avatars/`), `public/videos/` và `public/files/`, phục vụ qua `/public/...`, giới hạn ảnh 5MB (JPG/PNG/WEBP), giới hạn video bài giảng 1GB (MP4/WEBM, kiểm tra magic bytes), khóa học Free hỗ trợ mã nhúng `<iframe>` YouTube hoặc tải video lên server, khóa học Pro tải video lên server, tự động trích xuất thời lượng và xóa ảnh/video cũ khi cập nhật/xóa.
 ```

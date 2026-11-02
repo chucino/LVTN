@@ -200,18 +200,25 @@ const hasFilters = computed(
 </script>
 
 <template>
-  <section class="space-y-6">
+  <section data-ui class="space-y-6">
     <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
       <div>
-        <p class="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Course studio</p>
-        <h1 class="text-2xl font-black tracking-tight text-white sm:text-3xl">
-          {{ isAdmin ? 'Tất cả khóa học' : 'Khóa học của tôi' }}
+        <p class="text-xs font-medium text-muted">Course studio</p>
+        <h1 class="mt-1 font-display text-2xl font-normal tracking-tight text-ink sm:text-3xl">
+          {{ isAdmin ? 'Tất cả khóa học' : 'Khóa học được phân công' }}
         </h1>
-        <p class="mt-2 text-sm text-slate-400">Quản lý nội dung và theo dõi trạng thái duyệt.</p>
+        <p class="mt-1 text-sm text-muted">
+          {{
+            isAdmin
+              ? 'Tạo khóa học nền, phân công giảng viên và kiểm duyệt nội dung.'
+              : 'Biên soạn chương, bài giảng và trắc nghiệm cho các khóa học bạn được phân công.'
+          }}
+        </p>
       </div>
       <router-link
+        v-if="isAdmin"
         :to="{ name: 'ManageCourseCreate' }"
-        class="manage-button-primary inline-flex items-center justify-center gap-2"
+        class="manage-button-primary"
       >
         <CirclePlus class="h-4 w-4" />
         Tạo khóa học
@@ -220,7 +227,7 @@ const hasFilters = computed(
 
     <div v-if="successMessage" class="manage-alert-success" role="status">
       {{ successMessage }}
-      <button type="button" class="ml-auto text-emerald-200 underline" @click="successMessage = ''">Đóng</button>
+      <button type="button" class="ml-auto underline" @click="successMessage = ''">Đóng</button>
     </div>
     <div v-if="error || catalog.catalogError.value" class="manage-alert-error" role="alert">
       <AlertCircle class="mt-0.5 h-4 w-4 shrink-0" />
@@ -228,14 +235,14 @@ const hasFilters = computed(
       <button v-if="error" type="button" class="ml-auto underline" @click="fetchList">Thử lại</button>
     </div>
 
-    <div class="manage-panel overflow-hidden">
-      <div class="flex gap-2 overflow-x-auto border-b border-slate-800 px-4 pt-4 sm:px-6" role="tablist" aria-label="Lọc theo trạng thái">
+    <div class="bg-surface">
+      <div class="flex gap-1 overflow-x-auto bg-ground p-1" role="tablist" aria-label="Lọc theo trạng thái">
         <button
           v-for="tab in tabItems"
           :key="tab.label"
           type="button"
-          class="whitespace-nowrap border-b-2 px-2 pb-3 text-sm font-semibold transition"
-          :class="selectedStatus === tab.value && (tab.value !== undefined || !route.query.status) ? 'border-cyan-300 text-cyan-200' : 'border-transparent text-slate-400 hover:text-white'"
+          class="whitespace-nowrap px-3.5 py-2 text-xs font-medium transition-colors"
+          :class="selectedStatus === tab.value && (tab.value !== undefined || !route.query.status) ? 'bg-surface-2 text-ink' : 'text-muted hover:bg-surface hover:text-ink'"
           :aria-pressed="selectedStatus === tab.value && (tab.value !== undefined || !route.query.status)"
           @click="selectStatus(tab.value)"
         >
@@ -243,10 +250,10 @@ const hasFilters = computed(
         </button>
       </div>
 
-      <div class="grid gap-3 p-4 sm:grid-cols-2 sm:p-6 xl:grid-cols-5">
+      <div class="grid gap-3 p-4 sm:grid-cols-2 sm:p-5 xl:grid-cols-5">
         <label class="relative sm:col-span-2 xl:col-span-2">
           <span class="sr-only">Tìm theo tên khóa học</span>
-          <Search class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+          <Search class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
           <input v-model="keyword" type="search" maxlength="100" class="manage-input pl-10" placeholder="Tìm tên khóa học…" />
         </label>
         <label>
@@ -271,7 +278,7 @@ const hasFilters = computed(
             <option v-for="instructor in catalog.instructors.value" :key="instructor.id" :value="instructor.id">{{ instructor.fullName }}</option>
           </select>
         </label>
-        <label class="flex items-center gap-2 text-sm text-slate-400 sm:col-span-2 xl:col-span-1">
+        <label class="flex items-center gap-2 text-sm text-muted sm:col-span-2 xl:col-span-1">
           <SlidersHorizontal class="h-4 w-4 shrink-0" />
           <span class="sr-only">Sắp xếp khóa học</span>
           <select class="manage-input" :value="currentSort" @change="setSort(($event.target as HTMLSelectElement).value)">
@@ -282,67 +289,71 @@ const hasFilters = computed(
         </label>
       </div>
 
-      <div class="flex items-center justify-between border-t border-slate-800 px-4 py-3 text-xs text-slate-500 sm:px-6">
+      <div class="flex items-center justify-between bg-ground px-4 py-2.5 text-xs tabular-nums text-muted sm:px-5">
         <span>{{ total }} khóa học</span>
         <span>Trang {{ currentPage }}{{ totalPages ? ` / ${totalPages}` : '' }}</span>
       </div>
     </div>
 
-    <div v-if="loading" class="manage-panel space-y-3 p-5" aria-label="Đang tải khóa học" aria-busy="true">
-      <div v-for="n in 4" :key="n" class="h-16 animate-pulse rounded-xl bg-slate-800/70" />
+    <div v-if="loading" class="space-y-2 bg-surface p-5" aria-label="Đang tải khóa học" aria-busy="true">
+      <div v-for="n in 4" :key="n" class="h-16 bg-surface-2" />
     </div>
 
-    <div v-else-if="!error && items.length === 0" class="manage-panel px-5 py-14 text-center">
-      <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl border border-indigo-400/20 bg-indigo-500/10 text-cyan-200">
-        <BookOpen class="h-6 w-6" />
-      </div>
-      <h2 class="mt-4 text-lg font-bold text-white">{{ hasFilters ? 'Không tìm thấy khóa học' : 'Bạn chưa có khóa học nào' }}</h2>
-      <p class="mt-2 text-sm text-slate-400">
-        {{ hasFilters ? 'Thử thay đổi bộ lọc hoặc từ khóa.' : 'Bắt đầu bằng cách tạo khóa học đầu tiên của bạn.' }}
+    <div v-else-if="!error && items.length === 0" class="bg-surface px-5 py-14 text-center">
+      <BookOpen class="mx-auto h-7 w-7 text-muted" />
+      <h2 class="mt-3 text-base font-semibold text-ink">{{ hasFilters ? 'Không tìm thấy khóa học' : 'Bạn chưa có khóa học nào' }}</h2>
+      <p class="mt-1.5 text-sm text-muted">
+        {{
+          hasFilters
+            ? 'Thử thay đổi bộ lọc hoặc từ khóa.'
+            : isAdmin
+              ? 'Bắt đầu bằng cách tạo khóa học nền đầu tiên và phân công giảng viên.'
+              : 'Quản trị viên sẽ tạo khóa học nền và phân công cho bạn biên soạn chương, bài giảng.'
+        }}
       </p>
-      <router-link v-if="!hasFilters" :to="{ name: 'ManageCourseCreate' }" class="manage-button-primary mt-5 inline-flex items-center gap-2">
+      <router-link v-if="!hasFilters && isAdmin" :to="{ name: 'ManageCourseCreate' }" class="manage-button-primary mt-5">
         <CirclePlus class="h-4 w-4" /> Tạo khóa học
       </router-link>
     </div>
 
-    <div v-else-if="!loading && !error" class="manage-panel overflow-hidden">
+    <div v-else-if="!loading && !error" class="bg-surface">
       <div class="hidden overflow-x-auto lg:block">
         <table class="w-full min-w-[980px] text-left text-sm">
-          <thead class="border-b border-slate-800 bg-slate-900/70 text-xs uppercase tracking-wide text-slate-500">
+          <thead class="bg-surface-2 text-xs font-medium text-muted">
             <tr>
-              <th class="px-5 py-4 font-semibold">Khóa học</th>
-              <th class="px-4 py-4 font-semibold">Loại / Giá</th>
-              <th class="px-4 py-4 font-semibold">Trạng thái</th>
-              <th class="px-4 py-4 font-semibold">Nội dung</th>
-              <th v-if="isAdmin" class="px-4 py-4 font-semibold">Giảng viên</th>
-              <th class="px-4 py-4 font-semibold">Cập nhật</th>
-              <th class="px-4 py-4 font-semibold">Thao tác</th>
+              <th class="px-5 py-3.5 font-medium">Khóa học</th>
+              <th class="px-4 py-3.5 font-medium">Loại / Giá</th>
+              <th class="px-4 py-3.5 font-medium">Trạng thái</th>
+              <th class="px-4 py-3.5 font-medium">Nội dung</th>
+              <th v-if="isAdmin" class="px-4 py-3.5 font-medium">Giảng viên</th>
+              <th class="px-4 py-3.5 font-medium">Cập nhật</th>
+              <th class="px-4 py-3.5 font-medium">Thao tác</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-slate-800/80">
-            <tr v-for="course in items" :key="course.id" class="transition hover:bg-slate-900/50">
+          <tbody>
+            <tr v-for="course in items" :key="course.id" class="odd:bg-ground even:bg-surface transition-colors hover:bg-surface-2">
               <td class="max-w-[360px] px-5 py-4">
                 <div class="flex items-center gap-3">
                   <ManageCourseThumbnail :src="course.thumbnail" :title="course.title" />
                   <div class="min-w-0">
-                    <router-link :to="{ name: 'ManageCourseEdit', params: { id: course.id } }" class="line-clamp-2 font-semibold text-white hover:text-cyan-200">
+                    <router-link :to="{ name: 'ManageCourseEdit', params: { id: course.id } }" class="line-clamp-2 font-medium text-ink hover:text-brand-soft">
                       {{ course.title }}
                     </router-link>
-                    <p class="mt-1 truncate text-xs text-slate-500">{{ course.category.name }} · {{ course.level }}</p>
-                    <p v-if="course.status === 'DRAFT' && course.rejectReason" class="mt-1 truncate text-xs font-semibold text-rose-300" :title="course.rejectReason">
+                    <p class="mt-1 truncate text-xs text-muted">{{ course.category.name }} · {{ course.level }}</p>
+                    <p v-if="course.status === 'DRAFT' && course.rejectReason" class="mt-1 truncate text-xs font-medium text-rose-300" :title="course.rejectReason">
                       Bị từ chối: {{ course.rejectReason }}
                     </p>
                   </div>
                 </div>
               </td>
-              <td class="px-4 py-4">
-                <span class="font-semibold" :class="course.type === 'FREE' ? 'text-emerald-300' : 'text-amber-200'">{{ course.type }}</span>
-                <p class="mt-1 text-xs text-slate-400">{{ course.type === 'FREE' ? 'Miễn phí' : formatCoursePrice(course.discountPrice ?? course.price) }}</p>
+              <td class="px-4 py-4 tabular-nums">
+                <span class="text-xs font-semibold" :class="course.type === 'FREE' ? 'text-emerald-300' : 'text-brand-soft'">{{ course.type }}</span>
+                <p class="mt-1 text-xs text-muted">{{ course.type === 'FREE' ? 'Miễn phí' : formatCoursePrice(course.discountPrice ?? course.price) }}</p>
               </td>
               <td class="px-4 py-4"><CourseStatusBadge :status="course.status" /></td>
-              <td class="px-4 py-4 text-xs text-slate-400">{{ course.totalChapters }} chương · {{ course.totalLessons }} bài<br />{{ formatCourseDuration(course.totalDuration) }}</td>
-              <td v-if="isAdmin" class="max-w-40 truncate px-4 py-4 text-slate-300">{{ course.instructor.fullName }}</td>
-              <td class="whitespace-nowrap px-4 py-4 text-xs text-slate-400">{{ formatUpdatedAt(course.updatedAt) }}</td>
+              <td class="px-4 py-4 text-xs tabular-nums text-muted">{{ course.totalChapters }} chương · {{ course.totalLessons }} bài<br />{{ formatCourseDuration(course.totalDuration) }}</td>
+              <td v-if="isAdmin" class="max-w-40 truncate px-4 py-4 text-ink">{{ course.instructor.fullName }}</td>
+              <td class="whitespace-nowrap px-4 py-4 text-xs tabular-nums text-muted">{{ formatUpdatedAt(course.updatedAt) }}</td>
               <td class="px-4 py-4">
                 <ManageCourseActions :course="course" @action="openAction(course, $event)" />
               </td>
@@ -351,21 +362,21 @@ const hasFilters = computed(
         </table>
       </div>
 
-      <div class="space-y-3 p-3 lg:hidden">
-        <article v-for="course in items" :key="course.id" class="rounded-2xl border border-slate-800 bg-slate-900/60 p-4">
+      <div class="space-y-2 p-3 lg:hidden">
+        <article v-for="course in items" :key="course.id" class="bg-ground p-4">
           <div class="flex gap-3">
-            <ManageCourseThumbnail class="!h-16 !w-20 !rounded-xl" :src="course.thumbnail" :title="course.title" />
+            <ManageCourseThumbnail class="!h-16 !w-20" :src="course.thumbnail" :title="course.title" />
             <div class="min-w-0 flex-1">
-              <router-link :to="{ name: 'ManageCourseEdit', params: { id: course.id } }" class="line-clamp-2 font-bold text-white">{{ course.title }}</router-link>
-              <p class="mt-1 truncate text-xs text-slate-400">{{ course.category.name }} · {{ course.type }} · {{ course.type === 'FREE' ? 'Miễn phí' : formatCoursePrice(course.discountPrice ?? course.price) }}</p>
+              <router-link :to="{ name: 'ManageCourseEdit', params: { id: course.id } }" class="line-clamp-2 font-medium text-ink">{{ course.title }}</router-link>
+              <p class="mt-1 truncate text-xs tabular-nums text-muted">{{ course.category.name }} · {{ course.type }} · {{ course.type === 'FREE' ? 'Miễn phí' : formatCoursePrice(course.discountPrice ?? course.price) }}</p>
               <CourseStatusBadge class="mt-2" :status="course.status" />
             </div>
           </div>
-          <p v-if="course.status === 'DRAFT' && course.rejectReason" class="mt-3 rounded-lg border border-rose-400/20 bg-rose-500/5 p-2 text-xs text-rose-200">
+          <p v-if="course.status === 'DRAFT' && course.rejectReason" class="mt-3 bg-surface-2 p-2 text-xs text-rose-200">
             Bị từ chối: {{ course.rejectReason }}
           </p>
-          <div class="mt-3 flex flex-wrap items-center justify-between gap-3 border-t border-slate-800 pt-3">
-            <p class="text-xs leading-5 text-slate-400">
+          <div class="mt-3 flex flex-wrap items-center justify-between gap-3 pt-2">
+            <p class="text-xs leading-5 tabular-nums text-muted">
               {{ course.totalChapters }} chương · {{ course.totalLessons }} bài · {{ formatCourseDuration(course.totalDuration) }}
               <span class="block">Cập nhật {{ formatUpdatedAt(course.updatedAt) }}<template v-if="isAdmin"> · {{ course.instructor.fullName }}</template></span>
             </p>
@@ -377,7 +388,7 @@ const hasFilters = computed(
 
     <div v-if="!loading && totalPages > 1" class="flex items-center justify-center gap-3">
       <button type="button" class="manage-button-secondary" :disabled="currentPage <= 1" @click="changeQuery({ page: String(currentPage - 1) })">Trước</button>
-      <span class="text-sm text-slate-400">{{ currentPage }} / {{ totalPages }}</span>
+      <span class="text-sm tabular-nums text-muted">{{ currentPage }} / {{ totalPages }}</span>
       <button type="button" class="manage-button-secondary" :disabled="currentPage >= totalPages" @click="changeQuery({ page: String(currentPage + 1) })">Tiếp</button>
     </div>
 

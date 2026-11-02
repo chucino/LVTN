@@ -74,38 +74,38 @@ function submit() {
 </script>
 
 <template>
-  <dialog ref="dialog" class="manage-dialog m-auto w-[min(96vw,42rem)] rounded-2xl border border-slate-700 bg-slate-900 p-0 text-slate-100 shadow-2xl backdrop:bg-black/70" @cancel.prevent="emit('cancel')">
-    <form class="max-h-[90vh] overflow-y-auto p-5 sm:p-6" novalidate @submit.prevent="submit">
+  <dialog ref="dialog" data-ui class="manage-dialog m-auto w-[min(96vw,42rem)] bg-surface p-0 text-ink backdrop:bg-black/75" @cancel.prevent="emit('cancel')">
+    <form class="max-h-[90svh] overflow-y-auto p-5 sm:p-6" novalidate @submit.prevent="submit">
       <div class="flex items-center justify-between gap-3">
         <div>
-          <h2 class="text-lg font-bold text-white">{{ question ? 'Sửa câu trắc nghiệm' : 'Thêm câu trắc nghiệm' }}</h2>
-          <p class="mt-1 text-xs text-slate-400">Chọn đáp án đúng; chỉ số gửi API bắt đầu từ 0.</p>
+          <h2 class="text-base font-semibold text-ink">{{ question ? 'Sửa câu trắc nghiệm' : 'Thêm câu trắc nghiệm' }}</h2>
+          <p class="mt-1 text-xs text-muted">Chọn đáp án đúng; chỉ số gửi API bắt đầu từ 0.</p>
         </div>
-        <button type="button" class="rounded-lg p-2 text-slate-400 hover:bg-slate-800" aria-label="Đóng" :disabled="busy" @click="emit('cancel')"><X class="h-4 w-4" /></button>
+        <button type="button" class="p-1.5 text-muted hover:bg-surface-2 hover:text-ink" aria-label="Đóng" :disabled="busy" @click="emit('cancel')"><X class="h-4 w-4" /></button>
       </div>
 
       <label class="manage-field mt-5">
-        Nội dung câu hỏi
+        <span>Nội dung câu hỏi</span>
         <textarea v-model="form.content" class="manage-input min-h-24" minlength="5" maxlength="500" />
       </label>
 
       <fieldset class="mt-5 space-y-2">
-        <legend class="mb-2 text-sm font-semibold text-slate-200">Phương án — chọn đáp án đúng</legend>
+        <legend class="mb-2 text-sm font-medium text-ink">Phương án — chọn đáp án đúng</legend>
         <div v-for="(_, index) in form.options" :key="index" class="flex items-center gap-2">
-          <input v-model.number="form.correctOption" type="radio" :value="index" :name="`correct-option-${question?.id ?? 'new'}`" :aria-label="`Chọn phương án ${index + 1} là đáp án đúng`" class="h-4 w-4 accent-cyan-400" />
+          <input v-model.number="form.correctOption" type="radio" :value="index" :name="`correct-option-${question?.id ?? 'new'}`" :aria-label="`Chọn phương án ${index + 1} là đáp án đúng`" class="h-4 w-4 accent-[#b11226]" />
           <label class="sr-only" :for="`quiz-option-${index}`">Phương án {{ index + 1 }}</label>
           <input :id="`quiz-option-${index}`" v-model="form.options[index]" class="manage-input" type="text" maxlength="200" :placeholder="`Phương án ${index + 1}`" />
           <button type="button" class="manage-icon-button text-rose-300" :disabled="form.options.length <= 2" :aria-label="`Xóa phương án ${index + 1}`" @click="removeOption(index)"><Trash2 class="h-4 w-4" /></button>
         </div>
-        <button type="button" class="inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-200 disabled:opacity-40" :disabled="form.options.length >= 6" @click="addOption"><Plus class="h-4 w-4" /> Thêm phương án</button>
+        <button type="button" class="inline-flex items-center gap-1.5 text-xs font-medium text-ink hover:text-brand-soft disabled:opacity-40" :disabled="form.options.length >= 6" @click="addOption"><Plus class="h-4 w-4" /> Thêm phương án</button>
       </fieldset>
 
       <label class="manage-field mt-5">
-        Giải thích đáp án
+        <span>Giải thích đáp án</span>
         <textarea v-model="form.explanation" class="manage-input min-h-24" minlength="5" maxlength="1000" />
       </label>
       <p v-if="error" class="manage-field-error mt-3" role="alert">{{ error }}</p>
-      <div class="mt-6 flex flex-col-reverse gap-2 border-t border-slate-800 pt-4 sm:flex-row sm:justify-end">
+      <div class="mt-6 flex flex-col-reverse gap-2 pt-4 sm:flex-row sm:justify-end">
         <button type="button" class="manage-button-secondary" :disabled="busy" @click="emit('cancel')">Hủy</button>
         <button type="submit" class="manage-button-primary" :disabled="busy || readOnly">{{ busy ? 'Đang lưu…' : 'Lưu câu hỏi' }}</button>
       </div>
@@ -114,5 +114,7 @@ function submit() {
 </template>
 
 <style scoped>
-.manage-dialog::backdrop { background: rgb(2 6 23 / 0.72); backdrop-filter: blur(4px); }
+.manage-dialog::backdrop {
+  background: rgb(15 23 42 / 0.55);
+}
 </style>
