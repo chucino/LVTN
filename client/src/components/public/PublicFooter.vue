@@ -25,6 +25,7 @@ function scrollToTop() {
             <li><router-link :to="{ name: 'Courses' }" class="transition-colors hover:text-white">Tất cả khóa học</router-link></li>
             <li><router-link :to="{ name: 'Courses', query: { type: 'FREE' } }" class="transition-colors hover:text-white">Khóa học miễn phí</router-link></li>
             <li><router-link :to="{ name: 'Courses', query: { type: 'PRO' } }" class="transition-colors hover:text-white">Khóa học Pro</router-link></li>
+            <li><router-link :to="{ name: 'CertificateVerify' }" class="transition-colors hover:text-white">Tra cứu chứng chỉ</router-link></li>
           </ul>
         </nav>
 

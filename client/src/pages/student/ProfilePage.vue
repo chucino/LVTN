@@ -3,6 +3,7 @@ import { computed, onBeforeUnmount, onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router';
 import {
   AlertCircle,
+  Award,
   BookOpen,
   Briefcase,
   Calendar,
@@ -15,14 +16,25 @@ import {
   KeyRound,
   Lock,
   Mail,
+  PlayCircle,
   Save,
   Trash2,
   UserRound,
 } from 'lucide-vue-next';
-import { useAuthStore } from '@/stores/auth.store';
-import { usersApi } from '@/services/users.api';
-import { uploadsApi } from '@/services/uploads.api';
+import CertificateCardView from '@/components/certificate/CertificateCardView.vue';
+import CourseCover from '@/components/course/CourseCover.vue';
+import { formatCourseDuration } from '@/lib/course-format';
+import { certificatesApi } from '@/services/certificates.api';
 import { coursesApi } from '@/services/courses.api';
+import { enrollmentsApi } from '@/services/enrollments.api';
+import { uploadsApi } from '@/services/uploads.api';
+import { usersApi } from '@/services/users.api';
+import { useAuthStore } from '@/stores/auth.store';
+import type {
+  CertificateItem,
+  EnrollmentStatus,
+  MyEnrolledCourseItem,
+} from '@/types/learning';
 import type { ProfileTab } from '@/types/user';
 
 const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
@@ -42,7 +54,9 @@ const authStore = useAuthStore();
 
 const activeTab = computed<ProfileTab>(() => {
   const tab = route.query.tab;
-  if (tab === 'courses' || tab === 'security') return tab;
+  if (tab === 'courses' || tab === 'certificates' || tab === 'security') {
+    return tab;
+  }
   return 'info';
 });
 
@@ -75,6 +89,19 @@ const showConfirmPassword = ref(false);
 const savingPassword = ref(false);
 const passwordSuccess = ref<string | null>(null);
 const passwordError = ref<string | null>(null);
+
+// Enrolled courses & certificates state
+const myCourses = ref<MyEnrolledCourseItem[]>([]);
+const coursesLoading = ref(false);
+const courseStatusFilter = ref<'ALL' | EnrollmentStatus>('ALL');
+const myCertificates = ref<CertificateItem[]>([]);
+const certificatesLoading = ref(false);
+const selectedCertificate = ref<CertificateItem | null>(null);
+
+const filteredMyCourses = computed(() => {
+  if (courseStatusFilter.value === 'ALL') return myCourses.value;
+  return myCourses.value.filter((item) => item.status === courseStatusFilter.value);
+});
 
 const roleLabel = computed(() => {
   switch (authStore.user?.role) {
@@ -117,6 +144,13 @@ function formatJoinDate(rawDate?: string | null): string {
   return `Tham gia từ ${parsed.toLocaleDateString('vi-VN')}`;
 }
 
+function formatShortDate(rawDate?: string | null): string {
+  if (!rawDate) return '';
+  const parsed = new Date(rawDate);
+  if (Number.isNaN(parsed.getTime())) return '';
+  return parsed.toLocaleDateString('vi-VN');
+}
+
 function revokeAvatarPreview() {
   if (localAvatarPreview.value) {
     URL.revokeObjectURL(localAvatarPreview.value);
@@ -145,12 +179,41 @@ function hydrateFormFromUser() {
     : [];
 }
 
+async function loadStudentLearningData(): Promise<void> {
+  if (authStore.user?.role !== 'STUDENT') return;
+  coursesLoading.value = true;
+  certificatesLoading.value = true;
+  try {
+    const [coursesData, certsData] = await Promise.all([
+      enrollmentsApi.getMyCourses().catch(() => []),
+      certificatesApi.getMyCertificates().catch(() => []),
+    ]);
+    myCourses.value = coursesData;
+    myCertificates.value = certsData;
+    if (certsData.length > 0 && !selectedCertificate.value) {
+      selectedCertificate.value = certsData[0] ?? null;
+    }
+  } finally {
+    coursesLoading.value = false;
+    certificatesLoading.value = false;
+  }
+}
+
 watch(
   () => authStore.user,
   () => {
     hydrateFormFromUser();
   },
   { immediate: true },
+);
+
+watch(
+  () => activeTab.value,
+  (tab) => {
+    if (tab === 'courses' || tab === 'certificates') {
+      void loadStudentLearningData();
+    }
+  },
 );
 
 onMounted(async () => {
@@ -169,6 +232,7 @@ onMounted(async () => {
       ]);
       categoryOptions.value = Array.from(merged);
     }
+    await loadStudentLearningData();
   } catch {
     // Fallback to existing authStore.user
   } finally {
@@ -411,7 +475,35 @@ async function handleChangePassword() {
           @click="selectTab('courses')"
         >
           <BookOpen class="h-4 w-4" />
-          Khóa học đã đăng ký
+          <span>Khóa học của tôi</span>
+          <span
+            v-if="myCourses.length > 0"
+            class="rounded-full bg-tint px-2 py-0.5 text-xs font-bold tabular-nums text-brand-soft"
+          >
+            {{ myCourses.length }}
+          </span>
+        </button>
+
+        <button
+          type="button"
+          role="tab"
+          :aria-selected="activeTab === 'certificates'"
+          class="inline-flex items-center gap-2 whitespace-nowrap px-4 py-2.5 text-sm font-medium transition-colors"
+          :class="
+            activeTab === 'certificates'
+              ? 'bg-surface-2 text-ink'
+              : 'text-muted hover:bg-surface hover:text-ink'
+          "
+          @click="selectTab('certificates')"
+        >
+          <Award class="h-4 w-4" />
+          <span>Chứng chỉ của tôi</span>
+          <span
+            v-if="myCertificates.length > 0"
+            class="rounded-full bg-teal-tint px-2 py-0.5 text-xs font-bold tabular-nums text-teal"
+          >
+            {{ myCertificates.length }}
+          </span>
         </button>
 
         <button
@@ -559,7 +651,7 @@ async function handleChangePassword() {
             <input
               v-model="profileForm.dateOfBirth"
               type="date"
-              class="manage-input [color-scheme:dark]"
+              class="manage-input"
             />
           </label>
 
@@ -622,19 +714,69 @@ async function handleChangePassword() {
             Theo dõi lộ trình và tiến độ hoàn thành các khóa học của bạn tại NextCode.
           </p>
         </div>
-        <router-link
-          :to="{ name: 'Courses' }"
-          class="manage-button-secondary text-xs"
-        >
-          <Compass class="h-4 w-4" />
-          Khám phá thêm khóa học
-        </router-link>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            class="px-3.5 py-2 text-xs font-semibold transition-colors"
+            :class="
+              courseStatusFilter === 'ALL'
+                ? 'bg-brand text-white'
+                : 'bg-ground text-ink hover:bg-surface-2'
+            "
+            @click="courseStatusFilter = 'ALL'"
+          >
+            Tất cả ({{ myCourses.length }})
+          </button>
+          <button
+            type="button"
+            class="px-3.5 py-2 text-xs font-semibold transition-colors"
+            :class="
+              courseStatusFilter === 'LEARNING'
+                ? 'bg-brand text-white'
+                : 'bg-ground text-ink hover:bg-surface-2'
+            "
+            @click="courseStatusFilter = 'LEARNING'"
+          >
+            Đang học
+          </button>
+          <button
+            type="button"
+            class="px-3.5 py-2 text-xs font-semibold transition-colors"
+            :class="
+              courseStatusFilter === 'COMPLETED'
+                ? 'bg-brand text-white'
+                : 'bg-ground text-ink hover:bg-surface-2'
+            "
+            @click="courseStatusFilter = 'COMPLETED'"
+          >
+            Đã hoàn thành
+          </button>
+          <router-link
+            :to="{ name: 'Courses' }"
+            class="manage-button-secondary text-xs"
+          >
+            <Compass class="h-4 w-4" />
+            Khám phá thêm
+          </router-link>
+        </div>
       </div>
 
-      <div class="flex flex-col items-center justify-center bg-ground px-6 py-14 text-center">
+      <div v-if="coursesLoading" class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div v-for="i in 3" :key="i" class="h-64 bg-ground" />
+      </div>
+
+      <div
+        v-else-if="filteredMyCourses.length === 0"
+        class="flex flex-col items-center justify-center bg-ground px-6 py-14 text-center"
+      >
         <BookOpen class="h-8 w-8 text-muted" />
         <h3 class="mt-4 text-base font-semibold text-ink">
-          Bạn chưa đăng ký khóa học nào
+          {{
+            myCourses.length === 0
+              ? 'Bạn chưa đăng ký khóa học nào'
+              : 'Không có khóa học nào trong bộ lọc này'
+          }}
         </h3>
         <p class="mt-2 max-w-md text-xs leading-5 text-muted sm:text-sm">
           Khi bạn đăng ký khóa học Miễn phí hoặc hoàn tất mua khóa học Pro, danh sách khóa học cùng thanh tiến độ học tập sẽ hiển thị tại đây.
@@ -647,9 +789,177 @@ async function handleChangePassword() {
           Xem danh sách khóa học
         </router-link>
       </div>
+
+      <div v-else class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <article
+          v-for="item in filteredMyCourses"
+          :key="item.enrollmentId"
+          class="flex flex-col justify-between overflow-hidden bg-ground"
+        >
+          <div>
+            <CourseCover :src="item.thumbnail" :title="item.title" />
+            <div class="p-5">
+              <div class="flex flex-wrap items-center gap-2 text-xs font-semibold">
+                <span
+                  class="rounded-full px-2.5 py-0.5"
+                  :class="
+                    item.type === 'FREE'
+                      ? 'bg-teal-tint text-teal'
+                      : 'bg-tint text-brand-soft'
+                  "
+                >
+                  {{ item.type === 'FREE' ? 'Miễn phí' : 'Pro' }}
+                </span>
+                <span
+                  class="rounded-full px-2.5 py-0.5"
+                  :class="
+                    item.status === 'COMPLETED'
+                      ? 'bg-teal-tint text-teal'
+                      : 'bg-surface-2 text-ink'
+                  "
+                >
+                  {{ item.status === 'COMPLETED' ? 'Đã hoàn thành' : 'Đang học' }}
+                </span>
+              </div>
+
+              <h3 class="mt-3 line-clamp-2 text-base font-bold text-ink">
+                <router-link
+                  :to="{ name: 'CourseDetail', params: { id: item.courseId } }"
+                  class="hover:text-brand-soft"
+                >
+                  {{ item.title }}
+                </router-link>
+              </h3>
+              <p class="mt-1 text-xs text-muted">
+                Giảng viên: {{ item.instructorName }}
+              </p>
+              <p class="mt-1 text-xs tabular-nums text-muted">
+                {{ item.totalLessons }} bài · {{ formatCourseDuration(item.totalDuration) }} · Đăng ký {{ formatShortDate(item.enrolledAt) }}
+              </p>
+
+              <!-- Thanh tiến độ -->
+              <div class="mt-4">
+                <div class="flex items-center justify-between text-xs font-semibold">
+                  <span class="text-muted">Tiến độ hoàn thành</span>
+                  <span class="tabular-nums text-ink">{{ item.progressPercent }}%</span>
+                </div>
+                <div class="mt-1.5 h-2 overflow-hidden rounded-full bg-surface-3">
+                  <div
+                    class="h-full rounded-full"
+                    :class="item.status === 'COMPLETED' ? 'bg-teal' : 'bg-brand'"
+                    :style="{ width: `${item.progressPercent}%` }"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between gap-2 bg-surface-2 px-5 py-3.5">
+            <router-link
+              :to="{
+                name: 'CourseLearning',
+                params: { courseId: item.courseId },
+                query: item.lastLessonId ? { lessonId: item.lastLessonId } : undefined,
+              }"
+              class="manage-button-primary flex-1 justify-center text-xs"
+            >
+              <PlayCircle class="h-4 w-4" />
+              <span>{{ item.status === 'COMPLETED' ? 'Xem lại bài giảng' : 'Học tiếp' }}</span>
+            </router-link>
+
+            <router-link
+              v-if="item.certificateCode"
+              :to="{
+                name: 'CertificateVerifyCode',
+                params: { code: item.certificateCode },
+              }"
+              class="manage-button-secondary text-xs"
+              title="Xem chứng chỉ"
+            >
+              <Award class="h-4 w-4 text-teal" />
+              <span>Chứng chỉ</span>
+            </router-link>
+          </div>
+        </article>
+      </div>
     </section>
 
-    <!-- Tab 3: Password & Security -->
+    <!-- Tab 3: My Certificates -->
+    <section
+      v-else-if="activeTab === 'certificates'"
+      class="mt-6 space-y-6 bg-surface p-6 sm:p-8"
+    >
+      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+        <div>
+          <h2 class="text-lg font-semibold text-ink">Chứng chỉ của tôi</h2>
+          <p class="mt-1 text-xs text-muted">
+            Chứng chỉ được cấp tự động khi bạn hoàn thành 100% bài giảng và bài kiểm tra trắc nghiệm của khóa học.
+          </p>
+        </div>
+
+        <router-link
+          :to="{ name: 'CertificateVerify' }"
+          class="manage-button-secondary text-xs"
+        >
+          <Award class="h-4 w-4" />
+          Trang tra cứu chứng chỉ công khai
+        </router-link>
+      </div>
+
+      <div
+        v-if="myCertificates.length === 0"
+        class="flex flex-col items-center justify-center bg-ground px-6 py-14 text-center"
+      >
+        <Award class="h-8 w-8 text-muted" />
+        <h3 class="mt-4 text-base font-semibold text-ink">
+          Bạn chưa có chứng chỉ nào
+        </h3>
+        <p class="mt-2 max-w-md text-xs leading-5 text-muted sm:text-sm">
+          Hãy hoàn thành 100% các bài giảng trong khóa học bạn đã đăng ký để nhận chứng chỉ kèm mã QR xác thực.
+        </p>
+        <button
+          type="button"
+          class="manage-button-primary mt-5"
+          @click="selectTab('courses')"
+        >
+          <BookOpen class="h-4 w-4" />
+          Đi tới Khóa học của tôi
+        </button>
+      </div>
+
+      <div v-else class="space-y-6">
+        <div class="flex flex-wrap gap-2">
+          <button
+            v-for="cert in myCertificates"
+            :key="cert.id"
+            type="button"
+            class="px-4 py-2.5 text-left text-xs transition-colors"
+            :class="
+              selectedCertificate?.id === cert.id
+                ? 'bg-brand font-semibold text-white'
+                : 'bg-ground text-ink hover:bg-surface-2'
+            "
+            @click="selectedCertificate = cert"
+          >
+            <span class="block">{{ cert.courseTitle }}</span>
+            <span class="mt-0.5 block text-[11px] tabular-nums opacity-80">
+              {{ cert.certificateCode }}
+            </span>
+          </button>
+        </div>
+
+        <CertificateCardView
+          v-if="selectedCertificate"
+          :certificate-code="selectedCertificate.certificateCode"
+          :student-name="selectedCertificate.studentName"
+          :course-title="selectedCertificate.courseTitle"
+          :instructor-name="selectedCertificate.instructorName"
+          :issued-at="selectedCertificate.issuedAt"
+        />
+      </div>
+    </section>
+
+    <!-- Tab 4: Password & Security -->
     <section
       v-else-if="activeTab === 'security'"
       class="mt-6 max-w-2xl"
@@ -751,7 +1061,7 @@ async function handleChangePassword() {
                 class="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-ink"
                 @click="showConfirmPassword = !showConfirmPassword"
               >
-                <EyeOff v-if="showNewPassword" class="h-4 w-4" />
+                <EyeOff v-if="showConfirmPassword" class="h-4 w-4" />
                 <Eye v-else class="h-4 w-4" />
               </button>
             </div>

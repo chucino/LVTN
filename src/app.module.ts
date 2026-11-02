@@ -10,6 +10,8 @@ import { MailModule } from './modules/mail/mail.module.js';
 import { AuthModule } from './modules/auth/auth.module.js';
 import { CoursesModule } from './modules/courses/courses.module.js';
 import { UploadsModule } from './modules/uploads/uploads.module.js';
+import { CertificatesModule } from './modules/certificates/certificates.module.js';
+import { EnrollmentsModule } from './modules/enrollments/enrollments.module.js';
 
 import { JwtAuthGuard } from './common/guards/jwt-auth.guard.js';
 import { HttpExceptionFilter } from './common/filters/http-exception.filter.js';
@@ -49,6 +51,8 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
     AuthModule,
     CoursesModule,
     UploadsModule,
+    CertificatesModule,
+    EnrollmentsModule,
   ],
   providers: [
     // Guard JWT mặc định toàn cục cho toàn bộ hệ thống (dùng @Public() để mở)

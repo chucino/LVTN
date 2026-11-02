@@ -2,25 +2,35 @@
 import { computed, onBeforeUnmount, ref, watch } from 'vue';
 import axios from 'axios';
 import {
+  Award,
   CheckCircle2,
   CircleHelp,
   PlayCircle,
 } from 'lucide-vue-next';
 import CourseCover from '@/components/course/CourseCover.vue';
-import { formatCourseDuration, formatCoursePrice, getCourseErrorMessage } from '@/lib/course-format';
+import {
+  formatCourseDuration,
+  formatCoursePrice,
+  getCourseErrorMessage,
+} from '@/lib/course-format';
 import { coursesApi } from '@/services/courses.api';
+import { enrollmentsApi } from '@/services/enrollments.api';
 import { useAuthStore } from '@/stores/auth.store';
 import type { CourseDetail } from '@/types/course';
+import type { EnrollmentStatusResponse } from '@/types/learning';
 import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const router = useRouter();
 const authStore = useAuthStore();
 const course = ref<CourseDetail | null>(null);
+const enrollmentStatus = ref<EnrollmentStatusResponse | null>(null);
 const loading = ref(true);
+const enrolling = ref(false);
 const error = ref<string | null>(null);
 const notFound = ref(false);
 const actionNotice = ref('');
+const actionError = ref('');
 let activeController: AbortController | null = null;
 let requestVersion = 0;
 
@@ -29,6 +39,24 @@ const currentPrice = computed(() => {
   return course.value.type === 'FREE'
     ? 'Miễn phí'
     : formatCoursePrice(course.value.discountPrice ?? course.value.price);
+});
+
+const isEnrolled = computed(() => Boolean(enrollmentStatus.value?.enrolled));
+const isStudent = computed(
+  () => !authStore.isAuthenticated || authStore.user?.role === 'STUDENT',
+);
+
+const primaryActionLabel = computed(() => {
+  if (!course.value) return 'Đăng ký học ngay';
+  if (enrolling.value) return 'Đang đăng ký...';
+  if (isEnrolled.value) {
+    return enrollmentStatus.value?.status === 'COMPLETED'
+      ? 'Xem lại bài học'
+      : 'Tiếp tục học ngay';
+  }
+  return course.value.type === 'FREE'
+    ? 'Đăng ký học ngay'
+    : 'Đăng ký khóa học Pro';
 });
 
 function instructorInitials(name: string): string {
@@ -50,17 +78,29 @@ async function loadCourse(id: string): Promise<void> {
   error.value = null;
   notFound.value = false;
   course.value = null;
+  enrollmentStatus.value = null;
   actionNotice.value = '';
+  actionError.value = '';
 
   try {
-    course.value = await coursesApi.getCourseById(id, controller.signal);
-    if (currentVersion === requestVersion && course.value) {
-      document.title = `${course.value.title} - NextCode`;
+    const [courseData, statusData] = await Promise.all([
+      coursesApi.getCourseById(id, controller.signal),
+      authStore.isAuthenticated
+        ? enrollmentsApi
+            .getEnrollmentStatus(id, controller.signal)
+            .catch(() => null)
+        : Promise.resolve(null),
+    ]);
+    if (currentVersion === requestVersion && courseData) {
+      course.value = courseData;
+      enrollmentStatus.value = statusData;
+      document.title = `${courseData.title} - NextCode`;
     }
   } catch (requestError) {
     if (currentVersion === requestVersion && !controller.signal.aborted) {
       notFound.value =
-        axios.isAxiosError(requestError) && requestError.response?.status === 404;
+        axios.isAxiosError(requestError) &&
+        requestError.response?.status === 404;
       error.value = getCourseErrorMessage(requestError);
     }
   } finally {
@@ -68,18 +108,59 @@ async function loadCourse(id: string): Promise<void> {
   }
 }
 
-function handleCourseAction(): void {
+async function handleCourseAction(): Promise<void> {
+  if (!course.value) return;
+  actionNotice.value = '';
+  actionError.value = '';
+
   if (!authStore.isAuthenticated) {
-    void router.push({
+    await router.push({
       name: 'Login',
       query: { redirect: route.fullPath },
     });
     return;
   }
-  actionNotice.value =
-    course.value?.type === 'FREE'
-      ? 'Đã ghi nhận yêu cầu đăng ký học của bạn.'
-      : 'Chức năng thanh toán giáo trình Pro sẽ sớm mở.';
+
+  if (authStore.user?.role !== 'STUDENT') {
+    actionError.value =
+      'Chỉ tài khoản Học viên mới có thể đăng ký học khóa học.';
+    return;
+  }
+
+  // Nếu đã đăng ký -> chuyển thẳng vào giao diện học tập
+  if (isEnrolled.value) {
+    await router.push({
+      name: 'CourseLearning',
+      params: { courseId: course.value.id },
+      query: enrollmentStatus.value?.lastLessonId
+        ? { lessonId: enrollmentStatus.value.lastLessonId }
+        : undefined,
+    });
+    return;
+  }
+
+  if (course.value.type === 'PRO') {
+    actionNotice.value =
+      'Khóa học Pro yêu cầu tạo đơn hàng và thanh toán. Chức năng thanh toán QR đang được tích hợp.';
+    return;
+  }
+
+  // Khóa học FREE -> Gọi API đăng ký và chuyển thẳng vào phòng học
+  enrolling.value = true;
+  try {
+    const overview = await enrollmentsApi.enrollCourse(course.value.id);
+    await router.push({
+      name: 'CourseLearning',
+      params: { courseId: course.value.id },
+      query: overview.lastLessonId
+        ? { lessonId: overview.lastLessonId }
+        : undefined,
+    });
+  } catch (err) {
+    actionError.value = getCourseErrorMessage(err);
+  } finally {
+    enrolling.value = false;
+  }
 }
 
 watch(
@@ -265,22 +346,70 @@ onBeforeUnmount(() => {
                   </p>
                 </div>
 
+                <!-- Tiến độ nếu học viên đã đăng ký -->
+                <div
+                  v-if="isEnrolled && enrollmentStatus"
+                  class="mt-4 bg-ground p-4"
+                >
+                  <div class="flex items-center justify-between text-xs font-semibold text-ink">
+                    <span>
+                      {{
+                        enrollmentStatus.status === 'COMPLETED'
+                          ? 'Đã hoàn thành khóa học'
+                          : 'Đang theo học'
+                      }}
+                    </span>
+                    <span class="tabular-nums text-brand-soft">
+                      {{ enrollmentStatus.progressPercent }}%
+                    </span>
+                  </div>
+                  <div class="mt-2 h-2 overflow-hidden rounded-full bg-surface-3">
+                    <div
+                      class="h-full rounded-full bg-teal"
+                      :style="{ width: `${enrollmentStatus.progressPercent}%` }"
+                    />
+                  </div>
+                  <router-link
+                    v-if="enrollmentStatus.certificateCode"
+                    :to="{
+                      name: 'CertificateVerifyCode',
+                      params: { code: enrollmentStatus.certificateCode },
+                    }"
+                    class="mt-3 inline-flex items-center gap-1.5 text-xs font-semibold text-teal hover:underline"
+                  >
+                    <Award class="h-4 w-4" />
+                    <span>Chứng chỉ: {{ enrollmentStatus.certificateCode }}</span>
+                  </router-link>
+                </div>
+
                 <button
+                  v-if="isStudent"
                   type="button"
+                  :disabled="enrolling"
                   class="manage-button-primary mt-5 w-full !min-h-12 text-base"
                   @click="handleCourseAction"
                 >
-                  {{ course.type === 'FREE' ? 'Đăng ký học ngay' : 'Đăng ký khóa học Pro' }}
+                  {{ primaryActionLabel }}
                 </button>
+                <router-link
+                  v-else
+                  :to="{ name: 'ManageCourseEdit', params: { id: course.id } }"
+                  class="manage-button-secondary mt-5 flex w-full !min-h-12 items-center justify-center text-base"
+                >
+                  Quản lý khóa học này
+                </router-link>
 
                 <p v-if="actionNotice" class="mt-3 text-sm text-brand-soft" role="status">
                   {{ actionNotice }}
+                </p>
+                <p v-if="actionError" class="mt-3 text-sm text-brand-soft" role="alert">
+                  {{ actionError }}
                 </p>
 
                 <ul class="mt-5 space-y-2.5 text-sm text-muted">
                   <li class="flex items-center gap-2.5"><PlayCircle class="h-4 w-4 text-brand-soft" /> {{ course.totalLessons }} bài giảng video</li>
                   <li class="flex items-center gap-2.5"><CircleHelp class="h-4 w-4 text-brand-soft" /> Trắc nghiệm theo từng bài</li>
-                  <li class="flex items-center gap-2.5"><CheckCircle2 class="h-4 w-4 text-brand-soft" /> Học mọi lúc, trên mọi thiết bị</li>
+                  <li class="flex items-center gap-2.5"><CheckCircle2 class="h-4 w-4 text-brand-soft" /> Học tuần tự & nhận chứng chỉ khi hoàn thành</li>
                 </ul>
 
                 <div class="mt-6 bg-surface-2 p-4">

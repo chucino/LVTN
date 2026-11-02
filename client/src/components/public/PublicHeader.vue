@@ -2,6 +2,7 @@
 import { computed, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import {
+  Award,
   BookOpen,
   ChevronDown,
   KeyRound,
@@ -103,8 +104,10 @@ async function submitSearch() {
         >
           Giáo trình & Khóa học
         </router-link>
+        <router-link :to="{ name: 'CertificateVerify' }" class="transition-colors hover:text-ink">
+          Tra cứu chứng chỉ
+        </router-link>
         <a href="/#lo-trinh" class="transition-colors hover:text-ink">Cách học</a>
-        <a href="/#bang-gia" class="transition-colors hover:text-ink">Học phí</a>
         <a href="/#hoi-dap" class="transition-colors hover:text-ink">Hỏi đáp</a>
       </nav>
 
@@ -194,6 +197,13 @@ async function submitSearch() {
                 <BookOpen class="h-4 w-4 text-ink" /> Khóa học của tôi
               </router-link>
               <router-link
+                :to="{ name: 'Profile', query: { tab: 'certificates' } }"
+                class="account-menu-item hover:bg-surface-2 hover:text-ink"
+                @click="closeDropdown"
+              >
+                <Award class="h-4 w-4 text-teal" /> Chứng chỉ của tôi
+              </router-link>
+              <router-link
                 :to="{ name: 'Profile', query: { tab: 'security' } }"
                 class="account-menu-item hover:bg-surface-2 hover:text-ink"
                 @click="closeDropdown"
@@ -260,8 +270,14 @@ async function submitSearch() {
         >
           Giáo trình & Khóa học
         </router-link>
+        <router-link
+          :to="{ name: 'CertificateVerify' }"
+          class="mobile-nav-link"
+          @click="mobileMenuOpen = false"
+        >
+          Tra cứu chứng chỉ
+        </router-link>
         <a href="/#lo-trinh" class="mobile-nav-link" @click="mobileMenuOpen = false">Cách học</a>
-        <a href="/#bang-gia" class="mobile-nav-link" @click="mobileMenuOpen = false">Học phí</a>
         <a href="/#hoi-dap" class="mobile-nav-link" @click="mobileMenuOpen = false">Hỏi đáp</a>
       </nav>
 
@@ -293,6 +309,13 @@ async function submitSearch() {
           @click="mobileMenuOpen = false"
         >
           <BookOpen class="h-4 w-4" /> Khóa học của tôi
+        </router-link>
+        <router-link
+          :to="{ name: 'Profile', query: { tab: 'certificates' } }"
+          class="mobile-nav-link flex items-center gap-2 text-ink"
+          @click="mobileMenuOpen = false"
+        >
+          <Award class="h-4 w-4" /> Chứng chỉ của tôi
         </router-link>
         <router-link
           :to="{ name: 'Profile', query: { tab: 'security' } }"

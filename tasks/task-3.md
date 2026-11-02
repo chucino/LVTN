@@ -1,0 +1,55 @@
+# Task Log 3
+
+## [x] #021 - Xây dựng Backend cho đăng ký khóa học, học tuần tự, làm trắc nghiệm và cấp chứng chỉ
+- Bắt đầu: 2026-11-02 15:38
+- Mục tiêu: Xây dựng hoàn chỉnh phần Backend cho luồng đăng ký khóa học (Free đăng ký học ngay, Pro chặn đăng ký trực tiếp và cung cấp hàm dịch vụ cho đơn hàng hoàn tất), mở bài tuần tự (`Enrollment`, `LessonProgress`), lưu vị trí đang xem video, kiểm tra điều kiện làm trắc nghiệm sau video (`QuizAttempt`, quy tắc 100% với bài 1 câu và >= 70% với bài nhiều câu), và tự động cấp chứng chỉ (`Certificate`) khi hoàn thành 100% bài học.
+- Phạm vi dự kiến:
+  - src/common/constants/learning.enum.ts (mới)
+  - src/modules/certificates/schemas/certificate.schema.ts (mới)
+  - src/modules/certificates/dto/certificate-response.dto.ts (mới)
+  - src/modules/certificates/certificates.service.ts (mới)
+  - src/modules/certificates/certificates.controller.ts (mới)
+  - src/modules/certificates/certificates.module.ts (mới)
+  - src/modules/enrollments/schemas/enrollment.schema.ts (mới)
+  - src/modules/enrollments/schemas/lesson-progress.schema.ts (mới)
+  - src/modules/enrollments/schemas/quiz-attempt.schema.ts (mới)
+  - src/modules/enrollments/dto/update-lesson-progress.dto.ts (mới)
+  - src/modules/enrollments/dto/submit-quiz.dto.ts (mới)
+  - src/modules/enrollments/dto/enrollment-response.dto.ts (mới)
+  - src/modules/enrollments/enrollments.service.ts (mới)
+  - src/modules/enrollments/enrollments.controller.ts (mới)
+  - src/modules/enrollments/enrollments.module.ts (mới)
+  - src/modules/enrollments/enrollments.service.spec.ts (mới)
+  - src/app.module.ts
+- Backup đã tạo:
+  - backup/src/app.module.ts.20261102-1538.bak
+- Hoàn thành: 2026-11-02 15:45
+- Tóm tắt thay đổi: Hoàn thiện `EnrollmentsModule` và `CertificatesModule` với đầy đủ 9 REST API endpoints, kiểm soát quyền `STUDENT`, mở bài tuần tự (`LOCKED` -> `UNLOCKED` -> `COMPLETED`), lưu tiến độ xem video (`lastPositionSec`, `watchedFully`), mở khóa câu hỏi trắc nghiệm sau khi xem hết video, chấm điểm trắc nghiệm (100% cho bài 1 câu, >= 70% cho bài nhiều câu), lưu `QuizAttempt`, và tự động cấp `Certificate` (mã không tuần tự `NC-YYYY-XXXXXXXX` + tra cứu công khai) khi học viên hoàn thành 100% khóa học. Pass 100% unit test (`vitest`), `nest build` và `oxlint` (`0 warnings, 0 errors`).
+
+## [x] #022 - Thiết kế và xây dựng giao diện đăng ký khóa học, màn hình học tập tuần tự 7/3 và hệ thống chứng chỉ
+- Bắt đầu: 2026-11-02 16:37
+- Mục tiêu: Xây dựng toàn bộ giao diện Frontend kết nối với Backend cho chức năng đăng ký khóa học (`CourseDetailPage.vue`), màn hình học tập bố cục 7/3 (`CourseLearningPage.vue`, `LessonVideoPlayer.vue` tự động mở khóa khi phát hết 100% thời lượng video HTML5 / YouTube IFrame API, `LessonQuizPanel.vue`), nâng cấp tab "Khóa học của tôi" & "Chứng chỉ của tôi" trong `ProfilePage.vue`, cùng giao diện chứng chỉ trực quan (`CertificateCardView.vue` kèm QR + xuất PDF) và trang tra cứu chứng chỉ công khai (`CertificateVerifyPage.vue`).
+- Phạm vi dự kiến:
+  - client/src/types/learning.ts (mới)
+  - client/src/types/user.ts
+  - client/src/services/enrollments.api.ts (mới)
+  - client/src/services/certificates.api.ts (mới)
+  - client/src/components/learning/LessonVideoPlayer.vue (mới)
+  - client/src/components/learning/LessonQuizPanel.vue (mới)
+  - client/src/components/certificate/CertificateCardView.vue (mới)
+  - client/src/pages/student/CourseLearningPage.vue (mới)
+  - client/src/pages/public/CertificateVerifyPage.vue (mới)
+  - client/src/pages/public/CourseDetailPage.vue
+  - client/src/pages/student/ProfilePage.vue
+  - client/src/components/public/PublicHeader.vue
+  - client/src/components/public/PublicFooter.vue
+  - client/src/router/index.ts
+- Backup đã tạo:
+  - backup/client/src/router/index.ts.20261102-1637.bak
+  - backup/client/src/types/user.ts.20261102-1637.bak
+  - backup/client/src/pages/public/CourseDetailPage.vue.20261102-1637.bak
+  - backup/client/src/pages/student/ProfilePage.vue.20261102-1637.bak
+  - backup/client/src/components/public/PublicHeader.vue.20261102-1637.bak
+  - backup/client/src/components/public/PublicFooter.vue.20261102-1637.bak
+- Hoàn thành: 2026-11-02 16:47
+- Tóm tắt thay đổi: Hoàn thiện toàn bộ giao diện Frontend cho luồng đăng ký học, màn hình học tập tuần tự bố cục 7/3 (`CourseLearningPage.vue`), trình phát video thông minh (`LessonVideoPlayer.vue`) tự động đồng bộ `watchedFully = true` khi kết thúc 100% thời lượng phát (cả HTML5 `<video>` và YouTube IFrame Player API, không có nút đánh dấu thủ công), khu vực làm trắc nghiệm (`LessonQuizPanel.vue`) hiển thị điểm và giải thích chi tiết từng câu, chứng chỉ kỹ thuật số (`CertificateCardView.vue` kèm mã QR SVG và nút In/Tải PDF), trang tra cứu chứng chỉ công khai (`CertificateVerifyPage.vue`), và nâng cấp `ProfilePage.vue` với tab "Khóa học của tôi" & "Chứng chỉ của tôi" kết nối API thực tế. Vượt qua kiểm tra `lint.mjs` (`0 FAIL`) và `npm run build` (`vue-tsc -b && vite build`).

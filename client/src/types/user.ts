@@ -1,6 +1,6 @@
 import type { Role, User, UserStatus } from '@/types/auth';
 
-export type ProfileTab = 'info' | 'courses' | 'security';
+export type ProfileTab = 'info' | 'courses' | 'certificates' | 'security';
 
 export interface UpdateProfilePayload {
   fullName?: string;
@@ -52,4 +52,3 @@ export interface CreateManageUserPayload {
   occupation?: string;
   dateOfBirth?: string;
 }
-

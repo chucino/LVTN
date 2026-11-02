@@ -27,12 +27,34 @@ const routes: RouteRecordRaw[] = [
         meta: { title: 'Chi tiết khóa học - NextCode' },
       },
       {
+        path: 'certificates/verify',
+        name: 'CertificateVerify',
+        component: () => import('@/pages/public/CertificateVerifyPage.vue'),
+        meta: { title: 'Tra cứu chứng chỉ - NextCode' },
+      },
+      {
+        path: 'certificates/verify/:code',
+        name: 'CertificateVerifyCode',
+        component: () => import('@/pages/public/CertificateVerifyPage.vue'),
+        meta: { title: 'Xác thực chứng chỉ - NextCode' },
+      },
+      {
         path: 'profile',
         name: 'Profile',
         component: () => import('@/pages/student/ProfilePage.vue'),
         meta: { requiresAuth: true, title: 'Hồ sơ cá nhân - NextCode' },
       },
     ],
+  },
+  {
+    path: '/learn/:courseId',
+    name: 'CourseLearning',
+    component: () => import('@/pages/student/CourseLearningPage.vue'),
+    meta: {
+      requiresAuth: true,
+      roles: ['STUDENT'] as Role[],
+      title: 'Phòng học trực tuyến - NextCode',
+    },
   },
   {
     path: '/login',
