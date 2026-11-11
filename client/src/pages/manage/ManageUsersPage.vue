@@ -380,7 +380,7 @@ async function submitCreateUser() {
         <label class="relative sm:col-span-2">
           <span class="sr-only">Tìm theo họ tên hoặc email</span>
           <Search
-            class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted"
+            class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted"
           />
           <input
             v-model="keyword"

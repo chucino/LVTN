@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import {
   Award,
@@ -14,11 +14,15 @@ import {
   X,
 } from 'lucide-vue-next';
 import { useAuthStore } from '@/stores/auth.store';
+import { coursesApi } from '@/services/courses.api';
+import type { CourseCard } from '@/types/course';
 
 const authStore = useAuthStore();
 const router = useRouter();
 const route = useRoute();
 const accountDetailsRef = ref<HTMLDetailsElement | null>(null);
+const desktopSearchRef = ref<HTMLElement | null>(null);
+const mobileSearchRef = ref<HTMLElement | null>(null);
 const isStudent = computed(() => authStore.user?.role === 'STUDENT');
 const canAccessDashboard = computed(
   () => authStore.user?.role === 'INSTRUCTOR' || authStore.user?.role === 'ADMIN',
@@ -26,9 +30,19 @@ const canAccessDashboard = computed(
 const avatarLoadError = ref(false);
 const mobileMenuOpen = ref(false);
 const searchValue = ref('');
+const suggestions = ref<CourseCard[]>([]);
+const loadingSuggestions = ref(false);
+const showSuggestions = ref(false);
+const highlightedIndex = ref(-1);
+
+let suggestionTimer: ReturnType<typeof setTimeout> | undefined;
+let suggestionController: AbortController | null = null;
+
 const isCourseRoute = computed(
   () => route.name === 'Courses' || route.name === 'CourseDetail',
 );
+const isCoursesListingPage = computed(() => route.name === 'Courses');
+const trimmedKeyword = computed(() => searchValue.value.trim());
 
 watch(
   () => authStore.user?.avatar,
@@ -52,8 +66,46 @@ watch(
       accountDetailsRef.value.open = false;
     }
     mobileMenuOpen.value = false;
+    closeSuggestions();
   },
 );
+
+watch(searchValue, (val) => {
+  if (suggestionTimer) clearTimeout(suggestionTimer);
+  suggestionController?.abort();
+
+  const kw = val.trim();
+  highlightedIndex.value = -1;
+
+  if (!kw || isCoursesListingPage.value) {
+    suggestions.value = [];
+    loadingSuggestions.value = false;
+    return;
+  }
+
+  loadingSuggestions.value = true;
+  suggestionTimer = setTimeout(async () => {
+    const controller = new AbortController();
+    suggestionController = controller;
+    try {
+      const res = await coursesApi.getCourses(
+        { keyword: kw, limit: 8, sort: 'newest' },
+        controller.signal,
+      );
+      if (!controller.signal.aborted) {
+        suggestions.value = res.items;
+      }
+    } catch {
+      if (!controller.signal.aborted) {
+        suggestions.value = [];
+      }
+    } finally {
+      if (!controller.signal.aborted) {
+        loadingSuggestions.value = false;
+      }
+    }
+  }, 220);
+});
 
 const initials = computed(() =>
   (authStore.user?.fullName ?? 'NextCode')
@@ -70,6 +122,41 @@ function closeDropdown() {
   }
 }
 
+function openSuggestions() {
+  if (trimmedKeyword.value) {
+    showSuggestions.value = true;
+  }
+}
+
+function closeSuggestions() {
+  showSuggestions.value = false;
+  highlightedIndex.value = -1;
+}
+
+function onSearchInput() {
+  showSuggestions.value = Boolean(trimmedKeyword.value);
+}
+
+function handleDocumentClick(event: MouseEvent) {
+  const target = event.target as Node | null;
+  if (!target) return;
+  const inDesktop = desktopSearchRef.value?.contains(target) ?? false;
+  const inMobile = mobileSearchRef.value?.contains(target) ?? false;
+  if (!inDesktop && !inMobile) {
+    closeSuggestions();
+  }
+}
+
+onMounted(() => {
+  document.addEventListener('mousedown', handleDocumentClick);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener('mousedown', handleDocumentClick);
+  if (suggestionTimer) clearTimeout(suggestionTimer);
+  suggestionController?.abort();
+});
+
 async function logout() {
   closeDropdown();
   await authStore.logout();
@@ -78,7 +165,8 @@ async function logout() {
 }
 
 async function submitSearch() {
-  const keyword = searchValue.value.trim();
+  const keyword = trimmedKeyword.value;
+  closeSuggestions();
   const query =
     route.name === 'Courses'
       ? { ...route.query, keyword: keyword || undefined, page: undefined }
@@ -86,6 +174,42 @@ async function submitSearch() {
 
   await router.push({ name: 'Courses', query });
   mobileMenuOpen.value = false;
+}
+
+async function selectCourseSuggestion(course: CourseCard) {
+  closeSuggestions();
+  mobileMenuOpen.value = false;
+  await router.push({ name: 'CourseDetail', params: { id: course.id } });
+}
+
+function onSearchKeydown(event: KeyboardEvent) {
+  if (!showSuggestions.value || !trimmedKeyword.value) {
+    if (event.key === 'ArrowDown' && trimmedKeyword.value) {
+      showSuggestions.value = true;
+    }
+    return;
+  }
+
+  const maxIndex = suggestions.value.length; // 0 = "Tìm khóa học ...", 1..N = suggestions
+  if (event.key === 'ArrowDown') {
+    event.preventDefault();
+    highlightedIndex.value =
+      highlightedIndex.value < maxIndex ? highlightedIndex.value + 1 : 0;
+  } else if (event.key === 'ArrowUp') {
+    event.preventDefault();
+    highlightedIndex.value =
+      highlightedIndex.value > 0 ? highlightedIndex.value - 1 : maxIndex;
+  } else if (event.key === 'Enter') {
+    if (highlightedIndex.value > 0) {
+      const selected = suggestions.value[highlightedIndex.value - 1];
+      if (selected) {
+        event.preventDefault();
+        void selectCourseSuggestion(selected);
+      }
+    }
+  } else if (event.key === 'Escape') {
+    closeSuggestions();
+  }
 }
 </script>
 
@@ -128,24 +252,86 @@ async function submitSearch() {
         <a href="/#hoi-dap" class="whitespace-nowrap transition-colors hover:text-ink">Hỏi đáp</a>
       </nav>
 
-      <form
-        class="ml-auto hidden w-full max-w-[220px] items-center gap-2 rounded-full bg-surface-2 px-3.5 py-2 text-muted xl:flex xl:max-w-[260px]"
-        role="search"
-        @submit.prevent="submitSearch"
+      <!-- Desktop Search with Autocomplete Dropdown -->
+      <div
+        v-if="!isCoursesListingPage"
+        ref="desktopSearchRef"
+        class="relative ml-auto hidden w-full max-w-[230px] xl:block xl:max-w-[270px]"
       >
-        <button type="submit" class="text-muted transition-colors hover:text-ink" aria-label="Tìm kiếm">
-          <Search class="h-4 w-4 shrink-0" />
-        </button>
-        <input
-          v-model="searchValue"
-          aria-label="Tìm kiếm khóa học"
-          type="search"
-          placeholder="Tìm theo chủ đề..."
-          class="min-w-0 flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-muted"
-        />
-      </form>
+        <form
+          data-ui class="flex w-full items-center gap-2 rounded-full border border-surface-3 bg-surface-2 px-3.5 py-2 text-muted transition-colors focus-within:border-brand focus-within:bg-surface"
+          role="search"
+          @submit.prevent="submitSearch"
+        >
+          <button type="submit" class="text-muted transition-colors hover:text-ink" aria-label="Tìm kiếm">
+            <Search class="h-4 w-4 shrink-0" />
+          </button>
+          <input
+            v-model="searchValue"
+            aria-label="Tìm kiếm khóa học"
+            type="search"
+            autocomplete="off"
+            placeholder="Tìm theo chủ đề..."
+            class="min-w-0 flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-muted"
+            @focus="openSuggestions"
+            @input="onSearchInput"
+            @keydown="onSearchKeydown"
+          />
+        </form>
 
-      <div v-if="!authStore.isAuthenticated" class="ml-auto hidden shrink-0 items-center gap-3 lg:flex xl:ml-0">
+        <!-- Suggestions Dropdown -->
+        <div
+          v-if="showSuggestions && trimmedKeyword"
+          data-ui class="absolute right-0 top-[calc(100%+6px)] z-50 w-[360px] border border-surface-3 bg-surface py-1.5"
+          role="listbox"
+          aria-label="Gợi ý khóa học"
+        >
+          <button
+            type="button"
+            data-ui class="flex w-full items-center gap-2.5 border-b border-surface-3 px-3.5 py-2.5 text-left text-sm text-ink transition-colors hover:bg-surface-2"
+            :class="highlightedIndex === 0 ? 'bg-surface-2' : ''"
+            @click="submitSearch"
+          >
+            <BookOpen class="h-4 w-4 shrink-0 text-brand-soft" />
+            <span class="truncate">
+              Tìm khóa học "<strong class="font-semibold text-brand-soft">{{ trimmedKeyword }}</strong>"
+            </span>
+          </button>
+
+          <div v-if="loadingSuggestions && suggestions.length === 0" class="px-3.5 py-3 text-xs text-muted">
+            Đang tìm khóa học phù hợp...
+          </div>
+
+          <template v-else-if="suggestions.length > 0">
+            <button
+              v-for="(course, idx) in suggestions"
+              :key="course.id"
+              type="button"
+              class="flex w-full items-center justify-between gap-3 px-3.5 py-2.5 text-left text-sm text-ink transition-colors hover:bg-surface-2"
+              :class="highlightedIndex === idx + 1 ? 'bg-surface-2' : ''"
+              @click="selectCourseSuggestion(course)"
+            >
+              <span class="truncate">{{ course.title }}</span>
+              <span
+                class="shrink-0 px-2 py-0.5 text-[11px] font-medium"
+                :class="course.type === 'FREE' ? 'bg-teal-tint text-teal' : 'bg-tint text-brand-soft'"
+              >
+                {{ course.type === 'FREE' ? 'Miễn phí' : 'Pro' }}
+              </span>
+            </button>
+          </template>
+
+          <p v-else class="px-3.5 py-2.5 text-xs text-muted">
+            Nhấn Enter để tìm tất cả kết quả cho "{{ trimmedKeyword }}"
+          </p>
+        </div>
+      </div>
+
+      <div
+        v-if="!authStore.isAuthenticated"
+        class="ml-auto hidden shrink-0 items-center gap-3 lg:flex"
+        :class="isCoursesListingPage ? '' : 'xl:ml-0'"
+      >
         <router-link
           to="/login"
           class="whitespace-nowrap px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-ink"
@@ -160,7 +346,11 @@ async function submitSearch() {
         </router-link>
       </div>
 
-      <div v-else class="ml-auto hidden shrink-0 items-center gap-3 lg:flex xl:ml-0">
+      <div
+        v-else
+        class="ml-auto hidden shrink-0 items-center gap-3 lg:flex"
+        :class="isCoursesListingPage ? '' : 'xl:ml-0'"
+      >
         <details ref="accountDetailsRef" class="relative" data-ui>
           <summary
             aria-label="Mở menu tài khoản"
@@ -257,22 +447,67 @@ async function submitSearch() {
     </div>
 
     <div v-if="mobileMenuOpen" class="bg-surface px-[var(--margin)] pb-6 pt-4 lg:hidden">
-      <form
-        class="mb-4 flex items-center gap-2 bg-surface-2 px-3.5 py-2.5 text-muted"
-        role="search"
-        @submit.prevent="submitSearch"
+      <div
+        v-if="!isCoursesListingPage"
+        ref="mobileSearchRef"
+        class="relative mb-4"
       >
-        <button type="submit" aria-label="Tìm kiếm">
-          <Search class="h-4 w-4" />
-        </button>
-        <input
-          v-model="searchValue"
-          aria-label="Tìm kiếm khóa học"
-          type="search"
-          placeholder="Tìm theo chủ đề..."
-          class="min-w-0 flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-muted"
-        />
-      </form>
+        <form
+          data-ui class="flex items-center gap-2 border border-surface-3 bg-surface-2 px-3.5 py-2.5 text-muted focus-within:border-brand focus-within:bg-surface"
+          role="search"
+          @submit.prevent="submitSearch"
+        >
+          <button type="submit" aria-label="Tìm kiếm">
+            <Search class="h-4 w-4" />
+          </button>
+          <input
+            v-model="searchValue"
+            aria-label="Tìm kiếm khóa học"
+            type="search"
+            autocomplete="off"
+            placeholder="Tìm theo chủ đề..."
+            class="min-w-0 flex-1 bg-transparent text-sm text-ink outline-none placeholder:text-muted"
+            @focus="openSuggestions"
+            @input="onSearchInput"
+            @keydown="onSearchKeydown"
+          />
+        </form>
+
+        <!-- Mobile Suggestions Dropdown -->
+        <div
+          v-if="showSuggestions && trimmedKeyword"
+          data-ui class="mt-1 border border-surface-3 bg-surface py-1"
+          role="listbox"
+          aria-label="Gợi ý khóa học"
+        >
+          <button
+            type="button"
+            data-ui class="flex w-full items-center gap-2.5 border-b border-surface-3 px-3.5 py-2.5 text-left text-sm text-ink hover:bg-surface-2"
+            @click="submitSearch"
+          >
+            <BookOpen class="h-4 w-4 shrink-0 text-brand-soft" />
+            <span class="truncate">
+              Tìm khóa học "<strong class="font-semibold text-brand-soft">{{ trimmedKeyword }}</strong>"
+            </span>
+          </button>
+          <button
+            v-for="course in suggestions"
+            :key="course.id"
+            type="button"
+            class="flex w-full items-center justify-between gap-2 px-3.5 py-2.5 text-left text-sm text-ink hover:bg-surface-2"
+            @click="selectCourseSuggestion(course)"
+          >
+            <span class="truncate">{{ course.title }}</span>
+            <span
+              class="shrink-0 px-2 py-0.5 text-[11px] font-medium"
+              :class="course.type === 'FREE' ? 'bg-teal-tint text-teal' : 'bg-tint text-brand-soft'"
+            >
+              {{ course.type === 'FREE' ? 'Miễn phí' : 'Pro' }}
+            </span>
+          </button>
+        </div>
+      </div>
+
       <nav class="flex flex-col gap-1 text-base text-ink" aria-label="Điều hướng di động">
         <router-link to="/" class="mobile-nav-link" @click="mobileMenuOpen = false">Trang chủ</router-link>
         <router-link

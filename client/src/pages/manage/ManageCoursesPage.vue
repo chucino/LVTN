@@ -254,7 +254,7 @@ const hasFilters = computed(
       <div class="grid gap-3 p-4 sm:grid-cols-2 sm:p-5 xl:grid-cols-5">
         <label class="relative sm:col-span-2 xl:col-span-2">
           <span class="sr-only">Tìm theo tên khóa học</span>
-          <Search class="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
+          <Search class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
           <input v-model="keyword" type="search" maxlength="100" class="manage-input pl-10" placeholder="Tìm tên khóa học…" />
         </label>
         <label>

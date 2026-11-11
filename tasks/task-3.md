@@ -138,3 +138,44 @@
   - backup/client/src/layouts/ManageLayout.vue.20261112-0046.bak
 - Hoàn thành: 2026-11-12 00:48
 - Tóm tắt thay đổi: Tinh gọn `ManageLayout.vue` cho cả Admin và Giảng viên: xóa hộp giới thiệu "NextCode Admin / Instructor Studio" ở đầu thanh bên trái, gỡ bỏ hai mục trùng lặp "Hồ sơ cá nhân" và "Về trang chủ" ở đáy thanh bên trái (giữ lại cụm tên tài khoản mở Hồ sơ cá nhân và nút "Trang chủ" trên thanh điều hướng Header), đồng thời dời nút "Đăng xuất" từ thanh điều hướng Header xuống vị trí cuối cùng bên trái của Sidebar kèm nhãn "Đăng xuất" rõ ràng. Vượt qua kiểm tra `lint.mjs` (`0 FAIL`) và `npm run build`.
+
+
+## [x] #028 - Sửa lỗi icon tìm kiếm và icon trong ô nhập liệu bị đè lên chữ trên trang quản trị
+- Bắt đầu: 2026-11-12 01:21
+- Mục tiêu: Khắc phục triệt để lỗi CSS Specificity trong `client/src/style.css` khiến `.manage-input` ghi đè các class `pl-10`, `pl-11`, `pr-10`, `pr-11` của Tailwind v4 làm icon kính lúp/ổ khóa đè lên chữ bên trong ô nhập liệu; đồng thời chuẩn hóa toàn bộ các ô tìm kiếm trong khu vực quản trị (`ManageCoursesPage.vue`, `ManageUsersPage.vue`, `ManageCourseStudentsPage.vue`).
+- Phạm vi dự kiến:
+  - client/src/style.css
+  - client/src/pages/manage/ManageCoursesPage.vue
+  - client/src/pages/manage/ManageUsersPage.vue
+  - client/src/pages/manage/ManageCourseStudentsPage.vue
+- Backup đã tạo:
+  - backup/client/src/style.css.20261112-0121.bak
+  - backup/client/src/pages/manage/ManageCoursesPage.vue.20261112-0121.bak
+  - backup/client/src/pages/manage/ManageUsersPage.vue.20261112-0121.bak
+  - backup/client/src/pages/manage/ManageCourseStudentsPage.vue.20261112-0121.bak
+- Hoàn thành: 2026-11-12 01:25
+- Tóm tắt thay đổi: Đưa `.manage-input` trong `client/src/style.css` vào `@layer components` và bổ sung quy tắc tường minh cho `.manage-input.pl-9`, `.pl-10`, `.pl-11`, `.pr-10`, `.pr-11` để không bao giờ ghi đè các class khoảng cách nội bộ khi có icon; đồng thời chuẩn hóa vị trí icon kính lúp (`left-3.5 top-1/2 -translate-y-1/2`) và `pl-10` trên toàn bộ ô tìm kiếm của khu vực quản trị (`ManageCoursesPage.vue`, `ManageUsersPage.vue`, `ManageCourseStudentsPage.vue`). Vượt qua `lint.mjs` (`0 FAIL`) và `npm run build`.
+
+
+## [x] #029 - Nâng cấp giao diện trang Tìm kiếm & Khóa học (/courses): Tự động ẩn ô tìm kiếm nhỏ trên Header khi ở trang /courses và nâng cấp thanh tìm kiếm lớn + khung Bộ lọc
+- Bắt đầu: 2026-11-12 01:36
+- Mục tiêu: Tự động ẩn ô tìm kiếm trên `PublicHeader.vue` khi người dùng đang đứng tại trang `/courses` (`route.name === 'Courses'`) để loại bỏ tình trạng trùng lặp 2 thanh tìm kiếm cùng nhảy chữ; đồng thời nâng cấp giao diện thanh tìm kiếm lớn (thêm viền sắc nét, nút xóa nhanh từ khóa, nút Tìm kiếm) và khung Bộ lọc trong `CoursesPage.vue`.
+- Phạm vi dự kiến:
+  - client/src/components/public/PublicHeader.vue
+  - client/src/pages/public/CoursesPage.vue
+- Backup đã tạo:
+  - backup/client/src/components/public/PublicHeader.vue.20261112-0136.bak
+  - backup/client/src/pages/public/CoursesPage.vue.20261112-0136.bak
+- Hoàn thành: 2026-11-12 01:39
+- Tóm tắt thay đổi: Cập nhật `PublicHeader.vue` tự động ẩn ô tìm kiếm nhỏ trên thanh điều hướng khi đang ở trang `/courses` (`route.name === 'Courses'`) và giữ cụm nút tài khoản căn phải mượt mà; đồng thời nâng cấp `CoursesPage.vue` với đường viền phân tách khu vực đầu trang (`border-b border-surface-3`), nhãn đóng khung "Danh mục & Tìm kiếm", thanh tìm kiếm lớn có viền rõ nét kèm nút "Xóa" nhanh từ khóa và nút "Tìm kiếm", cùng khung Bộ lọc có viền `border border-surface-3` đồng bộ với Trang chủ. Vượt qua `lint.mjs` (`0 FAIL`) và `npm run build`.
+
+
+## [x] #030 - Nâng cấp chức năng tìm kiếm có bảng gợi ý thả xuống trực tiếp (Autocomplete Dropdown) trên Header
+- Bắt đầu: 2026-11-12 01:53
+- Mục tiêu: Nâng cấp ô tìm kiếm trên `PublicHeader.vue` (hiển thị ở các trang ngoài `/courses`) để khi người dùng gõ từ khóa sẽ xuất hiện bảng gợi ý thả xuống ngay bên dưới giống mẫu tham khảo: dòng đầu là "Tìm khóa học '<từ khóa>'" dẫn tới `/courses?keyword=...`, bên dưới là danh sách các khóa học khớp từ khóa (nhấn vào sẽ mở thẳng trang Chi tiết khóa học `/courses/:id`), hỗ trợ điều hướng bằng bàn phím (`↑`/`↓`/`Enter`/`Escape`).
+- Phạm vi dự kiến:
+  - client/src/components/public/PublicHeader.vue
+- Backup đã tạo:
+  - backup/client/src/components/public/PublicHeader.vue.20261112-0153.bak
+- Hoàn thành: 2026-11-12 01:55
+- Tóm tắt thay đổi: Hoàn thiện bảng gợi ý tìm kiếm thả xuống trực tiếp (Autocomplete Dropdown) trên thanh điều hướng `PublicHeader.vue` (desktop & mobile menu) cho tất cả các trang ngoài `/courses`. Khi người dùng nhập từ khóa, hệ thống gọi `coursesApi.getCourses` (có debounce `220ms` và `AbortController`), hiển thị dòng đầu `Tìm khóa học "<từ khóa>"` dẫn tới `/courses?keyword=...` và danh sách tối đa 8 khóa học khớp từ khóa (kèm nhãn `Miễn phí` / `Pro`) dẫn thẳng tới trang Chi tiết khóa học `/courses/:id`, hỗ trợ điều hướng bằng bàn phím (`ArrowDown`, `ArrowUp`, `Enter`, `Escape`) và tự động đóng khi click ra ngoài. Vượt qua `lint.mjs` (`0 FAIL`) và `npm run build`.

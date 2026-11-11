@@ -298,12 +298,13 @@ watch(
 
       <!-- Search Input -->
       <div class="relative">
-        <Search class="absolute left-3 top-2.5 h-4 w-4 text-muted pointer-events-none" />
+        <Search class="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted" />
         <input
           v-model="keyword"
-          type="text"
+          type="search"
+          maxlength="100"
           placeholder="Tìm theo họ tên hoặc email học viên..."
-          class="w-full bg-ground pl-9 pr-4 py-2 text-xs text-ink placeholder:text-muted focus:outline-none"
+          class="manage-input pl-10 text-sm"
           @input="onSearchInput"
         />
       </div>

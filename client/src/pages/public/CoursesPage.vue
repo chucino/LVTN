@@ -276,17 +276,24 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="min-h-[70svh]">
-    <section class="bg-surface py-10 no-radius sm:py-14">
+  <div data-ui class="min-h-[70svh]">
+    <section data-ui class="bg-surface border-b border-surface-3 py-10 no-radius sm:py-14">
       <div class="mx-auto max-w-[1440px] px-[var(--margin)]">
-        <h1 class="text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
+        <span data-ui class="inline-flex items-center border border-surface-3 bg-ground px-2.5 py-1 text-xs font-semibold text-brand-soft">
+          Danh mục &amp; Tìm kiếm
+        </span>
+        <h1 class="mt-3 text-3xl font-extrabold tracking-tight text-ink sm:text-4xl">
           Tất cả khóa học
         </h1>
         <p class="mt-2 max-w-2xl text-base text-muted">
           Tìm khóa học theo chủ đề, trình độ và hình thức học để chọn lộ trình phù hợp với bạn.
         </p>
 
-        <label class="mt-6 flex max-w-2xl items-center gap-3 rounded-full bg-surface-2 px-5 py-3.5">
+        <form
+          data-ui class="mt-6 flex max-w-2xl items-center gap-3 rounded-xl border border-surface-3 bg-ground px-4 py-2.5 transition-colors focus-within:border-brand focus-within:bg-surface"
+          role="search"
+          @submit.prevent="applyFilters"
+        >
           <span class="sr-only">Tìm kiếm khóa học</span>
           <svg class="h-5 w-5 shrink-0 text-muted" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true">
             <circle cx="11" cy="11" r="7" stroke-width="1.8" />
@@ -298,7 +305,22 @@ onBeforeUnmount(() => {
             placeholder="Tìm theo tên khóa học, ngôn ngữ lập trình..."
             class="min-w-0 flex-1 bg-transparent text-base text-ink outline-none placeholder:text-muted"
           />
-        </label>
+          <button
+            v-if="keywordInput"
+            type="button"
+            class="px-2 py-1 text-xs font-medium text-muted transition-colors hover:text-ink"
+            aria-label="Xóa từ khóa tìm kiếm"
+            @click="keywordInput = ''; void applyFilters()"
+          >
+            Xóa
+          </button>
+          <button
+            type="submit"
+            class="shrink-0 bg-brand px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-brand-hover"
+          >
+            Tìm kiếm
+          </button>
+        </form>
       </div>
     </section>
 
@@ -309,7 +331,7 @@ onBeforeUnmount(() => {
         </p>
         <button
           type="button"
-          class="bg-surface px-4 py-2.5 text-sm font-medium text-ink"
+          data-ui class="border border-surface-3 bg-surface px-4 py-2.5 text-sm font-medium text-ink"
           :aria-expanded="mobileFiltersOpen"
           aria-controls="course-filters"
           @click="mobileFiltersOpen = !mobileFiltersOpen"
@@ -318,10 +340,10 @@ onBeforeUnmount(() => {
         </button>
       </div>
 
-      <div class="grid gap-10 lg:grid-cols-[260px_minmax(0,1fr)]">
+      <div class="grid items-start gap-10 lg:grid-cols-[260px_minmax(0,1fr)]">
         <aside
           id="course-filters"
-          class="h-fit bg-surface p-6"
+          data-ui class="h-fit border border-surface-3 bg-surface p-6 lg:sticky lg:top-24 lg:max-h-[calc(100svh-7rem)] lg:overflow-y-auto"
           :class="mobileFiltersOpen ? 'block' : 'hidden lg:block'"
           aria-label="Bộ lọc khóa học"
         >
@@ -437,19 +459,12 @@ onBeforeUnmount(() => {
         </aside>
 
         <section aria-label="Kết quả khóa học" aria-live="polite">
-          <div class="mb-6 hidden items-center justify-between lg:flex">
+          <div class="mb-6 hidden items-center lg:flex">
             <p class="text-base text-muted">
               <template v-if="results">
                 Tìm thấy <span class="font-medium text-ink">{{ results.total }}</span> giáo trình
               </template>
             </p>
-            <button
-              type="button"
-              class="text-sm text-ink underline underline-offset-4 transition-colors hover:text-brand-soft"
-              @click="clearFilters"
-            >
-              Xóa bộ lọc
-            </button>
           </div>
 
           <div v-if="filterError" role="alert" class="mb-6 bg-brand-surface p-4 text-sm text-ink">
@@ -471,7 +486,7 @@ onBeforeUnmount(() => {
           </div>
           <div
             v-else-if="results?.items.length === 0"
-            class="bg-surface px-8 py-16"
+            data-ui class="border border-surface-3 bg-surface px-8 py-16"
           >
             <h2 class="text-2xl font-normal text-ink">Chưa tìm thấy giáo trình phù hợp</h2>
             <p class="mt-2 text-base text-muted">Hãy thử đổi từ khóa hoặc đặt lại bộ lọc tìm kiếm.</p>

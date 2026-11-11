@@ -198,37 +198,61 @@ thead.bg-surface-2 {
   font-weight: 600;
 }
 
-input.manage-input,
-textarea.manage-input,
-select.manage-input,
-.manage-input {
-  width: 100%;
-  min-width: 0;
-  border: 1px solid var(--surface-3);
-  border-radius: var(--radius-md);
-  background: var(--surface);
-  padding: 0.65rem 0.85rem;
-  color: var(--ink);
-  font: inherit;
-  font-size: 0.9375rem;
-  font-weight: 400;
-  outline: none;
-  transition: border-color 150ms, box-shadow 150ms;
+@layer components {
+  .manage-input {
+    width: 100%;
+    min-width: 0;
+    border: 1px solid var(--surface-3);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    padding: 0.65rem 0.85rem;
+    color: var(--ink);
+    font: inherit;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    outline: none;
+    transition: border-color 150ms, box-shadow 150ms;
+  }
+
+  .manage-input::placeholder {
+    color: #8696ab;
+  }
+
+  .manage-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgb(37 99 235 / 0.16); /* taste-skill-ignore */
+  }
+
+  .manage-input:disabled {
+    cursor: not-allowed;
+    background: var(--surface-2);
+    opacity: 0.7;
+  }
 }
 
-.manage-input::placeholder {
-  color: #8696ab;
+.manage-input.pl-9,
+input.manage-input.pl-9 {
+  padding-left: 2.25rem;
 }
 
-.manage-input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgb(37 99 235 / 0.16); /* taste-skill-ignore */
+.manage-input.pl-10,
+input.manage-input.pl-10 {
+  padding-left: 2.5rem;
 }
 
-.manage-input:disabled {
-  cursor: not-allowed;
-  background: var(--surface-2);
-  opacity: 0.7;
+.manage-input.pl-11,
+input.manage-input.pl-11 {
+  padding-left: 2.75rem;
+}
+
+.manage-input.pr-10,
+input.manage-input.pr-10 {
+  padding-right: 2.5rem;
+}
+
+.manage-input.pr-11,
+input.manage-input.pr-11 {
+  padding-right: 2.75rem;
 }
 
 .manage-button-primary,
