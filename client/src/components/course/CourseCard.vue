@@ -10,11 +10,14 @@ defineProps<{
 </script>
 
 <template>
-  <article class="course-card group flex flex-col justify-between overflow-hidden bg-surface transition-transform duration-200 hover:-translate-y-1">
+  <article
+    data-ui
+    class="course-card group flex flex-col justify-between overflow-hidden border border-surface-3 bg-surface transition-transform duration-200 hover:-translate-y-1 hover:border-brand"
+  >
     <div>
       <router-link
         :to="{ name: 'CourseDetail', params: { id: course.id } }"
-        class="block"
+        data-ui class="block border-b border-surface-3"
         :aria-label="`Xem khóa học ${course.title}`"
       >
         <CourseCover :src="course.thumbnail" :title="course.title" :category="course.category?.name" />
@@ -50,7 +53,7 @@ defineProps<{
       </div>
     </div>
 
-    <div class="flex items-center justify-between gap-3 bg-surface-2 px-5 py-3.5 text-sm">
+    <div data-ui class="flex items-center justify-between gap-3 border-t border-surface-3 bg-surface-2 px-5 py-3.5 text-sm">
       <span class="inline-flex flex-wrap items-center gap-x-3 gap-y-1 text-muted">
         <span class="inline-flex items-center gap-1"><BookOpen class="h-4 w-4" /> {{ course.totalLessons }} bài</span>
         <span class="inline-flex items-center gap-1"><Clock3 class="h-4 w-4" /> {{ formatCourseDuration(course.totalDuration) }}</span>

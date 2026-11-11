@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import {
   ArrowLeft,
@@ -8,7 +8,6 @@ import {
   LayoutDashboard,
   LogOut,
   Menu,
-  UserRound,
   Users,
   X,
 } from 'lucide-vue-next';
@@ -18,7 +17,16 @@ const authStore = useAuthStore();
 const route = useRoute();
 const router = useRouter();
 const mobileNavOpen = ref(false);
+const avatarFailed = ref(false);
 const isAdmin = computed(() => authStore.user?.role === 'ADMIN');
+
+watch(
+  () => authStore.user?.avatar,
+  () => {
+    avatarFailed.value = false;
+  },
+);
+
 const initials = computed(() =>
   (authStore.user?.fullName ?? 'NextCode')
     .split(/\s+/)
@@ -42,7 +50,8 @@ const links = computed(() => [
     active:
       (route.name === 'ManageCourses' && route.query.status !== 'PENDING') ||
       route.name === 'ManageCourseCreate' ||
-      route.name === 'ManageCourseEdit',
+      route.name === 'ManageCourseEdit' ||
+      route.name === 'ManageCourseStudents',
   },
   ...(isAdmin.value
     ? [
@@ -63,6 +72,7 @@ const links = computed(() => [
 ]);
 
 async function logout() {
+  mobileNavOpen.value = false;
   await authStore.logout();
   await router.push('/');
 }
@@ -70,7 +80,7 @@ async function logout() {
 
 <template>
   <div data-ui class="manage-shell min-h-[100svh] text-ink">
-    <header data-ui class="no-radius relative z-30 border-b border-surface-3 bg-surface">
+    <header data-ui class="no-radius sticky top-0 z-30 border-b border-surface-3 bg-surface">
       <div class="mx-auto flex h-14 max-w-[1600px] items-center justify-between gap-4 px-4 sm:px-6">
         <div class="flex items-center gap-3">
           <button
@@ -102,10 +112,11 @@ async function logout() {
               <p class="text-xs text-muted">{{ isAdmin ? 'Quản trị viên (ADMIN)' : 'Giảng viên (INSTRUCTOR)' }}</p>
             </div>
             <img
-              v-if="authStore.user?.avatar"
+              v-if="authStore.user?.avatar && !avatarFailed"
               :src="authStore.user.avatar"
               alt=""
               class="h-8 w-8 object-cover"
+              @error="avatarFailed = true"
             />
             <span
               v-else
@@ -117,20 +128,11 @@ async function logout() {
           </router-link>
           <button
             type="button"
-            class="hidden items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted transition-colors hover:bg-surface-2 hover:text-ink sm:inline-flex"
+            class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-muted transition-colors hover:bg-surface-2 hover:text-ink"
             @click="router.push('/')"
           >
             <ArrowLeft class="h-3.5 w-3.5" />
             Trang chủ
-          </button>
-          <button
-            type="button"
-            class="p-2 text-muted transition-colors hover:bg-surface-2 hover:text-ink"
-            aria-label="Đăng xuất"
-            title="Đăng xuất"
-            @click="logout"
-          >
-            <LogOut class="h-4 w-4" />
           </button>
         </div>
       </div>
@@ -138,55 +140,32 @@ async function logout() {
 
     <div class="relative z-10 mx-auto flex max-w-[1600px]">
       <aside
-        class="fixed inset-y-14 left-0 z-20 no-radius flex w-60 flex-col justify-between bg-surface p-4 transition-transform lg:sticky lg:top-14 lg:h-[calc(100svh-3.5rem)] lg:translate-x-0"
+        data-ui class="fixed inset-y-14 left-0 z-20 no-radius flex w-60 flex-col justify-between border-r border-surface-3 bg-surface p-4 transition-transform lg:sticky lg:top-14 lg:h-[calc(100svh-3.5rem)] lg:translate-x-0"
         :class="mobileNavOpen ? 'translate-x-0' : '-translate-x-full'"
       >
-        <div class="space-y-6">
-          <div class="bg-ground p-3.5">
-            <p class="text-xs font-semibold text-ink">
-              {{ isAdmin ? 'NextCode Admin' : 'Instructor Studio' }}
-            </p>
-            <p class="mt-1 text-xs leading-5 text-muted">
-              {{
-                isAdmin
-                  ? 'Quản trị toàn diện khóa học, duyệt nội dung và phân quyền người dùng.'
-                  : 'Biên soạn chương, bài giảng và trắc nghiệm cho các khóa học được phân công.'
-              }}
-            </p>
-          </div>
-
-          <nav class="space-y-1" aria-label="Điều hướng quản lý">
-            <router-link
-              v-for="link in links"
-              :key="link.label"
-              :to="link.to"
-              class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium transition-colors"
-              :class="link.active ? 'bg-tint text-brand-soft' : 'text-muted hover:bg-surface-2 hover:text-ink'"
-              @click="mobileNavOpen = false"
-            >
-              <component :is="link.icon" class="h-4 w-4 shrink-0" />
-              {{ link.label }}
-            </router-link>
-          </nav>
-        </div>
-
-        <div class="space-y-1 pt-4">
+        <nav class="space-y-1" aria-label="Điều hướng quản lý">
           <router-link
-            :to="{ name: 'Profile' }"
-            class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-muted transition-colors hover:bg-ground hover:text-ink"
+            v-for="link in links"
+            :key="link.label"
+            :to="link.to"
+            class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium transition-colors"
+            :class="link.active ? 'bg-tint text-brand-soft' : 'text-muted hover:bg-surface-2 hover:text-ink'"
             @click="mobileNavOpen = false"
           >
-            <UserRound class="h-4 w-4 shrink-0" />
-            Hồ sơ cá nhân
+            <component :is="link.icon" class="h-4 w-4 shrink-0" />
+            {{ link.label }}
           </router-link>
-          <router-link
-            to="/"
-            class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-muted transition-colors hover:bg-ground hover:text-ink"
-            @click="mobileNavOpen = false"
+        </nav>
+
+        <div data-ui class="border-t border-surface-3 pt-3">
+          <button
+            type="button"
+            class="flex w-full items-center gap-3 px-3 py-2.5 text-left text-sm font-medium text-muted transition-colors hover:bg-ground hover:text-ink"
+            @click="logout"
           >
-            <ArrowLeft class="h-4 w-4 shrink-0" />
-            Về trang chủ
-          </router-link>
+            <LogOut class="h-4 w-4 shrink-0" />
+            Đăng xuất
+          </button>
         </div>
       </aside>
 

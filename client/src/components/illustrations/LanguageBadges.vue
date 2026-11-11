@@ -19,11 +19,11 @@ const languages = [
 </script>
 
 <template>
-  <ul class="flex flex-wrap items-center gap-3" aria-label="Công nghệ trong các khóa học">
+  <ul data-ui class="flex flex-wrap items-center gap-3" aria-label="Công nghệ trong các khóa học">
     <li
       v-for="item in languages"
       :key="item.label"
-      class="flex items-center gap-2 rounded-xl bg-surface px-3 py-2"
+      class="flex items-center gap-2.5 rounded-xl border border-surface-3 bg-surface px-3.5 py-2"
       :class="size === 'sm' ? 'text-xs' : 'text-sm'"
     >
       <span

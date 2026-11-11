@@ -19,13 +19,22 @@ const authStore = useAuthStore();
 const router = useRouter();
 const route = useRoute();
 const accountDetailsRef = ref<HTMLDetailsElement | null>(null);
+const isStudent = computed(() => authStore.user?.role === 'STUDENT');
 const canAccessDashboard = computed(
   () => authStore.user?.role === 'INSTRUCTOR' || authStore.user?.role === 'ADMIN',
 );
+const avatarLoadError = ref(false);
 const mobileMenuOpen = ref(false);
 const searchValue = ref('');
 const isCourseRoute = computed(
   () => route.name === 'Courses' || route.name === 'CourseDetail',
+);
+
+watch(
+  () => authStore.user?.avatar,
+  () => {
+    avatarLoadError.value = false;
+  },
 );
 
 watch(
@@ -94,25 +103,33 @@ async function submitSearch() {
         <span class="text-xl font-bold tracking-tight text-ink">NextCode</span>
       </router-link>
 
-      <nav class="hidden items-center gap-7 text-base text-muted lg:flex" aria-label="Điều hướng chính">
-        <router-link to="/" class="transition-colors hover:text-ink">Trang chủ</router-link>
+      <nav
+        class="hidden shrink-0 items-center gap-5 text-sm font-medium text-muted lg:flex xl:gap-6"
+        aria-label="Điều hướng chính"
+      >
+        <router-link to="/" class="whitespace-nowrap transition-colors hover:text-ink">
+          Trang chủ
+        </router-link>
         <router-link
           :to="{ name: 'Courses' }"
-          class="transition-colors hover:text-ink"
-          :class="isCourseRoute ? 'text-ink font-medium' : ''"
+          class="whitespace-nowrap transition-colors hover:text-ink"
+          :class="isCourseRoute ? 'text-ink font-semibold' : ''"
           :aria-current="isCourseRoute ? 'page' : undefined"
         >
           Giáo trình & Khóa học
         </router-link>
-        <router-link :to="{ name: 'CertificateVerify' }" class="transition-colors hover:text-ink">
+        <router-link
+          :to="{ name: 'CertificateVerify' }"
+          class="whitespace-nowrap transition-colors hover:text-ink"
+        >
           Tra cứu chứng chỉ
         </router-link>
-        <a href="/#lo-trinh" class="transition-colors hover:text-ink">Cách học</a>
-        <a href="/#hoi-dap" class="transition-colors hover:text-ink">Hỏi đáp</a>
+        <a href="/#lo-trinh" class="whitespace-nowrap transition-colors hover:text-ink">Cách học</a>
+        <a href="/#hoi-dap" class="whitespace-nowrap transition-colors hover:text-ink">Hỏi đáp</a>
       </nav>
 
       <form
-        class="ml-auto hidden w-full max-w-xs items-center gap-2 rounded-full bg-surface-2 px-4 py-2 text-muted xl:flex"
+        class="ml-auto hidden w-full max-w-[220px] items-center gap-2 rounded-full bg-surface-2 px-3.5 py-2 text-muted xl:flex xl:max-w-[260px]"
         role="search"
         @submit.prevent="submitSearch"
       >
@@ -128,46 +145,39 @@ async function submitSearch() {
         />
       </form>
 
-      <div v-if="!authStore.isAuthenticated" class="ml-auto hidden shrink-0 items-center gap-4 lg:flex xl:ml-0">
+      <div v-if="!authStore.isAuthenticated" class="ml-auto hidden shrink-0 items-center gap-3 lg:flex xl:ml-0">
         <router-link
           to="/login"
-          class="px-3 py-2 text-base text-muted transition-colors hover:text-ink"
+          class="whitespace-nowrap px-3 py-2 text-sm font-medium text-muted transition-colors hover:text-ink"
         >
           Đăng nhập
         </router-link>
         <router-link
           to="/register"
-          class="bg-brand px-5 py-2.5 text-base font-semibold text-white transition-colors hover:bg-brand-hover"
+          class="whitespace-nowrap bg-brand px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-hover"
         >
           Đăng ký học
         </router-link>
       </div>
 
-      <div v-else class="ml-auto hidden shrink-0 items-center gap-4 lg:flex xl:ml-0">
-        <router-link
-          :to="{ name: 'Profile', query: { tab: 'courses' } }"
-          class="inline-flex items-center gap-2 px-3 py-2 text-base text-muted transition-colors hover:bg-surface hover:text-ink"
-        >
-          <BookOpen class="h-4 w-4 text-ink" />
-          Khóa học của tôi
-        </router-link>
-
+      <div v-else class="ml-auto hidden shrink-0 items-center gap-3 lg:flex xl:ml-0">
         <details ref="accountDetailsRef" class="relative" data-ui>
           <summary
             aria-label="Mở menu tài khoản"
             class="flex cursor-pointer list-none items-center gap-2.5 bg-surface px-2.5 py-1.5 text-sm text-ink transition-colors hover:bg-surface-2"
           >
             <img
-              v-if="authStore.user?.avatar"
+              v-if="authStore.user?.avatar && !avatarLoadError"
               :src="authStore.user.avatar"
               alt=""
               width="32"
               height="32"
               class="h-8 w-8 rounded-full object-cover"
+              @error="avatarLoadError = true"
             />
             <span
               v-else
-              class="flex h-8 w-8 items-center justify-center rounded-full bg-brand text-xs font-medium text-white"
+              class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-brand text-xs font-medium text-white"
             >
               {{ initials }}
             </span>
@@ -190,6 +200,7 @@ async function submitSearch() {
                 <UserRound class="h-4 w-4 text-ink" /> Hồ sơ cá nhân
               </router-link>
               <router-link
+                v-if="isStudent"
                 :to="{ name: 'Profile', query: { tab: 'courses' } }"
                 class="account-menu-item hover:bg-surface-2 hover:text-ink"
                 @click="closeDropdown"
@@ -197,6 +208,7 @@ async function submitSearch() {
                 <BookOpen class="h-4 w-4 text-ink" /> Khóa học của tôi
               </router-link>
               <router-link
+                v-if="isStudent"
                 :to="{ name: 'Profile', query: { tab: 'certificates' } }"
                 class="account-menu-item hover:bg-surface-2 hover:text-ink"
                 @click="closeDropdown"
@@ -304,6 +316,7 @@ async function submitSearch() {
           <UserRound class="h-4 w-4" /> Hồ sơ cá nhân
         </router-link>
         <router-link
+          v-if="isStudent"
           :to="{ name: 'Profile', query: { tab: 'courses' } }"
           class="mobile-nav-link flex items-center gap-2 text-ink"
           @click="mobileMenuOpen = false"
@@ -311,6 +324,7 @@ async function submitSearch() {
           <BookOpen class="h-4 w-4" /> Khóa học của tôi
         </router-link>
         <router-link
+          v-if="isStudent"
           :to="{ name: 'Profile', query: { tab: 'certificates' } }"
           class="mobile-nav-link flex items-center gap-2 text-ink"
           @click="mobileMenuOpen = false"

@@ -5,7 +5,6 @@ import {
   ArrowRight,
   BookOpen,
   CirclePlus,
-  ShieldCheck,
   Users,
 } from 'lucide-vue-next';
 import { useAuthStore } from '@/stores/auth.store';
@@ -327,21 +326,6 @@ onMounted(() => {
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- Role Permissions Guide Footer -->
-    <div class="bg-surface p-4 text-xs text-muted">
-      <div class="flex items-center gap-2 font-semibold text-ink">
-        <ShieldCheck class="h-4 w-4 text-brand-soft" />
-        <span>Phạm vi quyền hạn hiện tại ({{ isAdmin ? 'Quản trị viên - ADMIN' : 'Giảng viên - INSTRUCTOR' }})</span>
-      </div>
-      <p class="mt-1 leading-5">
-        {{
-          isAdmin
-            ? 'Bạn có toàn quyền quản lý người dùng (/dashboard/users), khởi tạo khóa học nền, gán giảng viên phụ trách và phê duyệt các khóa học chờ duyệt (/dashboard/courses).'
-            : 'Bạn có quyền biên soạn chương, bài giảng video và câu hỏi ôn tập cho các khóa học được phân công (/dashboard/courses) và gửi duyệt khi hoàn tất. Thông tin khóa học nền do Admin quản lý.'
-        }}
-      </p>
     </div>
   </section>
 </template>

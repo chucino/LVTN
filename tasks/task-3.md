@@ -86,3 +86,55 @@
   - backup/client/src/router/index.ts.20261102-2125.bak
 - Hoàn thành: 2026-11-02 21:37
 - Tóm tắt thay đổi: Hoàn thiện chức năng Quản lý học viên theo khóa học dành cho Giảng viên và Admin. Backend tự động tính `totalStudents` cho bảng khóa học thông qua MongoDB aggregate và bổ sung endpoint `GET /manage/courses/:courseId/students` có kiểm soát quyền RBAC chặt chẽ (giảng viên chỉ xem khóa của mình, ném 403 nếu truy cập khóa của người khác). Frontend bổ sung cột Học viên trên `ManageCoursesPage.vue`, thêm nút thao tác Users trên `ManageCourseActions.vue` và xây dựng trang quản lý học viên chuyên biệt `ManageCourseStudentsPage.vue` (`/dashboard/courses/:id/students`) với 4 thẻ thống kê tổng quan (Tổng số, Đang học, Đã hoàn thành, Tiến độ trung bình), tìm kiếm theo tên/email, lọc theo tiến độ, sắp xếp linh hoạt, phân trang và link tra cứu chứng chỉ công khai. Toàn bộ unit test (36/36 test), `nest build`, `lint.mjs` (`0 FAIL`) và `npm run build` đều pass 100%.
+
+## [x] #024 - Tinh chỉnh giao diện thanh điều hướng (Header) trang chủ và phân quyền hiển thị "Khóa học của tôi"
+- Bắt đầu: 2026-11-11 23:55
+- Mục tiêu: Sửa lỗi rớt dòng các mục điều hướng trên `PublicHeader.vue` (giữ nguyên nhãn từ khóa, thu gọn cỡ chữ/khoảng cách và áp dụng `whitespace-nowrap` + `shrink-0`), loại bỏ trùng lặp nút "Khóa học của tôi" trên thanh Header ngoài (chỉ giữ trong Menu tài khoản thả xuống), phân quyền chỉ hiển thị "Khóa học của tôi" và "Chứng chỉ của tôi" đối với Học viên (`STUDENT`) trên cả Header và `ProfilePage.vue`, đồng thời bổ sung xử lý `@error` fallback về chữ cái đầu khi ảnh avatar bị lỗi.
+- Phạm vi dự kiến:
+  - client/src/components/public/PublicHeader.vue
+  - client/src/pages/student/ProfilePage.vue
+- Backup đã tạo:
+  - backup/client/src/components/public/PublicHeader.vue.20261111-2355.bak
+  - backup/client/src/pages/student/ProfilePage.vue.20261111-2355.bak
+- Hoàn thành: 2026-11-12 00:02
+- Tóm tắt thay đổi: Tinh chỉnh `PublicHeader.vue` với `whitespace-nowrap` và `shrink-0` giúp 5 mục điều hướng ("Trang chủ", "Giáo trình & Khóa học", "Tra cứu chứng chỉ", "Cách học", "Hỏi đáp") luôn nằm thẳng hàng trên 1 dòng ngang; gỡ bỏ nút "Khóa học của tôi" bên ngoài thanh Header để loại bỏ trùng lặp và giữ duy nhất trong Menu tài khoản thả xuống; giới hạn chỉ hiển thị "Khóa học của tôi" và "Chứng chỉ của tôi" cho tài khoản `STUDENT` trên cả `PublicHeader.vue` và `ProfilePage.vue`; bổ sung `@error` fallback về chữ cái viết tắt khi ảnh đại diện không tải được. Pass `lint.mjs` (`0 FAIL`) và `npm run build`.
+
+## [x] #025 - Nâng cấp giao diện Trang chủ: Phân tách bố cục, xen kẽ màu nền và đóng khung thẻ nội dung
+- Bắt đầu: 2026-11-12 00:10
+- Mục tiêu: Phân tách rõ ràng từng khu vực trên `HomePage.vue` bằng đường viền ngang (`border-b border-surface-3`) và xen kẽ nền Trắng (`bg-surface`) ↔ Xám nhạt (`bg-ground`), bổ sung nhãn Eyebrow đóng khung phía trên tiêu đề mỗi phần, giữ bố cục 3 thẻ ngang ở mục "Cách học trên NextCode" nhưng đóng khung viền sắc nét (`border border-surface-3`) trên nền trắng, đồng thời đóng khung viền cho toàn bộ thẻ khóa học (`CourseCard.vue`), danh mục, bảng so sánh Free/Pro và câu hỏi thường gặp (FAQ).
+- Phạm vi dự kiến:
+  - client/src/pages/public/HomePage.vue
+  - client/src/components/course/CourseSection.vue
+  - client/src/components/course/CourseCard.vue
+  - client/src/components/illustrations/LanguageBadges.vue
+- Backup đã tạo:
+  - backup/client/src/pages/public/HomePage.vue.20261112-0010.bak
+  - backup/client/src/components/course/CourseSection.vue.20261112-0010.bak
+  - backup/client/src/components/course/CourseCard.vue.20261112-0010.bak
+  - backup/client/src/components/illustrations/LanguageBadges.vue.20261112-0010.bak
+- Hoàn thành: 2026-11-12 00:17
+- Tóm tắt thay đổi: Hoàn thiện nâng cấp bố cục trang chủ (`HomePage.vue`, `CourseSection.vue`, `CourseCard.vue`, `LanguageBadges.vue`): phân tách rõ ràng toàn bộ 8 khu vực bằng đường viền ngang `border-b border-surface-3` và xen kẽ màu nền Trắng (`bg-surface`) ↔ Xám nhạt (`bg-ground`); bổ sung nhãn Eyebrow đóng khung phía trên tiêu đề mỗi phần; giữ bố cục 3 thẻ ngang ở phần "Cách học trên NextCode" với nền trắng đóng khung viền sắc nét kèm thẻ tag tính năng; đóng khung riêng biệt cho khối "Lên lịch học của bạn", thẻ khóa học, bảng so sánh Free/Pro và danh sách câu hỏi thường gặp (FAQ). Vượt qua `lint.mjs` (`0 FAIL`) và `npm run build`.
+
+
+## [x] #026 - Nâng cấp giao diện trang quản trị Admin & Giảng viên: Cố định Sidebar khi cuộn trang và xóa mục "Phạm vi quyền hạn hiện tại"
+- Bắt đầu: 2026-11-12 00:30
+- Mục tiêu: Khắc phục lỗi thanh bên trái (`<aside>`) bị tách khúc khi cuộn trang trong `ManageLayout.vue` (chuyển `<header>` sang `sticky top-0 z-30`, bổ sung đường viền phải `border-r border-surface-3` trên `<aside>`, thêm fallback `@error` cho ảnh đại diện) và xóa hoàn toàn khối "Phạm vi quyền hạn hiện tại" ở cuối `DashboardPage.vue` đối với cả Admin và Giảng viên.
+- Phạm vi dự kiến:
+  - client/src/layouts/ManageLayout.vue
+  - client/src/pages/dashboard/DashboardPage.vue
+- Backup đã tạo:
+  - backup/client/src/layouts/ManageLayout.vue.20261112-0030.bak
+  - backup/client/src/pages/dashboard/DashboardPage.vue.20261112-0030.bak
+- Hoàn thành: 2026-11-12 00:32
+- Tóm tắt thay đổi: Chuyển thanh `<header>` của `ManageLayout.vue` sang `sticky top-0 z-30` để luôn cố định ở đỉnh màn hình và khớp liền mạch với thanh bên trái `<aside>` (`lg:sticky lg:top-14 lg:h-[calc(100svh-3.5rem)]`), bổ sung đường viền phải `border-r border-surface-3` cho `<aside>` và fallback `@error` cho ảnh đại diện; đồng thời xóa toàn bộ khối "Phạm vi quyền hạn hiện tại" ở cuối `DashboardPage.vue` cho cả Admin và Giảng viên. Vượt qua kiểm tra `lint.mjs` (`0 FAIL`) và `npm run build`.
+
+
+## [x] #027 - Tinh gọn Sidebar & Header trang quản trị (Admin & Giảng viên): Xóa khối giới thiệu, gỡ "Hồ sơ cá nhân" / "Về trang chủ" ở đáy Sidebar và dời nút "Đăng xuất" xuống cuối Sidebar
+- Bắt đầu: 2026-11-12 00:46
+- Mục tiêu: Xóa hộp giới thiệu "NextCode Admin / Instructor Studio" ở đầu Sidebar, xóa 2 mục trùng lặp "Hồ sơ cá nhân" và "Về trang chủ" ở cuối Sidebar (giữ lại trên thanh Header), đồng thời dời nút "Đăng xuất" từ thanh Header xuống vị trí cuối bên trái của Sidebar.
+- Phạm vi dự kiến:
+  - client/src/layouts/ManageLayout.vue
+- Backup đã tạo:
+  - backup/client/src/layouts/ManageLayout.vue.20261112-0046.bak
+- Hoàn thành: 2026-11-12 00:48
+- Tóm tắt thay đổi: Tinh gọn `ManageLayout.vue` cho cả Admin và Giảng viên: xóa hộp giới thiệu "NextCode Admin / Instructor Studio" ở đầu thanh bên trái, gỡ bỏ hai mục trùng lặp "Hồ sơ cá nhân" và "Về trang chủ" ở đáy thanh bên trái (giữ lại cụm tên tài khoản mở Hồ sơ cá nhân và nút "Trang chủ" trên thanh điều hướng Header), đồng thời dời nút "Đăng xuất" từ thanh điều hướng Header xuống vị trí cuối cùng bên trái của Sidebar kèm nhãn "Đăng xuất" rõ ràng. Vượt qua kiểm tra `lint.mjs` (`0 FAIL`) và `npm run build`.

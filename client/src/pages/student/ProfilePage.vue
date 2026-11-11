@@ -51,10 +51,13 @@ const DEFAULT_CATEGORIES = [
 const route = useRoute();
 const router = useRouter();
 const authStore = useAuthStore();
+const isStudent = computed(() => authStore.user?.role === 'STUDENT');
+const avatarLoadError = ref(false);
 
 const activeTab = computed<ProfileTab>(() => {
   const tab = route.query.tab;
-  if (tab === 'courses' || tab === 'certificates' || tab === 'security') {
+  if (tab === 'security') return 'security';
+  if (isStudent.value && (tab === 'courses' || tab === 'certificates')) {
     return tab;
   }
   return 'info';
@@ -128,6 +131,10 @@ const initials = computed(() =>
 const currentAvatarUrl = computed(() => {
   if (localAvatarPreview.value) return localAvatarPreview.value;
   return profileForm.avatar || '';
+});
+
+watch(currentAvatarUrl, () => {
+  avatarLoadError.value = false;
 });
 
 function toDateInputValue(rawDate?: string | null): string {
@@ -390,10 +397,11 @@ async function handleChangePassword() {
         <div class="flex flex-col items-start gap-5 sm:flex-row sm:items-center">
           <div class="relative shrink-0">
             <img
-              v-if="currentAvatarUrl"
+              v-if="currentAvatarUrl && !avatarLoadError"
               :src="currentAvatarUrl"
               alt="Ảnh đại diện của bạn"
               class="h-24 w-24 object-cover"
+              @error="avatarLoadError = true"
             />
             <div
               v-else
@@ -463,6 +471,7 @@ async function handleChangePassword() {
         </button>
 
         <button
+          v-if="isStudent"
           type="button"
           role="tab"
           :aria-selected="activeTab === 'courses'"
@@ -485,6 +494,7 @@ async function handleChangePassword() {
         </button>
 
         <button
+          v-if="isStudent"
           type="button"
           role="tab"
           :aria-selected="activeTab === 'certificates'"
@@ -547,10 +557,11 @@ async function handleChangePassword() {
         <div class="mt-5 flex flex-col items-center bg-ground p-6 text-center">
           <div class="relative">
             <img
-              v-if="currentAvatarUrl"
+              v-if="currentAvatarUrl && !avatarLoadError"
               :src="currentAvatarUrl"
               alt="Xem trước ảnh đại diện"
               class="h-28 w-28 object-cover"
+              @error="avatarLoadError = true"
             />
             <div
               v-else
