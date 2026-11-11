@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Check, EyeOff, Pencil, Send, RotateCcw, Trash2, X } from 'lucide-vue-next';
+import { Check, EyeOff, Pencil, RotateCcw, Send, Trash2, Users, X } from 'lucide-vue-next';
 import type { ManageCourseItem } from '@/types/manage-course';
 
 defineProps<{ course: ManageCourseItem }>();
@@ -10,6 +10,14 @@ const emit = defineEmits<{
 
 <template>
   <div class="flex flex-wrap gap-1.5" :aria-label="`Thao tác khóa ${course.title}`">
+    <router-link
+      :to="{ name: 'ManageCourseStudents', params: { id: course.id } }"
+      class="manage-icon-button"
+      title="Danh sách học viên"
+      :aria-label="`Danh sách học viên ${course.title}`"
+    >
+      <Users class="h-4 w-4" />
+    </router-link>
     <router-link
       v-if="course.permissions.canEdit"
       :to="{ name: 'ManageCourseEdit', params: { id: course.id } }"

@@ -38,6 +38,7 @@ export interface ManageCourseItem {
   totalChapters: number;
   totalLessons: number;
   totalDuration: number;
+  totalStudents?: number;
   instructor: ManageCourseInstructor;
   category: ManageCourseCategory;
   status: ManageCourseStatus;

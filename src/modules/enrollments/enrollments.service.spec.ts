@@ -9,6 +9,7 @@ import {
   CourseStatus,
   CourseType,
 } from '../../common/constants/course.enum.js';
+import { Role } from '../../common/constants/roles.enum.js';
 import {
   CertificateStatus,
   EnrollmentStatus,
@@ -184,6 +185,55 @@ describe('EnrollmentsService', () => {
         enrollmentsStore.push(doc);
         return doc;
       }),
+      aggregate: vi.fn((pipeline: any[]) => ({
+        exec: async () => {
+          if (pipeline.some((p) => p.$group && p.$group.avgProgress)) {
+            const courseEnrollments = enrollmentsStore.filter(
+              (e) => e.courseId.toString() === freeCourseId.toString(),
+            );
+            const total = courseEnrollments.length;
+            const completed = courseEnrollments.filter(
+              (e) => e.status === EnrollmentStatus.COMPLETED,
+            ).length;
+            const learning = courseEnrollments.filter(
+              (e) => e.status === EnrollmentStatus.LEARNING,
+            ).length;
+            const avg =
+              total > 0
+                ? courseEnrollments.reduce((sum, e) => sum + e.progressPercent, 0) /
+                  total
+                : 0;
+            return [
+              {
+                totalStudents: total,
+                completedStudents: completed,
+                learningStudents: learning,
+                avgProgress: avg,
+              },
+            ];
+          }
+          const items = enrollmentsStore
+            .filter((e) => e.courseId.toString() === freeCourseId.toString())
+            .map((e) => ({
+              enrollmentId: e._id.toString(),
+              student: {
+                id: e.studentId.toString(),
+                fullName: 'Nguyễn Học Viên',
+                email: 'student@example.com',
+                avatar: null,
+              },
+              enrolledAt: e.enrolledAt || new Date(),
+              progressPercent: e.progressPercent,
+              status: e.status,
+              completedAt: e.completedAt || null,
+              certificateCode:
+                e.status === EnrollmentStatus.COMPLETED
+                  ? 'NC-2026-TESTCODE'
+                  : null,
+            }));
+          return [{ items, totalCount: [{ count: items.length }] }];
+        },
+      })),
     };
 
     const lessonProgressModel: any = {
@@ -231,15 +281,17 @@ describe('EnrollmentsService', () => {
           },
         }),
       })),
-      findById: vi.fn((id) => ({
-        lean: () => ({
-          exec: async () => {
-            if (id.toString() === freeCourseId) return sampleFreeCourse;
-            if (id.toString() === proCourseId) return sampleProCourse;
-            return null;
-          },
-        }),
-      })),
+      findById: vi.fn((id) => {
+        const fetcher = async () => {
+          if (id.toString() === freeCourseId) return sampleFreeCourse;
+          if (id.toString() === proCourseId) return sampleProCourse;
+          return null;
+        };
+        return {
+          exec: fetcher,
+          lean: () => ({ exec: fetcher }),
+        };
+      }),
     };
 
     const userModel: any = {
@@ -430,5 +482,43 @@ describe('EnrollmentsService', () => {
     expect(quiz3AllCorrect.certificate?.certificateCode).toBe(
       'NC-2026-TESTCODE',
     );
+  });
+
+  it('Quản lý học viên: Giảng viên chỉ xem được khóa của mình, Admin xem được tất cả', async () => {
+    // 1. Học viên đăng ký khóa học FREE
+    await service.enrollCourse(studentId, freeCourseId);
+
+    // 2. Giảng viên khác truy cập -> ném lỗi ForbiddenException
+    const otherInstructorId = new Types.ObjectId(
+      '6650c1f6f2f4f6e4c8bfe999',
+    ).toString();
+    await expect(
+      service.getCourseStudentsForManager(
+        freeCourseId,
+        { userId: otherInstructorId, role: Role.INSTRUCTOR },
+        { page: 1, limit: 10 },
+      ),
+    ).rejects.toThrow(ForbiddenException);
+
+    // 3. Đúng giảng viên phụ trách truy cập -> thành công
+    const instructorResult = await service.getCourseStudentsForManager(
+      freeCourseId,
+      { userId: instructorId.toString(), role: Role.INSTRUCTOR },
+      { page: 1, limit: 10 },
+    );
+    expect(instructorResult.course.id).toBe(freeCourseId);
+    expect(instructorResult.summary.totalStudents).toBe(1);
+    expect(instructorResult.summary.learningStudents).toBe(1);
+    expect(instructorResult.items.length).toBe(1);
+    expect(instructorResult.items[0]!.student.fullName).toBe('Nguyễn Học Viên');
+
+    // 4. Admin truy cập -> thành công
+    const adminResult = await service.getCourseStudentsForManager(
+      freeCourseId,
+      { userId: new Types.ObjectId().toString(), role: Role.ADMIN },
+      { page: 1, limit: 10 },
+    );
+    expect(adminResult.course.id).toBe(freeCourseId);
+    expect(adminResult.summary.totalStudents).toBe(1);
   });
 });

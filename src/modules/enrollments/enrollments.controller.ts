@@ -30,6 +30,10 @@ import {
   MyEnrolledCourseItemDto,
   SubmitQuizResponseDto,
 } from './dto/enrollment-response.dto.js';
+import {
+  ManageCourseStudentsQueryDto,
+  ManageCourseStudentsResponseDto,
+} from './dto/manage-course-students.dto.js';
 import { SubmitQuizDto } from './dto/submit-quiz.dto.js';
 import {
   MyCoursesQueryDto,
@@ -196,6 +200,35 @@ export class EnrollmentsController {
       courseId,
       lessonId,
       dto,
+    );
+  }
+
+  @Get('manage/courses/:courseId/students')
+  @UseGuards(RolesGuard)
+  @Roles(Role.INSTRUCTOR, Role.ADMIN)
+  @ApiOperation({
+    summary:
+      'Giảng viên hoặc Admin xem danh sách, thống kê và tiến độ học viên của khóa học',
+  })
+  @ApiParam({ name: 'courseId', example: '6650c1f6f2f4f6e4c8bfe125' })
+  @ApiResponse({ status: 200, type: ManageCourseStudentsResponseDto })
+  @ApiResponse({
+    status: 403,
+    description: 'Giảng viên không có quyền quản lý khóa học của người khác',
+  })
+  @ApiResponse({
+    status: 404,
+    description: 'Không tìm thấy khóa học',
+  })
+  getCourseStudents(
+    @Param('courseId') courseId: string,
+    @Query() query: ManageCourseStudentsQueryDto,
+    @CurrentUser() user: CurrentUserData,
+  ): Promise<ManageCourseStudentsResponseDto> {
+    return this.enrollmentsService.getCourseStudentsForManager(
+      courseId,
+      user,
+      query,
     );
   }
 }

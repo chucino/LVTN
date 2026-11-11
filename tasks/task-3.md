@@ -53,3 +53,36 @@
   - backup/client/src/components/public/PublicFooter.vue.20261102-1637.bak
 - Hoàn thành: 2026-11-02 16:47
 - Tóm tắt thay đổi: Hoàn thiện toàn bộ giao diện Frontend cho luồng đăng ký học, màn hình học tập tuần tự bố cục 7/3 (`CourseLearningPage.vue`), trình phát video thông minh (`LessonVideoPlayer.vue`) tự động đồng bộ `watchedFully = true` khi kết thúc 100% thời lượng phát (cả HTML5 `<video>` và YouTube IFrame Player API, không có nút đánh dấu thủ công), khu vực làm trắc nghiệm (`LessonQuizPanel.vue`) hiển thị điểm và giải thích chi tiết từng câu, chứng chỉ kỹ thuật số (`CertificateCardView.vue` kèm mã QR SVG và nút In/Tải PDF), trang tra cứu chứng chỉ công khai (`CertificateVerifyPage.vue`), và nâng cấp `ProfilePage.vue` với tab "Khóa học của tôi" & "Chứng chỉ của tôi" kết nối API thực tế. Vượt qua kiểm tra `lint.mjs` (`0 FAIL`) và `npm run build` (`vue-tsc -b && vite build`).
+
+## [x] #023 - Nâng cấp quản lý học viên theo khóa học dành cho Giảng viên và Admin
+- Bắt đầu: 2026-11-02 21:25
+- Mục tiêu: Bổ sung số lượng học viên `totalStudents` vào danh sách khóa học và xây dựng API cùng giao diện Quản lý học viên chuyên biệt cho từng khóa học (`/dashboard/courses/:id/students`) cho phép Giảng viên (và Admin) theo dõi thống kê, danh sách học viên, tiến độ học tập và chứng chỉ đã cấp theo cơ chế chỉ xem (Read-only) an toàn.
+- Phạm vi dự kiến:
+  - src/modules/courses/dto/manage-course-response.dto.ts
+  - src/modules/courses/manage-course.serializer.ts
+  - src/modules/courses/course-manage.service.ts
+  - src/modules/enrollments/dto/manage-course-students.dto.ts (mới)
+  - src/modules/enrollments/enrollments.service.ts
+  - src/modules/enrollments/enrollments.controller.ts
+  - src/modules/enrollments/enrollments.service.spec.ts
+  - client/src/types/manage-course.ts
+  - client/src/types/learning.ts
+  - client/src/services/enrollments.api.ts
+  - client/src/pages/manage/ManageCoursesPage.vue
+  - client/src/components/manage/ManageCourseActions.vue
+  - client/src/pages/manage/ManageCourseStudentsPage.vue (mới)
+  - client/src/router/index.ts
+- Backup đã tạo:
+  - backup/src/modules/courses/dto/manage-course-response.dto.ts.20261102-2125.bak
+  - backup/src/modules/courses/manage-course.serializer.ts.20261102-2125.bak
+  - backup/src/modules/courses/course-manage.service.ts.20261102-2125.bak
+  - backup/src/modules/enrollments/enrollments.service.ts.20261102-2125.bak
+  - backup/src/modules/enrollments/enrollments.controller.ts.20261102-2125.bak
+  - backup/client/src/types/manage-course.ts.20261102-2125.bak
+  - backup/client/src/types/learning.ts.20261102-2125.bak
+  - backup/client/src/services/enrollments.api.ts.20261102-2125.bak
+  - backup/client/src/pages/manage/ManageCoursesPage.vue.20261102-2125.bak
+  - backup/client/src/components/manage/ManageCourseActions.vue.20261102-2125.bak
+  - backup/client/src/router/index.ts.20261102-2125.bak
+- Hoàn thành: 2026-11-02 21:37
+- Tóm tắt thay đổi: Hoàn thiện chức năng Quản lý học viên theo khóa học dành cho Giảng viên và Admin. Backend tự động tính `totalStudents` cho bảng khóa học thông qua MongoDB aggregate và bổ sung endpoint `GET /manage/courses/:courseId/students` có kiểm soát quyền RBAC chặt chẽ (giảng viên chỉ xem khóa của mình, ném 403 nếu truy cập khóa của người khác). Frontend bổ sung cột Học viên trên `ManageCoursesPage.vue`, thêm nút thao tác Users trên `ManageCourseActions.vue` và xây dựng trang quản lý học viên chuyên biệt `ManageCourseStudentsPage.vue` (`/dashboard/courses/:id/students`) với 4 thẻ thống kê tổng quan (Tổng số, Đang học, Đã hoàn thành, Tiến độ trung bình), tìm kiếm theo tên/email, lọc theo tiến độ, sắp xếp linh hoạt, phân trang và link tra cứu chứng chỉ công khai. Toàn bộ unit test (36/36 test), `nest build`, `lint.mjs` (`0 FAIL`) và `npm run build` đều pass 100%.

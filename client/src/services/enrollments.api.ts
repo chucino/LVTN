@@ -6,6 +6,8 @@ import type {
   EnrollmentStatusResponse,
   LessonLearningDetail,
   LessonProgressUpdateResponse,
+  ManageCourseStudentsQuery,
+  ManageCourseStudentsResponse,
   MyEnrolledCourseItem,
   SubmitQuizResponse,
 } from '@/types/learning';
@@ -88,6 +90,21 @@ export const enrollmentsApi = {
     const response = await http.post<ApiResponse<SubmitQuizResponse>>(
       `/enrollments/courses/${encodeURIComponent(courseId)}/lessons/${encodeURIComponent(lessonId)}/quiz-submit`,
       { answers },
+    );
+    return response.data.data;
+  },
+
+  async getCourseStudents(
+    courseId: string,
+    params?: ManageCourseStudentsQuery,
+    signal?: AbortSignal,
+  ): Promise<ManageCourseStudentsResponse> {
+    const response = await http.get<ApiResponse<ManageCourseStudentsResponse>>(
+      `/manage/courses/${encodeURIComponent(courseId)}/students`,
+      {
+        params,
+        signal,
+      },
     );
     return response.data.data;
   },

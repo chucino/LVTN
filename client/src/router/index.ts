@@ -122,6 +122,15 @@ const routes: RouteRecordRaw[] = [
         meta: { title: 'Chỉnh sửa khóa học - NextCode' },
       },
       {
+        path: 'courses/:id/students',
+        name: 'ManageCourseStudents',
+        component: () => import('@/pages/manage/ManageCourseStudentsPage.vue'),
+        meta: {
+          title: 'Quản lý học viên khóa học - NextCode',
+          roles: ['INSTRUCTOR', 'ADMIN'] as Role[],
+        },
+      },
+      {
         path: 'users',
         name: 'ManageUsers',
         component: () => import('@/pages/manage/ManageUsersPage.vue'),

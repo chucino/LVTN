@@ -7,6 +7,7 @@ import {
   CirclePlus,
   Search,
   SlidersHorizontal,
+  Users,
 } from 'lucide-vue-next';
 import { useAuthStore } from '@/stores/auth.store';
 import { formatCourseDuration, formatCoursePrice } from '@/lib/course-format';
@@ -325,6 +326,7 @@ const hasFilters = computed(
               <th class="px-4 py-3.5 font-medium">Loại / Giá</th>
               <th class="px-4 py-3.5 font-medium">Trạng thái</th>
               <th class="px-4 py-3.5 font-medium">Nội dung</th>
+              <th class="px-4 py-3.5 font-medium">Học viên</th>
               <th v-if="isAdmin" class="px-4 py-3.5 font-medium">Giảng viên</th>
               <th class="px-4 py-3.5 font-medium">Cập nhật</th>
               <th class="px-4 py-3.5 font-medium">Thao tác</th>
@@ -352,6 +354,16 @@ const hasFilters = computed(
               </td>
               <td class="px-4 py-4"><CourseStatusBadge :status="course.status" /></td>
               <td class="px-4 py-4 text-xs tabular-nums text-muted">{{ course.totalChapters }} chương · {{ course.totalLessons }} bài<br />{{ formatCourseDuration(course.totalDuration) }}</td>
+              <td class="px-4 py-4 tabular-nums">
+                <router-link
+                  :to="{ name: 'ManageCourseStudents', params: { id: course.id } }"
+                  class="inline-flex items-center gap-1.5 text-xs font-medium text-ink hover:text-brand-soft"
+                  title="Xem danh sách học viên"
+                >
+                  <Users class="h-3.5 w-3.5 text-muted" />
+                  <span>{{ course.totalStudents ?? 0 }} học viên</span>
+                </router-link>
+              </td>
               <td v-if="isAdmin" class="max-w-40 truncate px-4 py-4 text-ink">{{ course.instructor.fullName }}</td>
               <td class="whitespace-nowrap px-4 py-4 text-xs tabular-nums text-muted">{{ formatUpdatedAt(course.updatedAt) }}</td>
               <td class="px-4 py-4">
@@ -368,7 +380,12 @@ const hasFilters = computed(
             <ManageCourseThumbnail class="!h-16 !w-20" :src="course.thumbnail" :title="course.title" />
             <div class="min-w-0 flex-1">
               <router-link :to="{ name: 'ManageCourseEdit', params: { id: course.id } }" class="line-clamp-2 font-medium text-ink">{{ course.title }}</router-link>
-              <p class="mt-1 truncate text-xs tabular-nums text-muted">{{ course.category.name }} · {{ course.type }} · {{ course.type === 'FREE' ? 'Miễn phí' : formatCoursePrice(course.discountPrice ?? course.price) }}</p>
+              <p class="mt-1 truncate text-xs tabular-nums text-muted">
+                {{ course.category.name }} · {{ course.type }} · {{ course.type === 'FREE' ? 'Miễn phí' : formatCoursePrice(course.discountPrice ?? course.price) }} ·
+                <router-link :to="{ name: 'ManageCourseStudents', params: { id: course.id } }" class="underline hover:text-ink">
+                  {{ course.totalStudents ?? 0 }} học viên
+                </router-link>
+              </p>
               <CourseStatusBadge class="mt-2" :status="course.status" />
             </div>
           </div>

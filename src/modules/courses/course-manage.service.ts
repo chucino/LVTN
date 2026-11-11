@@ -219,6 +219,24 @@ export class CourseManageService {
                 },
               },
               ...instructorLookup,
+              {
+                $lookup: {
+                  from: 'enrollments',
+                  localField: '_id',
+                  foreignField: 'courseId',
+                  as: 'enrollmentDocs',
+                },
+              },
+              {
+                $addFields: {
+                  totalStudents: { $size: '$enrollmentDocs' },
+                },
+              },
+              {
+                $project: {
+                  enrollmentDocs: 0,
+                },
+              },
             ],
             totalCount: [{ $count: 'total' }],
           },
@@ -299,6 +317,24 @@ export class CourseManageService {
       .aggregate<ManageCourseAggregateRecord>([
         { $match: { _id: course._id } },
         ...instructorLookup,
+        {
+          $lookup: {
+            from: 'enrollments',
+            localField: '_id',
+            foreignField: 'courseId',
+            as: 'enrollmentDocs',
+          },
+        },
+        {
+          $addFields: {
+            totalStudents: { $size: '$enrollmentDocs' },
+          },
+        },
+        {
+          $project: {
+            enrollmentDocs: 0,
+          },
+        },
       ])
       .exec();
 

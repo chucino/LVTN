@@ -161,3 +161,60 @@ export interface SubmitQuizResponse {
   results: QuizQuestionResultItem[];
 }
 
+export type ManageCourseStudentsStatusFilter = 'ALL' | 'LEARNING' | 'COMPLETED';
+export type ManageCourseStudentsSort =
+  | 'NEWEST'
+  | 'OLDEST'
+  | 'PROGRESS_DESC'
+  | 'PROGRESS_ASC';
+
+export interface ManageCourseStudentProfile {
+  id: string;
+  fullName: string;
+  email: string;
+  avatar: string | null;
+}
+
+export interface ManageCourseStudentItem {
+  enrollmentId: string;
+  student: ManageCourseStudentProfile;
+  enrolledAt: string;
+  progressPercent: number;
+  status: EnrollmentStatus;
+  completedAt: string | null;
+  certificateCode: string | null;
+}
+
+export interface ManageCourseStudentSummary {
+  totalStudents: number;
+  learningStudents: number;
+  completedStudents: number;
+  avgProgress: number;
+}
+
+export interface ManageCourseStudentsCourseInfo {
+  id: string;
+  title: string;
+  type: string;
+  status: string;
+}
+
+export interface ManageCourseStudentsResponse {
+  course: ManageCourseStudentsCourseInfo;
+  summary: ManageCourseStudentSummary;
+  items: ManageCourseStudentItem[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
+export interface ManageCourseStudentsQuery {
+  page?: number;
+  limit?: number;
+  search?: string;
+  status?: ManageCourseStudentsStatusFilter;
+  sort?: ManageCourseStudentsSort;
+}
+
+

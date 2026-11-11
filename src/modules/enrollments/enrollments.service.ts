@@ -11,10 +11,18 @@ import {
   CourseStatus,
   CourseType,
 } from '../../common/constants/course.enum.js';
+import { Role } from '../../common/constants/roles.enum.js';
 import {
   EnrollmentStatus,
   LessonStatus,
 } from '../../common/constants/learning.enum.js';
+import {
+  ManageCourseStudentsQueryDto,
+  ManageCourseStudentsResponseDto,
+  ManageCourseStudentsSort,
+  ManageCourseStudentsStatusFilter,
+  ManageCourseStudentSummaryDto,
+} from './dto/manage-course-students.dto.js';
 import { CertificatesService } from '../certificates/certificates.service.js';
 import { CertificateResponseDto } from '../certificates/dto/certificate-response.dto.js';
 import { Chapter, Course, Lesson } from '../courses/schemas/course.schema.js';
@@ -915,6 +923,228 @@ export class EnrollmentsService {
     }
 
     return map;
+  }
+
+  /**
+   * Giảng viên hoặc Quản trị viên xem danh sách và tiến độ học viên của khóa học.
+   * Giảng viên chỉ xem được khóa học do mình phụ trách. Admin xem được mọi khóa.
+   */
+  async getCourseStudentsForManager(
+    courseId: string,
+    actor: { userId: string; role: Role | string },
+    query: ManageCourseStudentsQueryDto,
+  ): Promise<ManageCourseStudentsResponseDto> {
+    if (!isValidObjectId(courseId)) {
+      throw new BadRequestException('Mã khóa học không hợp lệ');
+    }
+
+    const course = await this.courseModel.findById(courseId).exec();
+    if (!course) {
+      throw new NotFoundException('Không tìm thấy khóa học');
+    }
+
+    if (actor.role === Role.INSTRUCTOR) {
+      if (course.instructorId.toString() !== actor.userId) {
+        throw new ForbiddenException(
+          'Bạn không có quyền quản lý học viên của khóa học này',
+        );
+      }
+    } else if (actor.role !== Role.ADMIN) {
+      throw new ForbiddenException(
+        'Chỉ giảng viên hoặc quản trị viên được xem danh sách học viên',
+      );
+    }
+
+    const courseObjectId = new Types.ObjectId(courseId);
+
+    const summaryAgg = await this.enrollmentModel
+      .aggregate<{
+        totalStudents: number;
+        completedStudents: number;
+        learningStudents: number;
+        avgProgress: number;
+      }>([
+        { $match: { courseId: courseObjectId } },
+        {
+          $group: {
+            _id: null,
+            totalStudents: { $sum: 1 },
+            completedStudents: {
+              $sum: {
+                $cond: [{ $eq: ['$status', EnrollmentStatus.COMPLETED] }, 1, 0],
+              },
+            },
+            learningStudents: {
+              $sum: {
+                $cond: [{ $eq: ['$status', EnrollmentStatus.LEARNING] }, 1, 0],
+              },
+            },
+            avgProgress: { $avg: '$progressPercent' },
+          },
+        },
+      ])
+      .exec();
+
+    const summary: ManageCourseStudentSummaryDto = {
+      totalStudents: summaryAgg[0]?.totalStudents ?? 0,
+      completedStudents: summaryAgg[0]?.completedStudents ?? 0,
+      learningStudents: summaryAgg[0]?.learningStudents ?? 0,
+      avgProgress:
+        summaryAgg[0]?.avgProgress != null
+          ? Math.round(summaryAgg[0].avgProgress * 10) / 10
+          : 0,
+    };
+
+    const matchFilter: Record<string, unknown> = { courseId: courseObjectId };
+    if (query.status && query.status !== ManageCourseStudentsStatusFilter.ALL) {
+      matchFilter.status = query.status;
+    }
+
+    const page = Math.max(1, query.page || 1);
+    const limit = Math.max(1, Math.min(100, query.limit || 10));
+    const skip = (page - 1) * limit;
+
+    let sortStage: Record<string, 1 | -1> = { enrolledAt: -1 };
+    if (query.sort === ManageCourseStudentsSort.OLDEST) {
+      sortStage = { enrolledAt: 1 };
+    } else if (query.sort === ManageCourseStudentsSort.PROGRESS_DESC) {
+      sortStage = { progressPercent: -1, enrolledAt: -1 };
+    } else if (query.sort === ManageCourseStudentsSort.PROGRESS_ASC) {
+      sortStage = { progressPercent: 1, enrolledAt: -1 };
+    }
+
+    const searchKeyword = query.search?.trim();
+    const searchMatch = searchKeyword
+      ? {
+          $or: [
+            { 'student.fullName': { $regex: searchKeyword, $options: 'i' } },
+            { 'student.email': { $regex: searchKeyword, $options: 'i' } },
+          ],
+        }
+      : {};
+
+    const [facetResult] = await this.enrollmentModel
+      .aggregate<{
+        items: Array<{
+          enrollmentId: string;
+          student: {
+            id: string;
+            fullName: string;
+            email: string;
+            avatar: string | null;
+          };
+          enrolledAt: Date;
+          progressPercent: number;
+          status: EnrollmentStatus;
+          completedAt: Date | null;
+          certificateCode?: string | null;
+        }>;
+        totalCount: Array<{ count: number }>;
+      }>([
+        { $match: matchFilter },
+        {
+          $lookup: {
+            from: 'users',
+            localField: 'studentId',
+            foreignField: '_id',
+            as: 'studentDoc',
+          },
+        },
+        { $unwind: '$studentDoc' },
+        {
+          $addFields: {
+            student: {
+              _id: '$studentDoc._id',
+              fullName: '$studentDoc.fullName',
+              email: '$studentDoc.email',
+              avatar: '$studentDoc.avatar',
+            },
+          },
+        },
+        ...(searchKeyword ? [{ $match: searchMatch }] : []),
+        {
+          $facet: {
+            items: [
+              { $sort: sortStage },
+              { $skip: skip },
+              { $limit: limit },
+              {
+                $lookup: {
+                  from: 'certificates',
+                  let: { studentId: '$studentId', courseId: '$courseId' },
+                  pipeline: [
+                    {
+                      $match: {
+                        $expr: {
+                          $and: [
+                            { $eq: ['$studentId', '$$studentId'] },
+                            { $eq: ['$courseId', '$$courseId'] },
+                          ],
+                        },
+                      },
+                    },
+                    { $project: { certificateCode: 1 } },
+                  ],
+                  as: 'certDocs',
+                },
+              },
+              {
+                $project: {
+                  enrollmentId: { $toString: '$_id' },
+                  student: {
+                    id: { $toString: '$student._id' },
+                    fullName: '$student.fullName',
+                    email: '$student.email',
+                    avatar: '$student.avatar',
+                  },
+                  enrolledAt: '$enrolledAt',
+                  progressPercent: '$progressPercent',
+                  status: '$status',
+                  completedAt: '$completedAt',
+                  certificateCode: {
+                    $arrayElemAt: ['$certDocs.certificateCode', 0],
+                  },
+                },
+              },
+            ],
+            totalCount: [{ $count: 'count' }],
+          },
+        },
+      ])
+      .exec();
+
+    const total = facetResult?.totalCount?.[0]?.count ?? 0;
+    const items = (facetResult?.items ?? []).map((item) => ({
+      enrollmentId: item.enrollmentId,
+      student: {
+        id: item.student.id,
+        fullName: item.student.fullName,
+        email: item.student.email,
+        avatar: item.student.avatar ?? null,
+      },
+      enrolledAt: new Date(item.enrolledAt).toISOString(),
+      progressPercent: item.progressPercent,
+      status: item.status,
+      completedAt: item.completedAt
+        ? new Date(item.completedAt).toISOString()
+        : null,
+      certificateCode: item.certificateCode ?? null,
+    }));
+
+    return {
+      course: {
+        id: course._id.toString(),
+        title: course.title,
+        type: course.type,
+        status: course.status,
+      },
+      summary,
+      items,
+      total,
+      page,
+      limit,
+      totalPages: total === 0 ? 0 : Math.ceil(total / limit),
+    };
   }
 }
 

@@ -66,6 +66,9 @@ export class ManageCourseItemDto {
   @ApiProperty({ example: 5400 })
   totalDuration!: number;
 
+  @ApiProperty({ example: 42, description: 'Tổng số học viên đã đăng ký khóa học' })
+  totalStudents!: number;
+
   @ApiProperty({ type: ManageInstructorDto })
   instructor!: ManageInstructorDto;
 

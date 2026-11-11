@@ -45,6 +45,7 @@ export interface ManageCourseItemAggregateRecord
     avatar: string | null;
   };
   category: { _id: Types.ObjectId | string; name: string };
+  totalStudents?: number;
 }
 
 export interface ManageCourseAggregateRecord
@@ -156,6 +157,7 @@ export function serializeManageCourseItem(
     totalChapters: course.totalChapters,
     totalLessons: course.totalLessons,
     totalDuration: course.totalDuration,
+    totalStudents: course.totalStudents ?? 0,
     instructor: serializeInstructor(course.instructor),
     category: {
       id: idToString(course.category._id),
