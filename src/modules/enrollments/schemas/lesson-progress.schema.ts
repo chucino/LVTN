@@ -35,6 +35,9 @@ export class LessonProgress {
   @Prop({ required: true, min: 0, default: 0 })
   lastPositionSec!: number;
 
+  @Prop({ required: true, min: 0, default: 0 })
+  watchedSeconds!: number;
+
   @Prop({ required: true, default: false })
   watchedFully!: boolean;
 
@@ -49,4 +52,3 @@ export const LessonProgressSchema =
   SchemaFactory.createForClass(LessonProgress);
 
 LessonProgressSchema.index({ enrollmentId: 1, lessonId: 1 }, { unique: true });
-

@@ -71,7 +71,11 @@ export const enrollmentsApi = {
   async updateLessonProgress(
     courseId: string,
     lessonId: string,
-    payload: { lastPositionSec: number; watchedFully?: boolean },
+    payload: {
+      lastPositionSec: number;
+      watchedSeconds?: number;
+      watchedFully?: boolean;
+    },
   ): Promise<LessonProgressUpdateResponse> {
     const response = await http.patch<
       ApiResponse<LessonProgressUpdateResponse>
@@ -109,4 +113,3 @@ export const enrollmentsApi = {
     return response.data.data;
   },
 };
-

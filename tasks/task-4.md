@@ -142,3 +142,21 @@
 - Backup đã tạo: backup/<đường dẫn file>.20261113-0316.bak cho toàn bộ 6 file trên
 - Hoàn thành: 2026-11-13 03:18
 - Tóm tắt thay đổi: Đổi toàn bộ nhãn nút "Xem như học viên" thành "Xem khóa học" tại `CourseDetailPage.vue`, `DashboardPage.vue`, `ManageCourseEditPage.vue`, `ManageCourseActions.vue`, `CourseLearningPage.vue`; tại `CourseStatusPanel.vue` (tab Trạng thái và duyệt) xóa nút trùng "Xem trang công khai" và chỉ giữ lại một nút duy nhất là "Xem khóa học".
+
+
+## [x] #038 - Nâng cấp điều kiện học bài giảng tiếp theo với bộ đếm 60% thời lượng video thực tế
+- Bắt đầu: 2026-11-13 03:47
+- Mục tiêu: Thêm bộ đếm thời gian xem thực tế (`watchedSeconds`) chỉ đếm khi video đang phát (`Play`), lưu cộng dồn vào DB, cho phép học viên tua tự do, tự động đánh dấu hoàn thành phần video và mở khóa trắc nghiệm / bài tiếp theo ngay khi bộ đếm đạt 60% thời lượng bài giảng, đồng thời chặn lách luật tua nhanh đến cuối video và hiển thị cảnh báo khi chưa đủ 60%.
+- Phạm vi dự kiến:
+  - src/modules/enrollments/schemas/lesson-progress.schema.ts
+  - src/modules/enrollments/dto/update-lesson-progress.dto.ts
+  - src/modules/enrollments/dto/enrollment-response.dto.ts
+  - src/modules/enrollments/enrollments.service.ts
+  - src/modules/enrollments/enrollments.service.spec.ts
+  - client/src/types/learning.ts
+  - client/src/services/enrollments.api.ts
+  - client/src/components/learning/LessonVideoPlayer.vue
+  - client/src/pages/student/CourseLearningPage.vue
+- Backup đã tạo: backup/<đường dẫn file>.20261113-0347.bak cho toàn bộ 9 file trên
+- Hoàn thành: 2026-11-13 03:55
+- Tóm tắt thay đổi: Bổ sung trường `watchedSeconds` vào `LessonProgress` schema, DTO và `EnrollmentsService` để lưu cộng dồn tổng thời gian thực tế học viên bật phát video; chặn hoàn toàn việc tua nhanh đến cuối video để qua bài ở tầng Backend (chỉ đánh dấu `watchedFully = true` khi `watchedSeconds >= Math.ceil(duration * 0.6)`). Trên `LessonVideoPlayer.vue`, gỡ khóa tua (`seek`) để học viên tua tự do, thêm bộ đếm ngầm 1 giây chỉ chạy khi video đang phát (`isPlaying`), tự động báo hoàn thành video và mở khóa bài tiếp theo / trắc nghiệm ngay khi chạm mốc 60% thời lượng, đồng thời hiển thị cảnh báo nhắc nhở nếu video kết thúc mà chưa tích lũy đủ 60% thời lượng. Toàn bộ 57 unit tests, `lint.mjs` (0 FAIL) và `npm run build` đều đạt.

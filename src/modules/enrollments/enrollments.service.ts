@@ -327,6 +327,7 @@ export class EnrollmentsService {
                 quizCount,
                 status: LessonStatus.UNLOCKED,
                 lastPositionSec: 0,
+                watchedSeconds: lesson.duration,
                 watchedFully: true,
                 quizPassed: false,
               };
@@ -394,6 +395,7 @@ export class EnrollmentsService {
               quizCount,
               status: prog.status,
               lastPositionSec: prog.lastPositionSec,
+              watchedSeconds: prog.watchedSeconds ?? 0,
               watchedFully: prog.watchedFully,
               quizPassed: prog.quizPassed,
             };
@@ -485,6 +487,7 @@ export class EnrollmentsService {
         requiredPassPercent,
         status: LessonStatus.UNLOCKED,
         lastPositionSec: 0,
+        watchedSeconds: entry.lesson.duration,
         watchedFully: true,
         quizPassed: false,
         quizUnlocked: hasQuiz,
@@ -544,7 +547,7 @@ export class EnrollmentsService {
       ? null
       : progress.watchedFully
         ? null
-        : 'Vui lòng xem hết video bài giảng trước khi làm câu hỏi trắc nghiệm';
+        : 'Vui lòng xem tối thiểu 60% thời lượng video bài giảng trước khi làm câu hỏi trắc nghiệm';
 
     const previousEntry = lessonIndex > 0 ? orderedLessons[lessonIndex - 1] : null;
     const nextEntry =
@@ -570,6 +573,7 @@ export class EnrollmentsService {
       requiredPassPercent,
       status: progress.status,
       lastPositionSec: progress.lastPositionSec,
+      watchedSeconds: progress.watchedSeconds ?? 0,
       watchedFully: progress.watchedFully,
       quizPassed: progress.quizPassed,
       quizUnlocked,
@@ -631,6 +635,7 @@ export class EnrollmentsService {
         lessonId,
         status: LessonStatus.UNLOCKED,
         lastPositionSec: clampedPosition,
+        watchedSeconds: maxDuration,
         watchedFully: true,
         quizPassed: false,
         quizUnlocked: entry.hasQuiz,
@@ -673,22 +678,36 @@ export class EnrollmentsService {
         ? Math.min(dto.lastPositionSec, maxDuration)
         : dto.lastPositionSec;
 
-    progress.lastPositionSec = Math.max(progress.lastPositionSec, clampedPosition);
+    progress.lastPositionSec = clampedPosition;
     enrollment.lastLessonId = entry.lesson._id;
 
-    const reachedEndByPosition =
-      maxDuration > 0 && clampedPosition >= maxDuration;
-    if (dto.watchedFully === true || reachedEndByPosition) {
+    const rawWatchedSeconds =
+      dto.watchedSeconds !== undefined
+        ? dto.watchedSeconds
+        : (progress.watchedSeconds ?? 0);
+    const clampedWatchedSeconds =
+      maxDuration > 0
+        ? Math.min(Math.max(0, rawWatchedSeconds), maxDuration)
+        : Math.max(0, rawWatchedSeconds);
+
+    progress.watchedSeconds = Math.max(
+      progress.watchedSeconds ?? 0,
+      clampedWatchedSeconds,
+    );
+
+    const requiredWatchSeconds =
+      maxDuration > 0 ? Math.ceil(maxDuration * 0.6) : 0;
+    const reachedRequiredWatchTime =
+      maxDuration <= 0 || progress.watchedSeconds >= requiredWatchSeconds;
+
+    if (reachedRequiredWatchTime) {
       progress.watchedFully = true;
-      if (maxDuration > 0) {
-        progress.lastPositionSec = maxDuration;
-      }
     }
 
     let unlockedNextLessonId: string | null = null;
     let certificate: CertificateResponseDto | null = null;
 
-    // Nếu bài học không có câu hỏi trắc nghiệm, xem hết video là hoàn thành bài ngay
+    // Nếu bài học không có câu hỏi trắc nghiệm, xem đủ 60% thời lượng video là hoàn thành bài ngay
     if (progress.watchedFully && !entry.hasQuiz) {
       progress.quizPassed = true;
       const advanceResult = await this.completeLessonAndAdvance(
@@ -715,6 +734,7 @@ export class EnrollmentsService {
       lessonId,
       status: progress.status,
       lastPositionSec: progress.lastPositionSec,
+      watchedSeconds: progress.watchedSeconds,
       watchedFully: progress.watchedFully,
       quizPassed: progress.quizPassed,
       quizUnlocked: entry.hasQuiz && progress.watchedFully,
@@ -1017,6 +1037,7 @@ export class EnrollmentsService {
       lessonId: entry.lesson._id,
       status: index === 0 ? LessonStatus.UNLOCKED : LessonStatus.LOCKED,
       lastPositionSec: 0,
+      watchedSeconds: 0,
       watchedFully: false,
       quizPassed: false,
     }));
@@ -1240,6 +1261,7 @@ export class EnrollmentsService {
           lessonId,
           status: shouldUnlock ? LessonStatus.UNLOCKED : LessonStatus.LOCKED,
           lastPositionSec: 0,
+          watchedSeconds: 0,
           watchedFully: false,
           quizPassed: false,
         });

@@ -14,8 +14,18 @@ export class UpdateLessonProgressDto {
   lastPositionSec!: number;
 
   @ApiPropertyOptional({
+    example: 120,
+    description: 'Tổng số giây thực tế học viên đã bật phát video (>= 0)',
+  })
+  @IsOptional()
+  @Type(() => Number)
+  @IsInt({ message: 'watchedSeconds phải là số nguyên' })
+  @Min(0, { message: 'watchedSeconds không được nhỏ hơn 0' })
+  watchedSeconds?: number;
+
+  @ApiPropertyOptional({
     example: true,
-    description: 'Đánh dấu đã xem hết video bài giảng hay chưa',
+    description: 'Đánh dấu đã xem đủ thời lượng video bài giảng hay chưa',
   })
   @IsOptional()
   @IsBoolean({ message: 'watchedFully phải là kiểu boolean' })
@@ -33,4 +43,3 @@ export class MyCoursesQueryDto {
   })
   status?: EnrollmentStatus;
 }
-

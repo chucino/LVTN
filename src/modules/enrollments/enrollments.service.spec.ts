@@ -372,18 +372,31 @@ describe('EnrollmentsService', () => {
       ),
     ).rejects.toBeInstanceOf(ForbiddenException);
 
-    // 2. Xem hết video bài 1 (không có quiz) -> tự động COMPLETED bài 1 và mở khóa bài 2
+    // 2. Tua nhanh đến cuối video bài 1 (lastPositionSec = 300, watchedFully = true) nhưng bộ đếm mới xem 20 giây (< 60% của 300s = 180s) -> CHƯA được tính hoàn thành video
+    const fastForwardAttempt = await service.updateLessonProgress(
+      studentId,
+      freeCourseId,
+      lesson1Id.toString(),
+      { lastPositionSec: 300, watchedSeconds: 20, watchedFully: true },
+    );
+    expect(fastForwardAttempt.watchedFully).toBe(false);
+    expect(fastForwardAttempt.watchedSeconds).toBe(20);
+    expect(fastForwardAttempt.status).toBe(LessonStatus.UNLOCKED);
+    expect(fastForwardAttempt.unlockedNextLessonId).toBeNull();
+
+    // Khi bộ đếm đạt đủ 60% thời lượng (180/300 giây) -> tự động COMPLETED bài 1 và mở khóa bài 2 ngay cả khi vị trí phát đang ở giây 180
     const step1 = await service.updateLessonProgress(
       studentId,
       freeCourseId,
       lesson1Id.toString(),
-      { lastPositionSec: 300, watchedFully: true },
+      { lastPositionSec: 180, watchedSeconds: 180, watchedFully: true },
     );
+    expect(step1.watchedFully).toBe(true);
     expect(step1.status).toBe(LessonStatus.COMPLETED);
     expect(step1.unlockedNextLessonId).toBe(lesson2Id.toString());
     expect(step1.courseProgressPercent).toBe(33);
 
-    // 3. Truy cập bài 2: mới mở khóa, chưa xem hết video nên chưa mở câu hỏi trắc nghiệm
+    // 3. Truy cập bài 2: mới mở khóa, chưa xem đủ 60% video nên chưa mở câu hỏi trắc nghiệm
     const lesson2BeforeWatch = await service.getLessonForLearning(
       studentId,
       freeCourseId,
@@ -392,19 +405,19 @@ describe('EnrollmentsService', () => {
     expect(lesson2BeforeWatch.quizUnlocked).toBe(false);
     expect(lesson2BeforeWatch.quizQuestions).toHaveLength(0);
 
-    // Thử nộp quiz khi chưa xem hết video -> bị chặn BadRequestException
+    // Thử nộp quiz khi chưa xem đủ 60% video -> bị chặn BadRequestException
     await expect(
       service.submitLessonQuiz(studentId, freeCourseId, lesson2Id.toString(), {
         answers: [{ questionId: q1Id.toString(), selectedOption: 1 }],
       }),
     ).rejects.toBeInstanceOf(BadRequestException);
 
-    // 4. Đánh dấu đã xem hết video bài 2 -> mở câu hỏi trắc nghiệm nhưng chưa hoàn thành bài
+    // 4. Đạt đủ 60% thời lượng video bài 2 (180/300 giây) -> mở câu hỏi trắc nghiệm ngay nhưng chưa hoàn thành bài
     const step2Watch = await service.updateLessonProgress(
       studentId,
       freeCourseId,
       lesson2Id.toString(),
-      { lastPositionSec: 300, watchedFully: true },
+      { lastPositionSec: 180, watchedSeconds: 180, watchedFully: true },
     );
     expect(step2Watch.status).toBe(LessonStatus.UNLOCKED);
     expect(step2Watch.quizUnlocked).toBe(true);
@@ -443,7 +456,7 @@ describe('EnrollmentsService', () => {
       studentId,
       freeCourseId,
       lesson3Id.toString(),
-      { lastPositionSec: 300, watchedFully: true },
+      { lastPositionSec: 180, watchedSeconds: 180, watchedFully: true },
     );
 
     const quiz3TwoCorrect = await service.submitLessonQuiz(

@@ -108,6 +108,9 @@ export class CurriculumLessonItemDto {
   @ApiProperty({ example: 120 })
   lastPositionSec!: number;
 
+  @ApiProperty({ example: 120, required: false })
+  watchedSeconds?: number;
+
   @ApiProperty({ example: false })
   watchedFully!: boolean;
 
@@ -257,6 +260,9 @@ export class LessonLearningDetailDto {
   @ApiProperty({ example: 120 })
   lastPositionSec!: number;
 
+  @ApiProperty({ example: 120, required: false })
+  watchedSeconds?: number;
+
   @ApiProperty({ example: true })
   watchedFully!: boolean;
 
@@ -294,6 +300,9 @@ export class LessonProgressUpdateResponseDto {
 
   @ApiProperty({ example: 420 })
   lastPositionSec!: number;
+
+  @ApiProperty({ example: 252, required: false })
+  watchedSeconds?: number;
 
   @ApiProperty({ example: true })
   watchedFully!: boolean;

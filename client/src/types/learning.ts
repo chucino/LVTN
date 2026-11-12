@@ -65,6 +65,7 @@ export interface CurriculumLessonItem {
   quizCount: number;
   status: LessonStatus;
   lastPositionSec: number;
+  watchedSeconds?: number;
   watchedFully: boolean;
   quizPassed: boolean;
 }
@@ -117,6 +118,7 @@ export interface LessonLearningDetail {
   requiredPassPercent: number;
   status: LessonStatus;
   lastPositionSec: number;
+  watchedSeconds?: number;
   watchedFully: boolean;
   quizPassed: boolean;
   quizUnlocked: boolean;
@@ -131,6 +133,7 @@ export interface LessonProgressUpdateResponse {
   lessonId: string;
   status: LessonStatus;
   lastPositionSec: number;
+  watchedSeconds?: number;
   watchedFully: boolean;
   quizPassed: boolean;
   quizUnlocked: boolean;

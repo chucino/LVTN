@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import { CheckCircle2, Clock } from 'lucide-vue-next';
+import { AlertCircle, CheckCircle2, Clock } from 'lucide-vue-next';
 import { formatCourseDuration } from '@/lib/course-format';
 
 const props = defineProps<{
@@ -9,25 +9,37 @@ const props = defineProps<{
   videoUrl: string;
   duration: number;
   lastPositionSec: number;
+  watchedSeconds?: number;
   watchedFully: boolean;
 }>();
 
 const emit = defineEmits<{
   (
     e: 'progress',
-    payload: { lastPositionSec: number; watchedFully: boolean },
+    payload: {
+      lastPositionSec: number;
+      watchedSeconds: number;
+      watchedFully: boolean;
+    },
   ): void;
 }>();
 
 const htmlVideoRef = ref<HTMLVideoElement | null>(null);
 const ytContainerId = computed(() => `yt-player-${props.lessonId}`);
 const currentPositionSec = ref(props.lastPositionSec || 0);
-const maxWatchedSec = ref(props.lastPositionSec || 0);
+const accumulatedWatchedSec = ref(props.watchedSeconds || 0);
 const isPlaying = ref(false);
+const insufficientWatchWarning = ref(false);
+const hasEmittedCompletion = ref(props.watchedFully);
 
 let lastSavedPositionSec = props.lastPositionSec || 0;
+let lastSavedWatchedSec = props.watchedSeconds || 0;
 let ytPlayer: any = null;
-let ytPollTimer: ReturnType<typeof setInterval> | null = null;
+let playTimer: ReturnType<typeof setInterval> | null = null;
+
+const requiredWatchSec = computed(() =>
+  props.duration > 0 ? Math.ceil(props.duration * 0.6) : 0,
+);
 
 function extractYouTubeId(rawUrl: string): string | null {
   if (!rawUrl) return null;
@@ -50,73 +62,164 @@ function extractYouTubeId(rawUrl: string): string | null {
 const youtubeVideoId = computed(() => extractYouTubeId(props.videoUrl));
 const isYouTube = computed(() => Boolean(youtubeVideoId.value));
 
-function maybeEmitPeriodicSave(sec: number): void {
-  const rounded = Math.max(0, Math.floor(sec));
-  currentPositionSec.value = rounded;
-  if (rounded > maxWatchedSec.value) {
-    maxWatchedSec.value = rounded;
+function syncCurrentPositionFromPlayer(): void {
+  if (isYouTube.value) {
+    if (ytPlayer && typeof ytPlayer.getCurrentTime === 'function') {
+      const sec = Math.floor(Number(ytPlayer.getCurrentTime() || 0));
+      if (sec >= 0) currentPositionSec.value = sec;
+    }
+  } else if (htmlVideoRef.value) {
+    const sec = Math.floor(htmlVideoRef.value.currentTime || 0);
+    if (sec >= 0) currentPositionSec.value = sec;
   }
-  if (Math.abs(rounded - lastSavedPositionSec) >= 10) {
-    lastSavedPositionSec = rounded;
+}
+
+function stopPlayTimer(): void {
+  if (playTimer) {
+    clearInterval(playTimer);
+    playTimer = null;
+  }
+}
+
+function startPlayTimer(): void {
+  stopPlayTimer();
+  playTimer = setInterval(() => {
+    if (!isPlaying.value) return;
+
+    syncCurrentPositionFromPlayer();
+
+    const nextWatched = accumulatedWatchedSec.value + 1;
+    accumulatedWatchedSec.value =
+      props.duration > 0 ? Math.min(props.duration, nextWatched) : nextWatched;
+
+    const reached60Percent =
+      props.duration <= 0 ||
+      accumulatedWatchedSec.value >= requiredWatchSec.value;
+
+    if (reached60Percent && insufficientWatchWarning.value) {
+      insufficientWatchWarning.value = false;
+    }
+
+    // Ngay khi bộ đếm chạm mốc 60% thời lượng bài giảng -> báo hoàn thành phần video ngay lập tức
+    if (
+      reached60Percent &&
+      !props.watchedFully &&
+      !hasEmittedCompletion.value
+    ) {
+      hasEmittedCompletion.value = true;
+      lastSavedPositionSec = currentPositionSec.value;
+      lastSavedWatchedSec = accumulatedWatchedSec.value;
+      emit('progress', {
+        lastPositionSec: currentPositionSec.value,
+        watchedSeconds: accumulatedWatchedSec.value,
+        watchedFully: true,
+      });
+      return;
+    }
+
+    // Định kỳ lưu cộng dồn mỗi 10 giây đang phát vào cơ sở dữ liệu
+    if (
+      accumulatedWatchedSec.value - lastSavedWatchedSec >= 10 ||
+      Math.abs(currentPositionSec.value - lastSavedPositionSec) >= 15
+    ) {
+      lastSavedPositionSec = currentPositionSec.value;
+      lastSavedWatchedSec = accumulatedWatchedSec.value;
+      emit('progress', {
+        lastPositionSec: currentPositionSec.value,
+        watchedSeconds: accumulatedWatchedSec.value,
+        watchedFully: props.watchedFully || reached60Percent,
+      });
+    }
+  }, 1000);
+}
+
+function flushProgressOnPause(): void {
+  syncCurrentPositionFromPlayer();
+  const reached60Percent =
+    props.watchedFully ||
+    props.duration <= 0 ||
+    accumulatedWatchedSec.value >= requiredWatchSec.value;
+
+  if (reached60Percent) {
+    hasEmittedCompletion.value = true;
+    insufficientWatchWarning.value = false;
+  }
+
+  if (
+    accumulatedWatchedSec.value !== lastSavedWatchedSec ||
+    Math.abs(currentPositionSec.value - lastSavedPositionSec) >= 2
+  ) {
+    lastSavedPositionSec = currentPositionSec.value;
+    lastSavedWatchedSec = accumulatedWatchedSec.value;
     emit('progress', {
-      lastPositionSec: rounded,
+      lastPositionSec: currentPositionSec.value,
+      watchedSeconds: accumulatedWatchedSec.value,
+      watchedFully: reached60Percent,
+    });
+  }
+}
+
+function handleVideoEnded(): void {
+  syncCurrentPositionFromPlayer();
+  const reached60Percent =
+    props.watchedFully ||
+    props.duration <= 0 ||
+    accumulatedWatchedSec.value >= requiredWatchSec.value;
+
+  lastSavedPositionSec = currentPositionSec.value;
+  lastSavedWatchedSec = accumulatedWatchedSec.value;
+
+  if (reached60Percent) {
+    hasEmittedCompletion.value = true;
+    insufficientWatchWarning.value = false;
+    emit('progress', {
+      lastPositionSec: currentPositionSec.value,
+      watchedSeconds: accumulatedWatchedSec.value,
+      watchedFully: true,
+    });
+  } else {
+    insufficientWatchWarning.value = true;
+    emit('progress', {
+      lastPositionSec: currentPositionSec.value,
+      watchedSeconds: accumulatedWatchedSec.value,
       watchedFully: false,
     });
   }
 }
 
-function handleVideoEnded(finalDuration?: number): void {
-  const finalSec = Math.max(
-    props.duration,
-    Math.floor(finalDuration || currentPositionSec.value || props.duration),
-  );
-  currentPositionSec.value = finalSec;
-  maxWatchedSec.value = finalSec;
-  lastSavedPositionSec = finalSec;
-  emit('progress', {
-    lastPositionSec: finalSec,
-    watchedFully: true,
-  });
-}
-
-// HTML5 <video> handlers
+// HTML5 <video> handlers (cho phép học viên tua tự do)
 function onHtmlLoadedMetadata(): void {
   const el = htmlVideoRef.value;
   if (!el) return;
-  if (props.lastPositionSec > 0 && (!el.duration || props.lastPositionSec < el.duration - 2)) {
+  if (
+    props.lastPositionSec > 0 &&
+    (!el.duration || props.lastPositionSec < el.duration - 2)
+  ) {
     el.currentTime = props.lastPositionSec;
   }
+}
+
+function onHtmlPlay(): void {
+  isPlaying.value = true;
+  startPlayTimer();
 }
 
 function onHtmlTimeUpdate(): void {
   const el = htmlVideoRef.value;
   if (!el) return;
-  // Không cho tua vượt quá vị trí đã xem xa nhất nếu bài học chưa xem hết
-  if (!props.watchedFully && el.currentTime > maxWatchedSec.value + 4) {
-    el.currentTime = maxWatchedSec.value;
-    return;
-  }
-  maybeEmitPeriodicSave(el.currentTime);
+  currentPositionSec.value = Math.max(0, Math.floor(el.currentTime));
 }
 
 function onHtmlPause(): void {
   isPlaying.value = false;
-  const el = htmlVideoRef.value;
-  if (!el) return;
-  const sec = Math.max(0, Math.floor(el.currentTime));
-  if (sec > 0 && sec !== lastSavedPositionSec) {
-    lastSavedPositionSec = sec;
-    emit('progress', {
-      lastPositionSec: sec,
-      watchedFully: false,
-    });
-  }
+  stopPlayTimer();
+  flushProgressOnPause();
 }
 
 function onHtmlEnded(): void {
   isPlaying.value = false;
-  const el = htmlVideoRef.value;
-  handleVideoEnded(el?.duration);
+  stopPlayTimer();
+  handleVideoEnded();
 }
 
 // YouTube IFrame API loader & player
@@ -144,15 +247,8 @@ function loadYouTubeIframeApi(): Promise<any> {
   });
 }
 
-function clearYtPoll(): void {
-  if (ytPollTimer) {
-    clearInterval(ytPollTimer);
-    ytPollTimer = null;
-  }
-}
-
 function destroyYtPlayer(): void {
-  clearYtPoll();
+  stopPlayTimer();
   if (ytPlayer && typeof ytPlayer.destroy === 'function') {
     try {
       ytPlayer.destroy();
@@ -183,39 +279,17 @@ async function initYouTubePlayer(): Promise<void> {
         // YT.PlayerState.PLAYING === 1
         if (event.data === 1) {
           isPlaying.value = true;
-          clearYtPoll();
-          ytPollTimer = setInterval(() => {
-            if (!ytPlayer || typeof ytPlayer.getCurrentTime !== 'function') return;
-            const currentSec = Number(ytPlayer.getCurrentTime() || 0);
-            if (!props.watchedFully && currentSec > maxWatchedSec.value + 6) {
-              ytPlayer.seekTo(maxWatchedSec.value, true);
-              return;
-            }
-            maybeEmitPeriodicSave(currentSec);
-          }, 3000);
+          startPlayTimer();
         } else if (event.data === 2) {
           // YT.PlayerState.PAUSED === 2
           isPlaying.value = false;
-          clearYtPoll();
-          if (ytPlayer && typeof ytPlayer.getCurrentTime === 'function') {
-            const sec = Math.floor(Number(ytPlayer.getCurrentTime() || 0));
-            if (sec > 0 && sec !== lastSavedPositionSec) {
-              lastSavedPositionSec = sec;
-              emit('progress', {
-                lastPositionSec: sec,
-                watchedFully: false,
-              });
-            }
-          }
+          stopPlayTimer();
+          flushProgressOnPause();
         } else if (event.data === 0) {
-          // YT.PlayerState.ENDED === 0 -> Video đã phát hết 100% thời lượng!
+          // YT.PlayerState.ENDED === 0
           isPlaying.value = false;
-          clearYtPoll();
-          const totalDur =
-            ytPlayer && typeof ytPlayer.getDuration === 'function'
-              ? Number(ytPlayer.getDuration() || props.duration)
-              : props.duration;
-          handleVideoEnded(totalDur);
+          stopPlayTimer();
+          handleVideoEnded();
         }
       },
     },
@@ -223,11 +297,37 @@ async function initYouTubePlayer(): Promise<void> {
 }
 
 watch(
+  () => props.watchedSeconds,
+  (newVal) => {
+    if (typeof newVal === 'number' && newVal > accumulatedWatchedSec.value) {
+      accumulatedWatchedSec.value = newVal;
+      lastSavedWatchedSec = newVal;
+    }
+  },
+);
+
+watch(
+  () => props.watchedFully,
+  (completed) => {
+    if (completed) {
+      hasEmittedCompletion.value = true;
+      insufficientWatchWarning.value = false;
+    }
+  },
+);
+
+watch(
   () => [props.lessonId, props.videoUrl],
   () => {
+    isPlaying.value = false;
+    stopPlayTimer();
     currentPositionSec.value = props.lastPositionSec || 0;
-    maxWatchedSec.value = props.lastPositionSec || 0;
+    accumulatedWatchedSec.value = props.watchedSeconds || 0;
     lastSavedPositionSec = props.lastPositionSec || 0;
+    lastSavedWatchedSec = props.watchedSeconds || 0;
+    hasEmittedCompletion.value = props.watchedFully;
+    insufficientWatchWarning.value = false;
+
     if (isYouTube.value) {
       setTimeout(() => {
         void initYouTubePlayer();
@@ -246,6 +346,9 @@ onMounted(() => {
 });
 
 onBeforeUnmount(() => {
+  if (isPlaying.value) {
+    flushProgressOnPause();
+  }
   destroyYtPlayer();
 });
 </script>
@@ -267,7 +370,7 @@ onBeforeUnmount(() => {
           playsinline
           class="h-full w-full"
           @loadedmetadata="onHtmlLoadedMetadata"
-          @play="isPlaying = true"
+          @play="onHtmlPlay"
           @timeupdate="onHtmlTimeUpdate"
           @pause="onHtmlPause"
           @ended="onHtmlEnded"
@@ -283,9 +386,6 @@ onBeforeUnmount(() => {
         <span class="tabular-nums">
           Thời lượng bài giảng: {{ formatCourseDuration(duration) }}
         </span>
-        <span v-if="currentPositionSec > 0 && !watchedFully" class="text-white/60 tabular-nums">
-          · Đang lưu ở {{ formatCourseDuration(currentPositionSec) }}
-        </span>
       </div>
 
       <div
@@ -293,12 +393,22 @@ onBeforeUnmount(() => {
         class="inline-flex items-center gap-1.5 rounded-full bg-[#4fd1a5]/20 px-3 py-1 font-semibold text-[#4fd1a5]"
       >
         <CheckCircle2 class="h-3.5 w-3.5" />
-        <span>Đã xem hết 100% video bài giảng</span>
+        <span>Đã hoàn thành xem video bài giảng</span>
       </div>
       <div v-else class="text-white/65">
-        Xem hết 100% thời lượng video để hệ thống tự động ghi nhận hoàn thành video
+        Xem tối thiểu 60% thời lượng video để hệ thống ghi nhận hoàn thành video
       </div>
+    </div>
+
+    <div
+      v-if="insufficientWatchWarning && !watchedFully"
+      class="flex items-center gap-2.5 bg-amber-500/20 px-5 py-2.5 text-xs font-medium text-amber-200"
+      role="alert"
+    >
+      <AlertCircle class="h-4 w-4 shrink-0 text-amber-300" />
+      <span>
+        Bạn chưa xem đủ 60% thời lượng video bài giảng. Vui lòng tiếp tục phát video để đủ điều kiện mở khóa bài tiếp theo.
+      </span>
     </div>
   </div>
 </template>
-

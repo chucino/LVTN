@@ -128,6 +128,7 @@ async function selectLesson(
 
 async function handleVideoProgress(payload: {
   lastPositionSec: number;
+  watchedSeconds: number;
   watchedFully: boolean;
 }): Promise<void> {
   if (!courseId.value || !currentLesson.value) return;
@@ -144,6 +145,8 @@ async function handleVideoProgress(payload: {
 
     if (currentLesson.value && currentLesson.value.id === targetLessonId) {
       currentLesson.value.lastPositionSec = updated.lastPositionSec;
+      currentLesson.value.watchedSeconds =
+        updated.watchedSeconds ?? payload.watchedSeconds;
       currentLesson.value.watchedFully = updated.watchedFully;
       currentLesson.value.quizPassed = updated.quizPassed;
       currentLesson.value.status = updated.status;
@@ -153,8 +156,8 @@ async function handleVideoProgress(payload: {
       }
     }
 
-    // Khi video vừa chạy hết 100% lần đầu tiên: tải lại chi tiết bài để nhận câu hỏi trắc nghiệm và cập nhật mục lục
-    if (payload.watchedFully && !wasWatchedFully) {
+    // Khi vừa đạt đủ 60% thời lượng video lần đầu tiên: tải lại chi tiết bài để nhận câu hỏi trắc nghiệm và cập nhật mục lục
+    if (updated.watchedFully && !wasWatchedFully) {
       await Promise.all([
         refreshOverviewSilently(),
         enrollmentsApi
@@ -173,7 +176,7 @@ async function handleVideoProgress(payload: {
           'Bạn đã hoàn thành bài học này. Bài học tiếp theo đã được mở khóa!';
       } else if (updated.quizUnlocked) {
         completionToast.value =
-          'Bạn đã xem hết video. Hãy hoàn thành câu hỏi trắc nghiệm bên dưới để mở bài tiếp theo.';
+          'Bạn đã xem đủ thời lượng video yêu cầu. Hãy hoàn thành câu hỏi trắc nghiệm bên dưới để mở bài tiếp theo.';
       }
     }
   } catch (err) {
@@ -427,6 +430,7 @@ onMounted(() => {
               :video-url="currentLesson.videoUrl"
               :duration="currentLesson.duration"
               :last-position-sec="currentLesson.lastPositionSec"
+              :watched-seconds="currentLesson.watchedSeconds"
               :watched-fully="currentLesson.watchedFully"
               @progress="handleVideoProgress"
             />
@@ -464,10 +468,10 @@ onMounted(() => {
                         Tài khoản Giảng viên / Quản trị viên được mở khóa toàn bộ bài giảng và làm thử trắc nghiệm không giới hạn
                       </template>
                       <template v-else-if="currentLesson.hasQuiz">
-                        Điều kiện hoàn thành: Xem hết 100% video và đạt bài trắc nghiệm ({{ currentLesson.requiredPassPercent }}%)
+                        Điều kiện hoàn thành: Xem tối thiểu 60% thời lượng video và đạt bài trắc nghiệm ({{ currentLesson.requiredPassPercent }}%)
                       </template>
                       <template v-else>
-                        Điều kiện hoàn thành: Xem hết 100% thời lượng video
+                        Điều kiện hoàn thành: Xem tối thiểu 60% thời lượng video
                       </template>
                     </span>
                   </div>
