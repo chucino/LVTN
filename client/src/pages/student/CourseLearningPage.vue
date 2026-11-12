@@ -11,12 +11,14 @@ import {
   CircleHelp,
   FileText,
   Lock,
+  MessageCircle,
   PanelRightClose,
   PanelRightOpen,
   PlayCircle,
   Sparkles,
 } from 'lucide-vue-next';
 import CertificateCardView from '@/components/certificate/CertificateCardView.vue';
+import LessonDiscussionDrawer from '@/components/learning/LessonDiscussionDrawer.vue';
 import LessonQuizPanel from '@/components/learning/LessonQuizPanel.vue';
 import LessonVideoPlayer from '@/components/learning/LessonVideoPlayer.vue';
 import { formatCourseDuration, getCourseErrorMessage } from '@/lib/course-format';
@@ -43,6 +45,8 @@ const showCertificateView = ref(false);
 const submittingQuiz = ref(false);
 const lastQuizResult = ref<SubmitQuizResponse | null>(null);
 const completionToast = ref<string | null>(null);
+const discussionOpen = ref(false);
+const lessonCommentsCount = ref(0);
 
 const courseId = computed(() => {
   const raw = route.params.courseId;
@@ -320,7 +324,7 @@ onMounted(() => {
     </section>
 
     <!-- Màn hình học tập bố cục 7/3 -->
-    <main v-else-if="overview" class="mx-auto max-w-[1600px] px-4 py-6 sm:px-6">
+    <main v-else-if="overview" class="mx-auto max-w-[1600px] px-4 py-4 sm:px-6">
       <!-- Khung hiển thị Chứng chỉ khi người học bấm "Xem chứng chỉ" -->
       <section v-if="showCertificateView && overview.certificate" class="mb-8 space-y-4">
         <div class="flex flex-wrap items-center justify-between gap-3 bg-surface p-5">
@@ -525,6 +529,19 @@ onMounted(() => {
               :last-submit-result="lastQuizResult"
               @submit="handleQuizSubmit"
             />
+
+            <!-- Nút nổi "Hỏi đáp" neo theo mép phải của cột bài giảng (tự động dịch sang trái khi mở mục lục) -->
+            <div class="pointer-events-none sticky bottom-6 z-20 flex justify-end pt-2">
+              <button
+                type="button"
+                data-ui
+                class="pointer-events-auto inline-flex items-center gap-2 rounded-full border border-surface-3 bg-surface px-4 py-2.5 text-sm font-bold text-ink transition-transform hover:-translate-y-0.5 hover:bg-surface-2"
+                @click="discussionOpen = true"
+              >
+                <MessageCircle class="h-4 w-4 text-brand" />
+                <span>Hỏi đáp</span>
+              </button>
+            </div>
           </template>
         </div>
 
@@ -611,6 +628,17 @@ onMounted(() => {
           </div>
         </aside>
       </div>
+
+      <!-- Drawer Hỏi đáp bài học trượt từ bên phải -->
+      <LessonDiscussionDrawer
+        v-if="currentLesson"
+        :open="discussionOpen"
+        :course-id="courseId"
+        :lesson-id="currentLesson.id"
+        :lesson-title="`Bài ${currentLesson.order}: ${currentLesson.title}`"
+        @close="discussionOpen = false"
+        @update:total-comments="lessonCommentsCount = $event"
+      />
     </main>
   </div>
 </template>

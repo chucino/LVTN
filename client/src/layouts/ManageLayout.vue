@@ -5,6 +5,7 @@ import {
   ArrowLeft,
   BookOpen,
   ClipboardList,
+  Flag,
   LayoutDashboard,
   LogOut,
   Menu,
@@ -52,6 +53,12 @@ const links = computed(() => [
       route.name === 'ManageCourseCreate' ||
       route.name === 'ManageCourseEdit' ||
       route.name === 'ManageCourseStudents',
+  },
+  {
+    label: 'Báo cáo vi phạm',
+    to: { name: 'ManageReports' },
+    icon: Flag,
+    active: route.name === 'ManageReports',
   },
   ...(isAdmin.value
     ? [

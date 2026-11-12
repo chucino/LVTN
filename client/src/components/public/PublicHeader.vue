@@ -3,6 +3,7 @@ import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import {
   Award,
+  Bell,
   BookOpen,
   ChevronDown,
   KeyRound,
@@ -15,7 +16,9 @@ import {
 } from 'lucide-vue-next';
 import { useAuthStore } from '@/stores/auth.store';
 import { coursesApi } from '@/services/courses.api';
+import { questionsApi } from '@/services/questions.api';
 import type { CourseCard } from '@/types/course';
+import type { NotificationItem } from '@/types/learning';
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -34,6 +37,38 @@ const suggestions = ref<CourseCard[]>([]);
 const loadingSuggestions = ref(false);
 const showSuggestions = ref(false);
 const highlightedIndex = ref(-1);
+
+const notifications = ref<NotificationItem[]>([]);
+const unreadNotificationsCount = ref(0);
+const notificationDetailsRef = ref<HTMLDetailsElement | null>(null);
+
+async function loadNotifications() {
+  if (!authStore.isAuthenticated) {
+    notifications.value = [];
+    unreadNotificationsCount.value = 0;
+    return;
+  }
+  try {
+    const res = await questionsApi.listMyNotifications();
+    notifications.value = res.items;
+    unreadNotificationsCount.value = res.unreadCount;
+  } catch {
+    // ignore background notification fetch error
+  }
+}
+
+async function handleMarkAllRead() {
+  try {
+    await questionsApi.markAllNotificationsRead();
+    unreadNotificationsCount.value = 0;
+    notifications.value = notifications.value.map((n) => ({
+      ...n,
+      isRead: true,
+    }));
+  } catch {
+    // ignore
+  }
+}
 
 let suggestionTimer: ReturnType<typeof setTimeout> | undefined;
 let suggestionController: AbortController | null = null;
@@ -60,10 +95,26 @@ watch(
 );
 
 watch(
+  () => authStore.isAuthenticated,
+  (isAuth) => {
+    if (isAuth) {
+      void loadNotifications();
+    } else {
+      notifications.value = [];
+      unreadNotificationsCount.value = 0;
+    }
+  },
+  { immediate: true },
+);
+
+watch(
   () => route.fullPath,
   () => {
     if (accountDetailsRef.value) {
       accountDetailsRef.value.open = false;
+    }
+    if (notificationDetailsRef.value) {
+      notificationDetailsRef.value.open = false;
     }
     mobileMenuOpen.value = false;
     closeSuggestions();
@@ -351,6 +402,60 @@ function onSearchKeydown(event: KeyboardEvent) {
         class="ml-auto hidden shrink-0 items-center gap-3 lg:flex"
         :class="isCoursesListingPage ? '' : 'xl:ml-0'"
       >
+        <!-- Chuông Thông báo (Notification) -->
+        <details ref="notificationDetailsRef" class="relative" data-ui>
+          <summary
+            aria-label="Mở thông báo"
+            class="relative flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-full bg-surface-2 text-ink transition-colors hover:bg-surface-3/60"
+            @click="loadNotifications"
+          >
+            <Bell class="h-4 w-4" />
+            <span
+              v-if="unreadNotificationsCount > 0"
+              class="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-brand px-1 text-[10px] font-bold text-white tabular-nums"
+            >
+              {{ unreadNotificationsCount > 9 ? '9+' : unreadNotificationsCount }}
+            </span>
+          </summary>
+
+          <div
+            data-ui class="absolute right-0 mt-2 w-80 border border-surface-3 bg-surface p-3"
+          >
+            <div
+              data-ui class="flex items-center justify-between border-b border-surface-3 pb-2"
+            >
+              <span class="text-xs font-bold text-ink">Thông báo hệ thống</span>
+              <button
+                v-if="unreadNotificationsCount > 0"
+                type="button"
+                class="text-xs font-semibold text-brand-soft hover:underline"
+                @click="handleMarkAllRead"
+              >
+                Đánh dấu đã đọc
+              </button>
+            </div>
+
+            <div class="mt-2 max-h-72 space-y-2 overflow-y-auto">
+              <p
+                v-if="notifications.length === 0"
+                class="py-6 text-center text-xs text-muted"
+              >
+                Chưa có thông báo mới.
+              </p>
+
+              <div
+                v-for="notif in notifications"
+                :key="notif.id"
+                class="rounded-lg p-2.5 text-xs leading-5"
+                :class="notif.isRead ? 'bg-ground text-muted' : 'bg-tint/40 text-ink'"
+              >
+                <p class="font-bold text-ink">{{ notif.title }}</p>
+                <p class="mt-0.5 text-muted">{{ notif.message }}</p>
+              </div>
+            </div>
+          </div>
+        </details>
+
         <details ref="accountDetailsRef" class="relative" data-ui>
           <summary
             aria-label="Mở menu tài khoản"

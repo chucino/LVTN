@@ -131,6 +131,15 @@ const routes: RouteRecordRaw[] = [
         },
       },
       {
+        path: 'reports',
+        name: 'ManageReports',
+        component: () => import('@/pages/manage/ManageReportsPage.vue'),
+        meta: {
+          title: 'Báo cáo vi phạm bình luận - NextCode',
+          roles: ['INSTRUCTOR', 'ADMIN'] as Role[],
+        },
+      },
+      {
         path: 'users',
         name: 'ManageUsers',
         component: () => import('@/pages/manage/ManageUsersPage.vue'),

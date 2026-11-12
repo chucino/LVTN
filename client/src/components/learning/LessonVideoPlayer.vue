@@ -252,30 +252,32 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="overflow-hidden bg-navy">
-    <div class="relative aspect-video w-full bg-black">
-      <div
-        v-if="isYouTube"
-        :id="ytContainerId"
-        class="h-full w-full"
-      />
-      <video
-        v-else
-        ref="htmlVideoRef"
-        :src="videoUrl"
-        controls
-        playsinline
-        class="h-full w-full"
-        @loadedmetadata="onHtmlLoadedMetadata"
-        @play="isPlaying = true"
-        @timeupdate="onHtmlTimeUpdate"
-        @pause="onHtmlPause"
-        @ended="onHtmlEnded"
-      >
-        Trình duyệt của bạn không hỗ trợ phát video trực tiếp.
-      </video>
+    <div class="w-full bg-black">
+      <div class="relative mx-auto aspect-video max-h-[calc(100svh-12.5rem)] w-full max-w-[1040px] bg-black">
+        <div
+          v-if="isYouTube"
+          :id="ytContainerId"
+          class="h-full w-full"
+        />
+        <video
+          v-else
+          ref="htmlVideoRef"
+          :src="videoUrl"
+          controls
+          playsinline
+          class="h-full w-full"
+          @loadedmetadata="onHtmlLoadedMetadata"
+          @play="isPlaying = true"
+          @timeupdate="onHtmlTimeUpdate"
+          @pause="onHtmlPause"
+          @ended="onHtmlEnded"
+        >
+          Trình duyệt của bạn không hỗ trợ phát video trực tiếp.
+        </video>
+      </div>
     </div>
 
-    <div class="flex flex-wrap items-center justify-between gap-3 bg-navy px-5 py-3 text-xs text-white/80">
+    <div class="flex flex-wrap items-center justify-between gap-3 bg-navy px-5 py-2.5 text-xs text-white/80">
       <div class="flex items-center gap-2">
         <Clock class="h-4 w-4 text-[#7dd3fc]" />
         <span class="tabular-nums">

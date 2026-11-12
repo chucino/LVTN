@@ -218,3 +218,122 @@ export interface ManageCourseStudentsQuery {
 }
 
 
+export type CommentReactionType =
+  | 'LIKE'
+  | 'LOVE'
+  | 'CARE'
+  | 'HAHA'
+  | 'WOW'
+  | 'SAD'
+  | 'ANGRY';
+
+export interface CommentAuthor {
+  id: string;
+  fullName: string;
+  avatar: string | null;
+  role: string;
+}
+
+export interface CommentReplyToUser {
+  userId: string;
+  fullName: string;
+}
+
+export interface CommentReactionSummaryItem {
+  type: CommentReactionType;
+  count: number;
+}
+
+export type CommentVisibilityStatus = 'VISIBLE' | 'HIDDEN';
+
+export interface LessonCommentItem {
+  id: string;
+  courseId: string;
+  lessonId: string;
+  parentId: string | null;
+  replyToUser: CommentReplyToUser | null;
+  author: CommentAuthor;
+  content: string;
+  visibilityStatus: CommentVisibilityStatus;
+  totalReactions: number;
+  reactionSummary: CommentReactionSummaryItem[];
+  myReaction: CommentReactionType | null;
+  isReportedByMe: boolean;
+  reportsCount: number;
+  canDelete: boolean;
+  createdAt: string;
+  replies: LessonCommentItem[];
+}
+
+export interface LessonCommentsResponse {
+  courseId: string;
+  lessonId: string;
+  totalComments: number;
+  totalRootComments: number;
+  myCommentBannedUntil: string | null;
+  items: LessonCommentItem[];
+}
+
+export type ReportTargetType = 'QUESTION' | 'ANSWER' | 'REVIEW';
+export type ReportStatus = 'PENDING' | 'ESCALATED' | 'RESOLVED' | 'DISMISSED';
+export type ReportActionType =
+  | 'DISMISS'
+  | 'DELETE_AND_REMIND'
+  | 'ESCALATE'
+  | 'APPLY_PENALTY';
+
+export interface ViolationHistoryItem {
+  reason: string;
+  actionTaken: string;
+  penaltySummary: string;
+  resolvedAt: string;
+}
+
+export interface ReportQueueItem {
+  id: string;
+  targetType: ReportTargetType;
+  targetId: string;
+  courseId: string;
+  courseTitle: string;
+  lessonId: string;
+  lessonTitle: string;
+  reporter: CommentAuthor;
+  targetAuthor: CommentAuthor;
+  targetAuthorViolationCount: number;
+  targetAuthorCommentBannedUntil: string | null;
+  targetAuthorStatus: string;
+  targetAuthorViolationHistory: ViolationHistoryItem[];
+  duplicateReportCount: number;
+  commentContent: string;
+  commentVisibilityStatus: CommentVisibilityStatus;
+  reason: string;
+  status: ReportStatus;
+  escalatedToAdmin: boolean;
+  actionTaken: ReportActionType | null;
+  moderationNote: string | null;
+  resolvedBy: CommentAuthor | null;
+  resolvedAt: string | null;
+  createdAt: string;
+}
+
+export interface ManageReportsResponse {
+  items: ReportQueueItem[];
+  summary: {
+    total: number;
+    pending: number;
+    resolved: number;
+    dismissed: number;
+  };
+  courses: Array<{ id: string; title: string }>;
+}
+
+export interface NotificationItem {
+  id: string;
+  type: string;
+  title: string;
+  message: string;
+  courseId: string | null;
+  lessonId: string | null;
+  isRead: boolean;
+  createdAt: string;
+}
