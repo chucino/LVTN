@@ -4,8 +4,8 @@ import {
   AlertCircle,
   AlertTriangle,
   CheckCircle2,
-  ExternalLink,
   EyeOff,
+  PlayCircle,
   RotateCcw,
   Send,
   Trash2,
@@ -50,8 +50,13 @@ function confirmAction(reason: string) {
         <p class="text-xs font-medium text-muted">Trạng thái hiện tại</p>
         <div class="mt-2"><CourseStatusBadge :status="course.status" /></div>
       </div>
-      <router-link v-if="course.status === 'APPROVED'" :to="{ name: 'CourseDetail', params: { id: course.id } }" class="inline-flex items-center gap-2 text-sm font-medium text-ink hover:text-brand-soft">
-        Xem trang công khai <ExternalLink class="h-4 w-4" />
+      <router-link
+        v-if="course.totalLessons > 0"
+        :to="{ name: 'CourseLearning', params: { courseId: course.id } }"
+        class="inline-flex items-center gap-2 text-sm font-medium text-brand-soft hover:underline"
+      >
+        <PlayCircle class="h-4 w-4" />
+        <span>Xem khóa học</span>
       </router-link>
     </div>
 

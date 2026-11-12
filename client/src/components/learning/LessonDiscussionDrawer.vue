@@ -21,7 +21,7 @@ import {
 import { getCourseErrorMessage } from '@/lib/course-format';
 import { questionsApi } from '@/services/questions.api';
 import { useAuthStore } from '@/stores/auth.store';
-import type { LessonCommentItem } from '@/types/learning';
+import type { CommentAuthor, LessonCommentItem } from '@/types/learning';
 
 const props = defineProps<{
   open: boolean;
@@ -115,9 +115,27 @@ function getInitials(name: string): string {
   return `${first}${last}`.toUpperCase();
 }
 
-function getRoleBadgeLabel(role: string): string | null {
-  if (role === 'ADMIN') return 'Quản trị viên';
-  if (role === 'INSTRUCTOR') return 'Giảng viên';
+function getAuthorBadge(
+  author: CommentAuthor,
+): { label: string; className: string } | null {
+  if (author.role === 'ADMIN') {
+    return {
+      label: 'QUẢN TRỊ VIÊN',
+      className: 'bg-tint text-brand-soft',
+    };
+  }
+  if (author.isCourseAuthor) {
+    return {
+      label: 'TÁC GIẢ',
+      className: 'bg-teal-tint text-teal',
+    };
+  }
+  if (author.role === 'INSTRUCTOR') {
+    return {
+      label: 'GIẢNG VIÊN',
+      className: 'bg-tint text-brand-soft',
+    };
+  }
   return null;
 }
 
@@ -737,10 +755,11 @@ onBeforeUnmount(() => {
                         {{ comment.author.fullName }}
                       </span>
                       <span
-                        v-if="getRoleBadgeLabel(comment.author.role)"
-                        class="rounded-full bg-tint px-2.5 py-0.5 text-[11px] font-semibold text-brand-soft"
+                        v-if="getAuthorBadge(comment.author)"
+                        class="rounded-full px-2.5 py-0.5 text-[11px] font-bold"
+                        :class="getAuthorBadge(comment.author)?.className"
                       >
-                        {{ getRoleBadgeLabel(comment.author.role) }}
+                        {{ getAuthorBadge(comment.author)?.label }}
                       </span>
                     </div>
                     <p class="mt-1.5 whitespace-pre-line break-words text-sm leading-6 text-ink">
@@ -1012,10 +1031,11 @@ onBeforeUnmount(() => {
                               {{ reply.author.fullName }}
                             </span>
                             <span
-                              v-if="getRoleBadgeLabel(reply.author.role)"
-                              class="rounded-full bg-tint px-2 py-0.5 text-[10px] font-semibold text-brand-soft"
+                              v-if="getAuthorBadge(reply.author)"
+                              class="rounded-full px-2 py-0.5 text-[10px] font-bold"
+                              :class="getAuthorBadge(reply.author)?.className"
                             >
-                              {{ getRoleBadgeLabel(reply.author.role) }}
+                              {{ getAuthorBadge(reply.author)?.label }}
                             </span>
                           </div>
 

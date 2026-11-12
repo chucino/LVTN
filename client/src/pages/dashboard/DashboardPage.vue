@@ -5,6 +5,7 @@ import {
   ArrowRight,
   BookOpen,
   CirclePlus,
+  PlayCircle,
   Users,
 } from 'lucide-vue-next';
 import { useAuthStore } from '@/stores/auth.store';
@@ -314,9 +315,18 @@ onMounted(() => {
             </div>
           </div>
 
-          <div class="flex shrink-0 items-center justify-between gap-3 sm:justify-end">
+          <div class="flex shrink-0 flex-wrap items-center justify-between gap-2.5 sm:justify-end">
             <CourseStatusBadge :status="course.status" />
             <span class="text-xs tabular-nums text-muted">{{ formatUpdatedAt(course.updatedAt) }}</span>
+            <router-link
+              v-if="course.totalLessons > 0"
+              :to="{ name: 'CourseLearning', params: { courseId: course.id } }"
+              class="manage-button-secondary inline-flex items-center gap-1.5 px-3 py-1.5 text-xs"
+              title="Xem khóa học"
+            >
+              <PlayCircle class="h-3.5 w-3.5 text-brand-soft" />
+              <span>Xem khóa học</span>
+            </router-link>
             <router-link
               :to="{ name: 'ManageCourseEdit', params: { id: course.id } }"
               class="manage-button-secondary px-3 py-1.5 text-xs"

@@ -6,6 +6,7 @@ import {
   EnrollmentStatus,
   LessonStatus,
 } from '../../common/constants/learning.enum.js';
+import { CourseStatus } from '../../common/constants/course.enum.js';
 import { Role } from '../../common/constants/roles.enum.js';
 import { UserStatus } from '../../common/constants/user-status.enum.js';
 import { computePenalty, QuestionsService } from './questions.service.js';
@@ -157,6 +158,7 @@ describe('QuestionsService', () => {
         exec: vi.fn().mockResolvedValue({
           _id: new Types.ObjectId(courseId),
           title: 'Lập trình JavaScript nâng cao',
+          status: CourseStatus.APPROVED,
           instructorId: new Types.ObjectId(instructorId),
           chapters: [
             {
@@ -596,6 +598,111 @@ describe('QuestionsService', () => {
       await expect(
         service.resolveReport(adminUser, reportId, { action: ReportActionType.ESCALATE }),
       ).rejects.toThrow(BadRequestException);
+    });
+  });
+
+  describe('instructor preview & author badge differentiation', () => {
+    const otherInstructorId = new Types.ObjectId('6650c1f6f2f4f6e4c8bfe009').toHexString();
+    const otherInstructorUser = {
+      userId: otherInstructorId,
+      email: 'other-instructor@nextcode.edu.vn',
+      role: Role.INSTRUCTOR,
+    };
+
+    it('marks the assigned course instructor with isCourseAuthor = true and other instructors with isCourseAuthor = false', async () => {
+      const now = new Date();
+      commentModel.find.mockReturnValue({
+        sort: vi.fn().mockReturnValue({
+          exec: vi.fn().mockResolvedValue([
+            {
+              _id: new Types.ObjectId(rootCommentId),
+              courseId: new Types.ObjectId(courseId),
+              lessonId: new Types.ObjectId(lessonId),
+              authorId: new Types.ObjectId(instructorId),
+              parentId: null,
+              replyToUser: null,
+              content: 'Chào các em, thầy là tác giả khóa học',
+              visibilityStatus: CommentVisibilityStatus.VISIBLE,
+              reactions: [],
+              reports: [],
+              createdAt: now,
+            },
+            {
+              _id: new Types.ObjectId('6650c1f6f2f4f6e4c8bfe509'),
+              courseId: new Types.ObjectId(courseId),
+              lessonId: new Types.ObjectId(lessonId),
+              authorId: new Types.ObjectId(otherInstructorId),
+              parentId: new Types.ObjectId(rootCommentId),
+              replyToUser: null,
+              content: 'Mình là giảng viên khóa khác ghé thăm',
+              visibilityStatus: CommentVisibilityStatus.VISIBLE,
+              reactions: [],
+              reports: [],
+              createdAt: now,
+            },
+          ]),
+        }),
+      });
+
+      userModel.find.mockReturnValue({
+        select: vi.fn().mockReturnValue({
+          exec: vi.fn().mockResolvedValue([
+            {
+              _id: new Types.ObjectId(instructorId),
+              fullName: 'Giảng viên Tác Giả',
+              avatar: null,
+              role: Role.INSTRUCTOR,
+            },
+            {
+              _id: new Types.ObjectId(otherInstructorId),
+              fullName: 'Giảng viên Khác',
+              avatar: null,
+              role: Role.INSTRUCTOR,
+            },
+          ]),
+        }),
+      });
+
+      const res = await service.listLessonComments(
+        otherInstructorUser,
+        courseId,
+        lessonId,
+      );
+
+      expect(res.items).toHaveLength(1);
+      expect(res.items[0]!.author.role).toBe(Role.INSTRUCTOR);
+      expect(res.items[0]!.author.isCourseAuthor).toBe(true);
+
+      const replyAuthor = res.items[0]!.replies[0]!.author;
+      expect(replyAuthor.role).toBe(Role.INSTRUCTOR);
+      expect(replyAuthor.isCourseAuthor).toBe(false);
+    });
+
+    it('forbids another instructor from accessing lesson Q&A when the course is not APPROVED', async () => {
+      courseModel.findById.mockReturnValue({
+        exec: vi.fn().mockResolvedValue({
+          _id: new Types.ObjectId(courseId),
+          title: 'Khóa học đang soạn nháp',
+          status: CourseStatus.DRAFT,
+          instructorId: new Types.ObjectId(instructorId),
+          chapters: [
+            {
+              _id: new Types.ObjectId(),
+              lessons: [
+                {
+                  _id: new Types.ObjectId(lessonId),
+                  order: 1,
+                  title: 'Bài 1',
+                },
+              ],
+            },
+          ],
+        }),
+      });
+
+      await expect(
+        service.listLessonComments(otherInstructorUser, courseId, lessonId),
+      ).rejects.toThrow(ForbiddenException);
     });
   });
 });

@@ -52,7 +52,7 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/pages/student/CourseLearningPage.vue'),
     meta: {
       requiresAuth: true,
-      roles: ['STUDENT'] as Role[],
+      roles: ['STUDENT', 'INSTRUCTOR', 'ADMIN'] as Role[],
       title: 'Phòng học trực tuyến - NextCode',
     },
   },

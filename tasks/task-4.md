@@ -102,3 +102,43 @@
 - Backup đã tạo: backup/<đường dẫn file>.20261113-0228.bak cho toàn bộ 10 file trên
 - Hoàn thành: 2026-11-13 02:35
 - Tóm tắt thay đổi: Thêm `violationCount`, `commentBannedUntil`, `violationHistory` vào `User`; `violationRecorded` vào `LessonComment`; `ReportStatus` gồm `PENDING`/`ESCALATED`/`RESOLVED`/`DISMISSED`. Backend: tab "Đang chờ xử lý" = `PENDING` (Giảng viên) / `ESCALATED` (Admin), xóa thẻ "Chuyển cấp Admin"; `resolveReport` đồng bộ mọi báo cáo cùng `targetId` và thông báo cho toàn bộ người báo cáo; cộng +1 vi phạm đúng một lần trên mỗi bình luận; Admin xử phạt tự động 5 mức (nhắc nhở, cấm 24h/7 ngày/30 ngày cộng dồn thời hạn cũ, khóa `LOCKED`); bình luận xóa mềm ẩn hẳn khi không có phản hồi, hiện "Bình luận này đã bị xóa do vi phạm" khi còn phản hồi; chặn bình luận khi đang bị cấm. Frontend: khóa ô nhập kèm thông báo thời hạn cấm, trang báo cáo 3 tab, cảnh báo vi phạm cho Giảng viên, hồ sơ vi phạm và xem trước mức phạt cho Admin. 54 unit tests, `lint.mjs` (0 FAIL) và `npm run build` đều đạt.
+
+
+## [x] #036 - Nâng cấp chức năng quản lý và xem khóa học theo 2 chế độ (Biên soạn & Xem như học viên) cho Giảng viên và Admin
+- Bắt đầu: 2026-11-13 02:59
+- Mục tiêu: Cho phép Giảng viên và Admin xem khóa học theo 2 chế độ: (1) Chế độ Biên soạn/Quản lý (chỉ dành cho Admin và Giảng viên phụ trách khóa học đó) và (2) Chế độ Xem như học viên (`/learn/:courseId` - không giới hạn mở khóa tuần tự, không lưu tiến độ hay điểm trắc nghiệm vào DB, Giảng viên A được xem khóa học đã xuất bản của Giảng viên B); đồng thời phân biệt nhãn `TÁC GIẢ` (Giảng viên phụ trách khóa học) và `GIẢNG VIÊN` (Giảng viên khác) trong Hỏi đáp bài học.
+- Phạm vi dự kiến:
+  - src/modules/enrollments/dto/enrollment-response.dto.ts
+  - src/modules/enrollments/enrollments.controller.ts
+  - src/modules/enrollments/enrollments.service.ts
+  - src/modules/enrollments/enrollments.service.spec.ts
+  - src/modules/questions/dto/lesson-comment.dto.ts
+  - src/modules/questions/questions.service.ts
+  - src/modules/questions/questions.service.spec.ts
+  - client/src/router/index.ts
+  - client/src/types/learning.ts
+  - client/src/pages/public/CourseDetailPage.vue
+  - client/src/pages/dashboard/DashboardPage.vue
+  - client/src/pages/manage/ManageCourseEditPage.vue
+  - client/src/components/manage/ManageCourseActions.vue
+  - client/src/components/manage/CourseStatusPanel.vue
+  - client/src/pages/student/CourseLearningPage.vue
+  - client/src/components/learning/LessonDiscussionDrawer.vue
+- Backup đã tạo: backup/<đường dẫn file>.20261113-0259.bak cho toàn bộ 16 file trên
+- Hoàn thành: 2026-11-13 03:09
+- Tóm tắt thay đổi: Bổ sung chế độ "Xem như học viên" (`isPreviewMode`, `canManageCourse`) tại `/learn/:courseId` cho `INSTRUCTOR` và `ADMIN` không cần bản ghi `Enrollment`, mở khóa toàn bộ bài giảng/trắc nghiệm ngay từ đầu và chấm điểm trắc nghiệm trên bộ nhớ tạm (không lưu `LessonProgress` hay `QuizAttempt` vào DB, không cấp chứng chỉ). Cho phép Giảng viên A xem khóa học đã xuất bản (`APPROVED`) của Giảng viên B ở chế độ học viên nhưng chặn quyền chỉnh sửa/quản lý; bổ sung `author.isCourseAuthor` để hiển thị nhãn `TÁC GIẢ` cho giảng viên phụ trách khóa học và `GIẢNG VIÊN` cho giảng viên khác trong Hỏi đáp bài học; thêm nút "Xem như học viên" tại trang công khai, trang tổng quan, danh sách khóa học, trang biên soạn và nút chuyển nhanh giữa hai chế độ trên thanh đầu phòng học. Toàn bộ 57 unit tests, `lint.mjs` (0 FAIL) và `npm run build` đều đạt.
+
+
+## [x] #037 - Đổi nhãn "Xem như học viên" thành "Xem khóa học" và gộp nút xem ở tab Trạng thái và duyệt
+- Bắt đầu: 2026-11-13 03:16
+- Mục tiêu: Đổi nhãn nút từ "Xem như học viên" thành "Xem khóa học" trên các trang công khai, tổng quan, danh sách quản lý, trang biên soạn; tại tab "Trạng thái và duyệt" (`CourseStatusPanel.vue`) loại bỏ sự trùng lặp giữa "Xem như học viên" và "Xem trang công khai", chỉ giữ lại một nút duy nhất là "Xem khóa học".
+- Phạm vi dự kiến:
+  - client/src/pages/public/CourseDetailPage.vue
+  - client/src/pages/dashboard/DashboardPage.vue
+  - client/src/pages/manage/ManageCourseEditPage.vue
+  - client/src/components/manage/ManageCourseActions.vue
+  - client/src/components/manage/CourseStatusPanel.vue
+  - client/src/pages/student/CourseLearningPage.vue
+- Backup đã tạo: backup/<đường dẫn file>.20261113-0316.bak cho toàn bộ 6 file trên
+- Hoàn thành: 2026-11-13 03:18
+- Tóm tắt thay đổi: Đổi toàn bộ nhãn nút "Xem như học viên" thành "Xem khóa học" tại `CourseDetailPage.vue`, `DashboardPage.vue`, `ManageCourseEditPage.vue`, `ManageCourseActions.vue`, `CourseLearningPage.vue`; tại `CourseStatusPanel.vue` (tab Trạng thái và duyệt) xóa nút trùng "Xem trang công khai" và chỉ giữ lại một nút duy nhất là "Xem khóa học".

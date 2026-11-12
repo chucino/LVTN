@@ -90,6 +90,8 @@ export interface CourseLearningOverview {
   completedAt: string | null;
   certificate: CertificateItem | null;
   chapters: CurriculumChapterItem[];
+  isPreviewMode?: boolean;
+  canManageCourse?: boolean;
 }
 
 export interface LearnerQuizQuestion {
@@ -232,6 +234,7 @@ export interface CommentAuthor {
   fullName: string;
   avatar: string | null;
   role: string;
+  isCourseAuthor?: boolean;
 }
 
 export interface CommentReplyToUser {

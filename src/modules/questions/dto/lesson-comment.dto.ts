@@ -128,6 +128,13 @@ export class CommentAuthorDto {
 
   @ApiProperty({ enum: Role, example: Role.STUDENT })
   role!: Role;
+
+  @ApiPropertyOptional({
+    example: false,
+    description:
+      'True khi người bình luận chính là Giảng viên được phân công phụ trách khóa học này (hiển thị nhãn TÁC GIẢ)',
+  })
+  isCourseAuthor?: boolean;
 }
 
 export class CommentReplyToUserDto {

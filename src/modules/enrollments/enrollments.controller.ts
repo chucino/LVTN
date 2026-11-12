@@ -109,27 +109,31 @@ export class EnrollmentsController {
 
   @Get('enrollments/courses/:courseId/learning')
   @UseGuards(RolesGuard)
-  @Roles(Role.STUDENT)
+  @Roles(Role.STUDENT, Role.INSTRUCTOR, Role.ADMIN)
   @ApiOperation({
     summary:
-      'Lấy toàn bộ lộ trình chương/bài giảng và trạng thái mở khóa tuần tự của khóa học đã đăng ký',
+      'Lấy toàn bộ lộ trình chương/bài giảng (Học viên xem theo tiến độ mở khóa tuần tự; Giảng viên/Admin xem ở chế độ Preview mở khóa toàn bộ bài)',
   })
   @ApiParam({ name: 'courseId', example: '6650c1f6f2f4f6e4c8bfe125' })
   @ApiResponse({ status: 200, type: CourseLearningOverviewDto })
-  @ApiResponse({ status: 403, description: 'Chưa đăng ký khóa học này' })
+  @ApiResponse({ status: 403, description: 'Chưa đăng ký khóa học này hoặc khóa học chưa xuất bản' })
   getCourseLearning(
     @Param('courseId') courseId: string,
     @CurrentUser() user: CurrentUserData,
   ): Promise<CourseLearningOverviewDto> {
-    return this.enrollmentsService.getCourseLearning(user.userId, courseId);
+    return this.enrollmentsService.getCourseLearning(
+      user.userId,
+      courseId,
+      user.role,
+    );
   }
 
   @Get('enrollments/courses/:courseId/lessons/:lessonId')
   @UseGuards(RolesGuard)
-  @Roles(Role.STUDENT)
+  @Roles(Role.STUDENT, Role.INSTRUCTOR, Role.ADMIN)
   @ApiOperation({
     summary:
-      'Xem chi tiết bài giảng đang mở khóa (videoUrl, ghi chép, câu hỏi trắc nghiệm sau khi xem hết video)',
+      'Xem chi tiết bài giảng đang mở khóa (videoUrl, ghi chép, câu hỏi trắc nghiệm)',
   })
   @ApiParam({ name: 'courseId', example: '6650c1f6f2f4f6e4c8bfe125' })
   @ApiParam({ name: 'lessonId', example: '6650c1f6f2f4f6e4c8bfe126' })
@@ -147,15 +151,16 @@ export class EnrollmentsController {
       user.userId,
       courseId,
       lessonId,
+      user.role,
     );
   }
 
   @Patch('enrollments/courses/:courseId/lessons/:lessonId/progress')
   @UseGuards(RolesGuard)
-  @Roles(Role.STUDENT)
+  @Roles(Role.STUDENT, Role.INSTRUCTOR, Role.ADMIN)
   @ApiOperation({
     summary:
-      'Lưu vị trí đang xem video và/hoặc đánh dấu đã xem hết video (tự động hoàn thành bài và mở bài kế tiếp nếu bài không có trắc nghiệm)',
+      'Lưu vị trí đang xem video và/hoặc đánh dấu đã xem hết video (ở chế độ Preview của Giảng viên/Admin thì không lưu vào DB)',
   })
   @ApiParam({ name: 'courseId', example: '6650c1f6f2f4f6e4c8bfe125' })
   @ApiParam({ name: 'lessonId', example: '6650c1f6f2f4f6e4c8bfe126' })
@@ -171,16 +176,17 @@ export class EnrollmentsController {
       courseId,
       lessonId,
       dto,
+      user.role,
     );
   }
 
   @Post('enrollments/courses/:courseId/lessons/:lessonId/quiz-submit')
   @UseGuards(RolesGuard)
-  @Roles(Role.STUDENT)
+  @Roles(Role.STUDENT, Role.INSTRUCTOR, Role.ADMIN)
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
     summary:
-      'Nộp câu trả lời trắc nghiệm sau khi đã xem hết video (1 câu: cần đúng 100%; nhiều câu: cần đúng >= 70%)',
+      'Nộp câu trả lời trắc nghiệm (ở chế độ Preview của Giảng viên/Admin thì chấm điểm trực tiếp không lưu vào DB)',
   })
   @ApiParam({ name: 'courseId', example: '6650c1f6f2f4f6e4c8bfe125' })
   @ApiParam({ name: 'lessonId', example: '6650c1f6f2f4f6e4c8bfe126' })
@@ -200,6 +206,7 @@ export class EnrollmentsController {
       courseId,
       lessonId,
       dto,
+      user.role,
     );
   }
 

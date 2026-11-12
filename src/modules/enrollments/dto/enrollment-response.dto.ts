@@ -168,6 +168,22 @@ export class CourseLearningOverviewDto {
 
   @ApiProperty({ type: [CurriculumChapterItemDto] })
   chapters!: CurriculumChapterItemDto[];
+
+  @ApiProperty({
+    example: false,
+    required: false,
+    description:
+      'True khi Giảng viên hoặc Admin đang xem khóa học ở chế độ Xem như học viên (không lưu tiến độ vào DB)',
+  })
+  isPreviewMode?: boolean;
+
+  @ApiProperty({
+    example: false,
+    required: false,
+    description:
+      'True khi người dùng hiện tại là Admin hoặc Giảng viên được phân công phụ trách khóa học này',
+  })
+  canManageCourse?: boolean;
 }
 
 export class LearnerQuizQuestionDto {

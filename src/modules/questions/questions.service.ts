@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
+import { CourseStatus } from '../../common/constants/course.enum.js';
 import { LessonStatus } from '../../common/constants/learning.enum.js';
 import { Role } from '../../common/constants/roles.enum.js';
 import { UserStatus } from '../../common/constants/user-status.enum.js';
@@ -193,6 +194,16 @@ export class QuestionsService {
       return { course, isCourseModerator: true };
     }
 
+    // Giảng viên khác (Giảng viên A xem khóa học của Giảng viên B): được xem và bình luận khi khóa học đã xuất bản (APPROVED)
+    if (user.role === Role.INSTRUCTOR) {
+      if (course.status !== CourseStatus.APPROVED) {
+        throw new ForbiddenException(
+          'Bạn chỉ có thể tham gia hỏi đáp ở khóa học của giảng viên khác khi khóa học đã được xuất bản công khai',
+        );
+      }
+      return { course, isCourseModerator: false };
+    }
+
     if (user.role !== Role.STUDENT) {
       throw new ForbiddenException(
         'Bạn không có quyền truy cập khu vực hỏi đáp của bài học này',
@@ -246,13 +257,21 @@ export class QuestionsService {
     currentUserId: string,
     isCourseModerator: boolean,
     replies: LessonCommentItemDto[] = [],
+    courseInstructorId?: string,
   ): LessonCommentItemDto {
     const authorIdStr = comment.authorId.toString();
-    const author: CommentAuthorDto = authorMap.get(authorIdStr) ?? {
+    const baseAuthor: CommentAuthorDto = authorMap.get(authorIdStr) ?? {
       id: authorIdStr,
       fullName: 'Học viên NextCode',
       avatar: null,
       role: Role.STUDENT,
+    };
+    const isCourseAuthor = Boolean(
+      courseInstructorId && authorIdStr === courseInstructorId,
+    );
+    const author: CommentAuthorDto = {
+      ...baseAuthor,
+      isCourseAuthor,
     };
 
     const visibilityStatus =
@@ -299,11 +318,9 @@ export class QuestionsService {
     courseId: string,
     lessonId: string,
   ): Promise<LessonCommentsResponseDto> {
-    const { isCourseModerator } = await this.verifyLessonDiscussionAccess(
-      user,
-      courseId,
-      lessonId,
-    );
+    const { course, isCourseModerator } =
+      await this.verifyLessonDiscussionAccess(user, courseId, lessonId);
+    const courseInstructorId = course.instructorId?.toString();
 
     const allComments = await this.commentModel
       .find({
@@ -373,6 +390,7 @@ export class QuestionsService {
           user.userId,
           isCourseModerator,
           [],
+          courseInstructorId,
         ),
       );
       items.push(
@@ -382,6 +400,7 @@ export class QuestionsService {
           user.userId,
           isCourseModerator,
           childDtos,
+          courseInstructorId,
         ),
       );
     }
@@ -416,11 +435,9 @@ export class QuestionsService {
     lessonId: string,
     dto: CreateLessonCommentDto,
   ): Promise<LessonCommentItemDto> {
-    const { isCourseModerator } = await this.verifyLessonDiscussionAccess(
-      user,
-      courseId,
-      lessonId,
-    );
+    const { course, isCourseModerator } =
+      await this.verifyLessonDiscussionAccess(user, courseId, lessonId);
+    const courseInstructorId = course.instructorId?.toString();
 
     const authorDoc = await this.userModel
       .findById(user.userId)
@@ -511,6 +528,7 @@ export class QuestionsService {
       user.userId,
       isCourseModerator,
       [],
+      courseInstructorId,
     );
   }
 
@@ -521,11 +539,9 @@ export class QuestionsService {
     commentId: string,
     dto: ToggleCommentReactionDto,
   ): Promise<LessonCommentItemDto> {
-    const { isCourseModerator } = await this.verifyLessonDiscussionAccess(
-      user,
-      courseId,
-      lessonId,
-    );
+    const { course, isCourseModerator } =
+      await this.verifyLessonDiscussionAccess(user, courseId, lessonId);
+    const courseInstructorId = course.instructorId?.toString();
 
     if (!isValidObjectId(commentId)) {
       throw new NotFoundException('Không tìm thấy bình luận');
@@ -584,6 +600,7 @@ export class QuestionsService {
       user.userId,
       isCourseModerator,
       [],
+      courseInstructorId,
     );
   }
 

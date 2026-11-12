@@ -521,4 +521,59 @@ describe('EnrollmentsService', () => {
     expect(adminResult.course.id).toBe(freeCourseId);
     expect(adminResult.summary.totalStudents).toBe(1);
   });
+
+  it('Chế độ Xem như học viên (Preview Mode): Giảng viên và Admin mở khóa toàn bộ bài giảng và làm thử trắc nghiệm không lưu DB', async () => {
+    const otherInstructorId = new Types.ObjectId(
+      '6650c1f6f2f4f6e4c8bfe999',
+    ).toString();
+
+    // 1. Giảng viên phụ trách vào xem khóa học của mình -> isPreviewMode = true, canManageCourse = true, toàn bộ bài UNLOCKED
+    const overviewOwn = await service.getCourseLearning(
+      instructorId.toString(),
+      freeCourseId,
+      Role.INSTRUCTOR,
+    );
+    expect(overviewOwn.isPreviewMode).toBe(true);
+    expect(overviewOwn.canManageCourse).toBe(true);
+    expect(overviewOwn.chapters[0]!.lessons.every((l) => l.status === LessonStatus.UNLOCKED)).toBe(true);
+    expect(enrollmentsStore).toHaveLength(0);
+
+    // 2. Giảng viên khác (Giảng viên A) vào xem khóa học đã xuất bản (APPROVED) của Giảng viên B -> isPreviewMode = true, canManageCourse = false
+    const overviewOther = await service.getCourseLearning(
+      otherInstructorId,
+      freeCourseId,
+      Role.INSTRUCTOR,
+    );
+    expect(overviewOther.isPreviewMode).toBe(true);
+    expect(overviewOther.canManageCourse).toBe(false);
+
+    // 3. Xem ngay bài 3 (có 3 câu hỏi trắc nghiệm) mà không cần hoàn thành bài 1 & 2 -> quizUnlocked = true
+    const lesson3Detail = await service.getLessonForLearning(
+      otherInstructorId,
+      freeCourseId,
+      lesson3Id.toString(),
+      Role.INSTRUCTOR,
+    );
+    expect(lesson3Detail.status).toBe(LessonStatus.UNLOCKED);
+    expect(lesson3Detail.quizUnlocked).toBe(true);
+    expect(lesson3Detail.quizQuestions).toHaveLength(3);
+
+    // 4. Làm thử bài trắc nghiệm bài 2 -> chấm điểm ngay nhưng không lưu QuizAttempt hay Enrollment vào DB
+    const quizPreview = await service.submitLessonQuiz(
+      otherInstructorId,
+      freeCourseId,
+      lesson2Id.toString(),
+      {
+        answers: [{ questionId: q1Id.toString(), selectedOption: 1 }],
+      },
+      Role.INSTRUCTOR,
+    );
+    expect(quizPreview.passed).toBe(true);
+    expect(quizPreview.scorePercent).toBe(100);
+    expect(quizPreview.canRetry).toBe(true);
+    expect(quizPreview.results[0]!.explanation).toContain('<h1>');
+    expect(quizAttemptsStore).toHaveLength(0);
+    expect(enrollmentsStore).toHaveLength(0);
+    expect(lessonProgressStore).toHaveLength(0);
+  });
 });

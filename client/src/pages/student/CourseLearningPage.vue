@@ -9,11 +9,13 @@ import {
   BookOpen,
   CheckCircle2,
   CircleHelp,
+  Eye,
   FileText,
   Lock,
   MessageCircle,
   PanelRightClose,
   PanelRightOpen,
+  Pencil,
   PlayCircle,
   Sparkles,
 } from 'lucide-vue-next';
@@ -129,6 +131,7 @@ async function handleVideoProgress(payload: {
   watchedFully: boolean;
 }): Promise<void> {
   if (!courseId.value || !currentLesson.value) return;
+  if (overview.value?.isPreviewMode) return;
   const targetLessonId = currentLesson.value.id;
   const wasWatchedFully = currentLesson.value.watchedFully;
 
@@ -193,6 +196,13 @@ async function handleQuizSubmit(
     );
     lastQuizResult.value = result;
 
+    if (overview.value?.isPreviewMode) {
+      completionToast.value = result.passed
+        ? `Chế độ xem thử: Đạt ${result.scorePercent}% (${result.correctCount}/${result.totalQuestions} câu đúng). Kết quả làm thử không lưu vào thống kê học viên.`
+        : `Chế độ xem thử: Đạt ${result.scorePercent}% (${result.correctCount}/${result.totalQuestions} câu đúng — yêu cầu ${result.requiredPassPercent}%). Bạn có thể chọn lại đáp án để kiểm tra tiếp.`;
+      return;
+    }
+
     if (result.passed) {
       await Promise.all([
         refreshOverviewSilently(),
@@ -252,8 +262,25 @@ onMounted(() => {
           </h1>
         </div>
 
-        <div v-if="overview" class="flex items-center gap-3">
-          <div class="hidden items-center gap-3 sm:flex">
+        <div v-if="overview" class="flex flex-wrap items-center gap-3">
+          <!-- Khi Giảng viên / Admin đang ở chế độ Xem khóa học -->
+          <template v-if="overview.isPreviewMode">
+            <span class="hidden items-center gap-1.5 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-[#4fd1a5] sm:inline-flex">
+              <Eye class="h-3.5 w-3.5" />
+              <span>Chế độ xem khóa học (Không lưu tiến độ)</span>
+            </span>
+            <router-link
+              v-if="overview.canManageCourse"
+              :to="{ name: 'ManageCourseEdit', params: { id: courseId } }"
+              class="inline-flex items-center gap-1.5 rounded-lg bg-[#4fd1a5] px-3 py-1.5 text-xs font-bold text-[#06382c] transition-opacity hover:opacity-90"
+            >
+              <Pencil class="h-3.5 w-3.5" />
+              <span>Chế độ biên soạn</span>
+            </router-link>
+          </template>
+
+          <!-- Khi Học viên đang học bình thường -->
+          <div v-else class="hidden items-center gap-3 sm:flex">
             <div class="text-right text-xs">
               <span class="font-semibold text-white tabular-nums">
                 Tiến độ: {{ overview.progressPercent }}%
@@ -424,14 +451,19 @@ onMounted(() => {
                       "
                     >
                       {{
-                        currentLesson.status === 'COMPLETED'
-                          ? 'Đã hoàn thành bài học'
-                          : 'Đang học'
+                        overview.isPreviewMode
+                          ? 'Chế độ xem thử (Đã mở khóa)'
+                          : currentLesson.status === 'COMPLETED'
+                            ? 'Đã hoàn thành bài học'
+                            : 'Đang học'
                       }}
                     </span>
                     <span class="text-muted">
                       ·
-                      <template v-if="currentLesson.hasQuiz">
+                      <template v-if="overview.isPreviewMode">
+                        Tài khoản Giảng viên / Quản trị viên được mở khóa toàn bộ bài giảng và làm thử trắc nghiệm không giới hạn
+                      </template>
+                      <template v-else-if="currentLesson.hasQuiz">
                         Điều kiện hoàn thành: Xem hết 100% video và đạt bài trắc nghiệm ({{ currentLesson.requiredPassPercent }}%)
                       </template>
                       <template v-else>
@@ -555,7 +587,12 @@ onMounted(() => {
             <div>
               <h2 class="text-base font-bold text-ink">Nội dung khóa học</h2>
               <p class="mt-0.5 text-xs tabular-nums text-muted">
-                Hoàn thành {{ overview.completedLessons }}/{{ overview.totalLessons }} bài học ({{ overview.progressPercent }}%)
+                <template v-if="overview.isPreviewMode">
+                  Đã mở khóa toàn bộ {{ overview.totalLessons }} bài học
+                </template>
+                <template v-else>
+                  Hoàn thành {{ overview.completedLessons }}/{{ overview.totalLessons }} bài học ({{ overview.progressPercent }}%)
+                </template>
               </p>
             </div>
           </div>

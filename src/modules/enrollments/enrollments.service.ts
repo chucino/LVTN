@@ -285,7 +285,75 @@ export class EnrollmentsService {
   async getCourseLearning(
     studentId: string,
     courseId: string,
+    role: Role | string = Role.STUDENT,
   ): Promise<CourseLearningOverviewDto> {
+    if (role === Role.INSTRUCTOR || role === Role.ADMIN) {
+      const { course, canManageCourse } = await this.findCourseForPreviewOrThrow(
+        studentId,
+        courseId,
+        role,
+      );
+      const orderedLessons = flattenOrderedLessons(course);
+      if (orderedLessons.length === 0) {
+        throw new BadRequestException(
+          'Khóa học này chưa có bài giảng nào để xem ở chế độ học viên',
+        );
+      }
+
+      const sortedChapters = [...(course.chapters ?? [])].sort(
+        (a, b) =>
+          a.order - b.order || a._id.toString().localeCompare(b._id.toString()),
+      );
+
+      const chapters: CurriculumChapterItemDto[] = sortedChapters.map(
+        (chapter) => {
+          const sortedLessons = [...(chapter.lessons ?? [])].sort(
+            (a, b) =>
+              a.order - b.order ||
+              a._id.toString().localeCompare(b._id.toString()),
+          );
+          return {
+            id: chapter._id.toString(),
+            title: chapter.title,
+            order: chapter.order,
+            lessons: sortedLessons.map((lesson) => {
+              const quizCount = lesson.quizQuestions?.length ?? 0;
+              return {
+                id: lesson._id.toString(),
+                title: lesson.title,
+                order: lesson.order,
+                duration: lesson.duration,
+                hasQuiz: quizCount > 0,
+                quizCount,
+                status: LessonStatus.UNLOCKED,
+                lastPositionSec: 0,
+                watchedFully: true,
+                quizPassed: false,
+              };
+            }),
+          };
+        },
+      );
+
+      return {
+        enrollmentId: `preview-${course._id.toString()}`,
+        courseId: course._id.toString(),
+        courseTitle: course.title,
+        courseType: course.type,
+        status: EnrollmentStatus.LEARNING,
+        progressPercent: 100,
+        completedLessons: orderedLessons.length,
+        totalLessons: orderedLessons.length,
+        lastLessonId: orderedLessons[0]?.lesson._id.toString() ?? null,
+        enrolledAt: new Date().toISOString(),
+        completedAt: null,
+        certificate: null,
+        chapters,
+        isPreviewMode: true,
+        canManageCourse,
+      };
+    }
+
     const { course, enrollment } = await this.findEnrollmentAndCourseOrThrow(
       studentId,
       courseId,
@@ -360,6 +428,8 @@ export class EnrollmentsService {
         : null,
       certificate,
       chapters,
+      isPreviewMode: false,
+      canManageCourse: false,
     };
   }
 
@@ -367,9 +437,71 @@ export class EnrollmentsService {
     studentId: string,
     courseId: string,
     lessonId: string,
+    role: Role | string = Role.STUDENT,
   ): Promise<LessonLearningDetailDto> {
     if (!isValidObjectId(lessonId)) {
       throw new NotFoundException('Không tìm thấy bài giảng');
+    }
+
+    if (role === Role.INSTRUCTOR || role === Role.ADMIN) {
+      const { course } = await this.findCourseForPreviewOrThrow(
+        studentId,
+        courseId,
+        role,
+      );
+      const orderedLessons = flattenOrderedLessons(course);
+      const lessonIndex = orderedLessons.findIndex(
+        (entry) => entry.lesson._id.toString() === lessonId,
+      );
+      if (lessonIndex === -1) {
+        throw new NotFoundException(
+          'Không tìm thấy bài giảng trong khóa học này',
+        );
+      }
+
+      const entry = orderedLessons[lessonIndex]!;
+      const quizCount = entry.quizCount;
+      const hasQuiz = entry.hasQuiz;
+      const requiredPassPercent = quizCount <= 1 ? 100 : 70;
+      const previousEntry =
+        lessonIndex > 0 ? orderedLessons[lessonIndex - 1] : null;
+      const nextEntry =
+        lessonIndex + 1 < orderedLessons.length
+          ? orderedLessons[lessonIndex + 1]
+          : null;
+
+      return {
+        id: entry.lesson._id.toString(),
+        chapterId: entry.chapter._id.toString(),
+        chapterTitle: entry.chapter.title,
+        title: entry.lesson.title,
+        order: entry.lesson.order,
+        videoUrl: entry.lesson.videoUrl,
+        duration: entry.lesson.duration,
+        note: entry.lesson.note ?? null,
+        summary: entry.lesson.summary ?? null,
+        hasQuiz,
+        quizCount,
+        requiredPassPercent,
+        status: LessonStatus.UNLOCKED,
+        lastPositionSec: 0,
+        watchedFully: true,
+        quizPassed: false,
+        quizUnlocked: hasQuiz,
+        quizLockedReason: null,
+        quizQuestions: (entry.lesson.quizQuestions ?? []).map((q) => ({
+          id: q._id.toString(),
+          content: q.content,
+          options: q.options,
+          correctOption: null,
+          explanation: null,
+        })),
+        previousLessonId: previousEntry
+          ? previousEntry.lesson._id.toString()
+          : null,
+        nextLessonId: nextEntry ? nextEntry.lesson._id.toString() : null,
+        nextLessonUnlocked: Boolean(nextEntry),
+      };
     }
 
     const { course, enrollment } = await this.findEnrollmentAndCourseOrThrow(
@@ -466,9 +598,47 @@ export class EnrollmentsService {
     courseId: string,
     lessonId: string,
     dto: UpdateLessonProgressDto,
+    role: Role | string = Role.STUDENT,
   ): Promise<LessonProgressUpdateResponseDto> {
     if (!isValidObjectId(lessonId)) {
       throw new NotFoundException('Không tìm thấy bài giảng');
+    }
+
+    if (role === Role.INSTRUCTOR || role === Role.ADMIN) {
+      const { course } = await this.findCourseForPreviewOrThrow(
+        studentId,
+        courseId,
+        role,
+      );
+      const orderedLessons = flattenOrderedLessons(course);
+      const lessonIndex = orderedLessons.findIndex(
+        (entry) => entry.lesson._id.toString() === lessonId,
+      );
+      if (lessonIndex === -1) {
+        throw new NotFoundException(
+          'Không tìm thấy bài giảng trong khóa học này',
+        );
+      }
+
+      const entry = orderedLessons[lessonIndex]!;
+      const maxDuration = entry.lesson.duration;
+      const clampedPosition =
+        maxDuration > 0
+          ? Math.min(dto.lastPositionSec, maxDuration)
+          : dto.lastPositionSec;
+
+      return {
+        lessonId,
+        status: LessonStatus.UNLOCKED,
+        lastPositionSec: clampedPosition,
+        watchedFully: true,
+        quizPassed: false,
+        quizUnlocked: entry.hasQuiz,
+        unlockedNextLessonId: null,
+        courseProgressPercent: 100,
+        enrollmentStatus: EnrollmentStatus.LEARNING,
+        certificate: null,
+      };
     }
 
     const { course, enrollment } = await this.findEnrollmentAndCourseOrThrow(
@@ -560,9 +730,113 @@ export class EnrollmentsService {
     courseId: string,
     lessonId: string,
     dto: SubmitQuizDto,
+    role: Role | string = Role.STUDENT,
   ): Promise<SubmitQuizResponseDto> {
     if (!isValidObjectId(lessonId)) {
       throw new NotFoundException('Không tìm thấy bài giảng');
+    }
+
+    if (role === Role.INSTRUCTOR || role === Role.ADMIN) {
+      const { course } = await this.findCourseForPreviewOrThrow(
+        studentId,
+        courseId,
+        role,
+      );
+      const orderedLessons = flattenOrderedLessons(course);
+      const lessonIndex = orderedLessons.findIndex(
+        (entry) => entry.lesson._id.toString() === lessonId,
+      );
+      if (lessonIndex === -1) {
+        throw new NotFoundException(
+          'Không tìm thấy bài giảng trong khóa học này',
+        );
+      }
+
+      const entry = orderedLessons[lessonIndex]!;
+      const questions = entry.lesson.quizQuestions ?? [];
+      if (questions.length === 0) {
+        throw new BadRequestException(
+          'Bài giảng này không có câu hỏi trắc nghiệm',
+        );
+      }
+
+      const answerMap = new Map<string, number>();
+      for (const item of dto.answers) {
+        const qId = item.questionId.toLowerCase();
+        if (answerMap.has(qId)) {
+          throw new BadRequestException(
+            `Câu hỏi ${item.questionId} bị gửi trùng lặp trong danh sách trả lời`,
+          );
+        }
+        answerMap.set(qId, item.selectedOption);
+      }
+
+      if (answerMap.size !== questions.length) {
+        throw new BadRequestException(
+          `Cần trả lời đầy đủ tất cả ${questions.length} câu hỏi trắc nghiệm của bài giảng`,
+        );
+      }
+
+      const results: QuizQuestionResultItemDto[] = [];
+      let correctCount = 0;
+
+      for (const question of questions) {
+        const qId = question._id.toString().toLowerCase();
+        const selectedOption = answerMap.get(qId);
+        if (selectedOption === undefined) {
+          throw new BadRequestException(
+            `Thiếu câu trả lời cho câu hỏi ${question._id.toString()}`,
+          );
+        }
+        if (selectedOption < 0 || selectedOption >= question.options.length) {
+          throw new BadRequestException(
+            `Đáp án đã chọn cho câu hỏi ${question._id.toString()} nằm ngoài phạm vi lựa chọn`,
+          );
+        }
+
+        const isCorrect = selectedOption === question.correctOption;
+        if (isCorrect) {
+          correctCount += 1;
+        }
+
+        results.push({
+          questionId: question._id.toString(),
+          selectedOption,
+          isCorrect,
+          explanation: isCorrect ? question.explanation : null,
+        });
+      }
+
+      const totalQuestions = questions.length;
+      const scorePercent = Math.round((correctCount / totalQuestions) * 100);
+      const requiredPassPercent = totalQuestions === 1 ? 100 : 70;
+      const passed =
+        totalQuestions === 1
+          ? correctCount === 1
+          : correctCount / totalQuestions >= 0.7;
+
+      const nextEntry =
+        lessonIndex + 1 < orderedLessons.length
+          ? orderedLessons[lessonIndex + 1]
+          : null;
+
+      return {
+        lessonId,
+        totalQuestions,
+        correctCount,
+        scorePercent,
+        requiredPassPercent,
+        passed,
+        canRetry: true,
+        lessonStatus: LessonStatus.UNLOCKED,
+        unlockedNextLessonId: nextEntry
+          ? nextEntry.lesson._id.toString()
+          : null,
+        courseProgressPercent: 100,
+        enrollmentStatus: EnrollmentStatus.LEARNING,
+        certificate: null,
+        results,
+      };
     }
 
     const { course, enrollment } = await this.findEnrollmentAndCourseOrThrow(
@@ -839,6 +1113,57 @@ export class EnrollmentsService {
     }
 
     return course as Course & { _id: Types.ObjectId };
+  }
+
+  private async findCourseForPreviewOrThrow(
+    actorUserId: string,
+    courseId: string,
+    role: Role | string,
+  ): Promise<{
+    course: Course & { _id: Types.ObjectId };
+    canManageCourse: boolean;
+  }> {
+    if (!isValidObjectId(courseId)) {
+      throw new NotFoundException('Không tìm thấy khóa học');
+    }
+
+    const course = await this.courseModel
+      .findById(new Types.ObjectId(courseId))
+      .lean()
+      .exec();
+
+    if (!course) {
+      throw new NotFoundException('Không tìm thấy khóa học');
+    }
+
+    const isAdmin = role === Role.ADMIN;
+    const isAssignedInstructor =
+      role === Role.INSTRUCTOR &&
+      course.instructorId?.toString() === actorUserId;
+
+    if (isAdmin || isAssignedInstructor) {
+      return {
+        course: course as Course & { _id: Types.ObjectId },
+        canManageCourse: true,
+      };
+    }
+
+    // Giảng viên khác (Giảng viên A xem khóa học của Giảng viên B): chỉ được xem khi khóa học đã xuất bản (APPROVED)
+    if (role === Role.INSTRUCTOR) {
+      if (course.status !== CourseStatus.APPROVED) {
+        throw new ForbiddenException(
+          'Bạn chỉ có thể xem khóa học của giảng viên khác khi khóa học đó đã được xuất bản công khai',
+        );
+      }
+      return {
+        course: course as Course & { _id: Types.ObjectId },
+        canManageCourse: false,
+      };
+    }
+
+    throw new ForbiddenException(
+      'Bạn không có quyền xem thử khóa học này',
+    );
   }
 
   private async findEnrollmentAndCourseOrThrow(

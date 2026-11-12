@@ -5,6 +5,7 @@ import {
   Award,
   CheckCircle2,
   CircleHelp,
+  Pencil,
   PlayCircle,
 } from 'lucide-vue-next';
 import CourseCover from '@/components/course/CourseCover.vue';
@@ -45,6 +46,14 @@ const isEnrolled = computed(() => Boolean(enrollmentStatus.value?.enrolled));
 const isStudent = computed(
   () => !authStore.isAuthenticated || authStore.user?.role === 'STUDENT',
 );
+const canManageThisCourse = computed(() => {
+  if (!authStore.user || !course.value) return false;
+  if (authStore.user.role === 'ADMIN') return true;
+  return (
+    authStore.user.role === 'INSTRUCTOR' &&
+    course.value.instructor.id === authStore.user.id
+  );
+});
 
 const primaryActionLabel = computed(() => {
   if (!course.value) return 'Đăng ký học ngay';
@@ -391,13 +400,24 @@ onBeforeUnmount(() => {
                 >
                   {{ primaryActionLabel }}
                 </button>
-                <router-link
-                  v-else
-                  :to="{ name: 'ManageCourseEdit', params: { id: course.id } }"
-                  class="manage-button-secondary mt-5 flex w-full !min-h-12 items-center justify-center text-base"
-                >
-                  Quản lý khóa học này
-                </router-link>
+                <div v-else class="mt-5 space-y-2.5">
+                  <router-link
+                    v-if="course.totalLessons > 0"
+                    :to="{ name: 'CourseLearning', params: { courseId: course.id } }"
+                    class="manage-button-primary flex w-full !min-h-12 items-center justify-center gap-2 text-base"
+                  >
+                    <PlayCircle class="h-5 w-5" />
+                    <span>Xem khóa học</span>
+                  </router-link>
+                  <router-link
+                    v-if="canManageThisCourse"
+                    :to="{ name: 'ManageCourseEdit', params: { id: course.id } }"
+                    class="manage-button-secondary flex w-full !min-h-12 items-center justify-center gap-2 text-base"
+                  >
+                    <Pencil class="h-4 w-4" />
+                    <span>Quản lý khóa học này</span>
+                  </router-link>
+                </div>
 
                 <p v-if="actionNotice" class="mt-3 text-sm text-brand-soft" role="status">
                   {{ actionNotice }}

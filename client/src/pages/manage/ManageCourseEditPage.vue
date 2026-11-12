@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { onBeforeRouteLeave, onBeforeRouteUpdate, useRoute, useRouter } from 'vue-router';
-import { AlertCircle, ArrowLeft, BookOpen, CheckCircle2 } from 'lucide-vue-next';
+import { AlertCircle, ArrowLeft, BookOpen, CheckCircle2, PlayCircle } from 'lucide-vue-next';
 import { useAuthStore } from '@/stores/auth.store';
 import { useManageCourseEditor } from '@/composables/useManageCourseEditor';
 import { useManageCatalog } from '@/composables/useManageCatalog';
@@ -161,6 +161,15 @@ async function handleStatusAction(
         <BookOpen class="h-3.5 w-3.5 text-brand-soft" />
         {{ editorCourse.totalChapters }} chương · {{ editorCourse.totalLessons }} bài
       </span>
+      <router-link
+        v-if="editorCourse && editorCourse.totalLessons > 0"
+        :to="{ name: 'CourseLearning', params: { courseId: editorCourse.id } }"
+        class="manage-button-secondary inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold"
+        title="Xem khóa học"
+      >
+        <PlayCircle class="h-4 w-4 text-brand-soft" />
+        <span>Xem khóa học</span>
+      </router-link>
     </div>
 
     <div v-if="editorError || catalogError" class="manage-alert-error" role="alert">
