@@ -160,3 +160,30 @@
 - Backup đã tạo: backup/<đường dẫn file>.20261113-0347.bak cho toàn bộ 9 file trên
 - Hoàn thành: 2026-11-13 03:55
 - Tóm tắt thay đổi: Bổ sung trường `watchedSeconds` vào `LessonProgress` schema, DTO và `EnrollmentsService` để lưu cộng dồn tổng thời gian thực tế học viên bật phát video; chặn hoàn toàn việc tua nhanh đến cuối video để qua bài ở tầng Backend (chỉ đánh dấu `watchedFully = true` khi `watchedSeconds >= Math.ceil(duration * 0.6)`). Trên `LessonVideoPlayer.vue`, gỡ khóa tua (`seek`) để học viên tua tự do, thêm bộ đếm ngầm 1 giây chỉ chạy khi video đang phát (`isPlaying`), tự động báo hoàn thành video và mở khóa bài tiếp theo / trắc nghiệm ngay khi chạm mốc 60% thời lượng, đồng thời hiển thị cảnh báo nhắc nhở nếu video kết thúc mà chưa tích lũy đủ 60% thời lượng. Toàn bộ 57 unit tests, `lint.mjs` (0 FAIL) và `npm run build` đều đạt.
+
+
+## [x] #039 - Nâng cấp chức năng Đánh giá khóa học (Course Reviews) tích hợp kiểm duyệt 2 tuyến
+- Bắt đầu: 2026-11-15 02:11
+- Mục tiêu: Cho phép học viên đã hoàn thành 100% khóa học chấm 1–5 sao kèm nhận xét tùy chọn (1 đánh giá duy nhất/khóa học, sửa lại bất cứ lúc nào, giữ nguyên đánh giá kể cả khi khóa học thêm bài giảng mới); hiển thị Modal chúc mừng kèm đánh giá ngay khi đạt 100% trong phòng học và khu vực Đánh giá cuối trang Chi tiết khóa học (ưu tiên đánh giá có chữ lên đầu, thẻ gọn 1 dòng cho đánh giá chỉ chấm sao); chặn nhập nhận xét chữ khi đang bị cấm bình luận và tích hợp báo cáo vi phạm đánh giá vào hàng đợi kiểm duyệt 2 tuyến (#035) kèm tự động tính lại `course.avgRating`.
+- Phạm vi dự kiến:
+  - src/modules/reviews/schemas/course-review.schema.ts
+  - src/modules/reviews/dto/course-review.dto.ts
+  - src/modules/reviews/reviews.service.ts
+  - src/modules/reviews/reviews.controller.ts
+  - src/modules/reviews/reviews.module.ts
+  - src/modules/reviews/reviews.service.spec.ts
+  - src/app.module.ts
+  - src/modules/questions/schemas/report.schema.ts
+  - src/modules/questions/questions.module.ts
+  - src/modules/questions/questions.service.ts
+  - src/modules/questions/questions.service.spec.ts
+  - client/src/types/review.ts
+  - client/src/services/reviews.api.ts
+  - client/src/components/course/CourseReviewsSection.vue
+  - client/src/components/learning/CourseCompletionReviewModal.vue
+  - client/src/pages/public/CourseDetailPage.vue
+  - client/src/pages/student/CourseLearningPage.vue
+  - client/src/pages/manage/ManageReportsPage.vue
+- Backup đã tạo: backup/<đường dẫn file>.20261115-0211.bak cho toàn bộ 8 file hiện có
+- Hoàn thành: 2026-11-15 02:23
+- Tóm tắt thay đổi: Tạo mới `ReviewsModule` (`CourseReview` schema với unique index `{ courseId, studentId }`, `ReviewsService`, `ReviewsController`, unit tests) hỗ trợ chấm 1–5 sao kèm nhận xét tùy chọn cho học viên hoàn thành 100% khóa học, bảo toàn đánh giá và quyền chỉnh sửa kể cả khi khóa học cập nhật thêm bài giảng mới, ưu tiên sắp xếp đánh giá có chữ lên đầu và đánh giá chỉ chấm sao xuống dưới, chặn gửi nhận xét có chữ khi đang bị cấm bình luận (`commentBannedUntil`). Tích hợp báo cáo đánh giá (`ReportTargetType.REVIEW`) vào `QuestionsService.listManageReports` và `resolveReport`, tự động ẩn toàn bộ đánh giá vi phạm và tính lại `course.avgRating`. Tạo mới `CourseReviewsSection.vue` ở cuối `CourseDetailPage.vue` và `CourseCompletionReviewModal.vue` bật lên ngay khi đạt 100% trong `CourseLearningPage.vue`. Toàn bộ 60 unit tests, `lint.mjs` (0 FAIL) và `npm run build` đều đạt.

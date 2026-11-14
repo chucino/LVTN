@@ -11,6 +11,10 @@ import {
 } from '../enrollments/schemas/lesson-progress.schema.js';
 import { User, UserSchema } from '../users/schemas/user.schema.js';
 import {
+  CourseReview,
+  CourseReviewSchema,
+} from '../reviews/schemas/course-review.schema.js';
+import {
   ManageReportsController,
   NotificationsController,
   QuestionsController,
@@ -36,6 +40,7 @@ import { Report, ReportSchema } from './schemas/report.schema.js';
       { name: Enrollment.name, schema: EnrollmentSchema },
       { name: LessonProgress.name, schema: LessonProgressSchema },
       { name: User.name, schema: UserSchema },
+      { name: CourseReview.name, schema: CourseReviewSchema },
     ]),
   ],
   controllers: [

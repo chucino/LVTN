@@ -69,10 +69,10 @@ export class Report {
 
   @Prop({
     type: MongooseSchema.Types.ObjectId,
-    required: true,
+    default: null,
     index: true,
   })
-  lessonId!: Types.ObjectId;
+  lessonId!: Types.ObjectId | null;
 
   @Prop({ type: String, required: true, trim: true, maxlength: 500 })
   reason!: string;
@@ -120,4 +120,3 @@ export const ReportSchema = SchemaFactory.createForClass(Report);
 
 ReportSchema.index({ courseId: 1, status: 1, createdAt: -1 });
 ReportSchema.index({ status: 1, escalatedToAdmin: 1, createdAt: -1 });
-

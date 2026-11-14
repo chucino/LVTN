@@ -3,6 +3,7 @@ import {
   ForbiddenException,
   Injectable,
   NotFoundException,
+  Optional,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, Types } from 'mongoose';
@@ -20,6 +21,10 @@ import {
   LessonProgress,
   LessonProgressDocument,
 } from '../enrollments/schemas/lesson-progress.schema.js';
+import {
+  CourseReview,
+  CourseReviewDocument,
+} from '../reviews/schemas/course-review.schema.js';
 import { User, UserDocument } from '../users/schemas/user.schema.js';
 import {
   CommentAuthorDto,
@@ -157,6 +162,9 @@ export class QuestionsService {
     private readonly lessonProgressModel: Model<LessonProgressDocument>,
     @InjectModel(User.name)
     private readonly userModel: Model<UserDocument>,
+    @Optional()
+    @InjectModel(CourseReview.name)
+    private readonly reviewModel?: Model<CourseReviewDocument>,
   ) {}
 
   /**
@@ -866,7 +874,19 @@ export class QuestionsService {
     }
 
     const commentIds = Array.from(
-      new Set(groupedReports.map((g) => g.report.targetId.toString())),
+      new Set(
+        groupedReports
+          .filter((g) => g.report.targetType !== ReportTargetType.REVIEW)
+          .map((g) => g.report.targetId.toString()),
+      ),
+    ).map((id) => new Types.ObjectId(id));
+
+    const reviewIds = Array.from(
+      new Set(
+        groupedReports
+          .filter((g) => g.report.targetType === ReportTargetType.REVIEW)
+          .map((g) => g.report.targetId.toString()),
+      ),
     ).map((id) => new Types.ObjectId(id));
 
     const userIdsSet = new Set<string>();
@@ -878,9 +898,12 @@ export class QuestionsService {
       }
     }
 
-    const [comments, users] = await Promise.all([
+    const [comments, reviews, users] = await Promise.all([
       commentIds.length > 0
         ? this.commentModel.find({ _id: { $in: commentIds } }).exec()
+        : Promise.resolve([]),
+      reviewIds.length > 0 && this.reviewModel
+        ? this.reviewModel.find({ _id: { $in: reviewIds } }).exec()
         : Promise.resolve([]),
       userIdsSet.size > 0
         ? this.userModel
@@ -899,6 +922,11 @@ export class QuestionsService {
     const commentMap = new Map<string, LessonCommentDocument>();
     for (const c of comments) {
       commentMap.set(c._id.toString(), c);
+    }
+
+    const reviewMap = new Map<string, CourseReviewDocument>();
+    for (const rev of reviews) {
+      reviewMap.set(rev._id.toString(), rev);
     }
 
     const userMap = new Map<string, CommentAuthorDto>();
@@ -923,9 +951,12 @@ export class QuestionsService {
     const items: ReportQueueItemDto[] = groupedReports.map(
       ({ report: r, duplicateCount }) => {
         const courseMeta = courseMap.get(r.courseId.toString());
+        const isReviewReport = r.targetType === ReportTargetType.REVIEW;
         const commentDoc = commentMap.get(r.targetId.toString());
+        const reviewDoc = reviewMap.get(r.targetId.toString());
         const authorDoc = userDocMap.get(r.targetAuthorId.toString());
         const bannedUntil = authorDoc?.commentBannedUntil ?? null;
+        const lessonIdStr = r.lessonId ? r.lessonId.toString() : '';
 
         return {
           id: r._id.toString(),
@@ -933,10 +964,13 @@ export class QuestionsService {
           targetId: r.targetId.toString(),
           courseId: r.courseId.toString(),
           courseTitle: courseMeta?.title ?? 'Khóa học NextCode',
-          lessonId: r.lessonId.toString(),
-          lessonTitle:
-            courseMeta?.lessonTitleMap.get(r.lessonId.toString()) ??
-            'Bài giảng trong khóa học',
+          lessonId: lessonIdStr,
+          lessonTitle: isReviewReport
+            ? reviewDoc
+              ? `Đánh giá khóa học (${reviewDoc.rating}/5 sao)`
+              : 'Đánh giá khóa học'
+            : (courseMeta?.lessonTitleMap.get(lessonIdStr) ??
+              'Bài giảng trong khóa học'),
           reporter:
             userMap.get(r.reporterId.toString()) ??
             fallbackUser(r.reporterId.toString()),
@@ -963,10 +997,12 @@ export class QuestionsService {
                     : new Date().toISOString(),
                 }))
             : [],
-          commentContent:
-            commentDoc?.content ?? '[Bình luận đã bị tác giả xóa]',
-          commentVisibilityStatus:
-            commentDoc?.visibilityStatus ?? CommentVisibilityStatus.VISIBLE,
+          commentContent: isReviewReport
+            ? (reviewDoc?.comment ?? '[Đánh giá không còn tồn tại]')
+            : (commentDoc?.content ?? '[Bình luận đã bị tác giả xóa]'),
+          commentVisibilityStatus: isReviewReport
+            ? (reviewDoc?.visibilityStatus ?? CommentVisibilityStatus.VISIBLE)
+            : (commentDoc?.visibilityStatus ?? CommentVisibilityStatus.VISIBLE),
           reason: r.reason,
           status: r.status,
           escalatedToAdmin: r.status === ReportStatus.ESCALATED,
@@ -1127,10 +1163,60 @@ export class QuestionsService {
       };
     }
 
-    // DELETE_AND_REMIND hoặc APPLY_PENALTY: cần bình luận còn tồn tại
-    const comment = await this.commentModel.findById(report.targetId).exec();
-    if (!comment) {
-      throw new NotFoundException('Bình luận bị báo cáo không còn tồn tại');
+    const isReviewReport = report.targetType === ReportTargetType.REVIEW;
+
+    let targetEntityId: Types.ObjectId;
+    let alreadyRecorded = false;
+
+    if (isReviewReport) {
+      if (!this.reviewModel) {
+        throw new NotFoundException('Đánh giá bị báo cáo không còn tồn tại');
+      }
+      const review = await this.reviewModel.findById(report.targetId).exec();
+      if (!review) {
+        throw new NotFoundException('Đánh giá bị báo cáo không còn tồn tại');
+      }
+      targetEntityId = review._id;
+      alreadyRecorded = review.violationRecorded === true;
+
+      review.visibilityStatus = CommentVisibilityStatus.HIDDEN;
+      review.moderationNote =
+        note ?? 'Đánh giá bị ẩn do vi phạm tiêu chuẩn cộng đồng';
+      review.violationRecorded = true;
+      await review.save();
+
+      // Tính lại điểm trung bình sao của khóa học (loại trừ đánh giá vi phạm vừa bị ẩn)
+      const visibleReviews = await this.reviewModel
+        .find({
+          courseId: report.courseId,
+          visibilityStatus: CommentVisibilityStatus.VISIBLE,
+        })
+        .select('rating')
+        .exec();
+
+      const totalVisible = visibleReviews.length;
+      const sumRating = visibleReviews.reduce((acc, r) => acc + r.rating, 0);
+      const nextAvgRating =
+        totalVisible > 0 ? Math.round((sumRating / totalVisible) * 10) / 10 : 0;
+
+      await this.courseModel
+        .findByIdAndUpdate(report.courseId, {
+          $set: { avgRating: nextAvgRating },
+        })
+        .exec();
+    } else {
+      const comment = await this.commentModel.findById(report.targetId).exec();
+      if (!comment) {
+        throw new NotFoundException('Bình luận bị báo cáo không còn tồn tại');
+      }
+      targetEntityId = comment._id;
+      alreadyRecorded = comment.violationRecorded === true;
+
+      comment.visibilityStatus = CommentVisibilityStatus.HIDDEN;
+      comment.moderationNote =
+        note ?? 'Bình luận bị xóa do vi phạm tiêu chuẩn cộng đồng';
+      comment.violationRecorded = true;
+      await comment.save();
     }
 
     const targetAuthor = await this.userModel
@@ -1147,16 +1233,7 @@ export class QuestionsService {
       );
     }
 
-    // Xóa mềm bình luận (giữ bằng chứng trong CSDL)
-    comment.visibilityStatus = CommentVisibilityStatus.HIDDEN;
-    comment.moderationNote =
-      note ?? 'Bình luận bị xóa do vi phạm tiêu chuẩn cộng đồng';
-
-    // Mỗi bình luận vi phạm chỉ được cộng +1 lần vi phạm duy nhất
     let violationCount = targetAuthor?.violationCount ?? 0;
-    const alreadyRecorded = comment.violationRecorded === true;
-    comment.violationRecorded = true;
-    await comment.save();
 
     const isPenalty = dto.action === ReportActionType.APPLY_PENALTY;
     const penalty = isPenalty
@@ -1166,7 +1243,11 @@ export class QuestionsService {
         )
       : null;
 
-    const penaltySummary = penalty?.summary ?? 'Xóa bình luận và nhắc nhở';
+    const penaltySummary =
+      penalty?.summary ??
+      (isReviewReport
+        ? 'Ẩn đánh giá vi phạm và nhắc nhở'
+        : 'Xóa bình luận và nhắc nhở');
 
     if (!alreadyRecorded) {
       const updated = await this.userModel
@@ -1177,7 +1258,7 @@ export class QuestionsService {
             $push: {
               violationHistory: {
                 reportId: report._id,
-                commentId: comment._id,
+                commentId: targetEntityId,
                 courseId: report.courseId,
                 reason: report.reason,
                 actionTaken: dto.action,
@@ -1229,22 +1310,26 @@ export class QuestionsService {
         ? NotificationType.MODERATION_WARNING
         : NotificationType.MODERATION_REMINDER,
       title: isWarning
-        ? 'Cảnh cáo vi phạm tiêu chuẩn hỏi đáp'
-        : 'Nhắc nhở về bình luận trong bài học',
-      message: `Bình luận của bạn trong khóa học "${course.title}" đã bị xóa do vi phạm tiêu chuẩn cộng đồng (tổng số lần vi phạm: ${violationCount}). Hình thức xử lý: ${penaltySummary}.${note ? ` Ghi chú: ${note}` : ''}`,
+        ? 'Cảnh cáo vi phạm tiêu chuẩn cộng đồng'
+        : isReviewReport
+          ? 'Nhắc nhở về đánh giá khóa học'
+          : 'Nhắc nhở về bình luận trong bài học',
+      message: `${isReviewReport ? 'Đánh giá' : 'Bình luận'} của bạn trong khóa học "${course.title}" đã bị ẩn do vi phạm tiêu chuẩn cộng đồng (tổng số lần vi phạm: ${violationCount}). Hình thức xử lý: ${penaltySummary}.${note ? ` Ghi chú: ${note}` : ''}`,
       courseId: report.courseId,
       lessonId: report.lessonId,
       isRead: false,
     });
 
     await notifyReporters(
-      `Cảm ơn bạn đã báo cáo vi phạm tại khóa học "${course.title}". Bình luận vi phạm đã được xử lý.`,
+      `Cảm ơn bạn đã báo cáo vi phạm tại khóa học "${course.title}". Nội dung vi phạm đã được xử lý.`,
     );
 
     return {
       message: isPenalty
         ? `Đã xử lý vi phạm: ${penaltySummary}.`
-        : 'Đã xóa bình luận vi phạm và gửi thông báo nhắc nhở.',
+        : isReviewReport
+          ? 'Đã ẩn đánh giá vi phạm, tính lại điểm trung bình khóa học và gửi thông báo nhắc nhở.'
+          : 'Đã xóa bình luận vi phạm và gửi thông báo nhắc nhở.',
       status: ReportStatus.RESOLVED,
     };
   }

@@ -20,6 +20,7 @@ import {
   Sparkles,
 } from 'lucide-vue-next';
 import CertificateCardView from '@/components/certificate/CertificateCardView.vue';
+import CourseCompletionReviewModal from '@/components/learning/CourseCompletionReviewModal.vue';
 import LessonDiscussionDrawer from '@/components/learning/LessonDiscussionDrawer.vue';
 import LessonQuizPanel from '@/components/learning/LessonQuizPanel.vue';
 import LessonVideoPlayer from '@/components/learning/LessonVideoPlayer.vue';
@@ -44,6 +45,7 @@ const lessonError = ref<string | null>(null);
 
 const sidebarCollapsed = ref(false);
 const showCertificateView = ref(false);
+const showCompletionReviewModal = ref(false);
 const submittingQuiz = ref(false);
 const lastQuizResult = ref<SubmitQuizResponse | null>(null);
 const completionToast = ref<string | null>(null);
@@ -135,6 +137,7 @@ async function handleVideoProgress(payload: {
   if (overview.value?.isPreviewMode) return;
   const targetLessonId = currentLesson.value.id;
   const wasWatchedFully = currentLesson.value.watchedFully;
+  const wasCourseCompleted = overview.value?.status === 'COMPLETED';
 
   try {
     const updated = await enrollmentsApi.updateLessonProgress(
@@ -178,6 +181,10 @@ async function handleVideoProgress(payload: {
         completionToast.value =
           'Bạn đã xem đủ thời lượng video yêu cầu. Hãy hoàn thành câu hỏi trắc nghiệm bên dưới để mở bài tiếp theo.';
       }
+
+      if (!wasCourseCompleted && updated.enrollmentStatus === 'COMPLETED') {
+        showCompletionReviewModal.value = true;
+      }
     }
   } catch (err) {
     lessonError.value = getCourseErrorMessage(err);
@@ -190,6 +197,7 @@ async function handleQuizSubmit(
   if (!courseId.value || !currentLesson.value) return;
   submittingQuiz.value = true;
   lessonError.value = null;
+  const wasCourseCompleted = overview.value?.status === 'COMPLETED';
 
   try {
     const result = await enrollmentsApi.submitLessonQuiz(
@@ -221,6 +229,10 @@ async function handleQuizSubmit(
       } else if (result.unlockedNextLessonId) {
         completionToast.value =
           'Bạn đã vượt qua bài kiểm tra trắc nghiệm! Bài học tiếp theo đã mở khóa.';
+      }
+
+      if (!wasCourseCompleted && result.enrollmentStatus === 'COMPLETED') {
+        showCompletionReviewModal.value = true;
       }
     }
   } catch (err) {
@@ -679,6 +691,16 @@ onMounted(() => {
         :lesson-title="`Bài ${currentLesson.order}: ${currentLesson.title}`"
         @close="discussionOpen = false"
         @update:total-comments="lessonCommentsCount = $event"
+      />
+
+      <!-- Modal chúc mừng hoàn thành 100% khóa học kèm đánh giá 1-5 sao -->
+      <CourseCompletionReviewModal
+        :open="showCompletionReviewModal"
+        :course-id="courseId"
+        :course-title="overview.courseTitle"
+        :certificate-code="overview.certificate?.certificateCode ?? null"
+        @close="showCompletionReviewModal = false"
+        @view-certificate="showCertificateView = true"
       />
     </main>
   </div>

@@ -9,6 +9,7 @@ import {
   PlayCircle,
 } from 'lucide-vue-next';
 import CourseCover from '@/components/course/CourseCover.vue';
+import CourseReviewsSection from '@/components/course/CourseReviewsSection.vue';
 import {
   formatCourseDuration,
   formatCoursePrice,
@@ -338,6 +339,12 @@ onBeforeUnmount(() => {
                 </div>
               </div>
             </section>
+
+            <!-- Phần Đánh giá của các học viên học trước đó ở cuối trang khóa học -->
+            <CourseReviewsSection
+              :course-id="course.id"
+              @rating-updated="course.avgRating = $event"
+            />
           </div>
 
           <!-- Thẻ đăng ký -->
