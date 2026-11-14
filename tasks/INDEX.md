@@ -1,4 +1,4 @@
 # Task Index
 
-- Đang hoạt động: task-5.md (1/10)
+- Đang hoạt động: task-5.md (3/10)
 - Đã đóng: task-1.md, task-2.md, task-3.md, task-4.md

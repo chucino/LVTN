@@ -29,16 +29,6 @@ export function getCourseReadiness(
   if (!hasText(course.title)) issues.push('Khóa học chưa có tiêu đề.');
   if (!hasText(course.description)) issues.push('Khóa học chưa có mô tả.');
   if (!course.level) issues.push('Khóa học chưa chọn trình độ.');
-  if (!course.categoryId) issues.push('Khóa học chưa chọn danh mục.');
-  if (!hasText(course.targetAudience)) {
-    issues.push('Khóa học chưa mô tả đối tượng học viên phù hợp.');
-  }
-  if (!hasText(course.requirements)) {
-    issues.push('Khóa học chưa có yêu cầu dành cho học viên.');
-  }
-  if (!course.learningOutcomes?.some((outcome) => hasText(outcome))) {
-    issues.push('Khóa học cần có ít nhất một mục tiêu học tập.');
-  }
   if (course.type === CourseType.FREE) {
     if (course.price !== 0) issues.push('Khóa học FREE phải có giá bằng 0.');
     if (course.discountPrice !== null) {

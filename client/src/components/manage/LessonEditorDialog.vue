@@ -425,7 +425,7 @@ async function handleDocFileChange(event: Event) {
     form.fileUrl = uploaded.url;
     form.fileName = uploaded.originalName || file.name;
     docUploadSuccessMessage.value =
-      'Đã tải file tài liệu lên thành công. Nội dung định dạng gốc của file sẽ được hiển thị trực tiếp trong phần Nội dung bài đọc của trang học.';
+      'Đã đính kèm file tài liệu lên bài giảng thành công.';
   } catch (cause) {
     errors.fileUrl = getManageErrorMessage(
       cause,
@@ -539,9 +539,6 @@ function submit() {
           <h2 class="text-base font-semibold text-ink">
             {{ lesson ? 'Chỉnh sửa bài giảng' : 'Thêm bài giảng' }}
           </h2>
-          <p class="mt-1 text-xs text-muted">
-            Hỗ trợ linh hoạt: Video bài giảng, Nội dung bài đọc (Text) thủ công hoặc Tải file tài liệu (.pdf, .docx, .txt, .md) - không bắt buộc phải có đủ cả hai.
-          </p>
         </div>
         <button
           type="button"
@@ -575,7 +572,7 @@ function submit() {
         <div class="space-y-3 border border-surface-3 p-4">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <span class="block text-sm font-medium text-ink">
-              1. Nguồn video bài giảng <span class="text-xs font-normal text-muted">(Tùy chọn - có thể bỏ qua nếu bài chỉ có Text/Tài liệu)</span>
+              1. Nguồn video bài giảng
             </span>
           </div>
 
@@ -631,7 +628,7 @@ function submit() {
           <!-- Chế độ 1: Mã nhúng YouTube <iframe> (Chỉ có ở khóa học FREE) -->
           <div v-if="sourceMode === 'youtube' && !isPro" class="space-y-3">
             <label class="manage-field">
-              <span>Mã nhúng YouTube (&lt;iframe&gt;) <span class="text-xs font-normal text-muted">(Có thể để trống nếu không dùng video)</span></span>
+              <span>Mã nhúng YouTube (&lt;iframe&gt;)</span>
               <textarea
                 v-model="form.youtubeEmbedInput"
                 class="manage-input min-h-20 text-xs"
@@ -639,9 +636,6 @@ function submit() {
                 :disabled="readOnly || busy"
                 placeholder='<iframe width="560" height="315" src="https://www.youtube.com/embed/..." title="YouTube video player" frameborder="0" allowfullscreen></iframe>'
               />
-              <span class="text-xs text-muted">
-                Vào video YouTube → Chia sẻ → Nhúng (Embed) → Sao chép thẻ &lt;iframe&gt; và dán vào đây.
-              </span>
               <span v-if="errors.videoUrl" class="manage-field-error">{{
                 errors.videoUrl
               }}</span>
@@ -798,11 +792,8 @@ function submit() {
         <div class="space-y-4 border border-surface-3 p-4">
           <div>
             <span class="block text-sm font-medium text-ink">
-              2. Nội dung bài đọc (Text) &amp; Tài liệu đính kèm <span class="text-xs font-normal text-muted">(Tùy chọn)</span>
+              2. Nội dung bài đọc (Text) &amp; Tài liệu đính kèm
             </span>
-            <p class="mt-0.5 text-xs text-muted">
-              Bạn có thể tải file tài liệu (<code>.pdf</code>, <code>.docx</code>, <code>.txt</code>, <code>.md</code>) để hiển thị trực tiếp nguyên bản định dạng trong phần Nội dung bài đọc trên trang học, hoặc nhập văn bản bổ sung ở bên dưới.
-            </p>
           </div>
 
           <!-- Tải file tài liệu lên -->
@@ -889,17 +880,17 @@ function submit() {
           <!-- Nhập nội dung bài đọc thủ công -->
           <label class="manage-field">
             <div class="flex items-center justify-between gap-2">
-              <span>Nội dung bài giảng dạng chữ (Nhập thủ công nếu cần)</span>
+              <span>Nội dung bài giảng dạng chữ </span>
               <span class="text-[11px] tabular-nums text-muted">
                 {{ form.content.length }} / 50000 ký tự
               </span>
             </div>
             <textarea
               v-model="form.content"
-              class="manage-input min-h-32 text-sm leading-6"
+              class="manage-input min-h-40 text-sm leading-6"
               maxlength="50000"
               :disabled="readOnly || busy"
-              placeholder="Nhập nội dung lý thuyết hoặc hướng dẫn thủ công tại đây (Tùy chọn - có thể để trống nếu đã tải file tài liệu ở trên)..."
+              placeholder="Nhập nội dung lý thuyết, hướng dẫn thực hành, ví dụ minh họa..."
             />
             <span v-if="errors.content" class="manage-field-error">{{
               errors.content

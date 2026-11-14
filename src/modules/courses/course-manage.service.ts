@@ -74,7 +74,12 @@ const instructorLookup: PipelineStage.FacetPipelineStage[] = [
       as: 'category',
     },
   },
-  { $unwind: '$category' },
+  {
+    $unwind: {
+      path: '$category',
+      preserveNullAndEmptyArrays: true,
+    },
+  },
 ];
 
 function escapeRegularExpression(value: string): string {
@@ -273,7 +278,10 @@ export class CourseManageService {
   ): Promise<ManageCourseDetailDto> {
     assertRole(actor);
     assertPricing(input.type, input.price, input.discountPrice ?? null);
-    await this.assertCategoryExists(input.categoryId);
+    const normalizedCategoryId = input.categoryId?.trim() || null;
+    if (normalizedCategoryId) {
+      await this.assertCategoryExists(normalizedCategoryId);
+    }
 
     if (actor.role !== Role.ADMIN) {
       throw new ForbiddenException('Chỉ quản trị viên mới có quyền tạo khóa học nền');
@@ -289,16 +297,20 @@ export class CourseManageService {
       instructorId = input.instructorId;
     }
 
+    const cleanedOutcomes = (input.learningOutcomes ?? [])
+      .map((item) => item.trim())
+      .filter((item) => item.length > 0);
+
     const course = await this.courseModel.create({
-      title: input.title,
-      description: input.description,
+      title: input.title.trim(),
+      description: input.description.trim(),
       type: input.type,
       level: input.level,
-      categoryId: new Types.ObjectId(input.categoryId),
+      categoryId: normalizedCategoryId ? new Types.ObjectId(normalizedCategoryId) : null,
       instructorId: new Types.ObjectId(instructorId),
-      targetAudience: input.targetAudience,
-      learningOutcomes: [...input.learningOutcomes],
-      requirements: input.requirements,
+      targetAudience: (input.targetAudience ?? '').trim(),
+      learningOutcomes: cleanedOutcomes,
+      requirements: (input.requirements ?? '').trim(),
       price: input.price,
       discountPrice: input.discountPrice ?? null,
       thumbnail: input.thumbnail ?? null,
@@ -381,7 +393,15 @@ export class CourseManageService {
     }
     assertPricing(nextType, nextPrice, nextDiscountPrice ?? null);
 
-    if (input.categoryId) await this.assertCategoryExists(input.categoryId);
+    if (input.categoryId !== undefined) {
+      const normalizedCategoryId = input.categoryId?.trim() || null;
+      if (normalizedCategoryId) {
+        await this.assertCategoryExists(normalizedCategoryId);
+        course.categoryId = new Types.ObjectId(normalizedCategoryId);
+      } else {
+        course.categoryId = null;
+      }
+    }
     if (input.instructorId !== undefined) {
       if (!(await this.usersService.isActiveInstructor(input.instructorId))) {
         throw new BadRequestException(
@@ -390,20 +410,21 @@ export class CourseManageService {
       }
       course.instructorId = new Types.ObjectId(input.instructorId);
     }
-    if (input.title !== undefined) course.title = input.title;
-    if (input.description !== undefined) course.description = input.description;
+    if (input.title !== undefined) course.title = input.title.trim();
+    if (input.description !== undefined) course.description = input.description.trim();
     if (input.type !== undefined) course.type = input.type;
     if (input.level !== undefined) course.level = input.level;
-    if (input.categoryId !== undefined) {
-      course.categoryId = new Types.ObjectId(input.categoryId);
-    }
     if (input.targetAudience !== undefined) {
-      course.targetAudience = input.targetAudience;
+      course.targetAudience = input.targetAudience.trim();
     }
     if (input.learningOutcomes !== undefined) {
-      course.learningOutcomes = [...input.learningOutcomes];
+      course.learningOutcomes = input.learningOutcomes
+        .map((item) => item.trim())
+        .filter((item) => item.length > 0);
     }
-    if (input.requirements !== undefined) course.requirements = input.requirements;
+    if (input.requirements !== undefined) {
+      course.requirements = input.requirements.trim();
+    }
     if (input.price !== undefined || nextType === CourseType.FREE) {
       course.price = nextPrice;
     }

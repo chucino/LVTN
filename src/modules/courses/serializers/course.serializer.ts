@@ -27,10 +27,10 @@ export interface CourseAggregateRecord {
     fullName: string;
     avatar: string | null;
   };
-  category: {
-    _id: Types.ObjectId | string;
-    name: string;
-  };
+  category?: {
+    _id?: Types.ObjectId | string;
+    name?: string;
+  } | null;
 }
 
 interface LessonAggregateRecord {
@@ -73,9 +73,15 @@ function serializeInstructor(
 function serializeCategory(
   category: CourseAggregateRecord['category'],
 ): CategoryCourseResponseDto {
+  if (!category?._id) {
+    return {
+      id: '',
+      name: '',
+    };
+  }
   return {
     id: idToString(category._id),
-    name: category.name,
+    name: category.name ?? '',
   };
 }
 

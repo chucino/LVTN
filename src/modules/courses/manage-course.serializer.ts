@@ -38,13 +38,13 @@ export interface ManageCourseItemAggregateRecord
   > {
   _id: Types.ObjectId | string;
   instructorId: Types.ObjectId;
-  categoryId: Types.ObjectId;
+  categoryId: Types.ObjectId | null;
   instructor: {
     _id: Types.ObjectId | string;
     fullName: string;
     avatar: string | null;
   };
-  category: { _id: Types.ObjectId | string; name: string };
+  category?: { _id?: Types.ObjectId | string; name?: string } | null;
   totalStudents?: number;
 }
 
@@ -162,10 +162,15 @@ export function serializeManageCourseItem(
     totalDuration: course.totalDuration,
     totalStudents: course.totalStudents ?? 0,
     instructor: serializeInstructor(course.instructor),
-    category: {
-      id: idToString(course.category._id),
-      name: course.category.name,
-    },
+    category: course.category?._id
+      ? {
+          id: idToString(course.category._id),
+          name: course.category.name ?? '',
+        }
+      : {
+          id: '',
+          name: 'Chưa phân loại',
+        },
     status: course.status,
     rejectReason: course.rejectReason ?? null,
     createdAt,

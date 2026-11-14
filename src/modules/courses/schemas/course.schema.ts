@@ -100,13 +100,13 @@ export class Course {
   @Prop({ type: String, enum: COURSE_LEVELS, required: true })
   level!: CourseLevel;
 
-  @Prop({ required: true, trim: true })
+  @Prop({ type: String, default: '', trim: true })
   targetAudience!: string;
 
-  @Prop({ type: [String], required: true, default: [] })
+  @Prop({ type: [String], default: [] })
   learningOutcomes!: string[];
 
-  @Prop({ required: true, trim: true })
+  @Prop({ type: String, default: '', trim: true })
   requirements!: string;
 
   @Prop({ required: true, min: 0, default: 0 })
@@ -134,10 +134,10 @@ export class Course {
   @Prop({
     type: MongooseSchema.Types.ObjectId,
     ref: Category.name,
-    required: true,
+    default: null,
     index: true,
   })
-  categoryId!: Types.ObjectId;
+  categoryId!: Types.ObjectId | null;
 
   @Prop({ required: true, min: 0, max: 5, default: 0 })
   avgRating!: number;

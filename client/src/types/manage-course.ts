@@ -123,10 +123,10 @@ export interface ManageCoursePayload {
   description: string;
   type: CourseType;
   level: CourseLevel;
-  categoryId: string;
-  targetAudience: string;
-  learningOutcomes: string[];
-  requirements: string;
+  categoryId?: string | null;
+  targetAudience?: string;
+  learningOutcomes?: string[];
+  requirements?: string;
   price: number;
   discountPrice?: number | null;
   thumbnail?: string | null;

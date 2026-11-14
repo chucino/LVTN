@@ -9,6 +9,7 @@ import { UsersService } from '../users/users.service.js';
 import { Category } from './schemas/category.schema.js';
 import { CourseManageService } from './course-manage.service.js';
 import {
+  CreateManageCourseDto,
   CreateQuizQuestionDto,
   ManageCourseQueryDto,
   ManageCourseSort,
@@ -520,5 +521,32 @@ describe('CourseManageService', () => {
     expect(deleteLocalFile).toHaveBeenCalledWith(
       '/public/files/old-doc.pdf',
     );
+  });
+
+  it('allows creating and approving courses with empty optional fields or short strings without minimum length limits', async () => {
+    const minimalCreateDto = plainToInstance(CreateManageCourseDto, {
+      title: 'JS',
+      description: 'Cơ bản',
+      type: CourseType.FREE,
+      level: 'Người mới bắt đầu',
+      categoryId: '',
+      targetAudience: '',
+      learningOutcomes: [],
+      requirements: 'Ngắn',
+      price: 0,
+      discountPrice: null,
+      instructorId: instructorId.toString(),
+    });
+    expect(await validate(minimalCreateDto)).toHaveLength(0);
+
+    course.categoryId = null;
+    course.targetAudience = '';
+    course.learningOutcomes = [];
+    course.requirements = '';
+    expect(getCourseReadiness(course)).toEqual({
+      ready: true,
+      issues: [],
+      warnings: [],
+    });
   });
 });

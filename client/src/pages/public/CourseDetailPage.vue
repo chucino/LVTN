@@ -245,7 +245,7 @@ onBeforeUnmount(() => {
                 {{ course.type === 'FREE' ? 'Miễn phí' : 'Pro' }}
               </span>
               <span class="rounded-full bg-white/15 px-3 py-1">{{ course.level }}</span>
-              <span class="rounded-full bg-white/15 px-3 py-1">{{ course.category.name }}</span>
+              <span v-if="course.category?.name" class="rounded-full bg-white/15 px-3 py-1">{{ course.category.name }}</span>
             </div>
             <h1 class="mt-4 text-3xl font-extrabold leading-tight text-white sm:text-4xl">
               {{ course.title }}
@@ -267,7 +267,10 @@ onBeforeUnmount(() => {
         <div class="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_380px]">
           <!-- Cột nội dung -->
           <div class="order-2 space-y-10 py-10 lg:order-1">
-            <section aria-labelledby="outcomes-heading">
+            <section
+              v-if="course.learningOutcomes && course.learningOutcomes.length > 0"
+              aria-labelledby="outcomes-heading"
+            >
               <h2 id="outcomes-heading" class="text-2xl font-bold text-ink">Bạn sẽ học được gì</h2>
               <ul class="mt-5 grid gap-3 sm:grid-cols-2">
                 <li
@@ -322,16 +325,19 @@ onBeforeUnmount(() => {
               </div>
             </section>
 
-            <section aria-labelledby="audience-heading">
+            <section
+              v-if="course.targetAudience?.trim() || course.requirements?.trim()"
+              aria-labelledby="audience-heading"
+            >
               <h2 id="audience-heading" class="text-2xl font-bold text-ink">Đối tượng và yêu cầu</h2>
               <div class="mt-5 grid gap-4 sm:grid-cols-2">
-                <div class="bg-surface p-6">
+                <div v-if="course.targetAudience?.trim()" class="bg-surface p-6">
                   <h3 class="text-base font-bold text-ink">Khóa học phù hợp với ai</h3>
                   <p class="mt-2 whitespace-pre-line text-sm leading-6 text-muted">
                     {{ course.targetAudience }}
                   </p>
                 </div>
-                <div class="bg-surface p-6">
+                <div v-if="course.requirements?.trim()" class="bg-surface p-6">
                   <h3 class="text-base font-bold text-ink">Yêu cầu đầu vào</h3>
                   <p class="mt-2 whitespace-pre-line text-sm leading-6 text-muted">
                     {{ course.requirements }}

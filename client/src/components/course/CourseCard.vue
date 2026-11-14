@@ -2,7 +2,7 @@
 import CourseCover from '@/components/course/CourseCover.vue';
 import type { CourseCard as Course } from '@/types/course';
 import { formatCourseDuration, formatCoursePrice } from '@/lib/course-format';
-import { BookOpen, Clock3, Star } from 'lucide-vue-next';
+import { BookOpen, Clock3, Crown, Star } from 'lucide-vue-next';
 
 defineProps<{
   course: Course;
@@ -20,19 +20,30 @@ defineProps<{
         data-ui class="block border-b border-surface-3"
         :aria-label="`Xem khóa học ${course.title}`"
       >
-        <CourseCover :src="course.thumbnail" :title="course.title" :category="course.category?.name" />
+        <CourseCover
+          :src="course.thumbnail"
+          :title="course.title"
+          :category="course.category?.name"
+          :is-pro="course.type === 'PRO'"
+        />
       </router-link>
 
       <div class="p-5">
         <div class="mb-3 flex flex-wrap items-center gap-2 text-xs font-semibold">
           <span
-            class="rounded-full px-2.5 py-1"
-            :class="course.type === 'FREE' ? 'bg-teal-tint text-teal' : 'bg-tint text-brand-soft'"
+            v-if="course.type === 'PRO'"
+            class="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-2.5 py-1 font-bold text-amber-600"
           >
-            {{ course.type === 'FREE' ? 'Miễn phí' : 'Pro' }}
+            <Crown class="h-3.5 w-3.5 fill-[#facc15] text-[#f59e0b]" />
+            <span>PRO</span>
           </span>
-          <span class="rounded-full bg-surface-2 px-2.5 py-1 text-muted">{{ course.level }}</span>
-          <span v-if="course.avgRating > 0" class="ml-auto inline-flex items-center gap-1 tabular-nums text-amber-300">
+          <span
+            v-else
+            class="inline-flex items-center rounded-full bg-teal-tint px-2.5 py-1 text-teal"
+          >
+            Miễn phí
+          </span>
+          <span v-if="course.avgRating > 0" class="ml-auto inline-flex items-center gap-1 tabular-nums text-amber-500">
             <Star class="h-3.5 w-3.5 fill-current" />
             {{ course.avgRating.toFixed(1) }}
           </span>
@@ -58,10 +69,20 @@ defineProps<{
         <span class="inline-flex items-center gap-1"><BookOpen class="h-4 w-4" /> {{ course.totalLessons }} bài</span>
         <span class="inline-flex items-center gap-1"><Clock3 class="h-4 w-4" /> {{ formatCourseDuration(course.totalDuration) }}</span>
       </span>
-      <strong v-if="course.type === 'FREE'" class="font-bold text-teal">Miễn phí</strong>
-      <strong v-else class="font-bold tabular-nums text-ink">
-        {{ formatCoursePrice(course.discountPrice ?? course.price) }}
+      <strong v-if="course.type === 'FREE'" class="text-base font-extrabold text-teal">
+        Miễn phí
       </strong>
+      <div v-else class="flex items-baseline gap-2">
+        <span
+          v-if="course.discountPrice !== null && course.discountPrice < course.price"
+          class="text-xs font-medium tabular-nums text-muted line-through"
+        >
+          {{ formatCoursePrice(course.price) }}
+        </span>
+        <strong class="text-base font-extrabold tabular-nums text-[#f05123]">
+          {{ formatCoursePrice(course.discountPrice ?? course.price) }}
+        </strong>
+      </div>
     </div>
   </article>
 </template>

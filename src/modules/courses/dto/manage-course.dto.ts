@@ -134,14 +134,14 @@ export class ManageCourseQueryDto {
 }
 
 export class CreateManageCourseDto {
-  @ApiProperty({ example: 'REST API với NestJS', minLength: 5, maxLength: 150 })
+  @ApiProperty({ example: 'REST API với NestJS', minLength: 1, maxLength: 150 })
   @IsString()
-  @Length(5, 150)
+  @Length(1, 150)
   title!: string;
 
-  @ApiProperty({ example: 'Xây dựng API bằng NestJS và TypeScript.', minLength: 20, maxLength: 5000 })
+  @ApiProperty({ example: 'Xây dựng API bằng NestJS và TypeScript.', minLength: 1, maxLength: 5000 })
   @IsString()
-  @Length(20, 5000)
+  @Length(1, 5000)
   description!: string;
 
   @ApiProperty({ enum: CourseType, example: CourseType.PRO })
@@ -152,27 +152,35 @@ export class CreateManageCourseDto {
   @IsIn(COURSE_LEVELS)
   level!: (typeof COURSE_LEVELS)[number];
 
-  @ApiProperty({ example: '6650c1f6f2f4f6e4c8bfe124' })
+  @ApiPropertyOptional({ example: '6650c1f6f2f4f6e4c8bfe124', nullable: true })
+  @ValidateIf(
+    (object: CreateManageCourseDto) =>
+      object.categoryId !== undefined &&
+      object.categoryId !== null &&
+      object.categoryId !== '',
+  )
   @IsMongoId()
-  categoryId!: string;
+  categoryId?: string | null;
 
-  @ApiProperty({ example: 'Người đã có kiến thức TypeScript cơ bản.', minLength: 10, maxLength: 1000 })
+  @ApiPropertyOptional({ example: 'Người đã có kiến thức TypeScript cơ bản.', maxLength: 1000 })
+  @ValidateIf((object: CreateManageCourseDto) => object.targetAudience !== undefined)
   @IsString()
-  @Length(10, 1000)
-  targetAudience!: string;
+  @MaxLength(1000)
+  targetAudience?: string;
 
-  @ApiProperty({ type: [String], example: ['Tạo REST API có xác thực'], minItems: 1, maxItems: 10 })
+  @ApiPropertyOptional({ type: [String], example: ['Tạo REST API có xác thực'], maxItems: 10 })
+  @ValidateIf((object: CreateManageCourseDto) => object.learningOutcomes !== undefined)
   @IsArray()
   @IsString({ each: true })
-  @Length(3, 200, { each: true })
-  @ArrayMinSize(1)
+  @MaxLength(200, { each: true })
   @ArrayMaxSize(10)
-  learningOutcomes!: string[];
+  learningOutcomes?: string[];
 
-  @ApiProperty({ example: 'Đã cài Node.js và hiểu TypeScript.', minLength: 5, maxLength: 1000 })
+  @ApiPropertyOptional({ example: 'Đã cài Node.js và hiểu TypeScript.', maxLength: 1000 })
+  @ValidateIf((object: CreateManageCourseDto) => object.requirements !== undefined)
   @IsString()
-  @Length(5, 1000)
-  requirements!: string;
+  @MaxLength(1000)
+  requirements?: string;
 
   @ApiProperty({ example: 699000, minimum: 0, maximum: 100_000_000 })
   @Type(() => Number)

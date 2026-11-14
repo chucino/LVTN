@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
+import { Crown } from 'lucide-vue-next';
 
 const props = defineProps<{
   src: string | null;
   title: string;
   compact?: boolean;
   category?: string;
+  isPro?: boolean;
 }>();
 
 const imageFailed = ref(false);
@@ -59,7 +61,10 @@ const theme = computed(() => {
       class="absolute inset-0 flex flex-col justify-between p-5"
       :style="{ background: theme.from, color: theme.ink }"
     >
-      <div class="flex items-center gap-1.5">
+      <div
+        class="flex items-center gap-1.5"
+        :class="isPro ? 'justify-end' : 'justify-start'"
+      >
         <span class="h-2.5 w-2.5 rounded-full" :style="{ background: theme.accent }" />
         <span class="h-2.5 w-2.5 rounded-full opacity-50" :style="{ background: theme.accent }" />
         <span class="h-2.5 w-2.5 rounded-full opacity-25" :style="{ background: theme.accent }" />
@@ -76,5 +81,14 @@ const theme = computed(() => {
         {{ title }}
       </span>
     </div>
+
+    <!-- Huy hiệu Vương miện vàng (Crown) trên góc ảnh bìa cho khóa học PRO -->
+    <span
+      v-if="isPro"
+      aria-label="Khóa học Pro"
+      class="pointer-events-none absolute top-3 left-3 z-10 flex h-8 w-8 items-center justify-center rounded-xl bg-slate-900/55"
+    >
+      <Crown class="h-4.5 w-4.5 fill-[#facc15] text-[#f59e0b]" />
+    </span>
   </div>
 </template>

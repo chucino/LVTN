@@ -72,7 +72,12 @@ const courseLookupStages = [
       as: 'category',
     },
   },
-  { $unwind: '$category' },
+  {
+    $unwind: {
+      path: '$category',
+      preserveNullAndEmptyArrays: true,
+    },
+  },
   {
     $project: {
       ...courseCardProjection,

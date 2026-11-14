@@ -195,7 +195,11 @@ function addOutcome() {
 }
 
 function removeOutcome(index: number) {
-  if (form.learningOutcomes.length > 1) form.learningOutcomes.splice(index, 1);
+  if (form.learningOutcomes.length > 1) {
+    form.learningOutcomes.splice(index, 1);
+  } else {
+    form.learningOutcomes[0] = '';
+  }
 }
 
 function validate(): boolean {
@@ -207,15 +211,33 @@ function validate(): boolean {
   const price = Number(form.price);
   const discountPrice = form.discountPrice.trim() ? Number(form.discountPrice) : null;
 
-  if (title.length < 5 || title.length > 150) errors.title = 'Tên khóa học phải từ 5 đến 150 ký tự.';
-  if (description.length < 20 || description.length > 5000) errors.description = 'Mô tả phải từ 20 đến 5000 ký tự.';
-  if (!form.categoryId) errors.categoryId = 'Vui lòng chọn danh mục.';
-  if (targetAudience.length < 10 || targetAudience.length > 1000) errors.targetAudience = 'Nội dung phải từ 10 đến 1000 ký tự.';
-  const outcomes = form.learningOutcomes.map((item) => item.trim());
-  if (outcomes.length < 1 || outcomes.length > 10 || outcomes.some((item) => item.length < 3 || item.length > 200)) {
-    errors.learningOutcomes = 'Cần từ 1 đến 10 mục tiêu, mỗi mục từ 3 đến 200 ký tự.';
+  if (!title) {
+    errors.title = 'Vui lòng nhập tên khóa học.';
+  } else if (title.length > 150) {
+    errors.title = 'Tên khóa học tối đa 150 ký tự.';
   }
-  if (requirements.length < 5 || requirements.length > 1000) errors.requirements = 'Yêu cầu phải từ 5 đến 1000 ký tự.';
+
+  if (!description) {
+    errors.description = 'Vui lòng nhập mô tả khóa học.';
+  } else if (description.length > 5000) {
+    errors.description = 'Mô tả tối đa 5000 ký tự.';
+  }
+
+  if (targetAudience.length > 1000) {
+    errors.targetAudience = 'Nội dung tối đa 1000 ký tự.';
+  }
+
+  const outcomes = form.learningOutcomes
+    .map((item) => item.trim())
+    .filter((item) => item.length > 0);
+  if (outcomes.length > 10 || outcomes.some((item) => item.length > 200)) {
+    errors.learningOutcomes = 'Tối đa 10 mục tiêu, mỗi mục tối đa 200 ký tự.';
+  }
+
+  if (requirements.length > 1000) {
+    errors.requirements = 'Yêu cầu tối đa 1000 ký tự.';
+  }
+
   if (!Number.isInteger(price) || price < 0 || price > 100_000_000) errors.price = 'Giá phải là số nguyên từ 0 đến 100.000.000đ.';
   if (form.type === 'FREE' && price !== 0) errors.price = 'Khóa Free phải có giá bằng 0.';
   if (form.type === 'PRO' && price <= 0) errors.price = 'Khóa Pro phải có giá lớn hơn 0.';
@@ -245,14 +267,17 @@ function save() {
   ) {
     return;
   }
+  const cleanedOutcomes = form.learningOutcomes
+    .map((item) => item.trim())
+    .filter((item) => item.length > 0);
   const payload: ManageCoursePayload = {
     title: form.title.trim(),
     description: form.description.trim(),
     type: form.type,
     level: form.level,
-    categoryId: form.categoryId,
+    categoryId: form.categoryId.trim() || null,
     targetAudience: form.targetAudience.trim(),
-    learningOutcomes: form.learningOutcomes.map((item) => item.trim()),
+    learningOutcomes: cleanedOutcomes,
     requirements: form.requirements.trim(),
     price,
     discountPrice: form.type === 'FREE' ? null : discountPrice,
@@ -273,13 +298,13 @@ function save() {
     <div class="grid gap-5 lg:grid-cols-2">
       <label class="manage-field lg:col-span-2">
         <span>Tên khóa học <span class="text-brand-soft">*</span></span>
-        <input v-model="form.title" class="manage-input" type="text" minlength="5" maxlength="150" :disabled="readOnly" autocomplete="off" />
+        <input v-model="form.title" class="manage-input" type="text" maxlength="150" :disabled="readOnly" autocomplete="off" />
         <span v-if="errors.title" class="manage-field-error">{{ errors.title }}</span>
       </label>
 
       <label class="manage-field lg:col-span-2">
         <span>Mô tả <span class="text-brand-soft">*</span></span>
-        <textarea v-model="form.description" class="manage-input min-h-32" minlength="20" maxlength="5000" :disabled="readOnly" />
+        <textarea v-model="form.description" class="manage-input min-h-32" maxlength="5000" :disabled="readOnly" />
         <span class="text-right text-xs tabular-nums text-muted">{{ form.description.length }}/5000</span>
         <span v-if="errors.description" class="manage-field-error">{{ errors.description }}</span>
       </label>
@@ -287,8 +312,8 @@ function save() {
       <label class="manage-field">
         <span>Loại khóa học <span class="text-brand-soft">*</span></span>
         <select v-model="form.type" class="manage-input" :disabled="readOnly || !canChangeType">
-          <option value="FREE">Free — miễn phí</option>
-          <option value="PRO">Pro — có phí</option>
+          <option value="FREE">Free - miễn phí</option>
+          <option value="PRO">Pro - có phí</option>
         </select>
         <span v-if="!canChangeType" class="text-xs text-muted">Chỉ khóa Nháp mới được đổi loại khóa học.</span>
       </label>
@@ -301,9 +326,9 @@ function save() {
       </label>
 
       <label class="manage-field">
-        <span>Danh mục <span class="text-brand-soft">*</span></span>
+        <span>Danh mục</span>
         <select v-model="form.categoryId" class="manage-input" :disabled="readOnly || catalogLoading">
-          <option value="" disabled>{{ catalogLoading ? 'Đang tải danh mục…' : 'Chọn danh mục' }}</option>
+          <option value="">{{ catalogLoading ? 'Đang tải danh mục…' : 'Không chọn danh mục' }}</option>
           <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
         </select>
         <span v-if="errors.categoryId" class="manage-field-error">{{ errors.categoryId }}</span>
@@ -313,24 +338,24 @@ function save() {
         <span>Giảng viên phụ trách <span class="text-brand-soft">*</span></span>
         <select v-model="form.instructorId" class="manage-input" :disabled="catalogLoading">
           <option value="" disabled>Chọn giảng viên</option>
-          <option v-for="instructor in instructors" :key="instructor.id" :value="instructor.id">{{ instructor.fullName }} — {{ instructor.email }}</option>
+          <option v-for="instructor in instructors" :key="instructor.id" :value="instructor.id">{{ instructor.fullName }} - {{ instructor.email }}</option>
         </select>
         <span v-if="errors.instructorId" class="manage-field-error">{{ errors.instructorId }}</span>
       </label>
 
       <label class="manage-field lg:col-span-2">
-        <span>Khóa học phù hợp với ai? <span class="text-brand-soft">*</span></span>
-        <textarea v-model="form.targetAudience" class="manage-input min-h-24" minlength="10" maxlength="1000" :disabled="readOnly" />
+        <span>Khóa học phù hợp với ai?</span>
+        <textarea v-model="form.targetAudience" class="manage-input min-h-24" maxlength="1000" :disabled="readOnly" />
         <span v-if="errors.targetAudience" class="manage-field-error">{{ errors.targetAudience }}</span>
       </label>
 
       <fieldset class="manage-field lg:col-span-2">
-        <legend class="mb-2">Bạn học được gì? <span class="text-brand-soft">*</span></legend>
+        <legend class="mb-2">Bạn học được gì?</legend>
         <div class="space-y-2">
           <div v-for="(_, index) in form.learningOutcomes" :key="index" class="flex items-start gap-2">
             <label class="sr-only" :for="`outcome-${index}`">Mục tiêu học tập {{ index + 1 }}</label>
-            <input :id="`outcome-${index}`" v-model="form.learningOutcomes[index]" class="manage-input" type="text" minlength="3" maxlength="200" :disabled="readOnly" :placeholder="`Mục tiêu ${index + 1}`" />
-            <button type="button" class="manage-icon-button text-rose-300" :disabled="readOnly || form.learningOutcomes.length <= 1" :aria-label="`Xóa mục tiêu ${index + 1}`" @click="removeOutcome(index)"><Trash2 class="h-4 w-4" /></button>
+            <input :id="`outcome-${index}`" v-model="form.learningOutcomes[index]" class="manage-input" type="text" maxlength="200" :disabled="readOnly" :placeholder="`Mục tiêu ${index + 1}`" />
+            <button type="button" class="manage-icon-button text-rose-300" :disabled="readOnly || (form.learningOutcomes.length <= 1 && !form.learningOutcomes[0])" :aria-label="`Xóa mục tiêu ${index + 1}`" @click="removeOutcome(index)"><Trash2 class="h-4 w-4" /></button>
           </div>
         </div>
         <button type="button" class="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-ink hover:text-brand-soft disabled:opacity-40" :disabled="readOnly || form.learningOutcomes.length >= 10" @click="addOutcome">
@@ -340,8 +365,8 @@ function save() {
       </fieldset>
 
       <label class="manage-field lg:col-span-2">
-        <span>Yêu cầu đầu vào <span class="text-brand-soft">*</span></span>
-        <textarea v-model="form.requirements" class="manage-input min-h-24" minlength="5" maxlength="1000" :disabled="readOnly" />
+        <span>Yêu cầu đầu vào</span>
+        <textarea v-model="form.requirements" class="manage-input min-h-24" maxlength="1000" :disabled="readOnly" />
         <span v-if="errors.requirements" class="manage-field-error">{{ errors.requirements }}</span>
       </label>
     </div>
