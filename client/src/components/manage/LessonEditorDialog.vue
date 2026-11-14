@@ -1,19 +1,34 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, reactive, ref, watch } from 'vue';
-import { Clock3, Film, Loader2, Lock, Upload, Video, X } from 'lucide-vue-next';
-import { secondsToParts } from '@/lib/manage-course-format';
+import {
+  CheckCircle2,
+  Clock3,
+  FileText,
+  Film,
+  Loader2,
+  Lock,
+  Trash2,
+  Upload,
+  Video,
+  VideoOff,
+  X,
+} from 'lucide-vue-next';
+import { getManageErrorMessage, secondsToParts } from '@/lib/manage-course-format';
 import {
   isLocalVideoUrl,
   loadYouTubeIframeApi,
   parseYouTubeEmbedInput,
   type YouTubePlayerInstance,
 } from '@/lib/video-embed';
+import { uploadsService } from '@/services/uploads.api';
 import type { ManageLesson, ManageLessonPayload } from '@/types/manage-course';
 
 const MAX_VIDEO_SIZE_BYTES = 1024 * 1024 * 1024; // 1GB
+const MAX_DOCUMENT_SIZE_BYTES = 25 * 1024 * 1024; // 25MB
 const ALLOWED_VIDEO_MIMES = new Set(['video/mp4', 'video/webm']);
+const ALLOWED_DOC_EXTENSIONS = new Set(['.pdf', '.docx', '.txt', '.md']);
 
-type VideoSourceMode = 'youtube' | 'upload';
+type VideoSourceMode = 'none' | 'youtube' | 'upload';
 
 const props = defineProps<{
   open: boolean;
@@ -29,6 +44,7 @@ const emit = defineEmits<{
 
 const dialog = ref<HTMLDialogElement | null>(null);
 const videoFileInputRef = ref<HTMLInputElement | null>(null);
+const docFileInputRef = ref<HTMLInputElement | null>(null);
 const youtubeContainerRef = ref<HTMLElement | null>(null);
 const errors = reactive<Record<string, string>>({});
 
@@ -38,6 +54,9 @@ const localVideoPreviewUrl = ref<string>('');
 const extractingDuration = ref(false);
 const extractedDuration = ref(0);
 
+const uploadingDocument = ref(false);
+const docUploadSuccessMessage = ref<string | null>(null);
+
 let ytPlayer: YouTubePlayerInstance | null = null;
 let activeYtRequestId = 0;
 
@@ -45,6 +64,9 @@ const form = reactive({
   title: '',
   youtubeEmbedInput: '',
   existingUploadedUrl: '',
+  content: '',
+  fileUrl: '',
+  fileName: '',
   note: '',
   summary: '',
 });
@@ -58,7 +80,16 @@ const activeUploadedPreviewUrl = computed(() => {
   return form.existingUploadedUrl.trim();
 });
 
+const hasActiveVideoInput = computed(() => {
+  if (sourceMode.value === 'none') return false;
+  if (sourceMode.value === 'youtube') {
+    return form.youtubeEmbedInput.trim().length > 0;
+  }
+  return Boolean(selectedVideoFile.value || form.existingUploadedUrl.trim());
+});
+
 const formattedDuration = computed(() => {
+  if (!hasActiveVideoInput.value) return '00:00 (Không sử dụng video)';
   if (extractedDuration.value <= 0) return 'Chưa có thông số (00:00)';
   const { minutes, seconds } = secondsToParts(extractedDuration.value);
   const mm = String(minutes).padStart(2, '0'); // taste-skill-ignore
@@ -70,6 +101,11 @@ function formatFileSize(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
   return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+}
+
+function getFileExtension(filename: string): string {
+  const dotIndex = filename.lastIndexOf('.');
+  return dotIndex >= 0 ? filename.slice(dotIndex).toLowerCase() : '';
 }
 
 function destroyYouTubePlayer() {
@@ -170,6 +206,16 @@ function switchSourceMode(nextMode: VideoSourceMode) {
   delete errors.duration;
   sourceMode.value = nextMode;
 
+  if (nextMode === 'none') {
+    destroyYouTubePlayer();
+    resetVideoSelection();
+    form.youtubeEmbedInput = '';
+    form.existingUploadedUrl = '';
+    extractedDuration.value = 0;
+    extractingDuration.value = false;
+    return;
+  }
+
   if (nextMode === 'youtube') {
     resetVideoSelection();
     const parsed = parsedYouTube.value;
@@ -196,10 +242,15 @@ watch(
     destroyYouTubePlayer();
     resetVideoSelection();
     extractingDuration.value = false;
+    uploadingDocument.value = false;
+    docUploadSuccessMessage.value = null;
     Object.keys(errors).forEach((key) => delete errors[key]);
 
     if (open) {
       form.title = lesson?.title ?? '';
+      form.content = lesson?.content ?? '';
+      form.fileUrl = lesson?.fileUrl ?? '';
+      form.fileName = lesson?.fileName ?? '';
       form.note = lesson?.note ?? '';
       form.summary = lesson?.summary ?? '';
       extractedDuration.value = lesson?.duration ?? 0;
@@ -207,7 +258,12 @@ watch(
       const existingVideo = lesson?.videoUrl?.trim() ?? '';
       const ytParsed = parseYouTubeEmbedInput(existingVideo);
 
-      if (isPro) {
+      if (lesson && !existingVideo) {
+        sourceMode.value = 'none';
+        form.youtubeEmbedInput = '';
+        form.existingUploadedUrl = '';
+        extractedDuration.value = 0;
+      } else if (isPro) {
         sourceMode.value = 'upload';
         form.youtubeEmbedInput = '';
         form.existingUploadedUrl = ytParsed ? '' : existingVideo;
@@ -304,6 +360,17 @@ function clearSelectedVideo() {
   }
 }
 
+function removeExistingVideo() {
+  if (props.readOnly || props.busy) return;
+  delete errors.videoUrl;
+  delete errors.duration;
+  resetVideoSelection();
+  form.existingUploadedUrl = '';
+  form.youtubeEmbedInput = '';
+  extractedDuration.value = 0;
+  extractingDuration.value = false;
+}
+
 function handleLocalVideoMetadata(event: Event) {
   const videoEl = event.target as HTMLVideoElement;
   const rawDuration = videoEl.duration;
@@ -325,6 +392,59 @@ function handleLocalVideoError() {
   }
 }
 
+function triggerDocPicker() {
+  if (props.readOnly || props.busy || uploadingDocument.value) return;
+  docFileInputRef.value?.click();
+}
+
+async function handleDocFileChange(event: Event) {
+  const input = event.target as HTMLInputElement;
+  const file = input.files?.[0];
+  if (!file) return;
+
+  delete errors.fileUrl;
+  docUploadSuccessMessage.value = null;
+
+  const ext = getFileExtension(file.name);
+  if (!ALLOWED_DOC_EXTENSIONS.has(ext)) {
+    errors.fileUrl =
+      'Chỉ hỗ trợ tải lên file tài liệu định dạng .pdf, .docx, .txt hoặc .md.';
+    input.value = '';
+    return;
+  }
+
+  if (file.size <= 0 || file.size > MAX_DOCUMENT_SIZE_BYTES) {
+    errors.fileUrl = 'Dung lượng file tài liệu không được vượt quá 25MB.';
+    input.value = '';
+    return;
+  }
+
+  uploadingDocument.value = true;
+  try {
+    const uploaded = await uploadsService.uploadLessonDocument(file);
+    form.fileUrl = uploaded.url;
+    form.fileName = uploaded.originalName || file.name;
+    docUploadSuccessMessage.value =
+      'Đã tải file tài liệu lên thành công. Nội dung định dạng gốc của file sẽ được hiển thị trực tiếp trong phần Nội dung bài đọc của trang học.';
+  } catch (cause) {
+    errors.fileUrl = getManageErrorMessage(
+      cause,
+      'Không thể tải file tài liệu lên server.',
+    );
+  } finally {
+    uploadingDocument.value = false;
+    input.value = '';
+  }
+}
+
+function removeAttachedDocument() {
+  if (props.readOnly || props.busy) return;
+  form.fileUrl = '';
+  form.fileName = '';
+  docUploadSuccessMessage.value = null;
+  delete errors.fileUrl;
+}
+
 function validate(): boolean {
   Object.keys(errors).forEach((key) => delete errors[key]);
   const title = form.title.trim();
@@ -332,50 +452,67 @@ function validate(): boolean {
     errors.title = 'Tên bài phải từ 3 đến 150 ký tự.';
   }
 
-  if (sourceMode.value === 'youtube') {
+  if (sourceMode.value === 'youtube' && form.youtubeEmbedInput.trim().length > 0) {
     if (!parsedYouTube.value) {
       errors.videoUrl =
-        'Vui lòng dán mã nhúng <iframe src="https://www.youtube.com/embed/..."> hợp lệ từ YouTube.';
-    }
-  } else {
-    if (!selectedVideoFile.value && !form.existingUploadedUrl.trim()) {
-      errors.videoUrl = 'Vui lòng chọn file video bài giảng từ máy (MP4 hoặc WEBM).';
+        'Mã nhúng YouTube không hợp lệ. Vui lòng dán thẻ <iframe src="https://www.youtube.com/embed/..."> hoặc để trống nếu bài không có video.';
     }
   }
 
-  if (extractingDuration.value) {
-    errors.duration = 'Hệ thống đang trích xuất thời lượng video, vui lòng đợi trong giây lát.';
-  } else if (
-    !Number.isInteger(extractedDuration.value) ||
-    extractedDuration.value < 1 ||
-    extractedDuration.value > 36000
-  ) {
-    errors.duration =
-      'Chưa trích xuất được thời lượng hợp lệ (1 – 36000 giây) từ video.';
+  if (hasActiveVideoInput.value) {
+    if (extractingDuration.value) {
+      errors.duration =
+        'Hệ thống đang trích xuất thời lượng video, vui lòng đợi trong giây lát.';
+    } else if (
+      !Number.isInteger(extractedDuration.value) ||
+      extractedDuration.value < 1 ||
+      extractedDuration.value > 36000
+    ) {
+      errors.duration =
+        'Chưa trích xuất được thời lượng hợp lệ (1 – 36000 giây) từ video.';
+    }
   }
 
+  if (form.content.length > 50000) {
+    errors.content = 'Nội dung bài đọc tối đa 50.000 ký tự.';
+  }
   if (form.note.length > 10000) errors.note = 'Ghi chép tối đa 10000 ký tự.';
   if (form.summary.length > 3000) errors.summary = 'Tóm tắt tối đa 3000 ký tự.';
   return Object.keys(errors).length === 0;
 }
 
 function submit() {
-  if (props.busy || extractingDuration.value || !validate()) return;
+  if (
+    props.busy ||
+    extractingDuration.value ||
+    uploadingDocument.value ||
+    !validate()
+  ) {
+    return;
+  }
 
-  const videoUrl =
-    sourceMode.value === 'youtube'
-      ? parsedYouTube.value!.canonicalIframe
-      : form.existingUploadedUrl.trim() || 'PLACEHOLDER_VIDEO';
+  let videoUrl = '';
+  let fileToUpload: File | null = null;
+  let duration = 0;
 
-  const fileToUpload =
-    sourceMode.value === 'upload' ? selectedVideoFile.value : null;
+  if (sourceMode.value === 'youtube' && parsedYouTube.value) {
+    videoUrl = parsedYouTube.value.canonicalIframe;
+    duration = extractedDuration.value;
+  } else if (sourceMode.value === 'upload' && hasActiveVideoInput.value) {
+    videoUrl = form.existingUploadedUrl.trim() || 'PLACEHOLDER_VIDEO';
+    fileToUpload = selectedVideoFile.value;
+    duration = extractedDuration.value;
+  }
 
   emit(
     'save',
     {
       title: form.title.trim(),
       videoUrl,
-      duration: extractedDuration.value,
+      duration,
+      content: form.content.trim() ? form.content.trim() : null,
+      fileUrl: form.fileUrl.trim() ? form.fileUrl.trim() : null,
+      fileName: form.fileName.trim() ? form.fileName.trim() : null,
       ...(props.isPro
         ? { note: form.note || null, summary: form.summary || null }
         : {}),
@@ -389,7 +526,7 @@ function submit() {
   <dialog
     ref="dialog"
     data-ui
-    class="manage-dialog m-auto w-[min(96vw,44rem)] bg-surface p-0 text-ink backdrop:bg-black/75"
+    class="manage-dialog m-auto w-[min(96vw,48rem)] bg-surface p-0 text-ink backdrop:bg-black/75"
     @cancel.prevent="emit('cancel')"
   >
     <form
@@ -403,11 +540,7 @@ function submit() {
             {{ lesson ? 'Chỉnh sửa bài giảng' : 'Thêm bài giảng' }}
           </h2>
           <p class="mt-1 text-xs text-muted">
-            {{
-              isPro
-                ? 'Khóa học Pro: Tải video lên server (public/videos) và tự động trích xuất thời lượng.'
-                : 'Khóa học Free: Hỗ trợ dán mã nhúng <iframe> YouTube hoặc tải video từ máy.'
-            }}
+            Hỗ trợ linh hoạt: Video bài giảng, Nội dung bài đọc (Text) thủ công hoặc Tải file tài liệu (.pdf, .docx, .txt, .md) - không bắt buộc phải có đủ cả hai.
           </p>
         </div>
         <button
@@ -421,7 +554,7 @@ function submit() {
         </button>
       </div>
 
-      <div class="mt-5 space-y-4">
+      <div class="mt-5 space-y-5">
         <label class="manage-field">
           <span>Tên bài giảng <span class="text-brand-soft">*</span></span>
           <input
@@ -430,6 +563,7 @@ function submit() {
             type="text"
             minlength="3"
             maxlength="150"
+            placeholder="Ví dụ: Bài 1 - Khái niệm cơ bản và tài liệu hướng dẫn"
             :disabled="readOnly || busy"
           />
           <span v-if="errors.title" class="manage-field-error">{{
@@ -437,15 +571,22 @@ function submit() {
           }}</span>
         </label>
 
-        <!-- Chọn chế độ nguồn video cho khóa học FREE -->
-        <div v-if="!isPro" class="space-y-2">
-          <span class="block text-sm font-medium text-ink">
-            Nguồn video bài giảng <span class="text-brand-soft">*</span>
-          </span>
-          <div class="grid grid-cols-2 gap-1 bg-ground p-1">
+        <!-- PHẦN 1: VIDEO BÀI GIẢNG (TÙY CHỌN) -->
+        <div class="space-y-3 border border-surface-3 p-4">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <span class="block text-sm font-medium text-ink">
+              1. Nguồn video bài giảng <span class="text-xs font-normal text-muted">(Tùy chọn - có thể bỏ qua nếu bài chỉ có Text/Tài liệu)</span>
+            </span>
+          </div>
+
+          <div
+            class="grid gap-1 bg-ground p-1"
+            :class="isPro ? 'grid-cols-2' : 'grid-cols-3'"
+          >
             <button
+              v-if="!isPro"
               type="button"
-              class="inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-medium transition-colors sm:text-sm"
+              class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2 text-xs font-medium transition-colors"
               :class="
                 sourceMode === 'youtube'
                   ? 'bg-surface-2 text-ink'
@@ -454,12 +595,12 @@ function submit() {
               :disabled="readOnly || busy"
               @click="switchSourceMode('youtube')"
             >
-              <Video class="h-4 w-4" />
-              Mã nhúng YouTube (&lt;iframe&gt;)
+              <Video class="h-4 w-4 shrink-0" />
+              <span>Mã nhúng YouTube</span>
             </button>
             <button
               type="button"
-              class="inline-flex items-center justify-center gap-2 px-3 py-2 text-xs font-medium transition-colors sm:text-sm"
+              class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2 text-xs font-medium transition-colors"
               :class="
                 sourceMode === 'upload'
                   ? 'bg-surface-2 text-ink'
@@ -468,161 +609,302 @@ function submit() {
               :disabled="readOnly || busy"
               @click="switchSourceMode('upload')"
             >
-              <Upload class="h-4 w-4" />
-              Tải video từ máy
+              <Upload class="h-4 w-4 shrink-0" />
+              <span>Tải video từ máy</span>
+            </button>
+            <button
+              type="button"
+              class="inline-flex items-center justify-center gap-1.5 px-2.5 py-2 text-xs font-medium transition-colors"
+              :class="
+                sourceMode === 'none'
+                  ? 'bg-surface-2 text-ink'
+                  : 'text-muted hover:text-ink'
+              "
+              :disabled="readOnly || busy"
+              @click="switchSourceMode('none')"
+            >
+              <VideoOff class="h-4 w-4 shrink-0" />
+              <span>Không dùng video</span>
             </button>
           </div>
-        </div>
 
-        <!-- Chế độ 1: Mã nhúng YouTube <iframe> (Chỉ có ở khóa học FREE) -->
-        <div v-if="sourceMode === 'youtube' && !isPro" class="space-y-3">
-          <label class="manage-field">
-            <span>Mã nhúng YouTube (&lt;iframe&gt;) <span class="text-brand-soft">*</span></span>
-            <textarea
-              v-model="form.youtubeEmbedInput"
-              class="manage-input min-h-24 text-xs"
-              maxlength="2000"
-              :disabled="readOnly || busy"
-              placeholder='<iframe width="560" height="315" src="https://www.youtube.com/embed/..." title="YouTube video player" frameborder="0" allowfullscreen></iframe>'
-            />
-            <span class="text-xs text-muted">
-              Vào video YouTube → Chia sẻ → Nhúng (Embed) → Sao chép thẻ &lt;iframe&gt; và dán vào đây.
-            </span>
-            <span v-if="errors.videoUrl" class="manage-field-error">{{
-              errors.videoUrl
-            }}</span>
-          </label>
+          <!-- Chế độ 1: Mã nhúng YouTube <iframe> (Chỉ có ở khóa học FREE) -->
+          <div v-if="sourceMode === 'youtube' && !isPro" class="space-y-3">
+            <label class="manage-field">
+              <span>Mã nhúng YouTube (&lt;iframe&gt;) <span class="text-xs font-normal text-muted">(Có thể để trống nếu không dùng video)</span></span>
+              <textarea
+                v-model="form.youtubeEmbedInput"
+                class="manage-input min-h-20 text-xs"
+                maxlength="2000"
+                :disabled="readOnly || busy"
+                placeholder='<iframe width="560" height="315" src="https://www.youtube.com/embed/..." title="YouTube video player" frameborder="0" allowfullscreen></iframe>'
+              />
+              <span class="text-xs text-muted">
+                Vào video YouTube → Chia sẻ → Nhúng (Embed) → Sao chép thẻ &lt;iframe&gt; và dán vào đây.
+              </span>
+              <span v-if="errors.videoUrl" class="manage-field-error">{{
+                errors.videoUrl
+              }}</span>
+            </label>
 
-          <div
-            v-if="parsedYouTube"
-            class="overflow-hidden bg-ground"
-          >
-            <div class="flex items-center justify-between bg-surface-2 px-3 py-2 text-xs text-ink">
-              <span class="inline-flex items-center gap-1.5 font-medium">
-                <Film class="h-3.5 w-3.5 text-brand-soft" />
-                Xem trước video YouTube (ID: {{ parsedYouTube.videoId }})
+            <div
+              v-if="parsedYouTube"
+              class="overflow-hidden bg-ground"
+            >
+              <div class="flex items-center justify-between bg-surface-2 px-3 py-2 text-xs text-ink">
+                <span class="inline-flex items-center gap-1.5 font-medium">
+                  <Film class="h-3.5 w-3.5 text-brand-soft" />
+                  Xem trước video YouTube (ID: {{ parsedYouTube.videoId }})
+                </span>
+              </div>
+              <div ref="youtubeContainerRef" class="aspect-video w-full bg-black" />
+            </div>
+          </div>
+
+          <!-- Chế độ 2: Tải video từ máy lên public/videos -->
+          <div v-else-if="sourceMode === 'upload'" class="space-y-3">
+            <div class="manage-field">
+              <span>Tệp video bài giảng (MP4, WEBM - tối đa 1GB) <span class="text-xs font-normal text-muted">(Tùy chọn)</span></span>
+              <input
+                ref="videoFileInputRef"
+                type="file"
+                accept="video/mp4,video/webm"
+                class="sr-only"
+                :disabled="readOnly || busy"
+                @change="handleVideoFileChange"
+              />
+
+              <div class="mt-1 space-y-3 bg-ground p-4">
+                <div class="flex flex-wrap items-center gap-2">
+                  <button
+                    v-if="!readOnly"
+                    type="button"
+                    class="manage-button-secondary text-xs sm:text-sm"
+                    :disabled="busy"
+                    @click="triggerVideoPicker"
+                  >
+                    <Upload class="h-4 w-4" />
+                    {{
+                      activeUploadedPreviewUrl
+                        ? 'Chọn video khác từ máy'
+                        : 'Chọn video từ máy'
+                    }}
+                  </button>
+                  <button
+                    v-if="!readOnly && selectedVideoFile"
+                    type="button"
+                    class="manage-button-danger text-xs sm:text-sm"
+                    :disabled="busy"
+                    @click="clearSelectedVideo"
+                  >
+                    <X class="h-4 w-4" />
+                    Hủy video mới chọn
+                  </button>
+                  <button
+                    v-else-if="!readOnly && form.existingUploadedUrl"
+                    type="button"
+                    class="manage-button-danger text-xs sm:text-sm"
+                    :disabled="busy"
+                    @click="removeExistingVideo"
+                  >
+                    <Trash2 class="h-4 w-4" />
+                    Gỡ video hiện tại
+                  </button>
+                </div>
+
+                <p v-if="selectedVideoFile" class="text-xs text-ink">
+                  Đã chọn: <strong class="font-semibold">{{ selectedVideoFile.name }}</strong>
+                  ({{ formatFileSize(selectedVideoFile.size) }}) - Khi bấm Lưu, video sẽ được tải lên ngầm có thanh tiến trình.
+                </p>
+                <p v-else-if="form.existingUploadedUrl" class="text-xs text-muted">
+                  Video hiện tại: <code class="text-ink">{{ form.existingUploadedUrl }}</code>
+                </p>
+                <p v-else class="text-xs text-muted">
+                  Hỗ trợ định dạng MP4, WEBM (dung lượng tối đa 1GB). Thời lượng sẽ được trích xuất tự động ngay khi chọn file.
+                </p>
+
+                <span v-if="errors.videoUrl" class="manage-field-error">{{
+                  errors.videoUrl
+                }}</span>
+
+                <div
+                  v-if="activeUploadedPreviewUrl"
+                  class="overflow-hidden bg-black"
+                >
+                  <div class="flex items-center justify-between bg-surface-2 px-3 py-2 text-xs text-ink">
+                    <span class="inline-flex items-center gap-1.5 font-medium">
+                      <Film class="h-3.5 w-3.5 text-brand-soft" />
+                      {{
+                        selectedVideoFile
+                          ? 'Xem trước video mới chọn (chạy trên trình duyệt)'
+                          : 'Xem trước video đã lưu'
+                      }}
+                    </span>
+                  </div>
+                  <video
+                    :key="activeUploadedPreviewUrl"
+                    :src="activeUploadedPreviewUrl"
+                    controls
+                    preload="metadata"
+                    class="aspect-video w-full bg-black"
+                    @loadedmetadata="handleLocalVideoMetadata"
+                    @error="handleLocalVideoError"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p v-else class="bg-ground p-3 text-xs text-muted">
+            Bài giảng này đang chọn chế độ <strong>Không dùng video</strong> (chỉ hiển thị Nội dung bài đọc / File tài liệu và câu hỏi trắc nghiệm nếu có).
+          </p>
+
+          <!-- Thời lượng tự động trích xuất (Chỉ hiển thị khi có video) -->
+          <div v-if="sourceMode !== 'none'" class="bg-ground p-3">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <span class="inline-flex items-center gap-1.5 text-xs font-medium text-ink">
+                <Clock3 class="h-3.5 w-3.5 text-brand-soft" />
+                Thời lượng video
+              </span>
+              <span class="inline-flex items-center gap-1 bg-surface-2 px-2 py-0.5 text-[11px] font-medium text-muted">
+                <Lock class="h-3 w-3 text-brand-soft" />
+                Tự động trích xuất
               </span>
             </div>
-            <div ref="youtubeContainerRef" class="aspect-video w-full bg-black" />
+
+            <div class="mt-1.5 flex items-center gap-2">
+              <template v-if="extractingDuration">
+                <Loader2 class="h-4 w-4 animate-spin text-brand-soft" />
+                <span class="text-xs text-ink">
+                  Đang trích xuất thời lượng tự động từ video…
+                </span>
+              </template>
+              <template v-else>
+                <span
+                  class="text-sm font-semibold tabular-nums"
+                  :class="hasActiveVideoInput && extractedDuration > 0 ? 'text-ink' : 'text-muted'"
+                >
+                  {{ formattedDuration }}
+                </span>
+              </template>
+            </div>
+            <span v-if="errors.duration" class="manage-field-error mt-1 block">{{
+              errors.duration
+            }}</span>
           </div>
         </div>
 
-        <!-- Chế độ 2: Tải video từ máy lên public/videos (Mặc định cho PRO và tùy chọn cho FREE) -->
-        <div v-else class="space-y-3">
-          <div class="manage-field">
-            <span>Tệp video bài giảng (MP4, WEBM — tối đa 1GB) <span class="text-brand-soft">*</span></span>
+        <!-- PHẦN 2: NỘI DUNG BÀI ĐỌC (TEXT) & TÀI LIỆU ĐÍNH KÈM (TÙY CHỌN) -->
+        <div class="space-y-4 border border-surface-3 p-4">
+          <div>
+            <span class="block text-sm font-medium text-ink">
+              2. Nội dung bài đọc (Text) &amp; Tài liệu đính kèm <span class="text-xs font-normal text-muted">(Tùy chọn)</span>
+            </span>
+            <p class="mt-0.5 text-xs text-muted">
+              Bạn có thể tải file tài liệu (<code>.pdf</code>, <code>.docx</code>, <code>.txt</code>, <code>.md</code>) để hiển thị trực tiếp nguyên bản định dạng trong phần Nội dung bài đọc trên trang học, hoặc nhập văn bản bổ sung ở bên dưới.
+            </p>
+          </div>
+
+          <!-- Tải file tài liệu lên -->
+          <div class="bg-ground p-3.5 space-y-2.5">
             <input
-              ref="videoFileInputRef"
+              ref="docFileInputRef"
               type="file"
-              accept="video/mp4,video/webm"
+              accept=".pdf,.docx,.txt,.md,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document,text/plain,text/markdown"
               class="sr-only"
-              :disabled="readOnly || busy"
-              @change="handleVideoFileChange"
+              :disabled="readOnly || busy || uploadingDocument"
+              @change="handleDocFileChange"
             />
 
-            <div class="mt-1 space-y-3 bg-ground p-4">
+            <div class="flex flex-wrap items-center justify-between gap-2">
               <div class="flex flex-wrap items-center gap-2">
                 <button
                   v-if="!readOnly"
                   type="button"
-                  class="manage-button-secondary text-xs sm:text-sm"
-                  :disabled="busy"
-                  @click="triggerVideoPicker"
+                  class="manage-button-secondary text-xs"
+                  :disabled="busy || uploadingDocument"
+                  @click="triggerDocPicker"
                 >
-                  <Upload class="h-4 w-4" />
-                  {{
-                    activeUploadedPreviewUrl
-                      ? 'Chọn video khác từ máy'
-                      : 'Chọn video từ máy'
-                  }}
-                </button>
-                <button
-                  v-if="!readOnly && selectedVideoFile"
-                  type="button"
-                  class="manage-button-danger text-xs sm:text-sm"
-                  :disabled="busy"
-                  @click="clearSelectedVideo"
-                >
-                  <X class="h-4 w-4" />
-                  Hủy video mới chọn
-                </button>
-              </div>
-
-              <p v-if="selectedVideoFile" class="text-xs text-ink">
-                Đã chọn: <strong class="font-semibold">{{ selectedVideoFile.name }}</strong>
-                ({{ formatFileSize(selectedVideoFile.size) }}) — Khi bấm Lưu, video sẽ được tải lên ngầm có thanh tiến trình, không khóa màn hình.
-              </p>
-              <p v-else-if="form.existingUploadedUrl" class="text-xs text-muted">
-                Video hiện tại: <code class="text-ink">{{ form.existingUploadedUrl }}</code>
-              </p>
-              <p v-else class="text-xs text-muted">
-                Hỗ trợ định dạng MP4, WEBM (dung lượng tối đa 1GB). Thời lượng sẽ được trích xuất tự động ngay khi chọn file.
-              </p>
-
-              <span v-if="errors.videoUrl" class="manage-field-error">{{
-                errors.videoUrl
-              }}</span>
-
-              <div
-                v-if="activeUploadedPreviewUrl"
-                class="overflow-hidden bg-black"
-              >
-                <div class="flex items-center justify-between bg-surface-2 px-3 py-2 text-xs text-ink">
-                  <span class="inline-flex items-center gap-1.5 font-medium">
-                    <Film class="h-3.5 w-3.5 text-brand-soft" />
+                  <Loader2
+                    v-if="uploadingDocument"
+                    class="h-4 w-4 animate-spin"
+                  />
+                  <Upload v-else class="h-4 w-4" />
+                  <span>
                     {{
-                      selectedVideoFile
-                        ? 'Xem trước video mới chọn (chạy trên trình duyệt)'
-                        : 'Xem trước video đã lưu'
+                      uploadingDocument
+                        ? 'Đang tải tài liệu lên…'
+                        : form.fileUrl
+                          ? 'Đổi file tài liệu khác'
+                          : 'Tải file tài liệu (.pdf, .docx, .txt, .md)'
                     }}
                   </span>
-                </div>
-                <video
-                  :key="activeUploadedPreviewUrl"
-                  :src="activeUploadedPreviewUrl"
-                  controls
-                  preload="metadata"
-                  class="aspect-video w-full bg-black"
-                  @loadedmetadata="handleLocalVideoMetadata"
-                  @error="handleLocalVideoError"
-                />
+                </button>
+
+                <button
+                  v-if="!readOnly && form.fileUrl"
+                  type="button"
+                  class="manage-button-danger text-xs"
+                  :disabled="busy || uploadingDocument"
+                  @click="removeAttachedDocument"
+                >
+                  <Trash2 class="h-3.5 w-3.5" />
+                  <span>Gỡ file đính kèm</span>
+                </button>
               </div>
+              <span class="text-[11px] text-muted">Tối đa 25MB</span>
             </div>
-          </div>
-        </div>
 
-        <!-- Thời lượng tự động trích xuất (Chỉ đọc / Khóa) -->
-        <div class="bg-ground p-3.5">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <span class="inline-flex items-center gap-1.5 text-sm font-medium text-ink">
-              <Clock3 class="h-4 w-4 text-brand-soft" />
-              Thời lượng video
-            </span>
-            <span class="inline-flex items-center gap-1 bg-surface-2 px-2.5 py-0.5 text-[11px] font-medium text-muted">
-              <Lock class="h-3 w-3 text-brand-soft" />
-              Tự động trích xuất
-            </span>
-          </div>
-
-          <div class="mt-2 flex items-center gap-2">
-            <template v-if="extractingDuration">
-              <Loader2 class="h-4 w-4 animate-spin text-brand-soft" />
-              <span class="text-sm text-ink">
-                Đang trích xuất thời lượng tự động từ video…
+            <div
+              v-if="form.fileUrl"
+              class="flex flex-wrap items-center justify-between gap-2 bg-surface px-3 py-2 text-xs"
+            >
+              <span class="inline-flex items-center gap-2 font-medium text-ink">
+                <FileText class="h-4 w-4 shrink-0 text-brand-soft" />
+                <span>Tài liệu đính kèm: <strong>{{ form.fileName || form.fileUrl }}</strong></span>
               </span>
-            </template>
-            <template v-else>
-              <span
-                class="text-base font-semibold tabular-nums"
-                :class="extractedDuration > 0 ? 'text-ink' : 'text-muted'"
+              <a
+                :href="form.fileUrl"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-brand-soft underline hover:opacity-80"
               >
-                {{ formattedDuration }}
-              </span>
-            </template>
+                Xem file
+              </a>
+            </div>
+
+            <div
+              v-if="docUploadSuccessMessage"
+              class="flex items-center gap-1.5 bg-surface p-2.5 text-xs text-emerald-300"
+            >
+              <CheckCircle2 class="h-4 w-4 shrink-0" />
+              <span>{{ docUploadSuccessMessage }}</span>
+            </div>
+
+            <span v-if="errors.fileUrl" class="manage-field-error block">{{
+              errors.fileUrl
+            }}</span>
           </div>
-          <span v-if="errors.duration" class="manage-field-error mt-1 block">{{
-            errors.duration
-          }}</span>
+
+          <!-- Nhập nội dung bài đọc thủ công -->
+          <label class="manage-field">
+            <div class="flex items-center justify-between gap-2">
+              <span>Nội dung bài giảng dạng chữ (Nhập thủ công nếu cần)</span>
+              <span class="text-[11px] tabular-nums text-muted">
+                {{ form.content.length }} / 50000 ký tự
+              </span>
+            </div>
+            <textarea
+              v-model="form.content"
+              class="manage-input min-h-32 text-sm leading-6"
+              maxlength="50000"
+              :disabled="readOnly || busy"
+              placeholder="Nhập nội dung lý thuyết hoặc hướng dẫn thủ công tại đây (Tùy chọn - có thể để trống nếu đã tải file tài liệu ở trên)..."
+            />
+            <span v-if="errors.content" class="manage-field-error">{{
+              errors.content
+            }}</span>
+          </label>
         </div>
 
         <template v-if="isPro">
@@ -665,14 +947,16 @@ function submit() {
         <button
           type="submit"
           class="manage-button-primary"
-          :disabled="busy || extractingDuration"
+          :disabled="busy || extractingDuration || uploadingDocument"
         >
           {{
             busy
               ? 'Đang lưu…'
               : extractingDuration
                 ? 'Đang lấy thời lượng…'
-                : 'Lưu bài giảng'
+                : uploadingDocument
+                  ? 'Đang tải tài liệu…'
+                  : 'Lưu bài giảng'
           }}
         </button>
       </div>

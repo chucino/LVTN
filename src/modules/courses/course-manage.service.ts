@@ -128,9 +128,10 @@ function assertNoQuizNotesForFree(
 
 function normalizeLessonVideoForCourse(
   type: CourseType,
-  rawVideoUrl: string,
+  rawVideoUrl?: string | null,
 ): string {
-  const trimmed = rawVideoUrl.trim();
+  const trimmed = (rawVideoUrl ?? '').trim();
+  if (!trimmed) return '';
   const isIframe = /^<iframe\b/i.test(trimmed);
   const youtubeId = extractYouTubeVideoId(trimmed);
   if (isIframe) {
@@ -452,11 +453,11 @@ export class CourseManageService {
       throw new ConflictException('Trạng thái khóa học đã thay đổi; vui lòng tải lại');
     }
     await this.uploadsService?.deleteLocalFile(course.thumbnail);
-    const lessonVideos = course.chapters.flatMap((chapter) =>
-      chapter.lessons.map((lesson) => lesson.videoUrl),
+    const lessonAssets = course.chapters.flatMap((chapter) =>
+      chapter.lessons.flatMap((lesson) => [lesson.videoUrl, lesson.fileUrl]),
     );
     await Promise.all(
-      lessonVideos.map((videoUrl) => this.uploadsService?.deleteLocalFile(videoUrl)),
+      lessonAssets.map((assetUrl) => this.uploadsService?.deleteLocalFile(assetUrl)),
     );
     return { message: 'Đã xóa khóa học' };
   }
@@ -528,11 +529,14 @@ export class CourseManageService {
       (chapter) => idString(chapter._id) === chapterId.toLowerCase(),
     );
     if (chapterIndex < 0) throw new NotFoundException('Không tìm thấy chương');
-    const deletedVideoUrls =
-      course.chapters[chapterIndex]?.lessons.map((lesson) => lesson.videoUrl) ?? [];
+    const deletedAssets =
+      course.chapters[chapterIndex]?.lessons.flatMap((lesson) => [
+        lesson.videoUrl,
+        lesson.fileUrl,
+      ]) ?? [];
     course.chapters.splice(chapterIndex, 1);
     await Promise.all(
-      deletedVideoUrls.map((videoUrl) => this.uploadsService?.deleteLocalFile(videoUrl)),
+      deletedAssets.map((assetUrl) => this.uploadsService?.deleteLocalFile(assetUrl)),
     );
     course.chapters.forEach((chapter, index) => {
       chapter.order = index + 1;
@@ -575,12 +579,25 @@ export class CourseManageService {
     if (chapter.lessons.length >= 50) {
       throw new BadRequestException('Mỗi chương được có tối đa 50 bài giảng');
     }
+    const normalizedVideoUrl = normalizeLessonVideoForCourse(
+      course.type,
+      input.videoUrl,
+    );
+    const duration = normalizedVideoUrl ? (input.duration ?? 0) : 0;
+    if (normalizedVideoUrl && duration < 1) {
+      throw new BadRequestException(
+        'Bài giảng có video phải có thời lượng tối thiểu 1 giây',
+      );
+    }
     chapter.lessons.push({
       _id: new Types.ObjectId(),
       title: input.title,
       order: chapter.lessons.length + 1,
-      videoUrl: normalizeLessonVideoForCourse(course.type, input.videoUrl),
-      duration: input.duration,
+      videoUrl: normalizedVideoUrl,
+      duration,
+      content: input.content?.trim() ? input.content.trim() : null,
+      fileUrl: input.fileUrl?.trim() ? input.fileUrl.trim() : null,
+      fileName: input.fileName?.trim() ? input.fileName.trim() : null,
       note: input.note ?? null,
       summary: input.summary ?? null,
       quizQuestions: [],
@@ -604,19 +621,51 @@ export class CourseManageService {
     const lesson = this.findLesson(course, chapterId, lessonId);
     if (input.title !== undefined) lesson.title = input.title;
     const previousVideoUrl = lesson.videoUrl;
+    const previousFileUrl = lesson.fileUrl;
     if (input.videoUrl !== undefined) {
       lesson.videoUrl = normalizeLessonVideoForCourse(course.type, input.videoUrl);
     }
-    if (input.duration !== undefined) lesson.duration = input.duration;
+    if (!lesson.videoUrl) {
+      lesson.duration = 0;
+    } else if (input.duration !== undefined) {
+      if (input.duration < 1) {
+        throw new BadRequestException(
+          'Bài giảng có video phải có thời lượng tối thiểu 1 giây',
+        );
+      }
+      lesson.duration = input.duration;
+    }
+    if (input.content !== undefined) {
+      lesson.content = input.content?.trim() ? input.content.trim() : null;
+    }
+    if (input.fileUrl !== undefined) {
+      lesson.fileUrl = input.fileUrl?.trim() ? input.fileUrl.trim() : null;
+    }
+    if (input.fileName !== undefined) {
+      lesson.fileName = input.fileName?.trim() ? input.fileName.trim() : null;
+    }
     if (input.note !== undefined) lesson.note = input.note;
     if (input.summary !== undefined) lesson.summary = input.summary;
-    const updatedCourse = await this.saveAndReturn(course, actor, input.duration !== undefined);
+    const shouldRecalculate =
+      input.duration !== undefined || input.videoUrl !== undefined;
+    const updatedCourse = await this.saveAndReturn(
+      course,
+      actor,
+      shouldRecalculate,
+    );
     if (
       input.videoUrl !== undefined &&
       previousVideoUrl &&
       previousVideoUrl !== lesson.videoUrl
     ) {
       await this.uploadsService?.deleteLocalFile(previousVideoUrl);
+    }
+    if (
+      input.fileUrl !== undefined &&
+      previousFileUrl &&
+      previousFileUrl !== lesson.fileUrl
+    ) {
+      await this.uploadsService?.deleteLocalFile(previousFileUrl);
     }
     return updatedCourse;
   }
@@ -634,8 +683,12 @@ export class CourseManageService {
     );
     if (lessonIndex < 0) throw new NotFoundException('Không tìm thấy bài giảng');
     const deletedVideoUrl = chapter.lessons[lessonIndex]?.videoUrl;
+    const deletedFileUrl = chapter.lessons[lessonIndex]?.fileUrl;
     chapter.lessons.splice(lessonIndex, 1);
-    await this.uploadsService?.deleteLocalFile(deletedVideoUrl);
+    await Promise.all([
+      this.uploadsService?.deleteLocalFile(deletedVideoUrl),
+      this.uploadsService?.deleteLocalFile(deletedFileUrl),
+    ]);
     chapter.lessons.forEach((lesson, index) => {
       lesson.order = index + 1;
     });

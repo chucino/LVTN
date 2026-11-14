@@ -61,6 +61,9 @@ export interface CurriculumLessonItem {
   title: string;
   order: number;
   duration: number;
+  hasVideo?: boolean;
+  hasText?: boolean;
+  hasFile?: boolean;
   hasQuiz: boolean;
   quizCount: number;
   status: LessonStatus;
@@ -111,6 +114,9 @@ export interface LessonLearningDetail {
   order: number;
   videoUrl: string;
   duration: number;
+  content?: string | null;
+  fileUrl?: string | null;
+  fileName?: string | null;
   note: string | null;
   summary: string | null;
   hasQuiz: boolean;

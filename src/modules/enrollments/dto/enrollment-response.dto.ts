@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { CourseType } from '../../../common/constants/course.enum.js';
 import {
   EnrollmentStatus,
@@ -95,6 +95,15 @@ export class CurriculumLessonItemDto {
 
   @ApiProperty({ example: 420 })
   duration!: number;
+
+  @ApiPropertyOptional({ example: true })
+  hasVideo?: boolean;
+
+  @ApiPropertyOptional({ example: false })
+  hasText?: boolean;
+
+  @ApiPropertyOptional({ example: false })
+  hasFile?: boolean;
 
   @ApiProperty({ example: true })
   hasQuiz!: boolean;
@@ -238,6 +247,15 @@ export class LessonLearningDetailDto {
 
   @ApiProperty({ example: 420 })
   duration!: number;
+
+  @ApiPropertyOptional({ example: null, nullable: true })
+  content?: string | null;
+
+  @ApiPropertyOptional({ example: null, nullable: true })
+  fileUrl?: string | null;
+
+  @ApiPropertyOptional({ example: null, nullable: true })
+  fileName?: string | null;
 
   @ApiProperty({ example: null, nullable: true })
   note!: string | null;
@@ -384,4 +402,3 @@ export class SubmitQuizResponseDto {
   @ApiProperty({ type: [QuizQuestionResultItemDto] })
   results!: QuizQuestionResultItemDto[];
 }
-

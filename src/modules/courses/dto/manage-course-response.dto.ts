@@ -140,6 +140,15 @@ export class ManageLessonDto {
   duration!: number;
 
   @ApiPropertyOptional({ example: null, nullable: true })
+  content!: string | null;
+
+  @ApiPropertyOptional({ example: null, nullable: true })
+  fileUrl!: string | null;
+
+  @ApiPropertyOptional({ example: null, nullable: true })
+  fileName!: string | null;
+
+  @ApiPropertyOptional({ example: null, nullable: true })
   note!: string | null;
 
   @ApiPropertyOptional({ example: null, nullable: true })

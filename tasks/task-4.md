@@ -187,3 +187,31 @@
 - Backup đã tạo: backup/<đường dẫn file>.20261115-0211.bak cho toàn bộ 8 file hiện có
 - Hoàn thành: 2026-11-15 02:23
 - Tóm tắt thay đổi: Tạo mới `ReviewsModule` (`CourseReview` schema với unique index `{ courseId, studentId }`, `ReviewsService`, `ReviewsController`, unit tests) hỗ trợ chấm 1–5 sao kèm nhận xét tùy chọn cho học viên hoàn thành 100% khóa học, bảo toàn đánh giá và quyền chỉnh sửa kể cả khi khóa học cập nhật thêm bài giảng mới, ưu tiên sắp xếp đánh giá có chữ lên đầu và đánh giá chỉ chấm sao xuống dưới, chặn gửi nhận xét có chữ khi đang bị cấm bình luận (`commentBannedUntil`). Tích hợp báo cáo đánh giá (`ReportTargetType.REVIEW`) vào `QuestionsService.listManageReports` và `resolveReport`, tự động ẩn toàn bộ đánh giá vi phạm và tính lại `course.avgRating`. Tạo mới `CourseReviewsSection.vue` ở cuối `CourseDetailPage.vue` và `CourseCompletionReviewModal.vue` bật lên ngay khi đạt 100% trong `CourseLearningPage.vue`. Toàn bộ 60 unit tests, `lint.mjs` (0 FAIL) và `npm run build` đều đạt.
+
+
+## [x] #040 - Nâng cấp thêm/chỉnh sửa bài giảng hỗ trợ Video tùy chọn, Nội dung chữ (Text) và Tải file tài liệu
+- Bắt đầu: 2026-11-15 03:20
+- Mục tiêu: Cho phép giảng viên tạo/chỉnh sửa bài giảng với Video tùy chọn (có thể để trống video), bổ sung nhập Nội dung chữ (Text) thủ công và Tải file tài liệu (`.pdf`, `.docx`, `.txt`, `.md`) lên `/public/files/` (vừa lưu file đính kèm vừa trích xuất văn bản đổ vào khung chữ); bỏ bắt buộc có video khi duyệt khóa học; hiển thị nội dung bài đọc & tài liệu trong phòng học kèm nút "Hoàn thành bài học" cho bài giảng không có video.
+- Phạm vi đã thực hiện:
+  - src/modules/courses/schemas/course.schema.ts
+  - src/modules/courses/dto/manage-course.dto.ts
+  - src/modules/courses/dto/manage-course-response.dto.ts
+  - src/modules/courses/manage-course.serializer.ts
+  - src/modules/courses/manage-course-readiness.ts
+  - src/modules/courses/course-manage.service.ts
+  - src/modules/courses/course-manage.service.spec.ts
+  - src/modules/uploads/dto/upload-response.dto.ts
+  - src/modules/uploads/uploads.service.ts
+  - src/modules/uploads/uploads.controller.ts
+  - src/modules/enrollments/dto/enrollment-response.dto.ts
+  - src/modules/enrollments/enrollments.service.ts
+  - src/modules/enrollments/enrollments.service.spec.ts
+  - client/src/types/manage-course.ts
+  - client/src/types/learning.ts
+  - client/src/services/uploads.api.ts
+  - client/src/components/manage/LessonEditorDialog.vue
+  - client/src/components/manage/CourseContentEditor.vue
+  - client/src/pages/student/CourseLearningPage.vue
+- Backup đã tạo: backup/<đường dẫn file>.20261115-032000.bak cho toàn bộ 19 file trên
+- Hoàn thành: 2026-11-15 03:41
+- Tóm tắt thay đổi: Nâng cấp `Lesson` schema (`videoUrl` mặc định `''`, `duration` mặc định `0`, bổ sung `content`, `fileUrl`, `fileName`), cập nhật DTO/serializer/service và cơ chế tự động xóa file tài liệu cũ khi cập nhật/xóa bài giảng. Bổ sung endpoint `POST /api/uploads/files` cho phép tải file `.pdf`, `.docx`, `.txt`, `.md` (tối đa 25MB) lên `/public/files/` kèm bộ giải nén trích xuất văn bản tự động cho `.docx`, `.txt`, `.md`. Gỡ điều kiện bắt buộc phải có video trong `manage-course-readiness.ts`. Cập nhật `LessonEditorDialog.vue`, `CourseContentEditor.vue` và `CourseLearningPage.vue` để hỗ trợ bài giảng không có video, hiển thị bài đọc + trình xem PDF nhúng + nút tải file, và nút "Hoàn thành bài học" cho bài giảng không có video. Toàn bộ 60/60 unit tests, `lint.mjs` (0 FAIL, 0 WARN) và build Backend/Frontend đều đạt.

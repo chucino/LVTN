@@ -9,10 +9,14 @@ import {
   BookOpen,
   CheckCircle2,
   CircleHelp,
+  Download,
+  ExternalLink,
   Eye,
   FileText,
+  Loader2,
   Lock,
   MessageCircle,
+  Paperclip,
   PanelRightClose,
   PanelRightOpen,
   Pencil,
@@ -22,6 +26,7 @@ import {
 import CertificateCardView from '@/components/certificate/CertificateCardView.vue';
 import CourseCompletionReviewModal from '@/components/learning/CourseCompletionReviewModal.vue';
 import LessonDiscussionDrawer from '@/components/learning/LessonDiscussionDrawer.vue';
+import LessonDocumentViewer from '@/components/learning/LessonDocumentViewer.vue';
 import LessonQuizPanel from '@/components/learning/LessonQuizPanel.vue';
 import LessonVideoPlayer from '@/components/learning/LessonVideoPlayer.vue';
 import { formatCourseDuration, getCourseErrorMessage } from '@/lib/course-format';
@@ -40,6 +45,7 @@ const overview = ref<CourseLearningOverview | null>(null);
 const currentLesson = ref<LessonLearningDetail | null>(null);
 const loadingOverview = ref(true);
 const loadingLesson = ref(false);
+const markingComplete = ref(false);
 const error = ref<string | null>(null);
 const lessonError = ref<string | null>(null);
 
@@ -55,6 +61,25 @@ const lessonCommentsCount = ref(0);
 const courseId = computed(() => {
   const raw = route.params.courseId;
   return Array.isArray(raw) ? (raw[0] ?? '') : String(raw ?? '');
+});
+
+const hasCurrentVideo = computed(() =>
+  Boolean(currentLesson.value?.videoUrl?.trim()),
+);
+
+const extractedFilePlainText = ref('');
+
+const showManualTextContent = computed(() => {
+  const manual = currentLesson.value?.content?.trim() ?? '';
+  if (!manual) return false;
+  if (!currentLesson.value?.fileUrl) return true;
+
+  const normManual = manual.replace(/\s+/g, ' ').trim();
+  const normFile = extractedFilePlainText.value.replace(/\s+/g, ' ').trim();
+  if (normFile && normManual === normFile) {
+    return false;
+  }
+  return true;
 });
 
 async function loadOverviewAndInitialLesson(): Promise<void> {
@@ -106,6 +131,7 @@ async function selectLesson(
   lastQuizResult.value = null;
   completionToast.value = null;
   showCertificateView.value = false;
+  extractedFilePlainText.value = '';
 
   try {
     const detail = await enrollmentsApi.getLessonForLearning(
@@ -159,7 +185,7 @@ async function handleVideoProgress(payload: {
       }
     }
 
-    // Khi vừa đạt đủ 60% thời lượng video lần đầu tiên: tải lại chi tiết bài để nhận câu hỏi trắc nghiệm và cập nhật mục lục
+    // Khi vừa đạt đủ 60% thời lượng video (hoặc xác nhận đọc bài) lần đầu tiên: tải lại chi tiết bài để nhận câu hỏi trắc nghiệm và cập nhật mục lục
     if (updated.watchedFully && !wasWatchedFully) {
       await Promise.all([
         refreshOverviewSilently(),
@@ -179,7 +205,9 @@ async function handleVideoProgress(payload: {
           'Bạn đã hoàn thành bài học này. Bài học tiếp theo đã được mở khóa!';
       } else if (updated.quizUnlocked) {
         completionToast.value =
-          'Bạn đã xem đủ thời lượng video yêu cầu. Hãy hoàn thành câu hỏi trắc nghiệm bên dưới để mở bài tiếp theo.';
+          'Bạn đã hoàn thành phần nội dung bài giảng. Hãy hoàn thành câu hỏi trắc nghiệm bên dưới để mở bài tiếp theo.';
+      } else if (updated.status === 'COMPLETED') {
+        completionToast.value = 'Bạn đã hoàn thành bài học này!';
       }
 
       if (!wasCourseCompleted && updated.enrollmentStatus === 'COMPLETED') {
@@ -188,6 +216,20 @@ async function handleVideoProgress(payload: {
     }
   } catch (err) {
     lessonError.value = getCourseErrorMessage(err);
+  }
+}
+
+async function handleMarkTextLessonComplete(): Promise<void> {
+  if (!courseId.value || !currentLesson.value || markingComplete.value) return;
+  markingComplete.value = true;
+  try {
+    await handleVideoProgress({
+      lastPositionSec: 0,
+      watchedSeconds: 0,
+      watchedFully: true,
+    });
+  } finally {
+    markingComplete.value = false;
   }
 }
 
@@ -210,7 +252,7 @@ async function handleQuizSubmit(
     if (overview.value?.isPreviewMode) {
       completionToast.value = result.passed
         ? `Chế độ xem thử: Đạt ${result.scorePercent}% (${result.correctCount}/${result.totalQuestions} câu đúng). Kết quả làm thử không lưu vào thống kê học viên.`
-        : `Chế độ xem thử: Đạt ${result.scorePercent}% (${result.correctCount}/${result.totalQuestions} câu đúng — yêu cầu ${result.requiredPassPercent}%). Bạn có thể chọn lại đáp án để kiểm tra tiếp.`;
+        : `Chế độ xem thử: Đạt ${result.scorePercent}% (${result.correctCount}/${result.totalQuestions} câu đúng - yêu cầu ${result.requiredPassPercent}%). Bạn có thể chọn lại đáp án để kiểm tra tiếp.`;
       return;
     }
 
@@ -386,7 +428,7 @@ onMounted(() => {
             class="manage-button-secondary text-xs"
             @click="showCertificateView = false"
           >
-            Quay lại xem video bài giảng
+            Quay lại xem bài giảng
           </button>
         </div>
 
@@ -435,8 +477,9 @@ onMounted(() => {
           </div>
 
           <template v-if="currentLesson">
-            <!-- Video Player -->
+            <!-- Video Player (Chỉ hiển thị khi bài giảng có video) -->
             <LessonVideoPlayer
+              v-if="hasCurrentVideo"
               :lesson-id="currentLesson.id"
               :title="currentLesson.title"
               :video-url="currentLesson.videoUrl"
@@ -479,11 +522,17 @@ onMounted(() => {
                       <template v-if="overview.isPreviewMode">
                         Tài khoản Giảng viên / Quản trị viên được mở khóa toàn bộ bài giảng và làm thử trắc nghiệm không giới hạn
                       </template>
-                      <template v-else-if="currentLesson.hasQuiz">
+                      <template v-else-if="hasCurrentVideo && currentLesson.hasQuiz">
                         Điều kiện hoàn thành: Xem tối thiểu 60% thời lượng video và đạt bài trắc nghiệm ({{ currentLesson.requiredPassPercent }}%)
                       </template>
-                      <template v-else>
+                      <template v-else-if="hasCurrentVideo">
                         Điều kiện hoàn thành: Xem tối thiểu 60% thời lượng video
+                      </template>
+                      <template v-else-if="currentLesson.hasQuiz">
+                        Điều kiện hoàn thành: Đọc nội dung bài giảng và đạt bài trắc nghiệm ({{ currentLesson.requiredPassPercent }}%)
+                      </template>
+                      <template v-else>
+                        Điều kiện hoàn thành: Đọc nội dung bài giảng và bấm nút "Hoàn thành bài học"
                       </template>
                     </span>
                   </div>
@@ -535,6 +584,37 @@ onMounted(() => {
                 </div>
               </div>
 
+              <!-- Nội dung bài đọc (Hiển thị trực tiếp định dạng từ file gốc và/hoặc văn bản thủ công) -->
+              <article
+                v-if="currentLesson.content || currentLesson.fileUrl"
+                class="mt-6 bg-ground p-6"
+              >
+                <div class="flex items-center gap-2 text-sm font-bold text-ink">
+                  <BookOpen class="h-4 w-4 text-brand-soft" />
+                  <h3>Nội dung bài đọc</h3>
+                </div>
+
+                <!-- Nội dung chữ giảng viên nhập thủ công (nếu có và khác với chữ trích xuất tự động từ file) -->
+                <div
+                  v-if="showManualTextContent"
+                  class="mt-4 whitespace-pre-line text-sm leading-7 text-ink sm:text-base"
+                >
+                  {{ currentLesson.content }}
+                </div>
+
+                <!-- Nội dung hiển thị nguyên bản định dạng từ file gốc (.docx, .pdf, .md, .txt) -->
+                <div
+                  v-if="currentLesson.fileUrl"
+                  class="mt-4"
+                >
+                  <LessonDocumentViewer
+                    :file-url="currentLesson.fileUrl"
+                    :file-name="currentLesson.fileName"
+                    @loaded-plain-text="extractedFilePlainText = $event"
+                  />
+                </div>
+              </article>
+
               <!-- Ghi chép & Tóm tắt bài giảng (nếu có) -->
               <div
                 v-if="currentLesson.note || currentLesson.summary"
@@ -560,9 +640,74 @@ onMounted(() => {
                   </p>
                 </div>
               </div>
+
+              <!-- Khung Tài liệu bài giảng đính kèm (nằm dưới trang, ngay trên nút Hoàn thành bài học) -->
+              <div
+                v-if="currentLesson.fileUrl"
+                class="mt-6 bg-ground p-5"
+              >
+                <div class="flex flex-wrap items-center justify-between gap-3">
+                  <div class="flex items-center gap-2.5">
+                    <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-surface-2 text-brand-soft">
+                      <Paperclip class="h-4 w-4" />
+                    </span>
+                    <div>
+                      <h3 class="text-sm font-bold text-ink">
+                        Tài liệu bài giảng đính kèm
+                      </h3>
+                      <p class="text-xs text-muted">
+                        {{ currentLesson.fileName || currentLesson.fileUrl }}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="flex flex-wrap items-center gap-2">
+                    <a
+                      :href="currentLesson.fileUrl"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="manage-button-secondary text-xs"
+                    >
+                      <ExternalLink class="h-3.5 w-3.5" />
+                      <span>Mở tab mới</span>
+                    </a>
+                    <a
+                      :href="currentLesson.fileUrl"
+                      :download="currentLesson.fileName || true"
+                      class="manage-button-primary text-xs"
+                    >
+                      <Download class="h-3.5 w-3.5" />
+                      <span>Tải tài liệu</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Nút "Hoàn thành bài học" căn giữa dành cho bài giảng KHÔNG có video và KHÔNG có trắc nghiệm -->
+              <div
+                v-if="!hasCurrentVideo && !currentLesson.hasQuiz && !overview.isPreviewMode"
+                class="mt-6 flex justify-center pt-1"
+              >
+                <button
+                  type="button"
+                  class="manage-button-primary px-6 py-2.5"
+                  :disabled="currentLesson.status === 'COMPLETED' || markingComplete"
+                  @click="handleMarkTextLessonComplete"
+                >
+                  <Loader2 v-if="markingComplete" class="h-4 w-4 animate-spin" />
+                  <CheckCircle2 v-else class="h-4 w-4" />
+                  <span>
+                    {{
+                      currentLesson.status === 'COMPLETED'
+                        ? 'Đã hoàn thành bài học'
+                        : 'Hoàn thành bài học'
+                    }}
+                  </span>
+                </button>
+              </div>
             </section>
 
-            <!-- Khung Trắc nghiệm sau video -->
+            <!-- Khung Trắc nghiệm sau bài giảng -->
             <LessonQuizPanel
               :lesson-id="currentLesson.id"
               :has-quiz="currentLesson.hasQuiz"
@@ -578,7 +723,7 @@ onMounted(() => {
               @submit="handleQuizSubmit"
             />
 
-            <!-- Nút nổi "Hỏi đáp" neo theo mép phải của cột bài giảng (tự động dịch sang trái khi mở mục lục) -->
+            <!-- Nút nổi "Hỏi đáp" neo theo mép phải của cột bài giảng -->
             <div class="pointer-events-none sticky bottom-6 z-20 flex justify-end pt-2">
               <button
                 type="button"
@@ -649,6 +794,10 @@ onMounted(() => {
                         v-if="lesson.status === 'COMPLETED'"
                         class="mt-0.5 h-4 w-4 shrink-0 text-teal"
                       />
+                      <FileText
+                        v-else-if="lesson. status === 'UNLOCKED' && lesson.hasVideo === false"
+                        class="mt-0.5 h-4 w-4 shrink-0 text-brand"
+                      />
                       <PlayCircle
                         v-else-if="lesson.status === 'UNLOCKED'"
                         class="mt-0.5 h-4 w-4 shrink-0 text-brand"
@@ -663,7 +812,8 @@ onMounted(() => {
                           {{ lesson.order }}. {{ lesson.title }}
                         </p>
                         <div class="mt-1 flex flex-wrap items-center gap-2 text-[11px] text-muted">
-                          <span class="tabular-nums">{{ formatCourseDuration(lesson.duration) }}</span>
+                          <span v-if="lesson.duration > 0" class="tabular-nums">{{ formatCourseDuration(lesson.duration) }}</span>
+                          <span v-else-if="lesson.hasText || lesson.hasFile">Bài đọc / Tài liệu</span>
                           <span
                             v-if="lesson.hasQuiz"
                             class="inline-flex items-center gap-1 text-teal"

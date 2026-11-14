@@ -322,12 +322,15 @@ export class EnrollmentsService {
                 id: lesson._id.toString(),
                 title: lesson.title,
                 order: lesson.order,
-                duration: lesson.duration,
+                duration: lesson.duration ?? 0,
+                hasVideo: Boolean(lesson.videoUrl?.trim()),
+                hasText: Boolean(lesson.content?.trim()),
+                hasFile: Boolean(lesson.fileUrl?.trim()),
                 hasQuiz: quizCount > 0,
                 quizCount,
                 status: LessonStatus.UNLOCKED,
                 lastPositionSec: 0,
-                watchedSeconds: lesson.duration,
+                watchedSeconds: lesson.duration ?? 0,
                 watchedFully: true,
                 quizPassed: false,
               };
@@ -390,7 +393,10 @@ export class EnrollmentsService {
               id: lesson._id.toString(),
               title: lesson.title,
               order: lesson.order,
-              duration: lesson.duration,
+              duration: lesson.duration ?? 0,
+              hasVideo: Boolean(lesson.videoUrl?.trim()),
+              hasText: Boolean(lesson.content?.trim()),
+              hasFile: Boolean(lesson.fileUrl?.trim()),
               hasQuiz: quizCount > 0,
               quizCount,
               status: prog.status,
@@ -478,8 +484,11 @@ export class EnrollmentsService {
         chapterTitle: entry.chapter.title,
         title: entry.lesson.title,
         order: entry.lesson.order,
-        videoUrl: entry.lesson.videoUrl,
-        duration: entry.lesson.duration,
+        videoUrl: entry.lesson.videoUrl ?? '',
+        duration: entry.lesson.duration ?? 0,
+        content: entry.lesson.content ?? null,
+        fileUrl: entry.lesson.fileUrl ?? null,
+        fileName: entry.lesson.fileName ?? null,
         note: entry.lesson.note ?? null,
         summary: entry.lesson.summary ?? null,
         hasQuiz,
@@ -487,7 +496,7 @@ export class EnrollmentsService {
         requiredPassPercent,
         status: LessonStatus.UNLOCKED,
         lastPositionSec: 0,
-        watchedSeconds: entry.lesson.duration,
+        watchedSeconds: entry.lesson.duration ?? 0,
         watchedFully: true,
         quizPassed: false,
         quizUnlocked: hasQuiz,
@@ -541,11 +550,12 @@ export class EnrollmentsService {
 
     const quizCount = entry.quizCount;
     const hasQuiz = entry.hasQuiz;
+    const hasVideo = Boolean(entry.lesson.videoUrl?.trim());
     const requiredPassPercent = quizCount <= 1 ? 100 : 70;
-    const quizUnlocked = hasQuiz && progress.watchedFully;
+    const quizUnlocked = hasQuiz && (!hasVideo || progress.watchedFully);
     const quizLockedReason = !hasQuiz
       ? null
-      : progress.watchedFully
+      : quizUnlocked
         ? null
         : 'Vui lòng xem tối thiểu 60% thời lượng video bài giảng trước khi làm câu hỏi trắc nghiệm';
 
@@ -564,8 +574,11 @@ export class EnrollmentsService {
       chapterTitle: entry.chapter.title,
       title: entry.lesson.title,
       order: entry.lesson.order,
-      videoUrl: entry.lesson.videoUrl,
-      duration: entry.lesson.duration,
+      videoUrl: entry.lesson.videoUrl ?? '',
+      duration: entry.lesson.duration ?? 0,
+      content: entry.lesson.content ?? null,
+      fileUrl: entry.lesson.fileUrl ?? null,
+      fileName: entry.lesson.fileName ?? null,
       note: entry.lesson.note ?? null,
       summary: entry.lesson.summary ?? null,
       hasQuiz,
@@ -625,7 +638,7 @@ export class EnrollmentsService {
       }
 
       const entry = orderedLessons[lessonIndex]!;
-      const maxDuration = entry.lesson.duration;
+      const maxDuration = entry.lesson.duration ?? 0;
       const clampedPosition =
         maxDuration > 0
           ? Math.min(dto.lastPositionSec, maxDuration)
@@ -672,7 +685,7 @@ export class EnrollmentsService {
       );
     }
 
-    const maxDuration = entry.lesson.duration;
+    const maxDuration = entry.lesson.duration ?? 0;
     const clampedPosition =
       maxDuration > 0
         ? Math.min(dto.lastPositionSec, maxDuration)
@@ -707,7 +720,7 @@ export class EnrollmentsService {
     let unlockedNextLessonId: string | null = null;
     let certificate: CertificateResponseDto | null = null;
 
-    // Nếu bài học không có câu hỏi trắc nghiệm, xem đủ 60% thời lượng video là hoàn thành bài ngay
+    // Nếu bài học không có câu hỏi trắc nghiệm, xem đủ 60% thời lượng video (hoặc xác nhận đọc bài) là hoàn thành bài ngay
     if (progress.watchedFully && !entry.hasQuiz) {
       progress.quizPassed = true;
       const advanceResult = await this.completeLessonAndAdvance(
@@ -890,7 +903,8 @@ export class EnrollmentsService {
       throw new BadRequestException('Bài giảng này không có câu hỏi trắc nghiệm');
     }
 
-    if (!progress.watchedFully) {
+    const hasVideo = Boolean(entry.lesson.videoUrl?.trim());
+    if (hasVideo && !progress.watchedFully) {
       throw new BadRequestException(
         'Vui lòng xem hết video bài giảng trước khi làm câu hỏi trắc nghiệm',
       );
@@ -977,6 +991,7 @@ export class EnrollmentsService {
     let certificate: CertificateResponseDto | null = null;
 
     if (passed) {
+      progress.watchedFully = true;
       progress.quizPassed = true;
       const advanceResult = await this.completeLessonAndAdvance(
         studentId,
@@ -1494,4 +1509,3 @@ export class EnrollmentsService {
     };
   }
 }
-

@@ -8,6 +8,11 @@ export interface UploadedFileResponse {
   mimeType: string;
 }
 
+export interface UploadedDocumentResponse extends UploadedFileResponse {
+  originalName: string;
+  extractedText: string | null;
+}
+
 export const uploadsService = {
   async uploadImage(
     file: File,
@@ -74,6 +79,30 @@ export const uploadsService = {
       },
     );
     return response.data.data;
+  },
+
+  async uploadLessonDocument(file: File): Promise<UploadedDocumentResponse> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const response = await http.post<ApiResponse<UploadedDocumentResponse>>(
+      '/uploads/files',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
+    return response.data.data;
+  },
+
+  async fetchPublicDocumentBuffer(fileUrl: string): Promise<ArrayBuffer> {
+    const response = await http.get<ArrayBuffer>(fileUrl, {
+      baseURL: '',
+      responseType: 'arraybuffer',
+    });
+    return response.data;
   },
 };
 

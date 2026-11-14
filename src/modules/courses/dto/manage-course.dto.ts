@@ -17,6 +17,7 @@ import {
   IsString,
   IsUrl,
   Length,
+  Matches,
   Max,
   MaxLength,
   Min,
@@ -33,6 +34,8 @@ export const LOCAL_COURSE_THUMBNAIL_PATTERN =
   /^\/public\/images\/courses\/[a-zA-Z0-9_-]+\.(?:jpg|jpeg|png|webp)$/;
 export const LOCAL_LESSON_VIDEO_PATTERN =
   /^\/public\/videos\/[a-zA-Z0-9_-]+\.(?:mp4|webm)$/;
+export const LOCAL_LESSON_FILE_PATTERN =
+  /^\/public\/files\/[a-zA-Z0-9_-]+\.(?:pdf|docx|txt|md)$/;
 
 const YOUTUBE_HOSTS = new Set([
   'www.youtube.com',
@@ -257,18 +260,21 @@ export class CreateLessonDto {
   @Length(3, 150)
   title!: string;
 
-  @ApiProperty({
+  @ApiPropertyOptional({
     example: '/public/videos/1730300000000-550e8400-e29b-41d4-a716-446655440000.mp4',
-    description: `Mã nhúng <iframe> YouTube (khóa FREE), đường dẫn video đã tải lên (/public/videos/...), URL HTTPS hoặc "${PLACEHOLDER_VIDEO}".`,
+    description: `Tùy chọn. Mã nhúng <iframe> YouTube (khóa FREE), đường dẫn video đã tải lên (/public/videos/...), URL HTTPS, "${PLACEHOLDER_VIDEO}" hoặc chuỗi rỗng "".`,
     maxLength: 2000,
   })
+  @ValidateIf((object: CreateLessonDto) => object.videoUrl !== undefined)
   @IsString()
   @MaxLength(2000)
   @ValidateIf(
     (object: CreateLessonDto) =>
-      object.videoUrl !== PLACEHOLDER_VIDEO &&
+      object.videoUrl !== undefined &&
       (typeof object.videoUrl !== 'string' ||
-        (!LOCAL_LESSON_VIDEO_PATTERN.test(object.videoUrl) &&
+        (object.videoUrl.trim().length > 0 &&
+          object.videoUrl !== PLACEHOLDER_VIDEO &&
+          !LOCAL_LESSON_VIDEO_PATTERN.test(object.videoUrl) &&
           extractYouTubeVideoId(object.videoUrl) === null)),
   )
   @IsUrl(
@@ -278,14 +284,60 @@ export class CreateLessonDto {
         'Video phải là mã nhúng <iframe> YouTube hợp lệ, đường dẫn video đã tải lên (/public/videos/...) hoặc URL HTTPS',
     },
   )
-  videoUrl!: string;
+  videoUrl?: string;
 
-  @ApiProperty({ example: 420, minimum: 1, maximum: 36000, description: 'Thời lượng tính bằng giây.' })
+  @ApiPropertyOptional({
+    example: 420,
+    minimum: 0,
+    maximum: 36000,
+    default: 0,
+    description: 'Thời lượng tính bằng giây (0 nếu bài giảng không có video).',
+  })
+  @ValidateIf((object: CreateLessonDto) => object.duration !== undefined)
   @Type(() => Number)
   @IsInt()
-  @Min(1)
+  @Min(0)
   @Max(36000)
-  duration!: number;
+  duration?: number;
+
+  @ApiPropertyOptional({
+    example: 'Nội dung bài đọc lý thuyết chi tiết...',
+    nullable: true,
+    maxLength: 50000,
+  })
+  @IsOptional()
+  @IsString()
+  @MaxLength(50000)
+  content?: string | null;
+
+  @ApiPropertyOptional({
+    example: '/public/files/1730300000000-550e8400-e29b-41d4-a716-446655440000.pdf',
+    nullable: true,
+    maxLength: 500,
+    description: 'Đường dẫn file tài liệu bài giảng đã tải lên (/public/files/...)',
+  })
+  @IsOptional()
+  @IsString()
+  @MaxLength(500)
+  @ValidateIf(
+    (object: CreateLessonDto) =>
+      typeof object.fileUrl === 'string' && object.fileUrl.trim().length > 0,
+  )
+  @Matches(LOCAL_LESSON_FILE_PATTERN, {
+    message:
+      'Tài liệu bài giảng phải là đường dẫn file đã tải lên (/public/files/... định dạng PDF, DOCX, TXT hoặc MD)',
+  })
+  fileUrl?: string | null;
+
+  @ApiPropertyOptional({
+    example: 'tai-lieu-bai-1.pdf',
+    nullable: true,
+    maxLength: 255,
+  })
+  @IsOptional()
+  @IsString()
+  @MaxLength(255)
+  fileName?: string | null;
 
   @ApiPropertyOptional({ example: 'Ghi chú bài học', nullable: true, maxLength: 10000 })
   @IsOptional()

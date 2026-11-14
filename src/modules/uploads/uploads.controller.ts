@@ -29,10 +29,12 @@ import {
 import { Roles } from '../../common/decorators/roles.decorator.js';
 import { RolesGuard } from '../../common/guards/roles.guard.js';
 import {
+  UploadDocumentResponseDto,
   UploadImageQueryDto,
   UploadResponseDto,
 } from './dto/upload-response.dto.js';
 import {
+  createDocumentMulterOptions,
   createImageMulterOptions,
   createVideoMulterOptions,
   UploadsService,
@@ -40,7 +42,7 @@ import {
 
 @ApiTags('Uploads')
 @ApiBearerAuth('bearer')
-@ApiExtraModels(UploadResponseDto)
+@ApiExtraModels(UploadResponseDto, UploadDocumentResponseDto)
 @Controller('uploads')
 export class UploadsController {
   constructor(private readonly uploadsService: UploadsService) {}
@@ -144,5 +146,50 @@ export class UploadsController {
     @UploadedFile() file: Express.Multer.File | undefined,
   ): Promise<UploadResponseDto> {
     return this.uploadsService.finalizeUploadedVideo(file);
+  }
+
+  @Post('files')
+  @UseGuards(RolesGuard)
+  @Roles(Role.INSTRUCTOR, Role.ADMIN)
+  @UseInterceptors(FileInterceptor('file', createDocumentMulterOptions()))
+  @ApiConsumes('multipart/form-data')
+  @ApiOperation({
+    summary:
+      'Tải file tài liệu bài giảng (.pdf, .docx, .txt, .md) lên server (lưu vào public/files) kèm trích xuất văn bản',
+  })
+  @ApiBody({
+    schema: {
+      type: 'object',
+      required: ['file'],
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+          description: 'File tài liệu PDF, DOCX, TXT hoặc MD (tối đa 25MB)',
+        },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 201,
+    schema: {
+      type: 'object',
+      properties: {
+        success: { type: 'boolean', example: true },
+        statusCode: { type: 'number', example: 201 },
+        data: { $ref: getSchemaPath(UploadDocumentResponseDto) },
+        timestamp: { type: 'string', format: 'date-time' },
+      },
+    },
+  })
+  @ApiBadRequestResponse({
+    description: 'File tài liệu không hợp lệ hoặc vượt quá giới hạn 25MB',
+  })
+  @ApiUnauthorizedResponse({ description: 'Chưa đăng nhập' })
+  @ApiForbiddenResponse({ description: 'Không có quyền tải file tài liệu' })
+  uploadDocument(
+    @UploadedFile() file: Express.Multer.File | undefined,
+  ): Promise<UploadDocumentResponseDto> {
+    return this.uploadsService.finalizeUploadedDocument(file);
   }
 }

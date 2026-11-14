@@ -37,11 +37,20 @@ export class Lesson {
   @Prop({ required: true, min: 1 })
   order!: number;
 
-  @Prop({ required: true, trim: true })
+  @Prop({ type: String, default: '', trim: true })
   videoUrl!: string;
 
-  @Prop({ required: true, min: 0 })
+  @Prop({ required: true, min: 0, default: 0 })
   duration!: number;
+
+  @Prop({ type: String, default: null })
+  content?: string | null;
+
+  @Prop({ type: String, default: null })
+  fileUrl?: string | null;
+
+  @Prop({ type: String, default: null })
+  fileName?: string | null;
 
   @Prop({ type: String, default: null })
   note!: string | null;

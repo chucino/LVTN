@@ -68,6 +68,9 @@ export interface ManageLesson {
   order: number;
   videoUrl: string;
   duration: number;
+  content?: string | null;
+  fileUrl?: string | null;
+  fileName?: string | null;
   note: string | null;
   summary: string | null;
   hasQuiz: boolean;
@@ -138,6 +141,9 @@ export interface ManageLessonPayload {
   title: string;
   videoUrl: string;
   duration: number;
+  content?: string | null;
+  fileUrl?: string | null;
+  fileName?: string | null;
   note?: string | null;
   summary?: string | null;
 }

@@ -36,6 +36,9 @@ function createCourse(status = CourseStatus.DRAFT) {
     order: 1,
     videoUrl: 'https://example.com/lesson.mp4',
     duration: 420,
+    content: null as string | null,
+    fileUrl: null as string | null,
+    fileName: null as string | null,
     note: 'Ghi chú cũ',
     summary: 'Tóm tắt cũ',
     quizQuestions: [],
@@ -212,7 +215,7 @@ describe('CourseManageService', () => {
     ).toMatchObject({ canEditInfo: true, canEdit: true, canApprove: true, canDelete: true });
   });
 
-  it('reports readiness blockers and non-blocking PRO lesson warnings', () => {
+  it('reports readiness blockers and non-blocking PRO lesson warnings (allowing lessons without video)', () => {
     course.chapters[0].lessons[0].note = null;
     course.chapters[0].lessons[0].summary = null;
     const result = getCourseReadiness(course as unknown as Course);
@@ -221,10 +224,18 @@ describe('CourseManageService', () => {
     expect(result.issues).toEqual([]);
     expect(result.warnings).toHaveLength(1);
 
+    // Bài giảng không có video (videoUrl = '', duration = 0) vẫn hợp lệ để gửi duyệt
     course.chapters[0].lessons[0].videoUrl = '';
+    course.chapters[0].lessons[0].duration = 0;
+    const textOnlyReady = getCourseReadiness(course as unknown as Course);
+    expect(textOnlyReady.ready).toBe(true);
+
+    // Bài giảng CÓ video nhưng thời lượng = 0 thì báo lỗi readiness
+    course.chapters[0].lessons[0].videoUrl = 'https://example.com/lesson.mp4';
+    course.chapters[0].lessons[0].duration = 0;
     const incomplete = getCourseReadiness(course as unknown as Course);
     expect(incomplete.ready).toBe(false);
-    expect(incomplete.issues[0]).toContain('chưa có video');
+    expect(incomplete.issues[0]).toContain('chưa có thời lượng hợp lệ');
   });
 
   it('allows valid DRAFT to PENDING transition with a conditional status update', async () => {
@@ -365,7 +376,7 @@ describe('CourseManageService', () => {
     expect(course.save).not.toHaveBeenCalled();
   });
 
-  it('rejects null for non-nullable patch fields while allowing nullable lesson notes', async () => {
+  it('rejects null for non-nullable patch fields while allowing nullable lesson notes and optional video/text/files', async () => {
     const invalidLesson = plainToInstance(UpdateLessonDto, { videoUrl: null });
     const invalidCourse = plainToInstance(UpdateManageCourseDto, { title: null });
     const invalidQuestion = plainToInstance(UpdateQuizQuestionDto, {
@@ -466,8 +477,30 @@ describe('CourseManageService', () => {
     );
     expect(addedYoutubeLesson?.videoUrl).not.toContain('onload=');
 
+    // Thêm bài giảng chỉ có Text + File tài liệu, không có video
+    await serviceForLessons.addLesson(
+      courseId.toString(),
+      chapterId.toString(),
+      {
+        title: 'Bài đọc lý thuyết & tài liệu PDF',
+        videoUrl: '',
+        duration: 0,
+        content: 'Nội dung bài đọc chi tiết chương 1',
+        fileUrl: '/public/files/1730300000000-doc1.pdf',
+        fileName: 'tai-lieu-chuong-1.pdf',
+      },
+      instructor,
+    );
+    const addedTextLesson = course.chapters[0]?.lessons[2];
+    expect(addedTextLesson?.videoUrl).toBe('');
+    expect(addedTextLesson?.duration).toBe(0);
+    expect(addedTextLesson?.content).toBe('Nội dung bài đọc chi tiết chương 1');
+    expect(addedTextLesson?.fileUrl).toBe('/public/files/1730300000000-doc1.pdf');
+    expect(addedTextLesson?.fileName).toBe('tai-lieu-chuong-1.pdf');
+
     const firstLesson = course.chapters[0]!.lessons[0]!;
     firstLesson.videoUrl = '/public/videos/old-lesson.mp4';
+    firstLesson.fileUrl = '/public/files/old-doc.pdf';
 
     await serviceForLessons.updateLesson(
       courseId.toString(),
@@ -476,11 +509,16 @@ describe('CourseManageService', () => {
       {
         videoUrl: '/public/videos/new-lesson.mp4',
         duration: 300,
+        fileUrl: '/public/files/new-doc.docx',
+        fileName: 'new-doc.docx',
       },
       instructor,
     );
     expect(deleteLocalFile).toHaveBeenCalledWith(
       '/public/videos/old-lesson.mp4',
+    );
+    expect(deleteLocalFile).toHaveBeenCalledWith(
+      '/public/files/old-doc.pdf',
     );
   });
 });

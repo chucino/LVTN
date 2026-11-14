@@ -8,13 +8,16 @@ import {
   CheckCircle2,
   CirclePlus,
   Clock3,
+  FileText,
   Film,
   HelpCircle,
   Loader2,
+  Paperclip,
   Pencil,
   Plus,
   Trash2,
   Video,
+  VideoOff,
   X,
 } from 'lucide-vue-next';
 import { formatCourseDuration } from '@/lib/course-format';
@@ -99,7 +102,7 @@ const deleteDialogInfo = computed(() => {
   if (deleting.value.kind === 'lesson') {
     return {
       title: 'Xóa bài giảng này?',
-      description: `Bài "${deleting.value.title}", file video trên server (nếu có) và tất cả câu hỏi trắc nghiệm của bài sẽ bị xóa.`,
+      description: `Bài "${deleting.value.title}", file video/tài liệu trên server (nếu có) và tất cả câu hỏi trắc nghiệm của bài sẽ bị xóa.`,
     };
   }
   return {
@@ -112,6 +115,10 @@ function formatFileSize(bytes: number): string {
   if (bytes < 1024) return `${bytes} B`;
   if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(1)} KB`;
   return `${(bytes / (1024 * 1024)).toFixed(2)} MB`;
+}
+
+function hasLessonVideo(lesson: ManageLesson): boolean {
+  return Boolean(lesson.videoUrl?.trim());
 }
 
 function isYouTubeLesson(lesson: ManageLesson): boolean {
@@ -440,9 +447,12 @@ async function confirmDelete() {
                 <div class="min-w-0">
                   <h3 class="break-words font-medium text-ink">{{ lesson.title }}</h3>
                   <p class="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs tabular-nums text-muted">
-                    <span class="inline-flex items-center gap-1"><Clock3 class="h-3.5 w-3.5" /> {{ formatCourseDuration(lesson.duration) }}</span>
-                    <span v-if="isYouTubeLesson(lesson)" class="inline-flex items-center gap-1 text-ink"><Video class="h-3.5 w-3.5" /> YouTube Embed</span>
-                    <span v-else class="inline-flex items-center gap-1 text-emerald-300"><Film class="h-3.5 w-3.5" /> Video Server</span>
+                    <span v-if="lesson.duration > 0" class="inline-flex items-center gap-1"><Clock3 class="h-3.5 w-3.5" /> {{ formatCourseDuration(lesson.duration) }}</span>
+                    <span v-if="hasLessonVideo(lesson) && isYouTubeLesson(lesson)" class="inline-flex items-center gap-1 text-ink"><Video class="h-3.5 w-3.5" /> YouTube Embed</span>
+                    <span v-else-if="hasLessonVideo(lesson)" class="inline-flex items-center gap-1 text-emerald-300"><Film class="h-3.5 w-3.5" /> Video Server</span>
+                    <span v-else class="inline-flex items-center gap-1 text-muted"><VideoOff class="h-3.5 w-3.5" /> Không có video</span>
+                    <span v-if="lesson.content" class="inline-flex items-center gap-1 text-ink"><FileText class="h-3.5 w-3.5" /> Có bài đọc</span>
+                    <span v-if="lesson.fileUrl" class="inline-flex items-center gap-1 text-brand-soft"><Paperclip class="h-3.5 w-3.5" /> {{ lesson.fileName || 'Có tài liệu' }}</span>
                     <span v-if="lesson.hasQuiz" class="inline-flex items-center gap-1 text-ink"><CheckCircle2 class="h-3.5 w-3.5" /> Có trắc nghiệm</span>
                     <span v-else class="inline-flex items-center gap-1"><HelpCircle class="h-3.5 w-3.5" /> Chưa có trắc nghiệm</span>
                   </p>

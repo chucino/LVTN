@@ -34,3 +34,17 @@ export class UploadResponseDto {
   mimeType!: string;
 }
 
+export class UploadDocumentResponseDto extends UploadResponseDto {
+  @ApiProperty({
+    example: 'tai-lieu-bai-1.docx',
+    description: 'Tên file gốc do giảng viên tải lên',
+  })
+  originalName!: string;
+
+  @ApiPropertyOptional({
+    example: 'Nội dung trích xuất từ tài liệu...',
+    nullable: true,
+    description: 'Văn bản trích xuất tự động từ file TXT, MD hoặc DOCX (null nếu là PDF)',
+  })
+  extractedText!: string | null;
+}
