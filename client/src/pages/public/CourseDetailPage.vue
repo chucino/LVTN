@@ -150,8 +150,10 @@ async function handleCourseAction(): Promise<void> {
   }
 
   if (course.value.type === 'PRO') {
-    actionNotice.value =
-      'Khóa học Pro yêu cầu tạo đơn hàng và thanh toán. Chức năng thanh toán QR đang được tích hợp.';
+    await router.push({
+      name: 'CourseCheckout',
+      params: { courseId: course.value.id },
+    });
     return;
   }
 

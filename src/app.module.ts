@@ -12,6 +12,7 @@ import { CoursesModule } from './modules/courses/courses.module.js';
 import { UploadsModule } from './modules/uploads/uploads.module.js';
 import { CertificatesModule } from './modules/certificates/certificates.module.js';
 import { EnrollmentsModule } from './modules/enrollments/enrollments.module.js';
+import { OrdersModule } from './modules/orders/orders.module.js';
 import { QuestionsModule } from './modules/questions/questions.module.js';
 import { ReviewsModule } from './modules/reviews/reviews.module.js';
 
@@ -55,6 +56,7 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
     UploadsModule,
     CertificatesModule,
     EnrollmentsModule,
+    OrdersModule,
     QuestionsModule,
     ReviewsModule,
   ],

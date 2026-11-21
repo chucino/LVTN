@@ -5,6 +5,7 @@ import {
   ArrowLeft,
   BookOpen,
   ClipboardList,
+  CreditCard,
   Flag,
   LayoutDashboard,
   LogOut,
@@ -67,6 +68,12 @@ const links = computed(() => [
           to: { name: 'ManageCourses', query: { status: 'PENDING' } },
           icon: ClipboardList,
           active: route.name === 'ManageCourses' && route.query.status === 'PENDING',
+        },
+        {
+          label: 'Đơn hàng & Thanh toán',
+          to: { name: 'ManageOrders' },
+          icon: CreditCard,
+          active: route.name === 'ManageOrders',
         },
         {
           label: 'Quản lý người dùng',

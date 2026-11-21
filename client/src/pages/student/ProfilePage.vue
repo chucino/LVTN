@@ -9,7 +9,9 @@ import {
   Calendar,
   Camera,
   CheckCircle2,
+  Clock,
   Compass,
+  CreditCard,
   Eye,
   EyeOff,
   GraduationCap,
@@ -17,16 +19,19 @@ import {
   Lock,
   Mail,
   PlayCircle,
+  QrCode,
   Save,
   Trash2,
   UserRound,
+  XCircle,
 } from 'lucide-vue-next';
 import CertificateCardView from '@/components/certificate/CertificateCardView.vue';
 import CourseCover from '@/components/course/CourseCover.vue';
-import { formatCourseDuration } from '@/lib/course-format';
+import { formatCourseDuration, formatCoursePrice } from '@/lib/course-format';
 import { certificatesApi } from '@/services/certificates.api';
 import { coursesApi } from '@/services/courses.api';
 import { enrollmentsApi } from '@/services/enrollments.api';
+import { ordersApi } from '@/services/orders.api';
 import { uploadsApi } from '@/services/uploads.api';
 import { usersApi } from '@/services/users.api';
 import { useAuthStore } from '@/stores/auth.store';
@@ -35,6 +40,11 @@ import type {
   EnrollmentStatus,
   MyEnrolledCourseItem,
 } from '@/types/learning';
+import type {
+  OrderDetail,
+  OrderStatus,
+  PaymentTransactionItem,
+} from '@/types/order';
 import type { ProfileTab } from '@/types/user';
 
 const MAX_AVATAR_BYTES = 5 * 1024 * 1024;
@@ -57,7 +67,10 @@ const avatarLoadError = ref(false);
 const activeTab = computed<ProfileTab>(() => {
   const tab = route.query.tab;
   if (tab === 'security') return 'security';
-  if (isStudent.value && (tab === 'courses' || tab === 'certificates')) {
+  if (
+    isStudent.value &&
+    (tab === 'courses' || tab === 'certificates' || tab === 'orders')
+  ) {
     return tab;
   }
   return 'info';
@@ -100,10 +113,24 @@ const courseStatusFilter = ref<'ALL' | EnrollmentStatus>('ALL');
 const myCertificates = ref<CertificateItem[]>([]);
 const certificatesLoading = ref(false);
 const selectedCertificate = ref<CertificateItem | null>(null);
+const myOrders = ref<OrderDetail[]>([]);
+const myTransactions = ref<PaymentTransactionItem[]>([]);
+const ordersLoading = ref(false);
+const orderStatusFilter = ref<'ALL' | OrderStatus>('ALL');
 
 const filteredMyCourses = computed(() => {
   if (courseStatusFilter.value === 'ALL') return myCourses.value;
   return myCourses.value.filter((item) => item.status === courseStatusFilter.value);
+});
+
+const filteredMyOrders = computed(() => {
+  if (orderStatusFilter.value === 'ALL') return myOrders.value;
+  if (orderStatusFilter.value === 'CANCELLED') {
+    return myOrders.value.filter(
+      (item) => item.status === 'CANCELLED' || item.status === 'EXPIRED',
+    );
+  }
+  return myOrders.value.filter((item) => item.status === orderStatusFilter.value);
 });
 
 const roleLabel = computed(() => {
@@ -190,19 +217,24 @@ async function loadStudentLearningData(): Promise<void> {
   if (authStore.user?.role !== 'STUDENT') return;
   coursesLoading.value = true;
   certificatesLoading.value = true;
+  ordersLoading.value = true;
   try {
-    const [coursesData, certsData] = await Promise.all([
+    const [coursesData, certsData, ordersData] = await Promise.all([
       enrollmentsApi.getMyCourses().catch(() => []),
       certificatesApi.getMyCertificates().catch(() => []),
+      ordersApi.getMyOrders().catch(() => ({ orders: [], transactions: [] })),
     ]);
     myCourses.value = coursesData;
     myCertificates.value = certsData;
+    myOrders.value = ordersData.orders;
+    myTransactions.value = ordersData.transactions;
     if (certsData.length > 0 && !selectedCertificate.value) {
       selectedCertificate.value = certsData[0] ?? null;
     }
   } finally {
     coursesLoading.value = false;
     certificatesLoading.value = false;
+    ordersLoading.value = false;
   }
 }
 
@@ -217,7 +249,7 @@ watch(
 watch(
   () => activeTab.value,
   (tab) => {
-    if (tab === 'courses' || tab === 'certificates') {
+    if (tab === 'courses' || tab === 'certificates' || tab === 'orders') {
       void loadStudentLearningData();
     }
   },
@@ -517,6 +549,29 @@ async function handleChangePassword() {
         </button>
 
         <button
+          v-if="isStudent"
+          type="button"
+          role="tab"
+          :aria-selected="activeTab === 'orders'"
+          class="inline-flex items-center gap-2 whitespace-nowrap px-4 py-2.5 text-sm font-medium transition-colors"
+          :class="
+            activeTab === 'orders'
+              ? 'bg-surface-2 text-ink'
+              : 'text-muted hover:bg-surface hover:text-ink'
+          "
+          @click="selectTab('orders')"
+        >
+          <CreditCard class="h-4 w-4" />
+          <span>Đơn hàng & Giao dịch</span>
+          <span
+            v-if="myOrders.length > 0"
+            class="rounded-full bg-tint px-2 py-0.5 text-xs font-bold tabular-nums text-brand-soft"
+          >
+            {{ myOrders.length }}
+          </span>
+        </button>
+
+        <button
           type="button"
           role="tab"
           :aria-selected="activeTab === 'security'"
@@ -572,7 +627,7 @@ async function handleChangePassword() {
           </div>
 
           <p v-if="selectedAvatarFile" class="mt-3 text-xs font-medium text-ink">
-            Đã chọn: {{ selectedAvatarFile.name }} (Xem trước — chưa lưu)
+            Đã chọn: {{ selectedAvatarFile.name }} (Xem trước, chưa lưu)
           </p>
           <p v-else class="mt-3 text-xs text-muted">
             JPG, PNG hoặc WEBP (Tối đa 5MB)
@@ -970,7 +1025,236 @@ async function handleChangePassword() {
       </div>
     </section>
 
-    <!-- Tab 4: Password & Security -->
+    <!-- Tab 4: Orders & Payment History -->
+    <section
+      v-else-if="activeTab === 'orders'"
+      class="mt-6 space-y-6 bg-surface p-6 sm:p-8"
+    >
+      <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+        <div>
+          <h2 class="text-lg font-semibold text-ink">
+            Đơn hàng & Lịch sử thanh toán
+          </h2>
+          <p class="mt-1 text-xs text-muted">
+            Quản lý các đơn hàng khóa học Pro và lịch sử giao dịch qua cổng VietQR payOS.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <button
+            type="button"
+            class="px-3.5 py-2 text-xs font-semibold transition-colors"
+            :class="
+              orderStatusFilter === 'ALL'
+                ? 'bg-brand text-white'
+                : 'bg-ground text-ink hover:bg-surface-2'
+            "
+            @click="orderStatusFilter = 'ALL'"
+          >
+            Tất cả ({{ myOrders.length }})
+          </button>
+          <button
+            type="button"
+            class="px-3.5 py-2 text-xs font-semibold transition-colors"
+            :class="
+              orderStatusFilter === 'PENDING'
+                ? 'bg-brand text-white'
+                : 'bg-ground text-ink hover:bg-surface-2'
+            "
+            @click="orderStatusFilter = 'PENDING'"
+          >
+            Chờ thanh toán
+          </button>
+          <button
+            type="button"
+            class="px-3.5 py-2 text-xs font-semibold transition-colors"
+            :class="
+              orderStatusFilter === 'COMPLETED'
+                ? 'bg-brand text-white'
+                : 'bg-ground text-ink hover:bg-surface-2'
+            "
+            @click="orderStatusFilter = 'COMPLETED'"
+          >
+            Hoàn tất
+          </button>
+          <button
+            type="button"
+            class="px-3.5 py-2 text-xs font-semibold transition-colors"
+            :class="
+              orderStatusFilter === 'CANCELLED'
+                ? 'bg-brand text-white'
+                : 'bg-ground text-ink hover:bg-surface-2'
+            "
+            @click="orderStatusFilter = 'CANCELLED'"
+          >
+            Đã hủy
+          </button>
+        </div>
+      </div>
+
+      <div v-if="ordersLoading" class="space-y-3">
+        <div v-for="i in 3" :key="i" class="h-24 bg-ground" />
+      </div>
+
+      <div
+        v-else-if="filteredMyOrders.length === 0"
+        class="flex flex-col items-center justify-center bg-ground px-6 py-14 text-center"
+      >
+        <CreditCard class="h-8 w-8 text-muted" />
+        <h3 class="mt-4 text-base font-semibold text-ink">
+          {{
+            myOrders.length === 0
+              ? 'Bạn chưa có đơn hàng nào'
+              : 'Không có đơn hàng nào trong bộ lọc này'
+          }}
+        </h3>
+        <p class="mt-2 max-w-md text-xs leading-5 text-muted sm:text-sm">
+          Khi bạn đăng ký mua khóa học Pro, thông tin mã đơn hàng, trạng thái thanh toán và lịch sử giao dịch sẽ hiển thị đầy đủ tại đây.
+        </p>
+        <router-link :to="{ name: 'Courses' }" class="manage-button-primary mt-5">
+          <Compass class="h-4 w-4" />
+          <span>Khám phá khóa học Pro</span>
+        </router-link>
+      </div>
+
+      <div v-else class="space-y-4">
+        <article
+          v-for="order in filteredMyOrders"
+          :key="order.id"
+          class="flex flex-col justify-between gap-4 bg-ground p-5 sm:flex-row sm:items-center"
+        >
+          <div class="space-y-1.5">
+            <div class="flex flex-wrap items-center gap-2.5 text-xs">
+              <span class="bg-surface px-2.5 py-1 font-extrabold tabular-nums text-brand-soft">
+                {{ order.orderCode }}
+              </span>
+              <span
+                class="inline-flex items-center gap-1 px-2.5 py-1 font-bold"
+                :class="
+                  order.status === 'COMPLETED'
+                    ? 'bg-teal-tint text-teal'
+                    : order.status === 'PENDING'
+                      ? 'bg-amber-500/15 text-amber-400'
+                      : 'bg-surface text-muted'
+                "
+              >
+                <CheckCircle2 v-if="order.status === 'COMPLETED'" class="h-3.5 w-3.5" />
+                <Clock v-else-if="order.status === 'PENDING'" class="h-3.5 w-3.5" />
+                <XCircle v-else class="h-3.5 w-3.5" />
+                <span>
+                  {{
+                    order.status === 'COMPLETED'
+                      ? 'Hoàn tất'
+                      : order.status === 'PENDING'
+                        ? 'Chờ thanh toán'
+                        : order.status === 'EXPIRED'
+                          ? 'Quá hạn'
+                          : 'Đã hủy'
+                  }}
+                </span>
+              </span>
+              <span class="tabular-nums text-muted">
+                Ngày tạo: {{ formatShortDate(order.createdAt) }}
+              </span>
+            </div>
+
+            <h3 class="text-base font-bold text-ink">
+              {{ order.courseTitle }}
+            </h3>
+            <p class="text-xs text-muted">
+              Giảng viên: {{ order.instructorName }}
+              <template v-if="order.couponCode">
+                · Đã áp mã <strong class="text-teal">{{ order.couponCode }}</strong> (-{{ formatCoursePrice(order.discountAmount) }})
+              </template>
+            </p>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-4 sm:justify-end">
+            <div class="sm:text-right">
+              <p class="text-xs text-muted">Tổng thanh toán</p>
+              <p class="text-lg font-extrabold tabular-nums text-[#f05123]">
+                {{ formatCoursePrice(order.finalAmount) }}
+              </p>
+            </div>
+
+            <router-link
+              v-if="order.status === 'PENDING'"
+              :to="{
+                name: 'CourseCheckout',
+                params: { courseId: order.courseId },
+                query: { orderId: order.id },
+              }"
+              class="manage-button-primary text-xs"
+            >
+              <QrCode class="h-4 w-4" />
+              <span>Tiếp tục thanh toán</span>
+            </router-link>
+
+            <router-link
+              v-else-if="order.status === 'COMPLETED'"
+              :to="{
+                name: 'CourseLearning',
+                params: { courseId: order.courseId },
+              }"
+              class="manage-button-primary text-xs"
+            >
+              <PlayCircle class="h-4 w-4" />
+              <span>Vào học ngay</span>
+            </router-link>
+
+            <router-link
+              v-else
+              :to="{
+                name: 'CourseCheckout',
+                params: { courseId: order.courseId },
+              }"
+              class="manage-button-secondary text-xs"
+            >
+              <span>Đặt mua lại</span>
+            </router-link>
+          </div>
+        </article>
+
+        <!-- Lịch sử giao dịch đã thanh toán -->
+        <div v-if="myTransactions.length > 0" class="pt-4">
+          <h3 class="text-sm font-bold text-ink">
+            Lịch sử giao dịch thành công ({{ myTransactions.length }})
+          </h3>
+          <div class="mt-3 overflow-x-auto bg-ground">
+            <table class="w-full border-collapse text-left text-xs">
+              <thead>
+                <tr class="bg-surface text-muted">
+                  <th class="px-4 py-3">Mã giao dịch</th>
+                  <th class="px-4 py-3">Mã đơn</th>
+                  <th class="px-4 py-3">Khóa học</th>
+                  <th class="px-4 py-3">Số tiền</th>
+                  <th class="px-4 py-3">Ngày thanh toán</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="tx in myTransactions" :key="tx.id" class="even:bg-surface/40">
+                  <td class="px-4 py-3 font-semibold tabular-nums text-ink">
+                    {{ tx.reference }}
+                  </td>
+                  <td class="px-4 py-3 font-bold tabular-nums text-brand-soft">
+                    {{ tx.orderCode }}
+                  </td>
+                  <td class="px-4 py-3 text-ink">{{ tx.courseTitle }}</td>
+                  <td class="px-4 py-3 font-bold tabular-nums text-[#f05123]">
+                    {{ formatCoursePrice(tx.amount) }}
+                  </td>
+                  <td class="px-4 py-3 tabular-nums text-muted">
+                    {{ formatShortDate(tx.createdAt) }}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tab 5: Password & Security -->
     <section
       v-else-if="activeTab === 'security'"
       class="mt-6 max-w-2xl"

@@ -44,6 +44,16 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/pages/student/ProfilePage.vue'),
         meta: { requiresAuth: true, title: 'Hồ sơ cá nhân - NextCode' },
       },
+      {
+        path: 'checkout/:courseId',
+        name: 'CourseCheckout',
+        component: () => import('@/pages/student/CourseCheckoutPage.vue'),
+        meta: {
+          requiresAuth: true,
+          roles: ['STUDENT'] as Role[],
+          title: 'Thanh toán khóa học Pro - NextCode',
+        },
+      },
     ],
   },
   {
@@ -146,6 +156,15 @@ const routes: RouteRecordRaw[] = [
         meta: {
           title: 'Quản lý người dùng - NextCode',
           roles: ['ADMIN'] as Role[],
+        },
+      },
+      {
+        path: 'orders',
+        name: 'ManageOrders',
+        component: () => import('@/pages/manage/ManageOrdersPage.vue'),
+        meta: {
+          title: 'Quản lý đơn hàng & Thanh toán - NextCode',
+          roles: ['ADMIN', 'ACCOUNTANT'] as Role[],
         },
       },
     ],

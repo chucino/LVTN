@@ -1,0 +1,12 @@
+export enum OrderStatus {
+  PENDING = 'PENDING',
+  COMPLETED = 'COMPLETED',
+  CANCELLED = 'CANCELLED',
+  EXPIRED = 'EXPIRED',
+}
+
+export enum PaymentMethod {
+  PAYOS_VIETQR = 'PAYOS_VIETQR',
+  SIMULATION = 'SIMULATION',
+  MANUAL = 'MANUAL',
+}
