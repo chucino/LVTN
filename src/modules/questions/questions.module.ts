@@ -15,6 +15,10 @@ import {
   CourseReviewSchema,
 } from '../reviews/schemas/course-review.schema.js';
 import {
+  RefreshToken,
+  RefreshTokenSchema,
+} from '../auth/schemas/refresh-token.schema.js';
+import {
   ManageReportsController,
   NotificationsController,
   QuestionsController,
@@ -41,6 +45,7 @@ import { Report, ReportSchema } from './schemas/report.schema.js';
       { name: LessonProgress.name, schema: LessonProgressSchema },
       { name: User.name, schema: UserSchema },
       { name: CourseReview.name, schema: CourseReviewSchema },
+      { name: RefreshToken.name, schema: RefreshTokenSchema },
     ]),
   ],
   controllers: [

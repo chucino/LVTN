@@ -17,17 +17,15 @@ import {
 import { ReportActionType, ReportStatus } from './schemas/report.schema.js';
 
 describe('computePenalty', () => {
-  it('maps accumulated violations to the 5 penalty tiers', () => {
+  it('maps accumulated violations to the 4 penalty tiers (1-3, 4-6, 7-10, >10)', () => {
     expect(computePenalty(1, false)).toMatchObject({ level: 1, banMs: null, lockAccount: false });
-    expect(computePenalty(5, false).level).toBe(1);
-    expect(computePenalty(6, false)).toMatchObject({ level: 2, banMs: 24 * 3600 * 1000 });
-    expect(computePenalty(10, false).level).toBe(2);
-    expect(computePenalty(11, false)).toMatchObject({ level: 3, banMs: 7 * 24 * 3600 * 1000 });
-    expect(computePenalty(15, false).level).toBe(3);
-    expect(computePenalty(16, false)).toMatchObject({ level: 4, banMs: 30 * 24 * 3600 * 1000 });
-    expect(computePenalty(19, false).level).toBe(4);
-    expect(computePenalty(20, false)).toMatchObject({ level: 5, lockAccount: true });
-    expect(computePenalty(1, true)).toMatchObject({ level: 5, lockAccount: true });
+    expect(computePenalty(3, false).level).toBe(1);
+    expect(computePenalty(4, false)).toMatchObject({ level: 2, banMs: 24 * 3600 * 1000 });
+    expect(computePenalty(6, false).level).toBe(2);
+    expect(computePenalty(7, false)).toMatchObject({ level: 3, banMs: 7 * 24 * 3600 * 1000 });
+    expect(computePenalty(10, false).level).toBe(3);
+    expect(computePenalty(11, false)).toMatchObject({ level: 4, lockAccount: true });
+    expect(computePenalty(1, true)).toMatchObject({ level: 4, lockAccount: true });
   });
 });
 
@@ -455,6 +453,36 @@ describe('QuestionsService', () => {
         expect.any(Object),
       );
     });
+
+    it('auto-escalates a report to ESCALATED when the target student already has >= 3 violations', async () => {
+      commentModel.findOne.mockReturnValue({
+        exec: vi.fn().mockResolvedValue(buildReportedComment(otherStudentId)),
+      });
+      userModel.findById.mockReturnValue({
+        select: vi.fn().mockReturnValue({
+          exec: vi.fn().mockResolvedValue({
+            _id: new Types.ObjectId(otherStudentId),
+            role: Role.STUDENT,
+            violationCount: 3,
+          }),
+        }),
+      });
+
+      await service.reportComment(studentUser, courseId, lessonId, rootCommentId, {
+        reason: 'Tái phạm lần thứ 4',
+      });
+
+      expect(reportModel.findOneAndUpdate).toHaveBeenCalledWith(
+        expect.any(Object),
+        expect.objectContaining({
+          $setOnInsert: expect.objectContaining({
+            status: ReportStatus.ESCALATED,
+            escalatedToAdmin: true,
+          }),
+        }),
+        expect.any(Object),
+      );
+    });
   });
 
   describe('resolveReport', () => {
@@ -553,12 +581,12 @@ describe('QuestionsService', () => {
       ).rejects.toThrow(BadRequestException);
     });
 
-    it('admin applies a 24h comment ban at the 6th violation, stacking on the existing ban', async () => {
+    it('admin applies a 24h comment ban at the 4th violation, stacking on the existing ban', async () => {
       const existingBan = new Date(Date.now() + 2 * 3600 * 1000);
       setupResolveMocks({
         report: { status: ReportStatus.ESCALATED },
-        author: { violationCount: 5, commentBannedUntil: existingBan },
-        updatedCount: 6,
+        author: { violationCount: 3, commentBannedUntil: existingBan },
+        updatedCount: 4,
       });
 
       const res = await service.resolveReport(adminUser, reportId, {

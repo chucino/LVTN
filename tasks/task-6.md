@@ -71,3 +71,33 @@ Tiếp nối các nhiệm vụ sau #050. Các nhiệm vụ đến #050 đã hoà
 - Backup: backup/client/src/components/certificate/CertificateCardView.vue.20261128-cert-pdf-spacing.bak
 - Hoàn thành: 2026-11-28 00:05
 - Tóm tắt thay đổi: Đã điều chỉnh `downloadCertificatePdf()` trong `CertificateCardView.vue` để đặt đường kẻ chân chứng chỉ (`footerDividerY = boxY + boxH + 84`) ngay dưới hộp tên khóa học (đối xứng với khoảng cách phía trên tiêu đề `CERTIFICATE OF COMPLETION`), đồng thời tính động chiều cao khung chứng chỉ (`innerH`, `outerH`, `H`) và `MediaBox` trang PDF ngang để ôm sát nội dung giống hệt bản chứng chỉ trên giao diện web. Build client thành công.
+
+## [x] #058 - Điều chỉnh thang số lần vi phạm bình luận và hình thức xử lý mới (1-3, 4-6, 7-10, >10)
+
+- Bắt đầu: 2026-11-28 02:20
+- Phạm vi: cả hai (server, client, test & tài liệu)
+- File liên quan: src/modules/questions/questions.service.ts, src/modules/questions/questions.service.spec.ts, client/src/pages/manage/ManageReportsPage.vue, docs/So_Do_UseCase.md, docs/So_Do_Lop_Moi.md
+- Mô tả: Cập nhật bảng ngưỡng xử phạt vi phạm tích lũy từ 5 mốc cũ (1-5, 6-10, 11-15, 16-19, >=20) sang 4 mốc mới theo yêu cầu: 1-3 lần (Nhắc nhở), 4-6 lần (Hạn chế bình luận 24 giờ), 7-10 lần (Hạn chế bình luận 7 ngày và cảnh cáo), trên 10 lần (>=11) hoặc vi phạm đặc biệt nghiêm trọng (Khóa tài khoản theo quyết định của quản trị viên).
+- Backup: backup/src/modules/questions/questions.service.ts.20261128-penalty-tiers.bak, backup/src/modules/questions/questions.service.spec.ts.20261128-penalty-tiers.bak, backup/client/src/pages/manage/ManageReportsPage.vue.20261128-penalty-tiers.bak
+- Hoàn thành: 2026-11-28 02:22
+- Tóm tắt thay đổi: Đã cập nhật hàm `computePenalty()` trong `questions.service.ts`, bộ xem trước mức phạt `penaltyPreview` cùng ngưỡng cảnh báo `HIGH_VIOLATION_THRESHOLD = 3` trong `ManageReportsPage.vue`, cập nhật unit test `questions.service.spec.ts` và đồng bộ đặc tả trong `docs/So_Do_UseCase.md`, `docs/So_Do_Lop_Moi.md` theo đúng 4 mốc mới: 1–3 lần (Nhắc nhở), 4–6 lần (Hạn chế bình luận 24 giờ), 7–10 lần (Hạn chế bình luận 7 ngày và cảnh cáo), trên 10 lần hoặc vi phạm đặc biệt nghiêm trọng (Khóa tài khoản). Kiểm thử Vitest và build client thành công.
+
+## [x] #059 - Nâng cấp cơ chế kiểm duyệt báo cáo vi phạm 2 tuyến (Tự động chuyển Admin từ mốc >=3, gộp nút xử lý Admin và thu hồi phiên khi khóa TK)
+
+- Bắt đầu: 2026-11-28 02:48
+- Phạm vi: cả hai (server, client & test)
+- File liên quan: src/modules/questions/questions.module.ts, src/modules/questions/questions.service.ts, src/modules/questions/questions.service.spec.ts, src/modules/reviews/reviews.service.ts, client/src/pages/manage/ManageReportsPage.vue
+- Mô tả: Áp dụng 3 cải tiến cho quy trình xử lý báo cáo vi phạm: (1) Tự động phân tuyến thẳng lên Admin (`ESCALATED`) khi người bị báo cáo đã có >= 3 lần vi phạm tích lũy, đồng thời tự động nâng cấp các báo cáo `PENDING` còn lại của người đó lên `ESCALATED` ngay khi chạm mốc 3 lần vi phạm; (2) Gộp nút xử lý ở giao diện Admin thành một nút "Xử lý vi phạm và áp dụng hình phạt" chuẩn theo bảng quy định (tránh bấm nhầm nút chỉ nhắc nhở) và ẩn nút "Xóa và nhắc nhở" ở phía Giảng viên nếu tác giả đã có >= 3 lần vi phạm; (3) Thu hồi toàn bộ `RefreshToken` ngay khi tài khoản bị khóa (`LOCKED`) do vi phạm bình luận.
+- Backup: backup/src/modules/questions/questions.service.ts.20261128-moderation-v2.bak, backup/src/modules/questions/questions.module.ts.20261128-moderation-v2.bak, backup/src/modules/questions/questions.service.spec.ts.20261128-moderation-v2.bak, backup/src/modules/reviews/reviews.service.ts.20261128-moderation-v2.bak, backup/client/src/pages/manage/ManageReportsPage.vue.20261128-moderation-v2.bak
+- Hoàn thành: 2026-11-28 02:51
+- Tóm tắt thay đổi: Đã cập nhật `questions.service.ts` và `reviews.service.ts` để tự động chuyển thẳng báo cáo lên `ESCALATED` (Admin) khi người bị báo cáo đã có `violationCount >= 3`, đồng thời tự động nâng cấp mọi báo cáo `PENDING` còn lại của người đó lên `ESCALATED` ngay khi chạm mốc 3 lần vi phạm; bổ sung thu hồi toàn bộ `RefreshToken` (`isRevoked = true`) khi tài khoản bị khóa do vi phạm bình luận; cập nhật `ManageReportsPage.vue` gộp nút xử lý của Admin thành 1 nút "Xử lý vi phạm và áp dụng hình phạt" thống nhất theo bảng quy định và ẩn nút "Xóa và nhắc nhở" ở phía Giảng viên khi học viên đã có >= 3 lần vi phạm. Toàn bộ unit test và build client thành công.
+
+## [x] #060 - Thống nhất thông báo phản hồi khi người dùng gửi báo cáo vi phạm
+
+- Bắt đầu: 2026-11-28 03:03
+- Phạm vi: server
+- File liên quan: src/modules/questions/questions.service.ts, src/modules/reviews/reviews.service.ts
+- Mô tả: Giữ nguyên cơ chế tự động chuyển thẳng báo cáo lên Admin ngầm ở phía sau khi tài khoản tái phạm nhiều lần, nhưng luôn trả về thông báo thống nhất "Đã ghi nhận báo cáo vi phạm. Cảm ơn bạn đã đóng góp xây dựng cộng đồng học tập!" cho người báo cáo để không tiết lộ trạng thái vi phạm nội bộ của tài khoản khác.
+- Backup: backup/src/modules/questions/questions.service.ts.20261128-moderation-v2.bak, backup/src/modules/reviews/reviews.service.ts.20261128-moderation-v2.bak
+- Hoàn thành: 2026-11-28 03:04
+- Tóm tắt thay đổi: Đã cập nhật `reportComment()` trong `questions.service.ts` và `reportCourseReview()` trong `reviews.service.ts` để luôn trả về thông báo tiêu chuẩn "Đã ghi nhận báo cáo vi phạm. Cảm ơn bạn đã đóng góp xây dựng cộng đồng học tập!" cho người gửi báo cáo trong mọi trường hợp. Kiểm thử Vitest đạt 100%.

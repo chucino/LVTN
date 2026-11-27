@@ -1823,7 +1823,7 @@ classDiagram
 5. **Ràng buộc đánh giá khóa học và kiểm duyệt cộng đồng 2 tuyến**:
    * Chỉ học viên đã hoàn thành 100% khóa học (`Enrollment.status === COMPLETED` hoặc `progressPercent >= 100`) mới được gửi đánh giá `CourseReview`.
    * Khi một bình luận (`LessonComment`) hoặc đánh giá (`CourseReview`) bị báo cáo vi phạm: nếu tác giả nội dung là học viên thì báo cáo vào hàng đợi Tuyến 1 (`PENDING`) của Giảng viên phụ trách khóa học; nếu tác giả nội dung là chính Giảng viên hoặc Admin (hoặc khi Giảng viên bấm chuyển cấp) thì báo cáo được đẩy lên hàng đợi Tuyến 2 (`ESCALATED`) của Admin.
-   * Thang xử phạt tự động (`computePenalty` khi Admin chọn `APPLY_PENALTY`): từ 1–5 lần vi phạm: nhắc nhở; từ 6–10 lần: cấm bình luận 24 giờ; từ 11–15 lần: cấm bình luận 7 ngày & cảnh cáo chính thức; từ 16–19 lần: cấm bình luận 30 ngày & cảnh cáo chính thức; từ 20 lần trở lên hoặc vi phạm đặc biệt nghiêm trọng (`severeViolation = true`): khóa tài khoản (`User.status = LOCKED`).
+   * Thang xử phạt tự động (`computePenalty` khi Admin chọn `APPLY_PENALTY`): từ 1–3 lần vi phạm: nhắc nhở; từ 4–6 lần: hạn chế bình luận 24 giờ; từ 7–10 lần: hạn chế bình luận 7 ngày & cảnh cáo chính thức; trên 10 lần ($\ge 11$) hoặc vi phạm đặc biệt nghiêm trọng (`severeViolation = true`): khóa tài khoản theo quyết định của quản trị viên (`User.status = LOCKED`).
 
 ---
 

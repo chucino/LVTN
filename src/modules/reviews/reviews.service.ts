@@ -431,6 +431,13 @@ export class ReviewsService {
 
     await review.save();
 
+    const targetAuthorDoc = await this.userModel
+      .findById(review.studentId)
+      .select('_id violationCount')
+      .exec();
+    const shouldAutoEscalate =
+      (targetAuthorDoc?.violationCount ?? 0) >= 3;
+
     await this.reportModel.findOneAndUpdate(
       {
         reporterId: new Types.ObjectId(user.userId),
@@ -446,8 +453,10 @@ export class ReviewsService {
           targetAuthorId: review.studentId,
           courseId: courseObjectId,
           lessonId: null,
-          status: ReportStatus.PENDING,
-          escalatedToAdmin: false,
+          status: shouldAutoEscalate
+            ? ReportStatus.ESCALATED
+            : ReportStatus.PENDING,
+          escalatedToAdmin: shouldAutoEscalate,
         },
       },
       { upsert: true, new: true },

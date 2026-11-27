@@ -25,6 +25,10 @@ import {
   CourseReview,
   CourseReviewDocument,
 } from '../reviews/schemas/course-review.schema.js';
+import {
+  RefreshToken,
+  RefreshTokenDocument,
+} from '../auth/schemas/refresh-token.schema.js';
 import { User, UserDocument } from '../users/schemas/user.schema.js';
 import {
   CommentAuthorDto,
@@ -65,6 +69,9 @@ const DAY_MS = 24 * HOUR_MS;
 /** Các trạng thái báo cáo còn nằm trong hàng đợi chờ xử lý */
 const ACTIVE_REPORT_STATUSES = [ReportStatus.PENDING, ReportStatus.ESCALATED];
 
+/** Ngưỡng số lần vi phạm tích lũy tự động chuyển thẳng báo cáo lên Admin (từ lần vi phạm thứ 4 trở đi) */
+export const AUTO_ESCALATE_VIOLATION_THRESHOLD = 3;
+
 export const HIDDEN_COMMENT_PLACEHOLDER = 'Bình luận này đã bị xóa do vi phạm';
 
 function isValidObjectId(id: string): boolean {
@@ -83,7 +90,7 @@ function formatBanDeadline(date: Date): string {
 }
 
 export interface PenaltyDecision {
-  level: 1 | 2 | 3 | 4 | 5;
+  level: 1 | 2 | 3 | 4;
   banMs: number | null;
   lockAccount: boolean;
   officialWarning: boolean;
@@ -92,15 +99,15 @@ export interface PenaltyDecision {
 
 /**
  * Bảng xử phạt tự động dựa trên tổng số lần vi phạm tích lũy:
- * 1-5: nhắc nhở | 6-10: cấm 24h | 11-15: cấm 7 ngày | 16-19: cấm 30 ngày | >=20 hoặc nghiêm trọng: khóa tài khoản
+ * 1-3: nhắc nhở | 4-6: hạn chế bình luận 24h | 7-10: hạn chế bình luận 7 ngày và cảnh cáo | >10 hoặc nghiêm trọng: khóa tài khoản
  */
 export function computePenalty(
   violationCount: number,
   severeViolation: boolean,
 ): PenaltyDecision {
-  if (severeViolation || violationCount >= 20) {
+  if (severeViolation || violationCount > 10) {
     return {
-      level: 5,
+      level: 4,
       banMs: null,
       lockAccount: true,
       officialWarning: true,
@@ -109,16 +116,7 @@ export function computePenalty(
         : `Đình chỉ tài khoản do tích lũy ${violationCount} lần vi phạm`,
     };
   }
-  if (violationCount >= 16) {
-    return {
-      level: 4,
-      banMs: 30 * DAY_MS,
-      lockAccount: false,
-      officialWarning: true,
-      summary: 'Cấm bình luận 30 ngày và cảnh cáo chính thức',
-    };
-  }
-  if (violationCount >= 11) {
+  if (violationCount >= 7) {
     return {
       level: 3,
       banMs: 7 * DAY_MS,
@@ -127,7 +125,7 @@ export function computePenalty(
       summary: 'Cấm bình luận 7 ngày và cảnh cáo chính thức',
     };
   }
-  if (violationCount >= 6) {
+  if (violationCount >= 4) {
     return {
       level: 2,
       banMs: 24 * HOUR_MS,
@@ -165,6 +163,9 @@ export class QuestionsService {
     @Optional()
     @InjectModel(CourseReview.name)
     private readonly reviewModel?: Model<CourseReviewDocument>,
+    @Optional()
+    @InjectModel(RefreshToken.name)
+    private readonly refreshTokenModel?: Model<RefreshTokenDocument>,
   ) {}
 
   /**
@@ -665,16 +666,23 @@ export class QuestionsService {
 
     await comment.save();
 
-    // Người bị báo cáo là Giảng viên/Admin: tự động chuyển cấp thẳng lên Admin (tránh xung đột lợi ích)
+    // Người bị báo cáo là Giảng viên/Admin HOẶC tài khoản đã có từ 3 lần vi phạm trở lên:
+    // tự động chuyển cấp thẳng lên Admin (đảm bảo áp dụng chế tài từ lần vi phạm thứ 4)
     const targetAuthorDoc = await this.userModel
       .findById(comment.authorId)
-      .select('_id role')
+      .select('_id role violationCount')
       .exec();
 
     const isTargetInstructorOrAdmin =
       comment.authorId.toString() === course.instructorId?.toString() ||
       targetAuthorDoc?.role === Role.INSTRUCTOR ||
       targetAuthorDoc?.role === Role.ADMIN;
+
+    const isHighViolationAuthor =
+      (targetAuthorDoc?.violationCount ?? 0) >= AUTO_ESCALATE_VIOLATION_THRESHOLD;
+
+    const shouldAutoEscalate =
+      isTargetInstructorOrAdmin || isHighViolationAuthor;
 
     const targetType = comment.parentId
       ? ReportTargetType.ANSWER
@@ -695,19 +703,18 @@ export class QuestionsService {
           targetAuthorId: comment.authorId,
           courseId: new Types.ObjectId(courseId),
           lessonId: new Types.ObjectId(lessonId),
-          status: isTargetInstructorOrAdmin
+          status: shouldAutoEscalate
             ? ReportStatus.ESCALATED
             : ReportStatus.PENDING,
-          escalatedToAdmin: isTargetInstructorOrAdmin,
+          escalatedToAdmin: shouldAutoEscalate,
         },
       },
       { upsert: true, new: true },
     );
 
     return {
-      message: isTargetInstructorOrAdmin
-        ? 'Báo cáo đã được chuyển thẳng tới Quản trị viên hệ thống (Admin) để xem xét khách quan.'
-        : 'Đã ghi nhận báo cáo vi phạm. Cảm ơn bạn đã đóng góp xây dựng cộng đồng học tập!',
+      message:
+        'Đã ghi nhận báo cáo vi phạm. Cảm ơn bạn đã đóng góp xây dựng cộng đồng học tập!',
       isReportedByMe: true,
       reportsCount: comment.reports.length,
     };
@@ -1272,6 +1279,25 @@ export class QuestionsService {
         )
         .exec();
       violationCount = updated?.violationCount ?? violationCount + 1;
+
+      // Ngay khi tài khoản đạt từ 3 lần vi phạm trở lên, tự động chuyển mọi báo cáo PENDING còn lại của tài khoản này lên Admin
+      if (violationCount >= AUTO_ESCALATE_VIOLATION_THRESHOLD) {
+        await this.reportModel
+          .updateMany(
+            {
+              targetAuthorId: report.targetAuthorId,
+              targetId: { $ne: report.targetId },
+              status: ReportStatus.PENDING,
+            },
+            {
+              $set: {
+                status: ReportStatus.ESCALATED,
+                escalatedToAdmin: true,
+              },
+            },
+          )
+          .exec();
+      }
     }
 
     if (penalty) {
@@ -1287,6 +1313,15 @@ export class QuestionsService {
       if (Object.keys(userUpdate).length > 0) {
         await this.userModel
           .findByIdAndUpdate(report.targetAuthorId, { $set: userUpdate })
+          .exec();
+      }
+      // Thu hồi toàn bộ RefreshToken của tài khoản ngay khi bị đình chỉ/khóa tài khoản
+      if (penalty.lockAccount) {
+        await this.refreshTokenModel
+          ?.updateMany(
+            { userId: report.targetAuthorId },
+            { $set: { isRevoked: true } },
+          )
           .exec();
       }
     }

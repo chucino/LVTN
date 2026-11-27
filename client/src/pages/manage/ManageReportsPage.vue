@@ -28,7 +28,7 @@ import type {
 type StatusTab = 'ALL' | 'PENDING' | 'RESOLVED' | 'DISMISSED';
 
 /** Từ ngưỡng này Giảng viên được khuyến nghị chuyển báo cáo lên Admin */
-const HIGH_VIOLATION_THRESHOLD = 5;
+const HIGH_VIOLATION_THRESHOLD = 3;
 
 const authStore = useAuthStore();
 const router = useRouter();
@@ -59,19 +59,18 @@ const moderationNote = ref('');
 const severeViolation = ref(false);
 const submittingAction = ref(false);
 
-/** Xem trước mức phạt theo cùng bảng quy tắc với Backend */
+/** Xem trước mức phạt theo cùng bảng quy tắc với Backend (1-3: Nhắc nhở, 4-6: 24h, 7-10: 7 ngày & cảnh cáo, >10: Khóa tài khoản) */
 const penaltyPreview = computed(() => {
   if (!activeModal.value || activeModal.value.action !== 'APPLY_PENALTY') {
     return null;
   }
   const nextCount = activeModal.value.report.targetAuthorViolationCount + 1;
   if (severeViolation.value) {
-    return { count: nextCount, text: 'Đình chỉ tài khoản ngay (vi phạm đặc biệt nghiêm trọng)' };
+    return { count: nextCount, text: 'Khóa tài khoản ngay (vi phạm đặc biệt nghiêm trọng)' };
   }
-  if (nextCount >= 20) return { count: nextCount, text: 'Đình chỉ tài khoản (từ 20 lần vi phạm)' };
-  if (nextCount >= 16) return { count: nextCount, text: 'Cấm bình luận 30 ngày và cảnh cáo chính thức' };
-  if (nextCount >= 11) return { count: nextCount, text: 'Cấm bình luận 7 ngày và cảnh cáo chính thức' };
-  if (nextCount >= 6) return { count: nextCount, text: 'Cấm bình luận 24 giờ' };
+  if (nextCount > 10) return { count: nextCount, text: 'Khóa tài khoản (trên 10 lần vi phạm)' };
+  if (nextCount >= 7) return { count: nextCount, text: 'Hạn chế bình luận 7 ngày và cảnh cáo' };
+  if (nextCount >= 4) return { count: nextCount, text: 'Hạn chế bình luận 24 giờ' };
   return { count: nextCount, text: 'Nhắc nhở và xóa bình luận vi phạm' };
 });
 
@@ -383,7 +382,7 @@ onMounted(() => {
         >
           <AlertTriangle class="mt-0.5 h-4 w-4 shrink-0" />
           <span>
-            Tài khoản đã vi phạm {{ item.targetAuthorViolationCount }} lần. Nên chuyển báo cáo lên Admin để xem xét.
+            Tài khoản đã vi phạm {{ item.targetAuthorViolationCount }} lần (chạm ngưỡng áp dụng chế tài hạn chế bình luận / khóa tài khoản). Hãy chuyển báo cáo lên Admin để xử phạt hoặc bỏ qua nếu báo cáo không hợp lệ.
           </span>
         </div>
 
@@ -551,7 +550,9 @@ onMounted(() => {
               <span>Bỏ qua báo cáo</span>
             </button>
 
+            <!-- Giảng viên: chỉ hiện nút "Xóa bình luận và nhắc nhở" khi học viên chưa chạm ngưỡng phạt (< 3 lần vi phạm) -->
             <button
+              v-if="!isAdmin && item.targetAuthorViolationCount < HIGH_VIOLATION_THRESHOLD"
               type="button"
               class="manage-button-primary text-xs"
               @click="openActionModal(item, 'DELETE_AND_REMIND')"
@@ -564,14 +565,24 @@ onMounted(() => {
             <button
               v-if="!isAdmin"
               type="button"
-              class="manage-button-secondary text-xs"
+              :class="
+                item.targetAuthorViolationCount >= HIGH_VIOLATION_THRESHOLD
+                  ? 'manage-button-primary text-xs'
+                  : 'manage-button-secondary text-xs'
+              "
               @click="openActionModal(item, 'ESCALATE')"
             >
               <ArrowUpRight class="h-3.5 w-3.5" />
-              <span>Chuyển lên Admin</span>
+              <span>
+                {{
+                  item.targetAuthorViolationCount >= HIGH_VIOLATION_THRESHOLD
+                    ? 'Chuyển lên Admin xử phạt'
+                    : 'Chuyển lên Admin'
+                }}
+              </span>
             </button>
 
-            <!-- Chỉ Admin: xử lý vi phạm và áp dụng hình phạt -->
+            <!-- Chỉ Admin: 1 nút xử lý vi phạm chuẩn theo bảng quy định (1-3: Nhắc nhở, 4-6: 24h, 7-10: 7 ngày, >10: Khóa TK) -->
             <button
               v-if="isAdmin"
               type="button"
