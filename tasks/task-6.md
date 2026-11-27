@@ -41,3 +41,33 @@ Tiếp nối các nhiệm vụ sau #050. Các nhiệm vụ đến #050 đã hoà
 - Backup: backup/client/src/components/manage/CourseInfoForm.vue.20261127-pro-price.bak
 - Hoàn thành: 2026-11-27 22:42
 - Tóm tắt thay đổi: Đã xóa ô nhập "Giá ưu đãi (tùy chọn)" (`discountPrice`) khỏi `CourseInfoForm.vue`, cố định `discountPrice: null` trong payload tạo/cập nhật khóa học, đồng thời chuẩn hóa xử lý `form.price` (`String(form.price ?? '').trim()`) trong `serializeFormState`, `validate()` và `save()` để tránh lỗi ép kiểu `number`/`string` của Vue `v-model` trên `<input type="number">`. Build client (`vue-tsc` + `vite build`) thành công.
+
+## [x] #055 - Nâng cấp giao diện chứng chỉ hiện đại, thay QR bằng Con dấu học viện và xuất PDF 1 trang A4 ngang
+
+- Bắt đầu: 2026-11-27 23:32
+- Phạm vi: client
+- File liên quan: client/src/components/certificate/CertificateCardView.vue, client/src/pages/student/ProfilePage.vue
+- Mô tả: Thiết kế lại giao diện chứng chỉ theo phong cách Công nghệ Hiện đại (tông Xanh Navy & Xanh Lam NextCode, khung viền kỷ hà sắc nét); xóa bỏ hoàn toàn mã QR và dòng "Tra cứu trực tuyến /certificates/verify/...", thay bằng Con dấu chứng nhận (Official Seal) của học viện; sửa tính năng "In / Tải PDF" thông qua iframe in độc lập khổ A4 Ngang (Landscape) để chỉ xuất duy nhất khung chứng chỉ vừa khít trên 1 trang giấy (không lẫn header/hồ sơ/footer của trang web).
+- Backup: backup/client/src/components/certificate/CertificateCardView.vue.20261127-cert-redesign.bak, backup/client/src/pages/student/ProfilePage.vue.20261127-cert-redesign.bak
+- Hoàn thành: 2026-11-27 23:34
+- Tóm tắt thay đổi: Đã tái thiết kế hoàn toàn `CertificateCardView.vue` theo phong cách Công nghệ Hiện đại (khung viền kép Navy `#0b1f4d` & Royal Blue `#1d4ed8`, góc kỷ hà, phân cấp chữ rõ nét, khung tên khóa học nổi bật, chữ ký giảng viên kèm monogram). Đã xóa hoàn toàn mã QR và dòng chữ `/certificates/verify/...`, thay bằng Con dấu chứng nhận `NextCode Official Seal` ở chính giữa chân chứng chỉ. Đã nâng cấp hàm `printCertificate()` kết xuất chứng chỉ qua `iframe` độc lập định dạng `@page { size: A4 landscape; margin: 0; }` kích thước chuẩn `297mm × 210mm`, giúp khi bấm "In / Tải PDF" chỉ xuất đúng 1 trang chứng chỉ duy nhất, không bị bể trang và không dính thanh menu, thông tin hồ sơ hay footer của website. Build client (`vue-tsc -b && vite build`) thành công.
+
+## [x] #056 - Tinh chỉnh nội dung chứng chỉ, tích hợp ảnh con_dau.jpg và tải trực tiếp PDF khổ ngang thuận chiều đọc
+
+- Bắt đầu: 2026-11-27 23:54
+- Phạm vi: client
+- File liên quan: client/src/components/certificate/CertificateCardView.vue, client/public/con_dau.jpg
+- Mô tả: Xóa dòng mã số trùng lặp dưới badge "CHỨNG CHỈ ĐÃ XÁC THỰC"; xóa phần tên giảng viên lặp lại phía trên khối "Giảng viên hướng dẫn"; đổi "NextCode Official Seal" thành "NEXTCODE"; đồng bộ "NEXTCODE ACADEMY" / "NextCode Academy" thành "NEXTCODE CENTER" / "NextCode Center"; thay con dấu bằng ảnh `con_dau.jpg` người dùng cung cấp; chuyển nút xuất PDF sang tải trực tiếp file `.pdf` 1 trang khổ A4 ngang (`/MediaBox [0 0 841.89 595.28]`, `/Rotate 0`) để khi mở trên WPS Office luôn nằm ngang thuận chiều đọc, không bị xoay dọc 90 độ.
+- Backup: backup/client/src/components/certificate/CertificateCardView.vue.20261127-cert-pdf-landscape.bak
+- Hoàn thành: 2026-11-27 23:57
+- Tóm tắt thay đổi: Đã xóa dòng `MÃ SỐ:` trùng lặp dưới badge `CHỨNG CHỈ ĐÃ XÁC THỰC`; xóa tên giảng viên lặp lại phía trên khối `Giảng viên hướng dẫn`; đổi nhãn dưới con dấu thành `NEXTCODE`; đồng bộ toàn bộ `NEXTCODE ACADEMY` / `NextCode Academy` thành `NEXTCODE CENTER` / `NextCode Center`; đưa ảnh con dấu người dùng cung cấp vào `client/public/con_dau.jpg` và hiển thị cả trên giao diện lẫn bản xuất PDF. Đã nâng cấp nút `Tải PDF` sang kết xuất Canvas 300 DPI (`2480x1754`) và đóng gói trực tiếp thành file PDF chuẩn khổ A4 ngang (`/MediaBox [0 0 841.89 595.28]`, `/Rotate 0`), tải thẳng về máy file `Chung-chi-{code}.pdf` hiển thị nằm ngang thuận chiều đọc trên WPS Office và mọi trình đọc PDF. Build client thành công.
+
+## [x] #057 - Thu gọn khoảng trắng dưới tên khóa học trong file PDF chứng chỉ khớp với giao diện web
+
+- Bắt đầu: 2026-11-28 00:02
+- Phạm vi: client
+- File liên quan: client/src/components/certificate/CertificateCardView.vue
+- Mô tả: Loại bỏ khoảng trắng thừa bên dưới hộp tên khóa học khi tải file PDF chứng chỉ bằng cách tính động tọa độ chân chứng chỉ (`footerDividerY`) ngay dưới hộp tên khóa học và tự động co chiều cao khung chứng chỉ (`innerH`, `outerH`, `H`) cùng `MediaBox` của trang PDF ngang theo đúng tỷ lệ hiển thị trên web.
+- Backup: backup/client/src/components/certificate/CertificateCardView.vue.20261128-cert-pdf-spacing.bak
+- Hoàn thành: 2026-11-28 00:05
+- Tóm tắt thay đổi: Đã điều chỉnh `downloadCertificatePdf()` trong `CertificateCardView.vue` để đặt đường kẻ chân chứng chỉ (`footerDividerY = boxY + boxH + 84`) ngay dưới hộp tên khóa học (đối xứng với khoảng cách phía trên tiêu đề `CERTIFICATE OF COMPLETION`), đồng thời tính động chiều cao khung chứng chỉ (`innerH`, `outerH`, `H`) và `MediaBox` trang PDF ngang để ôm sát nội dung giống hệt bản chứng chỉ trên giao diện web. Build client thành công.

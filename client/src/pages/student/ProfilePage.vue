@@ -981,7 +981,7 @@ async function handleChangePassword() {
           Bạn chưa có chứng chỉ nào
         </h3>
         <p class="mt-2 max-w-md text-xs leading-5 text-muted sm:text-sm">
-          Hãy hoàn thành 100% các bài giảng trong khóa học bạn đã đăng ký để nhận chứng chỉ kèm mã QR xác thực.
+          Hãy hoàn thành 100% các bài giảng trong khóa học bạn đã đăng ký để nhận chứng chỉ hoàn thành khóa học chính thức.
         </p>
         <button
           type="button"
