@@ -31,3 +31,13 @@ Tiếp nối các nhiệm vụ sau #050. Các nhiệm vụ đến #050 đã hoà
 - Backup: docs/report-work/20261122-chapter4/source-drive.docx và backup/docs/report-work/20261122-chapter4/LUANVAN.docx.20261122-chapter4.bak tải mới từ Drive trước chỉnh sửa.
 - Hoàn thành: 2026-11-22 15:32 UTC+7
 - Tóm tắt thay đổi: Tham khảo Chương 5 mẫu, đọc các phép kiểm tra trong mã nguồn và chạy đúng bộ kiểm thử hiện có. Kết quả 66/66 tình huống đạt trong 8 tệp, không bỏ qua; độ bao phủ dòng máy chủ 44,28% trên phạm vi 93 tệp được công cụ thu thập. Biên dịch máy chủ, kiểm tra kiểu và đóng gói giao diện thành công; ghi nhận cảnh báo kích thước gói. Bổ sung Chương 4 với 7 mục chính, 16 bảng, 66 mã tình huống và phần đánh giá giới hạn, không ghi dữ liệu mô phỏng thành kết quả dịch vụ thật. Giữ nguyên nội dung cũ, 49 bảng, 21 hình và toàn bộ các phần khác trong gói DOCX; chỉ sửa document.xml để thêm chương và đồng bộ điều hướng. Hợp nhất mục lục bị chia giữa vùng điều khiển và các đoạn liên kết cũ thành 179 mục, giữ định dạng người dùng, cập nhật danh mục bảng và số trang. Xuất kiểm tra Word nội bộ 127 trang, Chương 4 ở trang 109–127, rà soát ảnh trang và liên kết. Đã thay thế đúng file ID trên Drive, tải lại và đối chiếu SHA-256 trùng bản cuối. Bằng chứng tại validation.json, test-evidence.json và publish-proof.json. Không sửa mã nguồn chương trình, không thêm kiểm thử hoặc thực hiện giao dịch thật.
+
+## [x] #054 - Sửa lỗi tạo/lưu khóa học PRO và loại bỏ ô Giá ưu đãi trên form quản lý khóa học
+
+- Bắt đầu: 2026-11-27 22:40
+- Phạm vi: client
+- File liên quan: client/src/components/manage/CourseInfoForm.vue
+- Mô tả: Xử lý lỗi TypeError khi tạo/lưu khóa học PRO có Giá ưu đãi theo lựa chọn của người dùng: xóa bỏ ô "Giá ưu đãi (tùy chọn)" trên form thông tin khóa học, giữ nguyên 100% giao diện ô "Giá (VNĐ)", luôn gửi `discountPrice: null` và chuẩn hóa ép kiểu `price` giữa `string`/`number` khi dùng `v-model` trên `<input type="number">`.
+- Backup: backup/client/src/components/manage/CourseInfoForm.vue.20261127-pro-price.bak
+- Hoàn thành: 2026-11-27 22:42
+- Tóm tắt thay đổi: Đã xóa ô nhập "Giá ưu đãi (tùy chọn)" (`discountPrice`) khỏi `CourseInfoForm.vue`, cố định `discountPrice: null` trong payload tạo/cập nhật khóa học, đồng thời chuẩn hóa xử lý `form.price` (`String(form.price ?? '').trim()`) trong `serializeFormState`, `validate()` và `save()` để tránh lỗi ép kiểu `number`/`string` của Vue `v-model` trên `<input type="number">`. Build client (`vue-tsc` + `vite build`) thành công.

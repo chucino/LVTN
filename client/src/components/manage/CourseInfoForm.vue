@@ -35,8 +35,7 @@ interface CourseForm {
   targetAudience: string;
   learningOutcomes: string[];
   requirements: string;
-  price: string;
-  discountPrice: string;
+  price: string | number;
   thumbnail: string;
   instructorId: string;
 }
@@ -52,10 +51,16 @@ function blankForm(): CourseForm {
     learningOutcomes: [''],
     requirements: '',
     price: '0',
-    discountPrice: '',
     thumbnail: '',
     instructorId: '',
   };
+}
+
+function serializeFormState(state: CourseForm): string {
+  return JSON.stringify({
+    ...state,
+    price: String(state.price ?? '').trim(),
+  });
 }
 
 const form = reactive<CourseForm>(blankForm());
@@ -93,14 +98,13 @@ function resetForm(course: ManageCourseDetail | null) {
         learningOutcomes: [...course.learningOutcomes],
         requirements: course.requirements,
         price: String(course.price),
-        discountPrice: course.discountPrice === null ? '' : String(course.discountPrice),
         thumbnail: course.thumbnail ?? '',
         instructorId: course.instructor.id,
       }
     : blankForm();
   Object.assign(form, next);
   form.learningOutcomes = next.learningOutcomes.length ? [...next.learningOutcomes] : [''];
-  initialValue = JSON.stringify(form);
+  initialValue = serializeFormState(form);
   Object.keys(errors).forEach((key) => delete errors[key]);
 }
 
@@ -111,7 +115,7 @@ onBeforeUnmount(() => {
 });
 
 const isDirty = computed(
-  () => JSON.stringify(form) !== initialValue || selectedFile.value !== null,
+  () => serializeFormState(form) !== initialValue || selectedFile.value !== null,
 );
 watch(isDirty, (dirty) => emit('dirty', dirty), { immediate: true });
 
@@ -120,8 +124,7 @@ watch(
   (type, previous) => {
     if (type === 'FREE') {
       form.price = '0';
-      form.discountPrice = '';
-    } else if (previous === 'FREE' && !form.price) {
+    } else if (previous === 'FREE' && !String(form.price ?? '').trim()) {
       form.price = '1';
     }
   },
@@ -208,8 +211,8 @@ function validate(): boolean {
   const description = form.description.trim();
   const targetAudience = form.targetAudience.trim();
   const requirements = form.requirements.trim();
-  const price = Number(form.price);
-  const discountPrice = form.discountPrice.trim() ? Number(form.discountPrice) : null;
+  const rawPrice = String(form.price ?? '').trim();
+  const price = rawPrice === '' ? Number.NaN : Number(rawPrice);
 
   if (!title) {
     errors.title = 'Vui lòng nhập tên khóa học.';
@@ -241,9 +244,6 @@ function validate(): boolean {
   if (!Number.isInteger(price) || price < 0 || price > 100_000_000) errors.price = 'Giá phải là số nguyên từ 0 đến 100.000.000đ.';
   if (form.type === 'FREE' && price !== 0) errors.price = 'Khóa Free phải có giá bằng 0.';
   if (form.type === 'PRO' && price <= 0) errors.price = 'Khóa Pro phải có giá lớn hơn 0.';
-  if (discountPrice !== null && (!Number.isInteger(discountPrice) || discountPrice <= 0 || discountPrice >= price || discountPrice > 100_000_000)) {
-    errors.discountPrice = 'Giá ưu đãi phải lớn hơn 0 và thấp hơn giá gốc.';
-  }
   if (selectedFile.value) {
     if (!ALLOWED_IMAGE_MIMES.has(selectedFile.value.type)) {
       errors.thumbnail = 'Chỉ chấp nhận file ảnh định dạng JPG, PNG hoặc WEBP.';
@@ -257,8 +257,7 @@ function validate(): boolean {
 
 function save() {
   if (props.readOnly || props.busy || !validate()) return;
-  const price = Number(form.price);
-  const discountPrice = form.discountPrice.trim() ? Number(form.discountPrice) : null;
+  const price = Number(String(form.price ?? '').trim());
   if (
     props.course?.status === 'DRAFT' &&
     props.course.type === 'PRO' &&
@@ -279,8 +278,8 @@ function save() {
     targetAudience: form.targetAudience.trim(),
     learningOutcomes: cleanedOutcomes,
     requirements: form.requirements.trim(),
-    price,
-    discountPrice: form.type === 'FREE' ? null : discountPrice,
+    price: form.type === 'FREE' ? 0 : price,
+    discountPrice: null,
     thumbnail: form.thumbnail.trim() || null,
   };
   if (props.isAdmin) payload.instructorId = form.instructorId;
@@ -378,11 +377,6 @@ function save() {
           <span>Giá (VNĐ)</span>
           <input v-model="form.price" class="manage-input tabular-nums" type="number" min="0" max="100000000" step="1" :disabled="readOnly || form.type === 'FREE'" />
           <span v-if="errors.price" class="manage-field-error">{{ errors.price }}</span>
-        </label>
-        <label v-if="form.type === 'PRO'" class="manage-field">
-          <span>Giá ưu đãi (tùy chọn)</span>
-          <input v-model="form.discountPrice" class="manage-input tabular-nums" type="number" min="1" max="100000000" step="1" :disabled="readOnly" />
-          <span v-if="errors.discountPrice" class="manage-field-error">{{ errors.discountPrice }}</span>
         </label>
 
         <div class="manage-field sm:col-span-2">
