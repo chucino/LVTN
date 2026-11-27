@@ -1,0 +1,822 @@
+{
+  "total_tests": 66,
+  "passed_tests": 66,
+  "failed_tests": 0,
+  "pending_tests": 0,
+  "todo_tests": 0,
+  "success": true,
+  "file_count": 8,
+  "start_epoch_ms": 1795335212596,
+  "end_epoch_ms": 1795335223130.5745,
+  "coverage_totals": {
+    "lines": {
+      "total": 3493,
+      "covered": 1547,
+      "skipped": 0,
+      "pct": 44.28
+    },
+    "statements": {
+      "total": 3581,
+      "covered": 1565,
+      "skipped": 0,
+      "pct": 43.7
+    },
+    "functions": {
+      "total": 554,
+      "covered": 214,
+      "skipped": 0,
+      "pct": 38.62
+    },
+    "branches": {
+      "total": 2365,
+      "covered": 1012,
+      "skipped": 0,
+      "pct": 42.79
+    },
+    "branchesTrue": {
+      "total": 0,
+      "covered": 0,
+      "skipped": 0,
+      "pct": 100
+    }
+  },
+  "coverage_file_count": 93,
+  "files": [
+    {
+      "file": "auth.service.spec.ts",
+      "count": 6,
+      "status": "passed",
+      "cases": [
+        {
+          "title": "nên throw BadRequestException nếu password và confirmPassword không khớp khi đăng ký",
+          "status": "passed",
+          "duration_ms": 3.700300000000425,
+          "full_name": "AuthService (Unit Tests) nên throw BadRequestException nếu password và confirmPassword không khớp khi đăng ký"
+        },
+        {
+          "title": "nên throw ConflictException nếu email đã tồn tại và đã được kích hoạt (status ACTIVE)",
+          "status": "passed",
+          "duration_ms": 0.6319999999996071,
+          "full_name": "AuthService (Unit Tests) nên throw ConflictException nếu email đã tồn tại và đã được kích hoạt (status ACTIVE)"
+        },
+        {
+          "title": "nên tạo người dùng pending, tạo OTP và gửi email khi đăng ký hợp lệ",
+          "status": "passed",
+          "duration_ms": 133.07959999999912,
+          "full_name": "AuthService (Unit Tests) nên tạo người dùng pending, tạo OTP và gửi email khi đăng ký hợp lệ"
+        },
+        {
+          "title": "nên throw BadRequestException nếu Admin tự hạ quyền ADMIN của chính mình",
+          "status": "passed",
+          "duration_ms": 0.7667999999994208,
+          "full_name": "AuthService (Unit Tests) nên throw BadRequestException nếu Admin tự hạ quyền ADMIN của chính mình"
+        },
+        {
+          "title": "nên throw NotFoundException nếu không tìm thấy user cần phân quyền",
+          "status": "passed",
+          "duration_ms": 0.5864000000001397,
+          "full_name": "AuthService (Unit Tests) nên throw NotFoundException nếu không tìm thấy user cần phân quyền"
+        },
+        {
+          "title": "nên phân quyền thành công và thu hồi refresh token của user được phân quyền",
+          "status": "passed",
+          "duration_ms": 2.574399999999514,
+          "full_name": "AuthService (Unit Tests) nên phân quyền thành công và thu hồi refresh token của user được phân quyền"
+        }
+      ]
+    },
+    {
+      "file": "course-manage.service.spec.ts",
+      "count": 15,
+      "status": "passed",
+      "cases": [
+        {
+          "title": "blocks instructors from accessing another instructor course in the service",
+          "status": "passed",
+          "duration_ms": 8.835399999999936,
+          "full_name": "CourseManageService blocks instructors from accessing another instructor course in the service"
+        },
+        {
+          "title": "denies access to unsupported roles in the service, not only in the route guard",
+          "status": "passed",
+          "duration_ms": 1.3739999999997963,
+          "full_name": "CourseManageService denies access to unsupported roles in the service, not only in the route guard"
+        },
+        {
+          "title": "filters instructor lists by JWT identity and paginates in MongoDB",
+          "status": "passed",
+          "duration_ms": 3.635599999999613,
+          "full_name": "CourseManageService filters instructor lists by JWT identity and paginates in MongoDB"
+        },
+        {
+          "title": "computes permissions from both course state and ownership",
+          "status": "passed",
+          "duration_ms": 1.066899999999805,
+          "full_name": "CourseManageService computes permissions from both course state and ownership"
+        },
+        {
+          "title": "reports readiness blockers and non-blocking PRO lesson warnings (allowing lessons without video)",
+          "status": "passed",
+          "duration_ms": 2.8744000000006054,
+          "full_name": "CourseManageService reports readiness blockers and non-blocking PRO lesson warnings (allowing lessons without video)"
+        },
+        {
+          "title": "allows valid DRAFT to PENDING transition with a conditional status update",
+          "status": "passed",
+          "duration_ms": 2.3888000000006286,
+          "full_name": "CourseManageService allows valid DRAFT to PENDING transition with a conditional status update"
+        },
+        {
+          "title": "supports withdraw, reject, approve, hide, and re-approve transitions",
+          "status": "passed",
+          "duration_ms": 2.0817000000006374,
+          "full_name": "CourseManageService supports withdraw, reject, approve, hide, and re-approve transitions"
+        },
+        {
+          "title": "rejects invalid status transitions with 409",
+          "status": "passed",
+          "duration_ms": 0.9686999999994441,
+          "full_name": "CourseManageService rejects invalid status transitions with 409"
+        },
+        {
+          "title": "blocks instructor edits while the course is PENDING",
+          "status": "passed",
+          "duration_ms": 0.9981000000007043,
+          "full_name": "CourseManageService blocks instructor edits while the course is PENDING"
+        },
+        {
+          "title": "clears PRO-only lesson fields and resets pricing when changing DRAFT to FREE",
+          "status": "passed",
+          "duration_ms": 1.4720999999990454,
+          "full_name": "CourseManageService clears PRO-only lesson fields and resets pricing when changing DRAFT to FREE"
+        },
+        {
+          "title": "rejects reorder requests that do not contain exactly the existing chapter IDs",
+          "status": "passed",
+          "duration_ms": 0.9174000000002707,
+          "full_name": "CourseManageService rejects reorder requests that do not contain exactly the existing chapter IDs"
+        },
+        {
+          "title": "reorders chapters and assigns continuous order values",
+          "status": "passed",
+          "duration_ms": 1.368800000000192,
+          "full_name": "CourseManageService reorders chapters and assigns continuous order values"
+        },
+        {
+          "title": "rejects quiz answers outside the zero-based options range",
+          "status": "passed",
+          "duration_ms": 1.0362999999997555,
+          "full_name": "CourseManageService rejects quiz answers outside the zero-based options range"
+        },
+        {
+          "title": "rejects null for non-nullable patch fields while allowing nullable lesson notes and optional video/text/files",
+          "status": "passed",
+          "duration_ms": 14.554600000001301,
+          "full_name": "CourseManageService rejects null for non-nullable patch fields while allowing nullable lesson notes and optional video/text/files"
+        },
+        {
+          "title": "allows creating and approving courses with empty optional fields or short strings without minimum length limits",
+          "status": "passed",
+          "duration_ms": 2.4495000000006257,
+          "full_name": "CourseManageService allows creating and approving courses with empty optional fields or short strings without minimum length limits"
+        }
+      ]
+    },
+    {
+      "file": "courses.service.spec.ts",
+      "count": 6,
+      "status": "passed",
+      "cases": [
+        {
+          "title": "filters approved courses and applies effective-price sort and database pagination",
+          "status": "passed",
+          "duration_ms": 12.070400000000518,
+          "full_name": "CoursesService filters approved courses and applies effective-price sort and database pagination"
+        },
+        {
+          "title": "rejects an inverted price range",
+          "status": "passed",
+          "duration_ms": 3.429599999999482,
+          "full_name": "CoursesService rejects an inverted price range"
+        },
+        {
+          "title": "orders featured courses by rating and recency and limits results",
+          "status": "passed",
+          "duration_ms": 1.5398000000004686,
+          "full_name": "CoursesService orders featured courses by rating and recency and limits results"
+        },
+        {
+          "title": "validates page limits and rejects a featured limit above twelve",
+          "status": "passed",
+          "duration_ms": 5.524600000000646,
+          "full_name": "CoursesService validates page limits and rejects a featured limit above twelve"
+        },
+        {
+          "title": "returns only approved public detail fields and excludes lesson secrets and private instructor data",
+          "status": "passed",
+          "duration_ms": 3.2498999999988882,
+          "full_name": "CoursesService returns only approved public detail fields and excludes lesson secrets and private instructor data"
+        },
+        {
+          "title": "returns 404 for malformed or non-approved course ids",
+          "status": "passed",
+          "duration_ms": 1.1293000000005122,
+          "full_name": "CoursesService returns 404 for malformed or non-approved course ids"
+        }
+      ]
+    },
+    {
+      "file": "enrollments.service.spec.ts",
+      "count": 5,
+      "status": "passed",
+      "cases": [
+        {
+          "title": "cho phép học viên đăng ký khóa học FREE ngay lập tức và chỉ mở bài đầu tiên",
+          "status": "passed",
+          "duration_ms": 13.9375,
+          "full_name": "EnrollmentsService cho phép học viên đăng ký khóa học FREE ngay lập tức và chỉ mở bài đầu tiên"
+        },
+        {
+          "title": "chặn đăng ký trực tiếp khóa học PRO khi chưa qua luồng thanh toán",
+          "status": "passed",
+          "duration_ms": 1.0591000000003987,
+          "full_name": "EnrollmentsService chặn đăng ký trực tiếp khóa học PRO khi chưa qua luồng thanh toán"
+        },
+        {
+          "title": "kiểm soát học tuần tự, làm trắc nghiệm 1 câu (100%) & nhiều câu (>=70%), và cấp chứng chỉ khi hoàn thành",
+          "status": "passed",
+          "duration_ms": 6.737199999999575,
+          "full_name": "EnrollmentsService kiểm soát học tuần tự, làm trắc nghiệm 1 câu (100%) & nhiều câu (>=70%), và cấp chứng chỉ khi hoàn thành"
+        },
+        {
+          "title": "Quản lý học viên: Giảng viên chỉ xem được khóa của mình, Admin xem được tất cả",
+          "status": "passed",
+          "duration_ms": 3.20679999999993,
+          "full_name": "EnrollmentsService Quản lý học viên: Giảng viên chỉ xem được khóa của mình, Admin xem được tất cả"
+        },
+        {
+          "title": "Chế độ Xem như học viên (Preview Mode): Giảng viên và Admin mở khóa toàn bộ bài giảng và làm thử trắc nghiệm không lưu DB",
+          "status": "passed",
+          "duration_ms": 3.050699999999779,
+          "full_name": "EnrollmentsService Chế độ Xem như học viên (Preview Mode): Giảng viên và Admin mở khóa toàn bộ bài giảng và làm thử trắc nghiệm không lưu DB"
+        }
+      ]
+    },
+    {
+      "file": "questions.service.spec.ts",
+      "count": 20,
+      "status": "passed",
+      "cases": [
+        {
+          "title": "maps accumulated violations to the 5 penalty tiers",
+          "status": "passed",
+          "duration_ms": 10.956099999999424,
+          "full_name": "computePenalty maps accumulated violations to the 5 penalty tiers"
+        },
+        {
+          "title": "keeps a hidden root comment as a placeholder when it still has visible replies",
+          "status": "passed",
+          "duration_ms": 20.04820000000018,
+          "full_name": "QuestionsService listLessonComments keeps a hidden root comment as a placeholder when it still has visible replies"
+        },
+        {
+          "title": "fully hides a hidden root comment that has no visible replies",
+          "status": "passed",
+          "duration_ms": 5.2552999999998065,
+          "full_name": "QuestionsService listLessonComments fully hides a hidden root comment that has no visible replies"
+        },
+        {
+          "title": "returns myCommentBannedUntil while the viewer is banned",
+          "status": "passed",
+          "duration_ms": 1.441200000000208,
+          "full_name": "QuestionsService listLessonComments returns myCommentBannedUntil while the viewer is banned"
+        },
+        {
+          "title": "forbids commenting when lesson is still LOCKED for student",
+          "status": "passed",
+          "duration_ms": 3.6314000000002125,
+          "full_name": "QuestionsService createLessonComment forbids commenting when lesson is still LOCKED for student"
+        },
+        {
+          "title": "blocks commenting while the account is banned from commenting",
+          "status": "passed",
+          "duration_ms": 8.38590000000022,
+          "full_name": "QuestionsService createLessonComment blocks commenting while the account is banned from commenting"
+        },
+        {
+          "title": "toggles LIKE reaction on and off",
+          "status": "passed",
+          "duration_ms": 2.1662999999998647,
+          "full_name": "QuestionsService toggles LIKE reaction on and off"
+        },
+        {
+          "title": "creates an ESCALATED report when the target is the course instructor",
+          "status": "passed",
+          "duration_ms": 6.602499999999964,
+          "full_name": "QuestionsService reportComment creates an ESCALATED report when the target is the course instructor"
+        },
+        {
+          "title": "creates a PENDING report when the target is a student",
+          "status": "passed",
+          "duration_ms": 2.1427999999996246,
+          "full_name": "QuestionsService reportComment creates a PENDING report when the target is a student"
+        },
+        {
+          "title": "instructor deletes (soft hides) a student comment, adds +1 violation once and resolves all duplicate reports",
+          "status": "passed",
+          "duration_ms": 3.8463000000001557,
+          "full_name": "QuestionsService resolveReport instructor deletes (soft hides) a student comment, adds +1 violation once and resolves all duplicate reports"
+        },
+        {
+          "title": "does not add another violation when the comment was already recorded",
+          "status": "passed",
+          "duration_ms": 2.8742999999994936,
+          "full_name": "QuestionsService resolveReport does not add another violation when the comment was already recorded"
+        },
+        {
+          "title": "syncs DISMISSED status to every duplicate report of the same comment",
+          "status": "passed",
+          "duration_ms": 2.943500000000313,
+          "full_name": "QuestionsService resolveReport syncs DISMISSED status to every duplicate report of the same comment"
+        },
+        {
+          "title": "escalates all duplicate PENDING reports to ESCALATED without adding a violation",
+          "status": "passed",
+          "duration_ms": 2.7399999999997817,
+          "full_name": "QuestionsService resolveReport escalates all duplicate PENDING reports to ESCALATED without adding a violation"
+        },
+        {
+          "title": "forbids instructor from applying penalties or touching ESCALATED reports",
+          "status": "passed",
+          "duration_ms": 3.2613000000001193,
+          "full_name": "QuestionsService resolveReport forbids instructor from applying penalties or touching ESCALATED reports"
+        },
+        {
+          "title": "rejects resolving an already processed report",
+          "status": "passed",
+          "duration_ms": 1.9921999999996842,
+          "full_name": "QuestionsService resolveReport rejects resolving an already processed report"
+        },
+        {
+          "title": "admin applies a 24h comment ban at the 6th violation, stacking on the existing ban",
+          "status": "passed",
+          "duration_ms": 2.9693999999999505,
+          "full_name": "QuestionsService resolveReport admin applies a 24h comment ban at the 6th violation, stacking on the existing ban"
+        },
+        {
+          "title": "admin locks the account immediately for a severe violation",
+          "status": "passed",
+          "duration_ms": 1.9506000000001222,
+          "full_name": "QuestionsService resolveReport admin locks the account immediately for a severe violation"
+        },
+        {
+          "title": "forbids admin from escalating a report",
+          "status": "passed",
+          "duration_ms": 1.7268999999996595,
+          "full_name": "QuestionsService resolveReport forbids admin from escalating a report"
+        },
+        {
+          "title": "marks the assigned course instructor with isCourseAuthor = true and other instructors with isCourseAuthor = false",
+          "status": "passed",
+          "duration_ms": 2.8332000000000335,
+          "full_name": "QuestionsService instructor preview & author badge differentiation marks the assigned course instructor with isCourseAuthor = true and other instructors with isCourseAuthor = false"
+        },
+        {
+          "title": "forbids another instructor from accessing lesson Q&A when the course is not APPROVED",
+          "status": "passed",
+          "duration_ms": 1.6495999999997366,
+          "full_name": "QuestionsService instructor preview & author badge differentiation forbids another instructor from accessing lesson Q&A when the course is not APPROVED"
+        }
+      ]
+    },
+    {
+      "file": "reviews.service.spec.ts",
+      "count": 3,
+      "status": "passed",
+      "cases": [
+        {
+          "title": "chặn học viên chưa hoàn thành 100% khóa học gửi đánh giá",
+          "status": "passed",
+          "duration_ms": 11.690800000000309,
+          "full_name": "ReviewsService & Moderation Integration chặn học viên chưa hoàn thành 100% khóa học gửi đánh giá"
+        },
+        {
+          "title": "cho phép học viên hoàn thành 100% gửi đánh giá, giữ quyền sửa kể cả khi khóa học thêm bài mới và ưu tiên đánh giá có chữ lên đầu",
+          "status": "passed",
+          "duration_ms": 9.47649999999976,
+          "full_name": "ReviewsService & Moderation Integration cho phép học viên hoàn thành 100% gửi đánh giá, giữ quyền sửa kể cả khi khóa học thêm bài mới và ưu tiên đánh giá có chữ lên đầu"
+        },
+        {
+          "title": "chặn viết nhận xét chữ khi đang bị cấm bình luận (#035), và khi xóa mềm đánh giá vi phạm thì tự động trừ khỏi điểm trung bình khóa học",
+          "status": "passed",
+          "duration_ms": 13.28479999999945,
+          "full_name": "ReviewsService & Moderation Integration chặn viết nhận xét chữ khi đang bị cấm bình luận (#035), và khi xóa mềm đánh giá vi phạm thì tự động trừ khỏi điểm trung bình khóa học"
+        }
+      ]
+    },
+    {
+      "file": "orders.service.spec.ts",
+      "count": 5,
+      "status": "passed",
+      "cases": [
+        {
+          "title": "tính chữ ký tạo link thanh toán và xác thực chữ ký Webhook payOS chuẩn HMAC-SHA256",
+          "status": "passed",
+          "duration_ms": 10.06919999999991,
+          "full_name": "PayosService & OrdersService tính chữ ký tạo link thanh toán và xác thực chữ ký Webhook payOS chuẩn HMAC-SHA256"
+        },
+        {
+          "title": "tính toán đúng giá khóa học Pro từ DB và áp dụng mã giảm giá NEXTCODE10 / TEST2K",
+          "status": "passed",
+          "duration_ms": 21.744300000000294,
+          "full_name": "PayosService & OrdersService tính toán đúng giá khóa học Pro từ DB và áp dụng mã giảm giá NEXTCODE10 / TEST2K"
+        },
+        {
+          "title": "chặn tạo đơn hàng nếu học viên đã sở hữu khóa học",
+          "status": "passed",
+          "duration_ms": 2.826100000000224,
+          "full_name": "PayosService & OrdersService chặn tạo đơn hàng nếu học viên đã sở hữu khóa học"
+        },
+        {
+          "title": "xử lý Webhook payOS thành công, cập nhật trạng thái COMPLETED và mở khóa học Pro",
+          "status": "passed",
+          "duration_ms": 4.028999999998632,
+          "full_name": "PayosService & OrdersService xử lý Webhook payOS thành công, cập nhật trạng thái COMPLETED và mở khóa học Pro"
+        },
+        {
+          "title": "từ chối giả lập thanh toán khi PAYMENT_SIMULATION_ENABLED=false hoặc NODE_ENV=production",
+          "status": "passed",
+          "duration_ms": 3.2980999999999767,
+          "full_name": "PayosService & OrdersService từ chối giả lập thanh toán khi PAYMENT_SIMULATION_ENABLED=false hoặc NODE_ENV=production"
+        }
+      ]
+    },
+    {
+      "file": "uploads.service.spec.ts",
+      "count": 6,
+      "status": "passed",
+      "cases": [
+        {
+          "title": "detects JPEG, PNG and WEBP magic bytes accurately",
+          "status": "passed",
+          "duration_ms": 4.377400000000307,
+          "full_name": "UploadsService detects JPEG, PNG and WEBP magic bytes accurately"
+        },
+        {
+          "title": "detects MP4 and WEBM video magic bytes accurately",
+          "status": "passed",
+          "duration_ms": 0.9608000000007451,
+          "full_name": "UploadsService detects MP4 and WEBM video magic bytes accurately"
+        },
+        {
+          "title": "accepts a valid PNG image and returns its /public/images/courses URL, then deletes it safely",
+          "status": "passed",
+          "duration_ms": 28.068099999999504,
+          "full_name": "UploadsService accepts a valid PNG image and returns its /public/images/courses URL, then deletes it safely"
+        },
+        {
+          "title": "accepts a valid MP4 video in public/videos and deletes it safely",
+          "status": "passed",
+          "duration_ms": 17.42990000000009,
+          "full_name": "UploadsService accepts a valid MP4 video in public/videos and deletes it safely"
+        },
+        {
+          "title": "rejects and deletes a spoofed file whose magic bytes are not an image or video",
+          "status": "passed",
+          "duration_ms": 29.341199999999844,
+          "full_name": "UploadsService rejects and deletes a spoofed file whose magic bytes are not an image or video"
+        },
+        {
+          "title": "ignores external URLs or path traversal attempts in deleteLocalFile",
+          "status": "passed",
+          "duration_ms": 1.2860000000000582,
+          "full_name": "UploadsService ignores external URLs or path traversal attempts in deleteLocalFile"
+        }
+      ]
+    }
+  ],
+  "service_coverage": {
+    "auth.service.ts": {
+      "lines": {
+        "total": 186,
+        "covered": 38,
+        "skipped": 0,
+        "pct": 20.43
+      },
+      "functions": {
+        "total": 17,
+        "covered": 5,
+        "skipped": 0,
+        "pct": 29.41
+      },
+      "statements": {
+        "total": 186,
+        "covered": 38,
+        "skipped": 0,
+        "pct": 20.43
+      },
+      "branches": {
+        "total": 89,
+        "covered": 20,
+        "skipped": 0,
+        "pct": 22.47
+      }
+    },
+    "certificates.service.ts": {
+      "lines": {
+        "total": 35,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 5.71
+      },
+      "functions": {
+        "total": 8,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 0
+      },
+      "statements": {
+        "total": 38,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 5.26
+      },
+      "branches": {
+        "total": 17,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 0
+      }
+    },
+    "course-manage.service.ts": {
+      "lines": {
+        "total": 351,
+        "covered": 193,
+        "skipped": 0,
+        "pct": 54.98
+      },
+      "functions": {
+        "total": 68,
+        "covered": 36,
+        "skipped": 0,
+        "pct": 52.94
+      },
+      "statements": {
+        "total": 377,
+        "covered": 199,
+        "skipped": 0,
+        "pct": 52.78
+      },
+      "branches": {
+        "total": 338,
+        "covered": 185,
+        "skipped": 0,
+        "pct": 54.73
+      }
+    },
+    "courses.service.ts": {
+      "lines": {
+        "total": 47,
+        "covered": 40,
+        "skipped": 0,
+        "pct": 85.1
+      },
+      "functions": {
+        "total": 9,
+        "covered": 6,
+        "skipped": 0,
+        "pct": 66.66
+      },
+      "statements": {
+        "total": 52,
+        "covered": 44,
+        "skipped": 0,
+        "pct": 84.61
+      },
+      "branches": {
+        "total": 37,
+        "covered": 22,
+        "skipped": 0,
+        "pct": 59.45
+      }
+    },
+    "enrollments.service.ts": {
+      "lines": {
+        "total": 384,
+        "covered": 297,
+        "skipped": 0,
+        "pct": 77.34
+      },
+      "functions": {
+        "total": 38,
+        "covered": 30,
+        "skipped": 0,
+        "pct": 78.94
+      },
+      "statements": {
+        "total": 388,
+        "covered": 300,
+        "skipped": 0,
+        "pct": 77.31
+      },
+      "branches": {
+        "total": 391,
+        "covered": 218,
+        "skipped": 0,
+        "pct": 55.75
+      }
+    },
+    "mail.service.ts": {
+      "lines": {
+        "total": 26,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 7.69
+      },
+      "functions": {
+        "total": 3,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 0
+      },
+      "statements": {
+        "total": 26,
+        "covered": 2,
+        "skipped": 0,
+        "pct": 7.69
+      },
+      "branches": {
+        "total": 2,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 50
+      }
+    },
+    "orders.service.ts": {
+      "lines": {
+        "total": 292,
+        "covered": 82,
+        "skipped": 0,
+        "pct": 28.08
+      },
+      "functions": {
+        "total": 37,
+        "covered": 13,
+        "skipped": 0,
+        "pct": 35.13
+      },
+      "statements": {
+        "total": 302,
+        "covered": 84,
+        "skipped": 0,
+        "pct": 27.81
+      },
+      "branches": {
+        "total": 219,
+        "covered": 47,
+        "skipped": 0,
+        "pct": 21.46
+      }
+    },
+    "payos.service.ts": {
+      "lines": {
+        "total": 76,
+        "covered": 30,
+        "skipped": 0,
+        "pct": 39.47
+      },
+      "functions": {
+        "total": 18,
+        "covered": 9,
+        "skipped": 0,
+        "pct": 50
+      },
+      "statements": {
+        "total": 81,
+        "covered": 30,
+        "skipped": 0,
+        "pct": 37.03
+      },
+      "branches": {
+        "total": 64,
+        "covered": 18,
+        "skipped": 0,
+        "pct": 28.12
+      }
+    },
+    "questions.service.ts": {
+      "lines": {
+        "total": 369,
+        "covered": 219,
+        "skipped": 0,
+        "pct": 59.34
+      },
+      "functions": {
+        "total": 54,
+        "covered": 28,
+        "skipped": 0,
+        "pct": 51.85
+      },
+      "statements": {
+        "total": 376,
+        "covered": 222,
+        "skipped": 0,
+        "pct": 59.04
+      },
+      "branches": {
+        "total": 338,
+        "covered": 169,
+        "skipped": 0,
+        "pct": 50
+      }
+    },
+    "reviews.service.ts": {
+      "lines": {
+        "total": 117,
+        "covered": 88,
+        "skipped": 0,
+        "pct": 75.21
+      },
+      "functions": {
+        "total": 14,
+        "covered": 10,
+        "skipped": 0,
+        "pct": 71.42
+      },
+      "statements": {
+        "total": 118,
+        "covered": 88,
+        "skipped": 0,
+        "pct": 74.57
+      },
+      "branches": {
+        "total": 116,
+        "covered": 61,
+        "skipped": 0,
+        "pct": 52.58
+      }
+    },
+    "uploads.service.ts": {
+      "lines": {
+        "total": 187,
+        "covered": 64,
+        "skipped": 0,
+        "pct": 34.22
+      },
+      "functions": {
+        "total": 28,
+        "covered": 11,
+        "skipped": 0,
+        "pct": 39.28
+      },
+      "statements": {
+        "total": 189,
+        "covered": 64,
+        "skipped": 0,
+        "pct": 33.86
+      },
+      "branches": {
+        "total": 155,
+        "covered": 69,
+        "skipped": 0,
+        "pct": 44.51
+      }
+    },
+    "users.service.ts": {
+      "lines": {
+        "total": 130,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 0.76
+      },
+      "functions": {
+        "total": 26,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 0
+      },
+      "statements": {
+        "total": 131,
+        "covered": 1,
+        "skipped": 0,
+        "pct": 0.76
+      },
+      "branches": {
+        "total": 133,
+        "covered": 0,
+        "skipped": 0,
+        "pct": 0
+      }
+    }
+  },
+  "source_hashes": {
+    "src/modules/auth/auth.service.spec.ts": "c9fa06ffe454de18401c3406a22df9d1b1ed7a6c03fee2188086044198fc9b61",
+    "src/modules/courses/course-manage.service.spec.ts": "f7d2e8f7c602c7d255fdd87310ddbc62474b5103c087d2ff6454c5323105122d",
+    "src/modules/courses/courses.service.spec.ts": "685dc7ec56bf67065fd2f941cbce73d78bb9d8fa89272ba21ad321f81929eace",
+    "src/modules/enrollments/enrollments.service.spec.ts": "f688323532363f037b893be542fd420b296395e33063783f0066c9742b00cce5",
+    "src/modules/orders/orders.service.spec.ts": "4feba120bbbdfd1bfb22fa2fed3f9323f314d82183930ef513dec5efa02690c6",
+    "src/modules/questions/questions.service.spec.ts": "ca173d64abaae9bb90c61b9448ec65503cea6ef9d7f5b52e5df3b335af861b26",
+    "src/modules/reviews/reviews.service.spec.ts": "c3e275ec548d02d3398d198396bf860b5b811b737d077c0d0b2dab81f2b313a7",
+    "src/modules/uploads/uploads.service.spec.ts": "ed74668fc17934bdefd3f750af5188fdc498f632edd565993f5a8912bcf2aa7d"
+  }
+}

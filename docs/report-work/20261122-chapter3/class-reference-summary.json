@@ -1,0 +1,1130 @@
+[
+  {
+    "name": "User",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "fullName",
+        "String"
+      ],
+      [
+        "email",
+        "String"
+      ],
+      [
+        "passwordHash",
+        "String"
+      ],
+      [
+        "dateOfBirth",
+        "Date [0..1] | null"
+      ],
+      [
+        "occupation",
+        "String [0..1] | null"
+      ],
+      [
+        "role",
+        "Role"
+      ],
+      [
+        "avatar",
+        "String [0..1] | null"
+      ],
+      [
+        "status",
+        "UserStatus"
+      ],
+      [
+        "interestedCategories",
+        "List<Mixed>"
+      ],
+      [
+        "violationCount",
+        "int"
+      ],
+      [
+        "commentBannedUntil",
+        "Date | null [0..1]"
+      ],
+      [
+        "violationHistory",
+        "List<ViolationHistoryItem>"
+      ],
+      [
+        "createdAt",
+        "Date"
+      ],
+      [
+        "updatedAt",
+        "Date"
+      ],
+      [
+        "isActive",
+        "boolean {derived, readOnly}"
+      ]
+    ]
+  },
+  {
+    "name": "ViolationHistoryItem",
+    "fields": [
+      [
+        "reportId",
+        "ObjectId"
+      ],
+      [
+        "commentId",
+        "ObjectId"
+      ],
+      [
+        "courseId",
+        "ObjectId"
+      ],
+      [
+        "reason",
+        "String"
+      ],
+      [
+        "actionTaken",
+        "String"
+      ],
+      [
+        "penaltySummary",
+        "String"
+      ],
+      [
+        "resolvedBy",
+        "ObjectId"
+      ],
+      [
+        "resolvedAt",
+        "Date"
+      ]
+    ]
+  },
+  {
+    "name": "Otp",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "email",
+        "String"
+      ],
+      [
+        "codeHash",
+        "String"
+      ],
+      [
+        "purpose",
+        "OtpPurpose"
+      ],
+      [
+        "expiresAt",
+        "Date"
+      ],
+      [
+        "failedAttempts",
+        "int"
+      ],
+      [
+        "lastSentAt",
+        "Date"
+      ],
+      [
+        "isUsed",
+        "boolean"
+      ],
+      [
+        "createdAt",
+        "Date"
+      ],
+      [
+        "updatedAt",
+        "Date"
+      ]
+    ]
+  },
+  {
+    "name": "RefreshToken",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "userId",
+        "ObjectId"
+      ],
+      [
+        "tokenHash",
+        "String"
+      ],
+      [
+        "expiresAt",
+        "Date"
+      ],
+      [
+        "isRevoked",
+        "boolean"
+      ],
+      [
+        "createdAt",
+        "Date"
+      ],
+      [
+        "updatedAt",
+        "Date"
+      ]
+    ]
+  },
+  {
+    "name": "Category",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "name",
+        "String"
+      ],
+      [
+        "createdAt",
+        "Date"
+      ],
+      [
+        "updatedAt",
+        "Date"
+      ]
+    ]
+  },
+  {
+    "name": "Course",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "title",
+        "String"
+      ],
+      [
+        "description",
+        "String"
+      ],
+      [
+        "type",
+        "CourseType"
+      ],
+      [
+        "level",
+        "CourseLevel"
+      ],
+      [
+        "targetAudience",
+        "String"
+      ],
+      [
+        "learningOutcomes",
+        "List<String>"
+      ],
+      [
+        "requirements",
+        "String"
+      ],
+      [
+        "price",
+        "double"
+      ],
+      [
+        "discountPrice",
+        "double | null"
+      ],
+      [
+        "status",
+        "CourseStatus"
+      ],
+      [
+        "instructorId",
+        "ObjectId"
+      ],
+      [
+        "categoryId",
+        "ObjectId | null"
+      ],
+      [
+        "avgRating",
+        "double"
+      ],
+      [
+        "totalChapters",
+        "int"
+      ],
+      [
+        "totalLessons",
+        "int"
+      ],
+      [
+        "totalDuration",
+        "int"
+      ],
+      [
+        "thumbnail",
+        "String | null"
+      ],
+      [
+        "rejectReason",
+        "String | null"
+      ],
+      [
+        "chapters",
+        "List<Chapter>"
+      ],
+      [
+        "createdAt",
+        "Date"
+      ],
+      [
+        "updatedAt",
+        "Date"
+      ]
+    ]
+  },
+  {
+    "name": "Chapter",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "title",
+        "String"
+      ],
+      [
+        "order",
+        "int"
+      ],
+      [
+        "lessons",
+        "List<Lesson>"
+      ]
+    ]
+  },
+  {
+    "name": "Lesson",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "title",
+        "String"
+      ],
+      [
+        "order",
+        "int"
+      ],
+      [
+        "videoUrl",
+        "String"
+      ],
+      [
+        "duration",
+        "int"
+      ],
+      [
+        "content",
+        "String | null [0..1]"
+      ],
+      [
+        "fileUrl",
+        "String | null [0..1]"
+      ],
+      [
+        "fileName",
+        "String | null [0..1]"
+      ],
+      [
+        "note",
+        "String | null"
+      ],
+      [
+        "summary",
+        "String | null"
+      ],
+      [
+        "quizQuestions",
+        "List<QuizQuestion>"
+      ],
+      [
+        "hasQuiz",
+        "boolean"
+      ]
+    ]
+  },
+  {
+    "name": "QuizQuestion",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "content",
+        "String"
+      ],
+      [
+        "options",
+        "List<String>"
+      ],
+      [
+        "correctOption",
+        "int"
+      ],
+      [
+        "explanation",
+        "String"
+      ]
+    ]
+  },
+  {
+    "name": "Enrollment",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "studentId",
+        "ObjectId"
+      ],
+      [
+        "courseId",
+        "ObjectId"
+      ],
+      [
+        "enrolledAt",
+        "Date"
+      ],
+      [
+        "progressPercent",
+        "double"
+      ],
+      [
+        "status",
+        "EnrollmentStatus"
+      ],
+      [
+        "completedAt",
+        "Date | null"
+      ],
+      [
+        "lastLessonId",
+        "ObjectId | null"
+      ],
+      [
+        "createdAt",
+        "Date"
+      ],
+      [
+        "updatedAt",
+        "Date"
+      ]
+    ]
+  },
+  {
+    "name": "LessonProgress",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "enrollmentId",
+        "ObjectId"
+      ],
+      [
+        "lessonId",
+        "ObjectId"
+      ],
+      [
+        "status",
+        "LessonStatus"
+      ],
+      [
+        "lastPositionSec",
+        "int"
+      ],
+      [
+        "watchedSeconds",
+        "int"
+      ],
+      [
+        "watchedFully",
+        "boolean"
+      ],
+      [
+        "quizPassed",
+        "boolean"
+      ],
+      [
+        "createdAt",
+        "Date"
+      ],
+      [
+        "updatedAt",
+        "Date"
+      ]
+    ]
+  },
+  {
+    "name": "QuizAttempt",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "studentId",
+        "ObjectId"
+      ],
+      [
+        "questionId",
+        "ObjectId"
+      ],
+      [
+        "selectedOption",
+        "int"
+      ],
+      [
+        "isCorrect",
+        "boolean"
+      ],
+      [
+        "attemptedAt",
+        "Date"
+      ]
+    ]
+  },
+  {
+    "name": "Order",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "orderCode",
+        "String"
+      ],
+      [
+        "payosOrderCode",
+        "number"
+      ],
+      [
+        "studentId",
+        "ObjectId"
+      ],
+      [
+        "courseId",
+        "ObjectId"
+      ],
+      [
+        "originalPrice",
+        "double"
+      ],
+      [
+        "discountPrice",
+        "double | null"
+      ],
+      [
+        "couponCode",
+        "String | null"
+      ],
+      [
+        "discountAmount",
+        "double"
+      ],
+      [
+        "finalAmount",
+        "double"
+      ],
+      [
+        "status",
+        "OrderStatus"
+      ],
+      [
+        "paymentMethod",
+        "PaymentMethod"
+      ],
+      [
+        "paymentLinkId",
+        "String | null"
+      ],
+      [
+        "checkoutUrl",
+        "String | null"
+      ],
+      [
+        "qrCode",
+        "String | null"
+      ],
+      [
+        "qrImageUrl",
+        "String | null"
+      ],
+      [
+        "bankBin",
+        "String | null"
+      ],
+      [
+        "bankName",
+        "String | null"
+      ],
+      [
+        "accountNumber",
+        "String | null"
+      ],
+      [
+        "accountName",
+        "String | null"
+      ],
+      [
+        "transferDescription",
+        "String | null"
+      ],
+      [
+        "transactionReference",
+        "String | null"
+      ],
+      [
+        "expiresAt",
+        "Date"
+      ],
+      [
+        "paidAt",
+        "Date | null"
+      ],
+      [
+        "cancelledAt",
+        "Date | null"
+      ],
+      [
+        "cancelReason",
+        "String | null"
+      ],
+      [
+        "createdAt",
+        "Date"
+      ],
+      [
+        "updatedAt",
+        "Date"
+      ]
+    ]
+  },
+  {
+    "name": "PaymentTransaction",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "orderId",
+        "ObjectId"
+      ],
+      [
+        "orderCode",
+        "String"
+      ],
+      [
+        "payosOrderCode",
+        "number"
+      ],
+      [
+        "studentId",
+        "ObjectId"
+      ],
+      [
+        "courseId",
+        "ObjectId"
+      ],
+      [
+        "amount",
+        "double"
+      ],
+      [
+        "reference",
+        "String"
+      ],
+      [
+        "provider",
+        "String"
+      ],
+      [
+        "status",
+        "String"
+      ],
+      [
+        "counterAccountBankId",
+        "String | null"
+      ],
+      [
+        "counterAccountName",
+        "String | null"
+      ],
+      [
+        "counterAccountNumber",
+        "String | null"
+      ],
+      [
+        "transactionDateTime",
+        "String | null"
+      ],
+      [
+        "rawPayload",
+        "Record<String, unknown>"
+      ],
+      [
+        "createdAt",
+        "Date"
+      ],
+      [
+        "updatedAt",
+        "Date"
+      ]
+    ]
+  },
+  {
+    "name": "BuiltinCouponRule",
+    "fields": [
+      [
+        "code",
+        "String"
+      ],
+      [
+        "title",
+        "String"
+      ],
+      [
+        "discountType",
+        "String"
+      ],
+      [
+        "discountValue",
+        "double"
+      ],
+      [
+        "maxDiscountAmount",
+        "double | null"
+      ],
+      [
+        "minOrderAmount",
+        "double"
+      ],
+      [
+        "devOnly",
+        "boolean [0..1]"
+      ],
+      [
+        "fixedFinalAmount",
+        "double [0..1]"
+      ]
+    ]
+  },
+  {
+    "name": "Certificate",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "certificateCode",
+        "String"
+      ],
+      [
+        "studentId",
+        "ObjectId"
+      ],
+      [
+        "courseId",
+        "ObjectId"
+      ],
+      [
+        "issuedAt",
+        "Date"
+      ],
+      [
+        "qrCode",
+        "String"
+      ],
+      [
+        "fileUrl",
+        "String | null"
+      ],
+      [
+        "status",
+        "CertificateStatus"
+      ],
+      [
+        "createdAt",
+        "Date"
+      ],
+      [
+        "updatedAt",
+        "Date"
+      ]
+    ]
+  },
+  {
+    "name": "LessonComment",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "courseId",
+        "ObjectId"
+      ],
+      [
+        "lessonId",
+        "ObjectId"
+      ],
+      [
+        "parentId",
+        "ObjectId | null"
+      ],
+      [
+        "replyToUser",
+        "CommentReplyToUser | null"
+      ],
+      [
+        "authorId",
+        "ObjectId"
+      ],
+      [
+        "content",
+        "String"
+      ],
+      [
+        "visibilityStatus",
+        "CommentVisibilityStatus"
+      ],
+      [
+        "moderationNote",
+        "String | null"
+      ],
+      [
+        "violationRecorded",
+        "boolean"
+      ],
+      [
+        "reactions",
+        "List<CommentReaction>"
+      ],
+      [
+        "reports",
+        "List<CommentReport>"
+      ],
+      [
+        "createdAt",
+        "Date"
+      ],
+      [
+        "updatedAt",
+        "Date"
+      ]
+    ]
+  },
+  {
+    "name": "CommentReplyToUser",
+    "fields": [
+      [
+        "userId",
+        "ObjectId"
+      ],
+      [
+        "fullName",
+        "String"
+      ]
+    ]
+  },
+  {
+    "name": "CommentReaction",
+    "fields": [
+      [
+        "userId",
+        "ObjectId"
+      ],
+      [
+        "type",
+        "CommentReactionType"
+      ]
+    ]
+  },
+  {
+    "name": "CommentReport",
+    "fields": [
+      [
+        "userId",
+        "ObjectId"
+      ],
+      [
+        "reason",
+        "String"
+      ],
+      [
+        "createdAt",
+        "Date"
+      ]
+    ]
+  },
+  {
+    "name": "CourseReview",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "courseId",
+        "ObjectId"
+      ],
+      [
+        "studentId",
+        "ObjectId"
+      ],
+      [
+        "rating",
+        "int"
+      ],
+      [
+        "comment",
+        "String"
+      ],
+      [
+        "hasComment",
+        "boolean"
+      ],
+      [
+        "visibilityStatus",
+        "CommentVisibilityStatus"
+      ],
+      [
+        "moderationNote",
+        "String | null"
+      ],
+      [
+        "violationRecorded",
+        "boolean"
+      ],
+      [
+        "reports",
+        "List<CommentReport>"
+      ],
+      [
+        "createdAt",
+        "Date"
+      ],
+      [
+        "updatedAt",
+        "Date"
+      ]
+    ]
+  },
+  {
+    "name": "Report",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "reporterId",
+        "ObjectId"
+      ],
+      [
+        "targetType",
+        "ReportTargetType"
+      ],
+      [
+        "targetId",
+        "ObjectId"
+      ],
+      [
+        "targetAuthorId",
+        "ObjectId"
+      ],
+      [
+        "courseId",
+        "ObjectId"
+      ],
+      [
+        "lessonId",
+        "ObjectId | null"
+      ],
+      [
+        "reason",
+        "String"
+      ],
+      [
+        "status",
+        "ReportStatus"
+      ],
+      [
+        "escalatedToAdmin",
+        "boolean"
+      ],
+      [
+        "resolvedBy",
+        "ObjectId | null"
+      ],
+      [
+        "resolvedAt",
+        "Date | null"
+      ],
+      [
+        "actionTaken",
+        "ReportActionType | null"
+      ],
+      [
+        "moderationNote",
+        "String"
+      ],
+      [
+        "createdAt",
+        "Date"
+      ],
+      [
+        "updatedAt",
+        "Date"
+      ]
+    ]
+  },
+  {
+    "name": "Notification",
+    "fields": [
+      [
+        "_id",
+        "ObjectId"
+      ],
+      [
+        "recipientId",
+        "ObjectId"
+      ],
+      [
+        "type",
+        "NotificationType"
+      ],
+      [
+        "title",
+        "String"
+      ],
+      [
+        "message",
+        "String"
+      ],
+      [
+        "courseId",
+        "ObjectId | null"
+      ],
+      [
+        "lessonId",
+        "ObjectId | null"
+      ],
+      [
+        "isRead",
+        "boolean"
+      ],
+      [
+        "createdAt",
+        "Date"
+      ],
+      [
+        "updatedAt",
+        "Date"
+      ]
+    ]
+  },
+  {
+    "name": "AuthService",
+    "fields": []
+  },
+  {
+    "name": "UsersService",
+    "fields": []
+  },
+  {
+    "name": "MailService",
+    "fields": []
+  },
+  {
+    "name": "CoursesService",
+    "fields": []
+  },
+  {
+    "name": "CourseManageService",
+    "fields": []
+  },
+  {
+    "name": "UploadsService",
+    "fields": []
+  },
+  {
+    "name": "EnrollmentsService",
+    "fields": []
+  },
+  {
+    "name": "CertificatesService",
+    "fields": []
+  },
+  {
+    "name": "OrdersService",
+    "fields": []
+  },
+  {
+    "name": "PayosService",
+    "fields": []
+  },
+  {
+    "name": "QuestionsService",
+    "fields": []
+  },
+  {
+    "name": "ReviewsService",
+    "fields": []
+  },
+  {
+    "name": "JwtAuthGuard",
+    "fields": []
+  },
+  {
+    "name": "RolesGuard",
+    "fields": []
+  },
+  {
+    "name": "Class1",
+    "fields": []
+  },
+  {
+    "name": "Class2",
+    "fields": [
+      [
+        "Attribute1",
+        ""
+      ]
+    ]
+  }
+]

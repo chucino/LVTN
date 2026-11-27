@@ -1,0 +1,37 @@
+[
+  {
+    "name": "source-drive.docx",
+    "size": 2489325,
+    "sha256": "f6cb039241e84b7925fb6a1e3b19ac25c0a40cdaa7feca7bcdc98da1251ebe31"
+  },
+  {
+    "name": "reference.pdf",
+    "size": 7360907,
+    "sha256": "85dbff405d28399044ae976fe3962aa63f037bdd2e87c1487fbc0c01c8e7ca7f"
+  },
+  {
+    "name": "01_usecase_tong_quat.mdj",
+    "size": 593115,
+    "sha256": "2ba8205b7d826857ec877e2be7eb66c0564b714a7627396f3ef6db2f90f43842"
+  },
+  {
+    "name": "02_usecase_guest_student.mdj",
+    "size": 402748,
+    "sha256": "a2ee82f5bc99c039c25d8a7667e6d683194dc6cc94012a40b6845f2f199ff0f3"
+  },
+  {
+    "name": "03_usecase_giang_vien.mdj",
+    "size": 198424,
+    "sha256": "4b4b6ae5c615eae92fe4cb2b37ae7a41c32fe99712d75557a241e0f463b32611"
+  },
+  {
+    "name": "04_usecase_quan_tri_vien.mdj",
+    "size": 258129,
+    "sha256": "16b0d564418e04d232a9f350040f00f3c99d78c31226f0c11efcc4f1dd6732f1"
+  },
+  {
+    "name": "05_usecase_include_extend.mdj",
+    "size": 361428,
+    "sha256": "384e1b68befd789b4271533b2509f3604aaedbc09309b266a5bd4dc2c9fb3c19"
+  }
+]

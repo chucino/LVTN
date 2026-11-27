@@ -1,0 +1,438 @@
+[
+  {
+    "_type": "UMLUseCaseDiagram",
+    "_id": "86cb860af9a14333b68b0b119dce9a5b",
+    "name": "05_usecase_include_extend",
+    "documentation": "SƠ ĐỒ QUAN HỆ INCLUDE / EXTEND – NEXTCODE"
+  },
+  {
+    "_type": "UMLUseCaseSubject",
+    "_id": "644f4224a91c409bbb49305f713d0319",
+    "name": "CÁC QUAN HỆ <<include>> – BẮT BUỘC"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "f3644a08d6af4de9aafacbc7c86908f6",
+    "name": "UC01\nĐăng ký tài khoản"
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "7e36922e0ff1450fbe07ece4bb6c3229",
+    "source": {
+      "$ref": "f3644a08d6af4de9aafacbc7c86908f6"
+    },
+    "target": {
+      "$ref": "eb20f43bd8004d0083635cc57691eb3e"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "617d965465ae4a5ea990cd3f8cdec631",
+    "name": "UC03\nQuên mật khẩu"
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "1b8fc275488e4cbaa42535c9c0846ec0",
+    "source": {
+      "$ref": "617d965465ae4a5ea990cd3f8cdec631"
+    },
+    "target": {
+      "$ref": "eb20f43bd8004d0083635cc57691eb3e"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "eb20f43bd8004d0083635cc57691eb3e",
+    "name": "Xác thực mã OTP Email"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "d3f434c2fc8d4833880e6a22f679667f",
+    "name": "UC09\nĐặt mua khóa PRO"
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "7c4992f513bf416d8cd6cfd0277cb0e8",
+    "source": {
+      "$ref": "d3f434c2fc8d4833880e6a22f679667f"
+    },
+    "target": {
+      "$ref": "035662f193604d25b7e6b6709dcc8d2c"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "035662f193604d25b7e6b6709dcc8d2c",
+    "name": "Khởi tạo liên kết & mã VietQR"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "fc97fbeb41374fe18d660cd757a16557",
+    "name": "UC11\nHọc bài tuần tự & lưu tiến độ"
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "4a280dbc3c304abba990ed3c0c2dcc83",
+    "source": {
+      "$ref": "fc97fbeb41374fe18d660cd757a16557"
+    },
+    "target": {
+      "$ref": "8fb422c63c5c4445b4952e026312c711"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "8fb422c63c5c4445b4952e026312c711",
+    "name": "Mở khóa bài giảng kế tiếp"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "fac44f7bd9f444e48bdfe860869d5be5",
+    "name": "UC12\nLàm trắc nghiệm cuối bài"
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "974b2744b0ae4fca91a1d6d66d66c090",
+    "source": {
+      "$ref": "fac44f7bd9f444e48bdfe860869d5be5"
+    },
+    "target": {
+      "$ref": "8fb422c63c5c4445b4952e026312c711"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "c331fe88a1e045698aa3b7388d932163",
+    "name": "UC18\nBiên soạn nội dung khóa học"
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "660368e68cb644f0b453922bcd1a4474",
+    "source": {
+      "$ref": "c331fe88a1e045698aa3b7388d932163"
+    },
+    "target": {
+      "$ref": "69835b6a6c6b4aadaca861d7d20fa938"
+    }
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "9d68372ebfc0494995d0f9871370bc84",
+    "source": {
+      "$ref": "c331fe88a1e045698aa3b7388d932163"
+    },
+    "target": {
+      "$ref": "1f8f20ee23e04335a8beaa72e65aa115"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "69835b6a6c6b4aadaca861d7d20fa938",
+    "name": "Quản lý & sắp xếp Chương"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "1f8f20ee23e04335a8beaa72e65aa115",
+    "name": "Quản lý & sắp xếp Bài giảng"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "bebbaafafff6490e9482b00896f46dd2",
+    "name": "UC19\nGửi duyệt khóa học"
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "c334fa6ccb884e009637fb433a397c6c",
+    "source": {
+      "$ref": "bebbaafafff6490e9482b00896f46dd2"
+    },
+    "target": {
+      "$ref": "3ed1a988b24641d28afe7a3c94bb0004"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "3ed1a988b24641d28afe7a3c94bb0004",
+    "name": "Kiểm tra Readiness"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "1de25135e52a403abf46855d648e6244",
+    "name": "UC17\nQuản lý khóa học nền"
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "fbc8cc9abe87405c8d64cc8cb139d866",
+    "source": {
+      "$ref": "1de25135e52a403abf46855d648e6244"
+    },
+    "target": {
+      "$ref": "5c7fa823a9664b6fa6c7e18e754e02eb"
+    }
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "3f808d1a07654102b407c88e1abd8ffe",
+    "source": {
+      "$ref": "1de25135e52a403abf46855d648e6244"
+    },
+    "target": {
+      "$ref": "79889210b5bc41e8b6469763bc2e757f"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "5c7fa823a9664b6fa6c7e18e754e02eb",
+    "name": "Tạo khóa học nền / định giá /\nphân công giảng viên"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "79889210b5bc41e8b6469763bc2e757f",
+    "name": "Cập nhật thông tin nền /\nđổi GV / xóa khóa"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "03eaafe3f7554582a644aba66ca9a2ed",
+    "name": "UC23\nQuản lý người dùng"
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "da73267b2b7141e685b350a0df0e03fd",
+    "source": {
+      "$ref": "03eaafe3f7554582a644aba66ca9a2ed"
+    },
+    "target": {
+      "$ref": "3a8a811fbe944e50bc4b980712263aa8"
+    }
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "311b92e879054e78907904f22b87cb25",
+    "source": {
+      "$ref": "03eaafe3f7554582a644aba66ca9a2ed"
+    },
+    "target": {
+      "$ref": "47c38215fd0c4832be5e0432e17b3b73"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "3a8a811fbe944e50bc4b980712263aa8",
+    "name": "Tạo tài khoản ACTIVE"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "47c38215fd0c4832be5e0432e17b3b73",
+    "name": "Phân quyền & khóa/mở khóa"
+  },
+  {
+    "_type": "UMLUseCaseSubject",
+    "_id": "8d8f31500c2e4116a6445c1e1e224e48",
+    "name": "CÁC QUAN HỆ <<extend>> – MỞ RỘNG CÓ ĐIỀU KIỆN"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "1d07408a77b2469baeed85c2e2e1273b",
+    "name": "Áp dụng mã giảm giá"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "58a83f4fa8424d5a8b788acdfa14de6d",
+    "source": {
+      "$ref": "1d07408a77b2469baeed85c2e2e1273b"
+    },
+    "target": {
+      "$ref": "9bb30a8119ba4bbbae140e146f471c72"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "9bb30a8119ba4bbbae140e146f471c72",
+    "name": "UC09\nĐặt mua khóa PRO"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "3c23a52036b9411ab1bad46b718c0795",
+    "name": "UC10\nThanh toán & quản lý đơn cá nhân"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "1672f78b04f2471c8ae64ef0e602aaed",
+    "source": {
+      "$ref": "3c23a52036b9411ab1bad46b718c0795"
+    },
+    "target": {
+      "$ref": "b8c486f7ec1e4a009f708d4df615772d"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "b8c486f7ec1e4a009f708d4df615772d",
+    "name": "UC08\nĐăng ký học khóa FREE"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "d1102892d3e545cf87be5e044e6416f4",
+    "name": "UC12\nLàm trắc nghiệm cuối bài"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "a36b4ec9b8ae465aa27a1ebc831f29cb",
+    "source": {
+      "$ref": "d1102892d3e545cf87be5e044e6416f4"
+    },
+    "target": {
+      "$ref": "458c0c4e407343ea902bb3ecccb68995"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "458c0c4e407343ea902bb3ecccb68995",
+    "name": "UC11\nHọc bài tuần tự"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "ccd1119eb350407ca2f377ce41dcb347",
+    "name": "UC13\nNhận & xem chứng chỉ"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "c3ff6c81072b4702b00120c2d6553154",
+    "source": {
+      "$ref": "ccd1119eb350407ca2f377ce41dcb347"
+    },
+    "target": {
+      "$ref": "b310b0a336234a5db2beab4c5ff28992"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "b310b0a336234a5db2beab4c5ff28992",
+    "name": "Mở khóa bài giảng kế tiếp"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "b864379df978436d8548480f0212a48a",
+    "name": "Quản lý câu hỏi trắc nghiệm"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "2aab2235dcc4495cbdca890d6e727537",
+    "source": {
+      "$ref": "b864379df978436d8548480f0212a48a"
+    },
+    "target": {
+      "$ref": "35a09321c88d4aab8529313cfc57022a"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "35a09321c88d4aab8529313cfc57022a",
+    "name": "Quản lý bài giảng"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "5d691a9435fc47a88c45f5abfbf24fd3",
+    "name": "Đồng bộ trạng thái thanh toán"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "66ef9c8db42c43cc845115fd44ae3092",
+    "source": {
+      "$ref": "5d691a9435fc47a88c45f5abfbf24fd3"
+    },
+    "target": {
+      "$ref": "3886a7bcf7c74394b176a522d43323a4"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "a14d12ea8d2247a3832c7133ce750202",
+    "name": "Xác nhận thanh toán thủ công"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "b5bee29e82424fe49efff1bd0b29eb63",
+    "source": {
+      "$ref": "a14d12ea8d2247a3832c7133ce750202"
+    },
+    "target": {
+      "$ref": "3886a7bcf7c74394b176a522d43323a4"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "3886a7bcf7c74394b176a522d43323a4",
+    "name": "UC22\nQuản lý đơn hàng & doanh thu"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "4a092062f8124790ac80f524e9870c76",
+    "name": "Bỏ qua báo cáo (DISMISS)"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "e39dc87971cf43b9bbd7b04faeb08d34",
+    "source": {
+      "$ref": "4a092062f8124790ac80f524e9870c76"
+    },
+    "target": {
+      "$ref": "7ef29cea01cf471e8c188631f876660e"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "61961de4804a4d278973068d9b9d91f1",
+    "name": "Ẩn nội dung & nhắc nhở"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "e6025d1325ae49719eab1b809db70f5c",
+    "source": {
+      "$ref": "61961de4804a4d278973068d9b9d91f1"
+    },
+    "target": {
+      "$ref": "7ef29cea01cf471e8c188631f876660e"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "aaf7423620c243828be3b111515c6756",
+    "name": "Chuyển cấp lên Admin (ESCALATE)"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "c69e17a0d6784f8a8b070205a6c3be10",
+    "source": {
+      "$ref": "aaf7423620c243828be3b111515c6756"
+    },
+    "target": {
+      "$ref": "7ef29cea01cf471e8c188631f876660e"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "7ef29cea01cf471e8c188631f876660e",
+    "name": "UC21 – Tuyến 1\nKiểm duyệt báo cáo"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "024e9e1a19584a588141ca310615367a",
+    "name": "Áp dụng chế tài 5 cấp"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "0216b15e7b684f83928794d8ee519b68",
+    "source": {
+      "$ref": "024e9e1a19584a588141ca310615367a"
+    },
+    "target": {
+      "$ref": "b35e055dcd9d4c628839dbefc0f02c1a"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "b35e055dcd9d4c628839dbefc0f02c1a",
+    "name": "UC21 – Tuyến 2\nKiểm duyệt báo cáo"
+  }
+]

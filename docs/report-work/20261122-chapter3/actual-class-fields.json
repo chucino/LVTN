@@ -1,0 +1,303 @@
+{
+  "Otp": {
+    "path": "src/modules/auth/schemas/otp.schema.ts",
+    "fields": [
+      "email",
+      "codeHash",
+      "purpose",
+      "expiresAt",
+      "failedAttempts",
+      "lastSentAt",
+      "isUsed"
+    ]
+  },
+  "RefreshToken": {
+    "path": "src/modules/auth/schemas/refresh-token.schema.ts",
+    "fields": [
+      "userId",
+      "tokenHash",
+      "expiresAt",
+      "isRevoked"
+    ]
+  },
+  "Certificate": {
+    "path": "src/modules/certificates/schemas/certificate.schema.ts",
+    "fields": [
+      "certificateCode",
+      "studentId",
+      "courseId",
+      "issuedAt",
+      "qrCode",
+      "fileUrl",
+      "status",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  "Category": {
+    "path": "src/modules/courses/schemas/category.schema.ts",
+    "fields": [
+      "name"
+    ]
+  },
+  "QuizQuestion": {
+    "path": "src/modules/courses/schemas/course.schema.ts",
+    "fields": [
+      "_id",
+      "content",
+      "options",
+      "correctOption",
+      "explanation"
+    ]
+  },
+  "Lesson": {
+    "path": "src/modules/courses/schemas/course.schema.ts",
+    "fields": [
+      "_id",
+      "title",
+      "order",
+      "videoUrl",
+      "duration",
+      "content",
+      "fileUrl",
+      "fileName",
+      "note",
+      "summary",
+      "quizQuestions",
+      "hasQuiz"
+    ]
+  },
+  "Chapter": {
+    "path": "src/modules/courses/schemas/course.schema.ts",
+    "fields": [
+      "_id",
+      "title",
+      "order",
+      "lessons"
+    ]
+  },
+  "Course": {
+    "path": "src/modules/courses/schemas/course.schema.ts",
+    "fields": [
+      "title",
+      "description",
+      "type",
+      "level",
+      "targetAudience",
+      "learningOutcomes",
+      "requirements",
+      "price",
+      "discountPrice",
+      "status",
+      "instructorId",
+      "categoryId",
+      "avgRating",
+      "totalChapters",
+      "totalLessons",
+      "totalDuration",
+      "thumbnail",
+      "rejectReason",
+      "chapters",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  "Enrollment": {
+    "path": "src/modules/enrollments/schemas/enrollment.schema.ts",
+    "fields": [
+      "studentId",
+      "courseId",
+      "enrolledAt",
+      "progressPercent",
+      "status",
+      "completedAt",
+      "lastLessonId",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  "LessonProgress": {
+    "path": "src/modules/enrollments/schemas/lesson-progress.schema.ts",
+    "fields": [
+      "enrollmentId",
+      "lessonId",
+      "status",
+      "lastPositionSec",
+      "watchedSeconds",
+      "watchedFully",
+      "quizPassed",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  "QuizAttempt": {
+    "path": "src/modules/enrollments/schemas/quiz-attempt.schema.ts",
+    "fields": [
+      "studentId",
+      "questionId",
+      "selectedOption",
+      "isCorrect",
+      "attemptedAt"
+    ]
+  },
+  "Order": {
+    "path": "src/modules/orders/schemas/order.schema.ts",
+    "fields": [
+      "orderCode",
+      "payosOrderCode",
+      "studentId",
+      "courseId",
+      "originalPrice",
+      "discountPrice",
+      "couponCode",
+      "discountAmount",
+      "finalAmount",
+      "status",
+      "paymentMethod",
+      "paymentLinkId",
+      "checkoutUrl",
+      "qrCode",
+      "qrImageUrl",
+      "bankBin",
+      "bankName",
+      "accountNumber",
+      "accountName",
+      "transferDescription",
+      "transactionReference",
+      "expiresAt",
+      "paidAt",
+      "cancelledAt",
+      "cancelReason",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  "PaymentTransaction": {
+    "path": "src/modules/orders/schemas/payment-transaction.schema.ts",
+    "fields": [
+      "orderId",
+      "orderCode",
+      "payosOrderCode",
+      "studentId",
+      "courseId",
+      "amount",
+      "reference",
+      "provider",
+      "status",
+      "counterAccountBankId",
+      "counterAccountName",
+      "counterAccountNumber",
+      "transactionDateTime",
+      "rawPayload",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  "CommentReplyToUser": {
+    "path": "src/modules/questions/schemas/lesson-comment.schema.ts",
+    "fields": [
+      "userId",
+      "fullName"
+    ]
+  },
+  "CommentReaction": {
+    "path": "src/modules/questions/schemas/lesson-comment.schema.ts",
+    "fields": [
+      "userId",
+      "type"
+    ]
+  },
+  "CommentReport": {
+    "path": "src/modules/questions/schemas/lesson-comment.schema.ts",
+    "fields": [
+      "userId",
+      "reason",
+      "createdAt"
+    ]
+  },
+  "LessonComment": {
+    "path": "src/modules/questions/schemas/lesson-comment.schema.ts",
+    "fields": [
+      "courseId",
+      "lessonId",
+      "parentId",
+      "replyToUser",
+      "authorId",
+      "content",
+      "visibilityStatus",
+      "moderationNote",
+      "violationRecorded",
+      "reactions",
+      "reports",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  "Notification": {
+    "path": "src/modules/questions/schemas/notification.schema.ts",
+    "fields": [
+      "recipientId",
+      "type",
+      "title",
+      "message",
+      "courseId",
+      "lessonId",
+      "isRead",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  "Report": {
+    "path": "src/modules/questions/schemas/report.schema.ts",
+    "fields": [
+      "reporterId",
+      "targetType",
+      "targetId",
+      "targetAuthorId",
+      "courseId",
+      "lessonId",
+      "reason",
+      "status",
+      "escalatedToAdmin",
+      "resolvedBy",
+      "resolvedAt",
+      "actionTaken",
+      "moderationNote",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  "CourseReview": {
+    "path": "src/modules/reviews/schemas/course-review.schema.ts",
+    "fields": [
+      "courseId",
+      "studentId",
+      "rating",
+      "comment",
+      "hasComment",
+      "visibilityStatus",
+      "moderationNote",
+      "violationRecorded",
+      "reports",
+      "createdAt",
+      "updatedAt"
+    ]
+  },
+  "User": {
+    "path": "src/modules/users/schemas/user.schema.ts",
+    "fields": [
+      "fullName",
+      "email",
+      "passwordHash",
+      "dateOfBirth",
+      "occupation",
+      "role",
+      "avatar",
+      "status",
+      "interestedCategories",
+      "violationCount",
+      "commentBannedUntil",
+      "violationHistory"
+    ]
+  }
+}

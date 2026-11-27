@@ -1,0 +1,62 @@
+[
+  {
+    "id": "6af96bfde13d5b8ef08bcb8c",
+    "title": "TÉT 10k",
+    "type": "PRO"
+  },
+  {
+    "id": "6af8c91d167bab7ddedac39a",
+    "title": "Testa",
+    "type": "FREE"
+  },
+  {
+    "id": "6ae4b97894787cb7b60464b9",
+    "title": "zxczbvccnvbnvn",
+    "type": "FREE"
+  },
+  {
+    "id": "6ae4a48734c518ec130635d9",
+    "title": "Lập trình JavaScript cơ bản",
+    "type": "FREE"
+  },
+  {
+    "id": "6ae473f90852019e502c70da",
+    "title": "REST API với NestJS",
+    "type": "PRO"
+  },
+  {
+    "id": "6ade5128cf5f3454c77c8fa4",
+    "title": "TypeScript cho ứng dụng lớn",
+    "type": "PRO"
+  },
+  {
+    "id": "6ade5128cf5f3454c77c8fa2",
+    "title": "Thiết kế CSDL và tối ưu truy vấn",
+    "type": "PRO"
+  },
+  {
+    "id": "6ade5128cf5f3454c77c8fa1",
+    "title": "REST API với NestJS",
+    "type": "PRO"
+  },
+  {
+    "id": "6ade5128cf5f3454c77c8fa0",
+    "title": "Lập trình Web với Vue 3",
+    "type": "PRO"
+  },
+  {
+    "id": "6ade5128cf5f3454c77c8f9f",
+    "title": "Python nhập môn",
+    "type": "FREE"
+  },
+  {
+    "id": "6ade5128cf5f3454c77c8f9e",
+    "title": "SQL cơ bản",
+    "type": "FREE"
+  },
+  {
+    "id": "6ade5128cf5f3454c77c8f9d",
+    "title": "Git và GitHub nhập môn",
+    "type": "FREE"
+  }
+]

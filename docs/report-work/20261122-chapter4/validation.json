@@ -1,0 +1,18 @@
+{
+  "source_sha256": "9338f7153b9bffda284b1aafcd3beb2785c50b5478d1d1797f45ca27be7105ab",
+  "output_sha256": "9ee2b6c67d6c812bf7358625909fa842e82a9c4bfff24b84e5d425f099bb033a",
+  "changed_parts": [
+    "word/document.xml"
+  ],
+  "original_body_preserved": true,
+  "original_tables_preserved": 49,
+  "original_images_preserved": 21,
+  "all_other_parts_preserved": true,
+  "chapter_4_headings": 27,
+  "new_tables": 16,
+  "reported_cases": 66,
+  "toc_entries": 179,
+  "all_internal_links_valid": true,
+  "toc_cached_page_numbers_valid": true,
+  "chapter_4_first_page": 109
+}

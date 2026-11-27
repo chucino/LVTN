@@ -1,0 +1,517 @@
+[
+  {
+    "text": "LỜI CẢM ƠN",
+    "level": 1,
+    "anchor": "_Toc246153374"
+  },
+  {
+    "text": "DANH MỤC BẢNG VÀ HÌNH",
+    "level": 1,
+    "anchor": "_Toc246153375"
+  },
+  {
+    "text": "Danh mục bảng",
+    "level": 2,
+    "anchor": "_Toc246153376"
+  },
+  {
+    "text": "Danh mục hình",
+    "level": 2,
+    "anchor": "_Toc246153377"
+  },
+  {
+    "text": "CAM KẾT KẾT QUẢ",
+    "level": 1,
+    "anchor": "_Toc246153378"
+  },
+  {
+    "text": "TÓM LƯỢC",
+    "level": 1,
+    "anchor": "_Toc246153379"
+  },
+  {
+    "text": "ABSTRACT",
+    "level": 1,
+    "anchor": "_Toc246153380"
+  },
+  {
+    "text": "PHẦN I GIỚI THIỆU",
+    "level": 1,
+    "anchor": "_Toc246153381"
+  },
+  {
+    "text": "1 Đặt vấn đề",
+    "level": 2,
+    "anchor": "_Toc246153382"
+  },
+  {
+    "text": "2 Lịch sử giải quyết vấn đề",
+    "level": 2,
+    "anchor": "_Toc246153383"
+  },
+  {
+    "text": "2.1 Các nền tảng học tập đã có",
+    "level": 3,
+    "anchor": "_Toc246153384"
+  },
+  {
+    "text": "2.2 Hướng giải quyết được kế thừa",
+    "level": 3,
+    "anchor": "_Toc246153385"
+  },
+  {
+    "text": "3 Mục tiêu đề tài",
+    "level": 2,
+    "anchor": "_Toc246153386"
+  },
+  {
+    "text": "3.1 Mục tiêu tổng quát",
+    "level": 3,
+    "anchor": "_Toc246153387"
+  },
+  {
+    "text": "3.2 Mục tiêu cụ thể",
+    "level": 3,
+    "anchor": "_Toc246153388"
+  },
+  {
+    "text": "4 Đối tượng và phạm vi nghiên cứu",
+    "level": 2,
+    "anchor": "_Toc246153389"
+  },
+  {
+    "text": "4.1 Đối tượng nghiên cứu",
+    "level": 3,
+    "anchor": "_Toc246153390"
+  },
+  {
+    "text": "4.2 Phạm vi nghiên cứu",
+    "level": 3,
+    "anchor": "_Toc246153391"
+  },
+  {
+    "text": "5 Nội dung nghiên cứu",
+    "level": 2,
+    "anchor": "_Toc246153392"
+  },
+  {
+    "text": "5.1 Quy trình thực hiện",
+    "level": 3,
+    "anchor": "_Toc246153393"
+  },
+  {
+    "text": "5.2 Công nghệ và công cụ sử dụng",
+    "level": 3,
+    "anchor": "_Toc246153394"
+  },
+  {
+    "text": "6 Những đóng góp chính của đề tài",
+    "level": 2,
+    "anchor": "_Toc246153395"
+  },
+  {
+    "text": "7 Bố cục luận văn",
+    "level": 2,
+    "anchor": "_Toc246153396"
+  },
+  {
+    "text": "PHẦN II NỘI DUNG",
+    "level": 1,
+    "anchor": "nc_h_5001"
+  },
+  {
+    "text": "CHƯƠNG 1 MÔ TẢ BÀI TOÁN",
+    "level": 1,
+    "anchor": "nc_h_5002"
+  },
+  {
+    "text": "1.1 Mô tả bài toán",
+    "level": 2,
+    "anchor": "nc_h_5003"
+  },
+  {
+    "text": "1.1.1 Hoạt động cung cấp và học khóa học trực tuyến",
+    "level": 3,
+    "anchor": "nc_h_5004"
+  },
+  {
+    "text": "1.1.2 Nội dung khóa học và hình thức tham gia",
+    "level": 3,
+    "anchor": "nc_h_5005"
+  },
+  {
+    "text": "1.1.3 Các tác nhân và phạm vi sử dụng",
+    "level": 3,
+    "anchor": "nc_h_5006"
+  },
+  {
+    "text": "1.2 Phân tích yêu cầu chức năng",
+    "level": 2,
+    "anchor": "nc_h_5008"
+  },
+  {
+    "text": "1.2.1 Sơ đồ use case tổng quát",
+    "level": 3,
+    "anchor": "nc_h_5009"
+  },
+  {
+    "text": "1.2.2 Sơ đồ use case của khách truy cập và học viên",
+    "level": 3,
+    "anchor": "nc_h_5011"
+  },
+  {
+    "text": "1.2.3 Sơ đồ use case của giảng viên",
+    "level": 3,
+    "anchor": "nc_h_5013"
+  },
+  {
+    "text": "1.2.4 Sơ đồ use case của quản trị viên",
+    "level": 3,
+    "anchor": "nc_h_5015"
+  },
+  {
+    "text": "1.2.5 Danh mục chức năng của hệ thống",
+    "level": 3,
+    "anchor": "nc_h_5017"
+  },
+  {
+    "text": "1.3 Đặc tả các trường hợp sử dụng",
+    "level": 2,
+    "anchor": "nc_h_5019"
+  },
+  {
+    "text": "1.3.1 Đăng ký tài khoản và xác thực email",
+    "level": 3,
+    "anchor": "nc_h_5020"
+  },
+  {
+    "text": "1.3.2 Đăng nhập, duy trì phiên và đăng xuất",
+    "level": 3,
+    "anchor": "nc_h_5022"
+  },
+  {
+    "text": "1.3.3 Khôi phục mật khẩu",
+    "level": 3,
+    "anchor": "nc_h_5024"
+  },
+  {
+    "text": "1.3.4 Quản lý hồ sơ cá nhân và đổi mật khẩu",
+    "level": 3,
+    "anchor": "nc_h_5026"
+  },
+  {
+    "text": "1.3.5 Xem và đánh dấu đã đọc thông báo",
+    "level": 3,
+    "anchor": "nc_h_5028"
+  },
+  {
+    "text": "1.3.6 Tìm kiếm, lọc và xem chi tiết khóa học",
+    "level": 3,
+    "anchor": "nc_h_5030"
+  },
+  {
+    "text": "1.3.7 Tra cứu chứng chỉ công khai",
+    "level": 3,
+    "anchor": "nc_h_5032"
+  },
+  {
+    "text": "1.3.8 Đăng ký khóa học miễn phí",
+    "level": 3,
+    "anchor": "nc_h_5034"
+  },
+  {
+    "text": "1.3.9 Đặt mua khóa Pro và tạo yêu cầu thanh toán",
+    "level": 3,
+    "anchor": "nc_h_5036"
+  },
+  {
+    "text": "1.3.10 Thanh toán và quản lý đơn hàng cá nhân",
+    "level": 3,
+    "anchor": "nc_h_5038"
+  },
+  {
+    "text": "1.3.11 Học bài giảng và lưu tiến độ",
+    "level": 3,
+    "anchor": "nc_h_5040"
+  },
+  {
+    "text": "1.3.12 Làm trắc nghiệm cuối bài",
+    "level": 3,
+    "anchor": "nc_h_5042"
+  },
+  {
+    "text": "1.3.13 Nhận, xem và in chứng chỉ hoàn thành",
+    "level": 3,
+    "anchor": "nc_h_5044"
+  },
+  {
+    "text": "1.3.14 Đánh giá và nhận xét khóa học",
+    "level": 3,
+    "anchor": "nc_h_5046"
+  },
+  {
+    "text": "1.3.15 Thảo luận hỏi đáp tại bài giảng",
+    "level": 3,
+    "anchor": "nc_h_5048"
+  },
+  {
+    "text": "1.3.16 Báo cáo bình luận hoặc đánh giá vi phạm",
+    "level": 3,
+    "anchor": "nc_h_5050"
+  },
+  {
+    "text": "1.3.17 Tạo và quản lý thông tin khóa học",
+    "level": 3,
+    "anchor": "nc_h_5052"
+  },
+  {
+    "text": "1.3.18 Biên soạn chương, bài giảng và trắc nghiệm",
+    "level": 3,
+    "anchor": "nc_h_5054"
+  },
+  {
+    "text": "1.3.19 Gửi duyệt và quản lý công bố khóa học",
+    "level": 3,
+    "anchor": "nc_h_5056"
+  },
+  {
+    "text": "1.3.20 Theo dõi học viên và tiến độ theo khóa",
+    "level": 3,
+    "anchor": "nc_h_5058"
+  },
+  {
+    "text": "1.3.21 Xử lý báo cáo vi phạm",
+    "level": 3,
+    "anchor": "nc_h_5060"
+  },
+  {
+    "text": "1.3.22 Quản lý đơn hàng và xác nhận thanh toán",
+    "level": 3,
+    "anchor": "nc_h_5062"
+  },
+  {
+    "text": "1.3.23 Quản lý người dùng và phân quyền",
+    "level": 3,
+    "anchor": "nc_h_5064"
+  },
+  {
+    "text": "1.4 Quy trình nghiệp vụ và các quy tắc xử lý",
+    "level": 2,
+    "anchor": "nc_h_5066"
+  },
+  {
+    "text": "1.4.1 Từ chuẩn bị khóa học đến cung cấp cho học viên",
+    "level": 3,
+    "anchor": "nc_h_5067"
+  },
+  {
+    "text": "1.4.2 Đăng ký và xác nhận quyền học",
+    "level": 3,
+    "anchor": "nc_h_5068"
+  },
+  {
+    "text": "1.4.3 Học tuần tự và ghi nhận hoàn thành",
+    "level": 3,
+    "anchor": "nc_h_5069"
+  },
+  {
+    "text": "1.4.4 Hỏi đáp, đánh giá và xử lý phản ánh",
+    "level": 3,
+    "anchor": "nc_h_5070"
+  },
+  {
+    "text": "1.5 Dữ liệu và các mối liên hệ nghiệp vụ",
+    "level": 2,
+    "anchor": "nc_h_5072"
+  },
+  {
+    "text": "1.6 Yêu cầu phi chức năng",
+    "level": 2,
+    "anchor": "nc_h_5073"
+  },
+  {
+    "text": "1.6.1 Dễ sử dụng và dễ tiếp cận",
+    "level": 3,
+    "anchor": "nc_h_5074"
+  },
+  {
+    "text": "1.6.2 Bảo vệ tài khoản và dữ liệu",
+    "level": 3,
+    "anchor": "nc_h_5075"
+  },
+  {
+    "text": "1.6.3 Tính đúng đắn và khả năng phục hồi",
+    "level": 3,
+    "anchor": "nc_h_5076"
+  },
+  {
+    "text": "1.6.4 Khả năng đáp ứng",
+    "level": 3,
+    "anchor": "nc_h_5077"
+  },
+  {
+    "text": "1.6.5 Khả năng bảo trì và điều kiện vận hành",
+    "level": 3,
+    "anchor": "nc_h_5078"
+  },
+  {
+    "text": "1.7 Phân tích và lựa chọn hướng giải quyết",
+    "level": 2,
+    "anchor": "nc_h_5079"
+  },
+  {
+    "text": "1.8 Tổng kết chương",
+    "level": 2,
+    "anchor": "nc_h_5080"
+  },
+  {
+    "text": "Bảng 1.1 Các tác nhân và phạm vi sử dụng",
+    "kind": "table",
+    "anchor": "nc_caption_5007"
+  },
+  {
+    "text": "Hình 1.1 Sơ đồ use case tổng quát của NextCode",
+    "kind": "figure",
+    "anchor": "nc_caption_5010"
+  },
+  {
+    "text": "Hình 1.2 Sơ đồ use case của khách truy cập và học viên",
+    "kind": "figure",
+    "anchor": "nc_caption_5012"
+  },
+  {
+    "text": "Hình 1.3 Sơ đồ use case của giảng viên",
+    "kind": "figure",
+    "anchor": "nc_caption_5014"
+  },
+  {
+    "text": "Hình 1.4 Sơ đồ use case của quản trị viên",
+    "kind": "figure",
+    "anchor": "nc_caption_5016"
+  },
+  {
+    "text": "Bảng 1.2 Danh mục chức năng của NextCode",
+    "kind": "table",
+    "anchor": "nc_caption_5018"
+  },
+  {
+    "text": "Bảng 1.3 Đặc tả UC01 đăng ký tài khoản và xác thực email",
+    "kind": "table",
+    "anchor": "nc_caption_5021"
+  },
+  {
+    "text": "Bảng 1.4 Đặc tả UC02 đăng nhập, duy trì phiên và đăng xuất",
+    "kind": "table",
+    "anchor": "nc_caption_5023"
+  },
+  {
+    "text": "Bảng 1.5 Đặc tả UC03 khôi phục mật khẩu",
+    "kind": "table",
+    "anchor": "nc_caption_5025"
+  },
+  {
+    "text": "Bảng 1.6 Đặc tả UC04 quản lý hồ sơ cá nhân và đổi mật khẩu",
+    "kind": "table",
+    "anchor": "nc_caption_5027"
+  },
+  {
+    "text": "Bảng 1.7 Đặc tả UC05 xem và đánh dấu đã đọc thông báo",
+    "kind": "table",
+    "anchor": "nc_caption_5029"
+  },
+  {
+    "text": "Bảng 1.8 Đặc tả UC06 tìm kiếm, lọc và xem chi tiết khóa học",
+    "kind": "table",
+    "anchor": "nc_caption_5031"
+  },
+  {
+    "text": "Bảng 1.9 Đặc tả UC07 tra cứu chứng chỉ công khai",
+    "kind": "table",
+    "anchor": "nc_caption_5033"
+  },
+  {
+    "text": "Bảng 1.10 Đặc tả UC08 đăng ký khóa học miễn phí",
+    "kind": "table",
+    "anchor": "nc_caption_5035"
+  },
+  {
+    "text": "Bảng 1.11 Đặc tả UC09 đặt mua khóa Pro và tạo yêu cầu thanh toán",
+    "kind": "table",
+    "anchor": "nc_caption_5037"
+  },
+  {
+    "text": "Bảng 1.12 Đặc tả UC10 thanh toán và quản lý đơn hàng cá nhân",
+    "kind": "table",
+    "anchor": "nc_caption_5039"
+  },
+  {
+    "text": "Bảng 1.13 Đặc tả UC11 học bài giảng và lưu tiến độ",
+    "kind": "table",
+    "anchor": "nc_caption_5041"
+  },
+  {
+    "text": "Bảng 1.14 Đặc tả UC12 làm trắc nghiệm cuối bài",
+    "kind": "table",
+    "anchor": "nc_caption_5043"
+  },
+  {
+    "text": "Bảng 1.15 Đặc tả UC13 nhận, xem và in chứng chỉ hoàn thành",
+    "kind": "table",
+    "anchor": "nc_caption_5045"
+  },
+  {
+    "text": "Bảng 1.16 Đặc tả UC14 đánh giá và nhận xét khóa học",
+    "kind": "table",
+    "anchor": "nc_caption_5047"
+  },
+  {
+    "text": "Bảng 1.17 Đặc tả UC15 thảo luận hỏi đáp tại bài giảng",
+    "kind": "table",
+    "anchor": "nc_caption_5049"
+  },
+  {
+    "text": "Bảng 1.18 Đặc tả UC16 báo cáo bình luận hoặc đánh giá vi phạm",
+    "kind": "table",
+    "anchor": "nc_caption_5051"
+  },
+  {
+    "text": "Bảng 1.19 Đặc tả UC17 tạo và quản lý thông tin khóa học",
+    "kind": "table",
+    "anchor": "nc_caption_5053"
+  },
+  {
+    "text": "Bảng 1.20 Đặc tả UC18 biên soạn chương, bài giảng và trắc nghiệm",
+    "kind": "table",
+    "anchor": "nc_caption_5055"
+  },
+  {
+    "text": "Bảng 1.21 Đặc tả UC19 gửi duyệt và quản lý công bố khóa học",
+    "kind": "table",
+    "anchor": "nc_caption_5057"
+  },
+  {
+    "text": "Bảng 1.22 Đặc tả UC20 theo dõi học viên và tiến độ theo khóa",
+    "kind": "table",
+    "anchor": "nc_caption_5059"
+  },
+  {
+    "text": "Bảng 1.23 Đặc tả UC21 xử lý báo cáo vi phạm",
+    "kind": "table",
+    "anchor": "nc_caption_5061"
+  },
+  {
+    "text": "Bảng 1.24 Đặc tả UC22 quản lý đơn hàng và xác nhận thanh toán",
+    "kind": "table",
+    "anchor": "nc_caption_5063"
+  },
+  {
+    "text": "Bảng 1.25 Đặc tả UC23 quản lý người dùng và phân quyền",
+    "kind": "table",
+    "anchor": "nc_caption_5065"
+  },
+  {
+    "text": "Bảng 1.26 Các mức hạn chế tài khoản khi xử lý vi phạm",
+    "kind": "table",
+    "anchor": "nc_caption_5071"
+  }
+]

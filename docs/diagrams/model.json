@@ -1,0 +1,2174 @@
+{
+  "classes": {
+    "User": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "id",
+          "String"
+        ],
+        [
+          "fullName",
+          "String"
+        ],
+        [
+          "email",
+          "String"
+        ],
+        [
+          "passwordHash",
+          "String"
+        ],
+        [
+          "dateOfBirth",
+          "Date [0..1] | null"
+        ],
+        [
+          "occupation",
+          "String [0..1] | null"
+        ],
+        [
+          "role",
+          "Role"
+        ],
+        [
+          "avatar",
+          "String [0..1] | null"
+        ],
+        [
+          "status",
+          "UserStatus"
+        ],
+        [
+          "interestedCategories",
+          "List<Mixed>"
+        ],
+        [
+          "violationCount",
+          "int"
+        ],
+        [
+          "commentBannedUntil",
+          "Date | null [0..1]"
+        ],
+        [
+          "violationHistory",
+          "List<ViolationHistoryItem>"
+        ],
+        [
+          "createdAt",
+          "Date"
+        ],
+        [
+          "updatedAt",
+          "Date"
+        ],
+        [
+          "isActive",
+          "boolean {derived, readOnly}"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Collection"
+    },
+    "ViolationHistoryItem": {
+      "attrs": [
+        [
+          "reportId",
+          "ObjectId"
+        ],
+        [
+          "commentId",
+          "ObjectId"
+        ],
+        [
+          "courseId",
+          "ObjectId"
+        ],
+        [
+          "reason",
+          "String"
+        ],
+        [
+          "actionTaken",
+          "String"
+        ],
+        [
+          "penaltySummary",
+          "String"
+        ],
+        [
+          "resolvedBy",
+          "ObjectId"
+        ],
+        [
+          "resolvedAt",
+          "Date"
+        ]
+      ],
+      "ops": [],
+      "stereo": "EmbeddedStructure"
+    },
+    "Otp": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "email",
+          "String"
+        ],
+        [
+          "codeHash",
+          "String"
+        ],
+        [
+          "purpose",
+          "OtpPurpose"
+        ],
+        [
+          "expiresAt",
+          "Date"
+        ],
+        [
+          "failedAttempts",
+          "int"
+        ],
+        [
+          "lastSentAt",
+          "Date"
+        ],
+        [
+          "isUsed",
+          "boolean"
+        ],
+        [
+          "createdAt",
+          "Date"
+        ],
+        [
+          "updatedAt",
+          "Date"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Collection"
+    },
+    "RefreshToken": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "userId",
+          "ObjectId"
+        ],
+        [
+          "tokenHash",
+          "String"
+        ],
+        [
+          "expiresAt",
+          "Date"
+        ],
+        [
+          "isRevoked",
+          "boolean"
+        ],
+        [
+          "createdAt",
+          "Date"
+        ],
+        [
+          "updatedAt",
+          "Date"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Collection"
+    },
+    "Category": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "name",
+          "String"
+        ],
+        [
+          "createdAt",
+          "Date"
+        ],
+        [
+          "updatedAt",
+          "Date"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Collection"
+    },
+    "Course": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "title",
+          "String"
+        ],
+        [
+          "description",
+          "String"
+        ],
+        [
+          "type",
+          "CourseType"
+        ],
+        [
+          "level",
+          "CourseLevel"
+        ],
+        [
+          "targetAudience",
+          "String"
+        ],
+        [
+          "learningOutcomes",
+          "List<String>"
+        ],
+        [
+          "requirements",
+          "String"
+        ],
+        [
+          "price",
+          "double"
+        ],
+        [
+          "discountPrice",
+          "double | null"
+        ],
+        [
+          "status",
+          "CourseStatus"
+        ],
+        [
+          "instructorId",
+          "ObjectId"
+        ],
+        [
+          "categoryId",
+          "ObjectId | null"
+        ],
+        [
+          "avgRating",
+          "double"
+        ],
+        [
+          "totalChapters",
+          "int"
+        ],
+        [
+          "totalLessons",
+          "int"
+        ],
+        [
+          "totalDuration",
+          "int"
+        ],
+        [
+          "thumbnail",
+          "String | null"
+        ],
+        [
+          "rejectReason",
+          "String | null"
+        ],
+        [
+          "chapters",
+          "List<Chapter>"
+        ],
+        [
+          "createdAt",
+          "Date"
+        ],
+        [
+          "updatedAt",
+          "Date"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Collection"
+    },
+    "Chapter": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "title",
+          "String"
+        ],
+        [
+          "order",
+          "int"
+        ],
+        [
+          "lessons",
+          "List<Lesson>"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Subdocument"
+    },
+    "Lesson": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "title",
+          "String"
+        ],
+        [
+          "order",
+          "int"
+        ],
+        [
+          "videoUrl",
+          "String"
+        ],
+        [
+          "duration",
+          "int"
+        ],
+        [
+          "content",
+          "String | null [0..1]"
+        ],
+        [
+          "fileUrl",
+          "String | null [0..1]"
+        ],
+        [
+          "fileName",
+          "String | null [0..1]"
+        ],
+        [
+          "note",
+          "String | null"
+        ],
+        [
+          "summary",
+          "String | null"
+        ],
+        [
+          "quizQuestions",
+          "List<QuizQuestion>"
+        ],
+        [
+          "hasQuiz",
+          "boolean"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Subdocument"
+    },
+    "QuizQuestion": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "content",
+          "String"
+        ],
+        [
+          "options",
+          "List<String>"
+        ],
+        [
+          "correctOption",
+          "int"
+        ],
+        [
+          "explanation",
+          "String"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Subdocument"
+    },
+    "Enrollment": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "studentId",
+          "ObjectId"
+        ],
+        [
+          "courseId",
+          "ObjectId"
+        ],
+        [
+          "enrolledAt",
+          "Date"
+        ],
+        [
+          "progressPercent",
+          "double"
+        ],
+        [
+          "status",
+          "EnrollmentStatus"
+        ],
+        [
+          "completedAt",
+          "Date | null"
+        ],
+        [
+          "lastLessonId",
+          "ObjectId | null"
+        ],
+        [
+          "createdAt",
+          "Date"
+        ],
+        [
+          "updatedAt",
+          "Date"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Collection"
+    },
+    "LessonProgress": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "enrollmentId",
+          "ObjectId"
+        ],
+        [
+          "lessonId",
+          "ObjectId"
+        ],
+        [
+          "status",
+          "LessonStatus"
+        ],
+        [
+          "lastPositionSec",
+          "int"
+        ],
+        [
+          "watchedSeconds",
+          "int"
+        ],
+        [
+          "watchedFully",
+          "boolean"
+        ],
+        [
+          "quizPassed",
+          "boolean"
+        ],
+        [
+          "createdAt",
+          "Date"
+        ],
+        [
+          "updatedAt",
+          "Date"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Collection"
+    },
+    "QuizAttempt": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "studentId",
+          "ObjectId"
+        ],
+        [
+          "questionId",
+          "ObjectId"
+        ],
+        [
+          "selectedOption",
+          "int"
+        ],
+        [
+          "isCorrect",
+          "boolean"
+        ],
+        [
+          "attemptedAt",
+          "Date"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Collection"
+    },
+    "Order": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "orderCode",
+          "String"
+        ],
+        [
+          "payosOrderCode",
+          "number"
+        ],
+        [
+          "studentId",
+          "ObjectId"
+        ],
+        [
+          "courseId",
+          "ObjectId"
+        ],
+        [
+          "originalPrice",
+          "double"
+        ],
+        [
+          "discountPrice",
+          "double | null"
+        ],
+        [
+          "couponCode",
+          "String | null"
+        ],
+        [
+          "discountAmount",
+          "double"
+        ],
+        [
+          "finalAmount",
+          "double"
+        ],
+        [
+          "status",
+          "OrderStatus"
+        ],
+        [
+          "paymentMethod",
+          "PaymentMethod"
+        ],
+        [
+          "paymentLinkId",
+          "String | null"
+        ],
+        [
+          "checkoutUrl",
+          "String | null"
+        ],
+        [
+          "qrCode",
+          "String | null"
+        ],
+        [
+          "qrImageUrl",
+          "String | null"
+        ],
+        [
+          "bankBin",
+          "String | null"
+        ],
+        [
+          "bankName",
+          "String | null"
+        ],
+        [
+          "accountNumber",
+          "String | null"
+        ],
+        [
+          "accountName",
+          "String | null"
+        ],
+        [
+          "transferDescription",
+          "String | null"
+        ],
+        [
+          "transactionReference",
+          "String | null"
+        ],
+        [
+          "expiresAt",
+          "Date"
+        ],
+        [
+          "paidAt",
+          "Date | null"
+        ],
+        [
+          "cancelledAt",
+          "Date | null"
+        ],
+        [
+          "cancelReason",
+          "String | null"
+        ],
+        [
+          "createdAt",
+          "Date"
+        ],
+        [
+          "updatedAt",
+          "Date"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Collection"
+    },
+    "PaymentTransaction": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "orderId",
+          "ObjectId"
+        ],
+        [
+          "orderCode",
+          "String"
+        ],
+        [
+          "payosOrderCode",
+          "number"
+        ],
+        [
+          "studentId",
+          "ObjectId"
+        ],
+        [
+          "courseId",
+          "ObjectId"
+        ],
+        [
+          "amount",
+          "double"
+        ],
+        [
+          "reference",
+          "String"
+        ],
+        [
+          "provider",
+          "String"
+        ],
+        [
+          "status",
+          "String"
+        ],
+        [
+          "counterAccountBankId",
+          "String | null"
+        ],
+        [
+          "counterAccountName",
+          "String | null"
+        ],
+        [
+          "counterAccountNumber",
+          "String | null"
+        ],
+        [
+          "transactionDateTime",
+          "String | null"
+        ],
+        [
+          "rawPayload",
+          "Record<String, unknown>"
+        ],
+        [
+          "createdAt",
+          "Date"
+        ],
+        [
+          "updatedAt",
+          "Date"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Collection"
+    },
+    "BuiltinCouponRule": {
+      "attrs": [
+        [
+          "code",
+          "String"
+        ],
+        [
+          "title",
+          "String"
+        ],
+        [
+          "discountType",
+          "String"
+        ],
+        [
+          "discountValue",
+          "double"
+        ],
+        [
+          "maxDiscountAmount",
+          "double | null"
+        ],
+        [
+          "minOrderAmount",
+          "double"
+        ],
+        [
+          "devOnly",
+          "boolean [0..1]"
+        ],
+        [
+          "fixedFinalAmount",
+          "double [0..1]"
+        ]
+      ],
+      "ops": [],
+      "stereo": "interface"
+    },
+    "Certificate": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "certificateCode",
+          "String"
+        ],
+        [
+          "studentId",
+          "ObjectId"
+        ],
+        [
+          "courseId",
+          "ObjectId"
+        ],
+        [
+          "issuedAt",
+          "Date"
+        ],
+        [
+          "qrCode",
+          "String"
+        ],
+        [
+          "fileUrl",
+          "String | null"
+        ],
+        [
+          "status",
+          "CertificateStatus"
+        ],
+        [
+          "createdAt",
+          "Date"
+        ],
+        [
+          "updatedAt",
+          "Date"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Collection"
+    },
+    "LessonComment": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "courseId",
+          "ObjectId"
+        ],
+        [
+          "lessonId",
+          "ObjectId"
+        ],
+        [
+          "parentId",
+          "ObjectId | null"
+        ],
+        [
+          "replyToUser",
+          "CommentReplyToUser | null"
+        ],
+        [
+          "authorId",
+          "ObjectId"
+        ],
+        [
+          "content",
+          "String"
+        ],
+        [
+          "visibilityStatus",
+          "CommentVisibilityStatus"
+        ],
+        [
+          "moderationNote",
+          "String | null"
+        ],
+        [
+          "violationRecorded",
+          "boolean"
+        ],
+        [
+          "reactions",
+          "List<CommentReaction>"
+        ],
+        [
+          "reports",
+          "List<CommentReport>"
+        ],
+        [
+          "createdAt",
+          "Date"
+        ],
+        [
+          "updatedAt",
+          "Date"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Collection"
+    },
+    "CommentReplyToUser": {
+      "attrs": [
+        [
+          "userId",
+          "ObjectId"
+        ],
+        [
+          "fullName",
+          "String"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Subdocument"
+    },
+    "CommentReaction": {
+      "attrs": [
+        [
+          "userId",
+          "ObjectId"
+        ],
+        [
+          "type",
+          "CommentReactionType"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Subdocument"
+    },
+    "CommentReport": {
+      "attrs": [
+        [
+          "userId",
+          "ObjectId"
+        ],
+        [
+          "reason",
+          "String"
+        ],
+        [
+          "createdAt",
+          "Date"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Subdocument"
+    },
+    "CourseReview": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "courseId",
+          "ObjectId"
+        ],
+        [
+          "studentId",
+          "ObjectId"
+        ],
+        [
+          "rating",
+          "int"
+        ],
+        [
+          "comment",
+          "String"
+        ],
+        [
+          "hasComment",
+          "boolean"
+        ],
+        [
+          "visibilityStatus",
+          "CommentVisibilityStatus"
+        ],
+        [
+          "moderationNote",
+          "String | null"
+        ],
+        [
+          "violationRecorded",
+          "boolean"
+        ],
+        [
+          "reports",
+          "List<CommentReport>"
+        ],
+        [
+          "createdAt",
+          "Date"
+        ],
+        [
+          "updatedAt",
+          "Date"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Collection"
+    },
+    "Report": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "reporterId",
+          "ObjectId"
+        ],
+        [
+          "targetType",
+          "ReportTargetType"
+        ],
+        [
+          "targetId",
+          "ObjectId"
+        ],
+        [
+          "targetAuthorId",
+          "ObjectId"
+        ],
+        [
+          "courseId",
+          "ObjectId"
+        ],
+        [
+          "lessonId",
+          "ObjectId | null"
+        ],
+        [
+          "reason",
+          "String"
+        ],
+        [
+          "status",
+          "ReportStatus"
+        ],
+        [
+          "escalatedToAdmin",
+          "boolean"
+        ],
+        [
+          "resolvedBy",
+          "ObjectId | null"
+        ],
+        [
+          "resolvedAt",
+          "Date | null"
+        ],
+        [
+          "actionTaken",
+          "ReportActionType | null"
+        ],
+        [
+          "moderationNote",
+          "String | null"
+        ],
+        [
+          "createdAt",
+          "Date"
+        ],
+        [
+          "updatedAt",
+          "Date"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Collection"
+    },
+    "Notification": {
+      "attrs": [
+        [
+          "_id",
+          "ObjectId"
+        ],
+        [
+          "recipientId",
+          "ObjectId"
+        ],
+        [
+          "type",
+          "NotificationType"
+        ],
+        [
+          "title",
+          "String"
+        ],
+        [
+          "message",
+          "String"
+        ],
+        [
+          "courseId",
+          "ObjectId | null"
+        ],
+        [
+          "lessonId",
+          "ObjectId | null"
+        ],
+        [
+          "isRead",
+          "boolean"
+        ],
+        [
+          "createdAt",
+          "Date"
+        ],
+        [
+          "updatedAt",
+          "Date"
+        ]
+      ],
+      "ops": [],
+      "stereo": "Collection"
+    },
+    "AuthService": {
+      "attrs": [
+        [
+          "logger",
+          "Logger"
+        ],
+        [
+          "usersService",
+          "UsersService"
+        ],
+        [
+          "mailService",
+          "MailService"
+        ],
+        [
+          "jwtService",
+          "JwtService"
+        ],
+        [
+          "configService",
+          "ConfigService"
+        ],
+        [
+          "otpModel",
+          "Model<OtpDocument>"
+        ],
+        [
+          "refreshTokenModel",
+          "Model<RefreshTokenDocument>"
+        ]
+      ],
+      "ops": [
+        "generateOtp()",
+        "hashValue(val)",
+        "verifyHash(hash, plain)",
+        "generateAccessToken(payload)",
+        "generateRefreshToken(userId)",
+        "register(registerDto)",
+        "verifyRegisterOtp(verifyOtpDto)",
+        "resendOtp(resendOtpDto)",
+        "login(loginDto)",
+        "refresh(rawRefreshToken)",
+        "logout(rawRefreshToken)",
+        "forgotPassword(forgotPasswordDto)",
+        "resetPassword(resetPasswordDto)",
+        "getMe(userId)",
+        "assignRole(currentAdminId, targetUserId, newRole)"
+      ],
+      "stereo": "Service"
+    },
+    "UsersService": {
+      "attrs": [
+        [
+          "logger",
+          "Logger"
+        ],
+        [
+          "userModel",
+          "Model<UserDocument>"
+        ],
+        [
+          "uploadsService",
+          "UploadsService"
+        ],
+        [
+          "refreshTokenModel",
+          "Model<RefreshTokenDocument>"
+        ]
+      ],
+      "ops": [
+        "onApplicationBootstrap()",
+        "serializeUser(user)",
+        "create(data)",
+        "findByEmail(email, includePassword)",
+        "findById(id, includePassword)",
+        "findActiveInstructors()",
+        "isActiveInstructor(id)",
+        "markActive(email)",
+        "updateRole(id, role)",
+        "updateStatus(id, status)",
+        "updatePassword(id, passwordHash)",
+        "update(id, updateData)",
+        "getProfile(userId)",
+        "updateProfile(userId, dto)",
+        "changePassword(userId, dto)",
+        "listManageUsers(query)",
+        "createManageUser(dto)",
+        "updateManageUserRole(currentAdminId, targetUserId, role)",
+        "updateManageUserStatus(currentAdminId, targetUserId, status)"
+      ],
+      "stereo": "Service"
+    },
+    "MailService": {
+      "attrs": [
+        [
+          "logger",
+          "Logger"
+        ],
+        [
+          "transporter",
+          "Transporter"
+        ],
+        [
+          "configService",
+          "ConfigService"
+        ]
+      ],
+      "ops": [
+        "sendRegisterOtp(email, otp)",
+        "sendForgotPasswordOtp(email, otp)"
+      ],
+      "stereo": "Service"
+    },
+    "CoursesService": {
+      "attrs": [
+        [
+          "courseModel",
+          "Model<Course>"
+        ],
+        [
+          "categoryModel",
+          "Model<Category>"
+        ]
+      ],
+      "ops": [
+        "getCategories()",
+        "getCourses(query)",
+        "getFeaturedCourses(query)",
+        "getCourseById(id)",
+        "recalculateTotals(courseId)"
+      ],
+      "stereo": "Service"
+    },
+    "CourseManageService": {
+      "attrs": [
+        [
+          "courseModel",
+          "Model<Course>"
+        ],
+        [
+          "categoryModel",
+          "Model<Category>"
+        ],
+        [
+          "usersService",
+          "UsersService"
+        ],
+        [
+          "uploadsService",
+          "UploadsService"
+        ]
+      ],
+      "ops": [
+        "listCourses(query, actor)",
+        "getActiveInstructors(actor)",
+        "createCourse(input, actor)",
+        "getCourse(id, actor)",
+        "updateCourse(id, input, actor)",
+        "deleteCourse(id, actor)",
+        "submitCourse(id, actor)",
+        "withdrawCourse(id, actor)",
+        "approveCourse(id, actor)",
+        "rejectCourse(id, input, actor)",
+        "hideCourse(id, actor)",
+        "addChapter(courseId, input, actor)",
+        "updateChapter(courseId, chapterId, input, actor)",
+        "deleteChapter(courseId, chapterId, actor)",
+        "reorderChapters(courseId, input, actor)",
+        "addLesson(courseId, chapterId, input, actor)",
+        "updateLesson(courseId, chapterId, lessonId, input, actor)",
+        "deleteLesson(courseId, chapterId, lessonId, actor)",
+        "reorderLessons(courseId, chapterId, input, actor)",
+        "addQuizQuestion(courseId, chapterId, lessonId, input, actor)",
+        "updateQuizQuestion(courseId, chapterId, lessonId, questionId, input, actor)",
+        "deleteQuizQuestion(courseId, chapterId, lessonId, questionId, actor)",
+        "transitionCourse(id, actor, action, rejectReason)",
+        "actionLabel(action)",
+        "findCourseForActor(id, actor)",
+        "findEditableCourse(id, actor)",
+        "assertCanDelete(course, actor)",
+        "assertCategoryExists(categoryId)",
+        "saveAndReturn(course, actor, recalculate)",
+        "findChapter(course, chapterId)",
+        "findLesson(course, chapterId, lessonId)",
+        "assertExactReorder(currentIds, requestedIds, label)",
+        "assertValidQuestion(question)"
+      ],
+      "stereo": "Service"
+    },
+    "UploadsService": {
+      "attrs": [
+        [
+          "logger",
+          "Logger"
+        ],
+        [
+          "publicRoot",
+          "String"
+        ]
+      ],
+      "ops": [
+        "finalizeUploadedImage(file, folder)",
+        "finalizeUploadedVideo(file)",
+        "finalizeUploadedDocument(file)",
+        "deleteLocalFile(publicUrl)",
+        "discardTempFile(filePath)",
+        "readAndDetectImageMime(filePath)",
+        "readAndDetectVideoMime(filePath)",
+        "readHeaderBytes(filePath, length)",
+        "safeUnlink(filePath)"
+      ],
+      "stereo": "Service"
+    },
+    "EnrollmentsService": {
+      "attrs": [
+        [
+          "enrollmentModel",
+          "Model<EnrollmentDocument>"
+        ],
+        [
+          "lessonProgressModel",
+          "Model<LessonProgressDocument>"
+        ],
+        [
+          "quizAttemptModel",
+          "Model<QuizAttemptDocument>"
+        ],
+        [
+          "courseModel",
+          "Model<Course>"
+        ],
+        [
+          "userModel",
+          "Model<User>"
+        ],
+        [
+          "certificatesService",
+          "CertificatesService"
+        ]
+      ],
+      "ops": [
+        "enrollCourse(studentId, courseId)",
+        "createEnrollmentForCompletedOrder(studentId, courseId)",
+        "getEnrollmentStatus(userId, courseId)",
+        "getMyCourses(studentId, query)",
+        "getCourseLearning(studentId, courseId, role)",
+        "getLessonForLearning(studentId, courseId, lessonId, role)",
+        "updateLessonProgress(studentId, courseId, lessonId, dto, role)",
+        "submitLessonQuiz(studentId, courseId, lessonId, dto, role)",
+        "getCourseStudentsForManager(courseId, actor, query)",
+        "initializeEnrollment(studentObjectId, courseObjectId, course)",
+        "completeLessonAndAdvance(studentId, courseId, enrollment, orderedLessons, progressMap, lessonIndex)",
+        "findApprovedCourseOrThrow(courseId)",
+        "findCourseForPreviewOrThrow(actorUserId, courseId, role)",
+        "findEnrollmentAndCourseOrThrow(studentId, courseId)",
+        "ensureLessonProgressMap(enrollment, orderedLessons)"
+      ],
+      "stereo": "Service"
+    },
+    "CertificatesService": {
+      "attrs": [
+        [
+          "certificateModel",
+          "Model<CertificateDocument>"
+        ],
+        [
+          "courseModel",
+          "Model<Course>"
+        ],
+        [
+          "userModel",
+          "Model<User>"
+        ]
+      ],
+      "ops": [
+        "findByStudentAndCourse(studentId, courseId)",
+        "issueForEnrollment(studentId, courseId)",
+        "getMyCertificates(studentId)",
+        "verifyByCode(rawCode)",
+        "serializeCertificate(cert)"
+      ],
+      "stereo": "Service"
+    },
+    "OrdersService": {
+      "attrs": [
+        [
+          "logger",
+          "Logger"
+        ],
+        [
+          "orderModel",
+          "Model<OrderDocument>"
+        ],
+        [
+          "transactionModel",
+          "Model<PaymentTransactionDocument>"
+        ],
+        [
+          "courseModel",
+          "Model<Course>"
+        ],
+        [
+          "userModel",
+          "Model<User>"
+        ],
+        [
+          "enrollmentModel",
+          "Model<EnrollmentDocument>"
+        ],
+        [
+          "configService",
+          "ConfigService"
+        ],
+        [
+          "payosService",
+          "PayosService"
+        ],
+        [
+          "enrollmentsService",
+          "EnrollmentsService"
+        ]
+      ],
+      "ops": [
+        "isSimulationEnabled()",
+        "previewCheckout(studentId, dto)",
+        "createOrder(studentId, dto)",
+        "getOrderByIdForUser(orderId, user)",
+        "syncOrderPayment(orderId, user)",
+        "handlePayosWebhook(payload)",
+        "simulateOrderPayment(orderId, user)",
+        "confirmOrderManually(orderId, adminUser)",
+        "cancelOrder(orderId, user, dto)",
+        "getMyOrders(studentId, query)",
+        "getManageOrders(query)",
+        "getOrderExpireMinutes()",
+        "getPrimaryClientOrigin()",
+        "getAvailableCouponRules()",
+        "computePriceAndCoupon(course, rawCouponCode)",
+        "syncOrderWithPayosInternal(order)",
+        "completeOrderWithTransaction(params)",
+        "recordTransactionIfNotExists(params)",
+        "findOrderOrThrow(orderId)",
+        "assertCanAccessOrder(order, user)",
+        "serializeOrder(order)"
+      ],
+      "stereo": "Service"
+    },
+    "PayosService": {
+      "attrs": [
+        [
+          "logger",
+          "Logger"
+        ],
+        [
+          "configService",
+          "ConfigService"
+        ]
+      ],
+      "ops": [
+        "getCredentials()",
+        "isConfigured()",
+        "createPaymentRequestSignature(params)",
+        "verifyWebhookSignature(data, signature)",
+        "createPaymentLink(params)",
+        "getPaymentLinkInfo(payosOrderCode)",
+        "cancelPaymentLink(payosOrderCode, cancellationReason)"
+      ],
+      "stereo": "Service"
+    },
+    "QuestionsService": {
+      "attrs": [
+        [
+          "commentModel",
+          "Model<LessonCommentDocument>"
+        ],
+        [
+          "reportModel",
+          "Model<ReportDocument>"
+        ],
+        [
+          "notificationModel",
+          "Model<NotificationDocument>"
+        ],
+        [
+          "courseModel",
+          "Model<Course>"
+        ],
+        [
+          "enrollmentModel",
+          "Model<EnrollmentDocument>"
+        ],
+        [
+          "lessonProgressModel",
+          "Model<LessonProgressDocument>"
+        ],
+        [
+          "userModel",
+          "Model<UserDocument>"
+        ],
+        [
+          "reviewModel",
+          "Model<CourseReviewDocument>"
+        ]
+      ],
+      "ops": [
+        "verifyLessonDiscussionAccess(user, courseId, lessonId)",
+        "buildReactionSummary(reactions)",
+        "mapCommentToDto(comment, authorMap, currentUserId, isCourseModerator, replies, courseInstructorId)",
+        "listLessonComments(user, courseId, lessonId)",
+        "createLessonComment(user, courseId, lessonId, dto)",
+        "toggleCommentReaction(user, courseId, lessonId, commentId, dto)",
+        "reportComment(user, courseId, lessonId, commentId, dto)",
+        "deleteComment(user, courseId, lessonId, commentId)",
+        "listManageReports(user, query)",
+        "resolveReport(user, reportId, dto)",
+        "listMyNotifications(user)",
+        "markAllNotificationsRead(user)"
+      ],
+      "stereo": "Service"
+    },
+    "ReviewsService": {
+      "attrs": [
+        [
+          "reviewModel",
+          "Model<CourseReviewDocument>"
+        ],
+        [
+          "courseModel",
+          "Model<Course>"
+        ],
+        [
+          "enrollmentModel",
+          "Model<EnrollmentDocument>"
+        ],
+        [
+          "userModel",
+          "Model<UserDocument>"
+        ],
+        [
+          "reportModel",
+          "Model<ReportDocument>"
+        ]
+      ],
+      "ops": [
+        "listCourseReviews(courseId, query)",
+        "getMyCourseReviewState(user, courseId)",
+        "upsertMyCourseReview(user, courseId, dto)",
+        "reportCourseReview(user, courseId, reviewId, dto)",
+        "recalculateCourseRating(courseObjectId)",
+        "computeSummaryFromVisibleReviews(reviews)"
+      ],
+      "stereo": "Service"
+    },
+    "JwtAuthGuard": {
+      "attrs": [
+        [
+          "reflector",
+          "Reflector"
+        ],
+        [
+          "jwtService",
+          "JwtService"
+        ],
+        [
+          "configService",
+          "ConfigService"
+        ]
+      ],
+      "ops": [
+        "canActivate(context)",
+        "extractTokenFromHeader(request)"
+      ],
+      "stereo": "Guard"
+    },
+    "RolesGuard": {
+      "attrs": [
+        [
+          "reflector",
+          "Reflector"
+        ]
+      ],
+      "ops": [
+        "canActivate(context)"
+      ],
+      "stereo": "Guard"
+    }
+  },
+  "relations": [
+    {
+      "a": "User",
+      "b": "ViolationHistoryItem",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "*--",
+      "label": "embeds"
+    },
+    {
+      "a": "User",
+      "b": "RefreshToken",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "owns"
+    },
+    {
+      "a": "User",
+      "b": "Otp",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "..>",
+      "label": "email"
+    },
+    {
+      "a": "User",
+      "b": "Course",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "instructs"
+    },
+    {
+      "a": "Category",
+      "b": "Course",
+      "am": "0..1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "classifies"
+    },
+    {
+      "a": "Course",
+      "b": "Chapter",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "*--",
+      "label": "embeds"
+    },
+    {
+      "a": "Chapter",
+      "b": "Lesson",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "*--",
+      "label": "embeds"
+    },
+    {
+      "a": "Lesson",
+      "b": "QuizQuestion",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "*--",
+      "label": "embeds"
+    },
+    {
+      "a": "User",
+      "b": "Enrollment",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "enrolls"
+    },
+    {
+      "a": "Course",
+      "b": "Enrollment",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "has"
+    },
+    {
+      "a": "Enrollment",
+      "b": "LessonProgress",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "enrollmentId"
+    },
+    {
+      "a": "LessonProgress",
+      "b": "Lesson",
+      "am": "*",
+      "bm": "1",
+      "kind": "-->",
+      "label": "references"
+    },
+    {
+      "a": "User",
+      "b": "QuizAttempt",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "submits"
+    },
+    {
+      "a": "QuizAttempt",
+      "b": "QuizQuestion",
+      "am": "*",
+      "bm": "1",
+      "kind": "-->",
+      "label": "answers"
+    },
+    {
+      "a": "User",
+      "b": "Order",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "places"
+    },
+    {
+      "a": "Course",
+      "b": "Order",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "ordered in"
+    },
+    {
+      "a": "Order",
+      "b": "BuiltinCouponRule",
+      "am": "0..*",
+      "bm": "0..1",
+      "kind": "..>",
+      "label": "couponCode"
+    },
+    {
+      "a": "Order",
+      "b": "PaymentTransaction",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "paid via"
+    },
+    {
+      "a": "User",
+      "b": "Certificate",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "receives"
+    },
+    {
+      "a": "Course",
+      "b": "Certificate",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "grants"
+    },
+    {
+      "a": "Course",
+      "b": "LessonComment",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "contains"
+    },
+    {
+      "a": "Lesson",
+      "b": "LessonComment",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "discussed in"
+    },
+    {
+      "a": "User",
+      "b": "LessonComment",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "authors"
+    },
+    {
+      "a": "LessonComment",
+      "b": "LessonComment",
+      "am": "0..1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "parentId (replies)"
+    },
+    {
+      "a": "LessonComment",
+      "b": "CommentReplyToUser",
+      "am": "1",
+      "bm": "0..1",
+      "kind": "*--",
+      "label": "embeds"
+    },
+    {
+      "a": "LessonComment",
+      "b": "CommentReaction",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "*--",
+      "label": "embeds"
+    },
+    {
+      "a": "LessonComment",
+      "b": "CommentReport",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "*--",
+      "label": "embeds"
+    },
+    {
+      "a": "Course",
+      "b": "CourseReview",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "reviewed in"
+    },
+    {
+      "a": "User",
+      "b": "CourseReview",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "rates"
+    },
+    {
+      "a": "CourseReview",
+      "b": "CommentReport",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "*--",
+      "label": "embeds"
+    },
+    {
+      "a": "User",
+      "b": "Report",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "reporterId"
+    },
+    {
+      "a": "User",
+      "b": "Report",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "targetAuthorId"
+    },
+    {
+      "a": "User",
+      "b": "Report",
+      "am": "0..1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "resolvedBy"
+    },
+    {
+      "a": "Report",
+      "b": "Course",
+      "am": "*",
+      "bm": "1",
+      "kind": "-->",
+      "label": "belongs to"
+    },
+    {
+      "a": "Report",
+      "b": "LessonComment",
+      "am": "0..*",
+      "bm": "0..1",
+      "kind": "-->",
+      "label": "targetId QUESTION or ANSWER"
+    },
+    {
+      "a": "Report",
+      "b": "CourseReview",
+      "am": "0..*",
+      "bm": "0..1",
+      "kind": "-->",
+      "label": "targetId REVIEW"
+    },
+    {
+      "a": "User",
+      "b": "Notification",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "recipientId"
+    },
+    {
+      "a": "Course",
+      "b": "Notification",
+      "am": "0..1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "courseId"
+    },
+    {
+      "a": "Lesson",
+      "b": "Notification",
+      "am": "0..1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "lessonId"
+    },
+    {
+      "a": "Lesson",
+      "b": "Report",
+      "am": "0..1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "lessonId"
+    },
+    {
+      "a": "Enrollment",
+      "b": "Lesson",
+      "am": "0..*",
+      "bm": "0..1",
+      "kind": "-->",
+      "label": "lastLessonId"
+    },
+    {
+      "a": "User",
+      "b": "PaymentTransaction",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "studentId"
+    },
+    {
+      "a": "Course",
+      "b": "PaymentTransaction",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "courseId"
+    },
+    {
+      "a": "User",
+      "b": "CommentReplyToUser",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "userId"
+    },
+    {
+      "a": "User",
+      "b": "CommentReaction",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "userId"
+    },
+    {
+      "a": "User",
+      "b": "CommentReport",
+      "am": "1",
+      "bm": "0..*",
+      "kind": "-->",
+      "label": "userId"
+    },
+    {
+      "a": "AuthService",
+      "b": "UsersService",
+      "am": "",
+      "bm": "",
+      "kind": "-->",
+      "label": "uses"
+    },
+    {
+      "a": "AuthService",
+      "b": "MailService",
+      "am": "",
+      "bm": "",
+      "kind": "-->",
+      "label": "uses"
+    },
+    {
+      "a": "UsersService",
+      "b": "UploadsService",
+      "am": "",
+      "bm": "",
+      "kind": "-->",
+      "label": "deletes old avatar"
+    },
+    {
+      "a": "CourseManageService",
+      "b": "UsersService",
+      "am": "",
+      "bm": "",
+      "kind": "-->",
+      "label": "verifies instructor"
+    },
+    {
+      "a": "CourseManageService",
+      "b": "UploadsService",
+      "am": "",
+      "bm": "",
+      "kind": "-->",
+      "label": "cleans up media files"
+    },
+    {
+      "a": "EnrollmentsService",
+      "b": "CertificatesService",
+      "am": "",
+      "bm": "",
+      "kind": "-->",
+      "label": "issues certificate"
+    },
+    {
+      "a": "OrdersService",
+      "b": "PayosService",
+      "am": "",
+      "bm": "",
+      "kind": "-->",
+      "label": "creates & syncs VietQR"
+    },
+    {
+      "a": "OrdersService",
+      "b": "EnrollmentsService",
+      "am": "",
+      "bm": "",
+      "kind": "-->",
+      "label": "unlocks PRO course"
+    },
+    {
+      "a": "QuestionsService",
+      "b": "CourseReview",
+      "am": "",
+      "bm": "",
+      "kind": "..>",
+      "label": "reads and moderates model"
+    },
+    {
+      "a": "AuthService",
+      "b": "Otp",
+      "am": "",
+      "bm": "",
+      "kind": "..>",
+      "label": "verifies email OTP"
+    },
+    {
+      "a": "AuthService",
+      "b": "RefreshToken",
+      "am": "",
+      "bm": "",
+      "kind": "..>",
+      "label": "rotates sessions"
+    },
+    {
+      "a": "OrdersService",
+      "b": "BuiltinCouponRule",
+      "am": "",
+      "bm": "",
+      "kind": "..>",
+      "label": "computes coupon discount"
+    },
+    {
+      "a": "OrdersService",
+      "b": "Order",
+      "am": "",
+      "bm": "",
+      "kind": "..>",
+      "label": "completes payment"
+    },
+    {
+      "a": "EnrollmentsService",
+      "b": "Enrollment",
+      "am": "",
+      "bm": "",
+      "kind": "..>",
+      "label": "creates and completes"
+    },
+    {
+      "a": "CertificatesService",
+      "b": "Certificate",
+      "am": "",
+      "bm": "",
+      "kind": "..>",
+      "label": "issues"
+    },
+    {
+      "a": "QuestionsService",
+      "b": "Report",
+      "am": "",
+      "bm": "",
+      "kind": "..>",
+      "label": "resolves"
+    },
+    {
+      "a": "QuestionsService",
+      "b": "Notification",
+      "am": "",
+      "bm": "",
+      "kind": "..>",
+      "label": "creates"
+    }
+  ],
+  "enums": {
+    "CourseType": [
+      "FREE",
+      "PRO"
+    ],
+    "CourseStatus": [
+      "DRAFT",
+      "PENDING",
+      "APPROVED",
+      "HIDDEN"
+    ],
+    "EnrollmentStatus": [
+      "LEARNING",
+      "COMPLETED"
+    ],
+    "LessonStatus": [
+      "LOCKED",
+      "UNLOCKED",
+      "COMPLETED"
+    ],
+    "CertificateStatus": [
+      "VALID",
+      "REVOKED"
+    ],
+    "OrderStatus": [
+      "PENDING",
+      "COMPLETED",
+      "CANCELLED",
+      "EXPIRED"
+    ],
+    "PaymentMethod": [
+      "PAYOS_VIETQR",
+      "SIMULATION",
+      "MANUAL"
+    ],
+    "Role": [
+      "STUDENT",
+      "INSTRUCTOR",
+      "ACCOUNTANT",
+      "ADMIN"
+    ],
+    "UserStatus": [
+      "PENDING",
+      "ACTIVE",
+      "LOCKED"
+    ],
+    "OtpPurpose": [
+      "REGISTER",
+      "RESET_PASSWORD"
+    ],
+    "CommentReactionType": [
+      "LIKE",
+      "LOVE",
+      "CARE",
+      "HAHA",
+      "WOW",
+      "SAD",
+      "ANGRY"
+    ],
+    "CommentVisibilityStatus": [
+      "VISIBLE",
+      "HIDDEN"
+    ],
+    "NotificationType": [
+      "MODERATION_REMINDER",
+      "MODERATION_WARNING",
+      "MODERATION_RESTORED",
+      "REPORT_RESULT"
+    ],
+    "ReportTargetType": [
+      "QUESTION",
+      "ANSWER",
+      "REVIEW"
+    ],
+    "ReportStatus": [
+      "PENDING",
+      "ESCALATED",
+      "RESOLVED",
+      "DISMISSED"
+    ],
+    "ReportActionType": [
+      "DISMISS",
+      "DELETE_AND_REMIND",
+      "ESCALATE",
+      "APPLY_PENALTY"
+    ],
+    "CourseLevel": [
+      "Người mới bắt đầu",
+      "Có cơ bản",
+      "Chuyên nghiệp"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "source_sha256": "ac3a44f9b6a0f9746a456bc1f5127bc9756026b2081dfda8f1e6de732d7209bc",
+  "output_sha256": "22dcc1ec62b13ea9a3354d1ff445d5fbd934922ae7bec9c3bb7ada80ab6eb8d1",
+  "changed_parts": [
+    "word/document.xml",
+    "word/_rels/document.xml.rels"
+  ],
+  "original_body_preserved": true,
+  "original_tables_preserved": 27,
+  "original_images_preserved": 5,
+  "original_footnotes_preserved": 22,
+  "chapter_3_headings": 48,
+  "new_tables": 22,
+  "new_figures": 16,
+  "new_diagrams": 9,
+  "application_screenshots": 7,
+  "documented_models": 18,
+  "separate_collections": 15,
+  "schema_field_coverage": "complete except shared id/timestamp fields explained in prose",
+  "all_internal_links_valid": true,
+  "toc_cached_page_numbers_valid": true
+}

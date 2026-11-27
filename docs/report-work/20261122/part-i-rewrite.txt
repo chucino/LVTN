@@ -1,0 +1,101 @@
+# PHẦN I GIỚI THIỆU
+
+# 1 Đặt vấn đề
+
+Học lập trình là một quá trình tích lũy kiến thức và vận dụng kiến thức đó qua từng bài học. Người mới bắt đầu cần được hướng dẫn từ những nội dung cơ bản trước khi tiếp cận các nội dung phức tạp hơn. Với hình thức học trực tuyến, video và tài liệu giúp người học chủ động lựa chọn thời gian, xem lại bài giảng và tiếp tục học theo khả năng của mình. Để việc học có định hướng, các nội dung này cần được sắp xếp thành khóa học với trình tự và yêu cầu hoàn thành rõ ràng.
+
+Đối với một trung tâm đào tạo, cung cấp khóa học trực tuyến còn gắn với nhiều công việc ngoài biên soạn bài giảng. Trung tâm cần giới thiệu khóa học, tiếp nhận đăng ký, xác nhận học phí và cấp quyền học cho từng học viên. Trong quá trình học, giảng viên cần giải đáp thắc mắc, còn trung tâm cần theo dõi kết quả và ghi nhận những học viên đã hoàn thành khóa học. Các công việc này có quan hệ với nhau và cùng sử dụng thông tin về học viên, khóa học và quá trình tham gia.
+
+Nếu thông tin đăng ký, giao dịch và kết quả học tập được quản lý riêng bằng bảng tính, tin nhắn hoặc các đường dẫn chia sẻ, người phụ trách phải đối chiếu lại ở nhiều nơi. Chẳng hạn, sau khi học viên thanh toán, trung tâm cần xác định giao dịch thuộc khóa học nào và cập nhật quyền truy cập tương ứng. Khi học viên yêu cầu xác nhận hoàn thành, trung tâm cũng cần có căn cứ về những bài đã học và kết quả kiểm tra. Vì vậy, bài toán đặt ra là xây dựng một hệ thống liên kết được các công việc này, đồng thời cho phép mỗi người thực hiện đúng nhiệm vụ của mình.
+
+Từ yêu cầu trên, đề tài Xây dựng website đăng ký và học tập trực tuyến các khóa học lập trình cho trung tâm đào tạo được thực hiện với sản phẩm mang tên NextCode. Website hỗ trợ học viên tìm hiểu khóa học, đăng ký tham gia, thanh toán đối với khóa có thu phí và học theo nội dung đã biên soạn. Đồng thời, hệ thống cung cấp khu vực làm việc cho giảng viên và quản trị viên để tổ chức nội dung, quản lý việc cung cấp khóa học và theo dõi quá trình học tập. Qua đó, đề tài hướng đến việc xây dựng một quy trình thống nhất từ khi giới thiệu khóa học đến khi ghi nhận kết quả của học viên.
+
+# 2 Lịch sử giải quyết vấn đề
+
+# 2.1 Các nền tảng học tập đã có
+
+Việc tổ chức học tập qua website đã được áp dụng theo nhiều hướng. Các hệ thống quản lý học tập chú trọng tổ chức hoạt động và theo dõi kết quả, trong khi các nền tảng cung cấp khóa học giúp người học tìm kiếm và lựa chọn nội dung phù hợp. Trong phạm vi đề tài, Moodle và F8 được tham khảo để tìm hiểu hai cách tiếp cận này.
+
+Moodle cung cấp chức năng theo dõi hoàn thành hoạt động học tập. Giảng viên có thể thiết lập điều kiện như người học đã xem nội dung, đạt mức điểm quy định hoặc tự đánh dấu hoàn thành. Người học được hiển thị những việc cần thực hiện để hoàn tất hoạt động. Chức năng này cho thấy tiến độ học cần gắn với các điều kiện cụ thể, giúp người học biết việc cần làm và giúp người phụ trách có căn cứ theo dõi.[fn1]
+
+F8 là nền tảng cung cấp các khóa học lập trình bằng tiếng Việt. Website giới thiệu các khóa miễn phí và khóa Pro có thu phí, kèm thông tin như tên khóa, giảng viên, số bài và thời lượng. Cách trình bày này giúp người học xem xét nội dung và hình thức tham gia trước khi lựa chọn khóa học. Đối với đề tài, F8 là nguồn tham khảo về cách giới thiệu khóa học lập trình và tổ chức thông tin phục vụ người tự học.[fn2]
+
+Hai nền tảng trên giải quyết những khía cạnh liên quan trực tiếp đến đề tài. Moodle gợi mở cách quản lý điều kiện hoàn thành, còn F8 cho thấy cách cung cấp thông tin khóa học cho người học lập trình. Việc tham khảo tập trung vào các cách tổ chức này để xác định giải pháp phù hợp với hoạt động của một trung tâm đào tạo.
+
+# 2.2 Hướng giải quyết được kế thừa
+
+NextCode vận dụng cách tổ chức khóa học thành chương và bài, giúp học viên theo dõi trình tự học và nhận biết phần nội dung đã hoàn thành. Video, nội dung văn bản, tài liệu và câu hỏi trắc nghiệm được đặt trong bài học để người học tiếp cận kiến thức và kiểm tra lại mức độ hiểu bài. Tiến độ được lưu theo từng học viên và từng khóa học để có thể tiếp tục học ở những lần truy cập sau.
+
+Bên cạnh hoạt động học tập, đề tài tập trung liên kết việc đăng ký với quyền tham gia khóa học. Khóa miễn phí cho phép học viên đăng ký trực tiếp, còn khóa có thu phí yêu cầu xác nhận thanh toán trước khi cấp quyền học. Ở phía trung tâm, nội dung do giảng viên phụ trách được gửi xét duyệt trước khi công bố. Cách tổ chức này phù hợp với phạm vi một trung tâm quản lý khóa học và phân công người biên soạn, đồng thời tạo cơ sở để theo dõi quá trình từ chuẩn bị nội dung đến cung cấp khóa học cho học viên.
+
+# 3 Mục tiêu đề tài
+
+# 3.1 Mục tiêu tổng quát
+
+Xây dựng website NextCode phục vụ đăng ký và học tập trực tuyến các khóa học lập trình cho một trung tâm đào tạo. Hệ thống cần hỗ trợ học viên chủ động học theo nội dung có sẵn, đồng thời giúp trung tâm quản lý tập trung khóa học, việc tham gia và kết quả học tập.
+
+# 3.2 Mục tiêu cụ thể
+
+Đối với việc lựa chọn và tham gia khóa học, website cần cung cấp thông tin về nội dung, giảng viên và học phí, hỗ trợ tìm kiếm khóa học và đăng ký bằng tài khoản cá nhân. Với khóa có thu phí, thông tin đơn hàng và kết quả thanh toán cần được liên kết với đúng học viên và khóa học để cấp quyền truy cập sau khi giao dịch được xác nhận.
+
+Đối với hoạt động học tập, hệ thống cần trình bày bài giảng theo thứ tự, lưu tiến độ và cho phép học viên tiếp tục phần đang học. Các bài có câu hỏi trắc nghiệm cần ghi nhận kết quả làm bài. Việc hoàn thành bài và khóa học phải được xác định theo điều kiện đã đặt ra, làm căn cứ cấp chứng chỉ hoàn thành và tra cứu thông tin chứng chỉ.
+
+Đối với giảng viên, website cần hỗ trợ biên soạn chương, bài giảng, tài liệu và câu hỏi trắc nghiệm trong những khóa học được phân công. Giảng viên có thể gửi nội dung để xét duyệt, theo dõi học viên và trả lời các câu hỏi liên quan đến khóa học mình phụ trách.
+
+Đối với quản trị viên, hệ thống cần cung cấp công cụ tạo khóa học, phân công giảng viên, xét duyệt nội dung và quản lý trạng thái công bố. Đồng thời, quản trị viên cần theo dõi người dùng, đơn hàng, giao dịch và xử lý các báo cáo về nội dung không phù hợp.
+
+Về mặt kỹ thuật, website cần kiểm tra quyền truy cập theo nhiệm vụ của người dùng và bảo vệ nội dung học theo điều kiện tham gia. Dữ liệu về đăng ký, thanh toán và tiến độ cần được xử lý thống nhất giữa giao diện và máy chủ. Các trường hợp xử lý chính cần được kiểm thử để xác định mức độ đáp ứng yêu cầu của sản phẩm.
+
+# 4 Đối tượng và phạm vi nghiên cứu
+
+# 4.1 Đối tượng nghiên cứu
+
+Đối tượng nghiên cứu của đề tài là quy trình đăng ký, cung cấp và quản lý việc học các khóa lập trình trực tuyến tại một trung tâm đào tạo. Các vấn đề được xem xét gồm cách tổ chức nội dung khóa học, điều kiện tham gia, xác nhận học phí, theo dõi tiến độ, hỗ trợ học viên và ghi nhận hoàn thành. Mối liên hệ giữa các thông tin này là cơ sở để xác định chức năng và thiết kế dữ liệu cho hệ thống.
+
+Các nhóm người sử dụng được xem xét gồm khách truy cập, học viên, giảng viên và quản trị viên. Khách truy cập tìm hiểu thông tin công khai trước khi đăng ký tài khoản. Học viên tham gia và học các khóa học. Giảng viên phụ trách nội dung và hỗ trợ việc học, còn quản trị viên tổ chức và quản lý hoạt động của website. Dịch vụ gửi thư điện tử và dịch vụ thanh toán được nghiên cứu ở vai trò phối hợp với hệ thống để xác thực tài khoản và xử lý giao dịch.
+
+# 4.2 Phạm vi nghiên cứu
+
+Đề tài xây dựng ứng dụng hoạt động trên trình duyệt, phục vụ mô hình một trung tâm đào tạo quản lý và cung cấp các khóa học lập trình. Nội dung được biên soạn trước dưới dạng video, bài đọc, tài liệu đính kèm và câu hỏi trắc nghiệm. Học viên tự lựa chọn thời gian học, thực hiện các bài theo trình tự và được lưu lại tiến độ. Hai hình thức tham gia được triển khai là khóa miễn phí và khóa Pro có thu phí.
+
+Phạm vi chức năng bao gồm quản lý tài khoản, giới thiệu và tìm kiếm khóa học, đăng ký tham gia, thanh toán bằng mã QR, học và kiểm tra trắc nghiệm, hỏi đáp, đánh giá khóa học, cấp và tra cứu chứng chỉ hoàn thành. Phía quản lý bao gồm biên soạn và xét duyệt khóa học, phân công giảng viên, theo dõi học viên, đơn hàng, giao dịch và xử lý báo cáo vi phạm.
+
+Đề tài tập trung vào hình thức tự học qua nội dung có sẵn. Các nội dung như tổ chức lớp học qua cuộc gọi video, ứng dụng di động riêng và chấm bài lập trình tự động nằm ngoài phạm vi thực hiện. Chứng chỉ trong hệ thống ghi nhận việc hoàn thành khóa học theo các điều kiện của website. Việc đánh giá sản phẩm tập trung vào chức năng và quy trình xử lý, chưa bao gồm nghiên cứu tác động đến kết quả học tập tại một trung tâm đang vận hành.
+
+# 5 Nội dung nghiên cứu
+
+# 5.1 Quy trình thực hiện
+
+Trước hết, đề tài tìm hiểu cách tổ chức khóa học trực tuyến và xác định những công việc cần hỗ trợ cho học viên, giảng viên và người quản lý trung tâm. Các nền tảng liên quan được tham khảo để xem xét cách giới thiệu khóa học, tổ chức bài giảng và theo dõi hoàn thành. Từ đó, yêu cầu được phân tích theo quá trình chuẩn bị khóa học, tiếp nhận đăng ký, học tập và ghi nhận kết quả.
+
+Tiếp theo, các yêu cầu được mô tả bằng sơ đồ chức năng, sơ đồ trường hợp sử dụng và các luồng xử lý. Giai đoạn này làm rõ ai được thực hiện từng công việc, điều kiện trước khi thực hiện và kết quả cần lưu. Những tình huống như chưa thanh toán, chưa hoàn thành bài trước hoặc truy cập khóa học không được phân công cũng được xem xét để xác định cách hệ thống phản hồi.
+
+Trên cơ sở phân tích, đề tài thiết kế kiến trúc, cấu trúc dữ liệu và giao diện. Phần giao diện tiếp nhận thao tác và trình bày thông tin cho người dùng. Phần máy chủ kiểm tra dữ liệu, quyền truy cập và xử lý các quy tắc của hệ thống. Các nhóm chức năng được xây dựng và kết nối với nhau, trong đó việc xác nhận thanh toán cần dẫn đến quyền học, còn kết quả hoàn thành bài cần được phản ánh vào tiến độ khóa học.
+
+Sau khi cài đặt, các chức năng được kiểm tra dựa trên yêu cầu và kết quả mong đợi. Nội dung kiểm tra tập trung vào những tình huống quan trọng của tài khoản, quản lý khóa học, thanh toán, tiến độ, hỏi đáp và đánh giá. Kết quả được dùng để phát hiện sai lệch, điều chỉnh chương trình và xác định những nội dung cần tiếp tục hoàn thiện. Đồng thời, báo cáo trình bày thiết kế và hướng dẫn cài đặt để làm rõ cách tổ chức và vận hành sản phẩm.
+
+# 5.2 Công nghệ và công cụ sử dụng
+
+Hệ thống sử dụng TypeScript để phát triển cả giao diện và phần xử lý trên máy chủ. Giao diện được xây dựng bằng Vue 3, kết hợp Vuetify và Tailwind CSS để tổ chức các trang, biểu mẫu và thành phần hiển thị. Vite hỗ trợ chạy ứng dụng trong quá trình phát triển và tạo bản đóng gói giao diện. Vue Router quản lý việc chuyển trang, Pinia quản lý thông tin dùng chung và Axios trao đổi dữ liệu với máy chủ.
+
+Phần máy chủ được xây dựng bằng NestJS trên môi trường Node.js. Mã nguồn được chia theo các nhóm công việc như tài khoản, khóa học, đăng ký học, đơn hàng và chứng chỉ. MongoDB lưu trữ dữ liệu của hệ thống, còn Mongoose hỗ trợ mô tả cấu trúc và truy xuất dữ liệu. Cách tổ chức này phân chia trách nhiệm giữa các phần của chương trình và làm rõ nơi xử lý từng nghiệp vụ.
+
+Trong các chức năng kết nối dịch vụ, Nodemailer được dùng để gửi thư điện tử xác thực tài khoản và hỗ trợ khôi phục mật khẩu. payOS hỗ trợ tạo yêu cầu thanh toán và kiểm tra kết quả giao dịch cho khóa có thu phí. Mật khẩu được băm bằng Argon2 trước khi lưu, còn JWT hỗ trợ xác thực các yêu cầu truy cập. Vitest được sử dụng để xây dựng và chạy các kiểm thử tự động. Chi tiết lựa chọn và cách áp dụng các công nghệ được trình bày trong phần thiết kế và cài đặt giải pháp.
+
+# 6 Những đóng góp chính của đề tài
+
+Đề tài xây dựng được website NextCode với các chức năng phục vụ cả học viên và trung tâm đào tạo. Sản phẩm tổ chức việc giới thiệu khóa học, đăng ký, thanh toán và học tập trong cùng một hệ thống. Thông tin tham gia được gắn với từng tài khoản và khóa học, giúp học viên xem lại các khóa đã đăng ký và tiếp tục quá trình học của mình.
+
+Trong quản lý học tập, hệ thống lưu tiến độ từng bài và kết quả trắc nghiệm, kiểm tra điều kiện mở bài tiếp theo và ghi nhận hoàn thành khóa học. Thông tin chứng chỉ được lưu cùng học viên và khóa học, có mã để tra cứu. Khu vực hỏi đáp gắn với nội dung học, giúp học viên gửi thắc mắc và giảng viên theo dõi việc hỗ trợ trong phạm vi phụ trách.
+
+Đối với hoạt động của trung tâm, sản phẩm phân định công việc biên soạn của giảng viên với việc tạo, phân công và xét duyệt khóa học của quản trị viên. Các chức năng quản lý người dùng, đơn hàng, giao dịch và báo cáo vi phạm bổ sung công cụ theo dõi hoạt động của website. Bên cạnh sản phẩm, luận văn hệ thống hóa yêu cầu, thiết kế và các luồng xử lý chính, tạo tài liệu phục vụ việc kiểm tra và tiếp tục phát triển hệ thống.
+
+# 7 Bố cục luận văn
+
+Luận văn được tổ chức thành ba phần chính.
+
+Phần I Giới thiệu trình bày lý do thực hiện đề tài, các hướng giải quyết liên quan, mục tiêu, đối tượng và phạm vi nghiên cứu. Phần này cũng nêu nội dung thực hiện, công nghệ sử dụng và những đóng góp chính của đề tài.
+
+Phần II Nội dung gồm ba chương. Chương 1 Mô tả bài toán xác định các nhóm người dùng, yêu cầu chức năng, yêu cầu chất lượng và các quy trình cần giải quyết. Chương 2 Thiết kế và cài đặt giải pháp trình bày cơ sở lựa chọn công nghệ, kiến trúc, thiết kế dữ liệu, giao diện và cách cài đặt các chức năng chính. Chương 3 Kiểm thử và đánh giá trình bày phạm vi kiểm thử, các trường hợp kiểm tra và kết quả đánh giá sản phẩm.
+
+Phần III Kết luận tổng hợp kết quả đạt được, những hạn chế và hướng phát triển của đề tài. Cuối luận văn là tài liệu tham khảo và các phụ lục hướng dẫn cài đặt, sử dụng hệ thống.

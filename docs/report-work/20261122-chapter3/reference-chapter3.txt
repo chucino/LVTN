@@ -1,0 +1,4134 @@
+PAGE 94
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 60  
+ CHƯƠNG 3: THIẾT KẾ VÀ CÀI ĐẶT GIẢI PHÁP 
+Nội dung chương này tập trung trình bày kiến trúc tổng thể của hệ thống, đi sâu phân 
+tích các module cốt lõi, cơ chế vận hành cũng như sự tương tác giữa chúng. Đồng thời, 
+chương cũng cung cấp các bản đặc tả thiết kế và mô hình chi tiết nhằm đáp ứng yêu 
+cầu nghiệp vụ của từng nhóm người dùng cụ thể. 
+ 
+3.1 Kiến trúc tổng quan 
+3.1.1 Thiết kế kiến trúc tổng quan 
+Mô hình kiến trúc của ứng dụng được xây dựng theo hướng tách biệt Frontend và 
+Backend, giao tiếp thông qua chuẩn RESTful API (xem Hình 3-1). Phía máy chủ (Server-
+side) vận hành trên nền tảng Java Spring Boot mạnh mẽ kết hợp với PostgreSQL để đảm 
+bảo tính toàn vẹn dữ liệu giao dịch phức tạp. Trong khi đó, phía máy trạm (Client -side) 
+sử dụng thư viện React.js để xây dựng trải nghiệm người dùn g đơn trang (SPA) mượt 
+mà. Kiến trúc này đảm bảo hệ thống có khả năng chịu tải cao và dễ dàng mở rộng theo 
+chiều ngang. 
+ 
+ 
+Hình 3-1: Sơ đồ thiết kế hệ thống 
+Các thành phần cốt lõi cấu thành nên hệ thống Freelancer Marketplace được mô tả chi 
+tiết như sau: 
+
+
+PAGE 95
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 61  
+- Phía Client (React.js Ecosystem): 
++ Giao diện người dùng được xây dựng theo mô hình Ứng dụng đơn trang 
+(Single Page Application) sử dụng thư viện React.js, giúp tối ưu hóa tốc 
+độ tải trang và mang lại trải nghiệm mượt mà. 
++ Hệ thống sử dụng các thư viện bổ trợ mạnh mẽ như Redux để quản lý trạng 
+thái (state) tập trung, React Router để điều hướng và các bộ UI Kit như 
+Material UI, Tailwind CSS để xây dựng giao diện hiện đại, đáp ứng tốt 
+trên đa thiết bị. 
++ Tầng Client thực hiện giao tiếp với máy chủ thông qua thư viện Axios, gửi 
+các yêu cầu HTTP đến các điểm cuối (endpoints) của hệ thống Backend. 
+- Phía Back-End Server (Java Spring Boot): 
++ Máy chủ ứng dụng đóng vai trò xử lý logic nghiệp vụ chính, được phát 
+triển trên nền tảng Java Spring Boot. Đây là một framework mạnh mẽ, 
+cung cấp khả năng bảo mật cao và quản lý giao dịch (transaction) chặt chẽ. 
++ Hệ thống tích hợp Spring Security để đảm nhiệm vai trò xác thực và phân 
+quyền người dùng, đảm bảo an toàn dữ liệu cho các giao dịch giữa 
+Freelancer và nhà tuyển dụng. 
++ Server cung cấp hệ thống RESTful API chuẩn hóa, cho phép phía Client 
+truy xuất và xử lý dữ liệu một cách linh hoạt. 
+- Cơ sở dữ liệu (PostgreSQL): 
++ Hệ thống lựa chọn PostgreSQL làm hệ quản trị cơ sở dữ liệu quan hệ 
+(RDBMS) cốt lõi. Với khả năng tuân thủ chuẩn ACID, PostgreSQL đảm 
+bảo tính nhất quán tuyệt đối cho các dữ liệu quan trọng như thông tin hợp 
+đồng, tiến độ công việc và lịch sử thanh toán. 
++ Để tương tác hiệu quả với cơ sở dữ liệu, phía Server sử dụng JPA (Java 
+Persistence API) và Hibernate như một lớp ORM (Object -Relational 
+Mapping), giúp chuyển đổi dữ liệu từ các bảng trong database sang các đối 
+tượng Java một cách tự động và minh bạch. 
+- Dịch vụ bên thứ ba (Third-Party Services): Để hoàn thiện hệ sinh thái cho sàn 
+giao dịch, hệ thống tích hợp các dịch vụ hàng đầu: 
+
+PAGE 96
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 62  
++ Stripe: Cổng thanh toán trực tuyến giúp thực hiện các giao dịch nạp tiền, 
+thanh toán phí dịch vụ và rút tiền an toàn. 
++ Cloudinary: Nền tảng điện toán đám mây chuyên dụng để lưu trữ và tối ưu 
+hóa hình ảnh hồ sơ (profile) cũng như các tài liệu minh chứng dự án 
+(portfolio). 
++ Email Service: Hệ thống tin nhắn mới và các xác nhận giao dịch quan trọng 
+đến người dùng. 
+ 3.2 Mô hình MVC của hệ thống 
+3.2.1 Thiết kế mô hình MVC 
+ 
+Hình 3-2: Sơ đồ Mô hình MVC của hệ thống 
+ 
+Hình 3-2 minh họa cấu trúc tổng thể của hệ thống dựa trên mô hình MVC (Model - View 
+- Controller) kết hợp cùng phân hệ Gợi ý việc làm/ứng viên (Recommendation System)  
+thuật toán based -content. Việc ứng dụng kiến trúc này giúp chuẩn hóa quy trình phát 
+triển, tách biệt các tầng xử lý dữ liệu và giao diện, tạo nền tảng vững chắc cho việc tích 
+hợp các tính năng phức tạp trên sàn giao dịch. Các thành phần cụ thể bao gồm: 
+ 
+Tầng Hiển thị (View): Đảm nhiệm vai trò cung cấp giao diện tương tác cho người dùng 
+
+
+PAGE 97
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 63  
+trên trình duyệt. Các thành phần chính bao gồm: FreelancerDashboardView, 
+ProjectsView, ClientDashboardView, ProposalView, CompareProposalView, 
+PostProjectView, cùng các màn hình chi tiết về hồ sơ và hợp đồng ,v..v. Tầng này có 
+nhiệm vụ tiếp nhận thao tác từ phía người dùng (Freelancer và Nhà tuyển dụng) như: 
+đăng dự án, gửi đề xuất (proposal), so sánh ứng viên, và quản lý tiến độ công việc. 
+ 
+Tầng Điều khiển (Controller): Đóng vai trò điều phối dòng dữ liệu và xử lý các logic 
+nghiệp vụ của sàn giao dịch. Controller tiếp nhận các yêu cầu (HTTP Requests) từ tầng 
+View thông qua các API chuyên biệt như: ProjectController (quản lý dự án), 
+ProposalController (xử lý đề xuất), StripeController (xử lý thanh toán), và 
+AuthController (xác thực người dùng). Sau khi xử lý logic, Controller sẽ điều hướng yêu 
+cầu đến tầng Model hoặc hệ thống gợi ý để lấy kết quả và phản hồi lại cho giao diện. 
+ 
+Tầng Dữ liệu (Model): Quản lý toàn bộ cấu trúc thông tin và các quy tắc nghiệp vụ liên 
+quan đến cơ sở dữ liệu PostgreSQL. Các thực thể quan trọng được mô hình hóa bao gồm: 
+FreelancerModel, ProjectModel, ContractModel, SkillModel và PaymentModel. Thông 
+qua lớp Spring Data JPA, tầng Model thực hiện các truy vấn phức tạp để đảm bảo dữ 
+liệu về hợp đồng và giao dịch tài chính luôn đạt tính nhất quán cao nhất. 
+ 
+Hệ thống Gợi ý (Recommendation System): Đây là phân hệ thông minh tích hợp máy 
+học, chịu trách nhiệm phân tích hành vi và kỹ năng của người dùng để đưa ra các gợi ý 
+cá nhân hóa. Phân hệ này sẽ tiếp nhận dữ liệu từ RecommendationController (bao gồm 
+kỹ năng, danh mục công việc, ngân sách và lịch sử đánh giá), sau đó xử lý qua các thuật 
+toán để đề xuất dự án phù hợp nhất cho Freelancer hoặc ứng viên tiềm năng nhất cho 
+Nhà tuyển dụng. 
+ 
+
+PAGE 98
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 64  
+3.3. Sơ đồ phân rã chức năng 
+3.2.1 Sơ đồ phân rã chức năng Nhà tuyển dụng (Client) 
+ 
+Hình 3-3: Sơ đồ phân rã chức năng của Nhà tuyển dụng 
+ 
+Hình 3-3 minh họa sơ đồ phân rã chức năng dành cho vai trò Client trong hệ thống. Để 
+tối ưu hóa quy trình tuyển dụng và quản lý nhân sự từ xa, hệ thống cung cấp cho Client 
+một bộ công cụ toàn diện từ khâu đăng tin đến khâu thanh toán. Cụ thể, Client có thể 
+thực hiện các nhóm chức năng chính sau: 
+- Quản lý tài khoản: Chỉnh sửa thông tin cá nhân, cập nhật hồ sơ doanh nghiệp và 
+đổi mật khẩu để đảm bảo an toàn tài khoản thông qua lớp bảo mật Spring Security. 
+- Quản lý dự án: Đăng tin tuyển dụng mới với đầy đủ mô tả công việc, kỹ năng yêu 
+cầu và ngân sách; đồng thời có thể chỉnh sửa hoặc xóa dự án tùy theo nhu cầu 
+thực tế. 
+- Quản lý ứng viên và Đấu thầu: Xem danh sách các đề xuất (Proposals) từ 
+Freelancer, so sánh các mức giá thầu, xem hồ sơ năng lực chi tiết và thực hiện 
+mời các ứng viên tiềm năng tham gia đấu thầu. Client có quyền chấp nhận hoặc 
+từ chối đề xuất để bắt đầu quy trình cộng tác. 
+- Quản lý cộng tác: Tương tác trực tiếp với Freelancer qua hệ thống nhắn tin thời 
+gian thực, kiểm tra tiến độ thực hiện, nghiệm thu sản phẩm cuối cùng và nhận các 
+
+
+PAGE 99
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 65  
+báo cáo hàng tuần đối với các dự án tính phí theo giờ (Hourly rate). 
+- Quản lý tài chính và Đánh giá: Thực hiện nạp tiền vào ví hệ thống, theo dõi các 
+khoản chi trả dự án và gửi phản hồi, chấm điểm sao cho Freelancer sau khi kết 
+thúc dự án để xây dựng cộng đồng minh bạch. 
+- Đăng xuất: Kết thúc phiên làm việc và xóa bỏ các token xác thực trên trình duyệt. 
+ 
+Sơ đồ thể hiện rõ quy trình khép kín giúp Client quản lý dự án hiệu quả. Mọi dữ liệu về 
+dự án và giao dịch tài chính đều được xử lý thông qua các API RESTful của Spring Boot 
+và lưu trữ bền vững trong cơ sở dữ liệu PostgreSQL, đảm bảo tính toàn vẹn và bảo m ật 
+cao cho nhà tuyển dụng. 
+ 
+3.2.2 Sơ đồ phân rã chức năng Freelancer 
+ 
+Hình 3-4: Sơ đồ phân rã chức năng của Freelancer 
+ 
+Hình 3-4 minh họa sơ đồ phân rã chức năng dành cho vai trò Freelancer trong hệ thống. 
+Để hỗ trợ người dùng xây dựng sự nghiệp trực tuyến và quản lý công việc hiệu quả, hệ 
+thống cung cấp một quy trình khép kín từ việc hoàn thiện hồ sơ đến quản lý thu nhập. 
+Cụ thể, Freelancer có thể thực hiện các nhóm chức năng chính sau: 
+- Quản lý tài khoản: Cập nhật các thông tin cá nhân cơ bản và thực hiện đổi mật 
+khẩu định kỳ nhằm bảo vệ tài khoản thông qua cơ chế mã hóa của Spring Security. 
+
+
+PAGE 100
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 66  
+- Quản lý hồ sơ cá nhân: Đây là trung tâm xây dựng thương hiệu cá nhân, cho phép 
+người dùng thêm, sửa hoặc xóa các chứng chỉ nghề nghiệp, trình độ học vấn và 
+danh mục kỹ năng chuyên môn. Đặc biệt, chức năng quản lý Portfolio giúp 
+Freelancer đăng tải các sản phẩm thực tế đã thực hiện để minh chứng năng lực 
+với nhà tuyển dụng. 
+- Tìm kiếm dự án và Đấu thầu: Hệ thống cung cấp bộ lọc thông minh cho phép tìm 
+kiếm dự án theo từ khóa, danh mục kỹ năng, mức ngân sách hoặc loại hình dự án 
+(trọn gói hoặc theo giờ). Freelancer có thể xem chi tiết yêu cầu và thực hiện gửi 
+đề xuất đấu thầu để ứng tuyển vào các dự án phù hợp. 
+- Xem gợi ý công việc: Dựa trên các kỹ năng đã khai báo trong hồ sơ, hệ thống sẽ 
+tự động hiển thị danh sách các công việc tiềm năng, giúp tối ưu hóa thời gian tìm 
+kiếm dự án cho người dùng. 
+- Quản lý công việc: Theo dõi trạng thái các dự án đã đấu thầu, trực tiếp nhắn tin 
+và trao đổi yêu cầu với khách hàng. Trong quá trình làm việc, Freelancer thực 
+hiện gửi file sản phẩm, báo cáo tiến độ và gửi đánh giá phản hồi về khách hàng 
+sau khi dự án kết thúc. 
+- Xem doanh thu: Thống kê chi tiết thu nhập cá nhân theo tháng hoặc quý, giúp 
+Freelancer quản lý tài chính và theo dõi hiệu suất làm việc trên nền tảng. 
+- Đăng xuất: Thoát khỏi hệ thống để đảm bảo an toàn cho phiên làm việc. 
+Thông qua các chức năng này, Freelancer có thể chủ động hoàn toàn trong việc tìm kiếm 
+và thực hiện công việc. Toàn bộ các thao tác tương tác dữ liệu phức tạp như nộp sản 
+phẩm hay quản lý Portfolio đều được xử lý thông qua giao diện React và lưu trữ đồng 
+bộ vào cơ sở dữ liệu PostgreSQL phía Backend. 
+ 
+
+PAGE 101
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 67  
+3.2.3 Sơ đồ phân rã chức năng Quản trị viên (Admin) 
+ 
+Hình 3-5: Sơ đồ phân rã chức năng của Admin 
+Hình 3-5 minh họa các chức năng dành cho vai trò Quản trị viên trong hệ thống. Admin 
+đóng vai trò là người điều phối cao nhất, đảm bảo tính minh bạch và ổn định cho toàn 
+bộ nền tảng kết nối freelancer. Thông qua giao diện quản trị tập trung, Admin có thể 
+thực hiện các nhóm chức năng cốt lõi sau: 
+- Quản lý người dùng: Kiểm soát danh sách người dùng trên toàn hệ thống, thực 
+hiện kích hoạt tài khoản mới hoặc khóa các tài khoản vi phạm chính sách cộng 
+đồng để đảm bảo môi trường làm việc lành mạnh. 
+- Quản lý danh mục: Thiết lập và duy trì cấu trúc ngành nghề của hệ thống bằng 
+cách thêm, chỉnh sửa hoặc xóa các lĩnh vực ngành nghề (như IT, Marketing, 
+Design...). Việc quản lý tốt danh mục giúp người dùng dễ dàng phân loại và tìm 
+kiếm dự án. 
+- Quản lý kỹ năng: Quản trị thư viện kỹ năng chuyên môn phong phú. Admin có 
+quyền thêm mới các kỹ năng xu hướng, chỉnh sửa hoặc loại bỏ các kỹ năng không 
+còn phù hợp, tạo cơ sở cho hệ thống gợi ý công việc chính xác cho Freelancer. 
+- Thống kê và Báo cáo: Cung cấp cái nhìn tổng quát về hiệu quả vận hành của nền 
+tảng thông qua các báo cáo số lượng người dùng mới, số lượng dự án đã hoàn 
+thành theo từng tháng và báo cáo chi tiết về doanh thu hệ thống. 
+- Đăng xuất: Thoát khỏi trang quản trị và hủy phiên làm việc để bảo mật hệ thống. 
+Sơ đồ thể hiện rõ quyền hạn đặc quyền của Admin trong việc quản trị dữ liệu và giám 
+
+
+PAGE 102
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 68  
+sát hoạt động. Các chức năng này được xây dựng dựa trên sự phối hợp chặt chẽ giữa 
+giao diện quản lý hiện đại và hệ thống API bảo mật phía Backend, giúp Admin điều hành 
+nền tảng một cách chuyên nghiệp và hiệu quả. 
+ 
+ 3.4 Mô hình dữ liệu 
+3.3.1 Sơ đồ thực thể quan hệ - ERD 
+ 
+Hình 3-6: Sơ đồ ERD của hệ thống 
+ 
+
+
+PAGE 103
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 69  
+3.3.2. Bảng mô tả các thuộc tính của sơ đồ thực thể liên kết 
+3.3.2.1. Bảng Freelancer 
+Bảng 3-1: Mô tả thuộc tính thực thể Freelancer 
+Tên trường Kiểu dữ 
+liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc 
+định 
+Diễn giải 
+freelancer_id Long X  Không  Mã 
+freelancer 
+first_name String   Không  Tên 
+freelancer 
+last_name String   Không  Họ 
+freelancer 
+email String   Không  Địa chỉ 
+email 
+(duy 
+nhất) 
+username String   Không  Tên đăng 
+nhập 
+pwd_hash String   Không  Mật khấu 
+đã được 
+mã hóa 
+phone_number String   Có  Số điện 
+thoại 
+profile_image String   Có  Đường 
+dẫn ảnh 
+đại diện 
+is_verified Boolean   Không False Trạng 
+thái xác 
+minh 
+hourly_rate Decimal   Có  Giá theo 
+giờ 
+title String   Có  Tiêu đề 
+nghề 
+nghiệp 
+Description Text   Có  Mô tả bản 
+thân 
+is_blocked Boolean   Không False Trạng 
+thái bị 
+khóa 
+
+PAGE 104
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 70  
+created_at Timestamp   Không  Currnent 
+Time 
+Thời gian 
+tạo tài 
+khoản 
+updated_at Timestamp   Có  Thời gian 
+cập nhật 
+cuối 
+ 
+3.3.2.2. Bảng Client 
+Bảng 3-2: Mô tả thuộc tính thực thể Client 
+Tên trường Kiểu dữ 
+liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc định 
+Diễn giải 
+client_id Long X 
+ 
+Không 
+ 
+Mã khách 
+hàng 
+first_name String 
+  
+Không 
+ 
+Tên khách 
+hàng 
+last_name String 
+  
+Không 
+ 
+Họ khách 
+hàng 
+Username String 
+  
+Không 
+ 
+Tên đăng 
+nhập 
+pwd_hash String 
+  
+Không 
+ 
+Mật khẩu 
+mã hóa 
+Email String 
+  
+Không 
+ 
+Địa chỉ 
+email 
+Picture String 
+  
+Có 
+ 
+Ảnh đại 
+diện 
+phone_number String 
+  
+Có 
+ 
+Số điện 
+thoại 
+Wallet Double 
+  
+Không 0 Số dư ví/Tài 
+khoản 
+Description Text 
+  
+Có 
+ 
+Mô tả về 
+công ty/cá 
+nhân 
+is_verified Boolean 
+  
+Không FALSE Trạng thái 
+xác minh 
+is_blocked Boolean 
+  
+Không FALSE Trạng thái 
+bị khóa 
+reset_link String 
+  
+Có 
+ 
+Link đặt lại 
+mật khẩu 
+login_token String 
+  
+Có 
+ 
+Token đăng 
+
+PAGE 105
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 71  
+nhập 
+Bio String 
+  
+Có 
+ 
+Tiểu sử 
+ngắn 
+ 
+3.3.2.3. Bảng Admin 
+Bảng 3-3: Mô tả thuộc tính thực thể Admin 
+Tên trường Kiểu dữ 
+liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc định 
+Diễn giải 
+admin_id Long X 
+ 
+Không 
+ 
+Mã quản trị 
+viên 
+first_name String 
+  
+Không 
+ 
+Tên quản trị 
+viên 
+last_name String 
+  
+Không 
+ 
+Họ quản trị 
+viên 
+Username String 
+  
+Không 
+ 
+Tên đăng 
+nhập 
+pwd_hash String 
+  
+Không 
+ 
+Mật khẩu 
+mã hóa 
+Email String 
+  
+Không 
+ 
+Địa chỉ 
+email 
+Title String 
+  
+Có 
+ 
+Chức 
+danh/Vị trí 
+profile_image String 
+  
+Có 
+ 
+Ảnh hồ sơ 
+ 
+3.3.2.4. Bảng Category 
+Bảng 3-5: Mô tả thuộc tính thực thể Category 
+Tên trường Kiểu dữ 
+liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc định 
+Diễn giải 
+category_id Long X 
+ 
+Không 
+ 
+Mã danh 
+mục 
+category_name String 
+  
+Không 
+ 
+Tên danh 
+mục 
+category_image String 
+  
+Có 
+ 
+Ảnh đại 
+diện danh 
+mục 
+created_at Timestamp 
+  
+Không Now() Ngày tạo 
+updated_at Timestamp 
+  
+Không Now() Ngày cập 
+
+PAGE 106
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 72  
+nhật 
+ 
+ 
+3.2.2.5. Bảng Skill 
+Bảng 3-6: Mô tả thuộc tính thực thể Skill 
+Tên 
+trường 
+Kiểu dữ 
+liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc định 
+Diễn giải 
+skill_id Long X 
+ 
+Không 
+ 
+Mã kỹ 
+năng 
+name String 
+  
+Không 
+ 
+Tên kỹ 
+năng 
+created_at Timestamp 
+  
+Không Now() Ngày tạo 
+updated_at Timestamp 
+  
+Không Now() Ngày cập 
+nhật 
+ 
+ 
+3.2.2.6. Bảng Project 
+Bảng 3-7: Mô tả thuộc tính thực thể Project 
+Tên 
+trường 
+Kiểu dữ 
+liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc định 
+Diễn giải 
+project_id Long X 
+ 
+Không 
+ 
+Mã dự án 
+title String 
+  
+Không 
+ 
+Tiêu đề dự 
+án 
+description Text 
+  
+Không 
+ 
+Mô tả chi tiết 
+công việc 
+budget Double 
+  
+Có 
+ 
+Giá trị ngân 
+sách (số) 
+isinternship Boolean 
+  
+Không FALSE Có phải thực 
+tập không 
+duration String 
+  
+Có 
+ 
+Thời gian dự 
+kiến hoàn 
+thành 
+connections Integer 
+  
+Có 
+ 
+Số lượt kết 
+nối yêu cầu 
+status String 
+  
+Không Open' Trạng thái 
+(Mở, Đang 
+làm, Xong) 
+
+PAGE 107
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 73  
+start_time Timestamp 
+  
+Có 
+ 
+Thời gian bắt 
+đầu 
+end_time Timestamp 
+  
+Có 
+ 
+Thời gian kết 
+thúc 
+3.2.2.7. Bảng Budget 
+Bảng 3-8: Mô tả thuộc tính thực thể Budget 
+Tên 
+trường 
+Kiểu dữ 
+liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc định 
+Diễn giải 
+budget_id Long X 
+ 
+Không 
+ 
+Mã cấu hình 
+ngân sách 
+type String 
+  
+Không 
+ 
+Loại (Cố định 
+hoặc Theo giờ) 
+value Double 
+  
+Không 
+ 
+Giá trị quy 
+định 
+ 
+3.4.2.8. Bảng Review 
+ 
+Bảng 3-9: Mô tả thuộc tính thực thể Review 
+Tên trường Kiểu dữ 
+liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc 
+định 
+Diễn giải 
+review_id Long X 
+ 
+Không 
+ 
+Mã đánh 
+giá 
+rating Integer 
+  
+Không 
+ 
+Số sao (1-5) 
+comment Text 
+  
+Có 
+ 
+Nội dung 
+đánh giá 
+date Timestamp 
+  
+Không Current 
+Time 
+Ngày đánh 
+giá 
+testimonial_back Text 
+  
+Có 
+ 
+Phản hồi từ 
+freelancer 
+project_id Long 
+ 
+X Không 
+ 
+Liên kết tới 
+dự án 
+client_id Long 
+ 
+X Không 
+ 
+Người viết 
+đánh giá 
+freelancer_id Long 
+ 
+X Không 
+ 
+Người nhận 
+đánh giá 
+ 
+
+PAGE 108
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 74  
+ 
+3.4.2.9 Bảng Proposal 
+ 
+Bảng 3-10: Mô tả thuộc tính thực thể Proposal 
+Tên trường Kiểu dữ 
+liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc định 
+Diễn giải 
+proposal_id Long X 
+ 
+Không 
+ 
+Mã bản chào 
+giá 
+description Text 
+  
+Không 
+ 
+Nội dung giới 
+thiệu 
+files String 
+  
+Có 
+ 
+Đường dẫn tài 
+liệu đính kèm 
+proposal_price Decimal 
+  
+Không 
+ 
+Giá đề xuất 
+delivery_days Integer 
+  
+Không 
+ 
+Số ngày hoàn 
+thành 
+status String 
+  
+Không Pending' Trạng thái 
+(Pending, 
+Accepted, 
+Rejected) 
+created_at Timestamp 
+  
+Không Current 
+Time 
+Ngày gửi 
+proposal 
+project_id Long 
+ 
+X Không 
+ 
+Dự án ứng 
+tuyển 
+freelancer_id Long 
+ 
+X Không 
+ 
+Freelancer ứng 
+tuyển 
+ 
+3.4.2.10 Bảng Contract 
+Bảng 3-11: Mô tả thuộc tính thực thể Contract 
+Tên 
+trường 
+Kiểu dữ 
+liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc 
+định 
+Diễn giải 
+contract_id Long X 
+ 
+Không 
+ 
+Mã hợp đồng 
+type String 
+  
+Không 
+ 
+Loại hợp đồng 
+(Fixed/Hourly) 
+amount Decimal 
+  
+Không 
+ 
+Tổng giá trị hợp 
+đồng 
+start_date Timestamp 
+  
+Không 
+ 
+Ngày bắt đầu 
+
+PAGE 109
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 75  
+end_date Timestamp 
+  
+Có 
+ 
+Ngày kết thúc dự 
+kiến 
+status String 
+  
+Không Active' Trạng thái hợp 
+đồng 
+proposal_id Long 
+ 
+X Không 
+ 
+Dựa trên proposal 
+nào 
+ 
+3.4.2.11 Bảng Milestone 
+Bảng 3-12: Mô tả thuộc tính thực thể Milestone 
+Tên trường Kiểu dữ 
+liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc định 
+Diễn giải 
+milestone_id Long X 
+ 
+Không 
+ 
+Mã giai đoạn 
+title String 
+  
+Không 
+ 
+Tên giai đoạn 
+amount Decimal 
+  
+Không 
+ 
+Số tiền cho giai 
+đoạn này 
+start_date Timestamp 
+  
+Có 
+ 
+Ngày bắt đầu 
+end_date Timestamp 
+  
+Có 
+ 
+Ngày kết thúc 
+dự kiến 
+status String 
+  
+Không Pending' Trạng thái 
+(Pending, Paid, 
+Cancelled) 
+contract_id Long 
+ 
+X Không 
+ 
+Thuộc hợp 
+đồng nào 
+ 
+3.4.2.12 Bảng Portfolio 
+Bảng 3-13: Mô tả thuộc tính thực thể Portfolio 
+Tên trường Kiểu 
+dữ liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc 
+định 
+Diễn giải 
+portfolio_id Long X 
+ 
+Không 
+ 
+Mã sản phẩm 
+project_title String 
+  
+Không 
+ 
+Tên dự án đã làm 
+description Text 
+  
+Có 
+ 
+Mô tả chi tiết 
+url String 
+  
+Có 
+ 
+Link sản phẩm 
+(Github/Live) 
+completion_date Date 
+  
+Có 
+ 
+Ngày hoàn thành 
+freelancer_id Long 
+ 
+X Không 
+ 
+Thuộc về 
+Freelancer nào 
+
+PAGE 110
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 76  
+ 
+3.4.2.13 Bảng Payment 
+Bảng 3-14: Mô tả thuộc tính thực thể Payment 
+Tên trường Kiểu dữ 
+liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc định 
+Diễn giải 
+payment_id Long X 
+ 
+Không 
+ 
+Mã giao dịch 
+amount Decimal 
+  
+Không 
+ 
+Số tiền giao 
+dịch 
+payment_type String 
+  
+Không 
+ 
+(Deposit, 
+Withdrawal, 
+Milestone 
+Pay) 
+transaction_id String 
+  
+Có 
+ 
+Mã tham chiếu 
+từ cổng thanh 
+toán 
+status String 
+  
+Không Processing' Trạng thái 
+giao dịch 
+paid_at Timestamp 
+  
+Có 
+ 
+Thời gian thực 
+thanh toán 
+contract_id Long 
+ 
+X Có 
+ 
+Liên kết hợp 
+đồng (nếu có) 
+ 
+3.4.2.14 Bảng Message 
+Bảng 3-15: Mô tả thuộc tính thực thể Message 
+Tên 
+trường 
+Kiểu dữ 
+liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc 
+định 
+Diễn giải 
+message_id Long X 
+ 
+Không 
+ 
+Mã tin nhắn 
+content Text 
+  
+Không 
+ 
+Nội dung 
+sender_type String 
+  
+Không 
+ 
+Loại người gửi 
+(CLIENT/FLC) 
+sent_at Timestamp 
+  
+Không Current Thời gian gửi 
+room_id String 
+  
+Không 
+ 
+ID phòng chat 
+(hoặc Project ID) 
+ 
+
+PAGE 111
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 77  
+3.4.2.15 Bảng Clarification 
+ 
+Bảng 3-16: Mô tả thuộc tính thực thể Clarification 
+Tên trường Kiểu dữ 
+liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc định 
+Diễn giải 
+clarification_id Long X 
+ 
+Không 
+ 
+Mã yêu cầu 
+làm rõ 
+question Text 
+  
+Không 
+ 
+Câu hỏi của 
+Freelancer 
+answer Text 
+  
+Có 
+ 
+Câu trả lời 
+của Client 
+question_at Timestamp 
+  
+Không Current 
+Time 
+Thời điểm 
+hỏi 
+answer_at Timestamp 
+  
+Có 
+ 
+Thời điểm 
+trả lời 
+project_id Long 
+ 
+X Không 
+ 
+Liên kết tới 
+dự án 
+freelancer_id Long 
+ 
+X Không 
+ 
+Người đặt 
+câu hỏi 
+ 
+ 
+3.4.2.16 Bảng Education 
+Bảng 3-17: Mô tả thuộc tính thực thể Education 
+Tên trường Kiểu 
+dữ liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc 
+định 
+Diễn giải 
+education_id Long X 
+ 
+Không 
+ 
+Mã học vấn 
+organization String 
+  
+Không 
+ 
+Tên trường đại 
+học/tổ chức 
+degree String 
+  
+Có 
+ 
+Bằng cấp (Cử 
+nhân, Kỹ sư...) 
+area_study String 
+  
+Có 
+ 
+Chuyên ngành 
+start_date Date 
+  
+Có 
+ 
+Ngày bắt đầu 
+end_date Date 
+  
+Có 
+ 
+Ngày kết thúc 
+description Text 
+  
+Có 
+ 
+Mô tả thêm 
+freelancer_id Long 
+ 
+X Không 
+ 
+Thuộc về 
+Freelancer nào 
+ 
+
+PAGE 112
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 78  
+3.4.2.17 Bảng Certification 
+Bảng 3-18: Mô tả thuộc tính thực thể Certification 
+Tên trường Kiểu 
+dữ liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc 
+định 
+Diễn giải 
+certification_id Long X 
+ 
+Không 
+ 
+Mã chứng chỉ 
+title String 
+  
+Không 
+ 
+Tên chứng chỉ 
+organization String 
+  
+Không 
+ 
+Tổ chức cấp 
+status String 
+  
+Có 
+ 
+Trạng thái (đã 
+cấp/đang chờ) 
+start_date Date 
+  
+Có 
+ 
+Ngày cấp 
+end_date Date 
+  
+Có 
+ 
+Ngày hết hạn 
+description Text 
+  
+Có 
+ 
+Mô tả chi tiết 
+url String 
+  
+Có 
+ 
+Đường dẫn ảnh 
+hoặc link xác 
+thực 
+freelancer_id Long 
+ 
+X Không 
+ 
+Thuộc về 
+Freelancer nào 
+ 
+3.4.2.18 Bảng Experience 
+ 
+Bảng 3-19: Mô tả thuộc tính thực thể Experience 
+Tên trường Kiểu 
+dữ liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc 
+định 
+Diễn giải 
+experience_id Long X 
+ 
+Không 
+ 
+Mã kinh nghiệm 
+organization String 
+  
+Không 
+ 
+Tên công ty/tổ 
+chức 
+title String 
+  
+Không 
+ 
+Vị trí (VD: Java 
+Developer) 
+start_date Date 
+  
+Không 
+ 
+Ngày bắt đầu 
+end_date Date 
+  
+Có 
+ 
+Ngày kết thúc 
+(rỗng nếu hiện 
+tại) 
+description Text 
+  
+Có 
+ 
+Chi tiết công việc 
+đã làm 
+freelancer_id Long 
+ 
+X Không 
+ 
+Thuộc về 
+Freelancer nào 
+
+PAGE 113
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 79  
+ 
+3.4.2.19 Bảng Invitation 
+Bảng 3-20: Mô tả thuộc tính thực thể Invitation 
+Tên trường Kiểu dữ 
+liệu 
+Khóa 
+chính 
+Khóa 
+ngoại 
+Được 
+rỗng 
+Giá trị 
+mặc định 
+Diễn giải 
+invitation_id Long X 
+ 
+Không 
+ 
+Mã lời mời 
+content Text 
+  
+Không 
+ 
+Nội dung tin 
+nhắn mời 
+sent_at Timestamp 
+  
+Không Current 
+Time 
+Thời gian gửi 
+lời mời 
+status String 
+  
+Không Pending' Trạng thái 
+(Pending, 
+Accepted, 
+Declined) 
+project_id Long 
+ 
+X Không 
+ 
+Lời mời thuộc 
+dự án nào 
+client_id Long 
+ 
+X Không 
+ 
+Người gửi lời 
+mời (Client) 
+freelancer_id Long 
+ 
+X Không 
+ 
+Người nhận lời 
+mời (Freelancer) 
+ 
+
+PAGE 114
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 80  
+3.5. Thiết kế giao diện 
+3.5.1. Thiết kế giao diện đăng nhập 
+ 
+Hình 3-7: Thiết kế giao diện Đăng nhập 
+3.5.2 Thiết kế giao diện cho tác nhân Quản trị viên. 
+Hệ thống cung cấp cho Quản trị viên một bảng điều khiển trung tâm (Admin Panel) 
+với cái nhìn toàn diện về hoạt động vận hành. Tại đây, người quản trị có thể theo dõi 
+các chỉ số quan trọng thông qua bộ công cụ Tổng quan (bao gồm số lượng dự án, trạng 
+thái hoạt động, tổng số freelancer...). Đồng thời, giao diện tích hợp các chức năng cho 
+phép kiểm soát toàn bộ hệ thống như: Quản lý tài khoản, Quản lý danh mục và Quản lý 
+kỹ năng 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+PAGE 115
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 81  
+ 
+ 
+ 
+ 
+Hình 3-8: Thiết kế giao diện Quản trị viên 
+
+
+PAGE 116
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 82  
+ 
+Hình 3-9: Thiết kế giao diện Quản lý tài khoản 
+ 
+ 
+Phân hệ "Quản lý tài khoản"  (Hình 3-9), hệ thống cung cấp bảng dữ liệu tập trung, cho 
+phép theo dõi toàn bộ người dùng cùng các thuộc tính quan trọng như vai trò, trạng thái 
+hoạt động và các thao tác quản lý trực tiếp. Thanh tìm kiếm thông minh được tích hợp 
+phía trên bảng dữ liệu giúp quản trị viên truy vấn, sàng lọc và kiểm soát người dùng một 
+cách hiệu quả, đảm bảo tính bảo mật và duy trì sự ổn định cho toàn bộ hệ sinh thái 
+FreelancerHub. 
+
+
+PAGE 117
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 83  
+ 
+Hình 3-10: Thiết kế giao diện Quản lý danh mục  
+ 
+Giao diện Quản trị viên - Phân hệ Quản lý danh mục  (Hình 3-10): Đây là công cụ đắc 
+lực giúp quản trị viên kiểm soát và cấu trúc hóa các lĩnh vực hoạt động trên hệ thống 
+FreelancerHub. Bảng dữ liệu được thiết kế tập trung với các thuộc tính: mã định danh 
+(ID), hình ảnh đại diện, tên danh mục và số lượng kỹ năng liên kết, kèm theo cột "Hành 
+động" cho phép thực hiện các thao tác thêm, sửa, xóa trực tiếp. Việc phân loại và quản 
+lý danh mục khoa học thông qua bảng điều khiển này là nền tảng cốt lõi để đảm bảo hệ  
+thống luôn được cập nhật và phản ánh đúng các xu hướng công việc thực tế. 
+
+
+PAGE 118
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 84  
+ 
+Hình 3-11: Thiết kế giao diện Quản lý kỹ năng 
+ 
+Giao diện Quản trị viên - Phân hệ Quản lý kỹ năng (Hình 3-11): Đây là công cụ cho phép 
+quản trị viên duy trì và cập nhật hệ thống từ vựng kỹ năng (skill set) dùng để kết nối giữa 
+Freelancer và nhu cầu công việc. Bảng quản lý hiển thị các thông tin: mã định danh (ID), 
+tên kỹ năng, danh mục liên quan và mô tả chi tiết. Tính năng "+Tạo kỹ năng mới" được 
+tích hợp trực tiếp, hỗ trợ quản trị viên mở rộng hệ thống kỹ năng một cách linh hoạt. 
+Việc chuẩn hóa dữ liệu tại module này đóng vai trò quan trọng trong việc đảm bảo tính 
+chính xác cho công cụ tìm kiếm và thuật toán gợi ý ứng viên của hệ thống. 
+
+
+PAGE 119
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 85  
+3.5.3 Thiết kế giao diện cho tác nhân Freelancer 
+ 
+Hình 3-12: Thiết kế giao diện trang tìm kiếm dự án 
+Trang Tìm kiếm dự án  (Hình 3-12): cung cấp bộ lọc thông minh giúp Freelancer sàng 
+lọc công việc theo kỹ năng và nhu cầu. Giao diện hiển thị danh sách dự án trực quan kèm 
+thanh tìm kiếm để tối ưu hóa thời gian tiếp cận cơ hội mới. 
+ 
+Chi tiết dự án & Tương tác: Khi xem một dự án cụ thể, Freelancer có thể truy cập 3 
+phân khu chức năng: 
+
+
+PAGE 120
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 86  
+ 
+ 
+ 
+ Hình 3-14: Thiết kế giao diện trang trao đổi dự án 
+Hình 3-13: Thiết kế giao diện trang chi tiết dự án 
+
+PAGE 121
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 87  
+ 
+Trang Chi tiết dự án (Hình 3-13): Nắm bắt đầy đủ mô tả và yêu cầu từ khách hàng 
+Trao đổi (Hình 3-14): Khu vực tích hợp Form đặt câu hỏi và danh sách hỏi đáp để 
+làm rõ các vấn đề kỹ thuật trực tiếp với Client. 
+ 
+Hình 3-15: Thiết kế giao diện hiển thị hồ sơ đề xuất 
+Hồ sơ đề xuất: (Hình 3-15) Cho phép Freelancer theo dõi các phương án đã gửi và sử 
+dụng "Form tạo đề xuất" ở cột phải để nộp báo giá/giải pháp mới. 
+ 
+
+
+PAGE 122
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 88  
+ 
+Hình 3-16: Thiết kế giao diện Trang Hồ sơ cá nhân của Freelancer 
+Trang Hồ sơ cá nhân (Hình 3-16): Đây là "bản CV điện tử" giúp Freelancer xây dựng uy 
+tín. Giao diện cho phép cập nhật linh hoạt các thông tin cốt lõi như: Mô tả bản thân, Kỹ 
+năng, Học vấn, Kinh nghiệm và các Chứng chỉ chuyên môn. 
+ 
+
+
+PAGE 123
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 89  
+ 
+Hình 3-17: Thiết kế giao diện trang Hợp đồng điện tử  
+Trang Hợp đồng điện tử (Hình 3-17): Sau khi đề xuất được chấp nhận, hệ thống tự động 
+thiết lập giao diện hợp đồng. Tại đây hiển thị rõ các mốc thời gian (milestones) cần hoàn 
+thành, tóm tắt nội dung cam kết và tích hợp phần Phản hồi/Đánh giá sau khi hợp đồng kết 
+thúc để đảm bảo quyền lợi hai bên. 
+ 
+
+
+PAGE 124
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 90  
+3.5.4 Thiết kế giao diện cho tác nhân Nhà tuyển dụng 
+ 
+Hình 3-18: Thiết kế giao diện trang Dashboard của Nhà tuyển dụng 
+Giao diện Bảng điều khiển dành cho khách hàng (Hình 3-18): Đây là trung tâm quản trị 
+giúp nhà tuyển dụng theo dõi toàn bộ hoạt động trên hệ thống một cách trực quan. Giao 
+diện được thiết kế với các thẻ thống kê tổng quát bao gồm: tổng số dự án, các dự án đang 
+vận hành, trạng thái thanh toán và tổng chi tiêu thự c tế. Bên dưới là các phân khu chức 
+năng hỗ trợ giám sát tiến độ thực hiện (Theo dõi dự án), quản lý danh sách các tin tuyển 
+dụng (Dự án đã đăng) và tra cứu lịch sử giao dịch (Thanh toán gần đây), giúp khách hàng 
+kiểm soát quy trình làm việc và ngân sách dự án một cách tối ưu. 
+
+
+PAGE 125
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 91  
+ 
+Hình 3-19: Thiết kế giao diện trang Chi tiết hợp đồng của Nhà tuyển dụng 
+ 
+Giao diện Chi tiết hợp đồng (Hình 3-19): Sau khi đề xuất dự án được chấp nhận, hệ thống 
+sẽ tự động khởi tạo giao diện hợp đồng điện tử để làm cơ sở pháp lý và kỹ thuật cho sự 
+hợp tác giữa hai bên. Trang này hiển thị tập trung các thông tin cốt lõi bao gồm: tên hợp 
+đồng, bản tóm tắt các điều khoản cam kết và danh sách các cột mốc (milestones) cụ thể 
+gắn liền với nút thanh toán tương ứng cho từng giai đoạn. Ngoài ra, hệ thống tích hợp 
+sẵn phân hệ Phản hồi & Đánh giá, chỉ được kích hoạt sau khi hợp đồng hoàn thành, nhằm 
+đảm bảo tính khách quan và bảo vệ quyền lợi tối đa cho cả Freelancer lẫn khách hàng. 
+
+
+PAGE 126
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 92  
+ 
+Hình 3-20: Thiết kế giao diện Cửa sổ Thanh toán 
+ 
+ 
+Giao diện Cửa sổ lớp phủ (Modal) thanh toán (Hình 3-20): Nhằm tối ưu hóa luồng tương 
+tác và duy trì sự tập trung của người dùng trên trang Chi tiết hợp đồng, hệ thống sử dụng 
+cơ chế Modal để hiển thị các tác vụ thanh toán. Khi người dùng kích hoạt nút thanh toán, 
+một cửa sổ lớp phủ (Overlay) sẽ xuất hiện phía trên nền giao diện hiện tại, yêu cầu cung 
+cấp và xác thực các thông tin định danh thanh toán. Phương thức thiết kế này giúp người 
+dùng hoàn tất giao dịch một cách nhanh chóng, đồng thời giữ nguyên bối cảnh làm việc 
+trên hợp đồng, giảm thiểu độ trễ do tải lại trang và nâng cao tính liền mạch cho trải 
+nghiệm người dùng cuối. 
+
+
+PAGE 127
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 93  
+ 
+Hình 3-21: Thiết kế giao diện hiển thị danh sách ứng viên tiềm năng 
+ 
+Giao diện Danh sách ứng viên đề xuất (Hình 3-21): Trang này đóng vai trò là công cụ 
+hỗ trợ ra quyết định cho nhà tuyển dụng sau khi đăng tải dự án. Giao diện liệt kê chi tiết 
+danh sách các ứng có tiềm năng thích hợp làm dự án, đi kèm với các thao tác nhanh như 
+"Xem thông tin" (để đánh giá kỹ năng, kinh  nghiệm của Freelancer) và "Mời đấu thầu" 
+(Hệ thống gửi email mời tham gia đấu thầu). 
+
+
+PAGE 128
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 94  
+ 
+Hình 3-22: Thiết kế giao diện trang Hồ sơ năng lực của Freelancer 
+ 
+Trang Hồ sơ năng lực Freelancer (Hình 3-22): Đây là giao diện chuyên sâu giúp nhà 
+tuyển dụng đánh giá năng lực ứng viên trước khi ra quyết định mời đấu thầu. Trang cung 
+cấp cái nhìn toàn diện về Freelancer bao gồm: thông tin định danh cơ bản, phần giới 
+thiệu bản thân, quá trình kinh nghiệm làm việ c, hệ thống chứng chỉ chuyên môn và đặc 
+biệt là lịch sử đánh giá từ các khách hàng trước đó. Cấu trúc trang được tổ chức mạch 
+lạc, kết hợp với nút "Gửi tin nhắn" tích hợp sẵn, giúp nhà tuyển dụng dễ dàng liên hệ 
+trực tiếp để trao đổi chi tiết về yêu cầu công việc, từ đó đảm bảo sự phù hợp cao nhất 
+cho dự án. 
+
+
+PAGE 129
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 95  
+ 
+Hình 3-23: Thiết kế giao diện Đăng dự án 
+ 
+Giao diện Đăng dự án (Hình 3-23): Trang này đóng vai trò là cửa ngõ cho phép nhà 
+tuyển dụng khởi tạo các nhu cầu công việc trên hệ thống. Giao diện được thiết kế tối 
+giản với các trường thông tin trọng yếu bao gồm: tiêu đề dự án, mô tả chi tiết, loại hình 
+dự án, kỹ năng yêu cầu, phạm vi  công việc và ngân sách dự định. Mỗi trường dữ liệu 
+đều được tích hợp nút chỉnh sửa trực tiếp, giúp nhà tuyển dụng linh hoạt hiệu chỉnh nội 
+dung trước khi xác nhận đăng tải. Quy trình này đảm bảo các thông tin đầu vào được 
+chuẩn hóa, tạo nền tảng vững chắc để hệ thống kết nối dự án đến đúng các ứng viên phù 
+hợp. 
+ 3.6. Kết quả thực hiện yêu cầu chức năng 
+3.6.1. Chức năng Đăng ký 
+Mục đích: chức năng đăng ký là giúp người dùng khởi tạo danh tính cá nhân và xác 
+định vai trò cụ thể trong hệ thống là Freelancer hay Client. 
+
+
+PAGE 130
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 96  
+ 
+Hình 3-24: Giao diện đăng ký – Nhập Họ tên, Email, Mật khẩu 
+ 
+ 
+Hình 3-25: Giao diện đăng ký - Nhập username 
+
+
+PAGE 131
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 97  
+ 
+Hình 3-26: Giao diện đăng ký - Chọn vai trò 
+ 
+
+
+PAGE 132
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 98  
+ 
+Hình 3-27: Giao diện đăng ký - Chọn kỹ năng 
+
+
+PAGE 133
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 99  
+ 
+Hình 3-28: Giao diện đăng ký - Nhập liên kết mạng xã hội 
+ 
+ 
+Hình 3-29: Giao diện đăng ký - Viết tóm tắt về bản thân 
+
+
+PAGE 134
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 100  
+ 
+ 
+Bảng 3-24: Các thành phần được sử dụng trong giao diện đăng ký 
+STT Loại điều khiển Nội dung thực hiện Giá trị mặc định 
+1 TextField Cho phép người dùng nhập Họ (First Name).  
+2 TextField Cho phép người dùng nhập Tên (Last Name).  
+3 TextField Cho phép người dùng nhập địa chỉ Email để đăng ký 
+tài khoản. 
+ 
+4 TextField Cho phép người dùng thiết lập mật khẩu bí mật 
+(masking characters). 
+ 
+5 Checkbox Xác nhận đồng ý với Điều khoản người dùng và Chính 
+sách quyền riêng tư. 
+ 
+6 Button Gửi thông tin đăng ký cơ bản và chuyển sang bước 
+thiết lập tên đăng nhập. 
+ 
+7 Link Liên kết điều hướng người dùng đã có tài khoản sang 
+trang Đăng nhập. 
+ 
+8 TextField Cho phép người dùng thiết lập tên đăng nhập 
+(Username) duy nhất. 
+ 
+9 Button Xác nhận tên đăng nhập và chuyển sang bước chọn loại 
+tài khoản. 
+ 
+10 Radio Lựa chọn vai trò người dùng là "Freelancer" (Người 
+tìm việc). 
+ 
+11 Radio Lựa chọn vai trò người dùng là "Nhà tuyển dụng" 
+(Người thuê). 
+ 
+12 TextField Tìm kiếm các kỹ năng chuyên môn để thêm vào hồ sơ.  
+13 Checkbox Danh mục các nhóm ngành nghề (Lập trình, Thiết kế, 
+Marketing...). 
+ 
+14 Checkbox Danh sách các kỹ năng cụ thể thuộc danh mục đã chọn 
+để người dùng tích chọn. 
+ 
+15 Button Lưu danh sách kỹ năng đã chọn và tiếp tục.  
+16 TextField Liên kết tài khoản Facebook để xác thực hồ sơ.  
+17 TextField Liên kết tài khoản LinkedIn để nhập kinh nghiệm làm 
+việc. 
+ 
+18 TextField Liên kết tài khoản GitHub để xác thực dự án và kỹ 
+năng lập trình. 
+ 
+19 Button Quay lại bước trước đó.  
+20 Button Bỏ qua bước liên kết mạng xã hội.  
+
+PAGE 135
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 101  
+21 Button Tiếp tục sang bước tóm tắt chuyên môn.  
+22 TextArea Cho phép người dùng viết đoạn giới thiệu bản thân 
+ngắn gọn (10-100 từ). 
+ 
+23 Button Quay lại bước liên kết mạng xã hội.  
+24 Button Hoàn tất quá trình đăng ký và khởi tạo hồ sơ.  
+ 
+- Dữ liệu được sử dụng 
+ 
+Bảng 3-25: Dữ liệu được sử dụng trong chức năng Đăng ký 
+STT Tên bảng Phương thức Thêm Sửa Xóa Truy vấn 
+1 User X    
+2 Skill    X 
+3 Category    X 
+4 freelancer X    
+ 
+
+PAGE 136
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 102  
+ 
+Hình 3-30: : Lưu đồ chức năng Đăng ký 
+ 
+3.6.2 Chức năng đăng nhập 
+Mục đích: chức năng đăng nhập là xác thực danh tính người dùng và cấp quyền truy 
+cập vào các không gian làm việc cá nhân hóa dựa trên vai trò đã đăng ký. 
+
+
+PAGE 137
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 103  
+ 
+Hình 3-31: Giao diện chức năng Đăng nhập 
+- Các thành phần trong giao diện: 
+Bảng 3-26: Các thành phần trong giao diện Đăng nhập 
+STT Loại điều khiển Nội dung thực hiện Giá trị mặc định 
+1 TextField Cho phép người dùng nhập địa 
+chỉ Email để xác thực tài khoản. 
+ 
+2 TextField Cho phép người dùng nhập mật 
+khẩu bí mật (kèm biểu tượng 
+khóa). 
+ 
+3 Link Liên kết điều hướng đến trang 
+khôi phục mật khẩu khi người 
+dùng quên. 
+ 
+4 Button Gửi thông tin đăng nhập lên hệ 
+thống để xác thực quyền truy 
+cập. 
+ 
+5 Link Liên kết điều hướng người dùng 
+mới đến trang đăng ký tài khoản. 
+ 
+ 
+- Dữ liệu được sử dụng  
+
+
+PAGE 138
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 104  
+Bảng 3-27: Dữ liệu được sử dụng cho chức năng Đăng nhập 
+STT Tên bảng Phương thức Thêm Sửa Xóa Truy vấn 
+1 User    X 
+- Lưu đồ chức năng 
+-  
+Hình 3-32: Lưu đồ chức năng Đăng nhập 
+ 
+ 
+ 
+  
+ 
+
+
+PAGE 139
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 105  
+3.6.3 Chức năng tìm kiếm dự án 
+ 
+Hình 3-33: Giao diện Trang tìm dự án 
+ 
+Bảng 3-28: Các thành phần trong Trang tìm kiếm dự án 
+STT Loại điều khiển Nội dung thực hiện 
+Giá 
+trị 
+mặc 
+định 
+1 TextField Ô nhập từ khóa để tìm kiếm dự án theo tên hoặc nội dung mô 
+tả. 
+ 
+2 Button Nút bấm để kích hoạt lệnh tìm kiếm dự án.  
+
+
+PAGE 140
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 106  
+3 Select 
+(Dropdown) 
+Lựa chọn tiêu chí sắp xếp danh sách kết quả (ví dụ: Mới 
+nhất, Cũ nhất). 
+ 
+4 Radio Group Nhóm lựa chọn loại hình ngân sách (Tất cả, Giá cố định, 
+Theo giờ). 
+ 
+5, 6 TextField 
+(Small) 
+Nhập khoảng giá tối thiểu và tối đa để lọc ngân sách.  
+7 Radio Group Nhóm lựa chọn phạm vi thời gian dự án (Dưới 1 tháng, 1-3 
+tháng...). 
+ 
+8 Radio Group Nhóm lựa chọn mức độ kinh nghiệm yêu cầu (Mới bắt đầu, 
+Trung bình, Chuyên gia). 
+ 
+9 Radio Group Nhóm lựa chọn khối lượng thời gian làm việc (Bán thời gian, 
+Toàn thời gian, Linh hoạt). 
+ 
+10 Autocomplete Cho phép người dùng nhập hoặc chọn nhanh các kỹ năng yêu 
+cầu từ danh sách có sẵn. 
+ 
+11 Button Nút xác nhận áp dụng tất cả các tiêu chí lọc đã chọn.  
+12 Button Xem chi tiết dự án  
+ 
+- Dữ liệu được sử dụng 
+Bảng 3-29: Dữ liệu được sử dụng trong chức năng Tìm kiếm dự án 
+STT Tên bảng Phương thức Thêm Sửa Xóa Truy vấn 
+1 freelancer    X 
+2 Skill    X 
+3 Project    X 
+4 Budget    X 
+
+PAGE 141
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 107  
+ 
+Hình 3-34: Lưu đồ chức năng tìm kiếm dự án 
+ 
+
+
+PAGE 142
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 108  
+3.6.4 Chức năng đấu thầu dự án 
+ 
+Hình 3-35: Giao diện chức năng Đấu thầu dự án 
+- Các thành phần trong giao diện Đấu thầu dự án 
+Bảng 3-30: Các thành phần trong giao điện Đấu thầu dự án 
+STT Loại điều khiển Nội dung thực hiện Giá trị mặc định 
+1 Tabs Cho phép chuyển đổi giữa các tab: Chi tiết dự án, 
+Trao đổi, Hồ sơ đề xuất, Ứng viên tiềm năng. 
+ 
+2 TextField Nhập số tiền freelancer chào thầu cho dự án (đơn vị 
+USD). 
+ 
+
+
+PAGE 143
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 109  
+3 TextField Nhập tổng số ngày dự kiến freelancer sẽ hoàn thành 
+dự án. 
+ 
+4 TextArea Nhập nội dung thư ngỏ, giới thiệu bản thân và phương 
+án triển khai dự án. 
+ 
+5 TextField Nhập tên hoặc mô tả ngắn gọn cho cột mốc thanh toán 
+thứ nhất. 
+ 
+6 TextField Nhập giá trị tiền thù lao cho cột mốc thanh toán thứ 
+nhất. 
+ 
+7 TextField Nhập số ngày dự kiến hoàn thành cột mốc thứ nhất.  
+8 Button 
+(Icon) 
+Nút bấm để xóa cột mốc thanh toán tương ứng khỏi 
+danh sách. 
+ 
+9 Button 
+(Link) 
+Thành phần cho phép người dùng thêm các hàng cột 
+mốc thanh toán mới. 
+ 
+10 Button Nút bấm để xác nhận và gửi toàn bộ thông tin đề xuất 
+thầu lên hệ thống. 
+ 
+ 
+- Dữ liệu được sử dụng 
+ 
+Bảng 3-31: Dữ liệu được sử dụng trong chức năng Đấu thầu dự án 
+ 
+STT Tên bảng Phương thức Thêm Sửa Xóa Truy vấn 
+1 Project    X 
+2 Skill    X 
+3 Budget    X 
+4 Proposal X    
+5 Milestone X X X  
+6 Budget    X 
+
+PAGE 144
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 110  
+ 
+Hình 3-36: Lưu đồ chức năng Đấu thầu dự án 
+
+
+PAGE 145
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 111  
+ 
+3.6.5 Chức năng trao đổi thông tin dự án 
+ 
+Hình 3-37: Giao diện chức năng Trao đổi/Làm rõ về dự án 
+ 
+Các thành phần trong giao diện 
+Bảng 3-32: Các thành phần trong giao diện Trao đổi/Làm rõ về dự án 
+STT 
+Loại 
+điều 
+khiển 
+Nội dung thực hiện Giá trị mặc định 
+1 TextArea Cho phép người dùng nhập nội dung câu hỏi 
+hoặc thắc mắc cần làm rõ về dự án. 
+Nhập câu hỏi 
+của bạn... 
+2 Button Nút bấm để gửi nội dung câu hỏi lên hệ thống để 
+khách hàng phản hồi. 
+GỬI CÂU HỎI 
+
+
+PAGE 146
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 112  
+ 
+ 
+Hình 3-38: Lưu đồ chức năng Trao đổi/Làm rõ dự án 
+ 
+- Dữ liệu được sử dụng 
+ 
+Bảng 3-33: Dữ liệu được sử dụng cho chức năng Trao đổi làm rõ Dự án 
+STT Tên bảng Phương thức Thêm Sửa Xóa Truy vấn 
+1 Project    X 
+2 Freelancer    X 
+3 Client    X 
+3 Clarification X  X X 
+
+PAGE 147
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 113  
+3.6.6 Chức năng xem các đề xuất đã ứng tuyển 
+ 
+ 
+Hình 3-39: Giao diện chức năng Xem hồ sơ đề xuất 
+- Dữ liệu được sử dụng 
+ 
+Bảng 3-34: Dữ liệu được sử dụng cho chức năng Xem hồ sơ đề xuất 
+ 
+STT Tên bảng Phương thức Thêm Sửa Xóa Truy vấn 
+1 Project    X 
+2 Budget    X 
+3 Milestone    X 
+4 Proposal    X 
+5 Freelancer    X 
+
+PAGE 148
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 114  
+ 
+ 
+ 3.7. Kết quả thực hiện yêu cầu giao diện 
+3.7.1 Giao diện trang Đăng ký 
+Chức năng Đăng ký người dùng: Hệ thống triển khai quy trình đăng ký theo phân đoạn 
+(multi-step registration) nhằm tối ưu hóa trải nghiệm người dùng cuối. Thay vì yêu cầu 
+cung cấp toàn bộ dữ liệu trong một biểu mẫu duy nhất, hệ thống chia nhỏ quy trình 
+thành các bước logic, cho phép người dùng từng bước hoàn thiện hồ sơ. Cách tiếp cận 
+này giúp giảm thiểu độ phức tạp, tạo cảm giác mạch lạc và giúp hệ thống có thể thu 
+thập thông tin người dùng một cách có cấu trúc, tạo tiền đề vững chắc cho việc cá nhân 
+hóa trải nghiệm sau khi đăng ký thành công. 
+ 
+ 
+Hình 3-40: Giao diện chức năng Đăng ký 
+Người dùng thực hiện đăng ký qua email cá nhân. Đây là bước xác thực cơ bản, đảm 
+bảo tính định danh người dùng trước khi truy cập vào các tính năng tiếp theo của hệ 
+thống. 
+
+
+PAGE 149
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 115  
+ 
+Hình 3-41: Giao diện người dùng nhập username 
+người dùng thiết lập định danh (Username) duy nhất trên nền tảng. Giá trị này đóng vai 
+trò là "địa chỉ số" để người dùng xuất hiện trên cộng đồng và không được phép thay 
+đổi sau khi khởi tạo nhằm đảm bảo tính ổn định trong nhận diện thương hiệu cá nhân. 
+ 
+ 
+ Hình 3-42: Giao diện người dùng chọn vai trò trong quá trình Đăng ký 
+người dùng lựa chọn vai trò chính: Freelancer hoặc Nhà tuyển dụng (Hình 3-42). Dựa 
+trên lựa chọn này, hệ thống sẽ tự động điều hướng luồng nghiệp vụ (workflow) và các 
+tính năng hiển thị tương ứng, đảm bảo trải nghiệm chuyên biệt cho từng nhóm đối tượng. 
+ 
+ 
+
+
+PAGE 150
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 116  
+ 
+Hình 3-43: Giao diện Freelancer chọn kỹ năng khi đăng ký tài khoản 
+Người dùng thực hiện lựa chọn các kỹ năng chuyên môn từ hệ thống danh mục có sẵn 
+của FreelancerHub. Quy trình này giúp hệ thống xây dựng cơ sở dữ liệu về năng lực của 
+Freelancer, từ đó hỗ trợ thuật toán gợi ý dự án phù hợp trong tương lai. (Hình 3-43) 
+ 
+ 
+
+
+PAGE 151
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 117  
+ 
+Hình 3-44: Giao diện Freelancer nhập thông tin mạng xã hội trong quá trình Đăng ký 
+Hệ thống khuyến khích người dùng liên kết các tài khoản mạng xã hội nghề nghiệp như 
+LinkedIn, GitHub hoặc Facebook. Việc này không chỉ tiết kiệm thời gian nhập liệu mà 
+còn giúp "xây dựng lòng tin" với khách hàng thông qua bằng chứng về uy tín nghề nghiệp 
+thực tế. (Hình 3-44) 
+ 
+ 
+ 
+
+
+PAGE 152
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 118  
+ 
+Hình 3-45: Giao diện Freelancer nhập trong tin tóm lược về bản thân trong quá trình đăng ký 
+ 
+Bước cuối cùng yêu cầu người dùng đúc kết giá trị bản thân qua một bản tóm tắt chuyên 
+môn ngắn gọn. Đây là điểm nhấn quan trọng giúp khách hàng nắm bắt nhanh năng lực 
+của Freelancer ngay từ cái nhìn đầu tiên trước khi quyết định gửi lời mời hợp tác. (Hình 
+3-45) 
+
+
+PAGE 153
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 119  
+3.7.2. Giao diện trang Đăng nhập 
+ 
+Hình 3-46: Giao diện Đăng nhập 
+ 
+Giao diện Đăng nhập (Login  – Hình 3-46): Đây là cổng xác thực dành cho người dùng 
+đã có tài khoản trên hệ thống. Giao diện được thiết kế tối giản, tập trung vào việc nhập 
+liệu Email và Mật khẩu, kèm theo các tùy chọn hỗ trợ như "Quên mật khẩu" và ghi nhớ 
+đăng nhập, giúp người dùng truy cập vào  tài khoản cá nhân một cách nhanh chóng và 
+bảo mật. 
+
+
+PAGE 154
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 120  
+3.7.3 Giao diện dành cho Quản trị viên 
+ 
+Hình 3-47: Giao diện Bảng điều khiển của Admin 
+ 
+Bảng điều khiển Quản trị viên (Admin Dashboard  – Hình 3-47): Đây là giao diện tổng 
+quan cung cấp cái nhìn toàn diện về tình trạng hoạt động của hệ thống FreelancerHub. 
+Tại đây, quản trị viên có thể theo dõi các chỉ số quan trọng như tổng số người dùng, số 
+lượng dự án mới và các thống kê liên quan đến hoạt động củ a cộng đồng, giúp người 
+quản trị nắm bắt nhanh trạng thái hệ thống để đưa ra các quyết định vận hành kịp thời. 
+
+
+PAGE 155
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 121  
+ 
+Hình 3-48: Giao diện Quản lý tài khoản 
+ 
+Phân hệ Quản lý tài khoản (Hình 3-48): Trang quản trị được thiết kế tập trung, cho phép 
+quản trị viên theo dõi và kiểm soát toàn bộ người dùng trong hệ thống FreelancerHub. 
+Bảng dữ liệu bao gồm các thông tin trọng yếu như: ID người dùng, Họ tên, Email, Vai 
+trò (Freelancer/Khách hàng), Trạng thái (Hoạt động/Bị khóa) và cột "Hành động" cho 
+phép thay đổi trạng thái tài khoản trực tiếp. Chức năng tìm kiếm và bộ lọc được tích hợp 
+giúp quản trị viên truy vấn nhanh chóng, đảm bảo tính bảo mật và duy trì sự ổn định, kỷ 
+luật cho cộng đồng người dùng trên hệ thống. 
+
+
+PAGE 156
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 122  
+ 
+Hình 3-49: Quản lý danh mục 
+ 
+Giao diện Tạo/Cập nhật Kỹ năng mới  (Hình 3-49): Là một phân hệ nhỏ nhưng quan 
+trọng trong Admin Panel, giao diện này cho phép quản trị viên thêm mới các kỹ năng 
+chuyên môn vào danh mục hệ thống. Với các trường thông tin cụ thể như "Tên kỹ năng" 
+và "Danh mục liên quan", hệ thống đảm bảo sự đồng bộ và c hính xác trong việc phân 
+loại năng lực người dùng, từ đó tối ưu hóa cơ chế tìm kiếm và kết nối dự án. 
+
+
+PAGE 157
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 123  
+3.7.4 Giao diện dành cho Freelancer 
+ 
+Hình 3-50: Giao diện Bảng điều khiển Freelancer 
+ 
+Giao diện Dashboard của Freelancer (Hình  3-50 ): Đây là trung tâm điều khiển  giúp 
+Freelancer quản lý toàn bộ hoạt động nghề nghiệp của mình trên hệ thống. Việc tập trung 
+
+
+PAGE 158
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 124  
+hóa các thông số quan trọng giúp người dùng quản lý thời gian hiệu quả, đảm bảo tiến 
+độ công việc và nắm bắt nhanh các cơ hội hợp tác mới từ nhà tuyển dụng. 
+ 
+Hình 3-51: Giao diện Trang tìm kiếm dự án 
+ 
+Giao diện Tìm kiếm dự án (Hình 3-51): Đây là trung tâm kết nối giữa Freelancer và các 
+cơ hội công việc trên nền tảng. Giao diện được thiết kế để hỗ trợ hai chế độ làm việc: 
+tìm kiếm chủ động và tìm kiếm thụ động. Ở chế độ mặc định, hệ thống tự động kích hoạt 
+Thuật toán gợi ý đề xuất (Recommendation Engine), trình bày danh sách các dự án phù 
+hợp nhất dựa trên kỹ năng, lịch sử hoạt động và hồ sơ năng lực của chính Freelancer đó. 
+Phương thức này giúp cá nhân hóa luồng trải nghiệm, giúp người dùng tiết kiệm thời 
+
+
+PAGE 159
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 125  
+gian sàng lọc và tiếp cận nhanh chóng với những dự án có độ tương thích cao nhất với 
+chuyên môn của họ. Ngoài ra, thanh công cụ tìm kiếm và bộ lọc nâng cao cho phép người 
+dùng chủ động truy vấn dự án theo nhu cầu thực tế khi cần thiết. 
+ 
+
+PAGE 160
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 126  
+ 
+Hình 3-52: Giao diện trang Chi tiết dự án 
+Giao diện Chi tiết dự án (Hình 3-52): Đây là trang thông tin chuyên sâu cho phép 
+Freelancer tiếp cận đầy đủ các yêu cầu công việc. Giao diện được tổ chức trực quan, bao 
+gồm: tiêu đề dự án, ngân sách, phạm vi thực hiện và mô tả kỹ thuật chi tiết. Đặc biệt, 
+
+
+PAGE 161
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 127  
+khu vực "Thông tin khách hàng" giúp Freelancer đánh giá mức độ uy tín trước khi quyết 
+định hợp tác. Nút "Gửi đề xuất" (Proposal) được đặt ở vị trí chiến lược, cho phép người 
+dùng thực hiện hành động ứng tuyển ngay lập tức. Cấu trúc này không chỉ giúp 
+Freelancer nắm bắt toàn bộ yêu cầu dự án mà còn hỗ trợ quá trình ra quyết định một cách 
+nhanh chóng và chính xác. 
+ 
+ 
+Hình 3-53: Giao diện Chi tiết dự án – Trao đổi/Làm rõ 
+ 
+ 
+Trao đổi dự án (Hình 3-53): Tab "Trao đổi" được tích hợp ngay trong trang Chi tiết dự 
+án, đóng vai trò là cầu nối giao tiếp trực tiếp giữa nhà tuyển dụng và Freelancer. Giao 
+diện được thiết kế theo mô hình nhắn tin thời gian thực (real -time chat), cho phép các 
+bên thảo luận sâu về yêu cầu kỹ thuật, làm rõ các cột mốc dự án và giải quyết các thắc 
+mắc phát sinh trong quá trình đấu thầu. Việc lưu vết toàn bộ nội dung trao đổi ngay trong 
+
+
+PAGE 162
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 128  
+ngữ cảnh dự án không chỉ giúp minh bạch hóa thông tin, mà còn tạo ra cơ sở dữ liệu đối 
+chiếu quan trọng nếu xảy ra tranh chấp sau này, từ đó nâng cao tính bảo mật và sự tin 
+tưởng cho môi trường làm việc cộng tác. 
+ 
+Hình 3-54: Chi tiết dự án – Hồ sơ đề xuất 
+ 
+Quản lý Hồ sơ đề xuất (Hình 3-54): Tab "Hồ sơ đề xuất" là công cụ quản trị cốt lõi giúp 
+nhà tuyển dụng đánh giá và sàng lọc các ứng viên đã tham gia đấu thầu dự án. Danh sách 
+hiển thị trực quan thông tin của từng Freelancer, bao gồm: hồ sơ cá nhân, mức giá đề 
+xuất và thư ngỏ . Cơ chế này cho phép nhà tuyển dụng so sánh trực tiếp năng lực giữa 
+các ứng viên trong cùng một không gian làm việc, hỗ trợ việc ra quyết định c họn người 
+thực hiện một cách minh bạch và chuẩn xác dựa trên các thông số thực tế. 
+ 
+
+
+PAGE 163
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 129  
+ 
+
+
+PAGE 164
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 130  
+Hình 3-55: Giao diện Chi tiết hợp đồng 
+Giao diện Chi tiết hợp đồng (Hình 3.55): Đây là trang nghiệp vụ trọng tâm, nơi hiện thực 
+hóa các cam kết giữa nhà tuyển dụng và Freelancer sau khi đạt được thỏa thuận. Giao 
+diện được thiết kế để theo dõi chặt chẽ tiến độ dự án thông qua cơ chế cột mốc 
+(Milestones). Mỗi cột mốc thể hiện rõ phạm vi công việc, thời hạn hoàn thành và trạng 
+thái thanh toán tương ứng. Việc quản lý hợp đồng trên một không gian tập trung như thế 
+này đảm bảo tính minh bạch, giúp các bên kiểm soát rủi ro và giải quyết tranh chấp dựa 
+trên dữ liệu thời gian thực, đồng thời tích hợp sẵn các thao tác nghiệp vụ cần thiết như 
+phê duyệt kết quả hoặc thực hiện thanh toán trực tuyến. 
+ 
+
+PAGE 165
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 131  
+ 
+Hình 3-56: Giao diện Hồ sơ cá nhân 
+ 
+Giao diện Quản lý Hồ sơ Freelancer (Hình 3-56): Đây là phân hệ cá nhân hóa dành riêng 
+cho Freelancer, giúp quản lý và cập nhật thông tin chuyên môn. Giao diện được thiết kế 
+
+
+PAGE 166
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 132  
+để người dùng có thể dễ dàng chỉnh sửa các thông tin cốt lõi như: thông tin định danh, 
+kỹ năng chuyên môn, kinh nghiệm thực tế và các bằng chứng chứng minh năng lực. Việc 
+cho phép cập nhật dữ liệu một cách linh hoạt không chỉ giúp Freelancer duy trì sự chuyên 
+nghiệp, mà còn đảm bảo dữ liệu năng lực luôn ở trạng thái mới nhất, giúp thuật toán gợi 
+ý của hệ thống hoạt động chính xác hơn trong việc kết nối với các cơ hội công việc phù 
+hợp. 
+3.7.5 Giao diện dành cho Client 
+ 
+Hình 3-57: Giao diện Bảng điều khiển của Nhà tuyển dụng 
+Giao diện Bảng điều khiển dành cho khách hàng (Client Dashboard – Hình 3-57) được 
+
+
+PAGE 167
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 133  
+thiết kế để cung cấp cái nhìn tổng quan về tình hình dự án và thanh toán. Trang gồm bốn 
+thẻ thống kê chính: Tổng dự án, Dự án đang hoạt động, Thanh toán đang chờ và Tổng 
+chi tiêu. Phần Theo dõi Dự án hiển thị thông tin các dự án đang thực hiện với tên dự án, 
+thông tin freelancer, hạn chót và tiến độ. Phần Dự án Đã Đăng cho biết tình trạng các dự 
+án đang được đăng tuyển. Phần Thanh toán Gần đây liệt kê các khoản thanh toán gần 
+đây kèm trạng thái và nút thanh toán qua Stripe. Giao diện sử dụng màu sắc phân biệt rõ 
+ràng giữa các trạng thái, giúp khách hàng dễ dàng quản lý dự án và theo dõi dòng tiền 
+một cách trực quan và hiệu quả. 
+ 
+Chức năng đăng dự án 
+Đăng dự án Để đảm bảo tính chặt chẽ và đầy đủ của thông tin đầu vào, chức năng đăng 
+dự án được triển khai theo mô hình Quy trình đa bước) . Cách tiếp cận này giúp chia 
+nhỏ các nhóm dữ liệu phức tạp thành từng phần cụ thể, bao gồm: xác định tiêu đề/mục 
+tiêu, thiết lập yêu cầu kỹ thuật/kỹ năng, cấu trúc ngân sách/thời gian, và kiểm duyệt 
+thông tin cuối cùng. Thiết kế này không chỉ giúp người d ùng không cảm thấy "quá tải" 
+khi thực hiện các thiết lập phức tạp, mà còn đảm bảo dữ liệu dự án được cấu trúc hóa 
+một cách chuẩn mực trước khi lưu trữ, tạo tiền đề cho thuật toán tìm kiếm và gợi ý hoạt 
+động hiệu quả hơn. 
+ 
+ 
+Hình 3-58: Giao diện nhập mô tả dự án 
+ 
+Mô tả Dự án (Hình 3-58): Đây là giao diện quan trọng nơi nhà tuyển dụng cung cấp 
+
+
+PAGE 168
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 134  
+chi tiết về công việc. Tại đây, người dùng có thể trình bày rõ ràng các hạng mục cần 
+thực hiện, mục tiêu chính và các tiêu chuẩn về chất lượng mà dự án hướng tới. Việc 
+cung cấp nội dung mô tả đầy đủ và có cấu trúc không chỉ giúp Freelancer hiểu rõ yêu 
+cầu, đánh giá đúng độ khó của công việc, mà còn là căn cứ then chốt để hệ thống thực 
+hiện phân tích từ khóa, từ đó tối ưu hóa khả năng gợi ý dự án đến đúng đối tượng 
+Freelancer có năng lực phù hợp nhất. 
+ 
+Hình 3-59: Giao diện nhập thông tin dự án 
+ 
+
+
+PAGE 169
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 135  
+ 
+Hình 3-60: Giao diện chỉnh sửa Tiêu đề dự án 
+ 
+
+
+PAGE 170
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 136  
+ 
+Hình 3-61: Giao diện chỉnh sửa Mô tả dự án 
+ 
+
+
+PAGE 171
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 137  
+ 
+Hình 3-62: Giao diện chỉnh sửa Danh mục dự án 
+ 
+ 
+
+
+PAGE 172
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 138  
+ 
+Hình 3-63: Giao diện chỉnh sửa Kỹ năng dự án 
+ 
+
+
+PAGE 173
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 139  
+ 
+Hình 3-64: Giao diện chỉnh sửa phạm vị dự án 
+ 
+
+
+PAGE 174
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 140  
+ 
+Hình 3-65: Giao diện thêm ngân sách dự án 
+ 
+
+
+PAGE 175
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 141  
+ 
+Hình 3-66: Giao diện các tùy chọn nâng cao khi đăng tuyển dự án 
+ 
+
+
+PAGE 176
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 142  
+ 
+
+
+PAGE 177
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 143  
+Hình 3-67: Giao diện trang Chi tiết hợp đồng dành cho Nhà tuyển dụng 
+Giao diện Chi tiết Hợp đồng : Đây là trang quản trị nghiệp vụ dành cho nhà tuyển dụng 
+để giám sát toàn bộ vòng đời của một hợp đồng đã ký kết. Giao diện được xây dựng 
+nhằm cung cấp cái nhìn tổng quát và quyền kiểm soát chi tiết đối với tiến độ thực hiện 
+công việc. Thông qua hệ thống các cột mốc (Milestones), nhà tuyển dụng có thể theo dõi 
+thời hạn hoàn thành, kiểm tra kết quả công việc do Freelan cer gửi lên và trực tiếp thực 
+hiện phê duyệt hoặc thanh toán dựa trên các hạng mục đã thỏa thuận. Thiết kế tập tru ng 
+vào sự minh bạch, giúp nhà tuyển dụng quản lý hiệu quả nguồn lực và đảm bảo dự án 
+luôn bám sát tiến độ đề ra. 
+
+PAGE 178
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 144  
+ 
+ 
+Hình 3-68: Modal thanh toán milestone 
+Giao diện Modal Thanh toán (Hình 3-68): Đây là thành phần giao diện quan trọng 
+được kích hoạt khi nhà tuyển dụng (Client) thực hiện lệnh thanh toán cho một cột mốc 
+
+
+PAGE 179
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 145  
+công việc. 
+ 
+ 
+Hình 3-69: Danh sách ứng viên tiềm năng 
+ 
+Gợi ý Ứng viên Tiềm năng (Hình 3-69): Đây là trang nghiệp vụ nơi hệ thống chủ động 
+đề xuất danh sách các Freelancer có khả năng thực hiện dự án tốt nhất dựa trên thuật 
+toán so khớp. Hệ thống thực hiện phân tích các thuộc tính như: tập kỹ năng (skills), lịch 
+sử hoàn thành dự án, điểm đánh giá uy tín (rating) và sự tương quan giữa hồ sơ Freelancer 
+
+
+PAGE 180
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 146  
+với yêu cầu chi tiết của dự án. Giao diện này không chỉ rút ngắn đáng kể thời gian sàng 
+lọc hồ sơ cho nhà tuyển dụng mà còn giúp đảm bảo chất lượng nhân sự được chọn, từ 
+đó nâng cao tỷ lệ thành công của dự án ngay từ giai đoạn đầu hợp tác. 
+ 
+ 
+Hình 3-70: Giao diện Hồ sơ ứng viên 
+ 
+
+
+PAGE 181
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 147  
+Giao diện Hồ sơ Ứng viên : Đây là trang nghiệp vụ cho phép nhà tuyển dụng (Client) 
+thực hiện quá trình đánh giá và sàng lọc nhân sự chi tiết trước khi quyết định hợp tác. 
+Giao diện được thiết kế để hiển thị đầy đủ thông tin chuyên môn của Freelancer, bao 
+gồm: hồ sơ năng lực, các chứng chỉ chuyên môn, lịch sử dự án đã thực hiện và các đánh 
+giá từ khách hàng cũ. Việc trình bày các thông số này giúp nhà tuyển dụng có cái nhìn 
+khách quan về năng lực của Freelancer, từ đó xây dựng niềm tin và đưa ra các quyết định 
+nhân sự dựa trên dữ liệu thực tế. 
+  
+
+PAGE 182
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 148  
+ 
+ CHƯƠNG 4: HỆ THỐNG GỢI Ý VÀ CHATBOT 
+ 4.1. Hệ thống gợi ý 
+4.1. Tổng quan về hệ thống gợi ý 
+4.1.1. Khái niệm hệ thống gợi ý 
+Trong bối cảnh bùng nổ dữ liệu số, người dùng internet thường xuyên đối mặt với tình 
+trạng "quá tải thông tin" (Information Overload), khiến việc tìm kiếm các nội dung phù 
+hợp trở nên khó khăn và tốn kém thời gian. Hệ thống gợi ý (Recommender System - RS) 
+ra đời như một giải pháp lọc thông tin thông minh, được thiết kế để dự đoán mức độ "ưa 
+thích" (preference) hoặc "đánh giá" (rating) mà người dùng sẽ dành cho một đối tượng 
+cụ thể (sản phẩm, dịch vụ, bản tin...). 
+ 
+Về bản chất, hệ thống này vận dụng các kỹ thuật khai phá dữ liệu và học máy để phân 
+tích các mẫu hành vi trong quá khứ, hồ sơ nhân khẩu học và lịch sử giao dịch. Không 
+chỉ dừng lại ở việc hỗ trợ tìm kiếm, RS còn đóng vai trò chiến lược trong các nền tảng 
+trực tuyến nhằm: 
+- Cá nhân hóa trải nghiệm: Biến đổi giao diện thụ động thành luồng thông tin chủ 
+động, phù hợp với từng cá nhân. 
+- Tối ưu hóa doanh thu và tương tác: Giữ chân người dùng lâu hơn trên nền tảng 
+và tăng tỷ lệ chuyển đổi thông 
+- Hỗ trợ ra quyết định: Giúp người dùng sàng lọc giữa hàng triệu lựa chọn để đi 
+đến quyết định cuối cùng một cách nhanh chóng và chính xác hơn. 
+Dựa trên nguồn dữ liệu đầu vào và thuật toán xử lý, các hệ thống gợi ý hiện đại thường 
+được phân loại thành ba nhóm mô hình chủ đạo: 
+- Lọc dựa trên nội dung (Content -Based Filtering - CBF): Phương pháp này hoạt 
+động dựa trên nguyên lý so khớp giữa hồ sơ người dùng (User Profile) và các đặc 
+trưng của đối tượng (Item Features) . Hệ thống sẽ phân tích các thuộc tính mô tả 
+của sản phẩm (ví dụ: từ khóa, danh mục, thẻ tag...) mà người dùng đã từng  thích 
+trong quá khứ để đề xuất các sản phẩm có tính chất tương tự. 
+
+PAGE 183
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 149  
+Đặc điểm: Mô hình này có ưu điểm là không phụ thuộc vào cộng đồng 
+người dùng khác, tuy nhiên thường gặp hạn chế về "sự quá chuyên biệt" (Over-
+specialization), khiến người dùng khó tiếp cận các nội dung hoàn toàn mới lạ. 
+- Lọc cộng tác (Collaborative Filtering - CF): Khác với lọc dựa trên nội dung, lọc 
+cộng tác khai thác trí tuệ đám đông, xây dựng các đề xuất dựa trên hành vi tương 
+tác và đánh giá của cộng đồng người dùng. Phương pháp này bao gồm hai cách 
+tiếp cận chính: 
++ Dựa trên người dùng (User -based): Tìm kiếm những người dùng có sở thích 
+tương tự (neighbors) và gợi ý những mục mà nhóm người này thích. 
++ Dựa trên mục tin (Item -based): Tìm kiếm sự tương đồng giữa các sản phẩm 
+dựa trên lịch sử mua sắm hoặc đánh giá của người dùng. 
+Đặc điểm:  Lọc cộng tác có khả năng khám phá những sở thích tiềm ẩn 
+(serendipity) nhưng thường gặp khó khăn với vấn đề "dữ liệu thưa" (Sparsity 
+problem) khi số lượng người dùng và sản phẩm tăng lên nhanh chóng. 
+- Hệ thống gợi ý kết hợp (Hybrid Recommender System) Đây là giải pháp hiện đại 
+nhằm khắc phục các điểm yếu cố hữu của từng phương pháp đơn lẻ như vấn đề "khởi 
+đầu lạnh" (Cold Start - khi chưa có đủ dữ liệu lịch sử). Hệ thống kết hợp linh hoạt 
+giữa Lọc nội du ng và Lọc cộng tác thông qua các cơ chế như trộn lẫn (mixed), 
+chuyển đổi (switching) hoặc xếp tầng (cascade). Sự kết hợp này không chỉ nâng cao 
+độ chính xác của dự đoán (accuracy) mà còn đảm bảo tính đa dạng và độ bao phủ 
+(coverage) cho các đề xuất. 
+4.1.2. Vai trò của hệ thống gợi ý trong hệ thống FreelancerHub 
+Trong hệ sinh thái của FreelancerHub, hệ thống gợi ý không chỉ đóng vai trò là công 
+cụ hỗ trợ tìm kiếm thụ động mà là thành phần trung tâm điều phối sự tương tác giữa hai 
+đối tượng người dùng chính: Freelancer (Người tìm  việc) và Client (Nhà tuyển dụng). 
+Khác với các hệ thống thương mại điện tử truyền thống, bài toán tại FreelancerHub mang 
+tính chất gợi ý tương hỗ (Reciprocal Recommendation), nơi sự phù hợp phải đến từ cả 
+hai phía. 
+Cụ thể, vai trò của hệ thống được phân tích trên hai khía cạnh chiến lược sau: 
+a. Đối với Freelancer: Cá nhân hóa cơ hội việc làm 
+
+PAGE 184
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 150  
+Thách thức lớn nhất đối với Freelancer trên các nền tảng việc làm là phải sàng 
+lọc hàng trăm dự án mới mỗi ngày để tìm ra công việc phù hợp với kỹ năng của 
+mình. Hệ thống gợi ý của FreelancerHub giải quyết vấn đề này bằng cách: 
+- Tự động khớp lệnh kỹ năng: Phân tích hồ sơ năng lực (Profile), kỹ năng 
+chuyên môn (Skills) và lịch sử nhận việc của Freelancer để đề xuất các dự án có 
+độ tương thích cao nhất. 
+- Giảm thiểu thời gian tìm kiếm (Search Cost): Thay vì phải chủ động tìm 
+kiếm theo từ khóa, hệ thống chủ động đưa các dự án tiềm năng đến người dùng, 
+giúp Freelancer tiếp cận công việc nhanh chóng trước khi dự án hết hạn nộp hồ 
+sơ. 
+- Giải quyết vấn đề "Khởi đầu lạnh": Đối với Freelancer mới gia nhập chưa 
+có lịch sử làm việc, hệ thống có thể dựa trên các thuộc tính khai báo ban đầu 
+(Content-based) để đưa ra các gợi ý phù hợp, giúp họ nhanh chóng có được dự án 
+đầu tiên. 
+b. Đối với Client (Nhà tuyển dụng): Tối ưu hóa quy trình tuyển dụng 
+Ở chiều ngược lại, Nhà tuyển dụng thường gặp khó khăn trong việc đánh giá năng 
+lực ứng viên giữa hàng loạt hồ sơ chào giá. Hệ thống gợi ý đóng vai trò như một 
+bộ lọc thông minh giúp Client: 
+- Sàng lọc ứng viên tiềm năng: Dựa trên yêu cầu đặc thù của dự án (ngân sách, 
+thời gian, công nghệ sử dụng), hệ thống xếp hạng và đề xuất danh sách các 
+Freelancer có xác suất hoàn thành dự án thành công cao nhất. 
+- Đảm bảo chất lượng (Quality Assurance): Thông qua việc phân tích dữ liệu 
+lịch sử đánh giá (Rating) và tỷ lệ hoàn thành dự án của Freelancer, hệ thống 
+ưu tiên gợi ý những ứng viên có uy tín, giảm thiểu rủi ro cho Client. 
+- Tăng tốc độ tuyển dụng: Giúp Client nhanh chóng tìm thấy mảnh ghép phù 
+hợp mà không cần chờ đợi quá lâu để nhận được hồ sơ chào giá thụ động. 
+4.2. Phương pháp và thuật toán áp dụng trong hệ thống của đề tài 
+4.2.1. Kiến trúc tổng thể của hệ thống gợi ý 
+Hệ thống gợi ý của FreelancerHub được xây dựng dựa trên kiến trúc Hybrid 
+Recommender System (Hệ thống gợi ý lai ghép), cụ thể là phương pháp Weighted & 
+
+PAGE 185
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 151  
+Switching Hybrid (Lai ghép có trọng số và chuyển đổi). Kiến trúc này cho phép hệ thống 
+vận hành linh hoạt bằng cách sử dụng các bộ lọc nghiệp vụ (ngân sách, trạng thái dự án), 
+sau đó kết hợp sức mạnh của phân tích nội dung và hành vi cộng đồng để đưa ra da nh 
+sách đề xuất tối ưu nhất. 
+Hệ thống hoạt động theo mô hình Client-Server với sự phân tách nhiệm vụ rõ ràng: 
+• Backend Server (Spring Boot): Đóng vai trò là bộ điều phối, chịu trách nhiệm 
+truy xuất dữ liệu, áp dụng các bộ lọc nghiệp vụ, gọi API tính toán và tổng hợp kết 
+quả. 
+• Flask Service (External Service): Đảm nhận các tác vụ tính toán phức tạp như so 
+khớp vector kỹ năng (Embedding Matching) và chạy thuật toán lọc cộng tác 
+(Matrix Factorization/Neural CF). 
+4.3 Quy trình xử lý dữ liệu và thuật toán 
+4.3.1. Module gợi ý Dự án cho Freelancer (recommendProjects) 
+Quy trình này nhằm mục đích tìm kiếm các dự án phù hợp nhất với hồ sơ năng lực của 
+Freelancer. 
+1. Giai đoạn 1: Lọc ứng viên và Tiền xử lý (Candidate Generation & Pre-
+processing) 
+- Hệ thống truy xuất danh sách các dự án đang ở trạng thái OPEN. 
+- Dữ liệu kỹ năng của Freelancer và Dự án được chuyển đổi sang dạng 
+Vector (Skill Vector) để phục vụ tính toán. 
+2. Giai đoạn 2: Tính toán độ tương đồng nội dung (Content-Based Scoring) 
+- Sử dụng thuật toán so khớp độ tương đồng (Similarity Matching) giữa 
+Vector kỹ năng của Freelancer và Vector yêu cầu của dự án. 
+- Việc tính toán được thực hiện thông qua giao thức REST API gọi đến 
+dịch vụ AI (skill-similarity). 
+- Danh sách dự án được sắp xếp giảm dần dựa trên điểm số tương đồng 
+này. 
+3. Giai đoạn 3: Khai thác bộ lọc cộng tác (Collaborative Filtering) 
+- Hệ thống phân tích lịch sử tương tác (Project Interaction) của cộng đồng 
+Freelancer để tìm ra các dự án mà những người có hành vi tương tự đã 
+quan tâm. 
+
+PAGE 186
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 152  
+- Kết quả trả về là một danh sách các projectId tiềm năng từ dịch vụ AI 
+(cf-recommend). 
+4. Giai đoạn 4: Lai ghép và Tổng hợp (Hybrid Aggregation) 
+- Kết quả từ hai luồng trên được hợp nhất (Union), đồng thời loại bỏ các 
+kết quả trùng lặp (distinct). 
+- Kết quả cuối cùng được phân trang (Pagination) trước khi trả về cho 
+Client, đảm bảo hiệu năng hệ thống. 
+4.3.2. Module gợi ý Freelancer cho Nhà tuyển dụng (recommendFreelancers) 
+Quy trình này phức tạp hơn do phải tuân thủ các ràng buộc chặt chẽ về ngân sách và 
+chất lượng ứng viên. 
+1. Giai đoạn 1: Bộ lọc nghiệp vụ (Hard Constraints Filtering) 
+Trước khi đưa vào thuật toán gợi ý, danh sách Freelancer được lọc qua các điều 
+kiện tiên quyết: 
+o Trạng thái ứng tuyển: Loại bỏ những Freelancer đã nộp hồ sơ vào dự án 
+(hasApplied) để tránh gợi ý trùng lặp. 
+o Ngân sách (Budget Matching): Chỉ giữ lại các Freelancer có mức lương 
+theo giờ (hourlyRate) nằm trong khoảng ngân sách (min-max) của dự án. 
+Đây là bước quan trọng để đảm bảo tính khả thi của hợp đồng. 
+2. Giai đoạn 2: Tính điểm đa tiêu chí (Multi-criteria Scoring) 
+Hệ thống Content-Based không chỉ dựa trên kỹ năng mà còn tích hợp yếu tố uy 
+tín. Điểm số phù hợp được tính theo công thức trọng số: 
+Stotal = 0.8 x + 0.2 x Srating 
+Trong đó: 
+o Sskill: Độ tương đồng giữa vector kỹ năng dự án và kỹ năng freelancer. 
+o Srating: Điểm đánh giá trung bình của Freelancer (được chuẩn hóa về 
+thang 0-1). 
+o Việc đặt trọng số 0.8 cho kỹ năng nhấn mạnh tầm quan trọng của sự phù 
+hợp chuyên môn, trong khi 0.2 cho đánh giá giúp ưu tiên các freelancer 
+có uy tín cao. 
+3. Giai đoạn 3 & 4: Lọc cộng tác và Lai ghép 
+o Tương tự như quy trình gợi ý dự án, hệ thống gọi API /cf-recommend-
+freelancers để lấy danh sách ứng viên dựa trên hành vi của các nhà tuyển 
+dụng khác. 
+
+PAGE 187
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 153  
+o Danh sách cuối cùng là sự kết hợp của Content-Based (đã được lọc kỹ 
+lưỡng) và Collaborative Filtering. 
+4.4. Công thức tính điểm đề xuất 
+4.4.1 Công thức tổng quát cho Gợi ý Freelancer  
+Để xếp hạng một Freelancer f cho một dự án p, hệ thống tính toán tổng điểm S(p, f) dựa 
+trên sự kết hợp có trọng số giữa kỹ năng chuyên môn và uy tín cá nhân. 
+Công thức được thiết lập như sau: 
+S(p, f) = α x Simskill(𝑉𝑝, 𝑉𝑓) + β x Scorerating(f) 
+Trong đó: 
+- α= 0.8: Trọng số ưu tiên cho sự phù hợp về năng lực chuyên môn. Việc đặt 
+trọng số cao giúp đảm bảo ứng viên đáp ứng tốt các yêu cầu kỹ thuật của dự án. 
+- β= 0.2: Trọng số ưu tiên cho mức độ uy tín. Đây là yếu tố đảm bảo an toàn cho 
+nhà tuyển dụng dựa trên lịch sử làm việc của freelancer. 
+- Vp, Vf: Các vector đặc trưng (Embeddings) của dự án và freelancer trong không 
+gian n chiều. 
+- Simskill: Hàm tính toán độ tương đồng Cosine giữa các vector kỹ năng. 
+- Scorerating(f): Điểm đánh giá đã được chuẩn hóa của freelancer. 
+ 
+Thành phần 1: Độ tương đồng nội dung (Content Similarity) 
+Đây là thành phần cốt lõi sử dụng kỹ thuật xử lý ngôn ngữ tự nhiên (NLP) để chuyển 
+đổi các văn bản thô (như danh sách kỹ năng, mô tả dự án) thành các vector số học 
+nhằm tính toán sự tương quan. 
+1. Chuyển đổi Vector: Hệ thống sử dụng EmbeddingService để ánh xạ thông tin 
+từ SkillModel thành các vector đặc trưng. 
+2. Tính toán độ tương đồng: Điểm Simskill được tính toán thông qua công thức 
+Cosine Similarity, đo lường góc giữa hai vector trong không gian: 
+Simskill(Vp, Vf) = 
+ 𝑉𝑝 .𝑉𝑓
+ ||𝑉𝑝|| ||𝑉𝑓||  = 
+∑ 𝑉𝑝,𝑖𝑉𝑓,𝑖𝑛𝑖=1
+√∑ (𝑉𝑝,𝑖)2𝑛𝑖=1   √∑ (𝑉𝑓,𝑖)2𝑛𝑖=1
+ 
+Giá trị này nằm trong khoảng [0, 1], trong đó 1 thể hiện sự trùng khớp hoàn hảo 
+về kỹ năng. 
+Thành phần 2: Chuẩn hóa điểm đánh giá (Rating Normalization) 
+
+PAGE 188
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 154  
+Vì điểm đánh giá của Freelancer thường nằm trong thang điểm 5, hệ thống thực hiện 
+chuẩn hóa (Normalization) để đưa về cùng miền giá trị với điểm kỹ năng nhằm tránh 
+gây sai lệch khi cộng tổng. 
+Hàm calculateFreelancerRating thực hiện tính trung bình cộng các TestimonialModel: 
+Scorerating(f) = 
+∑ 𝑟𝑖𝑛𝑖=1
+𝑛 .  5  
+  𝑟𝑖: Số sao đánh giá của dự án thứ i. 
+ n: Tổng số lượng đánh giá mà freelancer đã nhận được. 
+ Hệ số 5n ở mẫu số giúp chuyển đổi điểm trung bình từ thang điểm 5 về thang điểm 
+chuẩn [0,1]  
+Quy trình Gợi ý Freelancer cho Nhà tuyển dụng (Client) 
+Khác với luồng gợi ý dự án, quy trình gợi ý ứng viên cho Nhà tuyển dụng được thiết kế 
+khắt khe hơn nhằm tối ưu hóa chi phí và đảm bảo chất lượng công việc. 
+a. Các bộ lọc tiền xử lý (Pre-ranking Filters) 
+Trước khi áp dụng công thức tính điểm, hệ thống thực hiện sàng lọc dựa trên các ràng 
+buộc thực tế của dự án: 
+• Loại bỏ ứng viên đã nộp hồ sơ: Đảm bảo danh sách gợi ý luôn là những gương 
+mặt mới tiềm năng. 
+• Ràng buộc ngân sách (Budget Matching): Hệ thống chỉ đề xuất những 
+Freelancer có mức lương theo giờ (hourlyRate) nằm trong phạm vi ngân sách dự 
+án. Đây là bước quan trọng để đảm bảo tính khả thi về mặt tài chính cho Client. 
+b. Điểm số tổng hợp đa tiêu chí 
+Như đã trình bày ở mục 4.2.2, điểm số cuối cùng là sự kết hợp giữa năng lực và uy tín: 
+S(p, f) = α x Simskill(𝑉𝑝, 𝑉𝑓) + β x Scorerating(f) 
+Việc tích hợp Rating vào công thức này giúp hệ thống tự động đẩy những Freelancer 
+có lịch sử làm việc tốt lên vị trí ưu tiên, giúp Client giảm bớt rủi ro khi chọn lựa ứng 
+viên. 
+ 
+4.3. Đánh giá, nhận xét và hướng phát triển hệ thống gợi ý 
+Đánh giá và Nhận xét hệ thống 
+Sau quá trình triển khai và thử nghiệm thực tế trên nền tảng FreelancerHub, hệ thống 
+gợi ý đã bộc lộ những ưu điểm nổi bật cũng như một số hạn chế cần lưu ý: 
+Ưu điểm: 
+• Tính cá nhân hóa cao nhờ mô hình Hybrid:  Việc kết hợp giữa Lọc nội dung 
+(Content-Based) và Lọc cộng tác (Collaborative Filtering) giúp hệ thống tận dụng 
+
+PAGE 189
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 155  
+được ưu điểm của cả hai. Hệ thống không chỉ gợi ý dựa trên kỹ năng cứng mà 
+còn dựa trên xu hướng hành vi của cộng đồng. 
+• Giải quyết bài toán thực tế qua các bộ lọc nghiệp vụ: Khác với các mô hình lý 
+thuyết, việc tích hợp hàm isFreelancerInBudget và kiểm tra hasApplied đảm bảo 
+các gợi ý có tính thực tiễn cao, giúp Client tiết kiệm ngân sách và Freelancer 
+không bị lãng phí thời gian vào các dự án không khả thi. 
+• Kiến trúc linh hoạt và khả năng mở rộng: Việc tách biệt tầng xử lý nghiệp vụ 
+(Java Spring Boot) và tầng tính toán AI (Python) thông qua REST API cho phép 
+hệ thống dễ dàng nâng cấp thuật toán mà không ảnh hưởng đến logic ứng dụng. 
+• Khắc phục vấn đề "Khởi đầu lạnh" (Cold Start): Nhờ ưu tiên trọng số cho 
+Lọc nội dung (α = 0.8), các Freelancer mới hoặc dự án mới đăng vẫn có thể 
+nhận được đề xuất chính xác ngay cả khi chưa có dữ liệu tương tác lịch sử. 
+Hạn chế: 
+• Phụ thuộc vào chất lượng dữ liệu đầu vào: Hiệu quả của hệ thống phụ thuộc 
+lớn vào việc Freelancer và Client cung cấp đầy đủ thông tin kỹ năng (Skills). 
+Nếu dữ liệu thiếu hoặc sai lệch, độ tương đồng vector sẽ không chính xác. 
+• Độ trễ khi gọi dịch vụ ngoài: Việc gọi API liên tục giữa Java và Python qua 
+RestTemplate có thể gây ra độ trễ nhất định khi danh sách ứng viên hoặc dự án 
+lên tới hàng chục nghìn bản ghi. 
+• Trọng số cố định: Hiện tại các hệ số α và β đang được cấu hình cứng (hard-
+coded), chưa có khả năng tự điều chỉnh theo thời gian hoặc theo từng nhóm 
+ngành nghề cụ thể. 
+Hướng phát triển hệ thống 
+Để nâng cao trải nghiệm người dùng và tính chính xác của thuật toán trong tương lai, hệ 
+thống FreelancerHub có thể phát triển theo các hướng sau: 
+1. Áp dụng Học máy chuyên sâu (Deep Learning): 
+Thay thế mô hình Cosine Similarity đơn giản bằng các mạng Neural (như Neural 
+Collaborative Filtering - NCF) hoặc các mô hình ngôn ngữ lớn (LLMs) để hiểu 
+sâu hơn về ngữ cảnh của bản mô tả công việc (Job Description) thay vì chỉ so 
+khớp từ khóa kỹ năng. 
+2. Tối ưu hóa tham số tự động (Hyperparameter Tuning): 
+
+PAGE 190
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 156  
+Xây dựng module tự động điều chỉnh trọng số $\alpha$ và $\beta$ dựa trên phản 
+hồi thực tế của người dùng (như tỷ lệ click -through rate hoặc tỷ lệ chấp nhận lời 
+mời làm việc). 
+3. Hệ thống gợi ý theo thời gian thực (Real-time Recommendation): 
+Tích hợp các nền tảng xử lý dòng dữ liệu (như Apache Kafka) để cập nhật ngay 
+lập tức các gợi ý khi Freelancer vừa cập nhật kỹ năng mới hoặc Client vừa xem 
+một hồ sơ ứng viên. 
+4. Hệ thống gợi ý có tính giải thích (Explainable AI - XAI): 
+Bổ sung tính năng giải thích cho người dùng biết "Tại sao tôi nhận được gợi ý 
+này?". Ví dụ: "Gợi ý dự án này vì bạn có 90% kỹ năng phù hợp với yêu cầu Java 
+và Spring Boot". Điều này giúp tăng mức độ tin tưởng của người dùng đối với hệ 
+thống. 
+5. Gợi ý đa mục tiêu (Multi-objective Recommendation): 
+Mở rộng công thức tính điểm để bao gồm thêm các yếu tố như: vị trí địa lý, ngôn 
+ngữ giao tiếp, và thời gian hoàn thành dự án dự kiến để tăng độ khớp (matching) 
+toàn diện. 
+ 4.2. Chatbot 
+4.2.1 Tổng quan tích hợp 
+Chức năng chatbot dự án được tích hợp trực tiếp vào giao diện tạo Project nhằm hỗ trợ 
+người dùng trong quá trình chỉnh sửa các trường như tiêu đề (title), mô tả (description), 
+kỹ năng (skills), phạm vi (scope), thời gian (timeline) và ngân sách (budget). Thay vì 
+yêu cầu người dùng tự hoàn thiện toàn bộ nội dung, hệ thống cho phép người dùng đặt 
+câu hỏi theo ngữ cảnh hiện tại và nhận phản hồi từ AI dưới dạng gợi ý và hướng dẫn. 
+Về kiến trúc, hệ thống sử dụng mô hình ngôn ngữ lớn (LLM) thông qua nền 
+tảng OpenRouter để sinh phản hồi. Việc gọi dịch vụ AI không được thực hiện trực tiếp 
+từ trình duyệt, mà được triển khai thông qua backend trung gian nhằm đảm bảo an toàn 
+khóa API, thống nhất kiểm soát truy cập, và thuận tiện cho việc ghi log theo dõi chi 
+phí. 
+ 
+4.2.2 Luồng xử lý dữ liệu của chức năng Chatbot Project 
+Dựa trên yêu cầu chức năng chatbot hỗ trợ tạo project, luồng xử lý dữ liệu được triển 
+khai như sau: 
+1. Nhập liệu từ người dùng 
+
+PAGE 191
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 157  
+Trong giao diện tạo dự án, người dùng nhập nội dung câu hỏi/đề nghị (ví dụ: 
+“Tôi nên đặt ngân sách khoảng bao nhiêu?”, “Viết lại title ngắn gọn hơn”, “Cần 
+thêm kỹ năng gì?”). Đồng thời hệ thống thu thập trạng thái hiện tại của bản nháp 
+project (các trường title, description, scope, budget, skills… nếu đã có). 
+ 
+2. Khởi tạo ngữ cảnh dự án (Project Context) 
+Trước khi gửi yêu cầu tới AI, hệ thống tổng hợp “ngữ cảnh dự án” từ các dữ liệu 
+người dùng đang chỉnh sửa. Ngữ cảnh này giúp AI hiểu được trạng thái hiện tại 
+của project để trả lời phù hợp, tránh gợi ý chung chung hoặc mâu thuẫn với nội 
+dung đã có. 
+ 
+3. Khởi tạo yêu cầu AI 
+Ứng dụng gửi yêu cầu đến lớp xử lý AI của hệ thống (backend). Yêu cầu bao 
+gồm: 
+• Thông điệp người dùng (user message) 
+• Ngữ cảnh project hiện tại (project context) 
+• (Tùy chọn) thông tin brief ban đầu nếu project đã từng được AI gợi ý 
+trước đó 
+ 
+4. Kiểm soát truy cập và giới hạn tần suất (Rate limit) 
+Backend thực hiện kiểm tra người dùng đăng nhập hợp lệ và áp dụng giới hạn 
+tần suất gọi AI theo từng tài khoản trong một khoảng thời gian. Bước này nhằm: 
+• Ngăn chặn spam/lạm dụng 
+• Giảm rủi ro phát sinh chi phí không kiểm soát khi gọi LLM 
+ 
+5. Xử lý tại dịch vụ AI (OpenRouter + LLM) 
+Backend xây dựng prompt theo hướng “trợ lý tạo project”, trong đó: 
+• Xác định vai trò AI là trợ lý hỗ trợ đăng dự án freelance 
+• Đưa project context vào để AI dựa vào đó trả lời 
+• Thiết lập nguyên tắc: trả lời ngắn gọn, thực tế, không bịa thông tin ngân 
+sách ngoài dữ liệu đã có Sau đó backend gọi OpenRouter để mô hình LLM 
+sinh phản hồi. 
+ 
+6. Nhận phản hồi và hậu xử lý 
+
+PAGE 192
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 158  
+Sau khi có kết quả từ AI, hệ thống thực hiện một số xử lý bổ sung để tối ưu trải 
+nghiệm: 
+• Phân loại phản hồi theo nhóm (gợi ý/tip/câu hỏi/cảnh báo/thông tin…) 
+• Xác định phản hồi có cần người dùng cung cấp thêm thông tin hay không 
+• Gợi ý thêm một số “tips” nhanh dựa theo chủ đề người dùng đang hỏi (ví 
+dụ: budget, timeline, skills) 
+ 
+7. Hiển thị kết quả trên giao diện 
+Phản hồi của AI được hiển thị trực tiếp trong giao diện chatbot. Người dùng có 
+thể: 
+• Tiếp tục hỏi để làm rõ yêu cầu 
+• Dựa theo gợi ý để chỉnh sửa thủ công các trường trong form tạo project 
+8. Ghi log theo dõi (tùy chọn/ẩn trong hệ thống) 
+Hệ thống ghi nhận thông tin phục vụ vận hành như: 
+• Model đang sử dụng 
+• Tokens/chi phí ước lượng 
+• Trạng thái thành công/thất bại 
+Dữ liệu này hỗ trợ giám sát chất lượng và tối ưu chi phí. 
+ 
+4.2.3 Xử lý và lưu trữ kết quả phản hồi (định hướng) 
+Kết quả phản hồi của chatbot hiện được sử dụng chủ yếu để hướng dẫn người dùng 
+chỉnh sửa. Tùy theo định hướng phát triển, hệ thống có thể mở rộng theo 2 hướng: 
+• Hướng 1: Chỉ hỗ trợ tư vấn 
+AI trả lời dạng text, người dùng tự chỉnh title/budget/skills theo gợi ý. 
+• Hướng 2: Hỗ trợ cập nhật có cấu trúc 
+AI trả về gợi ý theo từng trường (ví dụ: đề xuất title mới, range ngân sách mới), 
+cho phép người dùng nhấn “Áp dụng” để cập nhật trực tiếp vào form. Cách này 
+tăng tốc độ thao tác và giảm sai sót khi chỉnh tay. 
+4.2.4 Nhận xét (ưu điểm và hạn chế) 
+Ưu điểm: 
+• Hỗ trợ người dùng theo ngữ cảnh trong lúc tạo project, giảm thời gian hoàn thiện 
+bài đăng. 
+• AI trả lời định hướng nhiệm vụ (task-oriented), dễ áp dụng trực tiếp vào form. 
+
+PAGE 193
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 159  
+• Backend trung gian giúp bảo vệ khóa API, kiểm soát rate limit và ghi log chi phí. 
+Hạn chế: 
+• Nếu không lưu lịch sử hội thoại theo phiên, chatbot có thể thiếu “trí nhớ” đa lượt 
+và dễ trả lời lặp. 
+• Nếu phản hồi chỉ dạng text, việc cập nhật tự động các trường (title/budget/skills) 
+chưa tối ưu. 
+  
+
+PAGE 194
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 160  
+  
+ CHƯƠNG 5: KIỂM THỬ VÀ ĐÁNH GIÁ 
+ 5.1. Kiểm thử 
+5.1.1. Mục tiêu 
+- Xác thực chức năng: Thực hiện kiểm thử toàn diện nhằm đối soát và xác nhận 
+mức độ tương thích giữa các tính năng thực tế với tài liệu đặc tả yêu cầu phần 
+mềm (SRS). 
+- Quản trị rủi ro và khắc phục: Chủ động nhận diện các lỗ hổng kỹ thuật và rủi ro 
+vận hành, từ đó triển khai các biện pháp xử lý và tối ưu hóa hệ thống một cách 
+triệt để. 
+- Hệ thống hóa tài liệu: Xây dựng bộ chỉ dẫn kỹ thuật và tài liệu hóa quy trình vận 
+hành nhằm phục vụ công tác quản trị, nâng cấp hệ thống trong tương lai. 
+5.1.2. Phạm vi kiểm thử 
+Dựa trên danh mục các chức năng của hệ thống, phạm vi kiểm thử được xây dựng 
+nhằm xác thực toàn diện các quy trình nghiệp vụ. Các kịch bản kiểm soát được triển 
+khai như sau: 
+- Chức năng đăng ký tài khoản  
+- Chức năng đăng nhập  
+- Chức năng đăng dự án  
+- Chức năng quản lý cột mốc (Milestone)  
+- Chức năng nhắn tin giữa Nhà tuyển dụng và Freelancer  
+- Chức năng quản lý danh mục  
+- Chức năng quản lý tài khoản người dùng  
+- Chức năng mời đấu thầu  
+- Chức năng quản lý hồ sơ cá nhân của Freelancer  
+- Chức năng so sánh các đề xuất 
+ 5.2. Nội dung kiểm thử 
+5.2.1 Cách tiếp cận 
+Quy trình kiểm thử được triển khai theo lộ trình hệ thống, bắt đầu bằng việc phân tích 
+chuyên sâu các yêu cầu kỹ thuật và nghiệp vụ cốt lõi của hệ thống. Dựa trên nền tảng 
+đó, một kế hoạch kiểm thử chi tiết được thiết lập nhằm xác định rõ phạm vi, mục tiêu , 
+
+PAGE 195
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 161  
+nguồn lực và tiến độ thực hiện. Giai đoạn tiếp theo tập trung vào việc thiết kế bộ kịch 
+bản kiểm thử (Test Scenarios) và các trường hợp kiểm thử (Test Cases) để tối ưu hóa độ 
+bao phủ tính năng. Sau khi hoàn tất chuẩn bị môi trường và dữ liệu mẫu, quá trình  thực 
+thi sẽ được tiến hành theo các cấp độ từ kiểm thử đơn vị (Unit Test), kiểm thử tích hợp 
+(Integration Test) đến kiểm thử hệ thống và chấp nhận (System & UAT). Toàn bộ kết 
+quả, bao gồm các lỗi (bugs) phát sinh, được ghi nhận và đánh giá định kỳ để kiểm  soát 
+chất lượng. Cuối cùng, hệ thống trải qua các đợt sửa lỗi và kiểm thử hồi quy (Regression 
+Testing) nhằm đảm bảo sự ổn định tuyệt đối trước khi vận hành thực tế 
+5.2.2. Tiêu chí kiểm thử 
+- Độ tin cậy về chức năng (Functional Reliability): Kiểm chứng tính đúng đắn của 
+các luồng xử lý dữ liệu, đảm bảo kết quả đầu ra chính xác dựa trên các điều kiện 
+đầu vào tương ứng theo đặc tả SRS. 
+- Tính khả dụng (Usability): Kiểm chứng mức độ thân thiện của giao diện người 
+dùng (UI), đảm bảo quy trình tương tác (UX) diễn ra mạch lạc, thuận tiện và tối 
+ưu hóa trải nghiệm người dùng trên hệ thống. 
+- Tính Tương thích (Compatibility): Đảm bảo website vận hành nhất quán và không 
+xảy ra lỗi hiển thị trên các nền tảng trình duyệt phổ biến cũng như các thiết bị có 
+kích thước màn hình khác nhau. 
+5.2.3. Tiêu chí đình chỉ và yêu cầu đánh giá lại 
+- Điều kiện tạm dừng kiểm thử: Quá trình kiểm tra sẽ được đình chỉ nếu phát hiện 
+các khiếm khuyết mức độ cao gây mất ổn định hệ thống hoặc khi thiếu hụt dữ liệu 
+đầu vào. Hoạt động này chỉ được tái khởi động sau khi các tác nhân gây gián đoạn 
+đã được xử lý. 
+ 
+- Tiêu chí phê duyệt hoàn thành: Việc kiểm thử được coi là hoàn tất khi và chỉ khi 
+toàn bộ các trường hợp kiểm thử (Test Cases) đã được chạy, các sai lệch (Defects) 
+được ghi nhận và xử lý, đồng thời kết quả cuối cùng đáp ứng được sự mong đợi 
+của người dùng và các yêu cầu đặc tả. 
+ 5.3. Kịch bản kiểm thử 
+Bảng 5-1: Kịch bảng kiểm thử 
+Mã kịch bản 
+kiểm thử 
+Tên kịch bản kiểm thử Số trường 
+hợp kiểm 
+
+PAGE 196
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 162  
+thử 
+TS_REG Đăng ký  10 
+TS_LOGIN Đăng nhập 4 
+TS_JOB_POST Kiểm thử quy trình Đăng dự án 4 
+TS_MILESTONE Kiểm thử quản lý cột mốc 5 
+TS_CHAT Kiểm thử quy trình nhắn tin giữa Nhà tuyển dụng 
+và Freelancer 
+8 
+TS_CATEGORY Kiểm thử chức năng quản lý danh mục 2 
+TS_ACC_MA Kiểm thử chức năng quản lý tài khoản người dùng 3 
+TS_INVITATION Kiểm thử chức năng mời đấu thầu 5 
+TS_PROFILE Kiểm thử chức năng quản lý hồ sơ cá nhân 9 
+TS_COMP_PRO Kiểm thử chức năng so sánh đề xuất 6 
+ 
+ 5.4. Đánh giá kết quả kiểm thử 
+5.4.1. Kiểm thử chức năng Đăng ký 
+Bảng 5-2: Kiểm thử chức năng Đăng ký 
+Test 
+Case ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+TC001 
+Kiểm tra đăng ký 
+thành công với 
+thông tin hợp lệ 
+(Freelancer) 
+Tài khoản được tạo, hệ 
+thống gửi email xác nhận 
+và điều hướng đến trang 
+thiết lập hồ sơ. 
+Tài khoản được 
+tạo, hệ thống gửi 
+email xác nhận và 
+điều hướng đến 
+trang thiết lập hồ 
+sơ. 
+Đạt 
+TC002 
+Kiểm tra đăng ký 
+thành công với 
+thông tin hợp lệ 
+(Client) 
+Tài khoản được tạo, điều 
+hướng đến trang 
+Dashboard dành cho người 
+thuê. 
+Tài khoản được 
+tạo, điều hướng 
+đến trang 
+Dashboard dành 
+cho người thuê. 
+Đạt 
+TC003 
+Kiểm tra với 
+Email đã tồn tại 
+trong hệ thống 
+Hiển thị thông báo "Email 
+này đã được sử dụng. Vui 
+lòng chọn email khác hoặc 
+đăng nhập." 
+Hiển thị thông báo 
+"Email này đã 
+được sử dụng. Vui 
+lòng chọn email 
+khác hoặc đăng 
+nhập." 
+Đạt 
+
+PAGE 197
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 163  
+TC004 
+Kiểm tra với 
+Email không đúng 
+định dạng (thiếu 
+@, thiếu .com...) 
+Hiển thị thông báo "Email 
+không hợp lệ. Vui lòng 
+kiểm tra lại." 
+Hiển thị thông báo 
+"Email không hợp 
+lệ. Vui lòng kiểm 
+tra lại." 
+Đạt 
+TC005 
+Kiểm tra mật khẩu 
+quá ngắn (Dưới 8 
+ký tự) 
+Hiển thị thông báo "Mật 
+khẩu phải có ít nhất 8 ký 
+tự." 
+Hiển thị thông báo 
+"Mật khẩu phải có 
+ít nhất 8 ký tự." 
+Đạt 
+TC006 
+Kiểm tra mật khẩu 
+không có ký tự đặc 
+biệt/số (nếu hệ 
+thống yêu cầu) 
+Hiển thị thông báo "Mật 
+khẩu phải bao gồm chữ 
+cái, số và ký tự đặc biệt." 
+Hiển thị thông báo 
+"Mật khẩu phải 
+bao gồm chữ cái, 
+số và ký tự đặc 
+biệt." 
+Đạt 
+TC007 
+Kiểm tra mật khẩu 
+và "Nhập lại mật 
+khẩu" không khớp 
+Hiển thị thông báo "Mật 
+khẩu xác nhận không 
+trùng khớp." 
+Hiển thị thông báo 
+"Mật khẩu xác 
+nhận không trùng 
+khớp." 
+Đạt 
+TC008 
+Kiểm tra để trống 
+các trường bắt 
+buộc (Họ tên, 
+Email, Mật khẩu) 
+Hiển thị thông báo "Vui 
+lòng điền đầy đủ các 
+trường thông tin bắt buộc." 
+Hiển thị thông báo 
+"Vui lòng điền đầy 
+đủ các trường 
+thông tin bắt 
+buộc." 
+Đạt 
+TC009 
+Kiểm tra khi chưa 
+tích chọn "Đồng ý 
+với Điều khoản sử 
+dụng" 
+Hiển thị thông báo "Bạn 
+phải đồng ý với điều 
+khoản dịch vụ để tiếp tục." 
+Hiển thị thông báo 
+"Bạn phải đồng ý 
+với điều khoản 
+dịch vụ để tiếp 
+tục." 
+Đạt 
+TC010 
+Kiểm tra nhập Họ 
+tên chứa ký tự số 
+hoặc ký tự đặc biệt 
+Hiển thị thông báo "Họ tên 
+không được chứa số hoặc 
+ký tự đặc biệt." 
+Hiển thị thông báo 
+"Họ tên không 
+được chứa số hoặc 
+ký tự đặc biệt." 
+Đạt 
+ 
+5.4.2. Chức năng Đăng nhập 
+Bảng 5-3: Kiểm thử chức năng Đăng nhập 
+Test 
+Case ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+
+PAGE 198
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 164  
+TC001 
+Đăng nhập với 
+Email và Mật 
+khẩu hợp lệ 
+Đăng nhập thành công, điều 
+hướng vào trang Dashboard 
+tương ứng với vai trò. 
+Đăng nhập thành 
+công, điều hướng 
+vào trang 
+Dashboard tương 
+ứng với vai trò. 
+Đạt 
+TC002 
+Đăng nhập với 
+Email không tồn 
+tại 
+Hiển thị thông báo "Email 
+hoặc mật khẩu không chính 
+xác." 
+Hiển thị thông báo 
+"Email hoặc mật 
+khẩu không chính 
+xác." 
+Đạt 
+TC003 Đăng nhập với sai mật khẩu Hiển thị thông báo "Email hoặc mật khẩu không chính xác." Hiển thị thông báo "Email hoặc mật khẩu không chính xác." Đạt 
+TC004 
+Để trống trường 
+Email hoặc Mật 
+khẩu 
+Hiển thị thông báo "Vui lòng 
+nhập đầy đủ Email và Mật 
+khẩu." 
+Hiển thị thông báo 
+"Vui lòng nhập 
+đầy đủ Email và 
+Mật khẩu." 
+Đạt 
+ 
+ 
+5.4.3 Kiểm thử quy trình Đăng dự án 
+Bảng 5-4: Kiểm thử chức năng Đăng dự án 
+Test Case 
+ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+TC_PRO_01 
+Kiểm tra đăng dự 
+án với đầy đủ 
+thông tin hợp lệ 
+Dự án được lưu vào hệ 
+thống, hiển thị thông báo 
+"Đăng tin thành công" và 
+chuyển đến trang chi tiết 
+dự án. 
+Dự án được lưu vào 
+hệ thống, hiển thị 
+thông báo "Đăng tin 
+thành công" và 
+chuyển đến trang chi 
+tiết dự án. 
+Đạt 
+TC_PRO_02 
+Kiểm tra để 
+trống các trường 
+bắt buộc (Tiêu 
+đề, Mô tả, Ngân 
+sách) 
+Hiển thị thông báo "Vui 
+lòng điền đầy đủ các 
+thông tin bắt buộc." 
+Hiển thị thông báo 
+"Vui lòng điền đầy 
+đủ các thông tin bắt 
+buộc." 
+Đạt 
+TC_PRO_03 Kiểm tra nhập tiêu đề dự án quá Hiển thị thông báo "Tiêu đề quá ngắn, vui lòng mô tả rõ ràng hơn." Hiển thị thông báo "Tiêu đề quá ngắn, Đạt 
+
+PAGE 199
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 165  
+ngắn (ví dụ < 10 
+ký tự) 
+vui lòng mô tả rõ 
+ràng hơn." 
+TC_PRO_04 
+Kiểm tra nhập 
+ngân sách là số 
+âm hoặc bằng 0 
+Hiển thị thông báo 
+"Ngân sách phải là số 
+dương lớn hơn 0." 
+Hiển thị thông báo 
+"Ngân sách phải là 
+số dương lớn hơn 0." 
+Đạt 
+ 
+5.4.4 Kiểm thử quy trình Gửi báo giá và Đề xuất Milestone 
+Bảng 5-5: Kiểm thử chức năng Gửi báo giá và Đề xuất Milestone 
+Test Case 
+ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+TC_PRS_06 
+Freelancer gửi báo 
+giá với đầy đủ thông 
+tin (Giá, thời gian 
+hoàn thành, thư giới 
+thiệu) 
+Đề xuất được lưu, hiển 
+thị thông báo "Gửi đề 
+xuất thành công". 
+Đề xuất được lưu, 
+hiển thị thông báo 
+"Gửi đề xuất 
+thành công". 
+Đạt 
+TC_PRS_07 
+Freelancer bỏ trống 
+phần "Thư giới 
+thiệu" (Cover Letter) 
+Hiển thị thông báo "Vui 
+lòng nhập nội dung đề 
+xuất của bạn." 
+Hiển thị thông báo 
+"Vui lòng nhập 
+nội dung đề xuất 
+của bạn." 
+Đạt 
+TC_PRS_08 
+Một Freelancer cố 
+tình gửi báo giá lần 
+thứ 2 cho cùng 1 dự 
+án 
+Hệ thống thông báo 
+"Bạn đã gửi đề xuất cho 
+dự án này rồi." 
+Hệ thống thông 
+báo "Bạn đã gửi 
+đề xuất cho dự án 
+này rồi." 
+Đạt 
+TC_PRS_09 
+Freelancer thực hiện 
+chỉnh sửa báo giá đã 
+gửi 
+Thông tin báo giá được 
+cập nhật mới nhất trong 
+danh sách của Client. 
+Thông tin báo giá 
+được cập nhật mới 
+nhất trong danh 
+sách của Client. 
+Đạt 
+TC_PRS_08 
+Client xem danh 
+sách các Freelancer 
+đã chào giá 
+Hiển thị đầy đủ danh 
+sách, mức giá và đánh 
+giá (Rating) của từng 
+Freelancer. 
+Hiển thị đầy đủ 
+danh sách, mức 
+giá và đánh giá 
+(Rating) của từng 
+Freelancer. 
+Đạt 
+TC_PRS_09 
+Client nhấn "Chấp 
+nhận" (Accept) một 
+báo giá cụ thể 
+Hệ thống chuyển sang 
+trang chi tiết Hợp đồng 
+Hệ thống chuyển 
+sang trang chi tiết 
+Hợp đồng 
+Đạt 
+ 
+
+PAGE 200
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 166  
+5.4.5  Kiểm thử quản lý Cột mốc 
+Bảng 5-6: Kiểm thử chức năng Quản lý cột mốc 
+Test Case 
+ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+TC_MIL_01 
+Freelancer tạo 
+danh sách 
+Milestone khi gửi 
+Proposal (Tên, 
+Số tiền, Hạn nộp) 
+Các Milestone được lưu tạm 
+cùng với Proposal, hiển thị 
+đúng cấu trúc phân kỳ. 
+Các Milestone 
+được lưu tạm 
+cùng với 
+Proposal, hiển thị 
+đúng cấu trúc 
+phân kỳ. 
+Đạt 
+TC_MIL_02 
+Kiểm tra tổng số 
+tiền các 
+Milestone phải 
+bằng với tổng giá 
+trị báo giá 
+Hệ thống báo lỗi nếu tổng 
+tiền Milestone khác với tổng 
+ngân sách đề xuất. 
+Hệ thống báo lỗi 
+nếu tổng tiền 
+Milestone khác 
+với tổng ngân 
+sách đề xuất. 
+Đạt 
+TC_MIL_03 
+Client nhấn 
+"Chấp nhận 
+Proposal" 
+(Approve) 
+Hệ thống tự động chuyển 
+toàn bộ Milestone của 
+Proposal đó vào danh sách 
+công việc chính thức. 
+Hệ thống tự động 
+chuyển toàn bộ 
+Milestone của 
+Proposal đó vào 
+danh sách công 
+việc chính thức. 
+Đạt 
+TC_MIL_04 
+Client ký quỹ 
+(Deposit) cho 
+Milestone sau khi 
+duyệt 
+Tiền được trừ từ ví Client 
+vào Escrow, Milestone 
+chuyển từ "Pending" sang 
+"Funded". 
+Tiền được trừ từ 
+ví Client vào 
+Escrow, 
+Milestone chuyển 
+từ "Pending" 
+sang "Funded". 
+Đạt 
+TC_MIL_05 
+Freelancer nộp 
+sản phẩm cho 
+một Milestone cụ 
+thể 
+Hệ thống ghi nhận thời gian 
+nộp, cho phép đính kèm 
+file/link và báo cho Client. 
+Hệ thống ghi 
+nhận thời gian 
+nộp, cho phép 
+đính kèm file/link 
+và báo cho 
+Client. 
+Đạt 
+ 
+ 
+ 
+
+PAGE 201
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 167  
+5.4.6 Kiểm thử quy trình nhắn tin giữa Nhà tuyển dụng và Freelancer 
+Bảng 5-7: Kiểm thử chức năng nhắn tin giữa Nhà tuyển dụng và Freelancer 
+TestcaseID Kịch bản Kết quả mong đợi Kết quả thực thi 
+Tình 
+trạng 
+TC_MS_02 
+Freelancer nhắn tin 
+cho Client từ trang 
+chi tiết dự án 
+Tin nhắn được gửi đi, 
+Client nhận được thông 
+báo tin nhắn mới. 
+Tin nhắn được gửi 
+đi, Client nhận 
+được thông báo tin 
+nhắn mới. Đạt 
+TC_MS_03 
+Kiểm tra nhắn tin 
+thời gian thực (Real-
+time) 
+Tin nhắn hiển thị ngay 
+lập tức ở cả hai phía mà 
+không cần tải lại trang. 
+Tin nhắn hiển thị 
+ngay lập tức ở cả 
+hai phía mà không 
+cần tải lại trang. Đạt 
+TC_MS_04 
+Gửi tệp đính kèm 
+qua khung Chat 
+(Hình ảnh, PDF, 
+Docx) 
+Tệp được tải lên thành 
+công, đối phương có thể 
+nhấn vào để tải về hoặc 
+xem trước. 
+Tệp được tải lên 
+thành công, đối 
+phương có thể 
+nhấn vào để tải về 
+hoặc xem trước. Đạt 
+TC_MS_05 
+Gửi tệp tin có dung 
+lượng vượt quá giới 
+hạn (ví dụ > 25MB) 
+Hệ thống chặn gửi và 
+hiển thị thông báo "Dung 
+lượng tệp quá lớn". 
+Hệ thống chặn gửi 
+và hiển thị thông 
+báo "Dung lượng 
+tệp quá lớn". Đạt 
+TC_MS_06 
+Gửi tin nhắn trống 
+(chỉ có khoảng 
+trắng) 
+Nút gửi bị vô hiệu hóa 
+hoặc hệ thống không 
+thực hiện lệnh gửi. 
+Nút gửi bị vô hiệu 
+hóa hoặc hệ thống 
+không thực hiện 
+lệnh gửi. Đạt 
+TC_MS_07 
+Kiểm tra trạng thái 
+tin nhắn (Đã gửi/Đã 
+xem) 
+Hiển thị đúng trạng thái 
+"Sent" hoặc "Read" khi 
+đối phương đã mở tin 
+nhắn. 
+Hiển thị đúng 
+trạng thái "Sent" 
+hoặc "Read" khi 
+đối phương đã mở 
+tin nhắn. Đạt 
+TC_MS_08 
+Kiểm tra hiển thị 
+thông báo tin nhắn 
+mới (Notification 
+Badge) 
+Hiển thị số lượng tin 
+nhắn chưa đọc trên biểu 
+tượng chiếc chuông hoặc 
+tin nhắn. 
+Hiển thị số lượng 
+tin nhắn chưa đọc 
+trên biểu tượng 
+chiếc chuông hoặc 
+tin nhắn. Đạt 
+
+PAGE 202
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 168  
+TC_MS_09 
+Kiểm tra lịch sử tin 
+nhắn khi load lại 
+trang 
+Toàn bộ nội dung trò 
+chuyện cũ được tải đầy 
+đủ theo đúng trình tự 
+thời gian. 
+Toàn bộ nội dung 
+trò chuyện cũ 
+được tải đầy đủ 
+theo đúng trình tự 
+thời gian. Đạt 
+ 
+5.4.7 Kiểm thử chức năng quản lý danh mục 
+Bảng 5-8: Kiểm thử chức năng Quản lý danh mục 
+Test case 
+ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+TC_AD_01 Thêm danh mục mới Danh mục mới hiển thị trong danh sách Admin và trang đăng dự án của Client. 
+Danh mục mới 
+hiển thị trong 
+danh sách 
+Admin và trang 
+đăng dự án của 
+Client. 
+Đạt 
+TC_AD_03 Sửa tên danh mục đang có sẵn 
+Tên mới được cập nhật đồng 
+bộ trên toàn bộ hệ thống 
+(các bài đăng cũ cũng đổi 
+theo). 
+Tên mới được 
+cập nhật đồng 
+bộ trên toàn bộ 
+hệ thống (các 
+bài đăng cũ 
+cũng đổi theo). 
+Đạt 
+ 
+5.4.8 Kiểm thử chức năng quản lý tài khoản người dùng 
+Bảng 5-9: Kiểm thử chức năng quản lý tài khoản người dùng 
+TestcaseID Kịch bản Kết quả mong đợi Kết quả thực thi 
+Tình 
+trạng 
+TC_AD_06 
+Tìm kiếm người 
+dùng theo Email 
+hoặc Tên 
+Hiển thị chính xác thông 
+tin tài khoản cần tìm. 
+Hiển thị chính 
+xác thông tin tài 
+khoản cần tìm. Đạt 
+TC_AD_08 
+Khóa tài khoản 
+(Deactivate/Ban) 
+người dùng vi 
+phạm 
+Người dùng bị đăng xuất 
+ngay lập tức và không thể 
+đăng nhập lại. 
+Người dùng bị 
+đăng xuất ngay 
+lập tức và không 
+thể đăng nhập lại. Đạt 
+
+PAGE 203
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 169  
+TC_AD_09 
+Mở khóa tài khoản 
+(Reactivate) 
+Người dùng có thể đăng 
+nhập lại bình thường với 
+dữ liệu cũ được giữ 
+nguyên. 
+Người dùng có 
+thể đăng nhập lại 
+bình thường với 
+dữ liệu cũ được 
+giữ nguyên. Đạt 
+ 
+ 
+5.4.9 Kiểm thử chức năng mời đấu thầu 
+Bảng 5-10: Kiểm thử chức năng mời đấu thầu 
+Test Case 
+ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+TC_INV_03 
+Client xem danh 
+sách Freelancer 
+phù hợp với yêu 
+cầu dự án vừa 
+đăng 
+Hệ thống hiển thị danh 
+sách ứng viên có kỹ năng 
+và đánh giá (Rating) cao 
+nhất cho công việc đó. 
+Hệ thống hiển 
+thị danh sách 
+ứng viên có 
+kỹ năng và 
+đánh giá 
+(Rating) cao 
+nhất cho công 
+việc đó. 
+Đạt 
+TC_INV_04 
+Client nhấn nút 
+"Mời" một 
+Freelancer cụ thể 
+từ danh sách gợi ý 
+Hệ thống hiển thị thông 
+báo "Đã gửi lời mời thành 
+công"; nút "Mời" chuyển 
+sang trạng thái "Đã mời". 
+Hệ thống hiển 
+thị thông báo 
+"Đã gửi lời 
+mời thành 
+công"; nút 
+"Mời" chuyển 
+sang trạng 
+thái "Đã 
+mời". 
+Đạt 
+TC_INV_05 
+Kiểm tra việc gửi 
+Email mời thầu tự 
+động sau khi 
+Client nhấn "Mời" 
+Freelancer nhận được 
+Email có tiêu đề, mô tả 
+ngắn và link trực tiếp dẫn 
+đến dự án. 
+Freelancer 
+nhận được 
+Email có tiêu 
+đề, mô tả 
+ngắn và link 
+trực tiếp dẫn 
+đến dự án. 
+Đạt 
+
+PAGE 204
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 170  
+TC_INV_06 
+Kiểm tra tính hợp 
+lệ của liên kết 
+(Link) trong Email 
+Khi Freelancer click vào 
+link, hệ thống điều hướng 
+đúng đến trang chi tiết dự 
+án đó. 
+Khi 
+Freelancer 
+click vào link, 
+hệ thống điều 
+hướng đúng 
+đến trang chi 
+tiết dự án đó. 
+Đạt 
+TC_INV_08 Kiểm tra giới hạn lời mời 
+Client không được phép 
+gửi lời mời lần thứ 2 cho 
+cùng một Freelancer trong 
+cùng một dự án. 
+Client không 
+được phép 
+gửi lời mời 
+lần thứ 2 cho 
+cùng một 
+Freelancer 
+trong cùng 
+một dự án. 
+Đạt 
+ 
+5.4.10 Kiểm thử chức năng quản lý hồ sơ cá nhân của freelancer 
+Bảng 5-11: Kiểm thử chức năng quản lý hồ sơ cá nhân của freelancer 
+Test Case 
+ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+TC_PF_01 
+[Skill] Thêm kỹ năng 
+mới từ danh sách có 
+sẵn 
+Kỹ năng được thêm vào 
+hồ sơ và hiển thị dưới 
+dạng các thẻ (tags). 
+Kỹ năng được 
+thêm vào hồ sơ và 
+hiển thị dưới dạng 
+các thẻ (tags). 
+Đạt 
+TC_PF_02 
+[Skill] Tìm kiếm và 
+thêm kỹ năng không 
+có trong danh sách 
+(nếu hệ thống cho 
+phép) 
+Hệ thống cho phép nhập 
+mới hoặc hiển thị thông 
+báo "Kỹ năng này chưa 
+có, yêu cầu Admin 
+thêm". 
+Hệ thống cho 
+phép nhập mới 
+hoặc hiển thị 
+thông báo "Kỹ 
+năng này chưa có, 
+yêu cầu Admin 
+thêm". 
+Đạt 
+TC_PF_03 [Skill] Xóa kỹ năng hiện có 
+Kỹ năng bị loại bỏ khỏi 
+hồ sơ và không còn 
+xuất hiện trong bộ lọc 
+tìm kiếm Freelancer. 
+Kỹ năng bị loại 
+bỏ khỏi hồ sơ và 
+không còn xuất 
+hiện trong bộ lọc 
+tìm kiếm 
+Freelancer. 
+Đạt 
+
+PAGE 205
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 171  
+TC_PF_04 
+[Exp] Thêm mới kinh 
+nghiệm làm việc (Vị 
+trí, Công ty, Thời gian, 
+Mô tả) 
+Thông tin được lưu 
+thành công; hệ thống tự 
+động tính toán tổng số 
+năm kinh nghiệm. 
+Thông tin được 
+lưu thành công; 
+hệ thống tự động 
+tính toán tổng số 
+năm kinh nghiệm. 
+Đạt 
+TC_PF_05 
+[Exp] Nhập ngày kết 
+thúc công việc nhỏ 
+hơn ngày bắt đầu 
+Hệ thống báo lỗi "Ngày 
+kết thúc phải sau ngày 
+bắt đầu". 
+Hệ thống báo lỗi 
+"Ngày kết thúc 
+phải sau ngày bắt 
+đầu". 
+Đạt 
+TC_PF_06 
+[Edu] Thêm mới học 
+vấn (Trường, Chuyên 
+ngành, Năm tốt 
+nghiệp) 
+Thông tin học vấn hiển 
+thị đúng trình tự thời 
+gian (mới nhất lên đầu). 
+Thông tin học vấn 
+hiển thị đúng 
+trình tự thời gian 
+(mới nhất lên 
+đầu). 
+Đạt 
+TC_PF_07 
+[Edu] Chỉnh sửa hoặc 
+Xóa thông tin học 
+vấn/kinh nghiệm đã có 
+Dữ liệu được cập nhật 
+chính xác và phản ánh 
+ngay lập tức trên trang 
+xem hồ sơ (View 
+Profile). 
+Dữ liệu được cập 
+nhật chính xác và 
+phản ánh ngay lập 
+tức trên trang xem 
+hồ sơ (View 
+Profile). 
+Đạt 
+TC_PF_08 [Logic] Kiểm tra hiển thị hồ sơ đối với Client 
+Client có thể xem đầy 
+đủ Skill, Exp, Edu của 
+Freelancer dưới dạng 
+định dạng chuyên 
+nghiệp. 
+Client có thể xem 
+đầy đủ Skill, Exp, 
+Edu của 
+Freelancer dưới 
+dạng định dạng 
+chuyên nghiệp. 
+Đạt 
+TC_PF_09 
+[Validation] Để trống 
+các trường bắt buộc 
+khi thêm Kinh 
+nghiệm/Học vấn 
+Hiển thị thông báo yêu 
+cầu điền đầy đủ các 
+thông tin quan trọng. 
+Hiển thị thông 
+báo yêu cầu điền 
+đầy đủ các thông 
+tin quan trọng. 
+Đạt 
+ 
+5.4.11 Kiểm thử chức năng so sánh các đề xuất 
+Bảng 5-4: Kiểm thử chức năng so sánh các đề xuất 
+Test Case ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+
+PAGE 206
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 172  
+TC_COMP_02 
+Chọn 2 Proposal 
+và nhấn nút "So 
+sánh" 
+Hệ thống hiển thị bảng 
+so sánh gồm 2 cột với 
+các thông tin: Giá thầu, 
+Thời gian, Kỹ năng, 
+Rating. 
+Hệ thống hiển 
+thị bảng so sánh 
+gồm 2 cột với 
+các thông tin: 
+Giá thầu, Thời 
+gian, Kỹ năng, 
+Rating. 
+Đạt 
+TC_COMP_03 
+Chọn 3 Proposal 
+và nhấn nút "So 
+sánh" 
+Hệ thống hiển thị bảng 
+so sánh đầy đủ 3 cột 
+thông tin song song. 
+Hệ thống hiển 
+thị bảng so sánh 
+đầy đủ 3 cột 
+thông tin song 
+song. 
+Đạt 
+TC_COMP_04 
+Cố tình chọn 4 
+Proposal để so 
+sánh 
+Hệ thống ngăn chặn việc 
+tích chọn hoặc thông báo 
+"Chỉ được chọn tối đa 3 
+Proposal". 
+Hệ thống ngăn 
+chặn việc tích 
+chọn hoặc thông 
+báo "Chỉ được 
+chọn tối đa 3 
+Proposal". 
+Đạt 
+TC_COMP_05 
+Kiểm tra hiển thị 
+thông tin so sánh 
+chi tiết 
+Các tiêu chí (Giá, 
+Milestone, Số dự án đã 
+làm) phải được căn chỉnh 
+hàng ngang để dễ đối 
+chiếu. 
+Các tiêu chí 
+(Giá, Milestone, 
+Số dự án đã làm) 
+phải được căn 
+chỉnh hàng 
+ngang để dễ đối 
+chiếu. 
+Đạt 
+TC_COMP_08 
+Kiểm tra khi các 
+Proposal có đơn vị 
+tiền tệ khác nhau 
+(nếu có) 
+Hệ thống phải tự động 
+quy đổi hoặc hiển thị rõ 
+đơn vị để Client không bị 
+nhầm lẫn. 
+Hệ thống phải tự 
+động quy đổi 
+hoặc hiển thị rõ 
+đơn vị để Client 
+không bị nhầm 
+lẫn. 
+Đạt 
+TC_COMP_09 
+Nhấn nút "Đóng" 
+hoặc "Thoát" chế 
+độ so sánh 
+Hệ thống quay lại danh 
+sách tất cả các Proposal 
+ban đầu. 
+Hệ thống quay 
+lại danh sách tất 
+cả các Proposal 
+ban đầu. 
+Đạt 
+   
+
+PAGE 207
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 173  
+ Phần III: KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN 
+ 
+ 1. Kết quả đạt được 
+1.1. Về lý thuyết 
+Thông qua quá trình triển khai dự án, em đã nắm vững quy trình phát triển phần mềm 
+toàn diện, từ giai đoạn khảo sát yêu cầu, thiết lập kiến trúc hệ thống đến vận hành thực 
+tế. Việc xây dựng một nền tảng kết nối nhân lực tự do (Freelance Platform) giúp em hiểu 
+sâu sắc về các nghiệp vụ đặc thù như: cơ chế đấu thầu (bidding), quản trị hồ sơ năng lực 
+(portfolio) và quy trình phối hợp làm việc giữa Nhà tuyển dụng và Freelancer. 
+Về mặt kỹ thuật, em đã ứng dụng thành thạo mô hình kiến trúc phân lớp (Layered 
+Architecture) với sự kết hợp của hệ sinh thái Java Spring (Spring Boot, Spring Security, 
+Spring Data JPA) và hệ quản trị dữ liệu PostgreSQL. Ở tầng giao diện, việc triển khai 
+React cùng thư viện quản lý trạng thái Redux đã giúp em tối ưu hóa hiệu suất truyền tải 
+dữ liệu và trải nghiệm người dùng. Bên cạnh đó, các kỹ năng về xác thực bảo mật qua 
+JWT và thiết kế giao diện theo chuẩn MUI/Tailwind cũng được củng cố mạnh mẽ. 
+ 
+1.2. Về thực hành 
+Sản phẩm hoàn thiện là một website kết nối việc làm tự do có khả năng vận hành ổn 
+định, đáp ứng tốt các yêu cầu nghiệp vụ của một sàn giao dịch điện tử. Hệ thống cho 
+phép người dùng linh hoạt chuyển đổi vai trò, thực hiện các giao dịch đăng tin, nộp hồ 
+sơ và quản lý tài chính một cách minh bạch. 
+Giao diện được xây dựng dựa trên tư duy tối giản, chú trọng vào tính tiện dụng, giúp các 
+đối tác dễ dàng tìm thấy nhau và tương tác hiệu quả. Việc áp dụng thành công các công 
+nghệ Backend hiện đại đảm bảo hệ thống có khả năng mở rộng tốt và duy trì tính to àn 
+vẹn dữ liệu cao trong các giao dịch ký quỹ. 
+ 
+1.3. Hạn chế 
+- Khả năng hiển thị: Hệ thống chưa đạt được sự tối ưu tuyệt đối trên đa dạng kích 
+thước màn hình, đặc biệt là các thiết bị di động có độ phân giải thấp. 
+- Nghiệp vụ giải quyết mâu thuẫn: Do giới hạn về mặt thời gian, phân hệ xử lý 
+tranh chấp (Dispute Resolution) giữa hai bên người dùng chưa được tự động hóa 
+hoàn toàn trên hệ thống. 
+- Tính tương tác tức thời: Hệ thống hiện tại vẫn chủ yếu dựa trên giao tiếp bất đồng 
+
+PAGE 208
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 174  
+bộ, chưa tích hợp kênh trò chuyện trực tuyến (Live Chat) để hỗ trợ thương lượng 
+nhanh. 
+- Hệ thống cảnh báo: Các cơ chế lọc nội dung độc hại và thông báo đẩy (Push 
+Notification) đến người dùng vẫn đang ở mức cơ bản, cần được nâng cấp thêm. 
+2. Hướng phát triển 
+Để khắc phục các tồn tại nêu trên, em định hướng nâng cấp hệ thống theo các mục tiêu 
+sau: 
+- Tối ưu hóa UI/UX đa nền tảng: Áp dụng phương pháp thiết kế Responsive 
+chuyên sâu để mang lại sự đồng bộ cho người dùng trên cả nền tảng web và 
+thiết bị di động. 
+- Xây dựng trung tâm xử lý khiếu nại: Phát triển module quản lý tranh chấp, cho 
+phép lưu trữ bằng chứng và cung cấp công cụ để Quản trị viên can thiệp xử lý 
+công bằng. 
+- Tích hợp giao tiếp thời gian thực: Triển khai WebSockets để hỗ trợ tính năng 
+chat trực tiếp và cập nhật thông báo tức thì, giúp tăng tỷ lệ chốt dự án thành 
+công. 
+- Tăng cường bảo mật và kiểm duyệt: Ứng dụng các thư viện kiểm tra nội dung tự 
+động để ngăn chặn các tin tuyển dụng không phù hợp và đảm bảo tính chất 
+lượng của các đánh giá (Rating). 
+- Đa dạng hóa kênh thanh toán: Kết nối với các cổng thanh toán điện tử phổ biến 
+để tạo sự thuận tiện tối đa cho người dùng trong việc nạp/rút tiền. 
+ 
+  
+
+PAGE 209
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 175  
+TÀI LIỆU THAM KHẢO 
+ 
+[1] Spring Boot. Spring Boot Reference Documentation. Truy cập tại: 
+https://docs.spring.io/spring-boot/index.html (Sử dụng để xây dựng Backend và 
+RESTful API). 
+[2]  React Team. React Documentation. Truy cập tại: https://react.dev/ (Sử dụng để 
+phát triển giao diện người dùng và quản lý Component). 
+[3]  Redux Maintainers. Redux Toolkit Guide. Truy cập tại: https://redux-
+toolkit.js.org/ (Sử dụng để quản lý trạng thái tập trung cho các chức năng của Client và 
+Freelancer). 
+[4]  Spring Security Team. Spring Security Documentation. Truy cập tại: 
+https://docs.spring.io/spring-security/reference/index.html (Sử dụng để thực hiện xác 
+thực JWT và phân quyền người dùng). 
+[5] PostgreSQL Global Development Group. PostgreSQL 15 Documentation. Truy 
+cập tại: https://www.postgresql.org/docs/15/index.html (Sử dụng để quản trị và tối ưu 
+hóa cơ sở dữ liệu hệ thống). 
+[6] Material UI. MUI Core Documentation. Truy cập tại: https://mui.com/core/ (Sử 
+dụng để thiết kế giao diện Dashboard và các thành phần UI). 
+[7]  Phạm Thị Xuân Lộc, Phạm Thị Ngọc Diễm. Giáo trình Ngôn ngữ mô hình hóa 
+UML. 
+Nhà xuất bản Đại học Cần Thơ, 2012. 
+[8]  Nguyễn Thái Nghe. Giáo trình cơ sở dữ liệu. Nhà xuất bản Đại học Cần Thơ, 
+2014. 
+[9]  Võ Huỳnh Trâm, Bài giảng Phân tích yêu cầu phần mềm, Khoa Công Nghệ 
+Thông Tin 
+và Truyền Thông, Đại học Cần Thơ, 2009 
+[10] Huỳnh Xuân Hiệp, Võ Huỳnh Trâm, Phan Phương Lan, Huỳnh Quang Nghi. 
+Giáo 
+trình Kiến Trúc và Thiết Kế phần mềm. Nhà xuất bản Đại học Cần Thơ, 2015. 
+[11] Trần Cao Đệ, Nguyễn Công Danh. Giáo trình đảm bảo chất lượng. Nxb Đại học 
+Cần 
+Thơ. Ninh Kiều, Cần Thơ, 2014. 
+[12]  Tailwind Labs. Tailwind CSS Documentation. Truy cập tại: 
+https://tailwindcss.com/docs (Sử dụng để xây dựng giao diện tùy biến và tối ưu hóa 
+CSS cho hệ thống). 
+[13]  Axios Project. Axios API Reference. Truy cập tại: https://axios-
+http.com/docs/intro (Sử dụng để thực hiện các yêu cầu HTTP không đồng bộ giữa 
+React và Spring Boot). 
+ 

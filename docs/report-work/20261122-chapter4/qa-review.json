@@ -1,0 +1,14 @@
+{
+  "renderer": "Microsoft Word read-only PDF export, followed by pypdfium2 page PNG rendering",
+  "rendered_pages": 127,
+  "chapter_4_pages": [109, 127],
+  "visually_reviewed": "Updated navigation pages and all new chapter pages; final changed pages 9, 12, 121 and 122 also inspected individually",
+  "blank_pages": [],
+  "original_body_and_package_parts": "Verified unchanged outside navigation and chapter append",
+  "table_headers_repeat": true,
+  "table_rows_split": false,
+  "coverage_summary_table_kept_together": true,
+  "all_eight_test_file_hashes_unchanged": true,
+  "document_uploaded_in_place": true,
+  "readback_sha256_matches": true
+}

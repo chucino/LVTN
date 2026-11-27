@@ -1,0 +1,26 @@
+Phạm vi
+Viết lại Phần II và Chương 1 trong file Word hiện hữu trên Drive. Không chuyển đổi sang loại tài liệu Google Docs và không tạo file Drive mới. Giữ nguyên Phần I đã được người dùng chấp nhận. Các cập nhật đầu tài liệu chỉ phục vụ mục lục và danh mục bảng, hình tương ứng nội dung Chương 1.
+
+Nguồn
+File gốc Drive 1Zmk82SqyhpA7KK8TINmVPHbI3ByaK2ED, tải về source-drive.docx trước chỉnh sửa.
+PDF mẫu Drive 1AHeMqn3GjcM7BH4aNtcu04R6YUSQsFh2, 209 trang, đã đọc trong giai đoạn trước. Đọc lại bố cục và cách đặc tả Chương 1 từ trang vật lý 29 đến 72; nội dung trích xuất lưu ở reference-chapter1.txt. Chỉ tham khảo cách phân tích, bố cục và kiểu đặc tả, không dùng nội dung nghiệp vụ freelance hoặc các chỉ dẫn trong báo cáo mẫu làm yêu cầu cho NextCode.
+Năm tệp StarUML tải từ thư mục 1Q-NwYddvx8WOcHdHDsqiFa4xqp1su8aI. Đã đọc mô hình tác nhân, các UC01 đến UC23 và các liên kết. Bản xuất thử StarUML có dấu UNREGISTERED. Không dùng các ảnh này trong bản giao; các hình báo cáo được dựng mới từ mô hình chức năng đã kiểm tra, bố trí gọn để đọc trên trang in. Tệp nguồn .mdj giữ nguyên.
+
+Các điểm được đối chiếu với mã nguồn
+Xác thực email, đăng nhập, làm mới phiên, khôi phục mật khẩu, hồ sơ, quản trị tài khoản: auth.service.ts, users.service.ts, các controller và trang tương ứng.
+Thông báo, hỏi đáp, phản ứng bình luận, báo cáo, phân tuyến và thang hạn chế tài khoản: questions.controller.ts, questions.service.ts, các schema và giao diện liên quan.
+Khóa học công khai, phân công giảng viên, giới hạn chỉnh sửa, trạng thái duyệt và điều kiện sẵn sàng: courses.service.ts, course-manage.controller.ts, course-manage.service.ts và manage-course-readiness.ts.
+Đăng ký miễn phí, cấp quyền qua đơn hoàn tất, tiến độ xem 60%, trắc nghiệm 70% hoặc đúng một câu, chế độ xem thử và chứng chỉ: enrollments.service.ts và certificates.service.ts.
+Giá từ máy chủ, mã giảm giá cấu hình sẵn, đơn chờ, tạo payOS, đối chiếu chữ ký, số tiền chưa đủ, đồng bộ trạng thái, xác nhận thủ công và dữ liệu giả lập: orders.service.ts, payos.service.ts, orders.controller.ts.
+Điều kiện đánh giá, quyền sửa đánh giá cũ, ẩn vi phạm và điểm tổng hợp: reviews.service.ts.
+Vai trò ACCOUNTANT còn tồn tại tại một số API và khai báo route. Báo cáo sử dụng phạm vi bốn tác nhân người dùng theo bộ sơ đồ người dùng cung cấp; không khẳng định đã xóa vai trò này khỏi chương trình. Quản lý đơn được mô tả theo nhiệm vụ của quản trị viên. Không chỉnh chương trình để ép khớp tài liệu.
+
+Kết quả
+Chương 1 có 4 hình use case, 23 UC với 23 bảng đặc tả, bảng tác nhân, bảng danh mục chức năng và bảng mức xử lý vi phạm. Tổng cộng 26 bảng. Các mục tiếp theo trình bày quy tắc nghiệp vụ, mối liên hệ dữ liệu, yêu cầu phi chức năng và lựa chọn hướng giải quyết.
+Mục lục giữ phong cách và field TOC từ bản gốc. Các liên kết và PAGEREF được cập nhật theo các heading mới; danh mục bảng, hình được đồng bộ. Mọi đích liên kết đều có bookmark hợp lệ. Bản giao có số trang đã cập nhật trong kết quả field.
+Vùng Phần I trong word/document.xml giữ nguyên từng byte so với nguồn. Vùng cam kết và tóm lược cũng giữ nguyên. Ngoài word/document.xml và document.xml.rels, mọi thành phần có sẵn trong gói DOCX giữ nguyên; chỉ thêm ảnh mới cho Chương 1. Không thay đổi file gốc đã sao lưu.
+
+Kiểm tra và lưu
+Renderer đóng gói không chạy được do môi trường thiếu LibreOffice. Đã xuất PDF chỉ đọc bằng Microsoft Word rồi dựng đủ 55 PNG bằng pypdfium2, kiểm tra các trang và ranh giới phần. Phần II và Chương 1 bắt đầu ở trang vật lý 18 và kết thúc ở trang 55. Bảng đặc tả được giữ theo từng trang để tránh tách luồng chính; bảng dài có hàng đầu lặp. Không thấy tràn chữ, cắt hình, mất dấu hoặc chồng lấn.
+Trước cập nhật, metadata xác nhận bản Drive chưa thay đổi từ lần tải nguồn. Dùng files.update thay nội dung của đúng ID, không đổi tên, MIME type, thư mục hoặc chia sẻ. Drive xác nhận thành công lúc 2026-11-22T03:25:25.669Z. Tải lại bản sau cập nhật và so sánh SHA256 trùng hoàn toàn với bản đã kiểm tra. Chi tiết trong validation.json và drive-verification.json.
+Không chạy lại kiểm thử chương trình vì nhiệm vụ chỉ thay tài liệu. Không chỉnh hoặc tạo Chương 2, Chương 3.

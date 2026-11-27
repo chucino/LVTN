@@ -1,0 +1,22 @@
+{
+  "source_sha256": "b410d6545a8507a7247d82c1c27c72a769db5e30223b96c3efce64aecab37a14",
+  "output_sha256": "ac3a44f9b6a0f9746a456bc1f5127bc9756026b2081dfda8f1e6de732d7209bc",
+  "changed_parts": [
+    "word/footnotes.xml",
+    "word/_rels/footnotes.xml.rels",
+    "word/document.xml",
+    "word/_rels/document.xml.rels"
+  ],
+  "existing_tables_preserved": 26,
+  "existing_images_preserved": 4,
+  "prior_body_paragraphs_changed": [
+    138,
+    276
+  ],
+  "chapter_2_headings": 31,
+  "new_footnotes": 20,
+  "total_footnotes": 22,
+  "all_internal_links_valid": true,
+  "toc_cached_page_numbers_valid": true,
+  "scope": "Chapter 2, navigation, and two chapter-structure linking paragraphs"
+}

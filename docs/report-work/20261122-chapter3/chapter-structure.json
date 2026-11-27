@@ -1,0 +1,436 @@
+{
+  "headings": [
+    {
+      "text": "CHƯƠNG 3 THIẾT KẾ VÀ CÀI ĐẶT GIẢI PHÁP",
+      "level": 1,
+      "anchor": "nc_ch3_h_12001"
+    },
+    {
+      "text": "3.1 Kiến trúc tổng quan của hệ thống",
+      "level": 2,
+      "anchor": "nc_ch3_h_12002"
+    },
+    {
+      "text": "3.1.1 Các thành phần và sự liên kết",
+      "level": 3,
+      "anchor": "nc_ch3_h_12003"
+    },
+    {
+      "text": "3.1.2 Tổ chức mã nguồn",
+      "level": 3,
+      "anchor": "nc_ch3_h_12005"
+    },
+    {
+      "text": "3.2 Sơ đồ phân rã chức năng",
+      "level": 2,
+      "anchor": "nc_ch3_h_12007"
+    },
+    {
+      "text": "3.2.1 Phân rã chức năng tổng quát",
+      "level": 3,
+      "anchor": "nc_ch3_h_12008"
+    },
+    {
+      "text": "3.2.2 Chức năng của khách truy cập và học viên",
+      "level": 3,
+      "anchor": "nc_ch3_h_12010"
+    },
+    {
+      "text": "3.2.3 Chức năng của giảng viên",
+      "level": 3,
+      "anchor": "nc_ch3_h_12012"
+    },
+    {
+      "text": "3.2.4 Chức năng của quản trị viên",
+      "level": 3,
+      "anchor": "nc_ch3_h_12014"
+    },
+    {
+      "text": "3.3 Thiết kế dữ liệu",
+      "level": 2,
+      "anchor": "nc_ch3_h_12016"
+    },
+    {
+      "text": "3.3.1 Mối liên hệ và cách lưu trữ",
+      "level": 3,
+      "anchor": "nc_ch3_h_12017"
+    },
+    {
+      "text": "3.3.2 Tài khoản người dùng",
+      "level": 3,
+      "anchor": "nc_ch3_h_12020"
+    },
+    {
+      "text": "3.3.3 Mã xác minh qua email",
+      "level": 3,
+      "anchor": "nc_ch3_h_12022"
+    },
+    {
+      "text": "3.3.4 Mã làm mới phiên",
+      "level": 3,
+      "anchor": "nc_ch3_h_12024"
+    },
+    {
+      "text": "3.3.5 Danh mục khóa học",
+      "level": 3,
+      "anchor": "nc_ch3_h_12026"
+    },
+    {
+      "text": "3.3.6 Khóa học",
+      "level": 3,
+      "anchor": "nc_ch3_h_12028"
+    },
+    {
+      "text": "3.3.7 Cấu trúc chương trong khóa học",
+      "level": 3,
+      "anchor": "nc_ch3_h_12030"
+    },
+    {
+      "text": "3.3.8 Cấu trúc bài học trong chương",
+      "level": 3,
+      "anchor": "nc_ch3_h_12032"
+    },
+    {
+      "text": "3.3.9 Cấu trúc câu hỏi trắc nghiệm",
+      "level": 3,
+      "anchor": "nc_ch3_h_12034"
+    },
+    {
+      "text": "3.3.10 Đăng ký học",
+      "level": 3,
+      "anchor": "nc_ch3_h_12036"
+    },
+    {
+      "text": "3.3.11 Tiến độ từng bài học",
+      "level": 3,
+      "anchor": "nc_ch3_h_12038"
+    },
+    {
+      "text": "3.3.12 Kết quả trả lời câu hỏi",
+      "level": 3,
+      "anchor": "nc_ch3_h_12040"
+    },
+    {
+      "text": "3.3.13 Chứng chỉ hoàn thành",
+      "level": 3,
+      "anchor": "nc_ch3_h_12042"
+    },
+    {
+      "text": "3.3.14 Đơn hàng mua khóa học",
+      "level": 3,
+      "anchor": "nc_ch3_h_12044"
+    },
+    {
+      "text": "3.3.15 Giao dịch thanh toán",
+      "level": 3,
+      "anchor": "nc_ch3_h_12046"
+    },
+    {
+      "text": "3.3.16 Hỏi đáp tại bài học",
+      "level": 3,
+      "anchor": "nc_ch3_h_12048"
+    },
+    {
+      "text": "3.3.17 Đánh giá khóa học",
+      "level": 3,
+      "anchor": "nc_ch3_h_12050"
+    },
+    {
+      "text": "3.3.18 Báo cáo vi phạm",
+      "level": 3,
+      "anchor": "nc_ch3_h_12052"
+    },
+    {
+      "text": "3.3.19 Thông báo trong hệ thống",
+      "level": 3,
+      "anchor": "nc_ch3_h_12054"
+    },
+    {
+      "text": "3.4 Thiết kế giao diện",
+      "level": 2,
+      "anchor": "nc_ch3_h_12056"
+    },
+    {
+      "text": "3.4.1 Tổ chức các khu vực sử dụng",
+      "level": 3,
+      "anchor": "nc_ch3_h_12057"
+    },
+    {
+      "text": "3.4.2 Giao diện đăng nhập và đăng ký",
+      "level": 3,
+      "anchor": "nc_ch3_h_12058"
+    },
+    {
+      "text": "3.4.3 Giao diện tìm kiếm và xem khóa học",
+      "level": 3,
+      "anchor": "nc_ch3_h_12061"
+    },
+    {
+      "text": "3.4.4 Giao diện học tập và tra cứu chứng chỉ",
+      "level": 3,
+      "anchor": "nc_ch3_h_12064"
+    },
+    {
+      "text": "3.4.5 Giao diện quản lý khóa học và biên soạn",
+      "level": 3,
+      "anchor": "nc_ch3_h_12066"
+    },
+    {
+      "text": "3.5 Cài đặt các chức năng và luồng xử lý chính",
+      "level": 2,
+      "anchor": "nc_ch3_h_12069"
+    },
+    {
+      "text": "3.5.1 Xác thực tài khoản và xử lý yêu cầu API",
+      "level": 3,
+      "anchor": "nc_ch3_h_12070"
+    },
+    {
+      "text": "3.5.2 Biên soạn, xét duyệt và công bố khóa học",
+      "level": 3,
+      "anchor": "nc_ch3_h_12072"
+    },
+    {
+      "text": "3.5.3 Đăng ký học và thanh toán khóa Pro",
+      "level": 3,
+      "anchor": "nc_ch3_h_12074"
+    },
+    {
+      "text": "3.5.4 Học tuần tự, ghi nhận tiến độ và chấm trắc nghiệm",
+      "level": 3,
+      "anchor": "nc_ch3_h_12076"
+    },
+    {
+      "text": "3.5.5 Cấp và tra cứu chứng chỉ",
+      "level": 3,
+      "anchor": "nc_ch3_h_12078"
+    },
+    {
+      "text": "3.5.6 Hỏi đáp, đánh giá và xử lý vi phạm",
+      "level": 3,
+      "anchor": "nc_ch3_h_12079"
+    },
+    {
+      "text": "3.5.7 Tải lên và cung cấp học liệu",
+      "level": 3,
+      "anchor": "nc_ch3_h_12080"
+    },
+    {
+      "text": "3.6 Cấu hình và chạy hệ thống",
+      "level": 2,
+      "anchor": "nc_ch3_h_12081"
+    },
+    {
+      "text": "3.6.1 Cấu hình môi trường",
+      "level": 3,
+      "anchor": "nc_ch3_h_12082"
+    },
+    {
+      "text": "3.6.2 Chạy chương trình trong môi trường phát triển",
+      "level": 3,
+      "anchor": "nc_ch3_h_12084"
+    },
+    {
+      "text": "3.6.3 Phân phối bản dựng và kết nối dịch vụ",
+      "level": 3,
+      "anchor": "nc_ch3_h_12085"
+    },
+    {
+      "text": "3.7 Tổng kết chương",
+      "level": 2,
+      "anchor": "nc_ch3_h_12086"
+    }
+  ],
+  "captions": [
+    {
+      "text": "Hình 3.1 Kiến trúc tổng quan của NextCode",
+      "kind": "figure",
+      "anchor": "nc_ch3_caption_12004"
+    },
+    {
+      "text": "Bảng 3.1 Tổ chức mã nguồn của NextCode",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12006"
+    },
+    {
+      "text": "Hình 3.2 Phân rã chức năng tổng quát của NextCode",
+      "kind": "figure",
+      "anchor": "nc_ch3_caption_12009"
+    },
+    {
+      "text": "Hình 3.3 Phân rã chức năng của khách truy cập và học viên",
+      "kind": "figure",
+      "anchor": "nc_ch3_caption_12011"
+    },
+    {
+      "text": "Hình 3.4 Phân rã chức năng của giảng viên",
+      "kind": "figure",
+      "anchor": "nc_ch3_caption_12013"
+    },
+    {
+      "text": "Hình 3.5 Phân rã chức năng của quản trị viên",
+      "kind": "figure",
+      "anchor": "nc_ch3_caption_12015"
+    },
+    {
+      "text": "Hình 3.6 Liên kết dữ liệu tài khoản, khóa học và học tập",
+      "kind": "figure",
+      "anchor": "nc_ch3_caption_12018"
+    },
+    {
+      "text": "Hình 3.7 Liên kết dữ liệu thanh toán và tương tác",
+      "kind": "figure",
+      "anchor": "nc_ch3_caption_12019"
+    },
+    {
+      "text": "Bảng 3.2 Các thuộc tính của User",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12021"
+    },
+    {
+      "text": "Bảng 3.3 Các thuộc tính của Otp",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12023"
+    },
+    {
+      "text": "Bảng 3.4 Các thuộc tính của RefreshToken",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12025"
+    },
+    {
+      "text": "Bảng 3.5 Các thuộc tính của Category",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12027"
+    },
+    {
+      "text": "Bảng 3.6 Các thuộc tính của Course",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12029"
+    },
+    {
+      "text": "Bảng 3.7 Các thuộc tính của Chapter",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12031"
+    },
+    {
+      "text": "Bảng 3.8 Các thuộc tính của Lesson",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12033"
+    },
+    {
+      "text": "Bảng 3.9 Các thuộc tính của QuizQuestion",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12035"
+    },
+    {
+      "text": "Bảng 3.10 Các thuộc tính của Enrollment",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12037"
+    },
+    {
+      "text": "Bảng 3.11 Các thuộc tính của LessonProgress",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12039"
+    },
+    {
+      "text": "Bảng 3.12 Các thuộc tính của QuizAttempt",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12041"
+    },
+    {
+      "text": "Bảng 3.13 Các thuộc tính của Certificate",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12043"
+    },
+    {
+      "text": "Bảng 3.14 Các thuộc tính của Order",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12045"
+    },
+    {
+      "text": "Bảng 3.15 Các thuộc tính của PaymentTransaction",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12047"
+    },
+    {
+      "text": "Bảng 3.16 Các thuộc tính của LessonComment",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12049"
+    },
+    {
+      "text": "Bảng 3.17 Các thuộc tính của CourseReview",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12051"
+    },
+    {
+      "text": "Bảng 3.18 Các thuộc tính của Report",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12053"
+    },
+    {
+      "text": "Bảng 3.19 Các thuộc tính của Notification",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12055"
+    },
+    {
+      "text": "Hình 3.8 Giao diện đăng nhập tài khoản",
+      "kind": "figure",
+      "anchor": "nc_ch3_caption_12059"
+    },
+    {
+      "text": "Hình 3.9 Giao diện đăng ký tài khoản",
+      "kind": "figure",
+      "anchor": "nc_ch3_caption_12060"
+    },
+    {
+      "text": "Hình 3.10 Giao diện tìm kiếm khóa học theo từ khóa",
+      "kind": "figure",
+      "anchor": "nc_ch3_caption_12062"
+    },
+    {
+      "text": "Hình 3.11 Giao diện chi tiết khóa học",
+      "kind": "figure",
+      "anchor": "nc_ch3_caption_12063"
+    },
+    {
+      "text": "Hình 3.12 Giao diện tra cứu chứng chỉ",
+      "kind": "figure",
+      "anchor": "nc_ch3_caption_12065"
+    },
+    {
+      "text": "Hình 3.13 Giao diện danh sách khóa học được phân công",
+      "kind": "figure",
+      "anchor": "nc_ch3_caption_12067"
+    },
+    {
+      "text": "Hình 3.14 Giao diện biên soạn nội dung khóa học",
+      "kind": "figure",
+      "anchor": "nc_ch3_caption_12068"
+    },
+    {
+      "text": "Bảng 3.20 Một số API đại diện của hệ thống",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12071"
+    },
+    {
+      "text": "Bảng 3.21 Chuyển trạng thái công bố khóa học",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12073"
+    },
+    {
+      "text": "Hình 3.15 Luồng xử lý thanh toán và cấp quyền học",
+      "kind": "figure",
+      "anchor": "nc_ch3_caption_12075"
+    },
+    {
+      "text": "Hình 3.16 Luồng hoàn thành bài học và cập nhật tiến độ",
+      "kind": "figure",
+      "anchor": "nc_ch3_caption_12077"
+    },
+    {
+      "text": "Bảng 3.22 Các nhóm cấu hình đang sử dụng",
+      "kind": "table",
+      "anchor": "nc_ch3_caption_12083"
+    }
+  ]
+}

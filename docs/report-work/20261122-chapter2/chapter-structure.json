@@ -1,0 +1,355 @@
+{
+  "headings": [
+    {
+      "text": "CHƯƠNG 2 CƠ SỞ LÝ THUYẾT",
+      "level": 1,
+      "anchor": "nc_ch2_h_9001"
+    },
+    {
+      "text": "2.1 Mô hình ứng dụng web và phương thức trao đổi dữ liệu",
+      "level": 2,
+      "anchor": "nc_ch2_h_9002"
+    },
+    {
+      "text": "2.1.1 Mô hình máy khách và máy chủ",
+      "level": 3,
+      "anchor": "nc_ch2_h_9003"
+    },
+    {
+      "text": "2.1.2 HTTP, API và dữ liệu JSON",
+      "level": 3,
+      "anchor": "nc_ch2_h_9005"
+    },
+    {
+      "text": "2.2 Ngôn ngữ lập trình TypeScript",
+      "level": 2,
+      "anchor": "nc_ch2_h_9006"
+    },
+    {
+      "text": "2.3 Các công nghệ xây dựng giao diện",
+      "level": 2,
+      "anchor": "nc_ch2_h_9007"
+    },
+    {
+      "text": "2.3.1 Vue 3",
+      "level": 3,
+      "anchor": "nc_ch2_h_9008"
+    },
+    {
+      "text": "2.3.2 Vue Router",
+      "level": 3,
+      "anchor": "nc_ch2_h_9009"
+    },
+    {
+      "text": "2.3.3 Pinia",
+      "level": 3,
+      "anchor": "nc_ch2_h_9010"
+    },
+    {
+      "text": "2.3.4 Vuetify và Tailwind CSS",
+      "level": 3,
+      "anchor": "nc_ch2_h_9011"
+    },
+    {
+      "text": "2.3.5 Vite",
+      "level": 3,
+      "anchor": "nc_ch2_h_9012"
+    },
+    {
+      "text": "2.3.6 Axios",
+      "level": 3,
+      "anchor": "nc_ch2_h_9013"
+    },
+    {
+      "text": "2.4 Các công nghệ xây dựng máy chủ",
+      "level": 2,
+      "anchor": "nc_ch2_h_9014"
+    },
+    {
+      "text": "2.4.1 Node.js",
+      "level": 3,
+      "anchor": "nc_ch2_h_9015"
+    },
+    {
+      "text": "2.4.2 NestJS và cách tổ chức chương trình",
+      "level": 3,
+      "anchor": "nc_ch2_h_9016"
+    },
+    {
+      "text": "2.4.3 Kiểm tra đầu vào và xử lý phản hồi",
+      "level": 3,
+      "anchor": "nc_ch2_h_9017"
+    },
+    {
+      "text": "2.5 Cơ sở dữ liệu MongoDB và thư viện Mongoose",
+      "level": 2,
+      "anchor": "nc_ch2_h_9018"
+    },
+    {
+      "text": "2.5.1 Mô hình dữ liệu MongoDB",
+      "level": 3,
+      "anchor": "nc_ch2_h_9019"
+    },
+    {
+      "text": "2.5.2 Schema, model và chỉ mục trong Mongoose",
+      "level": 3,
+      "anchor": "nc_ch2_h_9020"
+    },
+    {
+      "text": "2.6 Xác thực và kiểm soát quyền truy cập",
+      "level": 2,
+      "anchor": "nc_ch2_h_9021"
+    },
+    {
+      "text": "2.6.1 Xác thực bằng JWT và duy trì phiên đăng nhập",
+      "level": 3,
+      "anchor": "nc_ch2_h_9022"
+    },
+    {
+      "text": "2.6.2 Băm mật khẩu bằng Argon2 và xác minh OTP",
+      "level": 3,
+      "anchor": "nc_ch2_h_9023"
+    },
+    {
+      "text": "2.6.3 Phân quyền và các biện pháp hỗ trợ",
+      "level": 3,
+      "anchor": "nc_ch2_h_9024"
+    },
+    {
+      "text": "2.7 Gửi email bằng Nodemailer và SMTP",
+      "level": 2,
+      "anchor": "nc_ch2_h_9025"
+    },
+    {
+      "text": "2.8 Thanh toán qua payOS và mã QR chuyển khoản",
+      "level": 2,
+      "anchor": "nc_ch2_h_9026"
+    },
+    {
+      "text": "2.8.1 Liên kết thanh toán và mã QR",
+      "level": 3,
+      "anchor": "nc_ch2_h_9027"
+    },
+    {
+      "text": "2.8.2 Webhook và kiểm tra dữ liệu giao dịch",
+      "level": 3,
+      "anchor": "nc_ch2_h_9028"
+    },
+    {
+      "text": "2.9 Công cụ kiểm thử và tài liệu API",
+      "level": 2,
+      "anchor": "nc_ch2_h_9029"
+    },
+    {
+      "text": "2.9.1 Kiểm thử bằng Vitest",
+      "level": 3,
+      "anchor": "nc_ch2_h_9030"
+    },
+    {
+      "text": "2.9.2 Tài liệu API bằng OpenAPI và Swagger",
+      "level": 3,
+      "anchor": "nc_ch2_h_9031"
+    },
+    {
+      "text": "2.10 Tổng kết chương",
+      "level": 2,
+      "anchor": "nc_ch2_h_9032"
+    }
+  ],
+  "captions": [
+    {
+      "text": "Hình 2.1 Mô hình trao đổi dữ liệu giữa các thành phần của NextCode",
+      "kind": "figure",
+      "anchor": "nc_ch2_caption_9004"
+    },
+    {
+      "text": "Bảng 2.1 Vai trò của các nhóm công nghệ trong NextCode",
+      "kind": "table",
+      "anchor": "nc_ch2_caption_9033"
+    }
+  ],
+  "footnotes": [
+    [
+      2,
+      "http"
+    ],
+    [
+      3,
+      "ts"
+    ],
+    [
+      4,
+      "vue"
+    ],
+    [
+      5,
+      "router"
+    ],
+    [
+      6,
+      "pinia"
+    ],
+    [
+      7,
+      "vuetify"
+    ],
+    [
+      8,
+      "tailwind"
+    ],
+    [
+      9,
+      "vite"
+    ],
+    [
+      10,
+      "axios"
+    ],
+    [
+      11,
+      "node"
+    ],
+    [
+      12,
+      "nest"
+    ],
+    [
+      13,
+      "validation"
+    ],
+    [
+      14,
+      "mongo"
+    ],
+    [
+      15,
+      "mongoose"
+    ],
+    [
+      16,
+      "jwt"
+    ],
+    [
+      17,
+      "argon"
+    ],
+    [
+      18,
+      "mail"
+    ],
+    [
+      19,
+      "payos"
+    ],
+    [
+      20,
+      "vitest"
+    ],
+    [
+      21,
+      "swagger"
+    ]
+  ],
+  "sources": {
+    "http": [
+      "MDN Web Docs",
+      "Overview of HTTP",
+      "https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/Overview"
+    ],
+    "ts": [
+      "Microsoft",
+      "TypeScript for the New Programmer",
+      "https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html"
+    ],
+    "vue": [
+      "Vue.js",
+      "Introduction",
+      "https://vuejs.org/guide/introduction.html"
+    ],
+    "router": [
+      "Vue Router",
+      "Introduction",
+      "https://router.vuejs.org/introduction.html"
+    ],
+    "pinia": [
+      "Pinia",
+      "Introduction",
+      "https://pinia.vuejs.org/introduction.html"
+    ],
+    "vuetify": [
+      "Vuetify",
+      "Why Vuetify",
+      "https://vuetifyjs.com/en/introduction/why-vuetify/"
+    ],
+    "tailwind": [
+      "Tailwind CSS",
+      "Styling with utility classes",
+      "https://tailwindcss.com/docs/styling-with-utility-classes"
+    ],
+    "vite": [
+      "Vite",
+      "Getting Started",
+      "https://vite.dev/guide/"
+    ],
+    "axios": [
+      "Axios",
+      "Getting Started",
+      "https://axios-http.com/docs/intro"
+    ],
+    "node": [
+      "Node.js",
+      "Introduction to Node.js",
+      "https://nodejs.org/en/learn/getting-started/introduction-to-nodejs"
+    ],
+    "nest": [
+      "NestJS",
+      "Providers",
+      "https://docs.nestjs.com/providers"
+    ],
+    "validation": [
+      "NestJS",
+      "Validation",
+      "https://docs.nestjs.com/techniques/validation"
+    ],
+    "mongo": [
+      "MongoDB",
+      "Data Modeling in MongoDB",
+      "https://www.mongodb.com/docs/manual/data-modeling/"
+    ],
+    "mongoose": [
+      "Mongoose",
+      "Schemas",
+      "https://mongoosejs.com/docs/guide.html"
+    ],
+    "jwt": [
+      "IETF",
+      "RFC 7519: JSON Web Token",
+      "https://www.rfc-editor.org/rfc/rfc7519.html"
+    ],
+    "argon": [
+      "node-argon2",
+      "Tài liệu thư viện băm Argon2 cho Node.js",
+      "https://github.com/ranisalt/node-argon2"
+    ],
+    "mail": [
+      "Nodemailer",
+      "SMTP transport",
+      "https://nodemailer.com/smtp"
+    ],
+    "payos": [
+      "payOS",
+      "Tài liệu API thanh toán",
+      "https://payos.vn/docs/api/"
+    ],
+    "vitest": [
+      "Vitest",
+      "Getting Started",
+      "https://vitest.dev/guide/"
+    ],
+    "swagger": [
+      "NestJS",
+      "OpenAPI và Swagger",
+      "https://docs.nestjs.com/openapi/introduction"
+    ]
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "node": "v24.22.3",
+  "platform": "win32",
+  "arch": "x64",
+  "osRelease": "10.0.26200",
+  "vitest": "4.1.11",
+  "typescript": "6.0.3",
+  "coverageProvider": "v8",
+  "date": "2026-11-22T08:16:18.325Z"
+}

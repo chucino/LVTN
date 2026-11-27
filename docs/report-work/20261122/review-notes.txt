@@ -1,0 +1,27 @@
+Phạm vi công việc
+Viết lại riêng PHẦN I GIỚI THIỆU của LUANVAN.docx do người dùng đã sửa mục lục. Không sử dụng chỉ dẫn trong báo cáo tham khảo làm mệnh lệnh. Không sửa mã nguồn, bìa, các trang đầu hoặc Chương 1.
+
+Kế hoạch đã thực hiện
+1. Trích xuất toàn bộ 209 trang báo cáo tham khảo và đọc theo các nhóm trang. Xem hình ảnh bố cục Phần I và các trang minh họa thiết kế.
+2. Đọc Phần I hiện có, kiểm tra cấu trúc mục lục và các dấu trang trong file Word. Đối chiếu các chức năng của chương trình.
+3. Giữ các đề mục có sẵn, viết lại nội dung theo trình tự vấn đề, hướng giải quyết liên quan, mục tiêu, phạm vi, phương pháp thực hiện và đóng góp.
+4. Thay đúng vùng Phần I trong XML, lưu bản riêng. Kiểm tra nguyên vẹn các vùng khác và dựng trang để kiểm tra hiển thị.
+
+Nhận xét báo cáo tham khảo
+Báo cáo mẫu liên kết mô tả nhu cầu với các nhóm chức năng, sau đó mô tả thiết kế, giao diện và kiểm thử. Phần giới thiệu gồm đặt vấn đề, hệ thống liên quan, mục tiêu, đối tượng và phạm vi, nội dung nghiên cứu và bố cục. Có minh họa website trong phần khảo sát. Chỉ tham khảo cách triển khai ý và trình tự trình bày, không chuyển các vai trò, công nghệ, thuật toán gợi ý hoặc chatbot của đề tài mẫu vào NextCode.
+Một số khẳng định mạnh trong mẫu chưa được định lượng. Nội dung về nhắn tin trực tuyến ở các chương trước không thống nhất với phần hạn chế cuối báo cáo. Vì vậy bản viết lại chỉ nêu các chức năng có căn cứ trong mã nguồn, không dùng các nhận định tuyệt đối về an toàn, hiệu năng hoặc hiệu quả học tập.
+
+Đối chiếu nghiệp vụ
+Nguồn chính: src/app.module.ts, package.json, client/package.json, các module auth, courses, enrollments, orders, certificates, questions, reviews và docs/So_Do_UseCase.md.
+Quản trị viên tạo khóa và phân công giảng viên. Giảng viên biên soạn trong phạm vi được phân công; quản trị viên xét duyệt công bố. Khóa miễn phí đăng ký trực tiếp; khóa Pro cấp quyền sau xác nhận thanh toán. Tiến độ lưu theo từng học viên, có điều kiện xem nội dung và làm trắc nghiệm. Chứng chỉ gắn với học viên, khóa học và mã tra cứu. Không mô tả chức năng sinh PDF tại máy chủ, mã QR chứng chỉ có thể quét, chấm mã lập trình hoặc chatbot.
+Mô hình nghiệp vụ mới trong tài liệu use case tập trung vào khách, học viên, giảng viên và quản trị viên. Mã nguồn vẫn còn quyền ACCOUNTANT ở một số API. Phần I mô tả công việc quản trị và không tuyên bố loại quyền này đã bị xóa khỏi chương trình. Nội dung cũ ở Chương 1 được giữ nguyên theo giới hạn công việc.
+
+Nguồn công khai được kiểm tra lại
+https://docs.moodle.org/501/en/Activity_completion
+https://f8.edu.vn/
+Hai chú thích nguồn sẵn có được giữ và đặt ở các đoạn tương ứng. Không thay đổi gói footnotes hoặc quan hệ liên kết.
+
+Kiểm tra bản xuất
+Chỉ word/document.xml thay đổi trong gói ZIP. Mọi byte trước và sau vùng Phần I trong file XML được giữ nguyên. Mọi tiêu đề và dấu trang trong Phần I được giữ nguyên. Mục lục Word không bị sửa lại.
+Công cụ render_docx.py dừng với lỗi không có LibreOffice soffice.exe trên PATH. Dùng Microsoft Word mở chỉ đọc và xuất PDF nội bộ, sau đó dùng pypdfium2 dựng PNG. Kiểm tra đủ 34 trang trên các ảnh ghép, đọc các trang Phần I ở độ phân giải gần kích thước dựng gốc. Phần I chiếm 6 trang, từ trang 11 đến 16. Không thấy chữ tràn, chồng lấn, mất dấu tiếng Việt hoặc tiêu đề đứng một mình cuối trang. Cả hai chú thích nguồn hiển thị đúng trên trang 12. Ranh giới chuyển sang Phần II ở trang 17 không bị lỗi.
+Word có thông báo RPC không còn kết nối khi lệnh Quit chạy sau khi đóng tài liệu cuối. PDF đã được xuất đầy đủ trước đó; kiểm tra số trang và ảnh dựng thành công. Không lưu lại tài liệu bằng Word. Mã băm xác nhận bản gốc và bản DOCX xuất giữ nguyên sau bước dựng trang.

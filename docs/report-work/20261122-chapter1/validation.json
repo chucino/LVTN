@@ -1,0 +1,16 @@
+{
+  "part_i_bytes_unchanged": true,
+  "commitment_and_abstract_bytes_unchanged": true,
+  "changed_original_zip_members": [
+    "word/document.xml",
+    "word/_rels/document.xml.rels"
+  ],
+  "tables": 26,
+  "specifications": 23,
+  "figures": 4,
+  "navigation_entries": 103,
+  "missing_bookmark_targets": [],
+  "pdf_pages": 55,
+  "source_sha256": "f6cb039241e84b7925fb6a1e3b19ac25c0a40cdaa7feca7bcdc98da1251ebe31",
+  "output_sha256": "ddc93379d700855731c2d777834b727499444cdd232686e944dac3692dd3197c"
+}

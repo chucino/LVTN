@@ -1,0 +1,1622 @@
+src/app.module.ts
+64: // Guard JWT mặc định toàn cục cho toàn bộ hệ thống (dùng @Public() để mở)
+
+src/common/constants/course-level.constant.ts
+
+
+src/common/constants/course.enum.ts
+
+
+src/common/constants/learning.enum.ts
+
+
+src/common/constants/order.enum.ts
+
+
+src/common/constants/roles.enum.ts
+
+
+src/common/constants/user-status.enum.ts
+
+
+src/common/decorators/current-user.decorator.ts
+
+
+src/common/decorators/public.decorator.ts
+
+
+src/common/decorators/roles.decorator.ts
+5: export const Roles = (...roles: Role[]) => SetMetadata(ROLES_KEY, roles);
+
+src/common/filters/http-exception.filter.ts
+69: path: request.url,
+
+src/common/guards/jwt-auth.guard.ts
+35: throw new UnauthorizedException('Không tìm thấy token xác thực hoặc phiên đã hết hạn');
+51: throw new UnauthorizedException('Token không hợp lệ hoặc đã hết hạn');
+
+src/common/guards/roles.guard.ts
+30: throw new ForbiddenException('Bạn không có quyền truy cập tài nguyên này');
+35: throw new ForbiddenException(
+
+src/common/interceptors/transform.interceptor.ts
+
+
+src/database/database.module.ts
+
+
+src/main.ts
+96: description: 'Nhập access token JWT: Bearer {token}',
+105: description: 'Cookie chứa refresh token được gửi tự động bởi trình duyệt',
+
+src/modules/auth/auth.controller.ts
+41: @Controller('auth')
+95: path: '/',
+108: path: '/',
+112: @Public()
+113: @Post('register')
+115: @ApiOperation({ summary: '1. Đăng ký tài khoản mới (Gửi mã OTP về email)' })
+116: @ApiResponse({ status: 201, description: 'Đăng ký thành công, mã OTP đã gửi' })
+117: @ApiResponse({ status: 400, description: 'Dữ liệu không hợp lệ hoặc mật khẩu không khớp' })
+118: @ApiResponse({ status: 409, description: 'Email đã được đăng ký và kích hoạt' })
+123: @Public()
+124: @Post('verify-register-otp')
+126: @ApiOperation({ summary: '2. Xác thực OTP đăng ký (Kích hoạt tài khoản và nhận Token)' })
+127: @ApiResponse({ status: 200, description: 'Xác thực OTP thành công, trả về access token và set cookie refresh token' })
+128: @ApiResponse({ status: 400, description: 'Mã OTP sai hoặc đã hết hạn' })
+144: @Public()
+145: @Post('resend-otp')
+147: @ApiOperation({ summary: '3. Gửi lại mã OTP (Có cooldown 60 giây)' })
+148: @ApiResponse({ status: 200, description: 'Gửi lại OTP thành công' })
+149: @ApiResponse({ status: 400, description: 'Chưa hết thời gian chờ cooldown' })
+154: @Public()
+155: @Post('login')
+157: @ApiOperation({ summary: '4. Đăng nhập hệ thống' })
+158: @ApiResponse({ status: 200, description: 'Đăng nhập thành công, trả về accessToken và cookie refreshToken' })
+159: @ApiResponse({ status: 401, description: 'Email hoặc mật khẩu không chính xác hoặc chưa xác thực email' })
+175: @Public()
+176: @Post('refresh')
+179: @ApiOperation({ summary: '5. Làm mới Access Token (Xoay vòng Refresh Token trong Cookie)' })
+180: @ApiResponse({ status: 200, description: 'Cấp access token mới thành công' })
+181: @ApiResponse({ status: 401, description: 'Refresh token không hợp lệ hoặc đã hết hạn' })
+195: @Public()
+196: @Post('logout')
+199: @ApiOperation({ summary: '6. Đăng xuất (Thu hồi refresh token và xóa Cookie)' })
+200: @ApiResponse({ status: 200, description: 'Đăng xuất thành công' })
+214: @Public()
+215: @Post('forgot-password')
+217: @ApiOperation({ summary: '7. Quên mật khẩu (Gửi OTP đặt lại mật khẩu qua email)' })
+218: @ApiResponse({ status: 200, description: 'Thông báo gửi OTP (chống dò email)' })
+223: @Public()
+224: @Post('reset-password')
+226: @ApiOperation({ summary: '8. Đặt lại mật khẩu mới (Xác thực với OTP)' })
+227: @ApiResponse({ status: 200, description: 'Đặt lại mật khẩu thành công' })
+228: @ApiResponse({ status: 400, description: 'Mã OTP sai, hết hạn hoặc mật khẩu không khớp' })
+233: @Get('me')
+236: @ApiOperation({ summary: '9. Lấy thông tin cá nhân của tài khoản hiện tại' })
+237: @ApiResponse({ status: 200, description: 'Thông tin tài khoản hiện tại' })
+238: @ApiResponse({ status: 401, description: 'Chưa đăng nhập hoặc token không hợp lệ' })
+243: @Patch('users/:id/role')
+246: @Roles(Role.ADMIN)
+248: @ApiOperation({ summary: '10. Phân quyền tài khoản (Chỉ ADMIN được quyền thực hiện)' })
+251: description: 'ID người dùng cần phân quyền',
+254: @ApiResponse({ status: 200, description: 'Phân quyền thành công' })
+255: @ApiResponse({ status: 400, description: 'Dữ liệu không hợp lệ hoặc Admin tự hạ quyền chính mình' })
+256: @ApiResponse({ status: 403, description: 'Từ chối truy cập (yêu cầu quyền ADMIN)' })
+257: @ApiResponse({ status: 404, description: 'Không tìm thấy người dùng' })
+270: @Get('admin-test')
+273: @Roles(Role.ADMIN)
+275: @ApiOperation({ summary: '11. Endpoint kiểm tra phân quyền - Chỉ dành cho ADMIN' })
+276: @ApiResponse({ status: 200, description: 'Truy cập thành công với quyền ADMIN' })
+277: @ApiResponse({ status: 403, description: 'Từ chối truy cập (thiếu quyền ADMIN)' })
+285: @Get('instructor-test')
+288: @Roles(Role.INSTRUCTOR, Role.ADMIN)
+290: @ApiOperation({ summary: '12. Endpoint kiểm tra phân quyền - Dành cho GIẢNG VIÊN và ADMIN' })
+291: @ApiResponse({ status: 200, description: 'Truy cập thành công với quyền INSTRUCTOR/ADMIN' })
+292: @ApiResponse({ status: 403, description: 'Từ chối truy cập (thiếu quyền)' })
+
+src/modules/auth/auth.module.ts
+
+
+src/modules/auth/auth.service.spec.ts
+
+
+src/modules/auth/auth.service.ts
+113: throw new BadRequestException('Mật khẩu và xác nhận mật khẩu không khớp');
+120: throw new ConflictException('Email này đã được sử dụng trên hệ thống');
+124: throw new UnauthorizedException('Tài khoản liên kết với email này đã bị khóa');
+204: throw new BadRequestException('Mã OTP không tồn tại hoặc đã được sử dụng');
+208: throw new BadRequestException('Mã OTP đã hết hạn. Vui lòng yêu cầu gửi lại mã');
+213: throw new BadRequestException(
+223: throw new BadRequestException(
+235: throw new NotFoundException('Không tìm thấy thông tin tài khoản người dùng');
+282: throw new BadRequestException(
+328: throw new UnauthorizedException('Email hoặc mật khẩu không chính xác');
+332: throw new UnauthorizedException(
+338: throw new UnauthorizedException(
+349: throw new UnauthorizedException('Email hoặc mật khẩu không chính xác');
+381: throw new UnauthorizedException('Không tìm thấy refresh token trong cookie');
+398: throw new UnauthorizedException('Refresh token không hợp lệ hoặc đã hết hạn');
+411: throw new UnauthorizedException(
+425: throw new UnauthorizedException('Tài khoản người dùng không còn khả dụng hoặc đã bị khóa');
+513: throw new BadRequestException('Mật khẩu mới và xác nhận mật khẩu không khớp');
+524: throw new BadRequestException('Mã OTP không hợp lệ hoặc đã được sử dụng');
+528: throw new BadRequestException('Mã OTP đã hết hạn. Vui lòng yêu cầu mã mới');
+533: throw new BadRequestException(
+543: throw new BadRequestException(
+553: throw new NotFoundException('Người dùng không tồn tại');
+576: throw new NotFoundException('Không tìm thấy người dùng');
+597: throw new BadRequestException(
+604: throw new NotFoundException('Không tìm thấy tài khoản người dùng cần phân quyền');
+609: throw new BadRequestException('Không thể cập nhật vai trò cho người dùng');
+
+src/modules/auth/dto/assign-role.dto.ts
+9: description: 'Vai trò mới của người dùng (STUDENT, INSTRUCTOR, ACCOUNTANT, ADMIN)',
+
+src/modules/auth/dto/forgot-password.dto.ts
+5: @ApiProperty({ example: 'nguyenvana@gmail.com', description: 'Email tài khoản cần đặt lại mật khẩu' })
+
+src/modules/auth/dto/login.dto.ts
+5: @ApiProperty({ example: 'nguyenvana@gmail.com', description: 'Email đăng nhập' })
+10: @ApiProperty({ example: 'Matkhau@123', description: 'Mật khẩu tài khoản' })
+
+src/modules/auth/dto/register.dto.ts
+13: @ApiProperty({ example: 'Nguyễn Văn A', description: 'Họ và tên của người dùng' })
+18: @ApiProperty({ example: 'nguyenvana@gmail.com', description: 'Email đăng ký' })
+23: @ApiProperty({ example: 'Matkhau@123', description: 'Mật khẩu tối thiểu 6 ký tự' })
+28: @ApiProperty({ example: 'Matkhau@123', description: 'Xác nhận lại mật khẩu' })
+33: @ApiPropertyOptional({ example: '2001-05-15', description: 'Ngày sinh (YYYY-MM-DD)' })
+38: @ApiPropertyOptional({ example: 'Sinh viên', description: 'Nghề nghiệp hiện tại' })
+43: @ApiPropertyOptional({ example: 'https://example.com/avatar.jpg', description: 'Đường dẫn ảnh đại diện' })
+50: description: 'Danh sách ID các lĩnh vực muốn học (tham chiếu Category)',
+60: description: 'Bí danh cũ của interestedCategories (tương thích ngược)',
+
+src/modules/auth/dto/resend-otp.dto.ts
+6: @ApiProperty({ example: 'nguyenvana@gmail.com', description: 'Email cần gửi lại OTP' })
+14: description: 'Mục đích OTP: REGISTER hoặc RESET_PASSWORD',
+
+src/modules/auth/dto/reset-password.dto.ts
+5: @ApiProperty({ example: 'nguyenvana@gmail.com', description: 'Email tài khoản' })
+10: @ApiProperty({ example: '123456', description: 'Mã OTP nhận qua email' })
+15: @ApiProperty({ example: 'MatkhauMoi@123', description: 'Mật khẩu mới (tối thiểu 6 ký tự)' })
+20: @ApiProperty({ example: 'MatkhauMoi@123', description: 'Xác nhận lại mật khẩu mới' })
+
+src/modules/auth/dto/verify-otp.dto.ts
+5: @ApiProperty({ example: 'nguyenvana@gmail.com', description: 'Email cần xác thực' })
+10: @ApiProperty({ example: '123456', description: 'Mã OTP gồm 6 chữ số' })
+
+src/modules/auth/schemas/otp.schema.ts
+
+
+src/modules/auth/schemas/refresh-token.schema.ts
+
+
+src/modules/certificates/certificates.controller.ts
+22: @Controller('certificates')
+26: @Get('my')
+29: @Roles(Role.STUDENT)
+30: @ApiOperation({ summary: 'Danh sách chứng chỉ đã được cấp của học viên' })
+38: @Public()
+39: @Get('verify/:code')
+41: summary: 'Tra cứu và xác thực tính hợp lệ của chứng chỉ công khai',
+46: description: 'Mã số chứng chỉ',
+49: @ApiResponse({ status: 404, description: 'Không tìm thấy chứng chỉ' })
+
+src/modules/certificates/certificates.module.ts
+
+
+src/modules/certificates/certificates.service.ts
+109: throw new NotFoundException('Không tìm thấy chứng chỉ với mã số này');
+133: .findById(cert.courseId, { title: 1, instructorId: 1 })
+
+src/modules/certificates/dto/certificate-response.dto.ts
+
+
+src/modules/certificates/schemas/certificate.schema.ts
+
+
+src/modules/courses/course-manage.controller.ts
+78: ApiBadRequestResponse({ description: 'Dữ liệu đầu vào không hợp lệ' }),
+79: ApiUnauthorizedResponse({ description: 'Chưa đăng nhập hoặc token không hợp lệ' }),
+80: ApiForbiddenResponse({ description: 'Không đủ quyền hoặc không sở hữu khóa học' }),
+81: ApiNotFoundResponse({ description: 'Không tìm thấy khóa học hoặc nội dung' }),
+82: ApiConflictResponse({ description: 'Trạng thái hiện tại không cho phép thao tác' }),
+100: @Roles(Role.INSTRUCTOR, Role.ADMIN)
+101: @Controller('manage')
+105: @Get('courses')
+106: @ApiOperation({ summary: 'Danh sách khóa học được phép quản lý' })
+119: @Post('courses')
+120: @Roles(Role.ADMIN)
+121: @ApiOperation({ summary: 'Tạo khóa học ở trạng thái DRAFT (Chỉ ADMIN)' })
+131: @Get('courses/:id')
+132: @ApiOperation({ summary: 'Chi tiết khóa học để quản lý nội dung' })
+133: @ApiParam({ name: 'id', description: 'Mongo ObjectId của khóa học' })
+143: @Patch('courses/:id')
+144: @Roles(Role.ADMIN)
+145: @ApiOperation({ summary: 'Cập nhật thông tin khóa học (Chỉ ADMIN)' })
+156: @Delete('courses/:id')
+157: @Roles(Role.ADMIN)
+158: @ApiOperation({ summary: 'Xóa khóa học ở trạng thái được phép (Chỉ ADMIN)' })
+159: @ApiResponse({ status: 200, description: 'Khóa học đã được xóa' })
+168: @Post('courses/:id/submit')
+170: @ApiOperation({ summary: 'Gửi khóa DRAFT chờ Admin duyệt' })
+180: @Post('courses/:id/withdraw')
+182: @ApiOperation({ summary: 'Thu hồi khóa đang PENDING về DRAFT' })
+192: @Post('courses/:id/approve')
+194: @Roles(Role.ADMIN)
+195: @ApiOperation({ summary: 'Duyệt khóa PENDING hoặc hiện lại khóa HIDDEN' })
+205: @Post('courses/:id/reject')
+207: @Roles(Role.ADMIN)
+208: @ApiOperation({ summary: 'Từ chối khóa PENDING và lưu lý do' })
+219: @Post('courses/:id/hide')
+221: @Roles(Role.ADMIN)
+222: @ApiOperation({ summary: 'Ẩn khóa APPROVED khỏi API công khai' })
+232: @Get('instructors')
+233: @Roles(Role.ADMIN)
+234: @ApiOperation({ summary: 'Danh sách giảng viên ACTIVE để gán khóa học' })
+249: @Post('courses/:courseId/chapters')
+251: @ApiOperation({ summary: 'Thêm chương vào cuối khóa học' })
+262: @Patch('courses/:courseId/chapters/reorder')
+263: @ApiOperation({ summary: 'Sắp xếp lại toàn bộ chương' })
+274: @Patch('courses/:courseId/chapters/:chapterId')
+275: @ApiOperation({ summary: 'Đổi tên chương' })
+291: @Delete('courses/:courseId/chapters/:chapterId')
+292: @ApiOperation({ summary: 'Xóa chương và toàn bộ nội dung con' })
+306: @Post('courses/:courseId/chapters/:chapterId/lessons')
+308: @ApiOperation({ summary: 'Thêm bài giảng vào cuối chương' })
+324: @Patch('courses/:courseId/chapters/:chapterId/lessons/reorder')
+325: @ApiOperation({ summary: 'Sắp xếp lại toàn bộ bài giảng trong chương' })
+341: @Patch('courses/:courseId/chapters/:chapterId/lessons/:lessonId')
+342: @ApiOperation({ summary: 'Cập nhật bài giảng' })
+359: @Delete('courses/:courseId/chapters/:chapterId/lessons/:lessonId')
+360: @ApiOperation({ summary: 'Xóa bài giảng và câu hỏi trắc nghiệm con' })
+375: @Post(
+379: @ApiOperation({ summary: 'Thêm câu trắc nghiệm cho bài giảng' })
+382: description:
+401: @Patch(
+404: @ApiOperation({ summary: 'Cập nhật câu trắc nghiệm' })
+407: description:
+427: @Delete(
+430: @ApiOperation({ summary: 'Xóa câu trắc nghiệm' })
+
+src/modules/courses/course-manage.service.spec.ts
+33: function createCourse(status = CourseStatus.DRAFT) {
+36: title: '1.1 Bài học',
+44: summary: 'Tóm tắt cũ',
+48: const chapter = { _id: chapterId, title: 'Chương một', order: 1, lessons: [lesson] };
+51: title: 'REST API với NestJS',
+52: description: 'Khóa học xây dựng REST API bằng NestJS.',
+203: getManageCoursePermissions(CourseStatus.DRAFT, instructorId, instructor),
+206: getManageCoursePermissions(CourseStatus.PENDING, instructorId, instructor),
+209: getManageCoursePermissions(CourseStatus.APPROVED, otherInstructorId, instructor),
+212: getManageCoursePermissions(CourseStatus.HIDDEN, otherInstructorId, {
+248: status: CourseStatus.DRAFT,
+251: $set: { status: CourseStatus.PENDING, rejectReason: null },
+253: expect(response.status).toBe(CourseStatus.PENDING);
+258: course.status = CourseStatus.PENDING;
+261: ).toBe(CourseStatus.DRAFT);
+263: course.status = CourseStatus.PENDING;
+273: expect(rejected.status).toBe(CourseStatus.DRAFT);
+276: course.status = CourseStatus.PENDING;
+279: ).toBe(CourseStatus.APPROVED);
+282: ).toBe(CourseStatus.HIDDEN);
+285: ).toBe(CourseStatus.APPROVED);
+289: course.status = CourseStatus.APPROVED;
+298: course.status = CourseStatus.PENDING;
+301: service.updateChapter(courseId.toString(), chapterId.toString(), { title: 'Chương mới' }, instructor),
+313: service.updateCourse(courseId.toString(), { title: 'Test' }, instructor),
+340: title: 'Chương hai',
+382: const invalidCourse = plainToInstance(UpdateManageCourseDto, { title: null });
+453: title: 'Bài Pro',
+468: title: 'Bài Free YouTube',
+486: title: 'Bài đọc lý thuyết & tài liệu PDF',
+528: title: 'JS',
+529: description: 'Cơ bản',
+
+src/modules/courses/course-manage.service.ts
+79: path: '$category',
+95: throw new ForbiddenException('Chỉ giảng viên hoặc quản trị viên được quản lý khóa học');
+101: throw new ForbiddenException('Thông tin giảng viên không hợp lệ');
+107: throw new BadRequestException('Khóa học FREE phải có giá bằng 0 và không có giá ưu đãi');
+111: throw new BadRequestException('Khóa học PRO phải có giá lớn hơn 0');
+117: throw new BadRequestException('Giá ưu đãi phải lớn hơn 0 và thấp hơn giá gốc');
+130: throw new BadRequestException('Ghi chép và tóm tắt chỉ được dùng cho khóa học PRO');
+144: throw new BadRequestException('Mã nhúng <iframe> YouTube không hợp lệ');
+147: throw new BadRequestException(
+194: ? { title: 1 as const, _id: 1 as const }
+209: title: 1,
+270: throw new ForbiddenException('Chỉ quản trị viên được xem danh sách giảng viên');
+287: throw new ForbiddenException('Chỉ quản trị viên mới có quyền tạo khóa học nền');
+292: throw new BadRequestException('Quản trị viên phải chọn giảng viên cho khóa học');
+295: throw new BadRequestException('Giảng viên không tồn tại hoặc không ở trạng thái hoạt động');
+305: title: input.title.trim(),
+306: description: input.description.trim(),
+317: status: CourseStatus.DRAFT,
+355: throw new NotFoundException('Không tìm thấy khóa học');
+366: throw new ForbiddenException(
+373: throw new ForbiddenException(
+384: if (course.status !== CourseStatus.DRAFT) {
+385: throw new ConflictException('Chỉ được đổi loại khóa học khi khóa đang ở trạng thái nháp');
+391: throw new BadRequestException('Khi đổi sang PRO, request phải kèm giá lớn hơn 0');
+407: throw new BadRequestException(
+474: throw new ConflictException('Trạng thái khóa học đã thay đổi; vui lòng tải lại');
+517: throw new BadRequestException('Mỗi khóa học được có tối đa 50 chương');
+521: title: input.title,
+535: throw new BadRequestException('Cần cung cấp tên chương để cập nhật');
+552: if (chapterIndex < 0) throw new NotFoundException('Không tìm thấy chương');
+584: if (!chapter) throw new BadRequestException('Danh sách chương không hợp lệ');
+601: throw new BadRequestException('Mỗi chương được có tối đa 50 bài giảng');
+609: throw new BadRequestException(
+615: title: input.title,
+623: summary: input.summary ?? null,
+638: throw new BadRequestException('Cần cung cấp ít nhất một trường để cập nhật bài giảng');
+653: throw new BadRequestException(
+705: if (lessonIndex < 0) throw new NotFoundException('Không tìm thấy bài giảng');
+737: if (!lesson) throw new BadRequestException('Danh sách bài giảng không hợp lệ');
+755: throw new BadRequestException('Mỗi bài giảng được có tối đa 10 câu trắc nghiệm');
+779: throw new BadRequestException('Cần cung cấp ít nhất một trường để cập nhật câu hỏi');
+787: if (!question) throw new NotFoundException('Không tìm thấy câu trắc nghiệm');
+817: throw new NotFoundException('Không tìm thấy câu trắc nghiệm');
+835: from: [CourseStatus.DRAFT],
+836: to: CourseStatus.PENDING,
+840: from: [CourseStatus.PENDING],
+841: to: CourseStatus.DRAFT,
+845: from: [CourseStatus.PENDING, CourseStatus.HIDDEN],
+846: to: CourseStatus.APPROVED,
+850: from: [CourseStatus.PENDING],
+851: to: CourseStatus.DRAFT,
+855: from: [CourseStatus.APPROVED],
+856: to: CourseStatus.HIDDEN,
+862: throw new ForbiddenException('Bạn không có quyền thực hiện hành động này');
+865: throw new ConflictException(
+872: throw new BadRequestException({
+884: throw new BadRequestException('Lý do từ chối phải có từ 10 đến 500 ký tự');
+898: throw new ConflictException('Trạng thái khóa học đã thay đổi; vui lòng tải lại');
+917: throw new NotFoundException('Không tìm thấy khóa học');
+920: if (!course) throw new NotFoundException('Không tìm thấy khóa học');
+925: throw new ForbiddenException('Bạn không có quyền truy cập khóa học của giảng viên khác');
+934: course.status !== CourseStatus.DRAFT &&
+935: course.status !== CourseStatus.APPROVED
+937: throw new ConflictException(
+946: throw new ForbiddenException('Chỉ quản trị viên mới có quyền xóa khóa học');
+949: course.status === CourseStatus.DRAFT ||
+950: (actor.role === Role.ADMIN && course.status === CourseStatus.HIDDEN);
+952: throw new ConflictException(
+960: throw new BadRequestException('Danh mục khóa học không tồn tại');
+972: course.status === CourseStatus.APPROVED
+974: course.status = CourseStatus.DRAFT;
+987: if (!chapter) throw new NotFoundException('Không tìm thấy chương');
+1000: if (!lesson) throw new NotFoundException('Không tìm thấy bài giảng');
+1007: label: string,
+1017: throw new BadRequestException(
+1034: throw new BadRequestException(
+1043: throw new BadRequestException(
+
+src/modules/courses/course-totals.ts
+16: throw new NotFoundException('Không tìm thấy khóa học');
+
+src/modules/courses/courses.controller.ts
+48: @Public()
+49: @Controller()
+53: @Get('categories')
+54: @ApiOperation({ summary: 'Lấy danh sách danh mục khóa học' })
+66: @Get('courses')
+67: @ApiOperation({ summary: 'Tìm kiếm, lọc và phân trang khóa học đã duyệt' })
+72: description: 'Tìm theo tên khóa, không phân biệt hoa thường',
+79: description: 'Mongo ObjectId của danh mục',
+85: description: 'Người mới bắt đầu | Có cơ bản | Chuyên nghiệp',
+92: description: 'Giá hiệu lực thấp nhất (VND)',
+99: description: 'Giá hiệu lực cao nhất (VND)',
+135: @ApiResponse({ status: 400, description: 'Query parameter không hợp lệ' })
+140: @Get('courses/featured')
+141: @ApiOperation({ summary: 'Lấy khóa học nổi bật cho trang chủ' })
+159: description: 'limit phải là số nguyên từ 1 đến 12',
+167: @Get('courses/:id')
+168: @ApiOperation({ summary: 'Xem chi tiết khóa học đã duyệt' })
+171: description: 'Mongo ObjectId của khóa học',
+182: description: 'Khóa học không tồn tại hoặc chưa được duyệt',
+
+src/modules/courses/courses.module.ts
+
+
+src/modules/courses/courses.service.spec.ts
+52: status: CourseStatus.APPROVED,
+106: { $match: { status: CourseStatus.APPROVED } },
+126: title: 'REST API với NestJS',
+145: description: 'Khóa học REST API.',
+152: title: 'Kiến trúc NestJS',
+157: title: '1.1 Module NestJS',
+163: summary: 'private summary',
+177: status: CourseStatus.APPROVED,
+189: title: '1.1 Module NestJS',
+
+src/modules/courses/courses.service.ts
+34: title: 1,
+77: path: '$category',
+133: throw new BadRequestException('minPrice không được lớn hơn maxPrice');
+137: status: CourseStatus.APPROVED,
+204: { $match: { status: CourseStatus.APPROVED } },
+218: throw new NotFoundException('Không tìm thấy khóa học');
+226: status: CourseStatus.APPROVED,
+233: description: 1,
+243: title: '$$chapter.title',
+251: title: '$$lesson.title',
+277: throw new NotFoundException('Không tìm thấy khóa học');
+
+src/modules/courses/dto/course-query.dto.ts
+
+
+src/modules/courses/dto/course-response.dto.ts
+
+
+src/modules/courses/dto/featured-query.dto.ts
+
+
+src/modules/courses/dto/manage-course-response.dto.ts
+69: @ApiProperty({ example: 42, description: 'Tổng số học viên đã đăng ký khóa học' })
+78: @ApiProperty({ enum: CourseStatus, example: CourseStatus.DRAFT })
+118: description: 'Chỉ số đáp án đúng, bắt đầu từ 0 (0-based).',
+
+src/modules/courses/dto/manage-course.dto.ts
+110: @ApiPropertyOptional({ example: '6650c1f6f2f4f6e4c8bfe123', description: 'Chỉ áp dụng cho Admin' })
+204: description: 'Đường dẫn ảnh đã tải lên (/public/images/courses/...) hoặc URL HTTPS',
+225: description: 'Bắt buộc khi tạo khóa với vai trò Admin; giảng viên hiện tại được lấy từ JWT.',
+258: description: 'Phải chứa đúng và đủ ID chương hiện có, không trùng lặp.',
+273: description: `Tùy chọn. Mã nhúng <iframe> YouTube (khóa FREE), đường dẫn video đã tải lên (/public/videos/...), URL HTTPS, "${PLACEHOLDER_VIDEO}" hoặc chuỗi rỗng "".`,
+302: description: 'Thời lượng tính bằng giây (0 nếu bài giảng không có video).',
+325: description: 'Đường dẫn file tài liệu bài giảng đã tải lên (/public/files/...)',
+371: description: 'Phải chứa đúng và đủ ID bài giảng hiện có, không trùng lặp.',
+397: description: 'Chỉ số đáp án đúng bắt đầu từ 0 (0-based), phải nhỏ hơn số options.',
+
+src/modules/courses/manage-course-readiness.ts
+
+
+src/modules/courses/manage-course.serializer.ts
+83: canEdit: isAdmin || (isOwner && [CourseStatus.DRAFT, CourseStatus.APPROVED].includes(status)),
+84: canSubmit: canManageOwn && status === CourseStatus.DRAFT,
+85: canWithdraw: canManageOwn && status === CourseStatus.PENDING,
+87: (isAdmin && status === CourseStatus.DRAFT) ||
+88: (isAdmin && status === CourseStatus.HIDDEN),
+90: isAdmin && [CourseStatus.PENDING, CourseStatus.HIDDEN].includes(status),
+91: canReject: isAdmin && status === CourseStatus.PENDING,
+92: canHide: isAdmin && status === CourseStatus.APPROVED,
+125: title: chapter.title,
+131: title: lesson.title,
+139: summary: lesson.summary ?? null,
+153: title: course.title,
+192: description: course.description,
+
+src/modules/courses/schemas/category.schema.ts
+
+
+src/modules/courses/schemas/course.schema.ts
+121: default: CourseStatus.DRAFT,
+
+src/modules/courses/serializers/course.serializer.ts
+15: title: string;
+38: title: string;
+46: title: string;
+52: description: string;
+93: title: course.title,
+113: title: lesson.title,
+125: title: chapter.title,
+138: description: course.description,
+
+src/modules/enrollments/dto/enrollment-response.dto.ts
+187: description:
+195: description:
+217: description: 'Chỉ trả về khi bài trắc nghiệm đã vượt qua (quizPassed = true)',
+224: description: 'Chỉ trả về khi bài trắc nghiệm đã vượt qua (quizPassed = true)',
+273: requiredPassPercent!: number;
+360: description: 'Chỉ trả lời đúng mới hiển thị giải thích vì sao đáp án đó đúng',
+379: requiredPassPercent!: number;
+
+src/modules/enrollments/dto/manage-course-students.dto.ts
+36: description: 'Từ khóa tìm kiếm theo họ tên hoặc email học viên',
+46: description: 'Lọc theo trạng thái học tập',
+55: description: 'Sắp xếp danh sách',
+98: description: 'Mã chứng chỉ nếu học viên đã hoàn thành và được cấp',
+104: @ApiProperty({ example: 45, description: 'Tổng số học viên đã đăng ký' })
+107: @ApiProperty({ example: 35, description: 'Số học viên đang học' })
+110: @ApiProperty({ example: 10, description: 'Số học viên đã hoàn thành khóa' })
+113: @ApiProperty({ example: 52.4, description: 'Tiến độ trung bình của lớp (%)' })
+
+src/modules/enrollments/dto/submit-quiz.dto.ts
+15: description: 'Mongo ObjectId của câu hỏi trắc nghiệm',
+22: description: 'Chỉ số đáp án học viên lựa chọn (0-based)',
+33: description: 'Danh sách câu trả lời cho các câu hỏi trắc nghiệm của bài giảng',
+
+src/modules/enrollments/dto/update-lesson-progress.dto.ts
+9: description: 'Vị trí đang xem video tính bằng giây (>= 0)',
+18: description: 'Tổng số giây thực tế học viên đã bật phát video (>= 0)',
+28: description: 'Đánh dấu đã xem đủ thời lượng video bài giảng hay chưa',
+38: description: 'Lọc theo trạng thái học tập: LEARNING hoặc COMPLETED',
+
+src/modules/enrollments/enrollments.controller.ts
+46: @Controller()
+50: @Post('courses/:courseId/enroll')
+52: @Roles(Role.STUDENT)
+55: summary:
+61: description: 'Mongo ObjectId của khóa học',
+66: description: 'Chỉ học viên được đăng ký hoặc khóa học thuộc loại PRO',
+70: description: 'Học viên đã đăng ký khóa học này trước đó',
+79: @Get('courses/:courseId/enrollment-status')
+81: summary:
+96: @Get('enrollments/my-courses')
+98: @Roles(Role.STUDENT)
+100: summary: 'Lấy danh sách các khóa học đã đăng ký của học viên',
+110: @Get('enrollments/courses/:courseId/learning')
+112: @Roles(Role.STUDENT, Role.INSTRUCTOR, Role.ADMIN)
+114: summary:
+119: @ApiResponse({ status: 403, description: 'Chưa đăng ký khóa học này hoặc khóa học chưa xuất bản' })
+131: @Get('enrollments/courses/:courseId/lessons/:lessonId')
+133: @Roles(Role.STUDENT, Role.INSTRUCTOR, Role.ADMIN)
+135: summary:
+143: description: 'Chưa đăng ký khóa học hoặc bài học đang ở trạng thái LOCKED',
+158: @Patch('enrollments/courses/:courseId/lessons/:lessonId/progress')
+160: @Roles(Role.STUDENT, Role.INSTRUCTOR, Role.ADMIN)
+162: summary:
+183: @Post('enrollments/courses/:courseId/lessons/:lessonId/quiz-submit')
+185: @Roles(Role.STUDENT, Role.INSTRUCTOR, Role.ADMIN)
+188: summary:
+196: description: 'Chưa xem hết video hoặc chưa trả lời đủ số câu hỏi của bài',
+213: @Get('manage/courses/:courseId/students')
+215: @Roles(Role.INSTRUCTOR, Role.ADMIN)
+217: summary:
+224: description: 'Giảng viên không có quyền quản lý khóa học của người khác',
+228: description: 'Không tìm thấy khóa học',
+
+src/modules/enrollments/enrollments.module.ts
+
+
+src/modules/enrollments/enrollments.service.spec.ts
+39: title: 'Nền tảng HTML & CSS',
+40: description: 'Khóa học miễn phí nền tảng Web',
+43: status: CourseStatus.APPROVED,
+54: title: 'Chương 1: Khởi đầu',
+59: title: '1.1 Giới thiệu (Không có trắc nghiệm)',
+64: summary: null,
+70: title: '1.2 Cấu trúc HTML (1 câu trắc nghiệm - cần đúng 100%)',
+75: summary: null,
+89: title: '1.3 CSS Flexbox (3 câu trắc nghiệm - cần đúng >= 70%)',
+94: summary: null,
+128: title: 'NestJS Chuyên sâu (Pro)',
+277: if (status !== CourseStatus.APPROVED) return null;
+476: expect(quiz3TwoCorrect.requiredPassPercent).toBe(70);
+
+src/modules/enrollments/enrollments.service.ts
+118: throw new ForbiddenException(
+134: throw new ConflictException('Bạn đã đăng ký khóa học này trước đó');
+262: title: course.title,
+298: throw new BadRequestException(
+317: title: chapter.title,
+323: title: lesson.title,
+384: title: chapter.title,
+394: title: lesson.title,
+451: throw new NotFoundException('Không tìm thấy bài giảng');
+465: throw new NotFoundException(
+473: const requiredPassPercent = quizCount <= 1 ? 100 : 70;
+485: title: entry.lesson.title,
+493: summary: entry.lesson.summary ?? null,
+496: requiredPassPercent,
+533: throw new NotFoundException('Không tìm thấy bài giảng trong khóa học này');
+540: throw new ForbiddenException(
+554: const requiredPassPercent = quizCount <= 1 ? 100 : 70;
+575: title: entry.lesson.title,
+583: summary: entry.lesson.summary ?? null,
+586: requiredPassPercent,
+621: throw new NotFoundException('Không tìm thấy bài giảng');
+635: throw new NotFoundException(
+676: throw new NotFoundException('Không tìm thấy bài giảng trong khóa học này');
+683: throw new ForbiddenException(
+712: maxDuration > 0 ? Math.ceil(maxDuration * 0.6) : 0;
+769: throw new NotFoundException('Không tìm thấy bài giảng');
+783: throw new NotFoundException(
+791: throw new BadRequestException(
+800: throw new BadRequestException(
+808: throw new BadRequestException(
+820: throw new BadRequestException(
+825: throw new BadRequestException(
+845: const requiredPassPercent = totalQuestions === 1 ? 100 : 70;
+861: requiredPassPercent,
+889: throw new NotFoundException('Không tìm thấy bài giảng trong khóa học này');
+896: throw new ForbiddenException(
+903: throw new BadRequestException('Bài giảng này không có câu hỏi trắc nghiệm');
+908: throw new BadRequestException(
+917: throw new BadRequestException(
+925: throw new BadRequestException(
+946: throw new BadRequestException(
+951: throw new BadRequestException(
+983: const requiredPassPercent = totalQuestions === 1 ? 100 : 70;
+1015: requiredPassPercent,
+1034: throw new BadRequestException(
+1134: throw new NotFoundException('Không tìm thấy khóa học');
+1140: status: CourseStatus.APPROVED,
+1146: throw new NotFoundException(
+1163: throw new NotFoundException('Không tìm thấy khóa học');
+1172: throw new NotFoundException('Không tìm thấy khóa học');
+1189: if (course.status !== CourseStatus.APPROVED) {
+1190: throw new ForbiddenException(
+1200: throw new ForbiddenException(
+1213: throw new NotFoundException('Không tìm thấy khóa học');
+1220: status: CourseStatus.APPROVED,
+1233: throw new NotFoundException(
+1239: throw new ForbiddenException(
+1300: throw new BadRequestException('Mã khóa học không hợp lệ');
+1305: throw new NotFoundException('Không tìm thấy khóa học');
+1310: throw new ForbiddenException(
+1315: throw new ForbiddenException(
+1350: const summary: ManageCourseStudentSummaryDto = {
+1499: title: course.title,
+
+src/modules/enrollments/schemas/enrollment.schema.ts
+
+
+src/modules/enrollments/schemas/lesson-progress.schema.ts
+
+
+src/modules/enrollments/schemas/quiz-attempt.schema.ts
+
+
+src/modules/mail/mail.module.ts
+
+
+src/modules/mail/mail.service.ts
+60: throw new Error('Không thể gửi email xác thực OTP. Vui lòng kiểm tra lại cấu hình email.');
+95: throw new Error('Không thể gửi email đặt lại mật khẩu. Vui lòng thử lại sau.');
+
+src/modules/orders/dto/order.dto.ts
+23: description: 'Mongo ObjectId của khóa học PRO cần mua',
+31: description: 'Mã giảm giá (tùy chọn)',
+71: description: 'Tìm theo mã đơn hàng, tên/email học viên hoặc tên khóa học',
+116: description: 'Dữ liệu giao dịch do payOS gửi về',
+122: description: 'Chữ ký HMAC-SHA256 của payOS',
+
+src/modules/orders/orders.controller.ts
+40: @Controller()
+44: @Post('orders/preview')
+47: @Roles(Role.STUDENT)
+50: summary:
+61: @Post('orders')
+64: @Roles(Role.STUDENT)
+67: summary:
+78: @Get('orders/my-orders')
+81: @Roles(Role.STUDENT)
+83: summary: 'Lấy danh sách đơn hàng và lịch sử giao dịch của học viên',
+93: @Get('orders/:id')
+96: @Roles(Role.STUDENT, Role.ADMIN, Role.ACCOUNTANT)
+98: summary:
+101: @ApiParam({ name: 'id', description: 'Mongo ObjectId của đơn hàng' })
+110: @Post('orders/:id/sync-payment')
+113: @Roles(Role.STUDENT, Role.ADMIN, Role.ACCOUNTANT)
+116: summary:
+119: @ApiParam({ name: 'id', description: 'Mongo ObjectId của đơn hàng' })
+128: @Post('orders/:id/simulate-payment')
+131: @Roles(Role.STUDENT, Role.ADMIN, Role.ACCOUNTANT)
+134: summary:
+137: @ApiParam({ name: 'id', description: 'Mongo ObjectId của đơn hàng' })
+146: @Post('orders/:id/cancel')
+149: @Roles(Role.STUDENT, Role.ADMIN, Role.ACCOUNTANT)
+152: summary: 'Hủy đơn hàng đang chờ thanh toán và hủy link thanh toán trên payOS',
+154: @ApiParam({ name: 'id', description: 'Mongo ObjectId của đơn hàng' })
+164: @Post('payments/payos/webhook')
+165: @Public()
+168: summary:
+177: @Get('manage/orders')
+180: @Roles(Role.ADMIN, Role.ACCOUNTANT)
+182: summary: 'Admin / Kế toán xem danh sách đơn hàng và thống kê doanh thu',
+191: @Post('manage/orders/:id/confirm')
+194: @Roles(Role.ADMIN, Role.ACCOUNTANT)
+197: summary:
+200: @ApiParam({ name: 'id', description: 'Mongo ObjectId của đơn hàng' })
+
+src/modules/orders/orders.module.ts
+
+
+src/modules/orders/orders.service.spec.ts
+108: description: 'NEXTCODE DH8K2M9',
+118: description: 'NEXTCODE DH8K2M9',
+149: title: 'Fullstack NestJS & Vue 3 Pro',
+151: status: CourseStatus.APPROVED,
+188: title: 'Fullstack NestJS & Vue 3 Pro',
+190: status: CourseStatus.APPROVED,
+220: status: OrderStatus.PENDING,
+241: description: 'NEXTCODE DH8K2M9A',
+262: expect(pendingOrder.status).toBe(OrderStatus.COMPLETED);
+
+src/modules/orders/orders.service.ts
+55: title: string;
+67: title: 'Giảm 10% học phí khóa học Pro (tối đa 100.000đ)',
+75: title: 'Ưu đãi 20% dành cho Học viên & Sinh viên (tối đa 200.000đ)',
+83: title: 'Giảm trực tiếp 50.000đ cho đơn từ 200.000đ',
+91: title: 'Mã kiểm thử giao dịch thật 2.000đ qua VietQR payOS',
+222: throw new BadRequestException(
+228: throw new BadRequestException(
+269: throw new NotFoundException('Không tìm thấy khóa học');
+275: status: CourseStatus.APPROVED,
+281: throw new NotFoundException(
+287: throw new BadRequestException(
+300: throw new ConflictException('Bạn đã đăng ký khóa học này trước đó');
+307: title: rule.title,
+335: throw new NotFoundException('Không tìm thấy khóa học');
+344: status: CourseStatus.APPROVED,
+350: throw new NotFoundException(
+356: throw new BadRequestException(
+369: throw new ConflictException('Bạn đã sở hữu khóa học này');
+379: status: OrderStatus.PENDING,
+387: if (pending.status === OrderStatus.COMPLETED) {
+392: pending.status = OrderStatus.EXPIRED;
+407: pending.status = OrderStatus.CANCELLED;
+447: status: OrderStatus.PENDING,
+460: description: `NEXTCODE ${orderCode}`,
+487: if (order.status === OrderStatus.PENDING) {
+490: order.status === OrderStatus.PENDING &&
+493: order.status = OrderStatus.EXPIRED;
+510: if (order.status === OrderStatus.PENDING) {
+527: throw new BadRequestException('Chữ ký webhook không hợp lệ');
+602: throw new ForbiddenException(
+610: if (order.status === OrderStatus.COMPLETED) {
+614: if (order.status !== OrderStatus.PENDING) {
+615: throw new BadRequestException(
+647: if (order.status === OrderStatus.COMPLETED) {
+652: order.status !== OrderStatus.PENDING &&
+653: order.status !== OrderStatus.EXPIRED
+655: throw new BadRequestException(
+690: if (order.status === OrderStatus.COMPLETED) {
+691: throw new BadRequestException(
+696: if (order.status === OrderStatus.PENDING) {
+697: order.status = OrderStatus.CANCELLED;
+732: if (order.status === OrderStatus.PENDING) {
+734: order.status = OrderStatus.EXPIRED;
+760: .find({ _id: { $in: courseIds } }, { title: 1 })
+809: this.courseModel.find({ title: regex }, { _id: 1 }).lean().exec(),
+837: .countDocuments({ status: OrderStatus.COMPLETED })
+840: .countDocuments({ status: OrderStatus.PENDING })
+844: status: { $in: [OrderStatus.CANCELLED, OrderStatus.EXPIRED] },
+849: { $match: { status: OrderStatus.COMPLETED } },
+878: if (order.status !== OrderStatus.PENDING) return;
+905: order.status = OrderStatus.CANCELLED;
+911: order.status = OrderStatus.EXPIRED;
+938: if (order.status !== OrderStatus.COMPLETED) {
+939: order.status = OrderStatus.COMPLETED;
+1002: throw new NotFoundException('Không tìm thấy đơn hàng');
+1010: throw new NotFoundException('Không tìm thấy đơn hàng');
+1024: throw new ForbiddenException('Bạn không có quyền truy cập đơn hàng này');
+1038: title: 1,
+
+src/modules/orders/payos.service.ts
+30: description: string;
+42: description: string;
+56: description: string;
+118: description: string;
+164: description: string;
+213: description: params.description,
+221: description: params.description,
+243: throw new BadGatewayException(
+256: description: string;
+270: throw new BadGatewayException(
+281: description: data.description,
+291: description: data.description,
+
+src/modules/orders/schemas/order.schema.ts
+67: default: OrderStatus.PENDING,
+
+src/modules/orders/schemas/payment-transaction.schema.ts
+
+
+src/modules/questions/dto/lesson-comment.dto.ts
+26: description: 'Nội dung bình luận hoặc câu trả lời (1..2000 ký tự)',
+36: description: 'ID của bình luận gốc nếu đây là câu trả lời (phản hồi)',
+44: description: 'ID của người dùng được gắn thẻ @Tên khi phản hồi',
+55: description: 'Loại biểu cảm (LIKE)',
+64: description: 'Lý do báo cáo bình luận vi phạm',
+76: description:
+84: description: 'Ghi chú xử lý / lời nhắc gửi tới người dùng',
+93: description:
+104: description: 'Lọc theo khóa học',
+112: description: 'Lọc theo trạng thái xử lý (ALL | PENDING | RESOLVED | DISMISSED)',
+134: description:
+229: description:
+289: @ApiProperty({ example: 1, description: 'Số học viên cùng báo cáo bình luận này' })
+294: description: 'Lịch sử vi phạm gần nhất của tác giả bình luận (chỉ Admin nhận)',
+342: courses!: Array<{ id: string; title: string }>;
+
+src/modules/questions/questions.controller.ts
+38: @Controller('courses/:courseId/lessons/:lessonId/comments')
+42: @Get()
+44: summary:
+58: @Post()
+61: summary: 'Gửi bình luận mới hoặc phản hồi câu trả lời trong bài giảng',
+80: @Post(':commentId/reactions')
+83: summary: 'Nhấn Thích hoặc bỏ Thích trên bình luận bài giảng',
+105: @Post(':commentId/report')
+108: summary: 'Báo cáo bình luận vi phạm (spam, quảng cáo, nội dung sai lệch)',
+129: @Delete(':commentId')
+132: summary:
+155: @Controller('manage/reports')
+159: @Get()
+161: summary:
+172: @Patch(':reportId/resolve')
+175: summary:
+189: @Controller('notifications')
+193: @Get()
+195: summary: 'Lấy danh sách thông báo mới nhất của người dùng hiện tại',
+203: @Patch('read-all')
+206: summary: 'Đánh dấu tất cả thông báo là đã đọc',
+
+src/modules/questions/questions.module.ts
+
+
+src/modules/questions/questions.service.spec.ts
+160: title: 'Lập trình JavaScript nâng cao',
+161: status: CourseStatus.APPROVED,
+170: title: 'Closure là gì?',
+685: title: 'Khóa học đang soạn nháp',
+686: status: CourseStatus.DRAFT,
+695: title: 'Bài 1',
+
+src/modules/questions/questions.service.ts
+90: summary: string;
+107: summary: severeViolation
+118: summary: 'Cấm bình luận 30 ngày và cảnh cáo chính thức',
+127: summary: 'Cấm bình luận 7 ngày và cảnh cáo chính thức',
+136: summary: 'Cấm bình luận 24 giờ',
+144: summary: 'Nhắc nhở vi phạm',
+181: throw new NotFoundException('Không tìm thấy bài học hoặc khóa học');
+186: throw new NotFoundException('Không tìm thấy khóa học');
+193: throw new NotFoundException('Không tìm thấy bài giảng trong khóa học này');
+207: if (course.status !== CourseStatus.APPROVED) {
+208: throw new ForbiddenException(
+216: throw new ForbiddenException(
+229: throw new ForbiddenException(
+242: throw new ForbiddenException(
+456: throw new ForbiddenException('Tài khoản của bạn đã bị đình chỉ');
+463: throw new ForbiddenException(
+470: throw new BadRequestException('Nội dung bình luận không được để trống');
+486: throw new NotFoundException(
+555: throw new NotFoundException('Không tìm thấy bình luận');
+567: throw new NotFoundException('Không tìm thấy bình luận');
+629: throw new NotFoundException('Không tìm thấy bình luận');
+641: throw new NotFoundException('Không tìm thấy bình luận');
+645: throw new BadRequestException(
+729: throw new NotFoundException('Không tìm thấy bình luận');
+741: throw new NotFoundException('Không tìm thấy bình luận');
+746: throw new ForbiddenException('Bạn không có quyền xóa bình luận này');
+776: throw new ForbiddenException(
+793: { title: string; lessonTitleMap: Map<string, string> }
+803: title: c.title,
+823: throw new ForbiddenException(
+1028: title: c.title,
+1043: throw new NotFoundException('Không tìm thấy báo cáo vi phạm');
+1048: throw new NotFoundException('Không tìm thấy báo cáo vi phạm');
+1052: throw new BadRequestException('Báo cáo này đã được xử lý trước đó');
+1057: throw new NotFoundException('Không tìm thấy khóa học liên quan');
+1066: throw new ForbiddenException('Bạn không có quyền xử lý báo cáo này');
+1071: throw new BadRequestException(
+1081: throw new ForbiddenException(
+1086: throw new ForbiddenException(
+1114: title: 'Kết quả xử lý báo cáo bình luận',
+1173: throw new NotFoundException('Đánh giá bị báo cáo không còn tồn tại');
+1177: throw new NotFoundException('Đánh giá bị báo cáo không còn tồn tại');
+1210: throw new NotFoundException('Bình luận bị báo cáo không còn tồn tại');
+1231: throw new BadRequestException(
+1312: title: isWarning
+1357: title: n.title,
+
+src/modules/questions/schemas/lesson-comment.schema.ts
+
+
+src/modules/questions/schemas/notification.schema.ts
+
+
+src/modules/questions/schemas/report.schema.ts
+
+
+src/modules/reviews/dto/course-review.dto.ts
+18: description: 'Số sao đánh giá từ 1 đến 5',
+28: description: 'Nhận xét đánh giá về khóa học (không bắt buộc, tối đa 2000 ký tự)',
+39: description: 'Lọc theo số sao cụ thể (1 đến 5)',
+52: description: 'Lý do báo cáo đánh giá vi phạm (3 - 500 ký tự)',
+151: description:
+
+src/modules/reviews/reviews.controller.ts
+34: @Controller('courses/:courseId/reviews')
+38: @Public()
+39: @Get()
+41: summary:
+44: @ApiParam({ name: 'courseId', description: 'ObjectId của khóa học' })
+53: @Get('me')
+56: @Roles(Role.STUDENT, Role.INSTRUCTOR, Role.ADMIN)
+58: summary:
+61: @ApiParam({ name: 'courseId', description: 'ObjectId của khóa học' })
+70: @Put('me')
+73: @Roles(Role.STUDENT)
+75: summary:
+78: @ApiParam({ name: 'courseId', description: 'ObjectId của khóa học' })
+87: @Post(':reviewId/report')
+90: @Roles(Role.STUDENT, Role.INSTRUCTOR, Role.ADMIN)
+92: summary:
+95: @ApiParam({ name: 'courseId', description: 'ObjectId của khóa học' })
+96: @ApiParam({ name: 'reviewId', description: 'ObjectId của đánh giá' })
+
+src/modules/reviews/reviews.module.ts
+
+
+src/modules/reviews/reviews.service.spec.ts
+38: title: 'Lập trình NestJS Thực chiến',
+
+src/modules/reviews/reviews.service.ts
+61: throw new NotFoundException('Không tìm thấy khóa học');
+71: throw new NotFoundException('Không tìm thấy khóa học');
+162: throw new NotFoundException('Không tìm thấy khóa học');
+249: summary: CourseReviewSummaryDto;
+252: throw new ForbiddenException(
+258: throw new NotFoundException('Không tìm thấy khóa học');
+285: throw new NotFoundException('Không tìm thấy khóa học');
+296: throw new ForbiddenException(
+305: throw new ForbiddenException(
+323: throw new ForbiddenException(
+381: throw new NotFoundException('Không tìm thấy đánh giá khóa học');
+400: throw new NotFoundException('Không tìm thấy đánh giá khóa học');
+404: throw new BadRequestException(
+411: throw new BadRequestException(
+
+src/modules/reviews/schemas/course-review.schema.ts
+
+
+src/modules/uploads/dto/upload-response.dto.ts
+11: description: 'Thư mục con trong public/images/',
+21: description: 'Đường dẫn tĩnh tới file đã lưu trên server',
+30: @ApiProperty({ example: 184320, description: 'Kích thước file (bytes)' })
+40: description: 'Tên file gốc do giảng viên tải lên',
+47: description: 'Văn bản trích xuất tự động từ file TXT, MD hoặc DOCX (null nếu là PDF)',
+
+src/modules/uploads/uploads.controller.ts
+46: @Controller('uploads')
+50: @Post('images')
+54: summary: 'Tải ảnh lên server (lưu vào public/images/courses hoặc avatars)',
+64: description: 'File ảnh JPG, PNG hoặc WEBP (tối đa 5MB)',
+82: description: 'File không hợp lệ hoặc vượt quá giới hạn 5MB',
+84: @ApiUnauthorizedResponse({ description: 'Chưa đăng nhập' })
+85: @ApiForbiddenResponse({ description: 'Không có quyền tải ảnh' })
+100: throw new ForbiddenException(
+107: @Post('videos')
+109: @Roles(Role.INSTRUCTOR, Role.ADMIN)
+113: summary: 'Tải video bài giảng lên server (lưu vào public/videos)',
+123: description: 'File video MP4 hoặc WEBM (tối đa 1GB)',
+141: description: 'File video không hợp lệ hoặc vượt quá giới hạn 1GB',
+143: @ApiUnauthorizedResponse({ description: 'Chưa đăng nhập' })
+144: @ApiForbiddenResponse({ description: 'Không có quyền tải video' })
+151: @Post('files')
+153: @Roles(Role.INSTRUCTOR, Role.ADMIN)
+157: summary:
+168: description: 'File tài liệu PDF, DOCX, TXT hoặc MD (tối đa 25MB)',
+186: description: 'File tài liệu không hợp lệ hoặc vượt quá giới hạn 25MB',
+188: @ApiUnauthorizedResponse({ description: 'Chưa đăng nhập' })
+189: @ApiForbiddenResponse({ description: 'Không có quyền tải file tài liệu' })
+
+src/modules/uploads/uploads.module.ts
+
+
+src/modules/uploads/uploads.service.spec.ts
+55: path: filePath,
+85: path: filePath,
+113: path: filePath,
+130: path: videoFilePath,
+
+src/modules/uploads/uploads.service.ts
+316: throw new BadRequestException('Vui lòng chọn file ảnh để tải lên');
+321: throw new BadRequestException(
+329: throw new BadRequestException(
+347: throw new BadRequestException('Vui lòng chọn file video để tải lên');
+352: throw new BadRequestException(
+360: throw new BadRequestException(
+377: throw new BadRequestException('Vui lòng chọn file tài liệu để tải lên');
+382: throw new BadRequestException(
+390: throw new BadRequestException(
+410: throw new BadRequestException('Nội dung file không phải là tài liệu PDF hợp lệ');
+423: throw new BadRequestException('Nội dung file không phải là tài liệu Word (.docx) hợp lệ');
+432: throw new BadRequestException('File văn bản (.txt/.md) chứa dữ liệu nhị phân không hợp lệ');
+
+src/modules/users/dto/manage-user.dto.ts
+
+
+src/modules/users/dto/user-profile.dto.ts
+29: description: 'Ngày sinh định dạng YYYY-MM-DD hoặc ISO',
+59: description: 'Đường dẫn ảnh đã tải lên (/public/images/avatars/...) hoặc URL HTTPS',
+96: @ApiProperty({ example: 'OldPass@123', description: 'Mật khẩu hiện tại' })
+105: description: 'Mật khẩu mới (tối thiểu 8 ký tự)',
+116: description: 'Xác nhận mật khẩu mới',
+
+src/modules/users/manage-users.controller.ts
+43: @Roles(Role.ADMIN)
+44: @Controller('manage/users')
+48: @Get()
+50: @ApiOperation({ summary: 'Danh sách người dùng toàn hệ thống (Chỉ ADMIN)' })
+51: @ApiResponse({ status: 200, description: 'Danh sách người dùng kèm thống kê' })
+52: @ApiUnauthorizedResponse({ description: 'Chưa đăng nhập' })
+53: @ApiForbiddenResponse({ description: 'Chỉ ADMIN có quyền truy cập' })
+58: @Post()
+61: summary: 'Tạo tài khoản mới trực tiếp ở trạng thái ACTIVE (Chỉ ADMIN)',
+63: @ApiResponse({ status: 201, description: 'Đã tạo tài khoản mới thành công' })
+64: @ApiBadRequestResponse({ description: 'Dữ liệu đầu vào không hợp lệ' })
+65: @ApiConflictResponse({ description: 'Email đã tồn tại' })
+66: @ApiForbiddenResponse({ description: 'Chỉ ADMIN có quyền tạo tài khoản' })
+71: @Patch(':id/role')
+73: @ApiOperation({ summary: 'Phân quyền vai trò cho người dùng (Chỉ ADMIN)' })
+74: @ApiResponse({ status: 200, description: 'Đã cập nhật vai trò người dùng' })
+75: @ApiBadRequestResponse({ description: 'Không thể tự hạ quyền chính mình' })
+76: @ApiNotFoundResponse({ description: 'Không tìm thấy tài khoản' })
+89: @Patch(':id/status')
+92: summary: 'Khóa hoặc mở khóa tài khoản người dùng (ACTIVE / LOCKED - Chỉ ADMIN)',
+94: @ApiResponse({ status: 200, description: 'Đã cập nhật trạng thái tài khoản' })
+95: @ApiBadRequestResponse({ description: 'Không thể tự khóa tài khoản của chính mình' })
+96: @ApiNotFoundResponse({ description: 'Không tìm thấy tài khoản' })
+
+src/modules/users/schemas/user.schema.ts
+
+
+src/modules/users/users.controller.ts
+22: @Controller('users')
+26: @Get('profile')
+28: @ApiOperation({ summary: 'Lấy thông tin hồ sơ cá nhân của tài khoản đang đăng nhập' })
+29: @ApiResponse({ status: 200, description: 'Thông tin hồ sơ người dùng' })
+30: @ApiUnauthorizedResponse({ description: 'Chưa đăng nhập hoặc token không hợp lệ' })
+35: @Patch('profile')
+38: summary: 'Cập nhật hồ sơ cá nhân (Họ tên, ngày sinh, nghề nghiệp, lĩnh vực quan tâm, ảnh đại diện)',
+40: @ApiResponse({ status: 200, description: 'Cập nhật hồ sơ thành công' })
+41: @ApiBadRequestResponse({ description: 'Dữ liệu đầu vào không hợp lệ' })
+42: @ApiUnauthorizedResponse({ description: 'Chưa đăng nhập' })
+50: @Patch('profile/password')
+52: @ApiOperation({ summary: 'Đổi mật khẩu tài khoản đang đăng nhập' })
+53: @ApiResponse({ status: 200, description: 'Đổi mật khẩu thành công' })
+55: description: 'Mật khẩu hiện tại không đúng hoặc mật khẩu mới không hợp lệ',
+57: @ApiUnauthorizedResponse({ description: 'Chưa đăng nhập' })
+
+src/modules/users/users.module.ts
+
+
+src/modules/users/users.service.ts
+260: throw new NotFoundException('Không tìm thấy thông tin người dùng');
+274: throw new NotFoundException('Không tìm thấy thông tin người dùng');
+330: throw new BadRequestException(
+336: throw new BadRequestException(
+343: throw new NotFoundException('Không tìm thấy thông tin người dùng');
+354: throw new BadRequestException('Mật khẩu hiện tại không chính xác');
+433: throw new ConflictException('Email này đã tồn tại trên hệ thống');
+462: throw new BadRequestException(
+469: throw new NotFoundException('Không tìm thấy tài khoản người dùng');
+474: throw new BadRequestException('Không thể cập nhật vai trò người dùng');
+496: throw new BadRequestException(
+503: throw new NotFoundException('Không tìm thấy tài khoản người dùng');
+508: throw new BadRequestException('Không thể cập nhật trạng thái tài khoản');
+
+src/seeds/courses.seed-data.ts
+5: title: string;
+10: title: string;
+11: description: string;
+49: title: 'HTML và CSS cơ bản',
+50: description:
+66: status: CourseStatus.APPROVED,
+71: title: 'Làm quen web',
+79: title: 'Thẻ HTML thường dùng',
+87: title: 'CSS cơ bản',
+95: title: 'Bố cục Flexbox',
+105: title: 'JavaScript cho người mới',
+106: description:
+122: status: CourseStatus.APPROVED,
+127: title: 'Cú pháp và biến',
+135: title: 'Hàm và mảng',
+143: title: 'Làm việc với DOM',
+153: title: 'Git và GitHub nhập môn',
+154: description:
+170: status: CourseStatus.APPROVED,
+175: title: 'Khái niệm Git',
+183: title: 'Lệnh cơ bản',
+191: title: 'Làm việc nhóm với GitHub',
+201: title: 'SQL cơ bản',
+202: description:
+218: status: CourseStatus.APPROVED,
+223: title: 'Làm quen CSDL quan hệ',
+231: title: 'Truy vấn SELECT',
+239: title: 'JOIN và nhóm dữ liệu',
+249: title: 'Python nhập môn',
+250: description:
+266: status: CourseStatus.APPROVED,
+271: title: 'Cài đặt và cú pháp',
+279: title: 'Cấu trúc điều khiển',
+287: title: 'Hàm và module',
+297: title: 'Lập trình Web với Vue 3',
+298: description:
+314: status: CourseStatus.APPROVED,
+319: title: 'Nền tảng Vue 3',
+327: title: 'Component và Router',
+335: title: 'Pinia và gọi API',
+343: title: 'Triển khai',
+353: title: 'REST API với NestJS',
+354: description:
+370: status: CourseStatus.APPROVED,
+375: title: 'Kiến trúc NestJS',
+383: title: 'Module, Controller, Service',
+391: title: 'Xác thực JWT',
+399: title: 'Kiểm thử và Swagger',
+409: title: 'Thiết kế CSDL và tối ưu truy vấn',
+410: description:
+426: status: CourseStatus.APPROVED,
+431: title: 'Mô hình hóa dữ liệu',
+439: title: 'Chỉ mục',
+447: title: 'Giao dịch',
+455: title: 'Tối ưu truy vấn',
+465: title: 'Vue nâng cao - bản nháp',
+466: description:
+480: status: CourseStatus.DRAFT,
+485: title: 'Ôn tập component',
+489: title: 'Tổ chức ứng dụng',
+493: title: 'Bài tập tổng hợp',
+503: title: 'TypeScript cho ứng dụng lớn',
+504: description:
+519: status: CourseStatus.PENDING,
+524: title: 'Kiểu dữ liệu nâng cao',
+532: title: 'Thiết kế theo miền',
+540: title: 'Tích hợp dự án',
+546: title: 'Docker và triển khai cơ bản',
+547: description:
+563: status: CourseStatus.HIDDEN,
+568: title: 'Khái niệm Docker',
+576: title: 'Đóng gói ứng dụng',
+580: title: 'Chạy môi trường phát triển',
+
+src/seeds/courses.seed.ts
+31: title: chapter.title,
+36: title: `${chapterIndex + 1}.${lessonIndex + 1} ${topic}`,
+42: summary: null,
+87: throw new Error(`Không thể tạo tài khoản giảng viên ${instructor.email}`);
+121: throw new Error(
+128: { title: course.title },
+131: description: course.description,
+156: .findOne({ title: course.title }, { _id: 1 })
+160: throw new Error(`Không thể tạo khóa học "${course.title}"`);
+168: throw new Error(
+179: throw new Error(
+
+client/src/App.vue
+
+
+client/src/assets/vite.svg
+1: <svg xmlns="http://www.w3.org/2000/svg" width="77" height="47" fill="none" aria-labelledby="vite-logo-title" viewBox="0 0 77 47"><title id="vite-logo-title">Vite</title><style>.parenthesis{fill:#000}@media (prefers-color
+
+client/src/assets/vue.svg
+
+
+client/src/components/certificate/CertificateCardView.vue
+
+
+client/src/components/course/CourseCard.vue
+
+
+client/src/components/course/CourseCardSkeleton.vue
+
+
+client/src/components/course/CourseCover.vue
+7: title: string;
+
+client/src/components/course/CourseReviewsSection.vue
+
+
+client/src/components/course/CourseSection.vue
+9: title: string;
+10: description: string;
+
+client/src/components/HelloWorld.vue
+
+
+client/src/components/illustrations/HeroCodeWindow.vue
+
+
+client/src/components/illustrations/LanguageBadges.vue
+10: { label: 'HTML', short: 'H5', bg: '#e44d26', fg: '#ffffff' },
+11: { label: 'CSS', short: 'C3', bg: '#1572b6', fg: '#ffffff' },
+12: { label: 'JavaScript', short: 'JS', bg: '#f7df1e', fg: '#1a1a1a' },
+13: { label: 'TypeScript', short: 'TS', bg: '#3178c6', fg: '#ffffff' },
+14: { label: 'Vue', short: 'V', bg: '#42b883', fg: '#0b2a1f' },
+15: { label: 'Node.js', short: 'N', bg: '#3c873a', fg: '#ffffff' },
+16: { label: 'Python', short: 'Py', bg: '#3776ab', fg: '#ffd43b' },
+17: { label: 'SQL', short: 'DB', bg: '#0f766e', fg: '#ffffff' },
+
+client/src/components/learning/CourseCompletionReviewModal.vue
+
+
+client/src/components/learning/LessonDiscussionDrawer.vue
+120: ): { label: string; className: string } | null {
+123: label: 'QUẢN TRỊ VIÊN',
+129: label: 'TÁC GIẢ',
+135: label: 'GIẢNG VIÊN',
+
+client/src/components/learning/LessonDocumentViewer.vue
+
+
+client/src/components/learning/LessonQuizPanel.vue
+21: requiredPassPercent: number;
+121: Bài học có <strong>{{ quizCount }} câu hỏi</strong>: Bạn cần đạt tối thiểu <strong>{{ requiredPassPercent }}%</strong> số câu đúng để mở khóa bài tiếp theo.
+173: ({{ lastSubmitResult.scorePercent }}% — Yêu cầu cần đạt {{ lastSubmitResult.requiredPassPercent }}%)
+
+client/src/components/learning/LessonVideoPlayer.vue
+8: title: string;
+41: props.duration > 0 ? Math.ceil(props.duration * 0.6) : 0,
+
+client/src/components/manage/ChapterEditorDialog.vue
+7: title: string;
+
+client/src/components/manage/CourseContentEditor.vue
+76: const editingChapter = ref<{ id: string; title: string } | null>(null);
+86: | { kind: 'chapter'; id: string; title: string }
+87: | { kind: 'lesson'; chapterId: string; id: string; title: string }
+95: if (!deleting.value) return { title: '', description: '' };
+98: title: 'Xóa chương này?',
+99: description: `Chương "${deleting.value.title}" cùng toàn bộ bài giảng, video và câu trắc nghiệm bên trong sẽ bị xóa.`,
+104: title: 'Xóa bài giảng này?',
+105: description: `Bài "${deleting.value.title}", file video/tài liệu trên server (nếu có) và tất cả câu hỏi trắc nghiệm của bài sẽ bị xóa.`,
+109: title: 'Xóa câu hỏi trắc nghiệm?',
+110: description: 'Câu hỏi này sẽ bị xóa khỏi bài giảng.',
+206: function openChapterDialog(chapter?: { id: string; title: string }) {
+211: async function saveChapter(title: string) {
+434: <button type="button" class="manage-icon-button" :disabled="busyKey !== null" :aria-label="`Đổi tên ${chapter.title}`" @click="openChapterDialog({ id: chapter.id, title: chapter.title })"><Pencil class="h-4 w-4" /></butt
+435: <button type="button" class="manage-icon-button text-rose-300" :disabled="busyKey !== null" :aria-label="`Xóa ${chapter.title}`" @click="deleting = { kind: 'chapter', id: chapter.id, title: chapter.title }"><Trash2 class
+465: <button type="button" class="manage-icon-button text-rose-300" :disabled="busyKey !== null" :aria-label="`Xóa ${lesson.title}`" @click="deleting = { kind: 'lesson', chapterId: chapter.id, id: lesson.id, title: lesson.tit
+
+client/src/components/manage/CourseInfoForm.vue
+30: title: string;
+31: description: string;
+46: title: '',
+47: description: '',
+87: title: course.title,
+88: description: course.description,
+274: title: form.title.trim(),
+275: description: form.description.trim(),
+
+client/src/components/manage/CourseStatusBadge.vue
+
+
+client/src/components/manage/CourseStatusPanel.vue
+29: case 'submit': return { title: 'Gửi khóa đi duyệt?', description: 'Khóa sẽ chuyển sang trạng thái Chờ duyệt.', confirm: 'Gửi duyệt' };
+30: case 'withdraw': return { title: 'Thu hồi khóa học?', description: 'Khóa sẽ trở về Nháp để tiếp tục chỉnh sửa.', confirm: 'Thu hồi' };
+31: case 'approve': return { title: props.course.status === 'HIDDEN' ? 'Hiện lại khóa học?' : 'Duyệt khóa học?', description: 'Khóa sẽ hiển thị công khai sau khi được duyệt.', confirm: props.course.status === 'HIDDEN' ? 'Hiệ
+32: case 'reject': return { title: 'Từ chối khóa học?', description: 'Khóa sẽ trở về Nháp. Nhập lý do để giảng viên biết nội dung cần bổ sung.', confirm: 'Từ chối' };
+33: case 'hide': return { title: 'Ẩn khóa học?', description: 'Khóa sẽ không còn xuất hiện trên trang khóa học công khai.', confirm: 'Ẩn khóa' };
+34: case 'delete': return { title: 'Xóa khóa học?', description: 'Thao tác này không thể hoàn tác.', confirm: 'Xóa khóa' };
+35: default: return { title: '', description: '', confirm: 'Xác nhận' };
+
+client/src/components/manage/LessonEditorDialog.vue
+64: title: '',
+71: summary: '',
+510: title: form.title.trim(),
+517: ? { note: form.note || null, summary: form.summary || null }
+
+client/src/components/manage/ManageActionDialog.vue
+8: title: string;
+15: description: '',
+
+client/src/components/manage/ManageCourseActions.vue
+
+
+client/src/components/manage/ManageCourseThumbnail.vue
+7: title: string;
+
+client/src/components/manage/QuizQuestionDialog.vue
+
+
+client/src/components/public/PublicFooter.vue
+
+
+client/src/components/public/PublicHeader.vue
+703: gap: 0.625rem;
+704: padding: 0.625rem 0.75rem;
+712: padding: 0.625rem 0.75rem;
+
+client/src/composables/useManageCatalog.ts
+
+
+client/src/composables/useManageCourseEditor.ts
+39: if (busyKey.value) throw new Error('Đang xử lý một thao tác khác.');
+79: if (!current) throw new Error('Chưa tải thông tin khóa học.');
+92: if (!current) throw new Error('Chưa tải thông tin khóa học.');
+101: if (!current) throw new Error('Chưa tải thông tin khóa học.');
+107: if (!current) throw new Error('Chưa tải thông tin khóa học.');
+114: if (!current) throw new Error('Chưa tải thông tin khóa học.');
+122: if (!current) throw new Error('Chưa tải thông tin khóa học.');
+130: if (!current) throw new Error('Chưa tải thông tin khóa học.');
+138: if (!current) throw new Error('Chưa tải thông tin khóa học.');
+146: if (!current) throw new Error('Chưa tải thông tin khóa học.');
+154: if (!current) throw new Error('Chưa tải thông tin khóa học.');
+162: if (!current) throw new Error('Chưa tải thông tin khóa học.');
+170: if (!current) throw new Error('Chưa tải thông tin khóa học.');
+182: if (!current) throw new Error('Chưa tải thông tin khóa học.');
+195: if (!current) throw new Error('Chưa tải thông tin khóa học.');
+203: if (!current) throw new Error('Chưa tải thông tin khóa học.');
+
+client/src/composables/useManageCourseList.ts
+
+
+client/src/layouts/AuthLayout.vue
+
+
+client/src/layouts/ManageLayout.vue
+43: label: 'Tổng quan',
+49: label: isAdmin.value ? 'Tất cả khóa học' : 'Khóa học được phân công',
+59: label: 'Báo cáo vi phạm',
+67: label: 'Khóa học chờ duyệt',
+73: label: 'Đơn hàng & Thanh toán',
+79: label: 'Quản lý người dùng',
+
+client/src/layouts/PublicLayout.vue
+
+
+client/src/lib/course-format.ts
+
+
+client/src/lib/docx-parser.ts
+801: throw new Error('Không tìm thấy nội dung word/document.xml trong file .docx');
+805: throw new Error('Không thể giải nén nội dung file Word (.docx)');
+
+client/src/lib/manage-course-format.ts
+
+
+client/src/lib/video-embed.ts
+
+
+client/src/main.ts
+
+
+client/src/pages/dashboard/DashboardPage.vue
+
+
+client/src/pages/ForbiddenPage.vue
+
+
+client/src/pages/manage/ManageCourseEditPage.vue
+
+
+client/src/pages/manage/ManageCoursesPage.vue
+53: const tabItems: Array<{ label: string; value?: ManageCourseStatus }> = [
+54: { label: 'Tất cả' },
+55: { label: 'Nháp', value: 'DRAFT' },
+56: { label: 'Chờ duyệt', value: 'PENDING' },
+57: { label: 'Đã duyệt', value: 'APPROVED' },
+58: { label: 'Đã ẩn', value: 'HIDDEN' },
+62: if (!pendingAction.value) return { title: '', description: '', confirmLabel: 'Xác nhận' };
+
+client/src/pages/manage/ManageCourseStudentsPage.vue
+
+
+client/src/pages/manage/ManageOrdersPage.vue
+
+
+client/src/pages/manage/ManageReportsPage.vue
+47: summary: { total: 0, pending: 0, resolved: 0, dismissed: 0 },
+55: title: string;
+56: description: string;
+146: title: 'Xóa bình luận và nhắc nhở',
+147: description:
+154: title: 'Xử lý vi phạm và áp dụng hình phạt',
+155: description:
+162: title: 'Chuyển báo cáo lên Admin',
+163: description:
+170: title: 'Bỏ qua báo cáo vi phạm',
+171: description:
+311: { key: 'PENDING', label: 'Đang chờ xử lý', count: data.summary.pending },
+312: { key: 'RESOLVED', label: 'Đã xử lý', count: data.summary.resolved },
+313: { key: 'DISMISSED', label: 'Đã bỏ qua', count: data.summary.dismissed },
+314: { key: 'ALL', label: 'Tất cả', count: data.summary.total },
+315: ] as Array<{ key: StatusTab; label: string; count: number }>"
+
+client/src/pages/manage/ManageUsersPage.vue
+76: const roleTabs: Array<{ label: string; value?: Role }> = [
+77: { label: 'Tất cả vai trò' },
+78: { label: 'Học viên', value: 'STUDENT' },
+79: { label: 'Giảng viên', value: 'INSTRUCTOR' },
+80: { label: 'Kế toán', value: 'ACCOUNTANT' },
+81: { label: 'Quản trị viên', value: 'ADMIN' },
+
+client/src/pages/public/CertificateVerifyPage.vue
+
+
+client/src/pages/public/CourseDetailPage.vue
+
+
+client/src/pages/public/CoursesPage.vue
+365: v-for="option in [{ label: 'Tất cả', value: '' }, { label: 'Free', value: 'FREE' }, { label: 'Pro', value: 'PRO' }]"
+
+client/src/pages/public/ForgotPasswordPage.vue
+26: path: '/reset-password',
+
+client/src/pages/public/HomePage.vue
+60: title: string;
+68: title: 'Nền tảng JavaScript & Tư duy bất đồng bộ',
+76: title: 'Kiến trúc Backend với NestJS, TypeScript & MongoDB',
+84: title: 'Phát triển Giao diện Web với Vue 3 & Pinia',
+101: title: c.title,
+147: title: 'Xem bài giảng video',
+154: title: 'Làm trắc nghiệm sau bài',
+161: title: 'Theo dõi tiến độ',
+
+client/src/pages/public/LoginPage.vue
+
+
+client/src/pages/public/RegisterPage.vue
+68: path: '/verify-otp',
+
+client/src/pages/public/ResetPasswordPage.vue
+
+
+client/src/pages/public/VerifyOtpPage.vue
+
+
+client/src/pages/student/CourseCheckoutPage.vue
+
+
+client/src/pages/student/CourseLearningPage.vue
+255: : `Chế độ xem thử: Đạt ${result.scorePercent}% (${result.correctCount}/${result.totalQuestions} câu đúng - yêu cầu ${result.requiredPassPercent}%). Bạn có thể chọn lại đáp án để kiểm tra tiếp.`;
+526: Điều kiện hoàn thành: Xem tối thiểu 60% thời lượng video và đạt bài trắc nghiệm ({{ currentLesson.requiredPassPercent }}%)
+532: Điều kiện hoàn thành: Đọc nội dung bài giảng và đạt bài trắc nghiệm ({{ currentLesson.requiredPassPercent }}%)
+715: :required-pass-percent="currentLesson.requiredPassPercent"
+
+client/src/pages/student/ProfilePage.vue
+
+
+client/src/plugins/vuetify.ts
+
+
+client/src/router/index.ts
+8: path: '/',
+12: path: '',
+15: meta: { title: 'NextCode - Học hôm nay, kiến tạo ngày mai' },
+18: path: 'courses',
+21: meta: { title: 'Khóa học lập trình - NextCode' },
+24: path: 'courses/:id',
+27: meta: { title: 'Chi tiết khóa học - NextCode' },
+30: path: 'certificates/verify',
+33: meta: { title: 'Tra cứu chứng chỉ - NextCode' },
+36: path: 'certificates/verify/:code',
+39: meta: { title: 'Xác thực chứng chỉ - NextCode' },
+42: path: 'profile',
+45: meta: { requiresAuth: true, title: 'Hồ sơ cá nhân - NextCode' },
+48: path: 'checkout/:courseId',
+53: roles: ['STUDENT'] as Role[],
+54: title: 'Thanh toán khóa học Pro - NextCode',
+60: path: '/learn/:courseId',
+65: roles: ['STUDENT', 'INSTRUCTOR', 'ADMIN'] as Role[],
+66: title: 'Phòng học trực tuyến - NextCode',
+70: path: '/login',
+73: meta: { guestOnly: true, title: 'Đăng nhập - NextCode' },
+76: path: '/register',
+79: meta: { guestOnly: true, title: 'Đăng ký tài khoản - NextCode' },
+82: path: '/verify-otp',
+85: meta: { title: 'Xác thực OTP - NextCode' },
+88: path: '/forgot-password',
+91: meta: { guestOnly: true, title: 'Quên mật khẩu - NextCode' },
+94: path: '/reset-password',
+97: meta: { title: 'Đặt lại mật khẩu - NextCode' },
+100: path: '/dashboard',
+104: roles: ['INSTRUCTOR', 'ADMIN'] as Role[],
+108: path: '',
+111: meta: { title: 'Trang quản trị - NextCode' },
+114: path: 'courses',
+117: meta: { title: 'Quản lý khóa học - NextCode' },
+120: path: 'courses/new',
+124: title: 'Tạo khóa học nền - NextCode',
+125: roles: ['ADMIN'] as Role[],
+129: path: 'courses/:id/edit',
+132: meta: { title: 'Chỉnh sửa khóa học - NextCode' },
+135: path: 'courses/:id/students',
+139: title: 'Quản lý học viên khóa học - NextCode',
+140: roles: ['INSTRUCTOR', 'ADMIN'] as Role[],
+144: path: 'reports',
+148: title: 'Báo cáo vi phạm bình luận - NextCode',
+149: roles: ['INSTRUCTOR', 'ADMIN'] as Role[],
+153: path: 'users',
+157: title: 'Quản lý người dùng - NextCode',
+158: roles: ['ADMIN'] as Role[],
+162: path: 'orders',
+166: title: 'Quản lý đơn hàng & Thanh toán - NextCode',
+167: roles: ['ADMIN', 'ACCOUNTANT'] as Role[],
+173: path: '/manage',
+177: path: '/manage/:pathMatch(.*)*',
+182: return { path: `/dashboard/${rest}`, query: to.query };
+186: path: '/forbidden',
+189: meta: { title: 'Không có quyền truy cập - NextCode' },
+192: path: '/:pathMatch(.*)*',
+
+client/src/services/auth.api.ts
+
+
+client/src/services/certificates.api.ts
+
+
+client/src/services/courses.api.ts
+
+
+client/src/services/enrollments.api.ts
+
+
+client/src/services/http.ts
+108: throw new Error('Refresh token không hợp lệ hoặc đã hết hạn');
+
+client/src/services/manage-courses.api.ts
+
+
+client/src/services/orders.api.ts
+
+
+client/src/services/questions.api.ts
+
+
+client/src/services/reviews.api.ts
+43: summary: CourseReviewSummary;
+49: summary: CourseReviewSummary;
+
+client/src/services/uploads.api.ts
+
+
+client/src/services/users.api.ts
+
+
+client/src/stores/auth.store.ts
+
+
+client/src/style.css
+208: padding: 0.65rem 0.85rem;
+328: gap: 0.6rem;
+
+client/src/types/auth.ts
+
+
+client/src/types/course.ts
+12: { value: 'newest', label: 'Mới nhất' },
+13: { value: 'price_asc', label: 'Giá tăng dần' },
+14: { value: 'price_desc', label: 'Giá giảm dần' },
+15: { value: 'rating_desc', label: 'Đánh giá cao nhất' },
+37: title: string;
+53: title: string;
+61: title: string;
+67: description: string;
+
+client/src/types/learning.ts
+44: title: string;
+61: title: string;
+78: title: string;
+113: title: string;
+121: summary: string | null;
+124: requiredPassPercent: number;
+164: requiredPassPercent: number;
+208: title: string;
+215: summary: ManageCourseStudentSummary;
+333: summary: {
+339: courses: Array<{ id: string; title: string }>;
+345: title: string;
+
+client/src/types/manage-course.ts
+31: title: string;
+67: title: string;
+75: summary: string | null;
+82: title: string;
+88: description: string;
+122: title: string;
+123: description: string;
+137: title: string;
+141: title: string;
+159: DRAFT: { label: 'Nháp', className: 'status-draft' },
+160: PENDING: { label: 'Chờ duyệt', className: 'status-pending' },
+161: APPROVED: { label: 'Đã duyệt', className: 'status-approved' },
+162: HIDDEN: { label: 'Đã ẩn', className: 'status-hidden' },
+167: label: string;
+169: { value: 'info', label: 'Thông tin' },
+170: { value: 'content', label: 'Nội dung' },
+171: { value: 'status', label: 'Trạng thái và duyệt' },
+
+client/src/types/order.ts
+7: title: string;
+
+client/src/types/review.ts
+28: summary: CourseReviewSummary;
+
+client/src/types/user.ts

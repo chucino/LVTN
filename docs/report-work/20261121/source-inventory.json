@@ -1,0 +1,5382 @@
+[
+  {
+    "file": "src/app.module.ts",
+    "lines": 86,
+    "bytes": 2891,
+    "sha256": "1620b7ed0030ae0eaede3f29a9424ffb2e3be6b263e50f13dd5ebea34bd0fa1b",
+    "declarations": [
+      {
+        "line": 86,
+        "declaration": "export class AppModule {}"
+      }
+    ]
+  },
+  {
+    "file": "src/common/constants/course-level.constant.ts",
+    "lines": 7,
+    "bytes": 183,
+    "sha256": "07ec2461d6cd1f02df7b13b3afbd3fdf1faf1cc8902342a7cd825044cb2cb94b",
+    "declarations": []
+  },
+  {
+    "file": "src/common/constants/course.enum.ts",
+    "lines": 11,
+    "bytes": 188,
+    "sha256": "95979742a452d5ed28d823d964c2277cbdeb3dd55a39b6c63a6ab51c8479ca0c",
+    "declarations": [
+      {
+        "line": 1,
+        "declaration": "export enum CourseType {"
+      },
+      {
+        "line": 6,
+        "declaration": "export enum CourseStatus {"
+      }
+    ]
+  },
+  {
+    "file": "src/common/constants/learning.enum.ts",
+    "lines": 16,
+    "bytes": 282,
+    "sha256": "08ab5cd123a3c46ac6fa64ba26b3ca6826adaad2d6e9e06832111ec31020a4f3",
+    "declarations": [
+      {
+        "line": 1,
+        "declaration": "export enum EnrollmentStatus {"
+      },
+      {
+        "line": 6,
+        "declaration": "export enum LessonStatus {"
+      },
+      {
+        "line": 12,
+        "declaration": "export enum CertificateStatus {"
+      }
+    ]
+  },
+  {
+    "file": "src/common/constants/order.enum.ts",
+    "lines": 12,
+    "bytes": 242,
+    "sha256": "e5bd5e58a955999c8e91c6d72ce9f6a4d790e7126c6954f3898724f98f50df83",
+    "declarations": [
+      {
+        "line": 1,
+        "declaration": "export enum OrderStatus {"
+      },
+      {
+        "line": 8,
+        "declaration": "export enum PaymentMethod {"
+      }
+    ]
+  },
+  {
+    "file": "src/common/constants/roles.enum.ts",
+    "lines": 6,
+    "bytes": 127,
+    "sha256": "97db8817bc36f597bf88df478760f3704a561e2f517e1c436dbe1e5628266de4",
+    "declarations": [
+      {
+        "line": 1,
+        "declaration": "export enum Role {"
+      }
+    ]
+  },
+  {
+    "file": "src/common/constants/user-status.enum.ts",
+    "lines": 5,
+    "bytes": 97,
+    "sha256": "f007f7f948fb9276a0fcb000fb9897a040e7909919954102ddb91f90c81a6d19",
+    "declarations": [
+      {
+        "line": 1,
+        "declaration": "export enum UserStatus {"
+      }
+    ]
+  },
+  {
+    "file": "src/common/decorators/current-user.decorator.ts",
+    "lines": 15,
+    "bytes": 436,
+    "sha256": "a97a0a2db53386840a328cfbbf6992d25bcf6bb7e0dea23d174217f9df4b36ff",
+    "declarations": [
+      {
+        "line": 3,
+        "declaration": "export interface CurrentUserData {"
+      }
+    ]
+  },
+  {
+    "file": "src/common/decorators/public.decorator.ts",
+    "lines": 4,
+    "bytes": 154,
+    "sha256": "67d2c26dd0b30f371d271ee05b43630d5f29f525c06d4319bbee1eb99cbb11b9",
+    "declarations": []
+  },
+  {
+    "file": "src/common/decorators/roles.decorator.ts",
+    "lines": 5,
+    "bytes": 211,
+    "sha256": "7ca185a94797f4056a945778e8e54b0fc282069735820c122ca6969ddd86dd7e",
+    "declarations": []
+  },
+  {
+    "file": "src/common/filters/http-exception.filter.ts",
+    "lines": 72,
+    "bytes": 2248,
+    "sha256": "4a6c597a582fa0ea758f0fc72d95eba071c9fd8cd6b1ffc2ab9f625a68c066fd",
+    "declarations": [
+      {
+        "line": 12,
+        "declaration": "export class HttpExceptionFilter implements ExceptionFilter {"
+      }
+    ]
+  },
+  {
+    "file": "src/common/guards/jwt-auth.guard.ts",
+    "lines": 61,
+    "bytes": 1873,
+    "sha256": "308e62092d16a247948011d44007a87919ede28d45e558de31c5332b8ae6fa1e",
+    "declarations": [
+      {
+        "line": 14,
+        "declaration": "export class JwtAuthGuard implements CanActivate {"
+      },
+      {
+        "line": 21,
+        "declaration": "async canActivate(context: ExecutionContext): Promise<boolean> {"
+      }
+    ]
+  },
+  {
+    "file": "src/common/guards/roles.guard.ts",
+    "lines": 42,
+    "bytes": 1258,
+    "sha256": "9af480ce153960603421e151579f7dbfab8469b1bcd8edefbe2e6726c352a700",
+    "declarations": [
+      {
+        "line": 12,
+        "declaration": "export class RolesGuard implements CanActivate {"
+      }
+    ]
+  },
+  {
+    "file": "src/common/interceptors/transform.interceptor.ts",
+    "lines": 38,
+    "bytes": 841,
+    "sha256": "e9d2af7437036a3dc6dd0a6ede0336e0f0ee3d728ee2b0cda3dcfd7467d4cd55",
+    "declarations": [
+      {
+        "line": 10,
+        "declaration": "export interface ResponseFormat<T> {"
+      },
+      {
+        "line": 18,
+        "declaration": "export class TransformInterceptor<T>"
+      }
+    ]
+  },
+  {
+    "file": "src/database/database.module.ts",
+    "lines": 20,
+    "bytes": 568,
+    "sha256": "c67ea897d54836f1a2a5727317691ef1328c966bb857eb9cedb8bead8923e753",
+    "declarations": [
+      {
+        "line": 20,
+        "declaration": "export class DatabaseModule {}"
+      }
+    ]
+  },
+  {
+    "file": "src/main.ts",
+    "lines": 121,
+    "bytes": 3942,
+    "sha256": "9f83d512741d4eaf167a87d099befba335c74f6ad3cc0277f9d10ae1a0d5b9b0",
+    "declarations": [
+      {
+        "line": 14,
+        "declaration": "async function bootstrap() {"
+      },
+      {
+        "line": 59,
+        "declaration": "(nodeEnv !== 'production' && DEV_LOCALHOST_ORIGIN_REGEX.test(requestOrigin))"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/auth/auth.controller.ts",
+    "lines": 299,
+    "bytes": 11149,
+    "sha256": "18af578c4c40bde35a7740e1fca1859cc6f0722b2d41714faafc6acf51f4456f",
+    "declarations": [
+      {
+        "line": 42,
+        "declaration": "export class AuthController {"
+      },
+      {
+        "line": 52,
+        "declaration": "if (typeof rawHeaderPort === 'string' && /^\\d{2,5}$/.test(rawHeaderPort.trim())) {"
+      },
+      {
+        "line": 60,
+        "declaration": "if (/^\\d{2,5}$/.test(parsed.port)) {"
+      },
+      {
+        "line": 119,
+        "declaration": "async register(@Body() registerDto: RegisterDto) {"
+      },
+      {
+        "line": 129,
+        "declaration": "async verifyRegisterOtp("
+      },
+      {
+        "line": 150,
+        "declaration": "async resendOtp(@Body() resendOtpDto: ResendOtpDto) {"
+      },
+      {
+        "line": 160,
+        "declaration": "async login("
+      },
+      {
+        "line": 182,
+        "declaration": "async refresh("
+      },
+      {
+        "line": 201,
+        "declaration": "async logout("
+      },
+      {
+        "line": 219,
+        "declaration": "async forgotPassword(@Body() forgotPasswordDto: ForgotPasswordDto) {"
+      },
+      {
+        "line": 229,
+        "declaration": "async resetPassword(@Body() resetPasswordDto: ResetPasswordDto) {"
+      },
+      {
+        "line": 239,
+        "declaration": "async getMe(@CurrentUser() currentUser: CurrentUserData) {"
+      },
+      {
+        "line": 258,
+        "declaration": "async assignRole("
+      },
+      {
+        "line": 278,
+        "declaration": "async testAdminRole(@CurrentUser() currentUser: CurrentUserData) {"
+      },
+      {
+        "line": 293,
+        "declaration": "async testInstructorRole(@CurrentUser() currentUser: CurrentUserData) {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/auth/auth.module.ts",
+    "lines": 31,
+    "bytes": 958,
+    "sha256": "0cf0fdb57dd817f0dd63dad8adead35151621962697617935caf7d554f479e26",
+    "declarations": [
+      {
+        "line": 31,
+        "declaration": "export class AuthModule {}"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/auth/auth.service.spec.ts",
+    "lines": 173,
+    "bytes": 5309,
+    "sha256": "c9fa06ffe454de18401c3406a22df9d1b1ed7a6c03fee2188086044198fc9b61",
+    "declarations": [
+      {
+        "line": 11,
+        "declaration": "describe('AuthService (Unit Tests)', () => {"
+      },
+      {
+        "line": 76,
+        "declaration": "it('nên throw BadRequestException nếu password và confirmPassword không khớp khi đăng ký', async () => {"
+      },
+      {
+        "line": 87,
+        "declaration": "it('nên throw ConflictException nếu email đã tồn tại và đã được kích hoạt (status ACTIVE)', async () => {"
+      },
+      {
+        "line": 104,
+        "declaration": "it('nên tạo người dùng pending, tạo OTP và gửi email khi đăng ký hợp lệ', async () => {"
+      },
+      {
+        "line": 125,
+        "declaration": "it('nên throw BadRequestException nếu Admin tự hạ quyền ADMIN của chính mình', async () => {"
+      },
+      {
+        "line": 131,
+        "declaration": "it('nên throw NotFoundException nếu không tìm thấy user cần phân quyền', async () => {"
+      },
+      {
+        "line": 139,
+        "declaration": "it('nên phân quyền thành công và thu hồi refresh token của user được phân quyền', async () => {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/auth/auth.service.ts",
+    "lines": 634,
+    "bytes": 20998,
+    "sha256": "76e004de12690cdf51b8e8919e0824389209d5d6a91cd4432e4e5f2a7497fe13",
+    "declarations": [
+      {
+        "line": 33,
+        "declaration": "export class AuthService {"
+      },
+      {
+        "line": 56,
+        "declaration": "private async hashValue(val: string): Promise<string> {"
+      },
+      {
+        "line": 63,
+        "declaration": "private async verifyHash(hash: string, plain: string): Promise<boolean> {"
+      },
+      {
+        "line": 74,
+        "declaration": "async generateAccessToken(payload: {"
+      },
+      {
+        "line": 90,
+        "declaration": "async generateRefreshToken(userId: string): Promise<string> {"
+      },
+      {
+        "line": 111,
+        "declaration": "async register(registerDto: RegisterDto) {"
+      },
+      {
+        "line": 195,
+        "declaration": "async verifyRegisterOtp(verifyOtpDto: VerifyOtpDto) {"
+      },
+      {
+        "line": 266,
+        "declaration": "async resendOtp(resendOtpDto: ResendOtpDto) {"
+      },
+      {
+        "line": 323,
+        "declaration": "async login(loginDto: LoginDto) {"
+      },
+      {
+        "line": 379,
+        "declaration": "async refresh(rawRefreshToken: string) {"
+      },
+      {
+        "line": 445,
+        "declaration": "async logout(rawRefreshToken?: string) {"
+      },
+      {
+        "line": 465,
+        "declaration": "async forgotPassword(forgotPasswordDto: ForgotPasswordDto) {"
+      },
+      {
+        "line": 511,
+        "declaration": "async resetPassword(resetPasswordDto: ResetPasswordDto) {"
+      },
+      {
+        "line": 573,
+        "declaration": "async getMe(userId: string) {"
+      },
+      {
+        "line": 595,
+        "declaration": "async assignRole(currentAdminId: string, targetUserId: string, newRole: Role) {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/auth/dto/assign-role.dto.ts",
+    "lines": 16,
+    "bytes": 588,
+    "sha256": "033effd6f0edcd2be1d34d2f04f696abb117e431abac13398e941b09a33254aa",
+    "declarations": [
+      {
+        "line": 5,
+        "declaration": "export class AssignRoleDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/auth/dto/forgot-password.dto.ts",
+    "lines": 9,
+    "bytes": 419,
+    "sha256": "b82ee421a18241e0c2efa1569f10695ac80fe3598641e7f27900a2c7245379b0",
+    "declarations": [
+      {
+        "line": 4,
+        "declaration": "export class ForgotPasswordDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/auth/dto/login.dto.ts",
+    "lines": 14,
+    "bytes": 642,
+    "sha256": "22ff80ed7af6ffe7096404aee4c487161eb0efc63e73ea355bfab8c76d26cd3b",
+    "declarations": [
+      {
+        "line": 4,
+        "declaration": "export class LoginDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/auth/dto/register.dto.ts",
+    "lines": 66,
+    "bytes": 2698,
+    "sha256": "7a8047119e0a51d27a1ade913fd3a675b9a5ea4627ba4730d856bc25ad21fdda",
+    "declarations": [
+      {
+        "line": 12,
+        "declaration": "export class RegisterDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/auth/dto/resend-otp.dto.ts",
+    "lines": 18,
+    "bytes": 731,
+    "sha256": "f7a4a92ea204623b7e01eec0ddccf6d7e9b114fd1fcf7b76327319bf2dd22d98",
+    "declarations": [
+      {
+        "line": 5,
+        "declaration": "export class ResendOtpDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/auth/dto/reset-password.dto.ts",
+    "lines": 24,
+    "bytes": 1237,
+    "sha256": "de1deea4aabac88c75624b6d20e3e88c29722390fd5a47d031a26f79952526bd",
+    "declarations": [
+      {
+        "line": 4,
+        "declaration": "export class ResetPasswordDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/auth/dto/verify-otp.dto.ts",
+    "lines": 14,
+    "bytes": 629,
+    "sha256": "c337d79966ccfc22f407e15124040984137598412ec76a612f67d6d94c2c012c",
+    "declarations": [
+      {
+        "line": 4,
+        "declaration": "export class VerifyOtpDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/auth/schemas/otp.schema.ts",
+    "lines": 36,
+    "bytes": 860,
+    "sha256": "63748245b5b47ebc84848f704a67230cace2ea63ab6909846f2135b3f5d22766",
+    "declarations": [
+      {
+        "line": 6,
+        "declaration": "export enum OtpPurpose {"
+      },
+      {
+        "line": 12,
+        "declaration": "export class Otp {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/auth/schemas/refresh-token.schema.ts",
+    "lines": 21,
+    "bytes": 594,
+    "sha256": "96c32caadde69b9b9a87c3122780918ac9c2d60c816423c4fa45ecd86fa936f4",
+    "declarations": [
+      {
+        "line": 7,
+        "declaration": "export class RefreshToken {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/certificates/certificates.controller.ts",
+    "lines": 56,
+    "bytes": 1998,
+    "sha256": "8c4bfec2a9e10b2b443a2870c9b42dabf3296f78896f9107deed77635e41647e",
+    "declarations": [
+      {
+        "line": 23,
+        "declaration": "export class CertificatesController {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/certificates/certificates.module.ts",
+    "lines": 26,
+    "bytes": 940,
+    "sha256": "abb12805466e20760047acbb5c1f6614421804b8903d9436f99dc96a815c992f",
+    "declarations": [
+      {
+        "line": 25,
+        "declaration": "export class CertificatesModule {}"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/certificates/certificates.service.ts",
+    "lines": 159,
+    "bytes": 5030,
+    "sha256": "f819a81fd9d94d71e8a7a5d428689faf2dd39ddfed015bad0bfb041414e35759",
+    "declarations": [
+      {
+        "line": 19,
+        "declaration": "function generateCertificateCode(year = new Date().getFullYear()): string {"
+      },
+      {
+        "line": 29,
+        "declaration": "export class CertificatesService {"
+      },
+      {
+        "line": 39,
+        "declaration": "async findByStudentAndCourse("
+      },
+      {
+        "line": 51,
+        "declaration": "async issueForEnrollment("
+      },
+      {
+        "line": 91,
+        "declaration": "async getMyCertificates(studentId: string): Promise<CertificateResponseDto[]> {"
+      },
+      {
+        "line": 102,
+        "declaration": "async verifyByCode(rawCode: string): Promise<CertificateVerifyResponseDto> {"
+      },
+      {
+        "line": 124,
+        "declaration": "private async serializeCertificate("
+      }
+    ]
+  },
+  {
+    "file": "src/modules/certificates/dto/certificate-response.dto.ts",
+    "lines": 58,
+    "bytes": 1643,
+    "sha256": "ababd34d87dad7d3346a52f940c6d07e9412e6ef6c948f67224115fbfdc2f56f",
+    "declarations": [
+      {
+        "line": 4,
+        "declaration": "export class CertificateResponseDto {"
+      },
+      {
+        "line": 36,
+        "declaration": "export class CertificateVerifyResponseDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/certificates/schemas/certificate.schema.ts",
+    "lines": 55,
+    "bytes": 1404,
+    "sha256": "c6041e18d0b4fa5a029a8568731cab57f405537f75cdb5f4d50c3af8d5216d8e",
+    "declarations": [
+      {
+        "line": 11,
+        "declaration": "export class Certificate {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/course-manage.controller.ts",
+    "lines": 445,
+    "bytes": 13937,
+    "sha256": "b86f8e631c67d6ac8d6989a36fe7e0abcb6145c87c7ec438a106ba178518cb27",
+    "declarations": [
+      {
+        "line": 61,
+        "declaration": "function successEnvelope("
+      },
+      {
+        "line": 76,
+        "declaration": "function ManageApiErrors() {"
+      },
+      {
+        "line": 86,
+        "declaration": "function CourseDetailResponse(status = HttpStatus.OK) {"
+      },
+      {
+        "line": 102,
+        "declaration": "export class CourseManageController {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/course-manage.service.spec.ts",
+    "lines": 552,
+    "bytes": 20123,
+    "sha256": "f7d2e8f7c602c7d255fdd87310ddbc62474b5103c087d2ff6454c5323105122d",
+    "declarations": [
+      {
+        "line": 33,
+        "declaration": "function createCourse(status = CourseStatus.DRAFT) {"
+      },
+      {
+        "line": 76,
+        "declaration": "function createAggregateRecord(course: ReturnType<typeof createCourse>) {"
+      },
+      {
+        "line": 84,
+        "declaration": "describe('CourseManageService', () => {"
+      },
+      {
+        "line": 144,
+        "declaration": "it('blocks instructors from accessing another instructor course in the service', async () => {"
+      },
+      {
+        "line": 153,
+        "declaration": "it('denies access to unsupported roles in the service, not only in the route guard', async () => {"
+      },
+      {
+        "line": 169,
+        "declaration": "it('filters instructor lists by JWT identity and paginates in MongoDB', async () => {"
+      },
+      {
+        "line": 201,
+        "declaration": "it('computes permissions from both course state and ownership', () => {"
+      },
+      {
+        "line": 219,
+        "declaration": "it('reports readiness blockers and non-blocking PRO lesson warnings (allowing lessons without video)', () => {"
+      },
+      {
+        "line": 242,
+        "declaration": "it('allows valid DRAFT to PENDING transition with a conditional status update', async () => {"
+      },
+      {
+        "line": 257,
+        "declaration": "it('supports withdraw, reject, approve, hide, and re-approve transitions', async () => {"
+      },
+      {
+        "line": 288,
+        "declaration": "it('rejects invalid status transitions with 409', async () => {"
+      },
+      {
+        "line": 297,
+        "declaration": "it('blocks instructor edits while the course is PENDING', async () => {"
+      },
+      {
+        "line": 306,
+        "declaration": "it('clears PRO-only lesson fields and resets pricing when changing DRAFT to FREE', async () => {"
+      },
+      {
+        "line": 327,
+        "declaration": "it('rejects reorder requests that do not contain exactly the existing chapter IDs', async () => {"
+      },
+      {
+        "line": 336,
+        "declaration": "it('reorders chapters and assigns continuous order values', async () => {"
+      },
+      {
+        "line": 360,
+        "declaration": "it('rejects quiz answers outside the zero-based options range', async () => {"
+      },
+      {
+        "line": 380,
+        "declaration": "it('rejects null for non-nullable patch fields while allowing nullable lesson notes and optional video/text/files', async () => {"
+      },
+      {
+        "line": 526,
+        "declaration": "it('allows creating and approving courses with empty optional fields or short strings without minimum length limits', async () => {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/course-manage.service.ts",
+    "lines": 1048,
+    "bytes": 36323,
+    "sha256": "74843539c34ee9d797e1341af88001e5a4f5b2ebbedcb3953d621b93e6eca697",
+    "declarations": [
+      {
+        "line": 52,
+        "declaration": "interface ManageCourseListAggregate {"
+      },
+      {
+        "line": 85,
+        "declaration": "function escapeRegularExpression(value: string): string {"
+      },
+      {
+        "line": 89,
+        "declaration": "function idString(id: Types.ObjectId | string): string {"
+      },
+      {
+        "line": 93,
+        "declaration": "function assertRole(actor: ManageCourseActor): void {"
+      },
+      {
+        "line": 105,
+        "declaration": "function assertPricing(type: CourseType, price: number, discountPrice: number | null): void {"
+      },
+      {
+        "line": 122,
+        "declaration": "function assertNoQuizNotesForFree("
+      },
+      {
+        "line": 134,
+        "declaration": "function normalizeLessonVideoForCourse("
+      },
+      {
+        "line": 140,
+        "declaration": "const isIframe = /^<iframe\\b/i.test(trimmed);"
+      },
+      {
+        "line": 157,
+        "declaration": "export class CourseManageService {"
+      },
+      {
+        "line": 168,
+        "declaration": "async listCourses("
+      },
+      {
+        "line": 265,
+        "declaration": "async getActiveInstructors("
+      },
+      {
+        "line": 275,
+        "declaration": "async createCourse("
+      },
+      {
+        "line": 324,
+        "declaration": "async getCourse("
+      },
+      {
+        "line": 360,
+        "declaration": "async updateCourse("
+      },
+      {
+        "line": 457,
+        "declaration": "async deleteCourse("
+      },
+      {
+        "line": 486,
+        "declaration": "async submitCourse(id: string, actor: ManageCourseActor): Promise<ManageCourseDetailDto> {"
+      },
+      {
+        "line": 490,
+        "declaration": "async withdrawCourse(id: string, actor: ManageCourseActor): Promise<ManageCourseDetailDto> {"
+      },
+      {
+        "line": 494,
+        "declaration": "async approveCourse(id: string, actor: ManageCourseActor): Promise<ManageCourseDetailDto> {"
+      },
+      {
+        "line": 498,
+        "declaration": "async rejectCourse("
+      },
+      {
+        "line": 506,
+        "declaration": "async hideCourse(id: string, actor: ManageCourseActor): Promise<ManageCourseDetailDto> {"
+      },
+      {
+        "line": 510,
+        "declaration": "async addChapter("
+      },
+      {
+        "line": 528,
+        "declaration": "async updateChapter("
+      },
+      {
+        "line": 543,
+        "declaration": "async deleteChapter("
+      },
+      {
+        "line": 568,
+        "declaration": "async reorderChapters("
+      },
+      {
+        "line": 591,
+        "declaration": "async addLesson("
+      },
+      {
+        "line": 630,
+        "declaration": "async updateLesson("
+      },
+      {
+        "line": 694,
+        "declaration": "async deleteLesson("
+      },
+      {
+        "line": 719,
+        "declaration": "async reorderLessons("
+      },
+      {
+        "line": 744,
+        "declaration": "async addQuizQuestion("
+      },
+      {
+        "line": 770,
+        "declaration": "async updateQuizQuestion("
+      },
+      {
+        "line": 803,
+        "declaration": "async deleteQuizQuestion("
+      },
+      {
+        "line": 825,
+        "declaration": "private async transitionCourse("
+      },
+      {
+        "line": 914,
+        "declaration": "private async findCourseForActor(id: string, actor: ManageCourseActor) {"
+      },
+      {
+        "line": 916,
+        "declaration": "if (!/^[0-9a-fA-F]{24}$/.test(id)) {"
+      },
+      {
+        "line": 930,
+        "declaration": "private async findEditableCourse(id: string, actor: ManageCourseActor) {"
+      },
+      {
+        "line": 958,
+        "declaration": "private async assertCategoryExists(categoryId: string): Promise<void> {"
+      },
+      {
+        "line": 964,
+        "declaration": "private async saveAndReturn("
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/course-totals.ts",
+    "lines": 40,
+    "bytes": 1145,
+    "sha256": "b7a9579eb756ffee2d81715d9f469e43a338557b9e5f5b51c1940e3d61a2be47",
+    "declarations": [
+      {
+        "line": 5,
+        "declaration": "export async function recalculateCourseTotals("
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/courses.controller.ts",
+    "lines": 187,
+    "bytes": 4987,
+    "sha256": "0c95cbe560f7d2828ccae3436ba2c742aa9b6c1b22dd7478de379e7a29c69c24",
+    "declarations": [
+      {
+        "line": 25,
+        "declaration": "function responseEnvelope(data: SchemaObject): SchemaObject {"
+      },
+      {
+        "line": 50,
+        "declaration": "export class CoursesController {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/courses.module.ts",
+    "lines": 26,
+    "bytes": 1092,
+    "sha256": "e504b4cb7b1b52e3b74f0faa7134ba41390d9313647a4ddaf47811c4ec3fb517",
+    "declarations": [
+      {
+        "line": 26,
+        "declaration": "export class CoursesModule {}"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/courses.service.spec.ts",
+    "lines": 220,
+    "bytes": 7602,
+    "sha256": "685dc7ec56bf67065fd2f941cbce73d78bb9d8fa89272ba21ad321f81929eace",
+    "declarations": [
+      {
+        "line": 17,
+        "declaration": "describe('CoursesService', () => {"
+      },
+      {
+        "line": 29,
+        "declaration": "it('filters approved courses and applies effective-price sort and database pagination', async () => {"
+      },
+      {
+        "line": 84,
+        "declaration": "it('rejects an inverted price range', async () => {"
+      },
+      {
+        "line": 96,
+        "declaration": "it('orders featured courses by rating and recency and limits results', async () => {"
+      },
+      {
+        "line": 113,
+        "declaration": "it('validates page limits and rejects a featured limit above twelve', async () => {"
+      },
+      {
+        "line": 123,
+        "declaration": "it('returns only approved public detail fields and excludes lesson secrets and private instructor data', async () => {"
+      },
+      {
+        "line": 208,
+        "declaration": "it('returns 404 for malformed or non-approved course ids', async () => {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/courses.service.ts",
+    "lines": 288,
+    "bytes": 8385,
+    "sha256": "d26a2f43f1754ce7dc903d02572f47dce4c9a017553abba38a49eb4cc8d1ead5",
+    "declarations": [
+      {
+        "line": 27,
+        "declaration": "interface CourseListAggregateResult {"
+      },
+      {
+        "line": 88,
+        "declaration": "function escapeRegularExpression(value: string): string {"
+      },
+      {
+        "line": 92,
+        "declaration": "function sortFor(sort: CourseSort): Record<string, 1 | -1> {"
+      },
+      {
+        "line": 106,
+        "declaration": "export class CoursesService {"
+      },
+      {
+        "line": 114,
+        "declaration": "async getCategories(): Promise<CategoryResponseDto[]> {"
+      },
+      {
+        "line": 127,
+        "declaration": "async getCourses(query: CourseQueryDto): Promise<CourseListResponseDto> {"
+      },
+      {
+        "line": 200,
+        "declaration": "async getFeaturedCourses("
+      },
+      {
+        "line": 216,
+        "declaration": "async getCourseById(id: string): Promise<CourseDetailResponseDto> {"
+      },
+      {
+        "line": 217,
+        "declaration": "if (!/^[0-9a-fA-F]{24}$/.test(id)) {"
+      },
+      {
+        "line": 283,
+        "declaration": "async recalculateTotals("
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/dto/course-query.dto.ts",
+    "lines": 88,
+    "bytes": 2006,
+    "sha256": "13d1fdbe9dd37fb66d26a130a8a2edca12ad9327e28cc1121c39bf1f0e54fc82",
+    "declarations": [
+      {
+        "line": 18,
+        "declaration": "export enum CourseSort {"
+      },
+      {
+        "line": 25,
+        "declaration": "export class CourseQueryDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/dto/course-response.dto.ts",
+    "lines": 139,
+    "bytes": 3600,
+    "sha256": "9dc3be2f2a18b4e7fbc3257ee5358b58a465a4cf459d5940d0d303e94e25569e",
+    "declarations": [
+      {
+        "line": 5,
+        "declaration": "export class InstructorCourseResponseDto {"
+      },
+      {
+        "line": 16,
+        "declaration": "export class CategoryCourseResponseDto {"
+      },
+      {
+        "line": 24,
+        "declaration": "export class CourseCardResponseDto {"
+      },
+      {
+        "line": 65,
+        "declaration": "export class CourseListResponseDto {"
+      },
+      {
+        "line": 82,
+        "declaration": "export class LessonPublicResponseDto {"
+      },
+      {
+        "line": 99,
+        "declaration": "export class ChapterPublicResponseDto {"
+      },
+      {
+        "line": 113,
+        "declaration": "export class CourseDetailResponseDto extends CourseCardResponseDto {"
+      },
+      {
+        "line": 133,
+        "declaration": "export class CategoryResponseDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/dto/featured-query.dto.ts",
+    "lines": 13,
+    "bytes": 367,
+    "sha256": "6ad034520a29248cdba17528ee0f91dbad6cfaa4dc1376ba25fab66759d52a61",
+    "declarations": [
+      {
+        "line": 5,
+        "declaration": "export class FeaturedQueryDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/dto/manage-course-response.dto.ts",
+    "lines": 224,
+    "bytes": 6066,
+    "sha256": "713f549e999b526060aba3588fb07545d21bb37649313eef5fbf83b25ff48bd1",
+    "declarations": [
+      {
+        "line": 5,
+        "declaration": "export class ManageInstructorDto {"
+      },
+      {
+        "line": 16,
+        "declaration": "export class ManageCategoryDto {"
+      },
+      {
+        "line": 24,
+        "declaration": "export class ManageCoursePermissionsDto {"
+      },
+      {
+        "line": 35,
+        "declaration": "export class ManageCourseItemDto {"
+      },
+      {
+        "line": 94,
+        "declaration": "export class ManageReadinessDto {"
+      },
+      {
+        "line": 105,
+        "declaration": "export class ManageQuizQuestionDto {"
+      },
+      {
+        "line": 126,
+        "declaration": "export class ManageLessonDto {"
+      },
+      {
+        "line": 164,
+        "declaration": "export class ManageChapterDto {"
+      },
+      {
+        "line": 178,
+        "declaration": "export class ManageCourseDetailDto extends ManageCourseItemDto {"
+      },
+      {
+        "line": 198,
+        "declaration": "export class ManageCourseListDto {"
+      },
+      {
+        "line": 215,
+        "declaration": "export class ManageInstructorOptionDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/dto/manage-course.dto.ts",
+    "lines": 439,
+    "bytes": 12937,
+    "sha256": "8e418990d872c34e024b64544903329a6749eb4e660a70d71e10bbd29c9cbe7d",
+    "declarations": [
+      {
+        "line": 47,
+        "declaration": "export function extractYouTubeVideoId(raw: string): string | null {"
+      },
+      {
+        "line": 53,
+        "declaration": "if (/^<iframe\\b/i.test(trimmed)) {"
+      },
+      {
+        "line": 54,
+        "declaration": "if (!/^<iframe\\b[^>]*>\\s*<\\/iframe>$/i.test(trimmed)) {"
+      },
+      {
+        "line": 74,
+        "declaration": "export function buildCanonicalYouTubeIframe(videoId: string): string {"
+      },
+      {
+        "line": 78,
+        "declaration": "export function isYouTubeIframeInput(raw: string): boolean {"
+      },
+      {
+        "line": 79,
+        "declaration": "return typeof raw === 'string' && /^<iframe\\b/i.test(raw.trim()) && extractYouTubeVideoId(raw) !== null;"
+      },
+      {
+        "line": 82,
+        "declaration": "export enum ManageCourseSort {"
+      },
+      {
+        "line": 88,
+        "declaration": "export class ManageCourseQueryDto {"
+      },
+      {
+        "line": 136,
+        "declaration": "export class CreateManageCourseDto {"
+      },
+      {
+        "line": 212,
+        "declaration": "!LOCAL_COURSE_THUMBNAIL_PATTERN.test(object.thumbnail),"
+      },
+      {
+        "line": 232,
+        "declaration": "export class UpdateManageCourseDto extends PartialType(CreateManageCourseDto, {"
+      },
+      {
+        "line": 236,
+        "declaration": "export class RejectManageCourseDto {"
+      },
+      {
+        "line": 243,
+        "declaration": "export class CreateChapterDto {"
+      },
+      {
+        "line": 250,
+        "declaration": "export class UpdateChapterDto extends PartialType(CreateChapterDto, {"
+      },
+      {
+        "line": 254,
+        "declaration": "export class ReorderChaptersDto {"
+      },
+      {
+        "line": 265,
+        "declaration": "export class CreateLessonDto {"
+      },
+      {
+        "line": 285,
+        "declaration": "!LOCAL_LESSON_VIDEO_PATTERN.test(object.videoUrl) &&"
+      },
+      {
+        "line": 363,
+        "declaration": "export class UpdateLessonDto extends PartialType(CreateLessonDto, {"
+      },
+      {
+        "line": 367,
+        "declaration": "export class ReorderLessonsDto {"
+      },
+      {
+        "line": 378,
+        "declaration": "export class CreateQuizQuestionDto {"
+      },
+      {
+        "line": 411,
+        "declaration": "export class UpdateQuizQuestionDto extends PartialType("
+      },
+      {
+        "line": 416,
+        "declaration": "export class ManageCourseIdParamsDto {"
+      },
+      {
+        "line": 421,
+        "declaration": "export class CourseParamsDto {"
+      },
+      {
+        "line": 426,
+        "declaration": "export class ChapterParamsDto extends CourseParamsDto {"
+      },
+      {
+        "line": 431,
+        "declaration": "export class LessonParamsDto extends ChapterParamsDto {"
+      },
+      {
+        "line": 436,
+        "declaration": "export class QuizQuestionParamsDto extends LessonParamsDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/manage-course-readiness.ts",
+    "lines": 84,
+    "bytes": 3122,
+    "sha256": "41abfe7361f3a0b3fe77abd4be46edfb67ebf13474e12dee2ef9d5971c846caa",
+    "declarations": [
+      {
+        "line": 6,
+        "declaration": "function hasText(value: string | null | undefined): boolean {"
+      },
+      {
+        "line": 10,
+        "declaration": "export function getCourseReadiness("
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/manage-course.serializer.ts",
+    "lines": 201,
+    "bytes": 6093,
+    "sha256": "e6d4484a520c59c4635e08dc23e9c15d22d635ce51c611beacbac3af0fc691b2",
+    "declarations": [
+      {
+        "line": 15,
+        "declaration": "export interface ManageCourseActor {"
+      },
+      {
+        "line": 20,
+        "declaration": "export interface ManageCourseItemAggregateRecord"
+      },
+      {
+        "line": 51,
+        "declaration": "export interface ManageCourseAggregateRecord"
+      },
+      {
+        "line": 62,
+        "declaration": "function idToString(id: Types.ObjectId | string): string {"
+      },
+      {
+        "line": 66,
+        "declaration": "function toIsoDate(value: Date | string | undefined): string {"
+      },
+      {
+        "line": 70,
+        "declaration": "export function getManageCoursePermissions("
+      },
+      {
+        "line": 96,
+        "declaration": "function serializeInstructor("
+      },
+      {
+        "line": 106,
+        "declaration": "function serializeQuizQuestion(question: {"
+      },
+      {
+        "line": 122,
+        "declaration": "function serializeChapter(chapter: Course['chapters'][number]): ManageChapterDto {"
+      },
+      {
+        "line": 146,
+        "declaration": "export function serializeManageCourseItem("
+      },
+      {
+        "line": 186,
+        "declaration": "export function serializeManageCourseDetail("
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/schemas/category.schema.ts",
+    "lines": 12,
+    "bytes": 414,
+    "sha256": "ea6abeffd4058a0e2eb93b78f5c39af3b8c751e8e509a6b59789665201b6ea7a",
+    "declarations": [
+      {
+        "line": 7,
+        "declaration": "export class Category {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/schemas/course.schema.ts",
+    "lines": 170,
+    "bytes": 4181,
+    "sha256": "3d4bc11e6101d8953ef245979415e9a5438c2f036a33341559a7f73c94b4930d",
+    "declarations": [
+      {
+        "line": 12,
+        "declaration": "export class QuizQuestion {"
+      },
+      {
+        "line": 31,
+        "declaration": "export class Lesson {"
+      },
+      {
+        "line": 71,
+        "declaration": "export class Chapter {"
+      },
+      {
+        "line": 90,
+        "declaration": "export class Course {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/courses/serializers/course.serializer.ts",
+    "lines": 146,
+    "bytes": 3784,
+    "sha256": "e2533472533fef1c7883c0f7066818f43904e26eb10b2cea48b42ecab56dd354",
+    "declarations": [
+      {
+        "line": 13,
+        "declaration": "export interface CourseAggregateRecord {"
+      },
+      {
+        "line": 36,
+        "declaration": "interface LessonAggregateRecord {"
+      },
+      {
+        "line": 44,
+        "declaration": "interface ChapterAggregateRecord {"
+      },
+      {
+        "line": 51,
+        "declaration": "export interface CourseDetailAggregateRecord extends CourseAggregateRecord {"
+      },
+      {
+        "line": 59,
+        "declaration": "function idToString(id: Types.ObjectId | string): string {"
+      },
+      {
+        "line": 63,
+        "declaration": "function serializeInstructor("
+      },
+      {
+        "line": 73,
+        "declaration": "function serializeCategory("
+      },
+      {
+        "line": 88,
+        "declaration": "export function serializeCourseCard("
+      },
+      {
+        "line": 108,
+        "declaration": "function serializeLesson("
+      },
+      {
+        "line": 120,
+        "declaration": "function serializeChapter("
+      },
+      {
+        "line": 133,
+        "declaration": "export function serializeCourseDetail("
+      }
+    ]
+  },
+  {
+    "file": "src/modules/enrollments/dto/enrollment-response.dto.ts",
+    "lines": 404,
+    "bytes": 11063,
+    "sha256": "45867ff8e97db5cac78fd8def491d4339ebb645d9eefe4b1ed53e82becf5284c",
+    "declarations": [
+      {
+        "line": 9,
+        "declaration": "export class EnrollmentStatusResponseDto {"
+      },
+      {
+        "line": 39,
+        "declaration": "export class MyEnrolledCourseItemDto {"
+      },
+      {
+        "line": 86,
+        "declaration": "export class CurriculumLessonItemDto {"
+      },
+      {
+        "line": 130,
+        "declaration": "export class CurriculumChapterItemDto {"
+      },
+      {
+        "line": 144,
+        "declaration": "export class CourseLearningOverviewDto {"
+      },
+      {
+        "line": 201,
+        "declaration": "export class LearnerQuizQuestionDto {"
+      },
+      {
+        "line": 229,
+        "declaration": "export class LessonLearningDetailDto {"
+      },
+      {
+        "line": 312,
+        "declaration": "export class LessonProgressUpdateResponseDto {"
+      },
+      {
+        "line": 347,
+        "declaration": "export class QuizQuestionResultItemDto {"
+      },
+      {
+        "line": 365,
+        "declaration": "export class SubmitQuizResponseDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/enrollments/dto/manage-course-students.dto.ts",
+    "lines": 153,
+    "bytes": 4283,
+    "sha256": "f939e73cb986ad49a8241fa25d77c66281382674dd5a6d5259c862970b7767c3",
+    "declarations": [
+      {
+        "line": 6,
+        "declaration": "export enum ManageCourseStudentsStatusFilter {"
+      },
+      {
+        "line": 12,
+        "declaration": "export enum ManageCourseStudentsSort {"
+      },
+      {
+        "line": 19,
+        "declaration": "export class ManageCourseStudentsQueryDto {"
+      },
+      {
+        "line": 62,
+        "declaration": "export class ManageStudentProfileDto {"
+      },
+      {
+        "line": 76,
+        "declaration": "export class ManageCourseStudentItemDto {"
+      },
+      {
+        "line": 103,
+        "declaration": "export class ManageCourseStudentSummaryDto {"
+      },
+      {
+        "line": 117,
+        "declaration": "export class ManageCourseStudentsCourseInfoDto {"
+      },
+      {
+        "line": 131,
+        "declaration": "export class ManageCourseStudentsResponseDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/enrollments/dto/submit-quiz.dto.ts",
+    "lines": 41,
+    "bytes": 1229,
+    "sha256": "f6f2e58c8795d07db46704a6c7ebea51301e1a6d9984b0c3438c1f82836c92ee",
+    "declarations": [
+      {
+        "line": 12,
+        "declaration": "export class QuizAnswerItemDto {"
+      },
+      {
+        "line": 30,
+        "declaration": "export class SubmitQuizDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/enrollments/dto/update-lesson-progress.dto.ts",
+    "lines": 45,
+    "bytes": 1562,
+    "sha256": "87521f6a867ea6a61290322387c200d527fa4f1f30874cc50101fe7f8a7326d3",
+    "declarations": [
+      {
+        "line": 6,
+        "declaration": "export class UpdateLessonProgressDto {"
+      },
+      {
+        "line": 35,
+        "declaration": "export class MyCoursesQueryDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/enrollments/enrollments.controller.ts",
+    "lines": 242,
+    "bytes": 8347,
+    "sha256": "31c4d9ae4b8faa699d203bb2b9b6011fbb9b390fc843d3a9aa7da57a26c70d62",
+    "declarations": [
+      {
+        "line": 47,
+        "declaration": "export class EnrollmentsController {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/enrollments/enrollments.module.ts",
+    "lines": 35,
+    "bytes": 1345,
+    "sha256": "1be93120c9c1aa4f5aaaf79283cbf86e71a4fcf471707bad2b1771cab45a7fdc",
+    "declarations": [
+      {
+        "line": 34,
+        "declaration": "export class EnrollmentsModule {}"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/enrollments/enrollments.service.spec.ts",
+    "lines": 592,
+    "bytes": 22114,
+    "sha256": "f688323532363f037b893be542fd420b296395e33063783f0066c9742b00cce5",
+    "declarations": [
+      {
+        "line": 20,
+        "declaration": "describe('EnrollmentsService', () => {"
+      },
+      {
+        "line": 338,
+        "declaration": "it('cho phép học viên đăng ký khóa học FREE ngay lập tức và chỉ mở bài đầu tiên', async () => {"
+      },
+      {
+        "line": 357,
+        "declaration": "it('chặn đăng ký trực tiếp khóa học PRO khi chưa qua luồng thanh toán', async () => {"
+      },
+      {
+        "line": 363,
+        "declaration": "it('kiểm soát học tuần tự, làm trắc nghiệm 1 câu (100%) & nhiều câu (>=70%), và cấp chứng chỉ khi hoàn thành', async () => {"
+      },
+      {
+        "line": 500,
+        "declaration": "it('Quản lý học viên: Giảng viên chỉ xem được khóa của mình, Admin xem được tất cả', async () => {"
+      },
+      {
+        "line": 538,
+        "declaration": "it('Chế độ Xem như học viên (Preview Mode): Giảng viên và Admin mở khóa toàn bộ bài giảng và làm thử trắc nghiệm không lưu DB', async () => {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/enrollments/enrollments.service.ts",
+    "lines": 1511,
+    "bytes": 49665,
+    "sha256": "b96332092f94f46e9f512d3ecf12e4fba6235ab95ea27a440f92e1f7dc85938f",
+    "declarations": [
+      {
+        "line": 58,
+        "declaration": "interface OrderedLessonEntry {"
+      },
+      {
+        "line": 65,
+        "declaration": "function isValidObjectId(id: string): boolean {"
+      },
+      {
+        "line": 66,
+        "declaration": "return /^[0-9a-fA-F]{24}$/.test(id);"
+      },
+      {
+        "line": 69,
+        "declaration": "function flattenOrderedLessons(course: Course): OrderedLessonEntry[] {"
+      },
+      {
+        "line": 92,
+        "declaration": "export class EnrollmentsService {"
+      },
+      {
+        "line": 111,
+        "declaration": "async enrollCourse("
+      },
+      {
+        "line": 144,
+        "declaration": "async createEnrollmentForCompletedOrder("
+      },
+      {
+        "line": 166,
+        "declaration": "async getEnrollmentStatus("
+      },
+      {
+        "line": 224,
+        "declaration": "async getMyCourses("
+      },
+      {
+        "line": 285,
+        "declaration": "async getCourseLearning("
+      },
+      {
+        "line": 444,
+        "declaration": "async getLessonForLearning("
+      },
+      {
+        "line": 613,
+        "declaration": "async updateLessonProgress("
+      },
+      {
+        "line": 761,
+        "declaration": "async submitLessonQuiz("
+      },
+      {
+        "line": 1027,
+        "declaration": "private async initializeEnrollment("
+      },
+      {
+        "line": 1064,
+        "declaration": "private async completeLessonAndAdvance("
+      },
+      {
+        "line": 1130,
+        "declaration": "private async findApprovedCourseOrThrow("
+      },
+      {
+        "line": 1154,
+        "declaration": "private async findCourseForPreviewOrThrow("
+      },
+      {
+        "line": 1205,
+        "declaration": "private async findEnrollmentAndCourseOrThrow("
+      },
+      {
+        "line": 1250,
+        "declaration": "private async ensureLessonProgressMap("
+      },
+      {
+        "line": 1294,
+        "declaration": "async getCourseStudentsForManager("
+      }
+    ]
+  },
+  {
+    "file": "src/modules/enrollments/schemas/enrollment.schema.ts",
+    "lines": 55,
+    "bytes": 1417,
+    "sha256": "7b6b88e571bd6d0bf251982a60c45cd191c4680e85dd87021d01eb8a1b3cfe95",
+    "declarations": [
+      {
+        "line": 11,
+        "declaration": "export class Enrollment {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/enrollments/schemas/lesson-progress.schema.ts",
+    "lines": 54,
+    "bytes": 1365,
+    "sha256": "f4bfa0f6949adaefcfa651b705bcab02f3c4cbbcb135e2c0839f6db169dbdfe6",
+    "declarations": [
+      {
+        "line": 11,
+        "declaration": "export class LessonProgress {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/enrollments/schemas/quiz-attempt.schema.ts",
+    "lines": 39,
+    "bytes": 967,
+    "sha256": "228e25f6b18ed21417af0810e2193536e1d8d36249b7e65ff1fba19d78156d8b",
+    "declarations": [
+      {
+        "line": 10,
+        "declaration": "export class QuizAttempt {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/mail/mail.module.ts",
+    "lines": 10,
+    "bytes": 269,
+    "sha256": "92ecc4d07db73eb41234a61ceb5ede2792b0d6f2600255933fe3c70e0addf29b",
+    "declarations": [
+      {
+        "line": 10,
+        "declaration": "export class MailModule {}"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/mail/mail.service.ts",
+    "lines": 98,
+    "bytes": 4905,
+    "sha256": "e2a4e34d3b53d05d4eb8649e7444caf612ba2f2de4ff8f4388bf5c6e68cfb14e",
+    "declarations": [
+      {
+        "line": 6,
+        "declaration": "export class MailService {"
+      },
+      {
+        "line": 28,
+        "declaration": "async sendRegisterOtp(email: string, otp: string): Promise<boolean> {"
+      },
+      {
+        "line": 64,
+        "declaration": "async sendForgotPasswordOtp(email: string, otp: string): Promise<boolean> {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/orders/dto/order.dto.ts",
+    "lines": 354,
+    "bytes": 6846,
+    "sha256": "db746def4462d4378694fce4e52de4b15d524a364645193aa8edb7bdecc913a4",
+    "declarations": [
+      {
+        "line": 20,
+        "declaration": "export class CreateOrderDto {"
+      },
+      {
+        "line": 39,
+        "declaration": "export class ValidateCouponDto {"
+      },
+      {
+        "line": 52,
+        "declaration": "export class CancelOrderDto {"
+      },
+      {
+        "line": 62,
+        "declaration": "export class MyOrdersQueryDto {"
+      },
+      {
+        "line": 69,
+        "declaration": "export class ManageOrdersQueryDto {"
+      },
+      {
+        "line": 99,
+        "declaration": "export class PayosWebhookPayloadDto {"
+      },
+      {
+        "line": 129,
+        "declaration": "export class AvailableCouponItemDto {"
+      },
+      {
+        "line": 149,
+        "declaration": "export class CouponPreviewResponseDto {"
+      },
+      {
+        "line": 178,
+        "declaration": "export class OrderDetailResponseDto {"
+      },
+      {
+        "line": 279,
+        "declaration": "export class PaymentTransactionItemDto {"
+      },
+      {
+        "line": 311,
+        "declaration": "export class MyOrdersResponseDto {"
+      },
+      {
+        "line": 319,
+        "declaration": "export class ManageOrdersStatsDto {"
+      },
+      {
+        "line": 336,
+        "declaration": "export class ManageOrdersResponseDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/orders/orders.controller.ts",
+    "lines": 208,
+    "bytes": 6757,
+    "sha256": "4f6e69e7d5ca7fa59e243c818a1511125d22de232de33c2d33b124a00cf1ffc3",
+    "declarations": [
+      {
+        "line": 41,
+        "declaration": "export class OrdersController {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/orders/orders.module.ts",
+    "lines": 35,
+    "bytes": 1346,
+    "sha256": "843a82b85fa8067e2dd73a2de64efafe3927a1025b845ee0c2d5ccff9ec52c1d",
+    "declarations": [
+      {
+        "line": 35,
+        "declaration": "export class OrdersModule {}"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/orders/orders.service.spec.ts",
+    "lines": 287,
+    "bytes": 8732,
+    "sha256": "4feba120bbbdfd1bfb22fa2fed3f9323f314d82183930ef513dec5efa02690c6",
+    "declarations": [
+      {
+        "line": 30,
+        "declaration": "describe('PayosService & OrdersService', () => {"
+      },
+      {
+        "line": 104,
+        "declaration": "it('tính chữ ký tạo link thanh toán và xác thực chữ ký Webhook payOS chuẩn HMAC-SHA256', () => {"
+      },
+      {
+        "line": 144,
+        "declaration": "it('tính toán đúng giá khóa học Pro từ DB và áp dụng mã giảm giá NEXTCODE10 / TEST2K', async () => {"
+      },
+      {
+        "line": 183,
+        "declaration": "it('chặn tạo đơn hàng nếu học viên đã sở hữu khóa học', async () => {"
+      },
+      {
+        "line": 207,
+        "declaration": "it('xử lý Webhook payOS thành công, cập nhật trạng thái COMPLETED và mở khóa học Pro', async () => {"
+      },
+      {
+        "line": 269,
+        "declaration": "it('từ chối giả lập thanh toán khi PAYMENT_SIMULATION_ENABLED=false hoặc NODE_ENV=production', async () => {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/orders/orders.service.ts",
+    "lines": 1089,
+    "bytes": 32753,
+    "sha256": "02017b3bf0011411253004847f009c267a3e44f26e65865b1f15d65d0226d945",
+    "declarations": [
+      {
+        "line": 53,
+        "declaration": "interface BuiltinCouponRule {"
+      },
+      {
+        "line": 101,
+        "declaration": "function isValidObjectId(id: string): boolean {"
+      },
+      {
+        "line": 102,
+        "declaration": "return /^[0-9a-fA-F]{24}$/.test(id);"
+      },
+      {
+        "line": 105,
+        "declaration": "function generateOrderCode(): string {"
+      },
+      {
+        "line": 114,
+        "declaration": "function generatePayosOrderCode(): number {"
+      },
+      {
+        "line": 121,
+        "declaration": "export class OrdersService {"
+      },
+      {
+        "line": 264,
+        "declaration": "async previewCheckout("
+      },
+      {
+        "line": 330,
+        "declaration": "async createOrder("
+      },
+      {
+        "line": 480,
+        "declaration": "async getOrderByIdForUser("
+      },
+      {
+        "line": 503,
+        "declaration": "async syncOrderPayment("
+      },
+      {
+        "line": 517,
+        "declaration": "async handlePayosWebhook("
+      },
+      {
+        "line": 597,
+        "declaration": "async simulateOrderPayment("
+      },
+      {
+        "line": 641,
+        "declaration": "async confirmOrderManually("
+      },
+      {
+        "line": 682,
+        "declaration": "async cancelOrder("
+      },
+      {
+        "line": 711,
+        "declaration": "async getMyOrders("
+      },
+      {
+        "line": 785,
+        "declaration": "async getManageOrders("
+      },
+      {
+        "line": 875,
+        "declaration": "private async syncOrderWithPayosInternal("
+      },
+      {
+        "line": 919,
+        "declaration": "private async completeOrderWithTransaction(params: {"
+      },
+      {
+        "line": 954,
+        "declaration": "private async recordTransactionIfNotExists(params: {"
+      },
+      {
+        "line": 1000,
+        "declaration": "private async findOrderOrThrow(orderId: string): Promise<OrderDocument> {"
+      },
+      {
+        "line": 1028,
+        "declaration": "private async serializeOrder("
+      }
+    ]
+  },
+  {
+    "file": "src/modules/orders/payos.service.ts",
+    "lines": 358,
+    "bytes": 9947,
+    "sha256": "574c071e755618ef693934ebf26d0635ed1f0465991cec823d53de02ca22457d",
+    "declarations": [
+      {
+        "line": 27,
+        "declaration": "export interface CreatePayosPaymentParams {"
+      },
+      {
+        "line": 36,
+        "declaration": "export interface PayosPaymentLinkResult {"
+      },
+      {
+        "line": 52,
+        "declaration": "export interface PayosTransactionItem {"
+      },
+      {
+        "line": 66,
+        "declaration": "export interface PayosPaymentLinkInfo {"
+      },
+      {
+        "line": 76,
+        "declaration": "function sortObjDataByKey("
+      },
+      {
+        "line": 87,
+        "declaration": "function convertObjToQueryStr(obj: Record<string, unknown>): string {"
+      },
+      {
+        "line": 109,
+        "declaration": "export function resolveBankNameFromBin(bin?: string | null): string {"
+      },
+      {
+        "line": 114,
+        "declaration": "export function buildVietQrImageUrl(params: {"
+      },
+      {
+        "line": 132,
+        "declaration": "export class PayosService {"
+      },
+      {
+        "line": 206,
+        "declaration": "async createPaymentLink("
+      },
+      {
+        "line": 302,
+        "declaration": "async getPaymentLinkInfo("
+      },
+      {
+        "line": 338,
+        "declaration": "async cancelPaymentLink("
+      }
+    ]
+  },
+  {
+    "file": "src/modules/orders/schemas/order.schema.ts",
+    "lines": 129,
+    "bytes": 2922,
+    "sha256": "dd4255a1da456e53037159a87e8cf2598cee381852b7416a2facb7c0dcc13c23",
+    "declarations": [
+      {
+        "line": 14,
+        "declaration": "export class Order {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/orders/schemas/payment-transaction.schema.ts",
+    "lines": 89,
+    "bytes": 2029,
+    "sha256": "76e77bef28c024bbd1e497e2cc4a973732027f75f886df714322c9cf82d7700e",
+    "declarations": [
+      {
+        "line": 10,
+        "declaration": "export class PaymentTransaction {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/questions/dto/lesson-comment.dto.ts",
+    "lines": 369,
+    "bytes": 9884,
+    "sha256": "63197dc7546103c030af240c007788d04df73dc59b30386b72403c25d8de026d",
+    "declarations": [
+      {
+        "line": 23,
+        "declaration": "export class CreateLessonCommentDto {"
+      },
+      {
+        "line": 51,
+        "declaration": "export class ToggleCommentReactionDto {"
+      },
+      {
+        "line": 61,
+        "declaration": "export class ReportLessonCommentDto {"
+      },
+      {
+        "line": 72,
+        "declaration": "export class ResolveReportDto {"
+      },
+      {
+        "line": 101,
+        "declaration": "export class ManageReportsQueryDto {"
+      },
+      {
+        "line": 119,
+        "declaration": "export class CommentAuthorDto {"
+      },
+      {
+        "line": 140,
+        "declaration": "export class CommentReplyToUserDto {"
+      },
+      {
+        "line": 148,
+        "declaration": "export class CommentReactionSummaryItemDto {"
+      },
+      {
+        "line": 156,
+        "declaration": "export class LessonCommentItemDto {"
+      },
+      {
+        "line": 213,
+        "declaration": "export class LessonCommentsResponseDto {"
+      },
+      {
+        "line": 238,
+        "declaration": "export class ViolationHistoryItemDto {"
+      },
+      {
+        "line": 252,
+        "declaration": "export class ReportQueueItemDto {"
+      },
+      {
+        "line": 329,
+        "declaration": "export class ManageReportsResponseDto {"
+      },
+      {
+        "line": 345,
+        "declaration": "export class NotificationItemDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/questions/questions.controller.ts",
+    "lines": 213,
+    "bytes": 7015,
+    "sha256": "85816b5c6002f676904cb6783758e14dc40f2233141ce732e98bc4630d85fe7d",
+    "declarations": [
+      {
+        "line": 39,
+        "declaration": "export class QuestionsController {"
+      },
+      {
+        "line": 156,
+        "declaration": "export class ManageReportsController {"
+      },
+      {
+        "line": 190,
+        "declaration": "export class NotificationsController {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/questions/questions.module.ts",
+    "lines": 54,
+    "bytes": 1768,
+    "sha256": "7092ce3cb4f9712539d805a387d1bb4c9029234cfb42bd1b84478857ca7191fc",
+    "declarations": [
+      {
+        "line": 54,
+        "declaration": "export class QuestionsModule {}"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/questions/questions.service.spec.ts",
+    "lines": 708,
+    "bytes": 25830,
+    "sha256": "ca173d64abaae9bb90c61b9448ec65503cea6ef9d7f5b52e5df3b335af861b26",
+    "declarations": [
+      {
+        "line": 19,
+        "declaration": "describe('computePenalty', () => {"
+      },
+      {
+        "line": 20,
+        "declaration": "it('maps accumulated violations to the 5 penalty tiers', () => {"
+      },
+      {
+        "line": 34,
+        "declaration": "describe('QuestionsService', () => {"
+      },
+      {
+        "line": 236,
+        "declaration": "describe('listLessonComments', () => {"
+      },
+      {
+        "line": 274,
+        "declaration": "it('keeps a hidden root comment as a placeholder when it still has visible replies', async () => {"
+      },
+      {
+        "line": 290,
+        "declaration": "it('fully hides a hidden root comment that has no visible replies', async () => {"
+      },
+      {
+        "line": 303,
+        "declaration": "it('returns myCommentBannedUntil while the viewer is banned', async () => {"
+      },
+      {
+        "line": 322,
+        "declaration": "describe('createLessonComment', () => {"
+      },
+      {
+        "line": 323,
+        "declaration": "it('forbids commenting when lesson is still LOCKED for student', async () => {"
+      },
+      {
+        "line": 339,
+        "declaration": "it('blocks commenting while the account is banned from commenting', async () => {"
+      },
+      {
+        "line": 357,
+        "declaration": "it('toggles LIKE reaction on and off', async () => {"
+      },
+      {
+        "line": 396,
+        "declaration": "describe('reportComment', () => {"
+      },
+      {
+        "line": 407,
+        "declaration": "it('creates an ESCALATED report when the target is the course instructor', async () => {"
+      },
+      {
+        "line": 433,
+        "declaration": "it('creates a PENDING report when the target is a student', async () => {"
+      },
+      {
+        "line": 460,
+        "declaration": "describe('resolveReport', () => {"
+      },
+      {
+        "line": 461,
+        "declaration": "it('instructor deletes (soft hides) a student comment, adds +1 violation once and resolves all duplicate reports', async () => {"
+      },
+      {
+        "line": 492,
+        "declaration": "it('does not add another violation when the comment was already recorded', async () => {"
+      },
+      {
+        "line": 502,
+        "declaration": "it('syncs DISMISSED status to every duplicate report of the same comment', async () => {"
+      },
+      {
+        "line": 520,
+        "declaration": "it('escalates all duplicate PENDING reports to ESCALATED without adding a violation', async () => {"
+      },
+      {
+        "line": 533,
+        "declaration": "it('forbids instructor from applying penalties or touching ESCALATED reports', async () => {"
+      },
+      {
+        "line": 549,
+        "declaration": "it('rejects resolving an already processed report', async () => {"
+      },
+      {
+        "line": 556,
+        "declaration": "it('admin applies a 24h comment ban at the 6th violation, stacking on the existing ban', async () => {"
+      },
+      {
+        "line": 578,
+        "declaration": "it('admin locks the account immediately for a severe violation', async () => {"
+      },
+      {
+        "line": 596,
+        "declaration": "it('forbids admin from escalating a report', async () => {"
+      },
+      {
+        "line": 604,
+        "declaration": "describe('instructor preview & author badge differentiation', () => {"
+      },
+      {
+        "line": 612,
+        "declaration": "it('marks the assigned course instructor with isCourseAuthor = true and other instructors with isCourseAuthor = false', async () => {"
+      },
+      {
+        "line": 681,
+        "declaration": "it('forbids another instructor from accessing lesson Q&A when the course is not APPROVED', async () => {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/questions/questions.service.ts",
+    "lines": 1384,
+    "bytes": 46300,
+    "sha256": "20a3f7fab43bc087117081c85e7e0b0ae3a2c8fe7351c90439e4d4d0ac38891d",
+    "declarations": [
+      {
+        "line": 70,
+        "declaration": "function isValidObjectId(id: string): boolean {"
+      },
+      {
+        "line": 71,
+        "declaration": "return /^[0-9a-fA-F]{24}$/.test(id);"
+      },
+      {
+        "line": 74,
+        "declaration": "function formatBanDeadline(date: Date): string {"
+      },
+      {
+        "line": 85,
+        "declaration": "export interface PenaltyDecision {"
+      },
+      {
+        "line": 97,
+        "declaration": "export function computePenalty("
+      },
+      {
+        "line": 149,
+        "declaration": "export class QuestionsService {"
+      },
+      {
+        "line": 175,
+        "declaration": "private async verifyLessonDiscussionAccess("
+      },
+      {
+        "line": 324,
+        "declaration": "async listLessonComments("
+      },
+      {
+        "line": 440,
+        "declaration": "async createLessonComment("
+      },
+      {
+        "line": 543,
+        "declaration": "async toggleCommentReaction("
+      },
+      {
+        "line": 615,
+        "declaration": "async reportComment("
+      },
+      {
+        "line": 716,
+        "declaration": "async deleteComment("
+      },
+      {
+        "line": 768,
+        "declaration": "async listManageReports("
+      },
+      {
+        "line": 1037,
+        "declaration": "async resolveReport("
+      },
+      {
+        "line": 1337,
+        "declaration": "async listMyNotifications("
+      },
+      {
+        "line": 1369,
+        "declaration": "async markAllNotificationsRead("
+      }
+    ]
+  },
+  {
+    "file": "src/modules/questions/schemas/lesson-comment.schema.ts",
+    "lines": 140,
+    "bytes": 3426,
+    "sha256": "ecc97158cd9775b0edcbca346c5494519f25167d107bf8670c27b406980a3ee3",
+    "declarations": [
+      {
+        "line": 4,
+        "declaration": "export enum CommentReactionType {"
+      },
+      {
+        "line": 14,
+        "declaration": "export enum CommentVisibilityStatus {"
+      },
+      {
+        "line": 20,
+        "declaration": "export class CommentReplyToUser {"
+      },
+      {
+        "line": 32,
+        "declaration": "export class CommentReaction {"
+      },
+      {
+        "line": 48,
+        "declaration": "export class CommentReport {"
+      },
+      {
+        "line": 67,
+        "declaration": "export class LessonComment {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/questions/schemas/notification.schema.ts",
+    "lines": 62,
+    "bytes": 1503,
+    "sha256": "f999a4ce992949412d1d24bcd5023ca127033c779898eea1f86c4f66e956e6af",
+    "declarations": [
+      {
+        "line": 4,
+        "declaration": "export enum NotificationType {"
+      },
+      {
+        "line": 17,
+        "declaration": "export class Notification {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/questions/schemas/report.schema.ts",
+    "lines": 122,
+    "bytes": 2842,
+    "sha256": "c32d0e4fd88bf6a7e129edf01900f1fdb4bbd93509c5fcea2f3e5d317faec72d",
+    "declarations": [
+      {
+        "line": 4,
+        "declaration": "export enum ReportTargetType {"
+      },
+      {
+        "line": 10,
+        "declaration": "export enum ReportStatus {"
+      },
+      {
+        "line": 17,
+        "declaration": "export enum ReportActionType {"
+      },
+      {
+        "line": 30,
+        "declaration": "export class Report {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/reviews/dto/course-review.dto.ts",
+    "lines": 171,
+    "bytes": 5035,
+    "sha256": "ab31b6ac4081dd6f5037444b19fe3f4a5581e7f73163842d6d881b94b31946f7",
+    "declarations": [
+      {
+        "line": 15,
+        "declaration": "export class UpsertCourseReviewDto {"
+      },
+      {
+        "line": 36,
+        "declaration": "export class ListCourseReviewsQueryDto {"
+      },
+      {
+        "line": 49,
+        "declaration": "export class ReportCourseReviewDto {"
+      },
+      {
+        "line": 61,
+        "declaration": "export class CourseReviewAuthorDto {"
+      },
+      {
+        "line": 72,
+        "declaration": "export class CourseReviewItemDto {"
+      },
+      {
+        "line": 101,
+        "declaration": "export class CourseReviewSummaryDto {"
+      },
+      {
+        "line": 114,
+        "declaration": "export class CourseReviewsListResponseDto {"
+      },
+      {
+        "line": 122,
+        "declaration": "export class MyReviewDetailDto {"
+      },
+      {
+        "line": 148,
+        "declaration": "export class MyCourseReviewStateDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/reviews/reviews.controller.ts",
+    "lines": 111,
+    "bytes": 3748,
+    "sha256": "32faf45f064bdb65a7601c9377080e724cdbfc6f25b6c31ddd28f3af00af090b",
+    "declarations": [
+      {
+        "line": 35,
+        "declaration": "export class ReviewsController {"
+      },
+      {
+        "line": 46,
+        "declaration": "async listCourseReviews("
+      },
+      {
+        "line": 63,
+        "declaration": "async getMyCourseReviewState("
+      },
+      {
+        "line": 79,
+        "declaration": "async upsertMyCourseReview("
+      },
+      {
+        "line": 97,
+        "declaration": "async reportCourseReview("
+      }
+    ]
+  },
+  {
+    "file": "src/modules/reviews/reviews.module.ts",
+    "lines": 32,
+    "bytes": 1120,
+    "sha256": "ee480645d9b7988a6910e40124feb90dcad8e60be42fc8e0774d15d1f202f830",
+    "declarations": [
+      {
+        "line": 31,
+        "declaration": "export class ReviewsModule {}"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/reviews/reviews.service.spec.ts",
+    "lines": 563,
+    "bytes": 17928,
+    "sha256": "c3e275ec548d02d3398d198396bf860b5b811b737d077c0d0b2dab81f2b313a7",
+    "declarations": [
+      {
+        "line": 19,
+        "declaration": "describe('ReviewsService & Moderation Integration', () => {"
+      },
+      {
+        "line": 353,
+        "declaration": "it('chặn học viên chưa hoàn thành 100% khóa học gửi đánh giá', async () => {"
+      },
+      {
+        "line": 375,
+        "declaration": "it('cho phép học viên hoàn thành 100% gửi đánh giá, giữ quyền sửa kể cả khi khóa học thêm bài mới và ưu tiên đánh giá có chữ lên đầu', async () => {"
+      },
+      {
+        "line": 447,
+        "declaration": "it('chặn viết nhận xét chữ khi đang bị cấm bình luận (#035), và khi xóa mềm đánh giá vi phạm thì tự động trừ khỏi điểm trung bình khóa học', async () => {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/reviews/reviews.service.ts",
+    "lines": 519,
+    "bytes": 16605,
+    "sha256": "1a216ca93bb8746711d630228426b49c7fee89292a548f51470ad312bd5c8352",
+    "declarations": [
+      {
+        "line": 42,
+        "declaration": "export class ReviewsService {"
+      },
+      {
+        "line": 56,
+        "declaration": "async listCourseReviews("
+      },
+      {
+        "line": 157,
+        "declaration": "async getMyCourseReviewState("
+      },
+      {
+        "line": 242,
+        "declaration": "async upsertMyCourseReview("
+      },
+      {
+        "line": 374,
+        "declaration": "async reportCourseReview("
+      },
+      {
+        "line": 463,
+        "declaration": "async recalculateCourseRating("
+      }
+    ]
+  },
+  {
+    "file": "src/modules/reviews/schemas/course-review.schema.ts",
+    "lines": 72,
+    "bytes": 1874,
+    "sha256": "059bcd5cee185b57e62f5b293e7bc4222eefd0ecde5e3bf72b541e51c971ebc5",
+    "declarations": [
+      {
+        "line": 15,
+        "declaration": "export class CourseReview {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/uploads/dto/upload-response.dto.ts",
+    "lines": 50,
+    "bytes": 1572,
+    "sha256": "bdfb6ad35e0db26db1b91b69c9ea93517af6917acbc0342ac05549caa2e4b323",
+    "declarations": [
+      {
+        "line": 7,
+        "declaration": "export class UploadImageQueryDto {"
+      },
+      {
+        "line": 18,
+        "declaration": "export class UploadResponseDto {"
+      },
+      {
+        "line": 37,
+        "declaration": "export class UploadDocumentResponseDto extends UploadResponseDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/uploads/uploads.controller.ts",
+    "lines": 195,
+    "bytes": 5987,
+    "sha256": "3d8c8cb20b7f1a1228d4c082d0e6b9e03172ab5562715ef2f308663ef0a9d578",
+    "declarations": [
+      {
+        "line": 47,
+        "declaration": "export class UploadsController {"
+      },
+      {
+        "line": 86,
+        "declaration": "async uploadImage("
+      }
+    ]
+  },
+  {
+    "file": "src/modules/uploads/uploads.module.ts",
+    "lines": 12,
+    "bytes": 387,
+    "sha256": "f26211f02424d868eb7e6e08b75bd0ee6bbb93d694824a8bd77b1a427c9e7741",
+    "declarations": [
+      {
+        "line": 11,
+        "declaration": "export class UploadsModule {}"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/uploads/uploads.service.spec.ts",
+    "lines": 148,
+    "bytes": 5370,
+    "sha256": "ed74668fc17934bdefd3f750af5188fdc498f632edd565993f5a8912bcf2aa7d",
+    "declarations": [
+      {
+        "line": 12,
+        "declaration": "describe('UploadsService', () => {"
+      },
+      {
+        "line": 17,
+        "declaration": "it('detects JPEG, PNG and WEBP magic bytes accurately', () => {"
+      },
+      {
+        "line": 31,
+        "declaration": "it('detects MP4 and WEBM video magic bytes accurately', () => {"
+      },
+      {
+        "line": 43,
+        "declaration": "it('accepts a valid PNG image and returns its /public/images/courses URL, then deletes it safely', async () => {"
+      },
+      {
+        "line": 74,
+        "declaration": "it('accepts a valid MP4 video in public/videos and deletes it safely', async () => {"
+      },
+      {
+        "line": 102,
+        "declaration": "it('rejects and deletes a spoofed file whose magic bytes are not an image or video', async () => {"
+      },
+      {
+        "line": 139,
+        "declaration": "it('ignores external URLs or path traversal attempts in deleteLocalFile', async () => {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/uploads/uploads.service.ts",
+    "lines": 517,
+    "bytes": 16851,
+    "sha256": "c4f743b53d7dd80fbcebcecfffafe3ba7f1e85e00ca5fffaa484a13be6f1b1ec",
+    "declarations": [
+      {
+        "line": 49,
+        "declaration": "export function detectImageMimeFromBytes("
+      },
+      {
+        "line": 84,
+        "declaration": "export function detectVideoMimeFromBytes("
+      },
+      {
+        "line": 110,
+        "declaration": "export function extractTextFromDocxBuffer(buffer: Buffer): string | null {"
+      },
+      {
+        "line": 179,
+        "declaration": "export function resolveImageFolder(rawFolder: unknown): ImageUploadFolder {"
+      },
+      {
+        "line": 189,
+        "declaration": "export function createImageMulterOptions(): MulterOptions {"
+      },
+      {
+        "line": 226,
+        "declaration": "export function createVideoMulterOptions(): MulterOptions {"
+      },
+      {
+        "line": 262,
+        "declaration": "export function createDocumentMulterOptions(): MulterOptions {"
+      },
+      {
+        "line": 300,
+        "declaration": "export class UploadsService {"
+      },
+      {
+        "line": 311,
+        "declaration": "async finalizeUploadedImage("
+      },
+      {
+        "line": 343,
+        "declaration": "async finalizeUploadedVideo("
+      },
+      {
+        "line": 373,
+        "declaration": "async finalizeUploadedDocument("
+      },
+      {
+        "line": 458,
+        "declaration": "async deleteLocalFile(publicUrl: string | null | undefined): Promise<void> {"
+      },
+      {
+        "line": 459,
+        "declaration": "if (!publicUrl || !LOCAL_PUBLIC_FILE_PATTERN.test(publicUrl)) {"
+      },
+      {
+        "line": 472,
+        "declaration": "async discardTempFile(filePath: string): Promise<void> {"
+      },
+      {
+        "line": 476,
+        "declaration": "private async readAndDetectImageMime("
+      },
+      {
+        "line": 483,
+        "declaration": "private async readAndDetectVideoMime("
+      },
+      {
+        "line": 490,
+        "declaration": "private async readHeaderBytes("
+      },
+      {
+        "line": 507,
+        "declaration": "private async safeUnlink(filePath: string): Promise<void> {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/users/dto/manage-user.dto.ts",
+    "lines": 119,
+    "bytes": 2958,
+    "sha256": "dd99985686dfcb629f0a9acffc4c2318beb6ada0bcffa6c5de99b06c27dcb9dd",
+    "declarations": [
+      {
+        "line": 21,
+        "declaration": "export enum ManageUserSort {"
+      },
+      {
+        "line": 27,
+        "declaration": "export class ManageUserQueryDto {"
+      },
+      {
+        "line": 65,
+        "declaration": "export class CreateManageUserDto {"
+      },
+      {
+        "line": 97,
+        "declaration": "export class UpdateManageUserRoleDto {"
+      },
+      {
+        "line": 103,
+        "declaration": "export class UpdateManageUserStatusDto {"
+      },
+      {
+        "line": 114,
+        "declaration": "export class ManageUserIdParamsDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/users/dto/user-profile.dto.ts",
+    "lines": 123,
+    "bytes": 3468,
+    "sha256": "db3c14a85e8069f32076e337312abb0a62cdcedb243536c97cffd236f048a5a4",
+    "declarations": [
+      {
+        "line": 18,
+        "declaration": "export class UpdateProfileDto {"
+      },
+      {
+        "line": 71,
+        "declaration": "!LOCAL_AVATAR_PATTERN.test(object.avatar),"
+      },
+      {
+        "line": 95,
+        "declaration": "export class ChangePasswordDto {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/users/manage-users.controller.ts",
+    "lines": 109,
+    "bytes": 3681,
+    "sha256": "83d1cb9520b3c54136640a90d50abfca77a43543a4accc4b79bc84d8a1ea970b",
+    "declarations": [
+      {
+        "line": 45,
+        "declaration": "export class ManageUsersController {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/users/schemas/user.schema.ts",
+    "lines": 100,
+    "bytes": 2864,
+    "sha256": "379c0bac6be3151f52cfc54beae5aa901795ed1a97c1bd28261a3b76c88fbd1b",
+    "declarations": [
+      {
+        "line": 17,
+        "declaration": "export class User {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/users/users.controller.ts",
+    "lines": 65,
+    "bytes": 2398,
+    "sha256": "d8ad1e0c9ff6b1678565182a182d8436c7312e6f2e7c6500e433f76962f64697",
+    "declarations": [
+      {
+        "line": 23,
+        "declaration": "export class UsersController {"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/users/users.module.ts",
+    "lines": 25,
+    "bytes": 857,
+    "sha256": "0586f899f364233454d10553fe8b2450b4743456ad4359093067ffb7bef06719",
+    "declarations": [
+      {
+        "line": 25,
+        "declaration": "export class UsersModule {}"
+      }
+    ]
+  },
+  {
+    "file": "src/modules/users/users.service.ts",
+    "lines": 525,
+    "bytes": 15645,
+    "sha256": "8424c3ffdcef27785ce0d456734c5b2e640d7cee01eaeeca90cad675cbb7fa7e",
+    "declarations": [
+      {
+        "line": 31,
+        "declaration": "function escapeRegex(value: string): string {"
+      },
+      {
+        "line": 35,
+        "declaration": "export interface SerializedUser {"
+      },
+      {
+        "line": 50,
+        "declaration": "export class UsersService implements OnApplicationBootstrap {"
+      },
+      {
+        "line": 64,
+        "declaration": "async onApplicationBootstrap() {"
+      },
+      {
+        "line": 108,
+        "declaration": "async create(data: {"
+      },
+      {
+        "line": 139,
+        "declaration": "async findByEmail("
+      },
+      {
+        "line": 150,
+        "declaration": "async findById("
+      },
+      {
+        "line": 164,
+        "declaration": "async findActiveInstructors(): Promise<"
+      },
+      {
+        "line": 183,
+        "declaration": "async isActiveInstructor(id: string): Promise<boolean> {"
+      },
+      {
+        "line": 199,
+        "declaration": "async markActive(email: string): Promise<UserDocument | null> {"
+      },
+      {
+        "line": 209,
+        "declaration": "async updateRole(id: string, role: Role): Promise<UserDocument | null> {"
+      },
+      {
+        "line": 218,
+        "declaration": "async updateStatus("
+      },
+      {
+        "line": 230,
+        "declaration": "async updatePassword("
+      },
+      {
+        "line": 242,
+        "declaration": "async update("
+      },
+      {
+        "line": 257,
+        "declaration": "async getProfile(userId: string): Promise<SerializedUser> {"
+      },
+      {
+        "line": 268,
+        "declaration": "async updateProfile("
+      },
+      {
+        "line": 325,
+        "declaration": "async changePassword("
+      },
+      {
+        "line": 368,
+        "declaration": "async listManageUsers(query: ManageUserQueryDto) {"
+      },
+      {
+        "line": 427,
+        "declaration": "async createManageUser("
+      },
+      {
+        "line": 456,
+        "declaration": "async updateManageUserRole("
+      },
+      {
+        "line": 490,
+        "declaration": "async updateManageUserStatus("
+      }
+    ]
+  },
+  {
+    "file": "src/seeds/courses.seed-data.ts",
+    "lines": 589,
+    "bytes": 20930,
+    "sha256": "e2cc0ebb2a6ea35c431fbddcf6022a742c63fb4f48d961cf0d42fd7ff31a4e16",
+    "declarations": [
+      {
+        "line": 4,
+        "declaration": "export interface SeedChapter {"
+      },
+      {
+        "line": 9,
+        "declaration": "export interface SeedCourse {"
+      }
+    ]
+  },
+  {
+    "file": "src/seeds/courses.seed.ts",
+    "lines": 217,
+    "bytes": 6801,
+    "sha256": "a7c068cfbf1871182202bfffe53331868304eb6105f17346dcdd2a7c9e6d279b",
+    "declarations": [
+      {
+        "line": 26,
+        "declaration": "function buildChapters("
+      },
+      {
+        "line": 55,
+        "declaration": "async function seedInstructors("
+      },
+      {
+        "line": 95,
+        "declaration": "async function seedCourses("
+      },
+      {
+        "line": 166,
+        "declaration": "export async function runCoursesSeed(): Promise<void> {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/App.vue",
+    "lines": 7,
+    "bytes": 107,
+    "sha256": "e49f17edcc80349a28a412ca9d0e9e708e02f624717042ff36f265334f9caf09",
+    "declarations": []
+  },
+  {
+    "file": "client/src/assets/vite.svg",
+    "lines": 1,
+    "bytes": 8709,
+    "sha256": "5be21acd42eb7b896e517f4e0f0f11eb5c5d9e54fbbcebe9453f033008fcca6f",
+    "declarations": []
+  },
+  {
+    "file": "client/src/assets/vue.svg",
+    "lines": 1,
+    "bytes": 496,
+    "sha256": "5532db34f1c52841881bab8aeca6c3e8d092bd21a689a65f4d8f8cf8041eef9d",
+    "declarations": []
+  },
+  {
+    "file": "client/src/components/certificate/CertificateCardView.vue",
+    "lines": 252,
+    "bytes": 9137,
+    "sha256": "f474b9673d35ac2ea50eeb9e6e3e439511b5711ac0716be2c3ef66b33ca9d5cb",
+    "declarations": [
+      {
+        "line": 86,
+        "declaration": "async function copyVerifyLink(): Promise<void> {"
+      },
+      {
+        "line": 98,
+        "declaration": "function printCertificate(): void {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/components/course/CourseCard.vue",
+    "lines": 88,
+    "bytes": 3504,
+    "sha256": "d119168b2914777aa6e12e74556d286d937f5ea04fee36a1f8324dcec7cad0f8",
+    "declarations": []
+  },
+  {
+    "file": "client/src/components/course/CourseCardSkeleton.vue",
+    "lines": 17,
+    "bytes": 636,
+    "sha256": "c38e8fe978bbaa4549e01fa1ebd2c3189dd7664af80c3d093d6fae18e29deea1",
+    "declarations": []
+  },
+  {
+    "file": "client/src/components/course/CourseCover.vue",
+    "lines": 94,
+    "bytes": 3089,
+    "sha256": "73c5f61addb41b48183ec42bdb842dda58a6d3c4b50f2426b5b1d1123bae750a",
+    "declarations": []
+  },
+  {
+    "file": "client/src/components/course/CourseReviewsSection.vue",
+    "lines": 848,
+    "bytes": 28848,
+    "sha256": "c1eef2e86fa89d1aabf086be2b10b1d5711cbf4967464fcd9efab30590f05b91",
+    "declarations": [
+      {
+        "line": 89,
+        "declaration": "function getStarPercentage(star: 1 | 2 | 3 | 4 | 5): number {"
+      },
+      {
+        "line": 96,
+        "declaration": "function getInitials(name: string): string {"
+      },
+      {
+        "line": 106,
+        "declaration": "function formatReviewTime(iso: string): string {"
+      },
+      {
+        "line": 124,
+        "declaration": "function formatBanDeadline(iso: string | null): string {"
+      },
+      {
+        "line": 139,
+        "declaration": "function extractApiError(err: unknown, fallback: string): string {"
+      },
+      {
+        "line": 148,
+        "declaration": "function isReportedByMe(reviewId: string): boolean {"
+      },
+      {
+        "line": 152,
+        "declaration": "function canReportReview(item: CourseReviewItem): boolean {"
+      },
+      {
+        "line": 158,
+        "declaration": "async function loadReviews(): Promise<void> {"
+      },
+      {
+        "line": 192,
+        "declaration": "function selectStarFilter(star?: number): void {"
+      },
+      {
+        "line": 198,
+        "declaration": "function startEditingMyReview(): void {"
+      },
+      {
+        "line": 207,
+        "declaration": "function cancelEditingMyReview(): void {"
+      },
+      {
+        "line": 212,
+        "declaration": "async function handleSubmitMyReview(): Promise<void> {"
+      },
+      {
+        "line": 243,
+        "declaration": "function openReportDialog(item: CourseReviewItem): void {"
+      },
+      {
+        "line": 250,
+        "declaration": "function closeReportDialog(): void {"
+      },
+      {
+        "line": 256,
+        "declaration": "async function handleSubmitReport(): Promise<void> {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/components/course/CourseSection.vue",
+    "lines": 86,
+    "bytes": 2965,
+    "sha256": "65c33d4a2b8c4bc8aa102d24c3c00ee922e8b6534750f4c058a2c13849c2661d",
+    "declarations": []
+  },
+  {
+    "file": "client/src/components/HelloWorld.vue",
+    "lines": 9,
+    "bytes": 174,
+    "sha256": "e132eaf4f531bcaf374fc678619f8c57a99dd863d7e3b1a8ac0fa49fbd5c35c9",
+    "declarations": []
+  },
+  {
+    "file": "client/src/components/illustrations/HeroCodeWindow.vue",
+    "lines": 54,
+    "bytes": 2790,
+    "sha256": "2aece879650581763ef8fea22306679bb723d7adec0159b05683ac3805549276",
+    "declarations": []
+  },
+  {
+    "file": "client/src/components/illustrations/LanguageBadges.vue",
+    "lines": 41,
+    "bytes": 1422,
+    "sha256": "94abd8f5ae9ed4735d7baf39e4f50972c6cb18e0e2a279bdf15361ecba27d152",
+    "declarations": []
+  },
+  {
+    "file": "client/src/components/learning/CourseCompletionReviewModal.vue",
+    "lines": 286,
+    "bytes": 9125,
+    "sha256": "ac2e7f51144900f7119ee1c6800c1e07f640c1d6fd007ef6158e6a63e3c5bd0a",
+    "declarations": [
+      {
+        "line": 47,
+        "declaration": "function formatBanDeadline(iso: string | null): string {"
+      },
+      {
+        "line": 62,
+        "declaration": "async function syncMyReviewEligibility(): Promise<void> {"
+      },
+      {
+        "line": 77,
+        "declaration": "async function handleSubmit(): Promise<void> {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/components/learning/LessonDiscussionDrawer.vue",
+    "lines": 1325,
+    "bytes": 54243,
+    "sha256": "49ad09b573d1005ebff00e2be4f9e0c3ba7e6d9ac7d41946ca5103e224378498",
+    "declarations": [
+      {
+        "line": 109,
+        "declaration": "function getInitials(name: string): string {"
+      },
+      {
+        "line": 118,
+        "declaration": "function getAuthorBadge("
+      },
+      {
+        "line": 142,
+        "declaration": "function formatRelativeTime(isoDate: string): string {"
+      },
+      {
+        "line": 158,
+        "declaration": "function recomputeTotalComments(): void {"
+      },
+      {
+        "line": 166,
+        "declaration": "async function fetchComments(): Promise<void> {"
+      },
+      {
+        "line": 187,
+        "declaration": "function openRootComposer(): void {"
+      },
+      {
+        "line": 195,
+        "declaration": "function cancelRootComposer(): void {"
+      },
+      {
+        "line": 200,
+        "declaration": "function insertFormatToTextarea("
+      },
+      {
+        "line": 224,
+        "declaration": "async function submitRootComment(): Promise<void> {"
+      },
+      {
+        "line": 248,
+        "declaration": "function startReply("
+      },
+      {
+        "line": 266,
+        "declaration": "function cancelReply(): void {"
+      },
+      {
+        "line": 271,
+        "declaration": "async function submitReply(): Promise<void> {"
+      },
+      {
+        "line": 316,
+        "declaration": "function expandRepliesBatch(rootComment: LessonCommentItem): void {"
+      },
+      {
+        "line": 325,
+        "declaration": "function collapseAllReplies(rootCommentId: string): void {"
+      },
+      {
+        "line": 329,
+        "declaration": "function getVisibleReplies(rootComment: LessonCommentItem): LessonCommentItem[] {"
+      },
+      {
+        "line": 335,
+        "declaration": "function getRemainingRepliesCount(rootComment: LessonCommentItem): number {"
+      },
+      {
+        "line": 340,
+        "declaration": "async function handleToggleLike("
+      },
+      {
+        "line": 359,
+        "declaration": "function openReportDialog(targetComment: LessonCommentItem): void {"
+      },
+      {
+        "line": 366,
+        "declaration": "function closeReportDialog(): void {"
+      },
+      {
+        "line": 371,
+        "declaration": "async function submitReportViolation(): Promise<void> {"
+      },
+      {
+        "line": 401,
+        "declaration": "async function handleDeleteComment("
+      },
+      {
+        "line": 441,
+        "declaration": "function handleKeydown(event: KeyboardEvent): void {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/components/learning/LessonDocumentViewer.vue",
+    "lines": 334,
+    "bytes": 10758,
+    "sha256": "b6bda7e9305729e0f1830e946522e5946c210d4ba7803d2c9278808bee3cfa2a",
+    "declarations": [
+      {
+        "line": 41,
+        "declaration": "function cleanupObjectUrls() {"
+      },
+      {
+        "line": 52,
+        "declaration": "function paragraphStyle(p: DocxParagraphBlock): Record<string, string> {"
+      },
+      {
+        "line": 74,
+        "declaration": "function paragraphHeadingClass(p: DocxParagraphBlock): string {"
+      },
+      {
+        "line": 82,
+        "declaration": "function runStyle(run: DocxRun): Record<string, string> {"
+      },
+      {
+        "line": 105,
+        "declaration": "function runClass(run: DocxRun): string {"
+      },
+      {
+        "line": 114,
+        "declaration": "async function loadDocumentContent() {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/components/learning/LessonQuizPanel.vue",
+    "lines": 285,
+    "bytes": 9997,
+    "sha256": "4fdcb1f11fb0b0c26ffe4b8410b15fa34c42743ff0470e2c6966d57ae0ea1b08",
+    "declarations": [
+      {
+        "line": 75,
+        "declaration": "function selectOption(questionId: string, optionIndex: number): void {"
+      },
+      {
+        "line": 81,
+        "declaration": "function resetForRetry(): void {"
+      },
+      {
+        "line": 92,
+        "declaration": "function handleSubmit(): void {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/components/learning/LessonVideoPlayer.vue",
+    "lines": 414,
+    "bytes": 12221,
+    "sha256": "9ef9f84161f61ff758ff60bb59686ad93677b290a69e73792c1264c8d06b5f19",
+    "declarations": [
+      {
+        "line": 44,
+        "declaration": "function extractYouTubeId(rawUrl: string): string | null {"
+      },
+      {
+        "line": 65,
+        "declaration": "function syncCurrentPositionFromPlayer(): void {"
+      },
+      {
+        "line": 77,
+        "declaration": "function stopPlayTimer(): void {"
+      },
+      {
+        "line": 84,
+        "declaration": "function startPlayTimer(): void {"
+      },
+      {
+        "line": 136,
+        "declaration": "function flushProgressOnPause(): void {"
+      },
+      {
+        "line": 162,
+        "declaration": "function handleVideoEnded(): void {"
+      },
+      {
+        "line": 191,
+        "declaration": "function onHtmlLoadedMetadata(): void {"
+      },
+      {
+        "line": 202,
+        "declaration": "function onHtmlPlay(): void {"
+      },
+      {
+        "line": 207,
+        "declaration": "function onHtmlTimeUpdate(): void {"
+      },
+      {
+        "line": 213,
+        "declaration": "function onHtmlPause(): void {"
+      },
+      {
+        "line": 219,
+        "declaration": "function onHtmlEnded(): void {"
+      },
+      {
+        "line": 226,
+        "declaration": "function loadYouTubeIframeApi(): Promise<any> {"
+      },
+      {
+        "line": 250,
+        "declaration": "function destroyYtPlayer(): void {"
+      },
+      {
+        "line": 262,
+        "declaration": "async function initYouTubePlayer(): Promise<void> {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/components/manage/ChapterEditorDialog.vue",
+    "lines": 67,
+    "bytes": 2246,
+    "sha256": "f7ed5e6052d174677c004e51be234b0ac8346ccb18486bb6b90bf12089511e97",
+    "declarations": [
+      {
+        "line": 33,
+        "declaration": "function save() {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/components/manage/CourseContentEditor.vue",
+    "lines": 508,
+    "bytes": 23149,
+    "sha256": "b8b793b8f51e72a972a6380ef1e3b23135c07a94ee38af23a14da156ecf01f0f",
+    "declarations": [
+      {
+        "line": 40,
+        "declaration": "interface ContentActions {"
+      },
+      {
+        "line": 54,
+        "declaration": "interface VideoUploadTask {"
+      },
+      {
+        "line": 114,
+        "declaration": "function formatFileSize(bytes: number): string {"
+      },
+      {
+        "line": 120,
+        "declaration": "function hasLessonVideo(lesson: ManageLesson): boolean {"
+      },
+      {
+        "line": 124,
+        "declaration": "function isYouTubeLesson(lesson: ManageLesson): boolean {"
+      },
+      {
+        "line": 128,
+        "declaration": "function removeUploadTask(taskId: string) {"
+      },
+      {
+        "line": 135,
+        "declaration": "function cancelUploadTask(task: VideoUploadTask) {"
+      },
+      {
+        "line": 145,
+        "declaration": "async function startBackgroundVideoUpload("
+      },
+      {
+        "line": 206,
+        "declaration": "function openChapterDialog(chapter?: { id: string; title: string }) {"
+      },
+      {
+        "line": 211,
+        "declaration": "async function saveChapter(title: string) {"
+      },
+      {
+        "line": 224,
+        "declaration": "async function moveChapter(index: number, offset: number) {"
+      },
+      {
+        "line": 236,
+        "declaration": "function openLessonDialog(chapterId: string, lesson: ManageLesson | null = null) {"
+      },
+      {
+        "line": 241,
+        "declaration": "async function saveLesson("
+      },
+      {
+        "line": 271,
+        "declaration": "async function moveLesson(chapterId: string, index: number, offset: number) {"
+      },
+      {
+        "line": 285,
+        "declaration": "function openQuizDialog(chapterId: string, lesson: ManageLesson, question: ManageQuizQuestion | null = null) {"
+      },
+      {
+        "line": 290,
+        "declaration": "async function saveQuestion(payload: ManageQuizQuestionPayload) {"
+      },
+      {
+        "line": 310,
+        "declaration": "async function confirmDelete() {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/components/manage/CourseInfoForm.vue",
+    "lines": 463,
+    "bytes": 19158,
+    "sha256": "3523c635e100f1803412c4f6da6f0e4afdab6476106e43b2563a3e8ed649c38d",
+    "declarations": [
+      {
+        "line": 29,
+        "declaration": "interface CourseForm {"
+      },
+      {
+        "line": 44,
+        "declaration": "function blankForm(): CourseForm {"
+      },
+      {
+        "line": 68,
+        "declaration": "function revokeLocalPreview() {"
+      },
+      {
+        "line": 75,
+        "declaration": "function resetFileSelection() {"
+      },
+      {
+        "line": 83,
+        "declaration": "function resetForm(course: ManageCourseDetail | null) {"
+      },
+      {
+        "line": 148,
+        "declaration": "function formatFileSize(bytes: number): string {"
+      },
+      {
+        "line": 154,
+        "declaration": "function triggerFilePicker() {"
+      },
+      {
+        "line": 159,
+        "declaration": "function handleFileChange(event: Event) {"
+      },
+      {
+        "line": 183,
+        "declaration": "function clearThumbnail() {"
+      },
+      {
+        "line": 193,
+        "declaration": "function addOutcome() {"
+      },
+      {
+        "line": 197,
+        "declaration": "function removeOutcome(index: number) {"
+      },
+      {
+        "line": 205,
+        "declaration": "function validate(): boolean {"
+      },
+      {
+        "line": 258,
+        "declaration": "function save() {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/components/manage/CourseStatusBadge.vue",
+    "lines": 30,
+    "bytes": 712,
+    "sha256": "8fff280205befd2dc16be34b6d4a5b4a98a1414d54a64001d09e7dc2bd98ee65",
+    "declarations": []
+  },
+  {
+    "file": "client/src/components/manage/CourseStatusPanel.vue",
+    "lines": 132,
+    "bytes": 7107,
+    "sha256": "f25dce4aeeea654a86e5b0e910ce7ed9ae4de1283df78b70872976cc54d7b1bd",
+    "declarations": [
+      {
+        "line": 39,
+        "declaration": "function confirmAction(reason: string) {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/components/manage/LessonEditorDialog.vue",
+    "lines": 962,
+    "bytes": 33645,
+    "sha256": "a5f3053bda9df659c23c30d9028ab094f55832a7c98e9232182007d819b1e8fc",
+    "declarations": [
+      {
+        "line": 100,
+        "declaration": "function formatFileSize(bytes: number): string {"
+      },
+      {
+        "line": 106,
+        "declaration": "function getFileExtension(filename: string): string {"
+      },
+      {
+        "line": 111,
+        "declaration": "function destroyYouTubePlayer() {"
+      },
+      {
+        "line": 126,
+        "declaration": "function revokeLocalVideoPreview() {"
+      },
+      {
+        "line": 133,
+        "declaration": "function resetVideoSelection() {"
+      },
+      {
+        "line": 141,
+        "declaration": "async function mountYouTubePreview(videoId: string, fallbackDuration = 0) {"
+      },
+      {
+        "line": 202,
+        "declaration": "function switchSourceMode(nextMode: VideoSourceMode) {"
+      },
+      {
+        "line": 318,
+        "declaration": "function triggerVideoPicker() {"
+      },
+      {
+        "line": 323,
+        "declaration": "function handleVideoFileChange(event: Event) {"
+      },
+      {
+        "line": 350,
+        "declaration": "function clearSelectedVideo() {"
+      },
+      {
+        "line": 363,
+        "declaration": "function removeExistingVideo() {"
+      },
+      {
+        "line": 374,
+        "declaration": "function handleLocalVideoMetadata(event: Event) {"
+      },
+      {
+        "line": 387,
+        "declaration": "function handleLocalVideoError() {"
+      },
+      {
+        "line": 395,
+        "declaration": "function triggerDocPicker() {"
+      },
+      {
+        "line": 400,
+        "declaration": "async function handleDocFileChange(event: Event) {"
+      },
+      {
+        "line": 440,
+        "declaration": "function removeAttachedDocument() {"
+      },
+      {
+        "line": 448,
+        "declaration": "function validate(): boolean {"
+      },
+      {
+        "line": 484,
+        "declaration": "function submit() {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/components/manage/ManageActionDialog.vue",
+    "lines": 109,
+    "bytes": 3222,
+    "sha256": "99b1fda2262ea13b7c331a5d6405395ccb0b20efd5c155558da17ba5a503737e",
+    "declarations": [
+      {
+        "line": 46,
+        "declaration": "function submit() {"
+      },
+      {
+        "line": 51,
+        "declaration": "function cancel() {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/components/manage/ManageCourseActions.vue",
+    "lines": 58,
+    "bytes": 2967,
+    "sha256": "e67e2b3d30e438bbb14cb8861f7ce7461975a3f9ea4d8ebe517242a6cf1ebf70",
+    "declarations": []
+  },
+  {
+    "file": "client/src/components/manage/ManageCourseThumbnail.vue",
+    "lines": 21,
+    "bytes": 675,
+    "sha256": "751eb9d5ca51f8a9d3cf67d61e078ac962902a15d8aeed01a9175e0d9dbbb92a",
+    "declarations": []
+  },
+  {
+    "file": "client/src/components/manage/QuizQuestionDialog.vue",
+    "lines": 120,
+    "bytes": 6057,
+    "sha256": "1506db4ed059f41db332559ddd0ec09eef4c212741fb2728118989d8ecd310d8",
+    "declarations": [
+      {
+        "line": 38,
+        "declaration": "function addOption() {"
+      },
+      {
+        "line": 42,
+        "declaration": "function removeOption(index: number) {"
+      },
+      {
+        "line": 49,
+        "declaration": "function submit() {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/components/public/PublicFooter.vue",
+    "lines": 57,
+    "bytes": 3083,
+    "sha256": "b1265ce3994375d0d73209122d184f56b8239782df307c81bd941fcfa5e4afe9",
+    "declarations": [
+      {
+        "line": 2,
+        "declaration": "function scrollToTop() {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/components/public/PublicHeader.vue",
+    "lines": 719,
+    "bytes": 25560,
+    "sha256": "53daf238ee629c078ec89facd59f50a9af172ee521473567f05be74b344610c5",
+    "declarations": [
+      {
+        "line": 45,
+        "declaration": "async function loadNotifications() {"
+      },
+      {
+        "line": 60,
+        "declaration": "async function handleMarkAllRead() {"
+      },
+      {
+        "line": 170,
+        "declaration": "function closeDropdown() {"
+      },
+      {
+        "line": 176,
+        "declaration": "function openSuggestions() {"
+      },
+      {
+        "line": 182,
+        "declaration": "function closeSuggestions() {"
+      },
+      {
+        "line": 187,
+        "declaration": "function onSearchInput() {"
+      },
+      {
+        "line": 191,
+        "declaration": "function handleDocumentClick(event: MouseEvent) {"
+      },
+      {
+        "line": 211,
+        "declaration": "async function logout() {"
+      },
+      {
+        "line": 218,
+        "declaration": "async function submitSearch() {"
+      },
+      {
+        "line": 230,
+        "declaration": "async function selectCourseSuggestion(course: CourseCard) {"
+      },
+      {
+        "line": 236,
+        "declaration": "function onSearchKeydown(event: KeyboardEvent) {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/composables/useManageCatalog.ts",
+    "lines": 36,
+    "bytes": 1341,
+    "sha256": "1408dd3c6c3440af1f8a9395968a2920c48c48b6561b8114e7434a5b532e231c",
+    "declarations": [
+      {
+        "line": 8,
+        "declaration": "export function useManageCatalog() {"
+      },
+      {
+        "line": 14,
+        "declaration": "async function loadCatalog(includeInstructors: boolean) {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/composables/useManageCourseEditor.ts",
+    "lines": 225,
+    "bytes": 7800,
+    "sha256": "1a66b12352dfd442f54567c46a75ef55c5e468ea67ad1895e2b6579209b95f72",
+    "declarations": [
+      {
+        "line": 13,
+        "declaration": "export function useManageCourseEditor() {"
+      },
+      {
+        "line": 20,
+        "declaration": "async function load(courseId: string) {"
+      },
+      {
+        "line": 34,
+        "declaration": "async function perform<T>("
+      },
+      {
+        "line": 54,
+        "declaration": "function updateDetail(request: () => Promise<ManageCourseDetail>, key = 'save') {"
+      },
+      {
+        "line": 60,
+        "declaration": "async function create("
+      },
+      {
+        "line": 74,
+        "declaration": "async function update("
+      },
+      {
+        "line": 90,
+        "declaration": "async function transition(action: 'submit' | 'withdraw' | 'approve' | 'hide') {"
+      },
+      {
+        "line": 99,
+        "declaration": "async function reject(reason: string) {"
+      },
+      {
+        "line": 105,
+        "declaration": "async function deleteCourse() {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/composables/useManageCourseList.ts",
+    "lines": 63,
+    "bytes": 2181,
+    "sha256": "917647cde02465ec51b3150118c793afec8724e3cb7eddd89ad0bab7dee8f8f9",
+    "declarations": [
+      {
+        "line": 10,
+        "declaration": "export function useManageCourseList() {"
+      },
+      {
+        "line": 19,
+        "declaration": "async function load(query: ManageCourseQuery) {"
+      },
+      {
+        "line": 38,
+        "declaration": "async function act("
+      },
+      {
+        "line": 61,
+        "declaration": "export function isManageCourseStatus(value: unknown): value is ManageCourseStatus {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/layouts/AuthLayout.vue",
+    "lines": 53,
+    "bytes": 2058,
+    "sha256": "2c320fff903b9244215a8493e3c883d07d42d76850135128acb6a4365b3f4df2",
+    "declarations": []
+  },
+  {
+    "file": "client/src/layouts/ManageLayout.vue",
+    "lines": 199,
+    "bytes": 6869,
+    "sha256": "c6c7ddcb2ef3face3528e6e05127463887fff3c12a26a088015ca988777b362e",
+    "declarations": [
+      {
+        "line": 88,
+        "declaration": "async function logout() {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/layouts/PublicLayout.vue",
+    "lines": 14,
+    "bytes": 334,
+    "sha256": "5f597b8f8b9973deed3d771d061db33fbfb0952dfa0aac3aba5746a5ce4286af",
+    "declarations": []
+  },
+  {
+    "file": "client/src/lib/course-format.ts",
+    "lines": 25,
+    "bytes": 995,
+    "sha256": "6019664c6b1c117dbf40e0bb85bc0a307e4e83f8ca2dd7495c840d2b7bfa78c1",
+    "declarations": [
+      {
+        "line": 1,
+        "declaration": "export function formatCoursePrice(price: number): string {"
+      },
+      {
+        "line": 5,
+        "declaration": "export function formatCourseDuration(durationInSeconds: number): string {"
+      },
+      {
+        "line": 17,
+        "declaration": "export function getCourseErrorMessage(error: unknown): string {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/lib/docx-parser.ts",
+    "lines": 862,
+    "bytes": 28074,
+    "sha256": "7fe3554b714dfea6f2473973716c566344b02e0a3fba10eaa1d2ddeffedb025c",
+    "declarations": [
+      {
+        "line": 1,
+        "declaration": "export interface DocxRun {"
+      },
+      {
+        "line": 20,
+        "declaration": "export interface DocxParagraphBlock {"
+      },
+      {
+        "line": 35,
+        "declaration": "export interface DocxTableCell {"
+      },
+      {
+        "line": 41,
+        "declaration": "export interface DocxTableRow {"
+      },
+      {
+        "line": 45,
+        "declaration": "export interface DocxTableBlock {"
+      },
+      {
+        "line": 52,
+        "declaration": "export interface ParsedDocxDocument {"
+      },
+      {
+        "line": 58,
+        "declaration": "interface ZipEntryMeta {"
+      },
+      {
+        "line": 66,
+        "declaration": "interface StyleDef {"
+      },
+      {
+        "line": 99,
+        "declaration": "function twipsToPx(twips: number): number {"
+      },
+      {
+        "line": 104,
+        "declaration": "function emuToPx(emu: number): number {"
+      },
+      {
+        "line": 109,
+        "declaration": "function normalizeHexColor(raw: string | null | undefined): string | null {"
+      },
+      {
+        "line": 113,
+        "declaration": "if (/^[0-9a-fA-F]{6}$/.test(cleaned)) {"
+      },
+      {
+        "line": 119,
+        "declaration": "function getLocalAttr(el: Element, localName: string): string | null {"
+      },
+      {
+        "line": 127,
+        "declaration": "function findDirectChild(parent: Element, localName: string): Element | null {"
+      },
+      {
+        "line": 137,
+        "declaration": "function findDirectChildren(parent: Element, localName: string): Element[] {"
+      },
+      {
+        "line": 148,
+        "declaration": "async function inflateRawBytes(compressed: Uint8Array): Promise<Uint8Array> {"
+      },
+      {
+        "line": 178,
+        "declaration": "function parseZipDirectory(buffer: ArrayBuffer): ZipEntryMeta[] {"
+      },
+      {
+        "line": 262,
+        "declaration": "async function extractZipEntryBytes("
+      },
+      {
+        "line": 297,
+        "declaration": "function parseStylesXml(xmlText: string): Map<string, StyleDef> {"
+      },
+      {
+        "line": 395,
+        "declaration": "function resolveStyleDef("
+      },
+      {
+        "line": 410,
+        "declaration": "function parseRelsXml(xmlText: string): Map<string, string> {"
+      },
+      {
+        "line": 427,
+        "declaration": "function parseParagraphElement("
+      },
+      {
+        "line": 682,
+        "declaration": "function parseTableElement("
+      },
+      {
+        "line": 738,
+        "declaration": "export async function parseDocxArrayBuffer("
+      }
+    ]
+  },
+  {
+    "file": "client/src/lib/manage-course-format.ts",
+    "lines": 43,
+    "bytes": 1463,
+    "sha256": "9967c311b90193d21e18e0417652b61017bfb8da9dd1f58f1c87aaeb7d24656d",
+    "declarations": [
+      {
+        "line": 1,
+        "declaration": "export function secondsToParts(seconds: number): { minutes: number; seconds: number } {"
+      },
+      {
+        "line": 9,
+        "declaration": "export function partsToSeconds(minutes: number, seconds: number): number {"
+      },
+      {
+        "line": 13,
+        "declaration": "export function getManageErrorMessage("
+      }
+    ]
+  },
+  {
+    "file": "client/src/lib/video-embed.ts",
+    "lines": 132,
+    "bytes": 3893,
+    "sha256": "2538ef8ebc6ef7ed0a95f43817b5f417e99b8d0e8705cd61cc8af488918701c6",
+    "declarations": [
+      {
+        "line": 11,
+        "declaration": "export interface ParsedYouTubeEmbed {"
+      },
+      {
+        "line": 17,
+        "declaration": "export function buildCanonicalYouTubeIframe(videoId: string): string {"
+      },
+      {
+        "line": 21,
+        "declaration": "export function parseYouTubeEmbedInput(raw: string): ParsedYouTubeEmbed | null {"
+      },
+      {
+        "line": 26,
+        "declaration": "if (/^<iframe\\b/i.test(trimmed)) {"
+      },
+      {
+        "line": 27,
+        "declaration": "if (!/^<iframe\\b[^>]*>\\s*<\\/iframe>$/i.test(trimmed)) {"
+      },
+      {
+        "line": 59,
+        "declaration": "export function isLocalVideoUrl(raw: string): boolean {"
+      },
+      {
+        "line": 60,
+        "declaration": "return LOCAL_VIDEO_PATH_REGEX.test(raw.trim());"
+      },
+      {
+        "line": 63,
+        "declaration": "export interface YouTubePlayerInstance {"
+      },
+      {
+        "line": 68,
+        "declaration": "interface YouTubeNamespace {"
+      },
+      {
+        "line": 85,
+        "declaration": "interface Window {"
+      },
+      {
+        "line": 93,
+        "declaration": "export function loadYouTubeIframeApi(): Promise<YouTubeNamespace> {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/main.ts",
+    "lines": 15,
+    "bytes": 342,
+    "sha256": "feb778f93dade6598db7912cfaae9dc74ef12f9bf2b4c8e0dc871bb8ef1bc884",
+    "declarations": []
+  },
+  {
+    "file": "client/src/pages/dashboard/DashboardPage.vue",
+    "lines": 341,
+    "bytes": 13703,
+    "sha256": "b37e46da59d16043529ac086e592d44c66820c2417f2ab34d68b93f049655b79",
+    "declarations": [
+      {
+        "line": 42,
+        "declaration": "function formatUpdatedAt(value: string): string {"
+      },
+      {
+        "line": 47,
+        "declaration": "async function loadDashboardData() {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/pages/ForbiddenPage.vue",
+    "lines": 23,
+    "bytes": 957,
+    "sha256": "0f1449294f65b96f201b8ce30c5edc608cff89ae4bc349a934f7d8da9bda5a73",
+    "declarations": []
+  },
+  {
+    "file": "client/src/pages/manage/ManageCourseEditPage.vue",
+    "lines": 239,
+    "bytes": 9028,
+    "sha256": "19c661292bbe96794a69976fc035668e44515b76578cceb406646c1202da629e",
+    "declarations": [
+      {
+        "line": 49,
+        "declaration": "function confirmDiscard(): boolean {"
+      },
+      {
+        "line": 64,
+        "declaration": "function beforeUnload(event: BeforeUnloadEvent) {"
+      },
+      {
+        "line": 94,
+        "declaration": "function setTab(tab: ManageCourseTab) {"
+      },
+      {
+        "line": 101,
+        "declaration": "async function saveInfo("
+      },
+      {
+        "line": 127,
+        "declaration": "async function handleStatusAction("
+      }
+    ]
+  },
+  {
+    "file": "client/src/pages/manage/ManageCoursesPage.vue",
+    "lines": 423,
+    "bytes": 19884,
+    "sha256": "f7498f406a0bc54ed3ce8aace9035dbbf6ce8b1548854915cc26f0948f55bdb7",
+    "declarations": [
+      {
+        "line": 82,
+        "declaration": "function routeString(value: unknown): string {"
+      },
+      {
+        "line": 86,
+        "declaration": "function routeQueryValue(value: unknown): string | undefined {"
+      },
+      {
+        "line": 90,
+        "declaration": "function makeQuery(): ManageCourseQuery {"
+      },
+      {
+        "line": 109,
+        "declaration": "function syncKeyword() {"
+      },
+      {
+        "line": 113,
+        "declaration": "async function fetchList() {"
+      },
+      {
+        "line": 142,
+        "declaration": "function changeQuery(values: Record<string, string | undefined>) {"
+      },
+      {
+        "line": 146,
+        "declaration": "function selectStatus(status?: ManageCourseStatus) {"
+      },
+      {
+        "line": 150,
+        "declaration": "function selectType(value: string) {"
+      },
+      {
+        "line": 154,
+        "declaration": "function setCategory(value: string) {"
+      },
+      {
+        "line": 158,
+        "declaration": "function setInstructor(value: string) {"
+      },
+      {
+        "line": 162,
+        "declaration": "function setSort(value: string) {"
+      },
+      {
+        "line": 166,
+        "declaration": "function openAction(course: ManageCourseItem, action: NonNullable<typeof pendingAction.value>['action']) {"
+      },
+      {
+        "line": 170,
+        "declaration": "async function confirmAction(reason: string) {"
+      },
+      {
+        "line": 188,
+        "declaration": "function formatUpdatedAt(value: string): string {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/pages/manage/ManageCourseStudentsPage.vue",
+    "lines": 542,
+    "bytes": 20629,
+    "sha256": "2d9e5614e4d63029515de9340c93c110c83ab0d272838b4387ccc3db1c420028",
+    "declarations": [
+      {
+        "line": 43,
+        "declaration": "function formatDate(isoString: string | null): string {"
+      },
+      {
+        "line": 59,
+        "declaration": "function getInitials(name: string): string {"
+      },
+      {
+        "line": 67,
+        "declaration": "async function fetchStudents() {"
+      },
+      {
+        "line": 90,
+        "declaration": "function syncUrlAndFetch() {"
+      },
+      {
+        "line": 103,
+        "declaration": "function onSearchInput() {"
+      },
+      {
+        "line": 111,
+        "declaration": "function setStatus(tab: ManageCourseStudentsStatusFilter) {"
+      },
+      {
+        "line": 118,
+        "declaration": "function onSortChange() {"
+      },
+      {
+        "line": 123,
+        "declaration": "function changePage(page: number) {"
+      },
+      {
+        "line": 129,
+        "declaration": "function resetFilters() {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/pages/manage/ManageOrdersPage.vue",
+    "lines": 412,
+    "bytes": 13988,
+    "sha256": "c566a4be61e5f90081e174b078a16ae6b90fedd9c71475dceaf36289a89e8521",
+    "declarations": [
+      {
+        "line": 41,
+        "declaration": "function formatDateTime(iso?: string | null): string {"
+      },
+      {
+        "line": 54,
+        "declaration": "function statusBadgeLabel(status: OrderStatus): string {"
+      },
+      {
+        "line": 68,
+        "declaration": "async function fetchOrders(targetPage = page.value): Promise<void> {"
+      },
+      {
+        "line": 91,
+        "declaration": "function handleSearch(): void {"
+      },
+      {
+        "line": 95,
+        "declaration": "function selectStatus(nextStatus: 'ALL' | OrderStatus): void {"
+      },
+      {
+        "line": 100,
+        "declaration": "async function handleSyncOrder(order: OrderDetail): Promise<void> {"
+      },
+      {
+        "line": 121,
+        "declaration": "async function handleManualConfirm(order: OrderDetail): Promise<void> {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/pages/manage/ManageReportsPage.vue",
+    "lines": 689,
+    "bytes": 25675,
+    "sha256": "937d3db77b58b5fa2c802d2812a18b1d93d8212d07120f492c9cc580041a51a5",
+    "declarations": [
+      {
+        "line": 78,
+        "declaration": "function formatDateTime(iso: string | null): string {"
+      },
+      {
+        "line": 93,
+        "declaration": "function getTargetTypeLabel(type: string): string {"
+      },
+      {
+        "line": 99,
+        "declaration": "function getActionTakenLabel(action: ReportActionType | null): string {"
+      },
+      {
+        "line": 107,
+        "declaration": "function isActionable(item: ReportQueueItem): boolean {"
+      },
+      {
+        "line": 114,
+        "declaration": "async function fetchReports(): Promise<void> {"
+      },
+      {
+        "line": 130,
+        "declaration": "function setStatusTab(tab: StatusTab): void {"
+      },
+      {
+        "line": 135,
+        "declaration": "function openActionModal("
+      },
+      {
+        "line": 177,
+        "declaration": "function closeActionModal(): void {"
+      },
+      {
+        "line": 183,
+        "declaration": "async function confirmResolveAction(): Promise<void> {"
+      },
+      {
+        "line": 210,
+        "declaration": "function goToManageUsers(authorName: string): void {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/pages/manage/ManageUsersPage.vue",
+    "lines": 800,
+    "bytes": 27894,
+    "sha256": "80f2b30403f6d9a8b5ddb1d2725942d5268a365defbabfea80910f456a2fa6ae",
+    "declarations": [
+      {
+        "line": 84,
+        "declaration": "function buildQuery(): ManageUserQuery {"
+      },
+      {
+        "line": 98,
+        "declaration": "async function fetchUsers() {"
+      },
+      {
+        "line": 144,
+        "declaration": "function changeQuery(next: Record<string, string | undefined>) {"
+      },
+      {
+        "line": 148,
+        "declaration": "function getInitials(fullName: string): string {"
+      },
+      {
+        "line": 157,
+        "declaration": "function formatDate(raw?: string | null): string {"
+      },
+      {
+        "line": 163,
+        "declaration": "function roleBadgeClass(role: Role): string {"
+      },
+      {
+        "line": 176,
+        "declaration": "function statusBadgeClass(status: UserStatus): string {"
+      },
+      {
+        "line": 187,
+        "declaration": "function statusLabel(status: UserStatus): string {"
+      },
+      {
+        "line": 198,
+        "declaration": "async function handleRoleChange(targetUser: User, nextRole: Role) {"
+      },
+      {
+        "line": 215,
+        "declaration": "async function handleToggleLock(targetUser: User) {"
+      },
+      {
+        "line": 242,
+        "declaration": "function openCreateDialog() {"
+      },
+      {
+        "line": 253,
+        "declaration": "async function submitCreateUser() {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/pages/public/CertificateVerifyPage.vue",
+    "lines": 145,
+    "bytes": 4890,
+    "sha256": "325e6e429e1ec4875251fe60d97452d659d865767357828bfe7a50fa7658cd26",
+    "declarations": [
+      {
+        "line": 18,
+        "declaration": "async function lookupCertificate(rawCode: string): Promise<void> {"
+      },
+      {
+        "line": 34,
+        "declaration": "async function handleSubmit(): Promise<void> {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/pages/public/CourseDetailPage.vue",
+    "lines": 478,
+    "bytes": 19793,
+    "sha256": "724a53cb7fc332bd87886ccdca01434440dc9437bfe1b1eb8d3388dac0dba10a",
+    "declarations": [
+      {
+        "line": 72,
+        "declaration": "function instructorInitials(name: string): string {"
+      },
+      {
+        "line": 82,
+        "declaration": "async function loadCourse(id: string): Promise<void> {"
+      },
+      {
+        "line": 121,
+        "declaration": "async function handleCourseAction(): Promise<void> {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/pages/public/CoursesPage.vue",
+    "lines": 542,
+    "bytes": 21435,
+    "sha256": "c9e14fdb68412cc1f574d1fbf3ed70ca90ed6839e14cb091fc89658728e0e3a4",
+    "declarations": [
+      {
+        "line": 54,
+        "declaration": "function firstString(value: unknown): string | undefined {"
+      },
+      {
+        "line": 58,
+        "declaration": "function parseInteger(value: string | undefined, min: number, max: number): number | undefined {"
+      },
+      {
+        "line": 59,
+        "declaration": "if (!value || !/^\\d+$/.test(value)) return undefined;"
+      },
+      {
+        "line": 66,
+        "declaration": "function parsePrice(value: string | undefined): number | undefined {"
+      },
+      {
+        "line": 67,
+        "declaration": "if (!value || !/^\\d+(\\.\\d{1,2})?$/.test(value)) return undefined;"
+      },
+      {
+        "line": 72,
+        "declaration": "function normalizeQuery(query: LocationQuery): LocationQueryRaw {"
+      },
+      {
+        "line": 87,
+        "declaration": "if (categoryId && /^[a-f\\d]{24}$/i.test(categoryId)) {"
+      },
+      {
+        "line": 93,
+        "declaration": "if (minRating !== undefined && /^(?:\\d(?:\\.\\d{1,2})?|5(?:\\.0{1,2})?)$/.test(minRating)) {"
+      },
+      {
+        "line": 105,
+        "declaration": "function queriesMatch(current: LocationQuery, normalized: LocationQueryRaw): boolean {"
+      },
+      {
+        "line": 119,
+        "declaration": "function queryToFilters(query: LocationQuery): void {"
+      },
+      {
+        "line": 141,
+        "declaration": "function buildQuery(): LocationQueryRaw {"
+      },
+      {
+        "line": 157,
+        "declaration": "function limitValue(): number {"
+      },
+      {
+        "line": 161,
+        "declaration": "async function applyFilters(): Promise<void> {"
+      },
+      {
+        "line": 167,
+        "declaration": "async function selectType(type: '' | CourseType): Promise<void> {"
+      },
+      {
+        "line": 172,
+        "declaration": "async function setPage(page: number): Promise<void> {"
+      },
+      {
+        "line": 177,
+        "declaration": "async function clearFilters(): Promise<void> {"
+      },
+      {
+        "line": 191,
+        "declaration": "async function loadResults(query: LocationQuery): Promise<void> {"
+      },
+      {
+        "line": 237,
+        "declaration": "async function loadCategories(): Promise<void> {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/pages/public/ForgotPasswordPage.vue",
+    "lines": 85,
+    "bytes": 2590,
+    "sha256": "022e47896a7a46476e3e3aecfef27806abfee72c25f93ecbdcff294cbd0f3502",
+    "declarations": []
+  },
+  {
+    "file": "client/src/pages/public/HomePage.vue",
+    "lines": 524,
+    "bytes": 23625,
+    "sha256": "c62cb05cd481975f66ac996406a2e8bcd77cdcde578e76eea262c423add8c1de",
+    "declarations": [
+      {
+        "line": 17,
+        "declaration": "interface CourseCollectionState {"
+      },
+      {
+        "line": 40,
+        "declaration": "async function loadCollection("
+      }
+    ]
+  },
+  {
+    "file": "client/src/pages/public/LoginPage.vue",
+    "lines": 126,
+    "bytes": 4131,
+    "sha256": "e34a6339da1631f1e4228978d090537f679a554ed588e852ed5c2c80adcd3979",
+    "declarations": []
+  },
+  {
+    "file": "client/src/pages/public/RegisterPage.vue",
+    "lines": 217,
+    "bytes": 7136,
+    "sha256": "1f4c0bac22bb1fb697f82bd088e11822aa9e974e2b6c73a87f488f5aff1d2e51",
+    "declarations": []
+  },
+  {
+    "file": "client/src/pages/public/ResetPasswordPage.vue",
+    "lines": 153,
+    "bytes": 4793,
+    "sha256": "b9cbef3f3e026da8acabcc7ce6ac08548c5f22dbba71d8d4e5b803022a1fdb95",
+    "declarations": []
+  },
+  {
+    "file": "client/src/pages/public/VerifyOtpPage.vue",
+    "lines": 186,
+    "bytes": 5794,
+    "sha256": "12a40c83bd45238b516effef6bbd04e178035288d8b7fa0e1745fb311af6c737",
+    "declarations": []
+  },
+  {
+    "file": "client/src/pages/student/CourseCheckoutPage.vue",
+    "lines": 999,
+    "bytes": 37447,
+    "sha256": "883e8e1d978ee058206b8f6a1dc1d6d81b6f18dee26b64cc9c6576b7f87aed92",
+    "declarations": [
+      {
+        "line": 91,
+        "declaration": "function stopTimers(): void {"
+      },
+      {
+        "line": 102,
+        "declaration": "function updateRemainingSeconds(): void {"
+      },
+      {
+        "line": 115,
+        "declaration": "function startOrderMonitoring(): void {"
+      },
+      {
+        "line": 136,
+        "declaration": "async function loadInitialData(): Promise<void> {"
+      },
+      {
+        "line": 212,
+        "declaration": "async function handleApplyCoupon(codeToApply?: string): Promise<void> {"
+      },
+      {
+        "line": 235,
+        "declaration": "async function handleCreateOrder(): Promise<void> {"
+      },
+      {
+        "line": 265,
+        "declaration": "async function handleSyncPayment(silent = false): Promise<void> {"
+      },
+      {
+        "line": 297,
+        "declaration": "async function handleSimulatePayment(): Promise<void> {"
+      },
+      {
+        "line": 316,
+        "declaration": "async function handleCancelAndChangeCoupon(): Promise<void> {"
+      },
+      {
+        "line": 341,
+        "declaration": "async function copyText(fieldKey: string, value?: string | number | null): Promise<void> {"
+      },
+      {
+        "line": 356,
+        "declaration": "function goToLearning(): void {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/pages/student/CourseLearningPage.vue",
+    "lines": 857,
+    "bytes": 35775,
+    "sha256": "6efeecd1ad85a3467de314583faeea6dfa657b903135fb7790a51c90215271d2",
+    "declarations": [
+      {
+        "line": 85,
+        "declaration": "async function loadOverviewAndInitialLesson(): Promise<void> {"
+      },
+      {
+        "line": 115,
+        "declaration": "async function refreshOverviewSilently(): Promise<void> {"
+      },
+      {
+        "line": 124,
+        "declaration": "async function selectLesson("
+      },
+      {
+        "line": 157,
+        "declaration": "async function handleVideoProgress(payload: {"
+      },
+      {
+        "line": 222,
+        "declaration": "async function handleMarkTextLessonComplete(): Promise<void> {"
+      },
+      {
+        "line": 236,
+        "declaration": "async function handleQuizSubmit("
+      },
+      {
+        "line": 287,
+        "declaration": "function handleCurriculumClick(lesson: CurriculumLessonItem): void {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/pages/student/ProfilePage.vue",
+    "lines": 1379,
+    "bytes": 48827,
+    "sha256": "509ff32265e63ee0a37712cb66627c0460d28e0114c5eda2612bb42e686a24ce",
+    "declarations": [
+      {
+        "line": 167,
+        "declaration": "function toDateInputValue(rawDate?: string | null): string {"
+      },
+      {
+        "line": 174,
+        "declaration": "function formatJoinDate(rawDate?: string | null): string {"
+      },
+      {
+        "line": 181,
+        "declaration": "function formatShortDate(rawDate?: string | null): string {"
+      },
+      {
+        "line": 188,
+        "declaration": "function revokeAvatarPreview() {"
+      },
+      {
+        "line": 195,
+        "declaration": "function resetAvatarFile() {"
+      },
+      {
+        "line": 203,
+        "declaration": "function hydrateFormFromUser() {"
+      },
+      {
+        "line": 216,
+        "declaration": "async function loadStudentLearningData(): Promise<void> {"
+      },
+      {
+        "line": 286,
+        "declaration": "function selectTab(tab: ProfileTab) {"
+      },
+      {
+        "line": 296,
+        "declaration": "function triggerAvatarPicker() {"
+      },
+      {
+        "line": 301,
+        "declaration": "function handleAvatarChange(event: Event) {"
+      },
+      {
+        "line": 323,
+        "declaration": "function removeAvatar() {"
+      },
+      {
+        "line": 333,
+        "declaration": "function toggleCategory(categoryName: string) {"
+      },
+      {
+        "line": 342,
+        "declaration": "async function handleSaveProfile() {"
+      },
+      {
+        "line": 384,
+        "declaration": "async function handleChangePassword() {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/plugins/vuetify.ts",
+    "lines": 28,
+    "bytes": 700,
+    "sha256": "9bff769c3dd2e0ac7caccf80c1832e18ab81d3f899ebcced63e2270e289bdf59",
+    "declarations": []
+  },
+  {
+    "file": "client/src/router/index.ts",
+    "lines": 240,
+    "bytes": 7362,
+    "sha256": "65d4ad0e67e13a78ddc5ed6222159ba34cd08ea5ce86625237528da23ab80968",
+    "declarations": []
+  },
+  {
+    "file": "client/src/services/auth.api.ts",
+    "lines": 92,
+    "bytes": 3100,
+    "sha256": "a050dbbfc414d6d5e1a18d2980d78a6233a14adf3c4bbe253c712846cecaa304",
+    "declarations": [
+      {
+        "line": 20,
+        "declaration": "async register(payload: RegisterPayload): Promise<ApiResponse<RegisterResponse>> {"
+      },
+      {
+        "line": 26,
+        "declaration": "async verifyRegisterOtp(payload: VerifyOtpPayload): Promise<ApiResponse<LoginResponse>> {"
+      },
+      {
+        "line": 32,
+        "declaration": "async resendOtp(payload: ResendOtpPayload): Promise<ApiResponse<MessageResponse>> {"
+      },
+      {
+        "line": 38,
+        "declaration": "async login(payload: LoginPayload): Promise<ApiResponse<LoginResponse>> {"
+      },
+      {
+        "line": 44,
+        "declaration": "async refresh(): Promise<ApiResponse<RefreshResponse>> {"
+      },
+      {
+        "line": 50,
+        "declaration": "async logout(): Promise<ApiResponse<MessageResponse>> {"
+      },
+      {
+        "line": 56,
+        "declaration": "async forgotPassword(payload: ForgotPasswordPayload): Promise<ApiResponse<MessageResponse>> {"
+      },
+      {
+        "line": 62,
+        "declaration": "async resetPassword(payload: ResetPasswordPayload): Promise<ApiResponse<MessageResponse>> {"
+      },
+      {
+        "line": 68,
+        "declaration": "async getMe(): Promise<ApiResponse<User>> {"
+      },
+      {
+        "line": 74,
+        "declaration": "async assignRole(userId: string, role: Role): Promise<ApiResponse<MessageResponse>> {"
+      },
+      {
+        "line": 82,
+        "declaration": "async testAdminRole(): Promise<ApiResponse<any>> {"
+      },
+      {
+        "line": 88,
+        "declaration": "async testInstructorRole(): Promise<ApiResponse<any>> {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/services/certificates.api.ts",
+    "lines": 28,
+    "bytes": 794,
+    "sha256": "94783447df66f814890be9978abea69fe4c91996a1f8220d0e92d3deec41216d",
+    "declarations": [
+      {
+        "line": 9,
+        "declaration": "async getMyCertificates(signal?: AbortSignal): Promise<CertificateItem[]> {"
+      },
+      {
+        "line": 17,
+        "declaration": "async verifyCertificate("
+      }
+    ]
+  },
+  {
+    "file": "client/src/services/courses.api.ts",
+    "lines": 51,
+    "bytes": 1279,
+    "sha256": "980f767e9980026153b412cb73d3ea7e3f3b46c977cba2d6a895a6d54f2a1d20",
+    "declarations": [
+      {
+        "line": 12,
+        "declaration": "async getCategories(signal?: AbortSignal): Promise<Category[]> {"
+      },
+      {
+        "line": 19,
+        "declaration": "async getCourses("
+      },
+      {
+        "line": 30,
+        "declaration": "async getFeaturedCourses("
+      },
+      {
+        "line": 41,
+        "declaration": "async getCourseById("
+      }
+    ]
+  },
+  {
+    "file": "client/src/services/enrollments.api.ts",
+    "lines": 115,
+    "bytes": 3437,
+    "sha256": "81c90bdaad6863ed7f6d23b516bb17f414372175816d0bbb564a6ccc7f74a8fe",
+    "declarations": [
+      {
+        "line": 16,
+        "declaration": "async enrollCourse(courseId: string): Promise<CourseLearningOverview> {"
+      },
+      {
+        "line": 23,
+        "declaration": "async getEnrollmentStatus("
+      },
+      {
+        "line": 34,
+        "declaration": "async getMyCourses("
+      },
+      {
+        "line": 48,
+        "declaration": "async getCourseLearning("
+      },
+      {
+        "line": 59,
+        "declaration": "async getLessonForLearning("
+      },
+      {
+        "line": 71,
+        "declaration": "async updateLessonProgress("
+      },
+      {
+        "line": 89,
+        "declaration": "async submitLessonQuiz("
+      },
+      {
+        "line": 101,
+        "declaration": "async getCourseStudents("
+      }
+    ]
+  },
+  {
+    "file": "client/src/services/http.ts",
+    "lines": 122,
+    "bytes": 3658,
+    "sha256": "cecfd76fdf72713ef0df33f55584c8bfd7a759808939a9a431e6a53ff491db6f",
+    "declarations": [
+      {
+        "line": 3,
+        "declaration": "function getCurrentClientPort(): string {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/services/manage-courses.api.ts",
+    "lines": 197,
+    "bytes": 5702,
+    "sha256": "9ac7ba8d43b320c776ee835bdfe33623bf8e09ca5ca3d8881900d92088fa9af9",
+    "declarations": [
+      {
+        "line": 14,
+        "declaration": "function coursePath(courseId: string): string {"
+      },
+      {
+        "line": 18,
+        "declaration": "async function getData<T>(request: Promise<{ data: ApiResponse<T> }>): Promise<T> {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/services/orders.api.ts",
+    "lines": 107,
+    "bytes": 2814,
+    "sha256": "f9857833fcbac075219ee07a165f6a44e85ed0816ce6f171a59a700a4f8a319f",
+    "declarations": [
+      {
+        "line": 13,
+        "declaration": "async previewCheckout("
+      },
+      {
+        "line": 29,
+        "declaration": "async createOrder("
+      },
+      {
+        "line": 40,
+        "declaration": "async getMyOrders("
+      },
+      {
+        "line": 54,
+        "declaration": "async getOrderById("
+      },
+      {
+        "line": 65,
+        "declaration": "async syncOrderPayment(orderId: string): Promise<OrderDetail> {"
+      },
+      {
+        "line": 72,
+        "declaration": "async simulateOrderPayment(orderId: string): Promise<OrderDetail> {"
+      },
+      {
+        "line": 79,
+        "declaration": "async cancelOrder(orderId: string, reason?: string): Promise<OrderDetail> {"
+      },
+      {
+        "line": 87,
+        "declaration": "async getManageOrders("
+      },
+      {
+        "line": 101,
+        "declaration": "async confirmOrderManually(orderId: string): Promise<OrderDetail> {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/services/questions.api.ts",
+    "lines": 132,
+    "bytes": 3898,
+    "sha256": "769634d6ddf3d87ef46ec2fc44cf1d564a4bde45df43496a033d234b2ed8e605",
+    "declarations": [
+      {
+        "line": 14,
+        "declaration": "async listLessonComments("
+      },
+      {
+        "line": 26,
+        "declaration": "async createLessonComment("
+      },
+      {
+        "line": 42,
+        "declaration": "async toggleCommentReaction("
+      },
+      {
+        "line": 55,
+        "declaration": "async reportComment("
+      },
+      {
+        "line": 78,
+        "declaration": "async deleteComment("
+      },
+      {
+        "line": 91,
+        "declaration": "async listManageReports(params?: {"
+      },
+      {
+        "line": 102,
+        "declaration": "async resolveReport("
+      },
+      {
+        "line": 116,
+        "declaration": "async listMyNotifications(): Promise<{"
+      },
+      {
+        "line": 126,
+        "declaration": "async markAllNotificationsRead(): Promise<{ updatedCount: number }> {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/services/reviews.api.ts",
+    "lines": 69,
+    "bytes": 1917,
+    "sha256": "cde5bd50159cf2fc775f329e887a515365768bf3c48c4d0c42e40c0e6e5e6109",
+    "declarations": [
+      {
+        "line": 11,
+        "declaration": "async listCourseReviews("
+      },
+      {
+        "line": 26,
+        "declaration": "async getMyCourseReviewState("
+      },
+      {
+        "line": 37,
+        "declaration": "async upsertMyCourseReview("
+      },
+      {
+        "line": 55,
+        "declaration": "async reportCourseReview("
+      }
+    ]
+  },
+  {
+    "file": "client/src/services/uploads.api.ts",
+    "lines": 109,
+    "bytes": 2860,
+    "sha256": "edd84628e70aeb2e1aa8971df7084547002b196487768bd2384fa363194dda4d",
+    "declarations": [
+      {
+        "line": 4,
+        "declaration": "export interface UploadedFileResponse {"
+      },
+      {
+        "line": 11,
+        "declaration": "export interface UploadedDocumentResponse extends UploadedFileResponse {"
+      },
+      {
+        "line": 17,
+        "declaration": "async uploadImage("
+      },
+      {
+        "line": 37,
+        "declaration": "async uploadCourseThumbnail(file: File): Promise<UploadedFileResponse> {"
+      },
+      {
+        "line": 54,
+        "declaration": "async uploadLessonVideo("
+      },
+      {
+        "line": 84,
+        "declaration": "async uploadLessonDocument(file: File): Promise<UploadedDocumentResponse> {"
+      },
+      {
+        "line": 100,
+        "declaration": "async fetchPublicDocumentBuffer(fileUrl: string): Promise<ArrayBuffer> {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/services/users.api.ts",
+    "lines": 79,
+    "bytes": 2135,
+    "sha256": "8a13c8c5db96eb513b610e285e4cbf8c2db7e7c9ad9bc1f809700e58f0f14341",
+    "declarations": [
+      {
+        "line": 12,
+        "declaration": "async getProfile(): Promise<User> {"
+      },
+      {
+        "line": 17,
+        "declaration": "async updateProfile("
+      },
+      {
+        "line": 27,
+        "declaration": "async changePassword("
+      },
+      {
+        "line": 37,
+        "declaration": "async listManageUsers("
+      },
+      {
+        "line": 47,
+        "declaration": "async createManageUser("
+      },
+      {
+        "line": 57,
+        "declaration": "async updateManageUserRole("
+      },
+      {
+        "line": 68,
+        "declaration": "async updateManageUserStatus("
+      }
+    ]
+  },
+  {
+    "file": "client/src/stores/auth.store.ts",
+    "lines": 232,
+    "bytes": 6141,
+    "sha256": "edbb3a759d7676a2c8a7d97fea15d17099e06c658b61703ef85158bf0b7297ca",
+    "declarations": [
+      {
+        "line": 52,
+        "declaration": "async function login(payload: LoginPayload) {"
+      },
+      {
+        "line": 69,
+        "declaration": "async function register(payload: RegisterPayload) {"
+      },
+      {
+        "line": 85,
+        "declaration": "async function verifyRegisterOtp(payload: VerifyOtpPayload) {"
+      },
+      {
+        "line": 103,
+        "declaration": "async function resendOtp(payload: ResendOtpPayload) {"
+      },
+      {
+        "line": 118,
+        "declaration": "async function forgotPassword(payload: ForgotPasswordPayload) {"
+      },
+      {
+        "line": 134,
+        "declaration": "async function resetPassword(payload: ResetPasswordPayload) {"
+      },
+      {
+        "line": 150,
+        "declaration": "async function fetchMe() {"
+      },
+      {
+        "line": 164,
+        "declaration": "async function refreshSession() {"
+      },
+      {
+        "line": 177,
+        "declaration": "async function logout() {"
+      },
+      {
+        "line": 188,
+        "declaration": "function syncUser(nextUser: User) {"
+      },
+      {
+        "line": 192,
+        "declaration": "async function assignRole(userId: string, role: Role) {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/style.css",
+    "lines": 369,
+    "bytes": 7744,
+    "sha256": "b74977049fa7cb377a9eaaff685cb3be68c46322123a137cffec5e07dce32e45",
+    "declarations": []
+  },
+  {
+    "file": "client/src/types/auth.ts",
+    "lines": 87,
+    "bytes": 1649,
+    "sha256": "74a4508fcc53869f90a569cd760e11cb949784ece1a6e1baf5aee0c573036cff",
+    "declarations": [
+      {
+        "line": 5,
+        "declaration": "export interface User {"
+      },
+      {
+        "line": 19,
+        "declaration": "export interface ApiResponse<T> {"
+      },
+      {
+        "line": 27,
+        "declaration": "export interface LoginResponse {"
+      },
+      {
+        "line": 33,
+        "declaration": "export interface RegisterResponse {"
+      },
+      {
+        "line": 38,
+        "declaration": "export interface RefreshResponse {"
+      },
+      {
+        "line": 42,
+        "declaration": "export interface MessageResponse {"
+      },
+      {
+        "line": 48,
+        "declaration": "export interface RegisterPayload {"
+      },
+      {
+        "line": 59,
+        "declaration": "export interface VerifyOtpPayload {"
+      },
+      {
+        "line": 64,
+        "declaration": "export interface ResendOtpPayload {"
+      },
+      {
+        "line": 69,
+        "declaration": "export interface LoginPayload {"
+      },
+      {
+        "line": 74,
+        "declaration": "export interface ForgotPasswordPayload {"
+      },
+      {
+        "line": 78,
+        "declaration": "export interface ResetPasswordPayload {"
+      },
+      {
+        "line": 85,
+        "declaration": "export interface AssignRolePayload {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/types/course.ts",
+    "lines": 93,
+    "bytes": 2075,
+    "sha256": "c763d78727ac15fec775139350b38e26fcede0016c8fd8deb3be9b6c57b438db",
+    "declarations": [
+      {
+        "line": 19,
+        "declaration": "export interface Category {"
+      },
+      {
+        "line": 24,
+        "declaration": "export interface CourseInstructor {"
+      },
+      {
+        "line": 30,
+        "declaration": "export interface CourseCategory {"
+      },
+      {
+        "line": 35,
+        "declaration": "export interface CourseCard {"
+      },
+      {
+        "line": 51,
+        "declaration": "export interface CourseLesson {"
+      },
+      {
+        "line": 59,
+        "declaration": "export interface CourseChapter {"
+      },
+      {
+        "line": 66,
+        "declaration": "export interface CourseDetail extends CourseCard {"
+      },
+      {
+        "line": 74,
+        "declaration": "export interface PaginatedCourses {"
+      },
+      {
+        "line": 82,
+        "declaration": "export interface CourseQuery {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/types/learning.ts",
+    "lines": 351,
+    "bytes": 8488,
+    "sha256": "214819573df895eb2a72fe917e85e6c00bc1ba0aab287644567ca5aeea31294f",
+    "declarations": [
+      {
+        "line": 7,
+        "declaration": "export interface CertificateItem {"
+      },
+      {
+        "line": 20,
+        "declaration": "export interface CertificateVerifyResult {"
+      },
+      {
+        "line": 30,
+        "declaration": "export interface EnrollmentStatusResponse {"
+      },
+      {
+        "line": 41,
+        "declaration": "export interface MyEnrolledCourseItem {"
+      },
+      {
+        "line": 59,
+        "declaration": "export interface CurriculumLessonItem {"
+      },
+      {
+        "line": 76,
+        "declaration": "export interface CurriculumChapterItem {"
+      },
+      {
+        "line": 83,
+        "declaration": "export interface CourseLearningOverview {"
+      },
+      {
+        "line": 101,
+        "declaration": "export interface LearnerQuizQuestion {"
+      },
+      {
+        "line": 109,
+        "declaration": "export interface LessonLearningDetail {"
+      },
+      {
+        "line": 138,
+        "declaration": "export interface LessonProgressUpdateResponse {"
+      },
+      {
+        "line": 152,
+        "declaration": "export interface QuizQuestionResultItem {"
+      },
+      {
+        "line": 159,
+        "declaration": "export interface SubmitQuizResponse {"
+      },
+      {
+        "line": 182,
+        "declaration": "export interface ManageCourseStudentProfile {"
+      },
+      {
+        "line": 189,
+        "declaration": "export interface ManageCourseStudentItem {"
+      },
+      {
+        "line": 199,
+        "declaration": "export interface ManageCourseStudentSummary {"
+      },
+      {
+        "line": 206,
+        "declaration": "export interface ManageCourseStudentsCourseInfo {"
+      },
+      {
+        "line": 213,
+        "declaration": "export interface ManageCourseStudentsResponse {"
+      },
+      {
+        "line": 223,
+        "declaration": "export interface ManageCourseStudentsQuery {"
+      },
+      {
+        "line": 241,
+        "declaration": "export interface CommentAuthor {"
+      },
+      {
+        "line": 249,
+        "declaration": "export interface CommentReplyToUser {"
+      },
+      {
+        "line": 254,
+        "declaration": "export interface CommentReactionSummaryItem {"
+      },
+      {
+        "line": 261,
+        "declaration": "export interface LessonCommentItem {"
+      },
+      {
+        "line": 280,
+        "declaration": "export interface LessonCommentsResponse {"
+      },
+      {
+        "line": 297,
+        "declaration": "export interface ViolationHistoryItem {"
+      },
+      {
+        "line": 304,
+        "declaration": "export interface ReportQueueItem {"
+      },
+      {
+        "line": 331,
+        "declaration": "export interface ManageReportsResponse {"
+      },
+      {
+        "line": 342,
+        "declaration": "export interface NotificationItem {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/types/manage-course.ts",
+    "lines": 172,
+    "bytes": 4039,
+    "sha256": "0709dc2917239ee63adbe990e42453cdb077018f7a32cc56bd39da871f5aa620",
+    "declarations": [
+      {
+        "line": 7,
+        "declaration": "export interface ManageCoursePermissions {"
+      },
+      {
+        "line": 18,
+        "declaration": "export interface ManageCourseInstructor {"
+      },
+      {
+        "line": 24,
+        "declaration": "export interface ManageCourseCategory {"
+      },
+      {
+        "line": 29,
+        "declaration": "export interface ManageCourseItem {"
+      },
+      {
+        "line": 51,
+        "declaration": "export interface ManageReadiness {"
+      },
+      {
+        "line": 57,
+        "declaration": "export interface ManageQuizQuestion {"
+      },
+      {
+        "line": 65,
+        "declaration": "export interface ManageLesson {"
+      },
+      {
+        "line": 80,
+        "declaration": "export interface ManageChapter {"
+      },
+      {
+        "line": 87,
+        "declaration": "export interface ManageCourseDetail extends ManageCourseItem {"
+      },
+      {
+        "line": 96,
+        "declaration": "export interface ManageCourseList {"
+      },
+      {
+        "line": 104,
+        "declaration": "export interface ManageInstructorOption {"
+      },
+      {
+        "line": 110,
+        "declaration": "export interface ManageCourseQuery {"
+      },
+      {
+        "line": 121,
+        "declaration": "export interface ManageCoursePayload {"
+      },
+      {
+        "line": 136,
+        "declaration": "export interface ManageChapterPayload {"
+      },
+      {
+        "line": 140,
+        "declaration": "export interface ManageLessonPayload {"
+      },
+      {
+        "line": 151,
+        "declaration": "export interface ManageQuizQuestionPayload {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/types/order.ts",
+    "lines": 102,
+    "bytes": 2401,
+    "sha256": "75056d1752b13986df5f224348422002fff59651c7626c5e6f52dc2d00a57242",
+    "declarations": [
+      {
+        "line": 5,
+        "declaration": "export interface AvailableCouponItem {"
+      },
+      {
+        "line": 14,
+        "declaration": "export interface CouponPreviewResponse {"
+      },
+      {
+        "line": 26,
+        "declaration": "export interface OrderDetail {"
+      },
+      {
+        "line": 62,
+        "declaration": "export interface PaymentTransactionItem {"
+      },
+      {
+        "line": 75,
+        "declaration": "export interface MyOrdersResponse {"
+      },
+      {
+        "line": 80,
+        "declaration": "export interface ManageOrdersQuery {"
+      },
+      {
+        "line": 87,
+        "declaration": "export interface ManageOrdersStats {"
+      },
+      {
+        "line": 95,
+        "declaration": "export interface ManageOrdersResponse {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/types/review.ts",
+    "lines": 51,
+    "bytes": 1140,
+    "sha256": "04975737a99a3b4694ab955f43069bfe5ef3f247583c0dbdc32bc3a7d0bf24a0",
+    "declarations": [
+      {
+        "line": 3,
+        "declaration": "export interface CourseReviewAuthor {"
+      },
+      {
+        "line": 9,
+        "declaration": "export interface CourseReviewItem {"
+      },
+      {
+        "line": 21,
+        "declaration": "export interface CourseReviewSummary {"
+      },
+      {
+        "line": 27,
+        "declaration": "export interface CourseReviewsListResponse {"
+      },
+      {
+        "line": 32,
+        "declaration": "export interface MyReviewDetail {"
+      },
+      {
+        "line": 43,
+        "declaration": "export interface MyCourseReviewState {"
+      }
+    ]
+  },
+  {
+    "file": "client/src/types/user.ts",
+    "lines": 59,
+    "bytes": 1203,
+    "sha256": "20a95c1a00330a02fb87f77eb78271ad0e590bab0fb30ab79f2898544408b24f",
+    "declarations": [
+      {
+        "line": 10,
+        "declaration": "export interface UpdateProfilePayload {"
+      },
+      {
+        "line": 18,
+        "declaration": "export interface ChangePasswordPayload {"
+      },
+      {
+        "line": 26,
+        "declaration": "export interface ManageUserQuery {"
+      },
+      {
+        "line": 35,
+        "declaration": "export interface ManageUserStats {"
+      },
+      {
+        "line": 43,
+        "declaration": "export interface ManageUserListResponse {"
+      },
+      {
+        "line": 52,
+        "declaration": "export interface CreateManageUserPayload {"
+      }
+    ]
+  }
+]

@@ -1,0 +1,4906 @@
+TRƯỜNG ĐẠI HỌC CẦN THƠ
+TRƯỜNG CÔNG NGHỆ THÔNG TIN - TRUYỀN THÔNG
+LUẬN VĂN TỐT NGHIỆP ĐẠI HỌC
+NGÀNH KỸ THUẬT PHẦN MỀM
+Đề tài
+PHẦN MỀM QUẢN LÝ HOẠT ĐỘNG VÙNG 
+NUÔI CÁ TRA 
+(PHÂN HỆ QUẢN LÝ NUÔI CÁ)
+Sinh viên: Nguyễn Cao Đức
+Mã số: B1906461
+Khóa: K45
+Cần Thơ, 05/2023TRƯỜNG ĐẠI HỌC CẦN THƠ
+TRƯỜNG CÔNG NGHỆ THÔNG TIN - TRUYỀN THÔNG
+KHOA CÔNG NGHỆ PHẦN MỀM
+LUẬN VĂN TỐT NGHIỆP ĐẠI HỌC
+NGÀNH KỸ THUẬT PHẦN MỀM
+Đề tài
+PHẦN MỀM QUẢN LÝ HOẠT ĐỘNG VÙNG 
+NUÔI CÁ TRA 
+(PHÂN HỆ QUẢN LÝ NUÔI CÁ)
+Người hướng dẫn
+Ths Phan Huy Cường
+Sinh viên thực hiện
+Họ và tên: Nguyễn Cao Đức
+Mã số: B1906461
+Khóa 45
+Cần Thơ, 05/202TRƯỜNG CÔNG NGHỆ THÔNG TIN VÀ TRUYỀN THÔNG
+KHOA CÔNG NGHỆ PHẦN MỀM
+XÁC NHẬN CHỈNH SỬA LUẬN VĂN
+THEO YÊU CẦU CỦA HỘI ĐỒNG
+Tên luận văn: Phần mềm quản lý hoạt động vùng nuôi cá tra (Phân hệ quản lý nuôi 
+cá) - Mobile application for the management of catfish farming (Farming 
+management module).
+Họ tên sinh viên: Nguyễn Cao Đức MASV: B1906461
+Mã lớp: DI1996A1
+Đã báo cáo tại hội đồng ngành: Kỹ thuật phần mềm
+Ngày báo cáo: 12/05/2023
+Hội đồng báo cáo gồm:
+1. ThS. Trương Thị Thanh Tuyền Chủ tịch hội đồng
+2. TS. Trương Xuân Việt Thành viên
+3. ThS. Phan Huy Cường Thư ký
+Luận văn đã được chỉnh sửa theo góp ý của Hội đồng.
+Cần Thơ, ngày ... tháng … năm 2023
+Giáo viên hướng dẫn
+(Ký và ghi họ tên)
+Phan Huy CườngLỜI CẢM ƠN
+Lời đầu tiên, em muốn bày tỏ lòng biết ơn sâu sắc đến ThS. Phan Huy Cường – thầy 
+đã trở thành người hướng dẫn tận tình và người bạn đồng hành của em trong suốt 
+quá trình nghiên cứu và hoàn thành luận văn này. Với sự động viên và hỗ trợ không 
+ngừng của thầy, em đã vượt qua được những thử thách và đạt được mục tiêu đặt ra.
+Em cũng muốn bày tỏ lòng kính trọng và cảm ơn đến các thầy cô của Khoa Công 
+nghệ phần mềm, Trường Công nghệ thông tin và Truyền thông, Đại học Cần Thơ -
+những người đã truyền đạt cho em những kiến thức quý báu và cung cấp cho em 
+một môi trường học tập tốt nhất.
+Em cũng muốn gửi lời cảm ơn đến gia đình, bạn bè và những người đã đóng góp 
+tích cực và hỗ trợ em trong quá trình thực hiện luận văn này. Sự quan tâm và ủng hộ 
+của họ đã là động lực giúp em vượt qua những khó khăn và hoàn thành nhiệm vụ 
+một cách thành công.
+Mặc dù luận văn này đã hoàn thành. Tuy nhiên, vì kiến thức bản thân còn hạn chế 
+nên trong quá trình nghiên cứu và thực hiện sẽ không tránh khỏi những thiếu sót. Vì 
+vậy, em rất mong nhận được sự thông cảm và đóng góp từ quý thầy cô phản biện 
+cũng như giảng viên đã trực tiếp hướng dẫn em trong luận văn này.
+Một lần nữa, em xin chân thành cảm ơn!
+Cần Thơ, ngày … tháng … năm 2023
+Sinh viên thực hiện
+Nguyễn Cao ĐứcCAM KẾT KẾT QUẢ
+Tôi xin cam kết quá trình thực hiện đề tài này và các sản phẩm trong quá trình thực 
+hiện được thực hiện và nghiên cứu hoàn toàn bởi người thực hiện đề tài là Nguyễn 
+Cao Đức.
+Mọi tài liệu tham khảo nếu có sẽ được liệt kê ở mục trích dẫn, các hình ảnh nếu lấy 
+từ nơi khác cũng sẽ có trích dẫn nguồn cẩn thận.
+Cần Thơ, ngày … tháng … năm 2023
+Sinh viên thực hiện
+Nguyễn Cao ĐứcMỤC LỤC
+PHẦN GIỚI THIỆU ...................................................................................................1
+1. Đặt vấn đề ...........................................................................................................1
+2. Lịch sử giải quyết vấn đề ....................................................................................2
+3. Mục tiêu đề tài.....................................................................................................2
+4. Đối tượng và phạm vi nghiên cứu.......................................................................3
+4.1. Đối tượng nghiên cứu ..................................................................................3
+4.2. Phạm vi nghiên cứu......................................................................................3
+5. Nội dung nghiên cứu...........................................................................................4
+5.1. Quy trình nghiên cứu ...................................................................................4
+5.2. Công nghệ sử dụng.......................................................................................4
+5.3. Công cụ hỗ trợ phát triển .............................................................................4
+6. Những đóng góp của đề tài .................................................................................5
+7. Bố cục quyền luận văn ........................................................................................5
+PHẦN NỘI DUNG .....................................................................................................6
+CHƯƠNG 1 MÔ TẢ BÀI TOÁN...........................................................................6
+Tổng quan hệ thống.........................................................................................6
+Đặc điểm cơ sở dữ liệu....................................................................................7
+Các chức năng của hệ thống............................................................................8
+Đăng ký tài khoản ..........................................................................14
+Đăng nhập tài khoản ......................................................................15
+Đăng xuất .......................................................................................15
+Tạo một tài khoản mới ...................................................................16
+Tạo nhiều tài khoản........................................................................16
+Xóa tài khoản .................................................................................17
+Phân quyền tài khoản .....................................................................18Xem tổng quan nhiệm vụ ...............................................................20
+Tạo nhiệm vụ mới ..........................................................................21
+Xem danh sách nhiệm vụ đã hoàn thành .....................................22
+Xem danh sách nhiệm vụ chưa hoàn thành..................................23
+Hoàn thành nhiệm vụ ...................................................................24
+Xem bình luận và xem chi tiết nhiệm vụ .....................................25
+Bình luận nhiệm vụ ......................................................................26
+Xem danh sách người chưa hoàn thành nhiệm vụ .......................26
+Xem danh sách người đã hoàn thành nhiệm vụ ...........................27
+Xem danh sách nhân sự trong vùng nuôi.....................................28
+Xem thông tin nhân sự .................................................................29
+Chuyển công tác...........................................................................30
+Chức năng xem thông tin ao ........................................................31
+Chức năng xem danh sách công nhân trong ao............................32
+Chức năng cài đặt thông số nước cần đo .....................................32
+Chức năng cài đặt số lần cho ăn trong ngày ................................33
+Chức năng xem danh sách báo cáo cá bệnh.................................34
+Chức năng xem chi tiết báo cáo cá bệnh......................................34
+Chức năng tạo phác đồ điều trị. ...................................................35
+Chức năng xem phác đồ điều trị đang chờ duyệt.........................36
+Chức năng xem phác đồ điều trị bị từ chối ..................................37
+Chức năng xem phác đồ điều trị đã được chấp nhận ...................37
+Chức năng tạo nhiệm vụ điều trị cho công nhân .........................38
+Chức năng xóa phác đồ điều trị ...................................................39
+Chức năng chỉnh sửa phác đồ điều trị..........................................40
+Chức năng hoàn thành điều trị .....................................................41Chức năng chấp nhận phác đồ điều trị.........................................42
+Chức năng từ chối phác đồ điều trị ..............................................42
+Chức năng xem danh sách nhiệm vụ cố định...............................43
+Chức năng nhập lượng thức ăn đã cho ăn....................................44
+Chức năng cập nhật chất lượng nước...........................................44
+Chức năng trị bệnh.......................................................................45
+Chức năng báo cáo cá bệnh..........................................................46
+Chức năng chỉnh sửa nhiệm vụ đã giao .......................................47
+Chức năng xóa nhiệm vụ đã giao.................................................48
+Chức năng kiểm tra bệnh cá.........................................................49
+Chức năng xem hình ảnh báo cáo việc trị bệnh ...........................50
+Nhắn tin cá nhân ..........................................................................50
+Tìm kiếm......................................................................................51
+Môi trường vận hành.....................................................................................52
+Các ràng buộc về mặt thực thi và thiết kế......................................52
+Các giả định và phụ thuộc..............................................................52
+Các yêu cầu phi chức năng............................................................................53
+Yêu cầu thực thi .............................................................................53
+Yêu cầu an toàn..............................................................................53
+Các đặc điểm chất lượng sản phẩm................................................53
+Các yêu cầu khác............................................................................53
+CHƯƠNG 2 CƠ SỞ LÝ THUYẾT ......................................................................54
+GIS .................................................................................................54
+Java.................................................................................................54
+Firebase ..........................................................................................54
+JitsiMeet .........................................................................................56Mapbox ..........................................................................................56
+MPAndroidChart............................................................................56
+Android Studio...............................................................................57
+CHƯƠNG 3 THIẾT KẾ VÀ CÀI ĐẶT GIẢI PHÁP...........................................58
+Kiến trúc hệ thống.........................................................................................58
+Ưu điểm và nhược điểm của mô hình MVC..................................58
+Cơ sở dữ liệu .................................................................................................59
+Sơ đồ thực thể liên kết....................................................................59
+Bảng NguoiDung ...........................................................................61
+Bảng CongTy .................................................................................61
+Bảng Vung .....................................................................................61
+Bảng Khu .......................................................................................62
+Bảng Ao .........................................................................................62
+Tin nhắn .........................................................................................62
+Bảng ChatLuongNuoc....................................................................63
+Bảng ChiSoMoiTruong..................................................................63
+Bảng VuNuoi ...............................................................................63
+Bảng ThaGiong ............................................................................63
+Bảng KetQuaThuHoach...............................................................64
+Bảng TangTruong ........................................................................64
+Bảng ThucAn ...............................................................................64
+Bảng Kho .....................................................................................65
+Bảng NhapKho.............................................................................65
+Bảng ChiTietNhapKho ................................................................66
+Bảng DanhMuc ............................................................................66
+Bảng NhiemVu ............................................................................66Bảng NhatKyNhiemVu................................................................67
+Bảng PhacDo................................................................................67
+Bang BaoCaoBenhCa ..................................................................67
+Bảng BinhLuan ............................................................................68
+Bảng YeuCauNghiPhep ...............................................................68
+Bảng YeuCauNhapHang..............................................................69
+Thiết kế giao diện..........................................................................................69
+Giao diện đăng nhập ......................................................................69
+Giao diện đăng ký ..........................................................................70
+Giao diện đăng xuất .......................................................................73
+Giao diện nhắn tin cá nhân.............................................................75
+Giao diện tạo một tài khoản ...........................................................77
+Giao diện tạo nhiều tài khoản ........................................................78
+Giao diện xóa tài khoản .................................................................81
+Giao diện phân quyền tài khoản.....................................................82
+Giao diện xem tổng quan nhiệm vụ ...............................................84
+Giao diện tạo nhiệm vụ mới.........................................................85
+Giao diện xem nhiệm vụ đã hoàn thành.......................................87
+Giao diện xem nhiệm vụ chưa hoàn thành...................................89
+Giao diện xem nhiệm vụ cố định .................................................90
+Giao diện xem bình luận và chi tiết nhiệm vụ .............................91
+Giao diện bình luận nhiệm vụ ......................................................92
+Giao diện hoàn thành nhiệm vụ ...................................................93
+Giao diện xem ai chưa hoàn thành nhiệm vụ...............................95
+Giao diện xem ai đã hoàn thành nhiệm vụ...................................96
+Giao diện xem danh sách nhân sự trong vùng nuôi .....................97Giao diện xem thông tin nhân sự .................................................99
+Giao diện chuyển công tác .........................................................100
+Giao diện xem thông tin ao ........................................................102
+Giao diện xem danh sách công nhân trong ao ...........................104
+Giao diện cài đặt thông số nước cần đo .....................................105
+Giao diện cài đặt số lần cho ăn trong ngày ................................107
+Giao diện xem danh sách báo cáo cá bệnh ................................108
+Giao diện xem chi tiết báo cáo cá bệnh .....................................110
+Giao diện tạo phác đồ điều trị ....................................................111
+Giao diện xem phác đồ chờ duyệt..............................................113
+Giao diện xem phác đồ điều trị bị từ chối..................................115
+Giao diện xem phác đồ điều trị đã được chấp nhận...................116
+Giao diện tạo nhiệm vụ điều trị cho công nhân .........................117
+Giao diện xóa phác đồ điều trị ...................................................119
+Giao diện chỉnh sửa phác đồ điều trị..........................................121
+Giao diện hoàn thành điều trị.....................................................123
+Giao diện chấp nhận phác đồ điều trị.........................................124
+Giao diện từ chối phác đồ điều trị..............................................126
+Giao diện nhập lượng thức ăn đã cho ăn....................................127
+Giao diện cập nhật chất lượng nước ..........................................128
+Giao diện chức năng trị bệnh .....................................................130
+Giao diện báo cáo cá bệnh .........................................................131
+Giao diện chỉnh sửa nhiệm vụ đã giao.......................................133
+Giao diện xóa nhiệm vụ đã giao.................................................135
+Giao diện kiểm tra bệnh cá ........................................................136
+Giao diện xem hình ảnh báo cáo việc trị bệnh...........................137CHƯƠNG 4 KIỂM THỬ VÀ ĐÁNH GIÁ ........................................................140
+Kế hoạch kiểm thử ......................................................................................140
+Mục tiêu .......................................................................................140
+Phạm vi kiểm thử .........................................................................140
+Môi trường kiểm thử....................................................................140
+Lịch trình kiểm thử.......................................................................140
+Quản lý rủi ro ...............................................................................141
+Các tiêu chí đầu ra........................................................................141
+Kịch bản kiểm thử........................................................................141
+Trường hợp kiểm thử ..................................................................................145
+PHẦN KẾT LUẬN.................................................................................................165
+1. Kết quả đạt được .............................................................................................165
+2. Hạn chế............................................................................................................166
+3. Hướng phát triển .............................................................................................166DANH MỤC BẢNG
+Bảng 3.1: Dữ liệu người dùng...................................................................................61
+Bảng 3.3: Dữ liệu bảng công ty ................................................................................61
+Bảng 3.4: Dữ liệu bảng vùng ....................................................................................61
+Bảng 3.5: Dữ liệu bảng khu ......................................................................................62
+Bảng 3.6: Dữ liệu bảng ao.........................................................................................62
+Bảng 3.7: Dữ liệu bảng tin nhắn ...............................................................................62
+Bảng 3.8: Dữ liệu bảng chất lượng nước ..................................................................63
+Bảng 3.9: Dữ liệu bảng loại môi trường ...................................................................63
+Bảng 3.10: Dữ liệu bảng vụ nuôi ..............................................................................63
+Bảng 3.11: Dữ liệu bảng thả giống ...........................................................................63
+Bảng 3.12: Dữ liệu bảng thu hoạch...........................................................................64
+Bảng 3.13: Dữ liệu bảng tăng trưởng........................................................................64
+Bảng 3.14: Dữ liệu bảng cho ăn................................................................................64
+Bảng 3.15: Dữ liệu bảng kho ....................................................................................65
+Bảng 3.16: Dữ liệu bảng danh mục...........................................................................66
+Bảng 3.17: Dữ liệu bảng nhiệm vụ ...........................................................................66
+Bảng 3.18: Dữ liệu bảng nhật ký nhiệm vụ ..............................................................67
+Bảng 3.19: Dữ liệu bảng phác đồ..............................................................................67
+Bảng 3.20: Dữ liệu bảng báo cáo bệnh cá.................................................................67
+Bảng 4.1: Rủi ro trong quá trình kiểm thử..............................................................141
+Bảng 4.2: Bảng tài liệu tham khảo cho quá trình kiểm thử ....................................141
+Bảng 4.3: Kịch bản kiểm thử ..................................................................................141
+Bảng 4.4: Trường hợp kiểm thử..............................................................................145DANH MỤC HÌNH
+Hình 1.1: Sơ đồ usecase của ké toán...........................................................................8
+Hình 1.2: Sơ đồ usecase chung ...................................................................................9
+Hình 1.3: Sơ đồ usecase của trưởng vùng.................................................................10
+Hình 1.4: Sơ đồ usecase của admin...........................................................................11
+Hình 1.5: Sơ đồ usecase của công nhân....................................................................12
+Hình 1.6: Sơ đồ usecase của trưởng khu...................................................................13
+Hình 3.1: Kiến trúc hệ thống MVC...........................................................................58
+Hình 3.2: Sơ đồ thức thể liên kết ..............................................................................60
+Hình 3.3: Giao diện trang chủ...................................................................................69
+Hình 3.4: Giao diện đăng nhập .................................................................................69
+Hình 3.5: Lưu đồ xử lý chức năng đăng nhập...........................................................70
+Hình 3.6: Giao diện đăng ký .....................................................................................71
+Hình 3.7: Giao diện nhập thông tin đăng ký .............................................................71
+Hình 3.8: Lưu đò xử lý chức năng đăng ký ..............................................................73
+Hình 3.9: Giao diện đăng xuất ..................................................................................74
+Hình 3.10: Lưu đồ xử lý chức năng đăng xuất..........................................................75
+Hình 3.11: Giao diện nhắn tin cá nhân......................................................................75
+Hình 3.12: Lưu đồ xử lý chức năng nhắn tin ............................................................76
+Hình 3.13: Giao diện tạo một tài khoản ....................................................................77
+Hình 3.14: Lưu đồ xử lý chức năng tạo một tài khoản .............................................78
+Hình 3.15: Giao diện tạo nhiều tài khoản .................................................................79
+Hình 3.16: Lưu đồ xử lý chức năng tạo nhiều tài khoản...........................................80
+Hình 3.17: Giao diện xóa tài khoản ..........................................................................81
+Hình 3.18: Lưu đồ xử lý xóa tài khoản .....................................................................82
+Hình 3.19: Giao diện phân quyền tài khoản..............................................................83
+Hình 3.20: Lưu đồ xử lý phân quyền tài khoản ........................................................84
+Hình 3.21: Giao diện tổng quan nhiệm vụ ................................................................84
+Hình 3.22: Lưu đồ xử lý xem nhiệm vụ....................................................................85Hình 3.23: Giao diện tạo nhiệm vụ mới....................................................................86
+Hình 3.24: Lưu đồ xử lý tạo nhiệm vụ mới ..............................................................87
+Hình 3.25: Giao diện xem nhiệm vụ hoàn thành ......................................................88
+Hình 3.26: Lưu đồ xử lý xem nhiệm vụ đã hoàn thành ............................................89
+Hình 3.27: Xem nhiệm vụ chưa hoàn thành .............................................................89
+Hình 3.28: Lưu đồ xử lý xem nhiệm vụ chưa hoàn thành ........................................90
+Hình 3.29: Giao diện xem nhiệm vụ cố định ............................................................91
+Hình 3.30: Lưu đồ xử lý xem nhiệm vụ cố định.......................................................91
+Hình 3.31: Giao diện xem bình luận và chi tiết nhiệm vụ ........................................92
+Hình 3.32: Lưu đồ xử lý xem bình luận và xem chi tiết nhiệm vụ ...........................92
+Hình 3.33: Giao diện bình luận nhiệm vụ.................................................................93
+Hình 3.34: Lưu đồ xử lý bình luận nhiệm vụ............................................................93
+Hình 3.35: Giao diện hoàn thành nhiệm vụ ..............................................................94
+Hình 3.36: Lưu đồ xử lý hoàn thành nhiệm vụ .........................................................94
+Hình 3.37: Giao diện xem ai chưa hoàn thành nhiệm vụ..........................................95
+Hình 3.38: Lưu đồ xử lý xem ai chưa hoàn thành nhiệm vụ ....................................96
+Hình 3.39: Giao diện xem ai đã hoàn thành nhiệm vụ..............................................96
+Hình 3.40: Lưu đồ xử lý xem ai đã hoàn thành nhiệm vụ ........................................97
+Hình 3.41: Giao diện xem danh sách nhân sự trong vùng nuôi ................................98
+Hình 3.42: Lưu đồ xử lý xem danh sách nhân sự trong vùng nuôi...........................98
+Hình 3.43: Giao diện xem thông tin nhân sự ............................................................99
+Hình 3.44: Lưu đồ xử lý xem thông tin nhân sự.....................................................100
+Hình 3.45: Giao diện chuyển công tác ....................................................................101
+Hình 3.46: Lưu đồ xử lý chuyển công tác...............................................................102
+Hình 3.47: Giao diện xem thông tin ao...................................................................103
+Hình 3.48: Lưu đồ xử lý xem thông tin ao..............................................................104
+Hình 3.49: Giao diện xem danh sách công nhân trong ao ......................................104
+Hình 3.50: Lưu đồ xử lý xem danh sách công nhân trong ao .................................105
+Hình 3.51: Giao diện cài đặt thông số nước cần đo ................................................105Hình 3.52: Lưu đồ xử lý cài đặt thông số nước cần đo...........................................107
+Hình 3.53: Giao diện cài đặt số lần cho ăn trong ngày ...........................................107
+Hình 3.54: Lưu đò xử lý cài đặt số lần cho ăn trong ngày......................................108
+Hình 3.55: Giao diện xem danh sách báo cáo cá bệnh ...........................................109
+Hình 3.56: Lưu đồ xử lý xem danh sách báo cáo cá bệnh ......................................109
+Hình 3.57: Giao diện xem chi tiết báo cáo cá bệnh ................................................110
+Hình 3.58: Lưu đồ xử lý xem chi tiết báo cáo cá bệnh ...........................................111
+Hình 3.59: Giao diện tạo phác đồ điều trị ...............................................................112
+Hình 3.60: Lưu đồ xử lý tạo phác đồ điều trị..........................................................113
+Hình 3.61: Giao diện xem phác đồ chờ duyệt.........................................................114
+Hình 3.62: Lưu đồ xử lý xem phác đồ chờ duyệt ...................................................115
+Hình 3.63: Giao diện xem phác đồ điều trị bị từ chối.............................................115
+Hình 3.64: Lưu đồ xử lý xem phác đồ điều trị bị từ chối .......................................116
+Hình 3.65: Giao diện xem phác đồ điều trị đã được chấp nhận..............................116
+Hình 3.66: Lưu đồ xử lý xem phác đồ điều trị đã được chấp nhận.........................117
+Hình 3.67: Giao diện tạo nhiệm vụ điều trị cho công nhân ....................................118
+Hình 3.68: Lưu đồ xử lý tạo nhiệm vụ điều trị cho công nhân...............................119
+Hình 3.69: Giao diện xóa phác đồ điều trị ..............................................................119
+Hình 3.70: Lưu đồ xử lý xóa phác đồ điều trị.........................................................120
+Hình 3.71: Giao diện chỉnh sửa phác đồ điều trị.....................................................121
+Hình 3.72: Lưu đồ xử lý chỉnh sửa phác đồ điều trị ...............................................122
+Hình 3.73:Giao diện hoàn thành điều trị.................................................................123
+Hình 3.74: Lưu đồ xử lý hoàn thành điều trị...........................................................124
+Hình 3.75: Giao diện chấp nhận phác đồ điều trị....................................................124
+Hình 3.76: Lưu đồ xử lý chấp nhận phác đồ điều trị ..............................................125
+Hình 3.77: Giao diện từ chối phác đồ điều trị.........................................................126
+Hình 3.78: Lưu đồ xử lý từ chối phác đồ điều trị ...................................................127
+Hình 3.79: Giao diện nhập lượng thức ăn đã cho ăn...............................................127
+Hình 3.80: Lưu đồ xử lý nhập lượng thức ăn đã cho ăn .........................................128Hình 3.81: Giao diện cập nhật chất lượng nước .....................................................129
+Hình 3.82: Lưu đồ xử lý cập nhật chất lượng nước ................................................130
+Hình 3.83: Giao diện chức năng trị bệnh ................................................................130
+Hình 3.84: Lưu đồ xử lý chức năng trị bệnh...........................................................131
+Hình 3.85: Giao diện báo cáo cá bệnh ....................................................................132
+Hình 3.86: Lưu đồ xử lý báo cáo cá bệnh ...............................................................133
+Hình 3.87: Giao diện chỉnh sửa nhiệm vụ đã giao..................................................133
+Hình 3.88: Lưu đồ xử lý chức năng chỉnh sửa nhiệm vụ đã giao ...........................134
+Hình 3.89: Giao diện xóa nhiệm vụ ........................................................................135
+Hình 3.90: Lưu đồ xử lý chức năng xóa nhiệm vụ .................................................136
+Hình 3.91: Giao diện kiểm tra bệnh cá ...................................................................136
+Hình 3.92: Lưu đồ xử lý kiểm tra bệnh cá ..............................................................137
+Hình 3.93: Giao diện xem hình ảnh báo cáo việc trị bệnh......................................138
+Hình 3.94: Lưu đồ xử lý xem hình ảnh báo cáo việc trị bệnh ................................139CÁC TỪ THUẬT NGỮ VÀ VIẾT TẮT
+Thuật ngữ/ Viết tắt Giải thích
+GIS Hệ thống thông tin địa lý (Geographic 
+Information System
+CSDL Cơ sở dữ liệu
+SDK Software Development Kit
+KBKT Kịch bản kiểm thử
+THKT Trường hợp kiểm thử
+KQ thực tế Kết quả thực tế
+KQ mong đợi Kết quả mong đợi
+API Application Programming Interface
+Polylines Là một chuỗi các đường thẳng được kết 
+nối từ các điểm và hiển thị trên bản đồ
+Polygon Là một chuỗi các đường thẳng được kết 
+nối từ các điểm và Là một chuỗi các 
+đường thẳng được kết nối từ các điểm và 
+hiển thị trên bản đồTÓM TẮT
+Hiện nay với sự phát triển vô cùng mạnh mẽ của công nghệ, xã hội đang dần tiến tới 
+một thời đại mới mà người ta gọi là công nghệ 4.0. Chúng ta có thể dễ dàng nhận 
+thấy công nghệ đã dần xuất hiện trong tất cả các ngành nghề hiện nay. Chính vì thế, 
+việc ứng dụng công nghệ vào sản xuất nhằm tăng năng suất và hiệu quả của công 
+việc là một điều rất cần thiết. Riêng đối với ngành thủy sản, đặc biệt là nuôi cá tra 
+công nghiệp, việc ứng dụng công nghệ thông tin vào quản lý vùng nuôi là một xu 
+hướng không thể thiếu. Công nghệ thông tin giúp cho việc thu thập, xử lý và truyền 
+tải dữ liệu về các thông số nuôi trồng, chất lượng nước, dịch bệnh, sản lượng, giá 
+cả… được nhanh chóng và chính xác. Đồng thời, việc áp dụng công nghệ cũng hỗ 
+trợ cho việc ra quyết định và giải quyết các vấn đề phát sinh trong quá trình nuôi.
+Nắm bắt được vấn đề đó, phần mềm quản lý hoạt động vùng nuôi cá tra trên nền 
+tảng Android ra đời với mục tiêu cung cấp một phần mềm giúp một trưởng vùng 
+nuôi có thể giám sát sự thay đổi hẳng ngày trong quá trình nuôi cá tra. Đồng thời 
+cũng hỗ trợ những tiện ích giúp cho trưởng khu nuôi và công nhân tại ao nuôi có thể 
+kết nối với nhau một cách nhanh chóng để kịp thời đưa ra hướng giải quyết cho các 
+vấn đề tại ao nuôi.
+Để xây dựng ứng dụng, luận văn sử dụng Android Studio là môi trường phát triển 
+tích hợp để phát triển, kết hợp với Gradle là hệ thống xây dựng linh hoạt và hiệu 
+quả. Với ngôn ngữ lập trình là Java và cơ sở dữ liệu không quan hệ Firebase cung 
+cấp các tính năng thời gian thực để giúp người dùng có thể nắm bắt được tình hình 
+thực tế tại vùng nuôi. Ứng dụng gồm năm nhóm người dùng chính: admin, trưởng 
+vùng nuôi, trưởng khu nuôi, công nhân tại ao và kế toán. Ứng dụng cung cấp nhiều 
+tính năng cho nhóm người dùng trên trong việc quản lý một khu nuôi cá tra nhằm 
+nâng cao chất lượng nuôi trồng.
+Kết quả của luận văn là một phần mềm quản lý hoạt động vùng nuôi cá tra nền tảng 
+android hoàn chỉnh và đáp ứng được các mục tiêu đề ra. Ứng dụng được kiểm thử 
+trên các thiết bị Android khác nhau để đảm bảo tính tương thích và ổn định.ABSTRACT
+Currently, with the extremely strong development of technology, society is 
+gradually moving towards a new era called Industry 4.0. We can easily see that 
+technology has gradually appeared in all industries today. Therefore, applying 
+technology to production to increase productivity and work efficiency is very 
+necessary. For the fisheries industry, especially industrial catfish farming, the 
+application of information technology in farming area management is an 
+indispensable trend. Information technology helps to quickly and accurately collect, 
+process and transmit data on farming parameters, water quality, diseases, 
+production, prices, etc. At the same time, applying technology also supports 
+decision-making and problem-solving in the farming process.
+Understanding this issue, a mobile application for managing industrial catfish 
+farming areas on the Android platform was born with the aim of providing an 
+application that helps a farming area manager monitor daily changes in the catfish 
+farming process. At the same time, it also supports utilities to help household 
+farmers plan and start a new farming season more effectively.
+To develop the application, Android Studio was used as an integrated development 
+environment, combined with Gradle, a flexible and efficient building system. With 
+the programming language being Java and the Firebase non-relational database 
+providing real-time features to help users grasp the actual situation in the farming 
+area. The application consists of six main user groups: admin, farming area 
+manager, pond manager, pond worker, accountant, and household farmer. The 
+application provides many features for these user groups in managing an industrial 
+catfish farming area to improve the quality of farming.
+The result of the thesis is a complete Android-based mobile application for 
+managing industrial catfish farming areas that meets the set objectives. The 
+application was tested on different Android devices to ensure compatibility and 
+stability.1
+PHẦN GIỚI THIỆU
+1. Đặt vấn đề
+Cá tra là một loài cá có giá trị kinh tế cao, được nuôi rộng rãi ở các tỉnh Đồng bằng 
+sông Cửu Long. Theo thống kê của Bộ Nông nghiệp và Phát triển nông thôn, năm 
+2020, sản lượng cá tra đạt 1,68 triệu tấn, chiếm 22% tổng sản lượng thủy sản nuôi 
+của cả nước. Cá tra cũng là một trong những mặt hàng xuất khẩu chủ lực của ngành 
+thủy sản Việt Nam, với giá trị xuất khẩu đạt 1,6 tỷ USD năm 2020.
+Tuy nhiên, nuôi cá tra cũng gặp nhiều khó khăn và thách thức, trong đó quản lý chất 
+lượng quy trình nuôi là một yếu tố quan trọng và ảnh hưởng trực tiếp đến hiệu quả 
+sản xuất. Quy trình nuôi bao gốm: lên kế hoặc nuôi, quy trình cho ăn, quy trình điều 
+trị bệnh cá, cập nhật số liệu về tình trạng cá, chất lượng nước... hẳng ngày, theo dõi 
+việc thực hiện công việc hẳng ngày của công nhân, quản lý kho vật tư, cảnh báo các 
+rủi ro kỹ thuật... Các yếu tố về chất lượng môi trưởng nuôi còn phụ thuộc theo thời 
+gian, không gian và các yếu tố như mật độ nuôi, lượng thức ăn, phương pháp xử lý 
+bệnh, nước,... Nếu không được kiểm soát và điều chỉnh kịp thời, các yếu tố trên sẽ 
+gây ra các vấn đề như suy giảm sức đề kháng, bệnh tất, chết cá... gây thiệt hại lớn 
+cho người nuôi.
+Phần mềm quản lý hoạt động vùng nuôi cá tra trên nền tảng Android không chỉ giúp 
+người nuôi cá tra quản lý chất lượng quy trình nuôi một cách hiệu quả mà còn giải 
+quyết được nhiều vấn đề khó khăn trong quá trình nuôi. Nhờ phần mềm này, người 
+nuôi có thể theo dõi các yếu tố liên quan đến môi trường nuôi cá như nhiệt độ, độ 
+pH, NH3, H2S... và nhận được các cảnh báo khi có sự cố xảy ra. Ngoài ra, ứng dụng 
+còn giúp người nuôi tối ưu hóa việc quản lý kho vật tư và giảm thiểu lãng phí, từ đó 
+giảm chi phí nuôi và tăng năng suất.
+Không chỉ giúp người nuôi cá tra nâng cao hiệu quả sản xuất, phần mềm còn góp 
+phần bảo vệ môi trường và nâng cao uy tín thương hiệu cá tra Việt Nam. Việc sử 
+dụng công nghệ thông tin trong quản lý vùng nuôi cá tra sẽ giúp giảm thiểu sự cố ô 
+nhiễm môi trường và giảm lượng chất thải sinh ra từ quá trình nuôi cá. Đồng thời, 
+việc quản lý và cải thiện chất lượng sản phẩm sẽ giúp tăng khả năng cạnh tranh trên 
+thị trường quốc tế và nâng cao uy tín thương hiệu cá tra Việt Nam.2
+2. Lịch sử giải quyết vấn đề
+Hiện nay, ngành nuôi trồng thủy sản đang phát triển mạnh mẽ và đóng góp quan 
+trọng cho nền kinh tế quốc gia. Tuy nhiên, các nhà nuôi thủy sản cũng gặp phải 
+nhiều khó khăn và thách thức trong quản lý trại nuôi như: thiếu thông tin chính xác 
+và kịp thời về tình hình nuôi trồng, dịch bệnh, thị trường; khó khăn trong việc tìm 
+kiếm và mua sắm các nguyên liệu, vật tư, thuốc thú y; thiếu minh bạch trong quản 
+lý thu chi, kho bãi, truy xuất nguồn gốc sản phẩm;... Để giải quyết những vấn đề 
+trên, một số công ty đã phát triển các ứng dụng quản lý trại nuôi thủy sản với các 
+tính năng nổi bật như sau:
+- iQShrimp – phần mềm dựa trên nền tảng đám mây đầu tiên trong ngành nuôi trồng 
+thủy sản. Phần mềm này cho phép người nuôi có thể cung cấp và nhận thông tin chi 
+tiết, thời gian thực về hoạt động của trại nuôi, chẩn đoán và tự động cảnh báo khi 
+các chỉ số vượt quá giới hạn hay cảnh báo dịch bệnh sớm theo khu vực từ một ao 
+phát hiện bệnh. Phần mềm cũng tự động gợi ý và kết nối từ xa với các chuyên gia 
+kỹ thuật để tư vấn, giúp người nuôi có thể đưa ra quyết định tối ưu cho việc nuôi 
+trồng của mình.
+- Farmext – ứng dụng giám sát và quản lý trại nuôi tôm, cá và nhiều thoại thủy sản 
+khác từ xa. Ứng dụng này cho phép người nuôi có thể ghi nhật ký nuôi (môi trường, 
+thức ăn, hóa chất), quản lý thu chi từng trại nuôi, quản lý xuất nhập nguyên liệu 
+trong kho. Ứng dụng cũng cung cấp các biểu đồ phân tích hiệu suất nuôi trồng và so 
+sánh với các chuẩn mực của ngành. Ngoài ra, ứng dụng còn hỗ trợ người nuôi truy 
+xuất nguồn gốc sản phẩm, tạo thuận lợi khi thủy sản được xuất khẩu với nguồn gốc 
+nguyên liệu đầu vào rõ ràng.
+Tuy nhiên, những ứng dụng trên không phù hợp cho người dùng công ty quản lý 
+vùng nuôi bao gồm nhiều khu và nhiều ao nuôi. Đồng thời các ứng dụng trên không 
+giúp quản lý nhân sự của một công ty. 
+Phần mềm “Quản lý hoạt động vùng nuôi cá tra” giải được các vấn đề của một công 
+ty trong việc quản lý vùng nuôi và nhân sự. Phần mềm còn tích hợp quản lý vùng 
+nuôi trên bản đồ (GIS) và trí tuệ nhân tạo cho việc nhận diện và phát hiện bệnh cá 
+thông qua da cá.
+3. Mục tiêu đề tài
+Mục tiêu đề tài là xây dụng một “Phần mềm quản lý hoạt động vùng nuôi cá tra” 
+thỏa mãn các tiêu chí sau:3
+- Đăng ký (có xác thực bằng OTP), đăng nhập, đăng xuất.
+- Nhắn tin với cá nhân hoặc một nhóm người dùng khác trong cùng vùng nuôi 
+để trao đổi thông tin, kinh nghiệm, hỗ trợ nhau.
+- Hội nghị: Tạo cuộc họp trực tuyến với nhiều người dùng khác trong cùng 
+vùng nuôi để bàn bạc, thống nhất các vấn đề liên quan đến nuôi trồng cá tra.
+- Quản lý tài khoản: Tạo một hoặc nhiều tài khoản con, phân quyền tài khoản 
+con theo vai trò và nhiệm vụ, xóa tài khoản con khi không cần thiết.
+- Quản lý vùng nuôi: Tạo, sửa, xóa vùng nuôi, khu nuôi và ao trên bản đồ, 
+nhập liệu và xem biểu đồ về các thông số kỹ thuật của ao nuôi như diện tích, 
+độ sâu, năng suất...
+- Quản lý hành chính trong vùng nuôi: Quản lý nhân sự, thu chi, nghỉ phép, 
+chấm công cho người dùng trong cùng vùng nuôi, xuất báo cáo hành chính 
+theo yêu cầu.
+- Quản lý chất lượng nuôi: Tạo báo cáo nuôi trồng hằng ngày, theo dõi việc 
+cho ăn cũng như điều trị bệnh trên cá, nhận thông báo và cảnh báo khi có 
+dịch bệnh hoặc các chỉ số vượt quá giới hạn an toàn, kết nối và tư vấn với 
+các chuyên gia kỹ thuật khi cần thiết.
+- Quản lý kho: Quản lý các sản phẩm còn trong kho như thuốc, thức ăn, đề
+kháng, thiết bị vật tư...
+- Quản lý chi phí: giúp người dùng nắm rõ những khoản chi cho việc nuôi, 
+khoản lỗ hoặc lãi sau một vụ nuôi...
+- Hỗ trợ người dùng trong việc lập kế hoạch cho một vụ nuôi mới.
+4. Đối tượng và phạm vi nghiên cứu
+4.1. Đối tượng nghiên cứu
+Đề tài sẽ tập trung vào các đối tượng nghiên cứu sau:
+- Tìm hiểu và sử dụng ngôn ngứ lập trình Java.
+- Tìm hiểu và sử dụng cơ sở dữ liệu Firebase FireStore.
+- Tìm hiểu và sử dụng các thư viện như Jitsi Meet, Mapbox,
+MPAndroidChart...
+4.2. Phạm vi nghiên cứu
+Phạm vi nghiên cứu của đề tài là:
+- Đối với admin: Admin có thể quản lý tài khoản, yêu cầu và vùng nuôi.
+- Đối với trưởng vùng: Trưởng vùng nuôi có thể quản lý nhiệm vụ, quản lý 
+vùng nuôi, quản lý nhân sự, quản lý ao nuôi, xem nhật ký nuôi, xem báo cáo, 
+lập kế hoạch nuôi, quản lý kho.
+- Đối với trưởng khu: Trưởng khu nuôi có thể quản lý nhiệm vụ được giao và 
+tạo nhiệm vụ cho công nhân, quản lý nhân sự khu nuôi, quản lý ao nuôi, xem 
+vụ nuôi, xem nhật ký nuôi, xem và tạo báo cáo, quản lý kho.4
+- Đối với công nhân: Công nhân tại ao nuôi có thể xem và hoàn thành nhiệm 
+vụ được giao, yêu cầu nghỉ phép, kiểm tra bệnh cá bằng AI, thực hiện nhập 
+số liệu cho ăn, thông số chất lượng nước, cân trọng cá...
+- Đối với kế toán: Kế toán tại vùng nuôi có thể quản lý thu chi của một vùng 
+nuôi, quản lý việc xuất nhập thuốc, thức ăn, vật tư tại vùng nuôi, quản lý 
+hàng trong kho tại vùng nuôi...
+5. Nội dung nghiên cứu
+5.1. Quy trình nghiên cứu
+Sinh viên Nguyễn Cao Đức chịu trách nhiệm:
+- Tìm hiểu đề tài và bài toán thực tế.
+- Lập trình các chức năng như: Đăng ký, đăng nhập, đăng xuất, quản lý tài 
+khoản (thêm tài khoản, xóa tài khoản, phân quyền tài khoản), nhắn tin (nhắn 
+tin cá nhân ), Quản lý nhiệm vụ (tạo mới nhiệm vụ, xem nhiệm vụ được giao 
+và hoàn thành nhiệm vụ, bình luận cho từng nhiệm vụ, xem chi tiết nhiệm 
+vụ, xem danh sách ai đã hoàn thành và ai chưa hoàn thành nhiệm vụ), chức 
+năng tìm kiếm (lọc theo loại tài khoản), Quản lý nhân sự vùng nuôi (Đuổi 
+việc một người dùng, chuyển người dùng đến một nơi công tác khác, xem 
+danh sách nhân sự ở vùng nuôi)...
+Sinh viên Trần Quốc Khánh chịu trách nhiệm:
+- Lập trình các chức năng như: Quản lý vùng nuôi (Thêm, sửa, xóa thông tin 
+một vùng, khu, ao nuôi trên bản đồ), quản lý yêu cầu (từ chối hoặc chấp nhận 
+các yêu cầu xuất nhập vật tư, thuốc, thức ăn, kháng sinh... yêu cầu xin nghỉ
+phép, nghỉ việc), hội nghị trực tuyến với một hoặc nhiều người, quản lý kho, 
+nhắn tin nhóm, quản lý nhóm (cài đặt nhóm: thêm thành viên, xóa thành 
+viên, xem danh sách thành viên, đổi trưởng nhóm, xóa nhóm, thoát nhóm, cài 
+đặt thông tin nhóm: đổi tên nhóm, đổi mô tả nhóm, đổi ảnh đại diện nhóm).
+- Lập trình giao diện người dùng.
+Các công việc chung:
+- Phân tích hệ thống và thiết kế cơ sở dữ liệu phù hợp.
+- Thiết kế giao diện người dùng một cách trực quan và dễ sử dụng.
+- Kiểm thử và sửa lỗi phát sinh.
+5.2. Công nghệ sử dụng
+- Ngôn ngữ lập trình được sử dụng để tạo nên ứng dụng là: Java.
+- Cơ sở dữ liệu sử dụng cho ứng dụng là: Firebase Firestore.
+5.3. Công cụ hỗ trợ phát triển
+- Công cụ lập trình: Android Studio.5
+- Công cụ thiết kế mô hình: StarUML, PowerDesigner, Draw.io.
+- Công cụ hỗ trợ viết tài liệu: Microsoft Word 365.
+- Công cụ hỗ trợ thực thi: Điện thoại Xiaomi Mi 11T trên nền tảng MUI 14 
+(Android 13), điện thoại Samsung Galaxy Note 10 lite trên nền tảng OneUI 
+4.0 (Android 13).
+6. Những đóng góp của đề tài
+- Xây dựng một phần mềm di động trên nền tảng Android giúp quản lý hoạt 
+động vùng nuôi cá tra cho các công ty.
+- Xây dựng một giao diện ứng dụng dễ sử dụng, đơn giản, trực quan, thân 
+thiện với người dùng.
+- Tích hợp vẽ vùng, khu, ao nuôi trên bản đồ.
+- Tích hợp AI để phát hiện bệnh trên da cá và đếm số lượng cá giống.
+- Tích hợp nhắn tin thời gian thực và hội nghị trực tuyến.
+7. Bố cục quyền luận văn
+Bố cục quyển luận văn gồm những phần sau đây:
+PHẦN GIỚI THIỆU
+PHẦN NỘI DUNG
+Chương 1: Mô tả bài toán
+Chương 2: Cơ sở lý thuyết.
+Chương 3: Thiết kế và cài đặt giải pháp
+Chương 4: Đánh giá và kiểm thử
+PHẦN KẾT LUẬN6
+PHẦN NỘI DUNG
+CHƯƠNG 1
+MÔ TẢ BÀI TOÁN
+Tổng quan hệ thống
+Cá tra là một loại cá có giá trị kinh tế cao, được nuôi rộng rãi ở Việt Nam và xuất 
+khẩu sang nhiều thị trường trên thế giới. Theo Nghị định 55/2017/NĐ-CP quản lý 
+nuôi chế biến và xuất khẩu sản phẩm cá tra, các cơ sở nuôi cá tra phải đáp ứng các 
+điều kiện về địa điểm, diện tích, cơ sở hạ tầng, an toàn thực phẩm. Việc quản lý 
+vùng nuôi cá tra đòi hỏi sự kiểm soát, giám sát toàn bộ thông tin liên quan đến hoạt 
+động nuôi, từ lúc thả giống cho đến thu hoạch, bao gồm cả quản lý kho vật tư, thức 
+ăn, thuốc, hóa chất và báo cáo sản lượng, chi phí, lợi nhuận.
+Tuy nhiên, hiện nay việc quản lý vùng nuôi cá tra công nghiệp còn gặp nhiều khó 
+khăn và thách thức, do sự phân tán địa lý của các ao nuôi, sự thiếu nhất quán và 
+không minh bạch của dữ liệu, sự phụ thuộc vào nhân công và kinh nghiệm của 
+người nuôi. Đồng thời, việc áp dụng công nghệ cao vào sản xuất xuất khẩu cá tra 
+cũng là một xu hướng không thể bỏ qua để nâng cao chất lượng và hiệu quả kinh tế 
+của ngành này.
+Trong bối cảnh đó, phần mềm quản lý hoạt động vùng nuôi cá tra trên nền tảng 
+Android là một giải pháp hiện đại và tiện lợi để hỗ trợ các cơ sở nuôi cá tra trong 
+việc theo dõi, điều hành và quyết định các hoạt động nuôi một cách khoa học và 
+chuyên nghiệp. Phần mềm này được xây dựng dựa trên nền tảng Android và tương 
+thích với nhiều hãng, nhiều mẫu mã điện thoại khác nhau. Phần mềm có các chức 
+năng chính tương ứng với năm nhóm người dùng như sau:
+- Đối với admin: Admin có thể quản lý tài khoản, yêu cầu và vùng nuôi.
+- Đối với trưởng vùng: Trưởng vùng nuôi có thể quản lý nhiệm vụ, quản lý 
+vùng nuôi, quản lý nhân sự, quản lý ao nuôi, xem nhật ký nuôi, xem báo cáo, 
+lập kế hoạch nuôi...
+- Đối với trưởng khu: Trưởng khu nuôi có thể quản lý nhiệm vụ được giao và 
+tạo nhiệm vụ cho công nhân, quản lý nhân sự khu nuôi, quản lý ao nuôi, xem 
+nhật ký nuôi, xem và tạo báo cáo...
+- Đối với công nhân: Công nhân tại ao nuôi có thể xem và hoàn thành nhiệm 
+vụ được giao, yêu cầu nghỉ phép, kiểm tra bệnh cá bằng AI, cập nhật số liệu 
+thức ăn đã cho ăn, thông số chất lượng nước, cân trọng cá...7
+- Đối với kế toán: kế toán tại vùng nuôi có thể quản lý thu chi của một vùng 
+nuôi, quản lý việc xuất nhập thuốc, thức ăn, vật tư tại vùng nuôi, quản lý 
+hàng trong kho tại vùng nuôi...
+Mục tiêu chung của nghiên cứu này là thiết kế và phát triển phần mềm quản lý hoạt 
+động vùng nuôi cá tra trên nền tảng Android để hỗ trợ các cơ sở nuôi cá tra trong 
+việc nâng cao hiệu quả sản xuất và chất lượng sản phẩm.
+Mục tiêu cụ thể của đề tài này là:
+- Nghiên cứu tình hình nuôi và quản lý vùng nuôi cá tra công nghiệp ở Việt 
+Nam, đặc biệt là ở Đồng bằng sông Cửu Long, để xác định các yếu tố ảnh 
+hưởng đến hoạt động nuôi và các nhu cầu của người nuôi.
+- Phân tích và thiết kế các chức năng và giao diện của phần mềm quản lý hoạt 
+động vùng nuôi cá tra trên nền tảng Android, dựa trên các yêu cầu của người 
+dùng và các tiêu chuẩn kỹ thuật của ngành nuôi cá tra.
+- Lập trình và kiểm thử phần mềm quản lý hoạt động vùng nuôi cá tra trên nền 
+tảng Android, sử dụng các công cụ và ngôn ngữ lập trình phù hợp.
+- Đánh giá hiệu quả của phần mềm quản lý hoạt động vùng nuôi cá tra trên 
+nền tảng Android, thông qua việc triển khai thực tế ở một số cơ sở nuôi cá tra 
+và thu thập phản hồi của người dùng.
+Đặc điểm cơ sở dữ liệu
+Cơ sở dữ liệu phải được thiết kế một cách hợp lý để dễ dàng truy xuất các thông tin 
+về vùng nuôi, khu nuôi, ao nuôi, thông tin về nhân viên, nhiệm vụ, bệnh cá...
+Tên thuộc tính trong cơ sở dữ liệu phải được thống nhất với nhau (Tiếng Việt hoặc 
+Tiếng Anh).
+Lập trình viên nên thiết kế cơ sở dữ liệu một cách chi tiết để tránh xảy ra các lỗi 
+trùng lặp, bên cạnh đó sẽ thuận tiện cho việc thống kê các hóa đơn.
+Trong cơ sở dữ liệu, mỗi bảng đều phải thiết kế khóa chính, khóa ngoại để nhất 
+quán dữ liệu. Cơ sở dữ liệu sẽ được cập nhật khi mỗi một mẫu tin có khóa ngoại 
+bên bảng khác được xoá, cập nhật.
+Giao diện người dùng:
+- Trực quan, thân thiện, màu sắc hài hoà.
+- Mỗi nhóm người dùng được thiết kế giao diện và các chức năng riêng biệt.
+- Hệ thống chạy ổn định, giao diện thân thiện giúp người dùng dễ dàng tiếp 
+cận phần mềm và có khả năng tương thích với nhiều mẫu mã điện thoại khác 
+nhau trên thị trường.8
+Các chức năng của hệ thống
+Ứng dụng phải đáp ứng đầy đủ các chức năng có trong sơ đồ các trường hợp sử 
+dụng sau:
+Hình 1.1: Sơ đồ usecase của kế toán9
+Hình 1.2: Sơ đồ usecase chung10
+Hình 1.3: Sơ đồ usecase của trưởng vùng11
+Hình 1.4: Sơ đồ usecase của admin12
+Hình 1.5: Sơ đồ usecase của công nhân13
+Hình 1.6: Sơ đồ usecase của trưởng khu14
+Đăng ký tài khoản
+Mẫu yêu cầu UC_01.
+Tên yêu cầu Đăng ký.
+Mức độ ưu tiên Cao.
+Mô tả Người dùng đăng ký tài khoản để có thể sử dụng các chức 
+năng của hệ thống.
+Tác nhân Người dùng admin.
+Điều kiện trước Người dùng chưa có tài khoản.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dung.
+2. Chọn đăng ký, ứng dụng sẽ chuyển sang màn hình 
+đăng ký tài khoản.
+3. Người dùng chọn loại đăng ký, điền đầy đủ thông tin 
+cá nhân và sau đó chọn đăng ký.
+4. Ứng dụng kiểm tra số điện thoại của người dùng nhập 
+vào để đăng ký:
+• Nếu số điện thoại đã có trong CSDL, ứng dụng 
+sẽ thông báo lỗi tương ứng và yêu cầu người 
+dùng sử dụng số điện thoại khác.
+• Nếu số điện thoại không có trong CSDL, ứng 
+dụng sẽ chuyển sang bước tiếp theo.
+5. Ứng dụng sẽ gửi mã OTP đến số điện thoại mà người 
+dùng đăng ký.
+6. Người dùng nhập mã OTP để xác minh.
+7. Ứng dụng kiểm tra mã OTP người dùng đã nhập:
+• Nếu mã OTP là không hợp lệ, ứng dụng sẽ 
+thông báo lỗi tương ứng và yêu cầu người dùng 
+nhập lại mã OTP.
+• Nếu mã OTP là hợp lệ, ứng dụng sẽ chuyển 
+sang bước tiếp theo.
+8. Người dùng điền thông tin công ty.
+9. Ứng dụng kiểm tra thông tin công ty người dùng đã 
+nhập:
+• Nếu thông tin công ty là không hợp lệ hoặc mã 
+công ty đã có trong CSDL thì ứng dụng sẽ 
+thông báo lỗi tương ứng.
+• Nếu thông tin công ty là hợp lệ và mã công ty 
+không có trong CSDL thì ứng dụng sẽ chuyển 
+đến màn hình trang chủ cho tác nhân admin.
+10.Kết thúc sự kiện.15
+Kết quả Người dùng thực hiện đăng ký tài khoản thành công hoặc thất bại.
+Đăng nhập tài khoản
+Mẫu yêu cầu UC_02.
+Tên yêu cầu Đăng nhập.
+Mức độ ưu tiên Cao.
+Mô tả Người dùng đăng nhập để sử dụng các chức năng liên quan.
+Tác nhân Người dùng cá nhân, admin, trưởng vùng, trưởng khu, công 
+nhân, kế toán.
+Điều kiện trước Người dùng đã có tài khoản.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng nhập số điện thoại và mật khẩu.
+3. Người dùng chọn đăng nhập.
+4. Ứng dụng kiểm tra thông tin người dùng đã nhập vào:
+• Nếu thông tin không hợp lệ, ứng dụng sẽ thông 
+báo lỗi tướng ứng sau đó yêu cầu người dùng 
+nhập lại.
+• Nếu thông tin là hợp lệ, ứng dụng sẽ chuyển 
+đến màn hình trang chủ tương ứng với từng tác 
+nhân.
+5. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện đăng nhập vào ứng dụng thành công 
+hoặc thất bại.
+Đăng xuất
+Mẫu yêu cầu UC_03.
+Tên yêu cầu Đăng xuất.
+Mức độ ưu tiên Trung bình.
+Mô tả Người dùng đăng xuất khỏi ứng dụng
+Tác nhân Người dùng cá nhân, admin, trưởng vùng, trưởng khu, công 
+nhân, kế toán.
+Điều kiện trước Người dùng đã đăng nhập.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn đăng xuất.
+3. Ứng dụng xóa bộ nhớ tạm và chuyển người dùng đến 
+màn hình đăng nhập.16
+4. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện đăng xuất khỏi ứng dụng thành công.
+Tạo một tài khoản mới
+Mẫu yêu cầu UC_13
+Tên yêu cầu Tạo một tài khoản mới.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này giúp cho admin có thể tạo một tài khoản mới.
+Tác nhân Admin.
+Điều kiện trước Người dùng đã đăng nhập và có quyền admin.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Tài khoản”.
+3. Ứng dụng hiển thị hộp thoại lựa chọn cho người dùng 
+bao gồm: “Tạo tài khoản”, “Xóa tài khoản” và “Phân 
+quyền tài khoản”.
+4. Người dùng chọn tạo tài khoản.
+5. Ứng dụng hiển thị hộp thoại lựa chọn cho người dùng 
+bao gồm: “Tạo một tài khoản” và “Tạo nhiều tài 
+khoản”.
+6. Người dùng chọn “Tạo một tài khoản” hoặc “Tạo 
+nhiều tài khoản”.
+7. Người dùng chọn “Tạo một tài khoản”.
+8. Ứng dụng chuyển đến màn hình tạo một tài khoản.
+9. Người dùng nhập thông tin tài khoản cần tạo.
+10.Ứng dụng kiểm tra thông tin người dùng nhập đã hợp 
+lệ hay chưa:
+• Nếu thông tin không hợp lệ, ứng dụng thông 
+báo lỗi tương ứng và yêu cầu người dùng nhập 
+lại thông tin.
+• Nếu thông tin là hợp lệ, ứng dụng tạo một tài 
+khoản mới với thông tin mà người dùng đã 
+nhập.
+11.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện việc tạo một tài khoản mới thành công 
+hoặc thất bại.
+Tạo nhiều tài khoản
+Mẫu yêu cầu UC_1417
+Tên yêu cầu Tạo nhiều tài khoản.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này giúp cho admin có thể tạo nhiều tài khoản 
+mới cùng một lúc bằng tập tin excel.
+Tác nhân Admin.
+Điều kiện trước Người dùng đã đăng nhập và có quyền admin.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Tài khoản”.
+3. Ứng dụng hiển thị hộp thoại lựa chọn cho người dùng 
+bao gồm: “Tạo tài khoản”, “Xóa tài khoản” và “Phân 
+quyền tài khoản”.
+4. Người dùng chọn tạo tài khoản.
+5. Ứng dụng hiển thị hộp thoại lựa chọn cho người dùng 
+bao gồm: “Tạo một tài khoản” và “Tạo nhiều tài 
+khoản”.
+6. Người dùng chọn “Tạo một tài khoản” hoặc “Tạo 
+nhiều tài khoản”.
+7. Người dùng chọn “Tạo nhiều tài khoản”.
+8. Ứng dụng truy cập vào phần mềm quản lý tập tin của 
+người dùng.
+9. Người dùng chọn tập tin excel chứa thông tin của các 
+tài khoản cần tạo.
+10.Trở lại ứng dụng.
+11.Ứng dụng đọc tập tin excel mà người dùng vừa chọn, 
+kiểm tra thông tin hợp lệ hay chưa:
+12.Nếu thông tin không hợp lệ, ứng dụng thông báo lỗi 
+tương ứng và yêu cầu người dùng chọn một tập tin 
+khác.
+13.Nếu thông tin là hợp lệ, ứng dụng lần lượt tạo các tài 
+khoản trong tập tin mà người dùng chọn.
+14.Ứng dụng thông báo đã tạo tài khoản thành công.
+15.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện việc tạo nhiều tài khoản mới cùng một 
+lúc thành công hoặc thất bại.
+Xóa tài khoản
+Mẫu yêu cầu UC_15
+Tên yêu cầu Xóa tài khoản.
+Mức độ ưu tiên Cao.18
+Mô tả Chức năng này giúp cho admin có thể xóa một hoặc nhiều tài 
+khoản cùng một lúc.
+Tác nhân Admin.
+Điều kiện trước Người dùng đã đăng nhập, có quyền admin và đã có một hoặc 
+nhiều tài khoản được tạo trước đó.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Tài khoản”.
+3. Ứng dụng hiển thị hộp thoại lựa chọn cho người dùng 
+bao gồm: “Tạo tài khoản”, “Xóa tài khoản” và “Phân 
+quyền tài khoản”.
+4. Người dùng chọn xóa tài khoản.
+5. Ứng dụng chuyển đến màn hình xóa tài khoản.
+6. Người dùng chọn một hoặc nhiều tài khoản cần xóa.
+7. Người dùng chọn xóa.
+8. Ứng dụng kiểm tra người dùng đã chọn ít nhất một tài 
+khoản hay chưa:
+9. Nếu người dùng chưa chọn tài khoản nào, ứng dụng sẽ 
+thông báo lỗi tương ứng và yêu cầu người dùng phải 
+chọn ít nhất một tài khoản để xóa.
+10.Nếu người dùng đã chọn ít nhất một tài khoản cần xóa, 
+chuyển sang bước tiếp theo.
+11.Ứng dụng hiển thị hộp thoại xác nhận việc xóa tài 
+khoản của người dùng.
+12.Người dùng chọn “Xóa” hoặc “Đóng”:
+13.Nếu người dùng chọn đóng, ứng dụng chuyển đến 
+bước 12.
+14.Nếu người dùng chọn xóa, ứng dụng chuyển đến bước 
+tiếp theo.
+15.Ứng dụng thực hiện xóa lần lượt các tài khoản mà 
+người dùng chọn và thông báo đã xóa các tài khoản 
+trên.
+16.Ứng dụng đóng hộp thoại xác nhận việc xóa tài khoản 
+của người dùng.
+17.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện xóa một hoặc nhiều tài khoản thành 
+công hoặc thất bại.
+Phân quyền tài khoản
+Mẫu yêu cầu UC_16
+Tên yêu cầu Phân quyền tài khoản.19
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này giúp admin có thể thay đổi quyền cho một 
+hoặc nhiều tài khoản cùng một lúc.
+Tác nhân Admin.
+Điều kiện trước Người dùng đã đăng nhập, có quyền admin và đã có một hoặc 
+nhiều tài khoản được tạo trước đó.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Tài khoản”.
+3. Ứng dụng chuyển đến màn hình quản lý tài khoản.
+4. Người dùng chọn phân quyền.
+5. Ứng dụng chuyển đến màn hình phân quyền tài khoản.
+6. Người dùng chọn một hoặc nhiều tài khoản cần thay 
+đổi quyền.
+7. Người dùng chọn quyền cần thay đổi.
+8. Người dùng chọn chỉnh sửa.
+9. Ứng dụng kiểm tra xem người dùng đã chọn ít nhất 
+một tài khoản cần chỉnh sửa quyền hay chưa:
+• Nếu người dùng chưa chọn bất kì tài khoản nào, 
+ứng dụng sẽ thông báo lỗi tương ứng và yêu 
+cầu người dùng phải chọn ít nhất một tài khoản 
+cần thay đổi quyền.
+• Nếu người dùng đã chọn ít nhất một tài khoản, 
+ứng dụng chuyển sang bước tiếp theo.
+10.Ứng dụng hiển thị hộp thoại xác nhận việc thay đổi 
+quyền của người dùng.
+11.Người dùng chọn “Chỉnh sửa” hoặc “Đóng”:
+• Nếu người dùng chọn đóng, ứng dụng chuyển 
+đến bước 13.
+• Nếu người dùng chọn chỉnh sửa, ứng dụng 
+chuyển đến bước tiếp theo.
+12.Ứng dụng tiến hành thay đổi quyền của các tài khoản 
+mà người dùng chọn và thông báo đã thay đổi quyền 
+thành công.
+13.Ứng dụng đóng hộp thoại xác nhận việc thay đổi 
+quyền của người dùng.
+14.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện thay đổi quyền của một hoặc nhiều tài 
+khoản thành công hoặc thất bại.20
+Xem tổng quan nhiệm vụ
+Mẫu yêu cầu UC_17
+Tên yêu cầu Xem tổng quan nhiệm vụ
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này giúp trưởng vùng, trưởng khu và công nhân 
+xem tổng quan và chi tiết có bao nhiêu nhiệm vụ đã hoàn 
+thành và bao nhiêu nhiệm vụ chưa hoàn thành dưới dạng biểu 
+đồ.
+Tác nhân Trưởng vùng, trưởng khu và công nhân.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng, trưởng 
+khu hoặc công nhân.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Nhiệm vụ”.
+3. Ứng dụng chuyển đến màn hình quản lý nhiệm vụ.
+4. Người dùng chọn thẻ tổng quan.
+5. Người dùng chọn ngày để xem tổng quan nhiệm vụ 
+(mặc định là ngày hiện tại).
+6. Ứng dụng kiểm tra quyền của người dùng để hiển thị 
+thông tin tương ứng.
+• Nếu người dùng là trưởng vùng, ứng dụng hiển 
+thị tổng quan các nhiệm vụ mà trưởng vùng đã 
+giao, có bao nhiêu nhiệm vụ đã hoàn thành, bao 
+nhiêu nhiệm vụ chưa hoàn thành chi tiết dưới 
+dạng biểu đồ và dạng thẻ thông tin. Ứng dụng 
+chuyển đến bước 8.
+• Nếu người dùng là trưởng khu, ứng dụng 
+chuyển đến bước tiếp theo.
+• Nếu người dùng là công nhân, ứng dụng hiển 
+thị tổng quan các nhiệm vụ mà mình đã được 
+giao, có bao nhiêu nhiệm vụ đã hoàn thành, bao 
+nhiêu nhiệm vụ chưa hoàn thành chi tiết dưới 
+dạng biểu đồ và dạng thẻ thông tin. Ứng dụng 
+chuyển đến bước 8.
+7. Người dùng chọn nhiệm vụ “Của tôi” hoặc “Đã giao”:
+• Nếu người dùng chọn của tôi, ứng dụng hiển thị 
+tổng quan các nhiệm vụ mà mình được nhận từ 
+cấp trên, có bao nhiêu nhiệm vụ đã hoàn thành, 
+bao nhiêu nhiệm vụ chưa hoàn thành chi tiết 
+dưới dạng biểu đồ và dạng thẻ thông tin.
+• Nếu người dùng chọn đã giao, ứng dụng hiển 21
+thị tổng quan các nhiệm vụ mà mình đã giao 
+cho cấp dưới, có bao nhiêu nhiệm vụ đã giao 
+được hoàn thành, bao nhiêu nhiệm vụ chưa 
+hoàn thành chi tiết dưới dạng biểu đồ và dạng 
+thẻ thông tin.
+8. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện thay đổi quyền của một hoặc nhiều tài 
+khoản thành công hoặc thất bại.
+Tạo nhiệm vụ mới
+Mẫu yêu cầu UC_18
+Tên yêu cầu Tạo nhiệm vụ mới.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này giúp trưởng vùng tạo nhiệm vụ cho một hoặc 
+nhiều trưởng khu trong vùng mà trưởng vùng phụ trách, 
+trưởng khu tạo nhiệm vụ cho một hoặc nhiều công nhân trong 
+khu mà trưởng khu phụ trách.
+Tác nhân Trưởng vùng, trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng, trưởng 
+khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Nhiệm vụ”.
+3. Ứng dụng chuyển đến màn hình quản lý nhiệm vụ.
+4. Người dùng chọn thẻ tổng quan.
+5. Người dùng chọn tạo mới.
+6. Ứng dụng hiển thị biểu mẫu tạo mới nhiệm vụ.
+7. Người dùng nhập các thông tin cần thiết.
+8. Người dùng chọn “Tạo” hoặc “Trở lại”.
+• Nếu người dùng chọn trở lại, ứng dụng đóng 
+biểu mẫu tạo nhiệm vụ mới, trở lại thẻ tổng 
+quan nhiệm vụ.
+• Nếu người dùng chọn tạo, ứng dụng chuyển 
+đến bước tiếp theo.
+9. Ứng dụng kiểm tra thông tin người dùng nhập có hợp 
+lệ hay không:
+• Nếu thông tin không hợp lệ, ứng dụng sẽ thông 
+báo lỗi tương ứng và hiển thị thông báo yêu cầu 
+người dùng nhập thông tin lại.
+• Nếu thông tin là hợp lệ, ứng dụng chuyển đến 
+bước tiếp theo.22
+10.Ứng dụng tạo nhiệm vụ và giao nhiệm vụ đó cho 
+những tài khoản tương ứng.
+11.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện việc tạo nhiệm vụ mới thành công hoặc 
+thất bại.
+Xem danh sách nhiệm vụ đã hoàn thành
+Mẫu yêu cầu UC_19
+Tên yêu cầu Xem nhiệm vụ đã hoàn thành.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này giúp trưởng vùng, trưởng khu và công nhân 
+xem danh sách những nhiệm vụ mà mình giao hoặc được 
+nhận đã hoàn thành. Chức năng này được hiển thị theo từng 
+ngày.
+Tác nhân Trưởng vùng, trưởng khu và công nhân.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng, trưởng 
+khu hoặc công nhân.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Nhiệm vụ”.
+3. Ứng dụng chuyển đến màn hình quản lý nhiệm vụ.
+4. Người dùng chọn thẻ nhiệm vụ đã hoàn thành.
+5. Người dùng chọn ngày để xem danh sách nhiệm vụ đã 
+hoàn thành (mặc định là ngày hiện tại).
+6. Ứng dụng hiển thị danh sách nhiệm vụ hoàn thành:
+• Đối với người dùng là trưởng vùng, ứng dụng 
+hiển thị danh sách các nhiệm vụ mà trưởng 
+vùng đã giao cho các trưởng khu được hoàn 
+thành. Ứng dụng chuyển đến bước 8.
+• Đối với người dùng là trưởng khu, ứng dụng 
+chuyển đến bước tiếp theo.
+• Đối với người dùng là công nhân, ứng dụng 
+hiển thị danh sách nhiệm vụ mà công nhân 
+được nhận đã hoàn thành. Ứng dụng chuyển 
+đến bước 8.
+7. Người dùng chọn nhiệm vụ “Của tôi” hoặc “Đã giao”.
+• Nếu người dùng chọn nhiệm vụ của tôi, ứng 
+dụng hiển thị danh sách những nhiệm vụ mà 
+người dùng được giao và đã hoàn thành.
+• Nếu người dùng chọn nhiệm vụ đã giao, ứng 
+dụng hiển thị danh sách những nhiệm vụ mà 23
+người dùng đã giao cho cấp dưới và đã được 
+cấp dưới hoàn thành.
+8. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện xem danh sách nhiệm vụ đã hoàn 
+thành thành công.
+Xem danh sách nhiệm vụ chưa hoàn thành
+Mẫu yêu cầu UC_20
+Tên yêu cầu Xem nhiệm vụ chưa hoàn thành.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này giúp trưởng vùng, trưởng khu và công nhân 
+xem danh sách những nhiệm vụ mà mình giao hoặc được 
+nhận chưa hoàn thành. Chức năng này được hiển thị theo 
+từng ngày.
+Tác nhân Trưởng vùng, trưởng khu và công nhân.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng, trưởng 
+khu hoặc công nhân.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Nhiệm vụ”.
+3. Ứng dụng chuyển đến màn hình quản lý nhiệm vụ.
+4. Người dùng chọn thẻ nhiệm vụ chưa hoàn thành.
+5. Người dùng chọn ngày để xem danh sách nhiệm vụ 
+chưa hoàn thành (mặc định là ngày hiện tại).
+6. Ứng dụng hiển thị danh sách nhiệm vụ chưa hoàn 
+thành:
+• Đối với người dùng là trưởng vùng, ứng dụng 
+hiển thị danh sách các nhiệm vụ mà trưởng 
+vùng đã giao cho các trưởng khu chưa được 
+hoàn thành. Ứng dụng chuyển đến bước 8.
+• Đối với người dùng là trưởng khu, ứng dụng 
+chuyển đến bước tiếp theo.
+• Đối với người dùng là công nhân, ứng dụng 
+hiển thị danh sách nhiệm vụ mà công nhân 
+được nhận chưa hoàn thành. Ứng dụng chuyển 
+đến bước 8.
+7. Người dùng chọn nhiệm vụ “Của tôi” hoặc “Đã giao”.
+• Nếu người dùng chọn nhiệm vụ của tôi, ứng 
+dụng hiển thị danh sách những nhiệm vụ mà 
+người dùng được giao và chưa hoàn thành.
+• Nếu người dùng chọn nhiệm vụ đã giao, ứng 24
+dụng hiển thị danh sách những nhiệm vụ mà 
+người dùng đã giao cho cấp dưới và chưa được 
+cấp dưới hoàn thành.
+8. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện xem danh sách nhiệm vụ chưa hoàn 
+thành thành công.
+Hoàn thành nhiệm vụ
+Mẫu yêu cầu UC_21
+Tên yêu cầu Hoàn thành nhiệm vụ.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này giúp trưởng khu, công nhân hoàn thành nhiệm 
+vụ mà mình được nhận.
+Tác nhân Trưởng khu và công nhân.
+Điều kiện trước Người dùng đã đăng nhập và có quyền là trưởng khu hoặc 
+công nhân.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Nhiệm vụ”.
+3. Ứng dụng chuyển đến màn hình quản lý nhiệm vụ.
+4. Người dùng chọn thẻ nhiệm vụ chưa hoàn thành.
+5. Người dùng chọn ngày để xem danh sách nhiệm vụ 
+chưa hoàn thành (mặc định là ngày hiện tại).
+6. Ứng dụng hiển thị danh sách nhiệm vụ chưa hoàn 
+thành:
+• Đối với người dùng là trưởng vùng, ứng dụng 
+hiển thị danh sách các nhiệm vụ mà trưởng 
+vùng đã giao cho các trưởng khu chưa được 
+hoàn thành. Ứng dụng chuyển đến bước 11.
+• Đối với người dùng là trưởng khu, ứng dụng 
+chuyển đến bước tiếp theo.
+• Đối với người dùng là công nhân, ứng dụng 
+hiển thị danh sách nhiệm vụ mà công nhân 
+được nhận chưa hoàn thành. Ứng dụng chuyển 
+đến bước 8.
+7. Người dùng chọn nhiệm vụ “Của tôi” hoặc “Đã giao”.
+• Nếu người dùng chọn nhiệm vụ của tôi, ứng 
+dụng hiển thị danh sách những nhiệm vụ mà 
+người dùng được giao và chưa hoàn thành.
+• Nếu người dùng chọn nhiệm vụ đã giao, ứng 
+dụng hiển thị danh sách những nhiệm vụ mà 25
+người dùng đã giao cho cấp dưới và chưa được 
+cấp dưới hoàn thành.
+8. Người dùng nhấn giữ và chọn một hoặc nhiều nhiệm 
+vụ cần hoàn thành.
+9. Người dùng chọn hoàn thành.
+10.Ứng dụng chuyển đổi trạng thái mà người dùng đã 
+chọn từ chưa hoàn thành sang hoàn thành và thông báo 
+đến người dùng đã hoàn thành các nhiệm vụ tương 
+ứng.
+11.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện hoàn thành một hoặc nhiều nhiệm vụ 
+mà mình được giao.
+Xem bình luận và xem chi tiết nhiệm vụ
+Mẫu yêu cầu UC_22
+Tên yêu cầu Xem bình luận và chi tiết nhiệm vụ.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này giúp trưởng vùng, trưởng khu, công nhân xem 
+bình luận và chi tiết về nhiệm vụ.
+Tác nhân Trưởng vùng, trưởng khu và công nhân.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng, trưởng 
+khu hoặc công nhân.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Nhiệm vụ”.
+3. Ứng dụng chuyển đến màn hình quản lý nhiệm vụ.
+4. Người dùng chọn thẻ nhiệm vụ “Hoàn thành” hoặc 
+“Chưa hoàn thành”.
+5. Người dùng chọn ngày để xem danh sách nhiệm vụ 
+chưa hoàn thành (mặc định là ngày hiện tại).
+6. Ứng dụng hiển thị danh sách nhiệm vụ đã hoàn thành 
+hoặc chưa hoàn thành theo tùy chọn của người dùng.
+7. Người dùng chọn vào một nhiệm vụ bất kì.
+8. Ứng dụng chuyển sang màn hình hiển thị thông tin chi 
+tiết nhiệm vụ và danh sách bình luận về nhiệm vụ.
+9. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện việc xem bình luận và chi tiết nhiệm 
+vụ thành công.26
+Bình luận nhiệm vụ
+Mẫu yêu cầu UC_23
+Tên yêu cầu Bình luận nhiệm vụ.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này giúp trưởng vùng, trưởng khu, công nhân 
+bình luận về một nhiệm vụ nào đó.
+Tác nhân Trưởng vùng, trưởng khu và công nhân.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng, trưởng 
+khu hoặc công nhân.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Nhiệm vụ”.
+3. Ứng dụng chuyển đến màn hình quản lý nhiệm vụ.
+4. Người dùng chọn thẻ nhiệm vụ “Hoàn thành” hoặc 
+“Chưa hoàn thành”.
+5. Người dùng chọn ngày để xem danh sách nhiệm vụ 
+chưa hoàn thành (mặc định là ngày hiện tại).
+6. Ứng dụng hiển thị danh sách nhiệm vụ đã hoàn thành 
+hoặc chưa hoàn thành theo tùy chọn của người dùng.
+7. Người dùng chọn vào một nhiệm vụ bất kì.
+8. Ứng dụng chuyển sang màn hình hiển thị thông tin chi 
+tiết nhiệm vụ và danh sách bình luận về nhiệm vụ.
+9. Người dùng nhập nội dung muốn bình luận và chọn 
+bình luận.
+10.Ứng dụng kiểm tra người dùng có nhập bình luận hay 
+không:
+• Nếu người dùng chưa nhập bình luận, ứng dụng 
+thông báo lỗi tương ứng và yêu cầu người dùng 
+nhập nội dung cần bình luận.
+• Nếu người dùng đã nhập bình luận, chuyển 
+sang bước tiếp theo.
+11.Ứng dụng tiến hành đăng bình luận của người dùng 
+lên nhiệm vụ.
+12.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện bình luận về nhiệm vụ thành công hoặc 
+thất bại.
+Xem danh sách người chưa hoàn thành nhiệm vụ
+Mẫu yêu cầu UC_2427
+Tên yêu cầu Xem danh sách ai chưa hoàn thành nhiệm vụ.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này giúp trưởng vùng, trưởng khu, công nhân xem 
+danh sách những ai chưa hoàn thành một nhiệm vụ nào đó.
+Tác nhân Trưởng vùng, trưởng khu và công nhân.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng, trưởng 
+khu hoặc công nhân.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Nhiệm vụ”.
+3. Ứng dụng chuyển đến màn hình quản lý nhiệm vụ.
+4. Người dùng chọn thẻ nhiệm vụ “Hoàn thành” hoặc 
+“Chưa hoàn thành”.
+5. Người dùng chọn ngày để xem danh sách nhiệm vụ 
+chưa hoàn thành (mặc định là ngày hiện tại).
+6. Ứng dụng hiển thị danh sách nhiệm vụ đã hoàn thành 
+hoặc chưa hoàn thành theo tùy chọn của người dùng.
+7. Người dùng chọn vào một nhiệm vụ bất kì.
+8. Ứng dụng chuyển sang màn hình hiển thị thông tin chi 
+tiết nhiệm vụ và danh sách bình luận về nhiệm vụ.
+9. Người dùng chọn danh sách chưa hoàn thành nhiệm 
+vụ.
+10.Ứng dụng hiển thị hội thoại chứa danh sách những ai 
+chưa hoàn thành nhiệm vụ.
+11.Người dùng chọn đóng.
+12.Ứng dụng đóng hộp thoại đang hiển thị.
+13.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện xem danh sách những ai chưa hoàn 
+thành nhiệm vụ thành công.
+Xem danh sách người đã hoàn thành nhiệm vụ
+Mẫu yêu cầu UC_25
+Tên yêu cầu Xem danh sách ai đã hoàn thành nhiệm vụ.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này giúp trưởng vùng, trưởng khu, công nhân xem 
+danh sách những ai đã hoàn thành một nhiệm vụ nào đó.
+Tác nhân Trưởng vùng, trưởng khu và công nhân.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng, trưởng 28
+khu hoặc công nhân.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Nhiệm vụ”.
+3. Ứng dụng chuyển đến màn hình quản lý nhiệm vụ.
+4. Người dùng chọn thẻ nhiệm vụ “Hoàn thành” hoặc 
+“Chưa hoàn thành”.
+5. Người dùng chọn ngày để xem danh sách nhiệm vụ 
+chưa hoàn thành (mặc định là ngày hiện tại).
+6. Ứng dụng hiển thị danh sách nhiệm vụ đã hoàn thành 
+hoặc chưa hoàn thành theo tùy chọn của người dùng.
+7. Người dùng chọn vào một nhiệm vụ bất kì.
+8. Ứng dụng chuyển sang màn hình hiển thị thông tin chi 
+tiết nhiệm vụ và danh sách bình luận về nhiệm vụ.
+9. Người dùng chọn danh sách đã hoàn thành nhiệm vụ.
+10.Ứng dụng hiển thị hội thoại chứa danh sách những ai 
+đã hoàn thành nhiệm vụ.
+11.Người dùng chọn đóng.
+12.Ứng dụng đóng hộp thoại đang hiển thị.
+13.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện xem danh sách những ai đã hoàn thành 
+nhiệm vụ thành công.
+Xem danh sách nhân sự trong vùng nuôi
+Mẫu yêu cầu UC_26
+Tên yêu cầu Xem danh sách nhân sự trong vùng nuôi.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này giúp trưởng vùng, trưởng khu xem danh sách 
+nhân sự trong vùng nuôi hoặc khu nuôi mà mình quản lý.
+Tác nhân Trưởng vùng, trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng hoặc 
+trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Nhân sự”.
+3. Ứng dụng hiển thị hộp thoại tùy chọn bao gồm: “Xem 
+thông tin” và “Chuyển công tác”.
+4. Người dùng chọn “Xem thông tin”.
+5. Ứng dụng chuyển sang màn hình hiển thị danh sách 
+trong vùng nuôi hoặc khu nuôi mà người dùng quản 
+lý.29
+• Đối với người dùng là trưởng khu, ứng dung 
+hiển thị danh sách công nhân trong khu mà 
+người dùng quản lý. Người dùng có thể áp dụng 
+bộ lọc để lọc ra danh sách công nhân theo từng 
+ao nuôi.
+• Đối với người dùng là trưởng vùng, ứng dụng 
+hiển thị danh sách công nhân và trưởng khu mà 
+người dùng quản lý. Người dùng có thể áp dụng 
+bộ lọc để lọc ra danh sách trưởng khu và công 
+nhân theo từng khu nuôi.
+6. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện xem danh sách nhân sự thành công.
+Xem thông tin nhân sự
+Mẫu yêu cầu UC_27
+Tên yêu cầu Xem thông tin nhân sự.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này giúp trưởng vùng, trưởng khu thông tin của 
+một cấp dưới nào đó do mình quản lý.
+Tác nhân Trưởng vùng, trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng hoặc 
+trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Nhân sự”.
+3. Ứng dụng hiển thị hộp thoại tùy chọn bao gồm: “Xem 
+thông tin” và “Chuyển công tác”.
+4. Người dùng chọn “Xem thông tin”.
+5. Ứng dụng chuyển sang màn hình hiển thị danh sách 
+trong vùng nuôi hoặc khu nuôi mà người dùng quản 
+lý.
+• Đối với người dùng là trưởng khu, ứng dung 
+hiển thị danh sách công nhân trong khu mà 
+người dùng quản lý. Người dùng có thể áp dụng 
+bộ lọc để lọc ra danh sách công nhân theo từng 
+ao nuôi.
+• Đối với người dùng là trưởng vùng, ứng dụng 
+hiển thị danh sách công nhân và trưởng khu mà 
+người dùng quản lý. Người dùng có thể áp dụng 
+bộ lọc để lọc ra danh sách trưởng khu và công 
+nhân theo từng khu nuôi.30
+6. Người dùng chọn vào một tài khoản bất kỳ để xem 
+thông tin.
+7. Ứng dụng hiển thị hộp thoại chứa thông tin tài khoản 
+mà người dùng vừa chọn.
+8. Người dùng chọn “Đóng”.
+9. Ứng dụng đóng hộp thoại trên.
+10.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện việc xem thông tin của một nhân sự 
+thành công.
+Chuyển công tác
+Mẫu yêu cầu UC_28
+Tên yêu cầu Chuyển công tác.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này giúp trưởng vùng, trưởng khu chuyển công 
+tác của cấp dưới đến một khu hoặc một ao nào đó.
+Tác nhân Trưởng vùng, trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng hoặc 
+trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Nhân sự”.
+3. Ứng dụng hiển thị hộp thoại tùy chọn bao gồm: “Xem 
+thông tin” và “Chuyển công tác”.
+4. Người dùng chọn “Chuyển công tác”.
+5. Ứng dụng chuyển sang màn hình hiển thị danh sách 
+trong vùng nuôi hoặc khu nuôi mà người dùng quản 
+lý.
+• Đối với người dùng là trưởng khu, ứng dụng 
+hiển thị danh sách công nhân trong khu mà 
+người dùng quản lý. Người dùng có thể áp 
+dụng bộ lọc để lọc ra danh sách công nhân theo 
+từng ao nuôi.
+• Đối với người dùng là trưởng vùng, ứng dụng 
+hiển thị danh sách công nhân và trưởng khu mà 
+người dùng quản lý. Người dùng có thể áp 
+dụng bộ lọc để lọc ra danh sách trưởng khu và 
+công nhân theo từng khu nuôi.
+6. Người dùng chọn một hoặc nhiều người dùng cần 
+chuyển công tác đến một khu hoặc một ao khác.
+• Đối với người dùng là trường vùng, người dùng 31
+chỉ có thể chuyển một hoặc nhiều công nhân từ 
+ao này sang ao khác.
+• Đối với người dùng là trưởng khu, người dùng 
+có thể đổi một trưởng vùng từ vùng này sang 
+vùng khác, một hoặc nhiều công nhân từ ao này 
+sang ao khác. Người dùng có thể chọn “Khu” 
+để đổi trưởng khu và chọn “Ao” để đối công 
+nhân.
+7. Ứng dụng kiểm tra người dùng có chọn ít nhất một tài 
+khoản cần chuyển công tác hay chưa:
+• Nếu người dùng chưa chọn tài khoản nào, ứng 
+dụng thông báo lỗi tương ứng và yêu cầu 
+người dùng phải chọn ít nhất một tài khoản.
+• Nếu người dùng đã chọn ít nhất một tài khoản, 
+ứng dụng chuyển sang bước tiếp theo.
+8. Ứng dụng chuyển nơi công tác của những tài khoản 
+mà người dùng đã chọn từ khu này sang khu khác 
+hoặc từ ao này sang ao khác.
+9. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện việc đổi công tác cho một hoặc nhiều 
+người khác thành công hoặc thất bại.
+Chức năng xem thông tin ao
+Mẫu yêu cầu UC_39
+Tên yêu cầu Xem thông tin ao.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép trưởng vùng, trưởng khu xem thông 
+tin của một ao.
+Tác nhân Trưởng vùng, trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng hoặc 
+trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn vào một ao nào đó.
+3. Ứng dụng chuyển sang màn hình “Chi tiết ao”.
+4. Ứng dụng hiển thị các thông tin về ao như tình hình 
+cho ăn, tình hình điều trị, chất lượng nước, diện tích, 
+số công nhân...
+5. Kết thúc sự kiện.32
+Kết quả Người dùng thực hiện xem thông tin ao thành công.
+Chức năng xem danh sách công nhân trong ao
+Mẫu yêu cầu UC_40
+Tên yêu cầu Xem danh sách công nhân trong ao.
+Mức độ ưu tiên Trung bình.
+Mô tả Chức năng này cho phép trưởng vùng, trưởng khu xem danh 
+sách công nhân của một ao nào đó.
+Tác nhân Trưởng vùng, trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng hoặc 
+trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn vào một ao nào đó.
+3. Ứng dụng chuyển sang màn hình “Chi tiết ao”.
+4. Người dùng chọn xem danh sách công nhân.
+5. Ứng dụng hiển thị hộp thoại chứa danh sách công 
+nhân của ao đó.
+6. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện xem danh sách công nhân thành công.
+Chức năng cài đặt thông số nước cần đo
+Mẫu yêu cầu UC_41
+Tên yêu cầu Cài đặt thông số nước cần đo.
+Mức độ ưu tiên Trung bình.
+Mô tả Chức năng này cho phép trưởng vùng, trưởng khu cài đặt 
+thông số nước cần đo trong ngày cho một ao nào đó.
+Tác nhân Trưởng vùng, trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng hoặc 
+trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn vào một ao nào đó.
+3. Ứng dụng chuyển sang màn hình “Chi tiết ao”.33
+4. Người dùng chọn cài đặt thông số nước cần đo.
+5. Ứng dụng hiển thị hộp thoại chứa các thông số nước.
+6. Người dùng chọn các thông số nước cần đo.
+7. Người dùng chọn “Lưu” hoặc “Đóng”:
+• Nếu người dùng chọn đóng, ứng dụng chuyển 
+đến bước 8.
+• Nếu người dùng chọn lưu, ứng dụng tiến hành 
+lưu các thông số cần đo. Chuyển đến bước tiếp 
+theo.
+8. Ứng dụng đóng hộp thoại.
+9. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện cài đặt thông số cần đo thành công.
+Chức năng cài đặt số lần cho ăn trong ngày
+Mẫu yêu cầu UC_42
+Tên yêu cầu Cài đặt số lần cho ăn trong ngày.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép trưởng vùng, trưởng khu cài đặt số 
+lần cho ăn trong ngày cho một ao nào đó.
+Tác nhân Trưởng vùng, trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng hoặc 
+trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn vào một ao nào đó.
+3. Ứng dụng chuyển sang màn hình “Chi tiết ao”.
+4. Người dùng chọn “Cài đặt cho ăn trong ngày”.
+5. Ứng dụng hiển thị hộp thoại “Cài đặt số lần cho ăn 
+trong ngày”.
+6. Người dùng chọn số lần cho ăn và nhập lượng thức ăn 
+phải cho ăn tương ứng mỗi lần.
+7. Người dùng chọn “Lưu” hoặc “Đóng”:
+• Nếu người dùng chọn đóng, chuyển đến bước 
+8.
+• Nếu người dùng chọn lưu, ứng dụng kiểm tra 
+thông tin mà người dùng nhập đã hợp lệ hay 
+chưa. Nếu chưa hợp lệ ứng dụng hiển thị thông 
+báo thông tin không hợp lệ và yêu cầu người 
+dùng nhập lại. Nếu hợp lệ, ứng dụng chuyển 34
+đến bước tiếp theo.
+8. Ứng dụng tiến hành lưu số lần cho ăn và lượng thức 
+ăn mà người dùng đã nhập.
+9. Ứng dụng đóng hộp thoại.
+10.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện cài đặt số lần cho ăn trong ngày thành 
+công hoặc thất bại.
+Chức năng xem danh sách báo cáo cá bệnh
+Mẫu yêu cầu UC_43
+Tên yêu cầu Xem danh sách báo cáo cá bệnh.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép trưởng khu xem danh sách báo cáo 
+cá bệnh từ công nhân trong khu.
+Tác nhân Trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Cá bệnh”.
+3. Ứng dụng hiển thị danh sách cá bệnh theo ngày, mặc 
+định là ngày hiện tại.
+4. Người dùng chọn ngày.
+5. Ứng dụng hiển thị danh sách báo cáo cá bệnh theo 
+ngày mà người dùng đã chọn.
+6. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện xem danh sách báo cáo cá bệnh thành 
+công.
+Chức năng xem chi tiết báo cáo cá bệnh
+Mẫu yêu cầu UC_44
+Tên yêu cầu Xem danh sách báo cáo cá bệnh.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép trưởng khu xem danh sách báo cáo 
+cá bệnh từ công nhân trong khu.35
+Tác nhân Trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Cá bệnh”.
+3. Ứng dụng hiển thị danh sách báo cáo cá bệnh từ công 
+nhân theo ngày (mặc định là ngày hiện tại).
+4. Người dùng chọn ngày.
+5. Ứng dụng hiển thị danh sách báo cá cá bệnh theo ngày 
+mà người dùng chọn.
+6. Người dùng chọn vào một báo cáo nào đó.
+7. Hiển thị hộp thoại chứa thông tin chi tiết về báo cáo 
+đó.
+8. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện xem chi tiết báo cáo cá bệnh thành 
+công.
+Chức năng tạo phác đồ điều trị.
+Mẫu yêu cầu UC_45
+Tên yêu cầu Tạo phác đồ điều trị.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép trưởng khu tạo phác đồ điều trị cho 
+một báo cáo cá bệnh của một khu nào đó.
+Tác nhân Trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Cá bệnh”.
+3. Ứng dụng hiển thị danh sách báo cáo cá bệnh theo 
+ngày, mặc định là ngày hiện tại.
+4. Người dùng chọn vào một báo cáo nào đó.
+5. Ứng dụng hiển thị hộp thoại chứ thông tin chi tiết của 
+báo cáo đó.
+6. Người dùng chọn “Tạo phác đồ”.
+7. Ứng dụng hiển thị hộp thoại “Tạo phác đồ điều trị”.
+8. Người dùng nhập các thông tin cần thiết như tên bệnh, 
+tên thuốc, loại thuốc sử dụng từng loại...
+9. Người dùng chọn “Tạo” hoặc “Đóng”:
+• Nếu người dùng chọn đóng, ứng dụng chuyển 36
+đến bước 12.
+• Nếu người dùng chọn tạo, ứng dụng kiểm tra 
+thông tin mà người dùng nhập đã hợp lệ hay 
+chưa. Nếu chưa hợp lệ, ứng dụng thông báo 
+đến người dùng thông tin chưa hợp lệ và yêu 
+cầu nhập lại. Nếu hợp lệ, ứng dụng chuyển đến 
+bước tiếp theo.
+10.Ứng dụng tạo phác đồ điều trị theo thông tin mà người 
+dùng đã nhập và chuyển phác đồ đó đến trưởng vùng 
+chờ duyệt.
+11.Ứng dụng thông báo tạo phác đồ thành công.
+12.Ứng dụng đóng hộp thoại “Tạo phác đồ điều trị”.
+13.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện tạo phác đồ điều trị thành công hoặc 
+thất bại.
+Chức năng xem phác đồ điều trị đang chờ duyệt
+Mẫu yêu cầu UC_46
+Tên yêu cầu Xem phác đồ chờ duyêt.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép trưởng khu và trưởng vùng xem các 
+phát đồ đang chờ trưởng vùng duyệt.
+Tác nhân Trưởng khu và trưởng vùng.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng khu hoặc 
+trưởng vùng.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Điều trị”.
+3. Ứng dụng chuyển sang màn hình “Phác đồ điều trị”.
+4. Người dùng chọn thẻ “Chờ xử lý”.
+5. Ứng dụng hiển thị danh sách phác đồ chờ được trưởng 
+vùng duyệt theo ngày, mặc định là ngày hôm nay.
+6. Người dùng chọn ngày.
+7. Ứng dụng hiển thị danh sách phác đồ chờ được trưởng 
+vùng duyệt theo ngày mà người dùng chọn.
+8. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện xem phác đồ điều trị chờ duyệt thành 
+công.37
+Chức năng xem phác đồ điều trị bị từ chối
+Mẫu yêu cầu UC_47
+Tên yêu cầu Xem phác đồ điều trị bị từ chối
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép trưởng khu và trưởng vùng xem các 
+phát đồ bị trưởng vùng từ chối.
+Tác nhân Trưởng khu và trưởng vùng.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng khu hoặc 
+trưởng vùng.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Điều trị”.
+3. Ứng dụng chuyển sang màn hình “Phác đồ điều trị”.
+4. Người dùng chọn thẻ “Từ chối.
+5. Ứng dụng hiển thị danh sách phác đồ bị từ chối bởi 
+trưởng vùng theo ngày, mặc định là ngày hôm nay.
+6. Người dùng chọn ngày.
+7. Ứng dụng hiển thị danh sách phác đồ bị từ chối bởi 
+trưởng vùng theo ngày mà người dùng đã chọn.
+8. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện xem phác đồ bị từ chối thành công.
+Chức năng xem phác đồ điều trị đã được chấp nhận
+Mẫu yêu cầu UC_48
+Tên yêu cầu Xem phác đồ điều trị đã được chấp nhận
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép trưởng khu và trưởng vùng xem các 
+phát đồ đã được trưởng vùng chấp nhận.
+Tác nhân Trưởng khu và trưởng vùng.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng khu hoặc 
+trưởng vùng.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Điều trị”.38
+3. Ứng dụng chuyển sang màn hình “Phác đồ điều trị”.
+4. Người dùng chọn thẻ “Chấp nhận”.
+5. Ứng dụng hiển thị danh sách phác đồ điều trị được 
+chấp nhận bởi trưởng vùng theo ngày, mặc định là 
+ngày hôm nay.
+6. Người dùng chọn ngày.
+7. Ứng dụng hiển thị danh sách phác đồ điều trị được 
+chấp nhận bởi trưởng vùng theo ngày mà người dùng 
+chọn.
+8. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện xem phác đồ điều trị được chấp nhận 
+thành công.
+Chức năng tạo nhiệm vụ điều trị cho công nhân
+Mẫu yêu cầu UC_49
+Tên yêu cầu Tạo nhiệm vụ điều trị cho công nhân
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép trưởng khu tạo nhiệm vụ theo phác 
+đồ điều trị đã được chấp nhận bởi trưởng vùng cho công 
+nhân thực hiện.
+Tác nhân Trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Điều trị”.
+3. Ứng dụng chuyển sang màn hình “Phác đồ điều trị”.
+4. Người dùng chọn thẻ “Chấp nhận”.
+5. Ứng dụng hiển thị danh sách phác đồ điều trị được 
+chấp nhận bởi trưởng vùng theo ngày, mặc định là 
+ngày hôm nay.
+6. Người dùng chọn ngày.
+7. Ứng dụng hiển thị danh sách phác đồ điều trị được 
+chấp nhận bởi trưởng vùng theo ngày mà người dùng 
+chọn.
+8. Người dùng chọn “Phân công”.
+9. Ứng dụng hiển thị hộp thoại chứa danh sách công 
+nhân trong ao tương ứng với phác đồ của ao đó.
+10.Người dùng chọn công nhân.
+11.Người dùng chọn “Chọn” hoặc “Đóng”:39
+• Nếu người dùng chọn đóng, ứng dụng chuyển 
+đến bước 13.
+• Nếu người dùng chọn chọn, ứng dụng kiểm tra 
+xem người dùng có chọn ít nhất một công nhân 
+hay chưa. Nếu chưa, ứng dụng thông báo đến 
+người dụng phải chọn ít nhất một công nhân. 
+Nếu người dùng đã chọn, ứng dụng chuyển đến 
+bước tiếp theo.
+12.Ứng dụng thực hiển chuyển phác đồ điều trị của 
+trưởng khu đến các công nhân được chọn.
+13.Ứng dụng đóng hộp thoại hiển thị danh sách công 
+nhân.
+14.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện tạo nhiệm vụ điều trị cho công nhân 
+thành công hoặc thất bại.
+Chức năng xóa phác đồ điều trị
+Mẫu yêu cầu UC_50
+Tên yêu cầu Xóa phác đồ điều trị.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép trưởng khu xóa phác đồ điều trị mà 
+mình đã tạo khi phác đồ đó chưa được trưởng vùng duyệt.
+Tác nhân Trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Điều trị”.
+3. Ứng dụng chuyển sang màn hình “Phác đồ điều trị”.
+4. Người dùng chọn thẻ “Chờ xử lý” hoặc “Từ chối”.
+5. Ứng dụng hiển thị danh sách phác đồ đang chờ xử lý 
+hoặc bị từ chối bởi trưởng vùng theo ngày, mặc định 
+là ngày hôm nay.
+6. Người dùng chọn ngày.
+7. Ứng dụng hiển thị danh sách phác đồ đang chờ xử lý 
+hoặc bị từ chối bởi trưởng vùng theo ngày mà người 
+dùng chọn.
+8. Người dùng chọn vào biểu tượng xóa trên phác đồ cần 
+xóa.
+9. Ứng dụng hiển thị hộp thoại xác nhận xóa phác đồ.40
+10.Người dùng chọn “Xóa” hoặc “Đóng”.
+• Nếu người dùng chọn đóng, ứng dụng chuyển 
+đến bước 12.
+• Nếu người dùng chọn xóa, ứng dụng tiến hành 
+xóa phác đồ điều trị tương ứng và chuyển đến 
+bước tiếp theo.
+11.Ứng dụng thông báo xóa phác đồ điều trị thành công.
+12.Ứng dụng đóng hộp thoại.
+13.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện xóa phác đồ điều trị thành công.
+Chức năng chỉnh sửa phác đồ điều trị
+Mẫu yêu cầu UC_51
+Tên yêu cầu Chỉnh sửa phác đồ điều trị.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép trưởng khu chỉnh sửa phác đồ điều 
+trị mà mình đã tạo khi phác đồ đó chưa được trưởng vùng 
+duyệt.
+Tác nhân Trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Điều trị”.
+3. Ứng dụng chuyển sang màn hình “Phác đồ điều trị”.
+4. Người dùng chọn thẻ “Chờ xử lý” hoặc “Từ chối”.
+5. Ứng dụng hiển thị danh sách phác đồ đang chờ xử lý 
+hoặc bị từ chối bởi trưởng vùng theo ngày, mặc định 
+là ngày hôm nay.
+6. Người dùng chọn ngày.
+7. Ứng dụng hiển thị danh sách phác đồ đang chờ xử lý 
+hoặc bị từ chối bởi trưởng vùng theo ngày mà người 
+dùng chọn.
+8. Người dùng chọn vào biểu tượng chỉnh sửa trên phác 
+đồ điều trị tương ứng.
+9. Ứng dụng hiển thị hộp thoại sửa phác đồ điều trị chứa 
+thông tin phác đồ điều trị hiện tại.
+10.Người dùng tiến hành sửa phác đồ điều trị.
+11.Ứng dụng kiểm tra thông tin mà người dùng sửa có 
+hợp lệ hay chưa.41
+• Nếu chưa hợp lệ, ứng dụng thông báo đến 
+người dùng thông tin chưa hợp lệ và yêu cầu 
+nhập lại.
+• Nếu hợp lệ, ứng dụng tiến hành sửa phác đồ 
+điều trị với thông tin mà người dùng đã thay 
+đổi. Ứng dụng chuyển đến bước tiếp theo.
+12.Ứng dụng thông báo đã sửa phác đồ thành công. Sau 
+đó, đóng hộp thoại sửa phác đồ điều trị.
+13.Kết thúc sự kiện.
+Kết quả Người dùng thực sửa phác đồ điều trị thành công hoặc thất 
+bại.
+Chức năng hoàn thành điều trị
+Mẫu yêu cầu UC_52
+Tên yêu cầu Hoàn thành điều trị.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép trưởng khu hoàn thành việc điều trị.
+Tác nhân Trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Điều trị”.
+3. Ứng dụng chuyển sang màn hình “Phác đồ điều trị”.
+4. Người dùng chọn thẻ “Chấp nhận”.
+5. Ứng dụng hiển thị danh sách phác đồ điều trị được 
+chấp nhận bởi trưởng vùng theo ngày, mặc định là 
+ngày hôm nay.
+6. Người dùng chọn ngày.
+7. Ứng dụng hiển thị danh sách phác đồ điều trị được 
+chấp nhận bởi trưởng vùng theo ngày mà người dùng 
+chọn.
+8. Người dùng chọn “Hoàn thành”.
+9. Ứng dụng tiến hành hoàn thành việc điều trị, lưu 
+thông tin điều trị vào nhật ký, chuyển trạng thái của 
+phác đồ từ “chấp nhận” sang hoàn thành và xóa phác 
+đồ khỏi danh sách chấp nhận.
+10.Kết thúc sự kiện.
+Kết quả Người dùng thực hoàn thành điều trị thành công.42
+Chức năng chấp nhận phác đồ điều trị
+Mẫu yêu cầu UC_53
+Tên yêu cầu Chấp nhận phác đồ điều trị.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép trưởng vùng chấp nhận một phác đồ 
+điều trị từ trưởng khu.
+Tác nhân Trưởng vùng.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Điều trị”.
+3. Ứng dụng chuyển sang màn hình “Phác đồ điều trị”.
+4. Người dùng chọn thẻ “Chờ xử lý”.
+5. Ứng dụng hiển thị danh sách phác đồ chờ được trưởng 
+vùng duyệt theo ngày, mặc định là ngày hôm nay.
+6. Người dùng chọn ngày.
+7. Ứng dụng hiển thị danh sách phác đồ chờ được trưởng 
+vùng duyệt theo ngày mà người dùng chọn.
+8. Người dùng chọn “Chấp nhận”.
+9. Ứng dụng thực hiện thay đổi trạng thái của phác đồ từ 
+“chờ xử lý” sang “được chấp nhận” và xóa phác đồ 
+khỏi danh sách chờ xử lý.
+10.Kết thúc sự kiện.
+Kết quả Người dùng thực chấp nhận phác đồ điều trị thành công.
+Chức năng từ chối phác đồ điều trị
+Mẫu yêu cầu UC_54
+Tên yêu cầu Từ chối phác đồ điều trị.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép trưởng vùng từ chối một phác đồ 
+điều trị từ trưởng khu.
+Tác nhân Trưởng vùng.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng.43
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Điều trị”.
+3. Ứng dụng chuyển sang màn hình “Phác đồ điều trị”.
+4. Người dùng chọn thẻ “Chờ xử lý”.
+5. Ứng dụng hiển thị danh sách phác đồ chờ được trưởng 
+vùng duyệt theo ngày, mặc định là ngày hôm nay.
+6. Người dùng chọn ngày.
+7. Ứng dụng hiển thị danh sách phác đồ chờ được trưởng 
+vùng duyệt theo ngày mà người dùng chọn.
+8. Người dùng chọn “Từ chối”.
+9. Ứng dụng chuyển trang thái của phác đồ từ “chờ xử 
+lý” sang “từ chối” và xóa phác đồ khỏi danh sách chờ 
+xử lý.
+10.Kết thúc sự kiện.
+Kết quả Người dùng thực từ chối phác đồ điều trị thành công.
+Chức năng xem danh sách nhiệm vụ cố định
+Mẫu yêu cầu UC_55
+Tên yêu cầu Xem danh sách nhiệm vụ cố định.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép trưởng khu xem danh sách nhiệm 
+vụ cố định đã giao cho công nhân.
+Tác nhân Trưởng vùng.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Nhiệm vụ”.
+3. Ứng dụng chuyển đến màn hình quản lý nhiệm vụ.
+4. Người dùng chọn thẻ nhiệm vụ cố định.
+5. Người dùng chọn ngày để xem danh sách nhiệm vụ đã 
+hoàn thành (mặc định là ngày hiện tại).
+6. Người dùng chọn ngày.
+7. Ứng dụng hiển thị danh sách nhiệm vụ cố định theo 
+ngày mà người dùng chọn.
+8. Kết thúc sự kiện.
+Kết quả Người dùng thực xem danh sách nhiệm vụ cố định thành 
+công.44
+Chức năng nhập lượng thức ăn đã cho ăn
+Mẫu yêu cầu UC_56
+Tên yêu cầu Nhập lượng thức ăn đã cho ăn.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép công nhân nhập thực ăn đã cho cá 
+ăn.
+Tác nhân Công nhân.
+Điều kiện trước Người dùng đã đăng nhập và có quyền công nhân.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn vào lần cho ăn.
+3. Ứng dụng hiển thị hộp thoại chứa biểu mẫu nhập 
+lượng thức ăn đã cho ăn.
+4. Người dùng nhập lượng thức ăn.
+5. Người dùng chọn “Lưu” hoặc “Đóng”:
+6. Nếu người dùng chọn đóng, ứng dụng chuyển đến 
+bước 8.
+7. Nếu người dùng chọn lưu, ứng dụng chuyển đến bước 
+tiếp theo.
+8. Ứng dụng kiểm tra xem dữ liệu người dùng nhập có 
+hợp lệ hay không
+• Nếu không hợp lệ, ứng dụng thông báo thông 
+tin không hợp lệ và yêu cầu nhập lại.
+• Nếu hợp lệ, ứng dụng lưu thông tin lượng thức 
+ăn mà người dùng đã nhập và chuyển đến bước 
+tiếp theo.
+9. Ứng dụng thông báo đã cập nhật lượng thức ăn thành 
+công.
+10.Ứng dụng đóng hộp thoại.
+11.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện nhập lượng thức ăn thành công hoặc 
+thất bại.
+Chức năng cập nhật chất lượng nước
+Mẫu yêu cầu UC_57
+Tên yêu cầu Cập nhật chất lượng nước.45
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép công nhân nhập chỉ số nước đã đo.
+Tác nhân Công nhân.
+Điều kiện trước Người dùng đã đăng nhập và có quyền công nhân.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn vào thông số cần nhập chỉ số đã đo.
+3. Ứng dụng hiển thị hộp thoại chứa biểu mẫu nhập chỉ 
+số đo nước.
+4. Người dùng nhập chỉ số.
+5. Người dùng chọn “Lưu” hoặc “Đóng”:
+• Nếu người dùng chọn đóng, ứng dụng chuyển 
+đến bước 8.
+• Nếu người dùng chọn lưu, ứng dụng chuyển 
+đến bước tiếp theo.
+6. Ứng dụng kiểm tra xem thông tin mà người dùng 
+nhập có hợp lệ hay không
+• Nếu không hợp lệ, ứng dụng thông báo đến 
+người dùng là thông tin không hợp lệ và yêu 
+cầu nhập lại.
+• Nếu hợp lệ, ứng dụng lưu chỉ số nước mà 
+người dùng đã nhập và chuyển đến bước tiếp 
+theo.
+7. Ứng dụng thông báo đã cập nhật chỉ số nước thành 
+công.
+8. Ứng dụng đóng hộp thoại.
+9. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện nhập chỉ số nước thành công hoặc thất 
+bại.
+Chức năng trị bệnh
+Mẫu yêu cầu UC_59
+Tên yêu cầu Trị bệnh.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép công nhân hoàn thành việc điều trị 
+bệnh cá mà trưởng khu đã giao.
+Tác nhân Công nhân.46
+Điều kiện trước Người dùng đã đăng nhập và có quyền công nhân.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Hoàn thành”.
+3. Ứng dụng tiến hành trừ lượng thuốc đã sử dụng trong 
+kho.
+4. Ứng dụng thông báo đã hoàn thành điều trị.
+5. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện trị bệnh thành công.
+Chức năng báo cáo cá bệnh
+Mẫu yêu cầu UC_60
+Tên yêu cầu Báo cáo cá bệnh.
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép công nhân tạo báo cáo cá bệnh lên 
+trưởng khu.
+Tác nhân Công nhân.
+Điều kiện trước Người dùng đã đăng nhập và có quyền công nhân.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Cá bệnh”.
+3. Ứng dụng hiển thị hộp thoại chứa biểu mẫu tạo báo 
+cáo cá bệnh.
+4. Người dùng nhập thông tin như ảnh, phỏng đoán.
+5. Người dùng chọn “Tạo” hoặc “Đóng”.
+• Nếu người dùng chọn đóng, ứng dụng chuyển 
+đến bước 8.
+• Nếu người dụng chọn tạo, ứng dụng chuyển 
+đến bước tiếp theo.
+6. Ứng dụng kiểm tra thông tin mà người dùng nhập có 
+hợp lệ hay chưa
+• Nếu chưa hợp lệ, ứng dụng thông báo đến 
+người dùng là thông tin chưa hợp lệ và yêu cầu 
+nhập lại.
+• Nếu hợp lệ, ứng dụng tiến hành chuyển báo 
+cáo đến trưởng khu và chuyển đến bước tiếp 
+theo.
+7. Ứng dụng thông báo tạo báo cáo thành công.
+8. Ứng dụng đóng hộp thoại tạo báo cáo.47
+9. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện tạo báo cáo cá bệnh thành công hoặc 
+thất bại.
+Chức năng chỉnh sửa nhiệm vụ đã giao
+Mẫu yêu cầu UC_65
+Tên yêu cầu Chỉnh sửa nhiệm vụ đã giao.
+Mức độ ưu tiên Trung bình.
+Mô tả Chức năng này cho phép trưởng vùng hoặc trưởng khu chỉnh 
+sửa nhiệm vụ đã giao cho cấp dưới.
+Tác nhân Trưởng vùng hoặc trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng hoặc 
+trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Nhiệm vụ”.
+3. Người chọn thẻ “Chưa hoàn thành”.
+4. Kiểm tra người dùng có quyền trưởng vùng hay 
+trưởng khu?
+• Nếu người dùng có quyền trưởng vùng, ứng 
+dụng chuyển sang bước tiếp theo.
+• Nếu người dùng có quyền trưởng khu, người 
+dùng chọn “Đã giao”, ứng dùng chuyển sang 
+bước tiếp theo.
+5. Ứng dụng hiển thị danh sách nhiệm vụ mà người dùng 
+đã giao.
+6. Người dùng chọn vào một nhiệm vụ cần chỉnh sửa.
+7. Người dùng chọn vào biểu tượng chỉnh sửa.
+8. Ứng dụng hiển thị hộp thoại chỉnh sửa nhiệm vụ.
+9. Người dùng nhập các thông tin cần chỉnh sửa.
+10.Người dùng chọn “Đóng” hoặc “Lưu”:
+• Nếu người dùng chọn đóng, ứng dụng chuyển 
+đến bước 13.
+• Nếu người dùng chọn lưu, ứng dụng kiểm tra 
+thông tin mà người dùng nhập có hợp lệ hay 
+không? Nếu không hợp lệ, ứng dụng thông báo 
+thông tin không hợp lệ và yêu cầu nhập lại, nếu 48
+thông tin hợp lệ, ứng dụng chuyển đến bước 
+tiếp theo.
+11.Ứng dụng thực hiện thay đổi thông tin nhiệm vụ.
+12.Ứng dụng thông báo đã chỉnh sửa nhiệm vụ thành 
+công.
+13.Ứng dụng đóng hộp thoại chỉnh sửa thông tin nhiệm 
+vụ.
+14.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện chỉnh sửa nhiệm vụ đã giao thành 
+công hoặc thất bại.
+Chức năng xóa nhiệm vụ đã giao
+Mẫu yêu cầu UC_66
+Tên yêu cầu Xóa nhiệm vụ đã giao.
+Mức độ ưu tiên Trung bình.
+Mô tả Chức năng này cho phép trưởng vùng hoặc trưởng khu xóa 
+nhiệm vụ đã giao cho cấp dưới.
+Tác nhân Trưởng vùng hoặc trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập và có quyền trưởng vùng hoặc 
+trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Nhiệm vụ”.
+3. Người chọn thẻ “Chưa hoàn thành”.
+4. Kiểm tra người dùng có quyền trưởng vùng hay 
+trưởng khu?
+• Nếu người dùng có quyền trưởng vùng, ứng 
+dụng chuyển sang bước tiếp theo.
+• Nếu người dùng có quyền trưởng khu, người 
+dùng chọn “Đã giao”, ứng dùng chuyển sang 
+bước tiếp theo.
+5. Ứng dụng hiển thị danh sách nhiệm vụ mà người dùng 
+đã giao.
+6. Người dùng chọn vào một nhiệm vụ cần xóa.
+7. Người dùng chọn vào biểu tượng xóa.
+8. Ứng dụng hiển thị hộp thoại xác nhận xóa nhiệm vụ.
+9. Người dùng chọn “Đóng” hoặc “Xóa”:49
+• Nếu người dùng chọn đóng, ứng dụng chuyển 
+đến bước 11.
+• Nếu người dùng chọn xóa, ứng dụng thực hiện 
+xóa nhiệm vụ, chuyển đến bước tiếp theo.
+10.Ứng dụng thông báo đã xóa nhiệm vụ thành công.
+11.Ứng dụng đóng hộp thoại xác nhận xóa nhiệm vụ.
+12.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện xóa nhiệm vụ đã giao thành công.
+Chức năng kiểm tra bệnh cá
+Mẫu yêu cầu UC_71
+Tên yêu cầu Kiểm tra bệnh cá
+Mức độ ưu tiên Trung bình.
+Mô tả Chức năng này cho phép trưởng vùng, trưởng khu, công 
+nhân có thể kiểm tra bệnh trên cá thông qua hình ảnh.
+Tác nhân Trưởng vùng, trưởng khu, công nhân.
+Điều kiện trước Người dùng đã đăng nhập, có quyền trưởng vùng, trưởng khu 
+hoặc công nhân.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn “Kiểm tra bệnh”.
+3. Ứng dụng chuyển sang màn hình kiểm tra bệnh bằng 
+hình ảnh.
+4. Người dùng chọn “Chụp ảnh từ camera” hoặc “Chọn 
+ảnh từ thư viện”:
+• Nếu người dùng chọn chụp ảnh từ camera, ứng 
+dụng hiển thị hộp thoại xin phép quyền chụp 
+ảnh và quay video. Nếu người dùng không cho 
+phép, chuyển đến bước 6. Nếu người dùng cho 
+phép, ứng dụng thực hiện mở camera của 
+người dùng, người dùng tiến hành chụp ảnh. 
+Ứng dụng chuyển đến bước tiếp theo.
+• Nếu người dùng chọn ảnh từ thư viện, ứng 
+dụng chuyển đến thư viện ảnh, người dùng tiến 
+hành chọn ảnh cần kiểm tra. Ứng dụng chuyển 
+sang bước tiếp theo.
+5. Ứng dụng phân tích và đưa ra kết quả chuẩn đoán.50
+6. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện kiểm tra bệnh cá bằng hình ảnh thành 
+công.
+Chức năng xem hình ảnh báo cáo việc trị bệnh
+Mẫu yêu cầu UC_72
+Tên yêu cầu Xem hình ảnh báo cáo việc trị bệnh
+Mức độ ưu tiên Cao.
+Mô tả Chức năng này cho phép trưởng vùng, trưởng khu xem hình 
+ảnh báo cáo việc trị bệnh cá từ công nhân.
+Tác nhân Trưởng vùng, trưởng khu.
+Điều kiện trước Người dùng đã đăng nhập, có quyền trưởng vùng hoặc 
+trưởng khu.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn vào một ao.
+3. Ứng dụng chuyển sang màn hình chi tiết ao.
+4. Người dùng chọn “Xem ảnh báo cáo hôm nay” trong 
+thẻ “Điều trị”.
+5. Ứng dụng kiểm tra xem công nhân chịu trách nhiệm 
+điều trị có hoàn thành việc điều trị chưa?
+• Nếu công nhân chưa hoàn thành, ứng dụng 
+thông báo việc điều trị hôm nay chưa được 
+hoàn thành và chuyển đến bước 8.
+• Nếu công nhân đã hoàn thành, ứng dụng hiển 
+thị hộp thoại ảnh báo cáo điều trị hôm nay.
+6. Người dùng chọn “Đóng”.
+7. Ứng dụng đóng hộp thoại.
+8. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện xem ảnh báo cáo điều trị thành công.
+Nhắn tin cá nhân
+Mẫu yêu cầu UC_73
+Tên yêu cầu Nhắn tin cá nhân.
+Mức độ ưu tiên Trung bình.51
+Mô tả Chức năng này giúp người dùng có thể nhắn tin với một 
+người dùng khác thông qua văn bản, hình ảnh hoặc tập tin.
+Tác nhân Người dùng cá nhân, admin, trưởng vùng, trưởng khu, công 
+nhân, kế toán.
+Điều kiện trước Người dùng đã đăng nhập.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng chọn biểu tượng tin nhắn.
+3. Ứng dụng chuyển đến màn hình cuộc hội thoại của 
+người dùng.
+4. Người dùng có thể tiếp tục nhắn tin vào những cuộc 
+trò chuyện hiện có hoặc tạo một cuộc trò chuyện mới.
+• Nếu người dùng tiếp tục nhắn tin vào những 
+cuộc trò chuyện đã có, người dùng chọn vào 
+một cuộc hội thoại đang hiển thị, chuyển sang 
+bước 8.
+• Nếu người chọn tạo một cuộc trò chuyện mới, 
+ứng dụng sẽ chuyển đến bước tiếp theo.
+5. Người dùng chọn cá nhân.
+6. Ứng dụng chuyển đến màn hình danh sách những 
+người dùng khác trong vùng nuôi của người dùng hiện 
+tại.
+7. Người dùng chọn một người dùng nào đó.
+8. Ứng dụng chuyển qua màn hình nhắn tin với người 
+dùng đó.
+9. Người dùng nhắn tin với người dùng đó thông qua văn 
+bản, hình ảnh hoặc tập tin.
+10.Kết thúc sự kiện.
+Kết quả Người dùng thực hiện nhắn tin với một người dùng khác 
+trong vùng nuôi hiện tại của mình qua văn bản, hình ảnh hoặc 
+tập tin.
+Tìm kiếm
+Mẫu yêu cầu UC_86
+Tên yêu cầu Chức năng tìm kiếm.
+Mức độ ưu tiên Trung bình.
+Mô tả Chức này giúp người dùng tìm kiếm một tài khoản khác theo 
+loại tài khoản như: admin, trưởng vùng, trưởng khu và kế 
+toán.
+Tác nhân Người dùng cá nhân, admin, trưởng vùng, trưởng khu, công 52
+nhân, kế toán.
+Điều kiện trước Người dùng đã đăng nhập.
+Các thao tác xử lý 1. Người dùng truy cập vào ứng dụng.
+2. Người dùng thực hiện một số tính năng như: tạo 
+nhóm, tạo cuộc hội nghị trực tuyến, xóa tài khoản, 
+xem thông tin tài khoản...
+3. Người dùng tiến hành nhập tên người dùng cần tìm 
+kiếm vào ô tìm kiếm. Người dùng có thể áp dụng bộ 
+lọc để ứng dụng chỉ hiển thị ra những tài khoản theo 
+yêu cầu của người dùng như: admin, trưởng vùng, 
+trưởng khu hoặc kế toán.
+4. Ứng dụng kiểm tra tên mà người dùng đã nhập:
+• Nếu không có, ứng dụng hiển thị danh sách tài 
+khoản hiện tại, chuyển sang bước 5.
+• Nếu có, ứng dụng hiển thị ra tài khoản mà 
+người dùng cần tìm kiếm.
+5. Kết thúc sự kiện.
+Kết quả Người dùng thực hiện cuộc hội nghị trực tuyến thành công 
+hoặc thất bại.
+Môi trường vận hành
+- Ứng dụng chạy trên điện thoại di động hệ điều hành Android tương thích với 
+nhiều hãng điện thoại khác nhau.
+- Ngôn ngữ lập trình: Java.
+- API: Mapbox, Jitsi Meet, MPAndroidChart.
+- Cơ sở dữ liệu: Firebase FireStore.
+Các ràng buộc về mặt thực thi và thiết kế
+Các ràng buộc về mặt thực thi và thiết kế có thể giúp tăng tính thân thiện của ứng 
+dụng với người dùng. Các yếu tố cần chú ý bao gồm:
+- Trực quan, giao diện đẹp mắt hài hòa, dễ dàng tương tác giữa người dùng với 
+hệ thống tạo cảm giác thân thiện cho người dùng.
+- Lập trình bằng ngôn ngữ Java, sử dụng công cụ hỗ trợ lập trình là Android 
+Studio.
+- Sử dụng Firebase FireStore làm cơ sở dữ liệu.
+- Sử dụng công cụ StarUML, PowerDesigner, Draw.io để thiết kế các sơ đồ.
+Các giả định và phụ thuộc
+Các yếu tố có thể làm cho quá trình xây dựng ứng dụng bị ảnh hưởng bao gồm:
+- Không thu thập đủ các yêu cầu của bài toán dẫn đến thiếu hụt các chức năng.53
+- Thiết kế không đúng với chức năng đặc tả làm cho ứng dụng chưa đạt chất 
+lượng.
+- Chậm tiến độ làm ảnh hưởng đến chất lượng ứng dụng.
+Các yêu cầu phi chức năng
+Yêu cầu thực thi
+- Không bị lỗi khi chạy chương trình.
+- Tốc độ truy cập vào ứng dụng nhanh và ổn định.
+- Đáp ứng đủ nhu cầu của người dùng.
+- Hiệu suất làm việc đạt hơn 90%.
+- Hệ thống hoạt động tốt, tốn ít tài nguyên, thao tác ổn định và không xuất 
+hiện lỗi khi người dùng sử dụng.
+Yêu cầu an toàn
+- Người dùng chỉ được thao tác các chức năng nằm trong phạm vi cho phép 
+được định sẵn trong hệ thống.
+- Các dữ liệu hệ thống cung cấp phải đảm bảo tính chính xác về mặt thông tin.
+- Hệ thống không chứa virus, không chứa các đường dẫn độc hại, bao gồm các 
+đường dẫn chứa mã độc.
+- Cơ sở dữ liệu phải được sao lưu và phục hồi theo định kỳ.
+- Mỗi tài khoản thành viên trong ứng dụng được bảo về một cách nghiêm túc, 
+tránh tình trạng đánh cắp thông tin trái phép bằng bất kỳ hình thức nào.
+Các đặc điểm chất lượng sản phẩm
+- Tính đúng đắn: Các chức năng của hệ thống phải được thực hiện đúng theo 
+yêu cầu.
+- Tính khoa học: Cách xây dựng, tổ chức các chức năng của hệ thống phải 
+khoa học. Xây dựng cơ sở dữ liệu hợp lý với hệ thống, giảm tài nguyên lưu 
+trữ dữ liệu.
+- Tính tin cậy: Hệ thống phải đảm bảo các chức năng thực hiện tốt.
+Các yêu cầu khác
+- Ngôn ngữ sử dụng trong ứng dụng phải thuần Việt, từ ngữ đơn giản, dễ hiểu.
+- Các nút bấm phải được sắp xếp hợp lý.
+- Giao diện trực quan, thân thiện và dễ nhìn.
+- Mức độ bảo mật cao, tin cậy.
+- Tốc độ xử lý nhanh chóng, chính xác.
+- Dễ dàng bảo trì cũng như nâng cấp hệ thống.54
+CHƯƠNG 2 CƠ SỞ LÝ THUYẾT
+GIS
+GIS (Geographic Information System) là một hệ thống máy tính dùng để thu thập, 
+lưu trữ, kiểm tra và hiển thị dữ liệu liên quan đến vị trí trên bề mặt của Trái Đất. 
+GIS có thể hiển thị nhiều loại dữ liệu khác nhau trên một bản đồ, chẳng hạn như 
+đường phố, tòa nhà và thực vật. Điều này giúp mọi người dễ dàng nhìn thấy, phân 
+tích và hiểu các mẫu và mối quan hệ không gian.
+GIS có thể sử dụng bất kỳ thông tin nào bao gồm vị trí. Vị trí có thể được biểu thị 
+bằng nhiều cách khác nhau, chẳng hạn như vĩ độ và kinh độ, địa chỉ hoặc mã ZIP. 
+Nhiều loại thông tin khác nhau có thể được so sánh và đối chiếu bằng GIS. Hệ 
+thống có thể bao gồm dữ liệu về con người, chẳng hạn như dân số, thu nhập hoặc 
+trình độ giáo dục. Nó có thể bao gồm thông tin về cảnh quan, chẳng hạn như vị trí 
+của suối, các loại thực vật và các loại đất khác nhau. Nó có thể bao gồm thông tin 
+về các địa điểm của các nhà máy, nông trại và trường học, hoặc cống thoát nước, 
+đường bộ và đường dây điện.
+Java
+Java là ngôn ngữ lập trình có mục đích, hướng đối tượng được phát triển cho môi 
+trường phân tán và phát triển phần mềm được tạo nên bởi Sun Microsystems, do 
+James Gosling khởi xướng và ra mắt năm 1995. Ngôn ngữ này độc lập với nền tảng, 
+không có giới hạn đối với bất kỳ phần cứng hay hệ điều hành cụ thể nào. Nó cung 
+cấp cho người dùng cơ sở để có thể “viết một lần, chạy ở mọi nơi”. Java rất phổ 
+biến và đã thống trị lĩnh vực này từ đầu những năm 2000. Đến nay, Java đã được sử 
+dụng trong đa dạng các lĩnh vực khác nhau, Cụ thể là:
+- Desktop App như media player, acrobat reader, antivirus...
+- Web App như javatpoint.com, irctc.co.in...
+- Enterprise App như một vài ứng dụng về xử lý các nghiệp vụ ngân hàng...
+- Thiết bị Mobile như các ứng dụng IOS hay Android.
+- Hệ thống nhúng.
+- Smart Card.
+- Robot.
+- Game App...
+Firebase
+Firebase là một nền tảng để phát triển ứng dụng di động và trang web, bao gồm các 
+API đơn giản và mạnh mẽ mà không cần backend hay server. Đặc biệt, còn là dịch 
+vụ đa năng và bảo mật cực tốt. Firebase hỗ trợ cả hai nền tảng Android và IOS. 55
+Firebase là dịch vụ cơ sở dữ liệu hoạt động trên nền tảng đám mây. Kèm theo đó là 
+hệ thống máy chủ cực kỳ mạnh mẽ của Google. Chức năng chính là giúp người 
+dùng lập trình ứng dụng bằng cách đơn giản hóa các thao tác với cơ sở dữ liệu.
+- Firebase Authentication là chức năng xác thực người dùng. Hiểu một cách 
+đơn giản, ứng dụng của bạn cần phải đăng nhập/đăng ký tài khoản để sử
+dụng, Firebase cung cấp cho chúng ta chức năng xác thực người dùng bằng 
+email, số điện thoại hay tài khoản Facebook, Google... Việc xác thực người 
+dùng là một chức năng vô cùng quan trọng trong việc phát triển ứng dụng. 
+Tuy nhiên, khi muốn xác thực với nhiều phương thức khác nhau như email, 
+số điện thoại, Google, Facebook sẽ tốn nhiều thời gian và công sức. Firebase 
+Authentication giúp thực hiện việc đó một cách dễ dàng, giúp n gười dùng 
+nhanh chóng tiếp cận sản phẩm hơn. Nó là một chức năng vô cùng hữu ích 
+của Firebase. Nếu muốn xây dựng sản phẩm một cách nhanh chóng hay đơn 
+giản là làm bài tập, đồ án thì việc tích hợp Firebase Authentication và 
+Firebase Firestore vào ứng dụng sẽ giúp giảm rất nhiều thời gian so với các 
+cách khác.
+- Firebase Firestore là cơ sở dữ liệu mới của Firebase phát triển dành cho ứng 
+dụng di động. Nó là sự kế thừa của Realtime Database với mô hình dữ liệu 
+mới và trực quan hơn. Firebase Firestore phong phú hơn, nhanh hơn và có 
+khả năng mở rộng siêu việt hơn so với Realtime Database. Firebase Firestore 
+giúp dữ liệu đồng bộ hóa trên các ứng dụng client thông qua việc đăng ký 
+thời gian thực – realtime và cung cấp hỗ trợ ngoại tuyến cho thiết bị di động 
+và web. Firestore cũng cung cấp tích hợp các sản phẩm khác của Firebase và 
+Google Cloud Platform, bao gồm cả Cloud Functions. Các tính năng chính 
+của Firestore:
+o Tính linh hoạt: Firestore hỗ trợ các cấu trúc dữ liệu linh hoạt, phân cấp dữ
+liệu. Lưu trữ dữ liệu trong các document, được tổ chức thành các 
+collection. Các document có thể chức các đối tượng phức tạp.
+o Truy vấn tượng trưng: Có thể sử dụng các truy vấn để truy xuất các 
+document riêng lẻ hoặc để truy xuất tất cả các document trong collection 
+khớp với các tham số truy vấn. Các truy vấn có thể bao gồm nhiều bộ lọc, 
+kết hợp giữa bộ lọc và sắp xếp.
+o Cập nhật thời gian thực: Firebase Firestore sử dụng đồng bộ hóa dữ liệu 
+để cập nhật dữ liệu trên mọi thiết bị được kết nối. Nó cũng được thiết kế
+để thực hiện các truy vấn tìm nạp một lần.
+o Hỗ trợ offline: Firebase Firestore lưu trữ dữ liệu tại local, vì vậy ứng 
+dụng có thể viết, đọc, nghe và truy vấn dữ liệu ngay cả khi thiết bị ngoại 
+tuyến. Khi thiết bị trở lại trực tuyến, Firestore sẽ đồng bộ hóa mọi thay 
+đổi cục bộ trên Cloud Firestore.
+o Khả năng mở rộng: Mang đến khả năng từ Google Cloud Platform thiết 
+kế để sử dụng cơ sở dữ liệu khó khăn nhất từ các ứng dụng lớn thế giới.56
+JitsiMeet
+JitsiMeet là một giải pháp họp video trực tuyến miễn phí, mã nguồn mở và bảo mật 
+cao. JitsiMeet cho phép người dùng tạo và tham gia các cuộc họp video mà không 
+cần tài khoản hay giới hạn số lượng người tham gia. JitsiMeet cũng cung cấp nhiều 
+tính năng nâng cao như chia sẻ màn hình, chỉnh sửa tài liệu chung, trò chuyện tích 
+hợp và gọi điện thoại. JitsiMeet sử dụng mã hóa mặc định và có các cài đặt bảo mật 
+nâng cao để bảo vệ quyền riêng tư của người dùng. JitsiMeet cũng cho phép các nhà 
+phát triển tùy biến và tích hợp giải pháp họp video vào ứng dụng web hoặc di động 
+của họ. JitsiMeet là một giải pháp họp video hiện đại, tiện lợi và tiết kiệm chi phí 
+cho các tổ chức và cá nhân.
+Mapbox
+Mapbox là một nền tảng cung cấp các dịch vụ lập bản đồ trực tuyến cho các trang 
+web và ứng dụng bằng cách sử dụng các API của họ. Mapbox cho phép người dùng 
+tùy biến bản đồ của họ với các kiểu, lớp và tính năng khác nhau. Mapbox cũng hỗ 
+trợ các bản đồ tương tác dựa trên WebGL, một công nghệ cho phép hiển thị đồ họa 
+3D trên trình duyệt web. Mapbox có một gói miễn phí hào phóng cho các nhà phát 
+triển và không yêu cầu thông tin thanh toán nếu không vượt quá giới hạn sử dụng. 
+Mapbox được sử dụng bởi nhiều trang web và ứng dụng nổi tiếng như Foursquare, 
+Lonely Planet, Financial Times, Weather Channel và Snapchat…
+MPAndroidChart
+MPAndroidChart là một thư viện biểu đồ cho Android, được phát triển bởi Philipp 
+Jahoda. Thư viện này hỗ trợ nhiều loại biểu đồ khác nhau, như biểu đồ đường, biểu 
+đồ cột, biểu đồ tròn, biểu đồ nến và biểu đồ phân tán. MPAndroidChart cung cấp 
+các tính năng như vẽ biểu đồ, chia tỷ lệ, xử lý animations, tương tác với dữ liệu và 
+tùy biến giao diện. MPAndroidChart có thể được tích hợp vào ứng dụng Android 
+bằng cách thêm dependency vào Gradle và khai báo View trong XML hoặc Java. 
+MPAndroidChart là một thư viện miễn phí và mã nguồn mở, có thể được sử dụng 
+cho các mục đích thương mại hoặc phi lợi nhuận.57
+Android Studio
+Android Studio là một công cụ tích hợp (IDE) của Google dùng để phát triển các 
+ứng dụng chạy trên các thiết bị sử dụng hệ điều hành Android. Được xây dựng dựa 
+trên mã nguồn của IntelliJ, sử dụng ngôn ngữ lập trình Kotlin của JetBrains thay thế 
+cho Java, tuy nhiên Java và C++ vẫn được hỗ trợ để phát triển ứng dụng Android. 
+Android Studio cài đặt được trên các hệ thống máy tính Windows, macOS và 
+Linux. Android Studio được Google tích hợp tất cả các công cụ hỗ trợ như SDK 
+(Software Development Kit), máy ảo giả lập thiết bị di động ngay trên máy tính...58
+CHƯƠNG 3 THIẾT KẾ VÀ CÀI ĐẶT GIẢI PHÁP
+Kiến trúc hệ thống
+Hình 3.1: Kiến trúc hệ thống MVC
+MVC là chữ viết tắt của Model – View – Controller, đây là mô hình giúp cho việc 
+phát triển phần mềm được trở nên gọn gàng và dễ dàng hơn. Mô hình này được 
+dùng khá rộng rãi. Nó là mô hình phân bố mã nguồn thành 3 tầng, mỗi tầng có một 
+nhiệm vụ riêng biệt, độc lập với các thành phần khác:
+- Model: Đây là một bộ phận có chức năng lưu trữ toàn bộ dữ liệu của ứng 
+dụng. Bộ phận này là cầu nối giữa 2 thành phần View và Controller. Model 
+thể hiện dưới hình thức là một cơ sở dữ liệu hoặc có khi chỉ đơn giản là một 
+tập tin XML bình thường. Nó hiện rõ các thao tác với cơ sở dữ liệu như cho 
+phép xem, truy xuất, xử lý dữ liệu...
+- View: Đây là phần giao diện (theme) dành cho người sử dụng. View là 
+phương tiện hiển thị các đối tượng trong ứng dụng. Chẳng hạn như hiển thị
+một cửa sổ, nút hay văn bản trong một cửa sổ khác. Nó bao gồm bất cứ thứ
+gì mà người dùng có thể nhìn thấy được.
+- Controller: Bộ phận có nhiệm vụ xử lý các yêu cầu của người dùng đưa đến 
+thông qua View. Từ đó, Controller đưa ra dữ liệu phù hợp với người dùng. 
+Bên cạnh đó, Controller còn có chức năng kết nối với Model.
+Ưu điểm và nhược điểm của mô hình MVC
+Ưu điểm:
+- Đơn giản và dễ hiểu, phù hợp với các ứng dụng nhỏ và đơn giản.
+- Giúp tái sử dụng code và bảo trì ứng dụng.
+- Giúp tăng tính bảo mật của ứng dụng, do người dùng chỉ tiếp xúc với View, 
+không trực tiếp với Model.59
+- Giúp tăng tính linh hoạt của ứng dụng, do có thể thay đổi hoặc thêm mới các 
+thành phần mà không ảnh hưởng đến các thành phần khác.
+Nhược điểm:
+- Có thể gây ra sự phụ thuộc cao giữa các thành phần, đặc biệt là Controller và 
+View, khiến cho ứng dụng khó mở rộng và kiểm thử.
+- Có thể gây ra sự lặp lại code khi có nhiều View cùng sử dụng một Controller 
+hoặc một Model.
+- Có thể gây ra sự phức tạp khi xử lý các sự kiện từ View hoặc các nghiệp vụ
+từ Model, do Controller phải chịu trách nhiệm cho cả hai.
+Cơ sở dữ liệu
+Sơ đồ thực thể liên kết60
+Hình 3.2: Sơ đồ thực thể liên kết61
+Bảng NguoiDung
+Bảng 2.2: Dữ liệu người dùng
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 ND_ID string ID của người dùng
+2 ND_CMND string Số CMND/CCCD của người dùng
+3 ND_HoTen string Họ tên người dùng
+4 ND_NamSinh timestamp Ngày tháng năm sinh của người dùng
+5 ND_SDT string Số điện thoại của người dùng
+6 ND_MatKhau string Mật khẩu của người dùng
+7 ND_Avt string Ảnh đại diện của người dùng
+8 ND_LoaiTaiKhoan string Loại tài khoản của người dùng
+9 CT_ID string ID của công ty
+Bảng CongTy
+Bảng 2.3: Dữ liệu bảng công ty
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 CT_ID string ID của công ty
+2 CT_Ten string Tên công ty
+3 CT_DiaChi string Địa chỉ công ty
+4 CT_Code string Mã code công ty
+5 CT_SDT string Số điện thoại công ty
+6 CT_Avt string Ảnh đại diện công ty
+Bảng Vung
+Bảng 2.4: Dữ liệu bảng vùng
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 Vung_ID string ID của vùng62
+2 Vung_Ten string Tên vùng
+3 Vung_ToaDo list<geopoint> Danh sách các tọa độ trên bản đồ
+Bảng Khu
+Bảng 2.5: Dữ liệu bảng khu
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 Khu_ID string ID của khu
+2 Khu_Ten string Tên khu
+3 Khu_ToaDo list<geopoint> Danh sách các tọa độ trên bản đồ
+4 Vung_ID string ID của vùng
+Bảng Ao
+Bảng 2.6: Dữ liệu bảng ao
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 Ao_ID string ID của ao
+2 Ao_Ten string Tên ao
+3 Ao_ToaDo geopoint Tạo độ của ao trên bản đồ
+4 Ao_DienTich float Diện tích mặt nước ao nuôi
+5 Khu_ID string ID của khu
+Tin nhắn
+Bảng 2.7: Dữ liệu bảng tin nhắn
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 TN_ID string ID của tin nhắn
+2 TN_ThoiGian string Thời gian nhắn tin
+3 TN_Loai string Loại tin nhắn (tệp, ảnh, văn bản)
+4 TN_NoiDung string Nội dung tin nhắn
+5 HT_ID string ID của hộp thoại63
+Bảng ChatLuongNuoc
+Bảng 2.8: Dữ liệu bảng chất lượng nước
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 CLN_ID string ID của chất lượng nước
+2 CLN_NgayDo string Ngày đo chất lượng nước
+3 CLN_LanDo string Lần đo trong ngày
+4 VN_ID string ID của vụ nuôi
+Bảng ChiSoMoiTruong
+Bảng 2.9: Dữ liệu bảng loại môi trường
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 LMT_ID string ID loại môi trường
+2 LMT_GiaTri float Gía trị đo
+Bảng VuNuoi
+Bảng 2.10: Dữ liệu bảng vụ nuôi
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 VN_ID string ID của vụ nuôi
+2 VN_NgayBatDau time Tổng lượng thức ăn đã dùng
+3 VN_PhiCaiTao number Chi phí cải tạo ao
+4 Ao_ID string ID của ao
+5 TH_ID string ID thu hoạch
+Bảng ThaGiong
+Bảng 2.11: Dữ liệu bảng thả giống
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 TG_ID string ID thả giống
+2 TG_SoLuong string Số lượng cá giống thả
+3 TG_MauGiong string Mẫu giống64
+4 TG_NgayTha timestamp Ngày thả giống
+5 TG_Gia number Giá cá giống
+6 TG_MatDo number Mật độ thả
+7 VN_ID string ID của vụ nuôi
+Bảng KetQuaThuHoach
+Bảng 2.12: Dữ liệu bảng thu hoạch
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 KQTH_ID string ID thu hoạch
+2 KQTH_NgayThuHoach timestamp Ngày thu hoạch
+3 KQTH_SoLuong number Số lượng cá thu hoạch
+4 KQTH_SanLuong number Sản lượng cá thu hoạch
+5 KQTH_KichCo number Kích cỡ cá thu hoạch
+6 KQTH_Gia number Giá bán
+Bảng TangTruong
+Bảng 2.13: Dữ liệu bảng tăng trưởng
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 TT_ID string ID tăng trưởng
+2 TT_NgayKiemTra timestamp Ngày bắt cá cân
+3 TT_TrongLuong number Trọng lượng cá cân được
+4 TT_HaoHut number Trọng lượng cá hao hụt
+5 VN_ID string ID vụ nuôi
+Bảng ThucAn
+Bảng 2.14: Dữ liệu bảng thức ăn
+STT Tên thuộc tính Kiểu dữ liệu Mô tả65
+1 CA_ID string ID của cho ăn
+2 CA_Ngay timestamp Ngày cho ăn
+3 CA_Lan1 number Lượng thức ăn cho ăn lần 1
+4 CA_Lan2 number Lượng thức ăn cho ăn lần 2
+5 CA_Lan3 number Lượng thức ăn cho ăn lần 3
+6 CA_Lan4 number Lượng thức ăn cho ăn lần 4
+7 CA_Lan5 number Lượng thức ăn cho ăn lần 5
+8 CA_Lan6 number Lượng thức ăn cho ăn lần 6
+9 CA_Lan7 number Lượng thức ăn cho ăn lần 7
+10 CA_Lan8 number Lượng thức ăn cho ăn lần 8
+11 VN_ID string ID của vụ nuôi
+12 KHO_ID string ID của kho
+Bảng Kho
+Bảng 2.15: Dữ liệu bảng kho
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 Kho_ID string ID kho
+2 Kho_DienTich number Diện tích kho
+3 Kho_MoTa string Mô tả của kho
+4 Ao_ID string ID của ao
+Bảng NhapKho
+Bảng 2.16: Dữ liệu bảng nhập kho
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 NK_ID string ID nhập kho
+2 NK_NgayNhap timestamp Ngày nhập kho
+3 NK_TongTien number Tổng tiền hàng66
+4 NK_HinhAnh string Hình ảnh hóa đơn
+5 KHO_ID string ID của kho
+Bảng ChiTietNhapKho
+Bảng 2.17: Dữ liệu bảng chi tiết nhập kho
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 NK_ID string ID nhập kho
+2 DM_ID string ID của danh mục
+3 CTNK_SoLuong number Số lượng danh mục
+4 CTNK_DonGia number Đơn giá danh mục
+Bảng DanhMuc
+Bảng 2.18: Dữ liệu bảng danh mục
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 DM_ID string ID danh mục sản phẩm
+2 DM_Ten string Tên danh mục
+3 DM_NSX string Nhà sản xuất
+4 DM_DonViTinh string Đơn vị tính
+5 DM_CongDung string Công dụng của danh mục sản phẩm
+Bảng NhiemVu
+Bảng 2.19: Dữ liệu bảng nhiệm vụ
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 NV_ID string ID của nhiệm vụ
+2 NV_Ten string Tên nhiệm vụ
+3 NV_NoiDung string Nội dung nhiệm vụ
+4 NV_TrangThai string Trạng thái nhiệm vụ
+5 NV_NgayBatDau timestamp Ngày bắt đầu nhiệm vụ67
+6 NV_NgayKetThuc timestamp Ngày kết thúc nhiệm vụ
+7 ND_ID string ID của trưởng vùng
+Bảng NhatKyNhiemVu
+Bảng 2.20: Dữ liệu bảng nhật ký nhiệm vụ
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 NV_ID string ID của nhiệm vụ
+2 ND_ID string ID của trưởng khu
+3 NKNV_NgayHoanThanh timestamp Ngày hoàn thành nhiệm vụ
+4 NKNV_GhiChu string Ghi chú về nhiệm vụ
+Bảng PhacDo
+Bảng 2.21: Dữ liệu bảng phác đồ
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 PD_ID string ID của phác đồ
+2 PD_CatMoi string Cắt thức ăn
+3 PD_ThayNuoc string Thay nước ao
+4 PD_HutBun string Hút bùn ao
+5 PD_Ngay timestamp Ngày thực hiện
+6 PD_Thuoc string Thuốc sử dụng
+7 PD_GhiChu string Ghi chú
+8 PD_Benh string Bệnh của cá
+9 PD_TrangThai string Trạng thái của phác đồ
+10 BCBC_ID string ID của báo cáo bệnh cá
+Bang BaoCaoBenhCa
+Bảng 2.22: Dữ liệu bảng báo cáo cá bệnh
+STT Tên thuộc tính Kiểu dữ liệu Mô tả68
+1 BCBC_ID string ID của phác đồ
+2 BCBC_TrangThai string Trạng thái của báo cáo
+3 BCBC_HinhAnh string Hình ảnh cá bệnh
+4 BCBC_Ngay timestamp Ngày báo cáo
+5 ND_ID string ID của công nhân báo cáo
+Bảng BinhLuan
+Bảng 2.23: Dữ liệu bảng bình luận
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 BL_ID string ID của bình luận
+2 BL_NoiDung string Nội dung bình luận
+3 BL_Ngay timestamp Ngày bình luận
+4 NV_ID string ID nhiệm vụ đã bình luận
+5 ND_ID string ID của người dùng đã bình 
+luận
+Bảng YeuCauNghiPhep
+Bảng 2.24: Dữ liệu bảng yêu cầu nghỉ phép
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 YCNP_ID string ID của yêu cầu
+2 YCNP_NgayBatDau timestamp Ngày bắt đầu nghỉ
+3 YCNP_NgayKetThuc timestamp Ngày kết thúc nghỉ
+4 YCNP_LyDo string Lý do xin nghỉ
+5 YCNP_HinhAnh string Hình ảnh mô tả
+6 YCNP_GhiChu string Ghi chú về yêu cầu
+7 ND_IDCreater string ID người tạo
+8 ND_IDReceiver string ID người nhận69
+Bảng YeuCauNhapHang
+Bảng 2.25: Dữ liệu bảng yêu cầu nhập hàng
+STT Tên thuộc tính Kiểu dữ liệu Mô tả
+1 YCNH_ID string ID của yêu cầu
+2 YCNH_HangHoa list<map<>> Ngày bắt đầu nghỉ
+3 YCNH_NgayKetThuc timestamp Ngày kết thúc nghỉ
+4 ND_IDCreater string ID người tạo
+5 ND_IDReceiver string ID người nhận
+Thiết kế giao diện
+Giao diện đăng nhập
+- Mục đích: Cho phép người dùng đăng nhập vào ứng dụng.
+- Giao diện:
+Hình 3.3: Giao diện trang chủ
+Hình 3.4: Giao diện đăng nhập
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định70
+1 EditText textPhone Nhập số điện thoại
+2 EditText textPassword Nhập mật khẩu
+3 Button btnLogin Bấm đăng nhập
+- Lưu đồ xử lý:
+Hình 3.5: Lưu đồ xử lý chức năng đăng nhập
+Giao diện đăng ký
+- Mục đích: Cho phép người dùng đăng ký với vai trò là admin của công ty.
+- Giao diện:71
+Hình 3.6: Giao diện đăng ký
+Hình 3.7: Giao diện nhập thông tin đăng ký
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+LoginAcitivty
+1 TextView textRegis Ấn để chuyển sang màn 
+hình đăng ký
+RegisActivity
+1 EditText edtPhone Nhập số điện thoại cần 
+đăng ký
+2 EditText edtPassword Nhập mật khẩu72
+3 EditText edtConfirm Nhập xác nhận mật khẩu
+4 Button btnRegis Ấn đăng ký
+SendOTPActivity
+1 Button btnSendOTP Ấn gửi mã OTP
+VerifyOTPActivity
+1 EditText edtOTP Nhập mã OTP
+2 Button btnVerifyOTP Ấn xác minh mã OTP
+SetupInfoActivity
+1 ImageView imageProfile Chọn ảnh đại diện
+2 EditText edtName Nhập tên
+3 EditText edtPersonalID Nhập CMND/CCCD
+4 EditText edtDate Chọn ngày tháng năm 
+sinh
+5 EditText edtAddress Nhập địa chỉ
+6 Button btnContinue Ấn để chuyển sang màn 
+hình nhập thông tin công 
+ty cần đăng ký
+7 ImageView imageProfle Chọn ảnh đại diện công ty
+8 EditText edtName Nhập tên công ty
+9 EditText edtCode Nhập mã công ty
+10 EditText edtPhone Nhập số điện thoại công 
+ty
+11 EditText edtAddress Nhập địa chỉ công ty
+12 Button btnRegis Ấn để đăng ký tài khoản
+- Lưu đồ xử lý:73
+Hình 3.8: Lưu đò xử lý chức năng đăng ký
+Giao diện đăng xuất
+- Mục đích: Cho phép người dùng đăng xuất tài khoản khỏi ứng dụng.
+- Giao diện:74
+Hình 3.9: Giao diện đăng xuất
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+HomeAcitivty
+1 ImageView imageLogout Ấn để đăng xuất khỏi ứng 
+dụng75
+- Lưu đồ xử lý:
+Hình 3.10: Lưu đồ xử lý chức năng đăng xuất
+Giao diện nhắn tin cá nhân
+- Mục đích: Cho phép người dùng trò chuyện với những người dùng khác 
+cùng công ty thông qua văn bản, hình ảnh hoặc tập tin.
+- Giao diện:
+Hình 3.11: Giao diện nhắn tin cá nhân
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+HomeAcitivty
+1 ImageView imageChat Ấn để mở màn hình hộp 
+thoại
+ConversationActivity76
+1 Button btnNewChat Ấn để mở màn hình hiển thị 
+danh sách người dùng
+UserActivity
+1 RecyclerView userRecycler Hiển thị danh sách người 
+dùng, ấn vào một người 
+dùng để bắt đầu trò chuyện 
+với người đó
+ChatActivity
+1 EditText edtMessage Nhập nội dung tin nhắn
+2 RecyclerView chatRecycler Hiển thị danh sách tin nhắn
+3 Button btnSend Ấn để gửi tin nhắn
+4 Button btnImage Ấn để gửi hình ảnh
+5 Button btnAttrach Ấn để gửi tập tin
+- Lưu đồ xử lý:
+Hình 3.12: Lưu đồ xử lý chức năng nhắn tin77
+Giao diện tạo một tài khoản
+- Mục đích: Cho phép người dùng có quyền là admin tạo một tài khoản mới.
+- Giao diện:
+Hình 3.13: Giao diện tạo một tài khoản
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+AdminHomeActivity
+1 CardView cardAccount Ấn để mở hộp thoại quản lý 
+tài khoản
+AccountManagermentDialog
+1 CardView cardAccount Ấn để mở hộp thoại tạo tài 
+khoản
+CreateAccountDialog
+1 CardView cardSimple Ấn để mở màn hình tạo một 
+tài khoản
+CreateSimpleAccountActivity
+1 ImageView imageProfile Ấn để chọn ảnh đại diện cho 
+tài khoản cần tạo
+2 TextInputEdit edtPhone Nhập số điện thoại cho tài 
+khoản cần tạo
+3 TextInputEdit edtPassword Nhập mật khẩu cho tài 78
+khoản cần tạo
+4 TextInputEdit edtName Nhập tên cho tài khoản cần 
+tạo
+5 TextInputEdit edtPersonalId Nhập cmnd/cccd cho tài 
+khoản cần tạo
+6 TextInputEdit edtDate Nhập ngày sinh cho tài 
+khoản cần tạo
+7 TextInputEdit edtAddress Nhập địa chỉ cho tài khoản 
+cần tạo
+- Lưu đồ xử lý:
+Hình 3.14: Lưu đồ xử lý chức năng tạo một tài khoản
+Giao diện tạo nhiều tài khoản
+- Mục đích: Cho phép người dùng có quyền là admin tạo nhiều tài khoản cùng 
+lúc thông qua tập tin excel.
+- Giao diện:79
+Hình 3.15: Giao diện tạo nhiều tài khoản
+Hình 3.16: Giao diện chọn file80
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+AdminHomeActivity
+1 CardView cardAccount Ấn để mở hộp thoại quản lý 
+tài khoản
+AccountManagermentDialog
+1 CardView cardAccount Ấn để mở hộp thoại tạo tài 
+khoản
+CreateAccountDialog
+1 CardView cardMultiple Ấn để mở màn hình tạo 
+nhiều tài khoản
+CreateMutipleAccountActivity
+1 Button btnCreate Ấn để chọn tập tin và tạo tài 
+khoản
+- Lưu đồ xử lý:
+Hình 3.17: Lưu đồ xử lý chức năng tạo nhiều tài khoản81
+Giao diện xóa tài khoản
+- Mục đích: Cho phép người dùng có quyền admin xóa một hoặc nhiều tài 
+khoản.
+- Giao diện:
+Hình 3.18: Giao diện xóa tài khoản
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+AdminHomeActivity
+1 CardView cardAccount Ấn để mở hộp thoại quản 
+lý tài khoản
+AccountManagementDialog
+1 CardView cardDelete Ấn để mở màn hình xóa 
+tài khoản
+DeleteAccountActivity
+1 RecyclerView userRecycle Hiển thị danh sách tài 
+khoản hiện có của công 
+ty, ấn để chọn một hoặc 
+nhiều tài khoản cần xóa
+2 Button btnDelete Ấn để xóa tài khoản
+ConfirmDeleteAccountDialog
+1 Button btnDelete Ấn để xóa các tài khoản 
+được chọn82
+2 Button btnClose Ấn để đóng hộp thoại
+- Lưu đồ xử lý:
+Hình 3.19: Lưu đồ xử lý xóa tài khoản
+Giao diện phân quyền tài khoản
+- Mục đích: Cho phép người dùng có quyền admin thay đổi quyền của một 
+hoặc nhiều tài khoản.
+- Giao diện:83
+Hình 3.20: Giao diện phân quyền tài khoản
+- Thành phần giao diện:
+STT Loại điều 
+khiển
+Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+AdminHomeActivity
+1 CardView cardAccount Ấn để mở hộp thoại quản lý 
+tài khoản
+AccountManagementDialog
+1 CardView cardPermiss Ấn để mở màn hình phân 
+quyền tài khoản
+PermissionManagementActivity
+1 RecyclerView userRecycle Hiển thị danh sách tài khoản 
+hiện có của công ty, ấn để 
+chọn một hoặc nhiều tài 
+khoản cần thay đổi quyền
+2 Button btnChange Ấn để thay đổi quyền
+3 Spinner spinnerAcc Ấn để chọn quyền cần thay 
+đổi
+- Lưu đồ xử lý:84
+Hình 3.21: Lưu đồ xử lý phân quyền tài khoản
+Giao diện xem tổng quan nhiệm vụ
+- Mục đích: Cho phép người dùng xem tổng quan nhiệm vụ của mình hoặc 
+nhiệm vụ đã giao dưới dạng biểu đồ.
+- Giao diện:
+Hình 3.22: Giao diện tổng quan nhiệm vụ85
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+TaskManagerActivity
+1 TabLayout overviewFrag Hiển thị tổng quan nhiệm 
+vụ
+2 PieChart pieChart Hiển thị phần trăm nhiệm 
+vụ hoàn thành và chưa 
+hoàn thành
+- Lưu đồ xử lý:
+Hình 3.23: Lưu đồ xử lý xem nhiệm vụ
+Giao diện tạo nhiệm vụ mới
+- Mục đích: Cho phép người dùng tạo nhiệm vụ mới cho cấp dưới.
+- Giao diện:86
+Hình 3.24: Giao diện tạo nhiệm vụ mới
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+TaskManagerActivity
+1 TabLayout overviewFrag Hiển thị tổng quan nhiệm 
+vụ
+2 TextView textNewTask Ấn để hiển thị biểu mẫu 
+tạo nhiệm vụ mới
+3 TextView textShowUser Ấn để hiển thị danh sách 
+tài khoản cấp dưới
+4 RecyclerView userRecycler Hiển thị danh sách người 
+dùng, ấn để chọn một hoặc 
+nhiều tài khoản cần giao 
+nhiệm vụ
+5 RadioButton radioFixed Ấn để chọn tạo nhiệm vụ 
+cố định
+6 RadioButton radioTemporary Ấn để chọn tạo nhiệm vụ 87
+tạm thời
+7 Spinner spnFixedType Ấn để chọn loại nhiệm vụ 
+cố định
+8 TextView textDayStart Nhập ngày bắt đầu cho 
+nhiệm vụ tạm thời
+9 TextView textDayEnd Nhập ngày kết thúc cho 
+nhiệm vụ tạm thời
+10 TextView textTitle Nhập tiêu đề cho nhiệm vụ 
+tạm thời
+11 TextView textContent Nhập nội dung nhiệm vụ
+12 Button btnCreate Ấn để tạo nhiệm vụ
+13 Button btnBack Ấn để đóng biểu mẫu tạo 
+nhiệm vụ và trở lại màn 
+hình tổng quan
+- Lưu đồ xử lý:
+Hình 3.25: Lưu đồ xử lý tạo nhiệm vụ mới
+Giao diện xem nhiệm vụ đã hoàn thành
+- Mục đích: Cho phép người dùng xem nhệm vụ mà cấp dưới hoặc bản thân đã 
+hoàn thành.88
+- Giao diện:
+Hình 3.26: Giao diện xem nhiệm vụ hoàn thành
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+TaskManagerActivity
+1 TabLayout completedFrag Hiển thị danh sách 
+nhiệm vụ đã hoàn thành
+2 RecyclerView taskRecycler Chứa danh sách nhiệm 
+vụ đã hoàn thành
+- Lưu đồ xử lý:89
+Hình 3.27: Lưu đồ xử lý xem nhiệm vụ đã hoàn thành
+Giao diện xem nhiệm vụ chưa hoàn thành
+- Mục đích: Cho phép người dùng xem nhệm vụ mà cấp dưới hoặc bản thân 
+chưa hoàn thành.
+- Giao diện:
+Hình 3.28: Xem nhiệm vụ chưa hoàn thành90
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+TaskManagerActivity
+1 TabLayout uncompleteFrag Hiển thị danh sách nhiệm 
+vụ chưa hoàn thành
+2 RecyclerView taskRecycler Chứa danh sách nhiệm vụ 
+chưa hoàn thành
+- Lưu đồ xử lý:
+Hình 3.29: Lưu đồ xử lý xem nhiệm vụ chưa hoàn thành
+Giao diện xem nhiệm vụ cố định
+- Mục đích: Cho phép trưởng khu xem nhệm vụ cố định mà trưởng khu đã 
+giao cho công nhân.
+- Giao diện:91
+Hình 3.30: Giao diện xem nhiệm vụ cố định
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+TaskManagerActivity
+1 TabLayout tabFixedTask Hiển thị danh sách 
+nhiệm vụ cố định
+2 RecyclerView taskRecycler Chứa danh sách nhiệm 
+vụ cố định
+- Lưu đồ xử lý:
+Hình 3.31: Lưu đồ xử lý xem nhiệm vụ cố định
+Giao diện xem bình luận và chi tiết nhiệm vụ
+- Mục đích: Cho phép người dùng xem bình luận và chi tiết về một nhiệm vụ.
+- Giao diện:92
+Hình 3.32: Giao diện xem bình luận và chi tiết nhiệm vụ
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+TaskManagerActivity
+1 RecyclerView taskRecycler Chứa danh sách nhiệm 
+vụ chưa hoàn thành, 
+nhiệm vụ cố định hoặc 
+nhiệm vụ đã hoàn thành.
+- Lưu đồ xử lý:
+Hình 3.33: Lưu đồ xử lý xem bình luận và xem chi tiết nhiệm vụ
+Giao diện bình luận nhiệm vụ
+- Mục đích: Cho phép người dùng đưa ra bình luận về một nhiệm vụ.
+- Giao diện:93
+Hình 3.34: Giao diện bình luận nhiệm vụ
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+TaskManagerActivity
+1 RecyclerView taskRecycler Chứa danh sách nhiệm 
+vụ chưa hoàn thành, 
+nhiệm vụ cố định hoặc 
+nhiệm vụ đã hoàn thành.
+- Lưu đồ xử lý:
+Hình 3.35: Lưu đồ xử lý bình luận nhiệm vụ
+Giao diện hoàn thành nhiệm vụ
+- Mục đích: Cho phép người dùng đánh dấu hoàn thành nhiệm vụ được giao.
+- Giao diện:94
+Hình 3.36: Giao diện hoàn thành nhiệm vụ
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+TaskManagerActivity
+1 RecyclerView taskRecycler Chứa danh sách nhiệm 
+vụ chưa hoàn thành, 
+nhiệm vụ cố định hoặc 
+nhiệm vụ đã hoàn thành.
+2 Button btnComplete Ấn để hoàn thành nhiệm 
+vụ.
+- Lưu đồ xử lý:
+Hình 3.37: Lưu đồ xử lý hoàn thành nhiệm vụ95
+Giao diện xem ai chưa hoàn thành nhiệm vụ
+- Mục đích: Cho phép người dùng xem danh sách ai chưa hoàn thành nhiệm 
+vụ.
+- Giao diện:
+Hình 3.38: Giao diện xem ai chưa hoàn thành nhiệm vụ
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+CommentBottomSheetDialog
+1 TextView textUnComplete Ấn để mở hộp thoại 
+xem danh sách ai chưa 
+hoàn thành nhiệm vụ.
+UnCompleteTaskDialog
+1 RecyclerView userRecycle Chứa danh sách những 
+ai chưa hoàn thành 
+nhiệm vụ.
+2 Button btnClose Ấn để đóng hộp thoại.96
+- Lưu đồ xử lý:
+Hình 3.39: Lưu đồ xử lý xem ai chưa hoàn thành nhiệm vụ
+Giao diện xem ai đã hoàn thành nhiệm vụ
+- Mục đích: Cho phép người dùng xem danh sách ai đã hoàn thành nhiệm vụ.
+- Giao diện:
+Hình 3.40: Giao diện xem ai đã hoàn thành nhiệm vụ97
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+CommentBottomSheetDialog
+1 TextView textComplete Ấn để mở hộp thoại xem 
+danh sách ai chưa hoàn 
+thành nhiệm vụ.
+CompleteTaskDialog
+1 RecyclerView userRecycle Chứa danh sách những 
+ai đã hoàn thành nhiệm 
+vụ.
+2 Button btnClose Ấn để đóng hộp thoại.
+- Lưu đồ xử lý:
+Hình 3.41: Lưu đồ xử lý xem ai đã hoàn thành nhiệm vụ
+Giao diện xem danh sách nhân sự trong vùng nuôi
+- Mục đích: Cho phép người dùng có quyền trưởng vùng xem danh sách nhân 
+sự trong toàn vùng và trưởng khu có quyền xem danh sách nhân sự trong 
+toàn khu.
+- Giao diện:98
+Hình 3.42: Giao diện xem danh sách nhân sự trong vùng nuôi
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+HRManagementActivity
+1 RecyclerView userRecycle Chứa danh sách nhân sự.
+- Lưu đồ xử lý:
+Hình 3.43: Lưu đồ xử lý xem danh sách nhân sự trong vùng nuôi99
+Giao diện xem thông tin nhân sự
+- Mục đích: Cho phép người dùng có quyền trưởng vùng xem thông tin nhân 
+sự trong toàn vùng và trưởng khu có quyền xem thông tin nhân sự trong toàn 
+khu.
+- Giao diện:
+Hình 3.44: Giao diện xem thông tin nhân sự
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+HRManagementActivity
+1 RecyclerView userRecycle Chứa danh sách nhân sự. 
+Chọn vào một tài khoản 
+bất kỳ để xem thông tin.
+InfomationDialog
+1 ImageView imageProfile Hiển thị ảnh đại diện của 
+tài khoản được chọn.
+2 TextView textPhone Hiển thị số điện thoại của 100
+tài khoản được chọn.
+3 TextView textName Hiển thị tên của tài 
+khoản được chọn.
+4 TextView textPosition Hiển thị chức vụ của tài 
+khoản được chọn.
+5 TextView textDate Hiển thị ngày tháng năm 
+sinh của tài khoản được 
+chọn.
+6 TextView textAddress Hiển thị địa chỉ của tài 
+khoản được chọn.
+7 Button btnClose Ấn để đóng hộp thoại.
+- Lưu đồ xử lý:
+Hình 3.45: Lưu đồ xử lý xem thông tin nhân sự
+Giao diện chuyển công tác
+- Mục đích: Cho phép người dùng có quyền trưởng vùng chuyển công tác của 
+một trưởng khu qua khu khác hoặc một công nhân qua ao khác và trưởng 
+khu có quyền chuyển công nhân từ ao này qua ao khác.
+- Giao diện:101
+Hình 3.46: Giao diện chuyển công tác
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+AreaHRManagementActivity
+1 RecyclerView userRecycle Hiển thị danh sách tài 
+khoản theo khu hoặc theo 
+ao. Ấn vào một hoặc 
+nhiều tài khoản để chọn 
+tài khoản đó.
+2 Button btnChange Ấn để thực hiện thay đổi, 
+chuyển công nhân từ ao 
+này qua ao khác, chuyển 
+trưởng khu từ khu này 
+sang khu khác.
+3 Spinner spnArea Hiển thị các tùy chọn ao 
+hoặc khu.
+4 RaidioButton radioCampus Ấn để hiển thị trưởng khu.
+5 RadioButton radioPond Ấn để hiển thị công nhân.
+ConfirmChangeDialog102
+1 Button btnClose Ấn để đóng hộp thoại.
+2 Button btnChange Ấn để thực hiện thay đổi.
+- Lưu đồ xử lý:
+Hình 3.47: Lưu đồ xử lý chuyển công tác
+Giao diện xem thông tin ao
+- Mục đích: Cho phép người dùng có quyền trưởng vùng hoặc trưởng khu xem 
+thông tin chi tiết của một ao như diện tích, mật độ thả, số công nhân, tình 
+hình cho ăn, chất lượng nước tại ao...
+- Giao diện:103
+Hình 3.48: Giao diện xem thông tin ao
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+RegionalChiefActivity hoặc DirectorHomeActivity
+1 Recycleview pondRecycle Hiển thị danh sách ao, ấn 
+vào một ao để xem thông 
+tin ao tương ứng.
+PondDetailActivity
+1 TextView textDetail Ấn để hiển thị thông tin 
+chi tiết của ao.
+2 ImageView imageDetail Ấn để hiển thị thông tin 
+chi tiết của ao.104
+- Lưu đồ xử lý:
+Hình 3.49: Lưu đồ xử lý xem thông tin ao
+Giao diện xem danh sách công nhân trong ao
+- Mục đích: Cho phép người dùng có quyền trưởng vùng hoặc trưởng khu xem 
+danh sách công nhân hiện đang làm việc tại ao.
+- Giao diện:
+Hình 3.50: Giao diện xem danh sách công nhân trong ao105
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+PondDetailActivity
+1 CardView cardShowWorker Ấn để hiển thị hộp thoại 
+chứa danh sách công 
+nhân trong ao.
+ShowWorkerDialog
+1 RecyclerView userRecycle Hiển thị danh sách công 
+nhân hiện đang làm 
+việc tại ao.
+2 Button btnClose Ấn để đóng hộp thoại.
+- Lưu đồ xử lý:
+Hình 3.51: Lưu đồ xử lý xem danh sách công nhân trong ao
+Giao diện cài đặt thông số nước cần đo
+- Mục đích: Cho phép người dùng có quyền trưởng vùng hoặc trưởng khu cài 
+đặt thông số nước cần đo của một ao.
+- Giao diện:
+Hình 3.52: Giao diện cài đặt thông số nước cần đo106
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+PondDetailActivity
+1 CardView cardWater Ấn để hiển thị hộp thoại 
+cài đặt thông số nước 
+cần đo.
+SettingWaterParametersDialog
+1 Checkbox cbPH Ấn để cài đặt cần đo pH 
+tại ao.
+2 Checkbox cbAlkalinity Ấn để cài đặt cần đo độ 
+kiềm tại ao.
+3 Checkbox cbH2S Ấn để cài đặt cần đo 
+H2S tại ao.
+4 Checkbox cbSalinity Ấn để cài đặt cần đo độ 
+mặn tại ao.
+5 Checkbox cbTemperature Ấn để cài đặt cần đo 
+nhiệt độ nước tại ao.
+6 Checkbox cbNH3 Ấn để cài đặt cần đo 
+NH3 tại ao.
+7 Button btnClose Ấn để đóng hộp thoại.
+9 Button btnSave Ấn để lưu các thông số 
+môi trường cần đo cho 
+ao.
+- Lưu đồ xử lý:107
+Hình 3.53: Lưu đồ xử lý cài đặt thông số nước cần đo
+Giao diện cài đặt số lần cho ăn trong ngày
+- Mục đích: Cho phép người dùng có quyền trưởng vùng hoặc trưởng khu cài 
+đặt số lần cho ăn trong ngày của một ao.
+- Giao diện:
+Hình 3.54: Giao diện cài đặt số lần cho ăn trong ngày
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 108
+mặc định
+PondDetailActivity
+1 CardView cardFeed Ấn để hiển thị hộp thoại 
+cài đặt số lần cho ăn 
+trong ngày.
+SettingFeedDialog
+1 Spinner spinnerAmount Ấn để lựa chọn số lần 
+cho ăn trong ngày.
+2 RecyclerView feedRecycler Hiển thị danh sách cài 
+đặt số lần cho ăn tương 
+ứng với lựa chọn của 
+người dùng.
+3 EditText textAmount Nhập lượng thức ăn 
+tương ứng với lần ăn.
+7 Button btnClose Ấn để đóng hộp thoại.
+9 Button btnSave Ấn để lưu số lần ăn và 
+lượng thức ăn tương 
+ứng cho ao.
+- Lưu đồ xử lý:
+Hình 3.55: Lưu đò xử lý cài đặt số lần cho ăn trong ngày
+Giao diện xem danh sách báo cáo cá bệnh
+- Mục đích: Cho phép người dùng có quyền trưởng khu xem danh sách báo 
+cáo cá bệnh từ công nhân.
+- Giao diện:109
+Hình 3.56: Giao diện xem danh sách báo cáo cá bệnh
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+DirectorHomeActivity
+1 CardView cardReportFish Ấn để chuyển sang màn 
+hình hiển thị báo cáo cá 
+bệnh từ công nhân.
+ReportFishActivity
+1 RecyclerView reportRecycler Hiển thị danh sách báo 
+cáo cá bệnh từ công 
+nhân theo ngày.
+- Lưu đồ xử lý:
+Hình 3.57: Lưu đồ xử lý xem danh sách báo cáo cá bệnh110
+Giao diện xem chi tiết báo cáo cá bệnh
+- Mục đích: Cho phép người dùng có quyền trưởng khu xem chi tiết báo cáo 
+cá bệnh từ công nhân.
+- Giao diện:
+Hình 3.58: Giao diện xem chi tiết báo cáo cá bệnh
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+ReportFishActivity
+1 RecyclerView reportRecycler Hiển thị danh sách báo 
+cáo cá bệnh từ công 
+nhân, ấn để hiển thị chi 
+tiết báo cáo.
+ReportFishDetailDialog
+1 TextView textNamePond Hiển thị tên ao.
+2 TextView textDate Hiển thị ngày báo cáo.
+3 TextView textGuess Hiển thị phỏng đoán 111
+bệnh từ công nhân.
+4 Image imageReport Hiển thị ảnh chụp cá 
+bệnh từ công nhân.
+5 Image imageProfile Hiển thị ảnh của công 
+nhân báo cáo
+6 TextView textName Hiển thị tên công nhân 
+báo cáo.
+7 TextView textPhone Hiển thị số điện thoại 
+công nhân báo cáo.
+- Lưu đồ xử lý:
+Hình 3.59: Lưu đồ xử lý xem chi tiết báo cáo cá bệnh
+Giao diện tạo phác đồ điều trị
+- Mục đích: Cho phép người dùng có quyền trưởng khu tạo phác đồ điều trị từ
+báo cáo cá bệnh của công nhân.
+- Giao diện:112
+Hình 3.60: Giao diện tạo phác đồ điều trị
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc 
+định
+ReportFishDetailDialog
+1 Button btnCreate Ấn để hiển thị hộp thoại 
+tạo phác đồ điều trị
+TreatmentProtocolDialog
+1 Spinner spnSickName Ấn để chọn tên bệnh.
+2 Spinner spnMedicine Ấn để chọn loại thuốc.
+3 RecyclerView medicineRecycle Hiển thị danh sách 
+thuốc mà người dùng đã 
+chọn.
+4 EditText edtAmout Nhập lượng thuốc cần 
+dùng tương ứng với 
+từng loại.
+5 TextView textNote Nhập ghi chú cho phác 113
+đồ nếu có.
+6 Checkbox cbWater Ấn để chọn phương 
+pháp thay nước cho 
+phác đồ.
+7 Checkbox cbFood Ấn để chọn phương 
+pháp cắt mồi cho phác 
+đồ.
+8 Checkbox cbMud Ấn để chọn phương 
+phác hút bùn cho phác 
+đồ.
+9 Button btnCreate Ấn để tạo phác đồ
+10 Button btnClose Ấn để đóng hộp thoại.
+- Lưu đồ xử lý:
+Hình 3.61: Lưu đồ xử lý tạo phác đồ điều trị
+Giao diện xem phác đồ chờ duyệt
+- Mục đích: Cho phép người dùng có quyền trưởng vùng hoặc trưởng khu xem 
+danh sách phác đồ chờ trưởng vùng duyệt.
+- Giao diện:114
+Hình 3.62: Giao diện xem phác đồ chờ duyệt
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+RegionalChiefActivity hoặc DirectorHomeActivity
+1 CardView cartTreatmet Ấn để chuyển sang màn 
+hình hiển thị danh sách 
+phác đồ chờ duyệt.
+TreatmentActivity
+1 RecyclerView treamentRecycle Hiển thị danh sách phác 
+đồ điều trị chờ duyệt 
+theo ngày.115
+- Lưu đồ xử lý:
+Hình 3.63: Lưu đồ xử lý xem phác đồ chờ duyệt
+Giao diện xem phác đồ điều trị bị từ chối
+- Mục đích: Cho phép người dùng có quyền trưởng vùng hoặc trưởng khu xem 
+danh sách phác đồ bị từ chối bởi trưởng vùng.
+- Giao diện:
+Hình 3.64: Giao diện xem phác đồ điều trị bị từ chối
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+RegionalChiefActivity hoặc DirectorHomeActivity
+1 CardView cartTreatmet Ấn để chuyển sang màn 
+hình hiển thị danh sách 
+phác đồ chờ duyệt.116
+TreatmentActivity
+1 RecyclerView treamentRecycle Hiển thị danh sách phác 
+đồ điều trị bị từ chối 
+theo ngày.
+- Lưu đồ xử lý:
+Hình 3.65: Lưu đồ xử lý xem phác đồ điều trị bị từ chối
+Giao diện xem phác đồ điều trị đã được chấp nhận
+- Mục đích: Cho phép người dùng có quyền trưởng vùng hoặc trưởng khu xem 
+danh sách phác đồ đã được chấp nhận bởi trưởng vùng.
+- Giao diện:
+Hình 3.66: Giao diện xem phác đồ điều trị đã được chấp nhận
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 117
+mặc định
+RegionalChiefActivity hoặc DirectorHomeActivity
+1 CardView cartTreatmet Ấn để chuyển sang màn 
+hình hiển thị danh sách 
+phác đồ chờ duyệt.
+TreatmentActivity
+1 RecyclerView treamentRecycle Hiển thị danh sách phác 
+đồ điều trị đã được chấp 
+nhận bởi trưởng vùng.
+- Lưu đồ xử lý:
+Hình 3.67: Lưu đồ xử lý xem phác đồ điều trị đã được chấp nhận
+Giao diện tạo nhiệm vụ điều trị cho công nhân
+- Mục đích: Cho phép người dùng có quyền trưởng khu giao nhiệm vụ điều trị
+bệnh trên cá cho một hoặc nhiều công nhân theo phác đồ điều trị đã được 
+trưởng vùng chấp nhận.
+- Giao diện:118
+Hình 3.68: Giao diện tạo nhiệm vụ điều trị cho công nhân
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+TreatmentActivity
+1 RecyclerView treamentRecycle Hiển thị danh sách phác 
+đồ điều trị đã được chấp 
+nhận bởi trưởng vùng.
+AssignmentWorkerDialog
+1 RecyclerView userRecycle Hiển thị danh sách công 
+nhân trong ao tương 
+ứng với phác đồ điều trị 
+của ao đó. Ấn để chọn 
+một hoặc nhiều công 
+nhân cần giao nhiệm vụ 
+điêu trị.
+2 Button btnClose Ấn để đóng hộp thoại.
+3 Button btnAssign Ấn để chuyển phác đồ 
+điều trị đến các công 
+nhân tương ứng.
+- Lưu đồ xử lý:119
+Hình 3.69: Lưu đồ xử lý tạo nhiệm vụ điều trị cho công nhân
+Giao diện xóa phác đồ điều trị
+- Mục đích: Cho phép người dùng có quyền trưởng khu xóa các phác đồ điều 
+trị đang chờ duyệt hoặc bị từ chối bởi trưởng vùng.
+- Giao diện:
+Hình 3.70: Giao diện xóa phác đồ điều trị
+- Thành phần giao diện:120
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+TreatmentActivity
+1 RecyclerView treamentRecycle Hiển thị danh sách phác 
+đồ điều trị đã được chấp 
+nhận bởi trưởng vùng.
+2 Image imageDelete Ấn để hiển thị hộp thoại 
+xác nhận xóa phác đồ.
+ConfirmDeleteDialog
+1 Button btnClose Ấn để đóng hộp thoại.
+2 Button btnDelete Ấn để xóa phác đồ.
+- Lưu đồ xử lý:
+Hình 3.71: Lưu đồ xử lý xóa phác đồ điều trị121
+Giao diện chỉnh sửa phác đồ điều trị
+- Mục đích: Cho phép người dùng có quyền trưởng khu chỉnh sửa các phác đồ
+điều trị đang chờ duyệt hoặc bị từ chối bởi trưởng vùng.
+- Giao diện:
+Hình 3.72: Giao diện chỉnh sửa phác đồ điều trị
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+TreatmentActivity
+1 RecyclerView treamentRecycle Hiển thị danh sách phác đồ 
+điều trị đã được chấp nhận 
+bởi trưởng vùng.
+2 Image imageEdit Ấn để hiển thị hộp thoại 
+sửa thông tin phác đồ.
+TreatmentInfoDialog
+1 Spinner spnSichName Ấn để thay đổi tên bệnh.
+2 Spinner spnMedicine Ấn để chọn thuốc122
+3 RecyclerView medicineRecycle Hiển thị danh sách thuốc 
+tương ứng với các loại 
+thuốc mà người dùng đã 
+chọn.
+4 EditText edtAmount Nhập số lượng tương ứng 
+với từng loại thuốc.
+5 Button btnClose Ấn để đóng hộp thoại.
+6 Button btnSave Ấn để lưu thay đổi.
+- Lưu đồ xử lý:
+Hình 3.73: Lưu đồ xử lý chỉnh sửa phác đồ điều trị123
+Giao diện hoàn thành điều trị
+- Mục đích: Cho phép người dùng có quyền trưởng khu hoàn thành việc trị
+bệnh.
+- Giao diện:
+Hình 3.74:Giao diện hoàn thành điều trị
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+TreatmentActivity
+1 RecyclerView treamentRecycle Hiển thị danh sách phác 
+đồ điều trị đã được chấp 
+nhận bởi trưởng vùng.
+2 Button btnComplete Ấn để hiển thị hộp thoại 
+xác nhận xóa phác đồ.
+ConfirmDeleteDialog
+1 Button btnClose Ấn để đóng hộp thoại.
+2 Button btnComplete Ấn để hoàn thành điều 
+trị.
+- Lưu đồ xử lý:124
+Hình 3.75: Lưu đồ xử lý hoàn thành điều trị
+Giao diện chấp nhận phác đồ điều trị
+- Mục đích: Cho phép người dùng có quyền trưởng vùng chấp nhận phác đồ
+điều trị của trưởng khu.
+- Giao diện:
+Hình 3.76: Giao diện chấp nhận phác đồ điều trị
+- Thành phần giao diện:125
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+TreatmentActivity
+1 RecyclerView treamentRecycle Hiển thị danh sách phác 
+đồ điều trị chờ duyệt 
+bởi trưởng vùng.
+2 Button btnAccept Ấn để chấp nhận phác 
+đồ điều trị từ trưởng 
+khu.
+- Lưu đồ xử lý:
+Hình 3.77: Lưu đồ xử lý chấp nhận phác đồ điều trị126
+Giao diện từ chối phác đồ điều trị
+- Mục đích: Cho phép người dùng có quyền trưởng vùng từ chối phác đồ điều 
+trị của trưởng khu.
+- Giao diện:
+Hình 3.78: Giao diện từ chối phác đồ điều trị
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+TreatmentActivity
+1 RecyclerView treamentRecycle Hiển thị danh sách phác 
+đồ điều trị chờ duyệt bởi 
+trưởng vùng.
+2 Button btnReject Ấn để từ chối phác đồ 
+điều trị từ trưởng khu.127
+- Lưu đồ xử lý:
+Hình 3.79: Lưu đồ xử lý từ chối phác đồ điều trị
+Giao diện nhập lượng thức ăn đã cho ăn
+- Mục đích: Cho phép người dùng có quyền công nhân nhập lượng thức ăn mà 
+công nhân đã cho cá ăn.
+- Giao diện:
+Hình 3.80: Giao diện nhập lượng thức ăn đã cho ăn
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị mặc 
+định
+WorkerHomeActivity
+1 ImageView imageFeed Ấn để hiển thị hộp thoại 128
+nhập lượng thức ăn đã 
+cho cá ăn.
+FeedDialog
+1 EditText edtFeed Nhập lượng thức ăn đã 
+cho cá ăn.
+2 Button btnClose Ấn để đóng hộp thoại.
+3 Button btnSave Ấn để lưu lượng thức 
+ăn đã nhập.
+- Lưu đồ xử lý:
+Hình 3.81: Lưu đồ xử lý nhập lượng thức ăn đã cho ăn
+Giao diện cập nhật chất lượng nước
+- Mục đích: Cho phép người dùng có quyền công nhân nhập các thông số về
+chất lượng nước mà công nhân đã đo.
+- Giao diện:129
+Hình 3.82: Giao diện cập nhật chất lượng nước
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+WorkerHomeActivity
+1 ImageView imageWater Ấn để hiển thị hộp thoại 
+nhập thông số chất 
+lượng nước đã đo được.
+WaterDialog
+1 EditText edtWater Nhập thông số nước đã 
+đo được.
+2 Button btnClose Ấn để đóng hộp thoại.
+3 Button btnSave Ấn để lưu thông số nước 
+đã đo được.130
+- Lưu đồ xử lý:
+Hình 3.83: Lưu đồ xử lý cập nhật chất lượng nước
+Giao diện chức năng trị bệnh
+- Mục đích: Cho phép người dùng có quyền công nhân hoàn thành việc trị
+bệnh cho cá trong ngày.
+- Giao diện:
+Hình 3.84: Giao diện chức năng trị bệnh131
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+WorkerHomeActivity
+1 TextView textReportImage Ấn để chọn ảnh báo cáo 
+tình trạng của cá.
+2 Button btnComplete Ấn để hoàn thành việc 
+điều trị bệnh trong ngày 
+hôm nay.
+- Lưu đồ xử lý:
+Hình 3.85: Lưu đồ xử lý chức năng trị bệnh
+Giao diện báo cáo cá bệnh
+- Mục đích: Cho phép người dùng có quyền công nhân thực hiện báo cáo tình 
+trạng cá bệnh cho trưởng khu.
+- Giao diện:132
+Hình 3.86: Giao diện báo cáo cá bệnh
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+WorkerHomeActivity
+1 TextView textReportImage Ấn để chọn ảnh báo cáo 
+tình trạng của cá.
+2 Button btnComplete Ấn để hoàn thành việc 
+điều trị bệnh trong ngày 
+hôm nay.133
+- Lưu đồ xử lý:
+Hình 3.87: Lưu đồ xử lý báo cáo cá bệnh
+Giao diện chỉnh sửa nhiệm vụ đã giao
+- Mục đích: Cho phép người dùng có quyền trưởng vùng hoặc trưởng khu 
+chỉnh sửa nhiệm vụ đã giao cho cấp dưới.
+- Giao diện:
+Hình 3.88: Giao diện chỉnh sửa nhiệm vụ đã giao
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+CommentBottomSheetDialog
+1 ImageView imageEdit Ấn để mở hộp thoại chỉnh 
+sửa nhiệm vụ đã giao.134
+EditTaskDialog
+1 TextView textChoose Ấn để hiển thị danh sách 
+công nhân.
+2 RecyclerView userRecycle Hiển thị danh sách công 
+nhân, ấn để chọn hoặc bỏ 
+chọn công nhân cần thực 
+hiện nhiệm vụ.
+3 TextView textDateStart Chọn ngày bắt đầu nhiệm vụ.
+4 TextView textDateEnd Chọn ngày kết thúc nhiệm 
+vụ.
+5 TextView textTitle Nhập tiêu đề nhiệm vụ.
+6 TextView TextContent Nhập nội dung nhiệm vụ.
+7 Button btnClose Ấn để đóng hộp thoại.
+8 Buton bntEdit Ấn để chính sửa thông tin 
+nhiệm vụ.
+- Lưu đồ xử lý:
+Hình 3.89: Lưu đồ xử lý chức năng chỉnh sửa nhiệm vụ đã giao135
+Giao diện xóa nhiệm vụ đã giao
+- Mục đích: Cho phép người dùng có quyền trưởng vùng hoặc trưởng khu xóa 
+nhiệm vụ đã giao cho cấp dưới.
+- Giao diện:
+Hình 3.90: Giao diện xóa nhiệm vụ
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị mặc 
+định
+CommentBottomSheetDialog
+1 ImageView imageDelete Ấn để mở hộp thoại xác 
+nhận xóa nhiệm vụ.
+ConfirmDeleteTaskDialog
+1 Button btnClose Ấn để đóng hộp thoại.
+2 Buton bntDelete Ấn để xóa nhiệm vụ.136
+- Lưu đồ xử lý:
+Hình 3.91: Lưu đồ xử lý chức năng xóa nhiệm vụ
+Giao diện kiểm tra bệnh cá
+- Mục đích: Cho phép người dùng có quyền trưởng vùng, trưởng khu, công 
+nhân kiểm tra bệnh cá bằng hình ảnh.
+- Giao diện:
+Hình 3.92: Giao diện kiểm tra bệnh cá137
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị mặc 
+định
+AIActivity
+1 ImageView imageResult Hiển thị ảnh mà người 
+dùng chụp từ camera 
+hoặc chọn từ thư viện.
+2 Button btnCamera Ấn để mở máy ảnh.
+3 Button btnGallery Ấn để mở thư viện ảnh.
+- Lưu đồ xử lý:
+Hình 3.93: Lưu đồ xử lý kiểm tra bệnh cá
+Giao diện xem hình ảnh báo cáo việc trị bệnh
+- Mục đích: Cho phép người dùng có quyền trưởng vùng, trưởng khu xem 
+hình ảnh báo cáo việc trị bệnh từ công nhân.
+- Giao diện:138
+Hình 3.94: Giao diện xem hình ảnh báo cáo việc trị bệnh
+- Thành phần giao diện:
+STT Loại điều khiển Tên điều khiền Nội dung thực hiện Giá trị 
+mặc định
+PondDetailActivity
+1 TextView textImageReport Ấn để hiển thị hộp thoại 
+chứa ảnh báo cáo từ công 
+nhân.
+TreatmentImageReportDialog
+1 ImageView imageReport Hiển thị ảnh báo cáo từ 
+công nhân.
+2 Button btnClose Ấn để đóng hộp thoại.
+-139
+- Lưu đồ xử lý:
+Hình 3.95: Lưu đồ xử lý xem hình ảnh báo cáo việc trị bệnh140
+CHƯƠNG 4 KIỂM THỬ VÀ ĐÁNH GIÁ
+Kế hoạch kiểm thử
+Mục tiêu
+- Tìm các lỗi phát sinh do người lập trình tạo ra khi lập trình. Ngăn ngừa xảy 
+ra lỗi khi đưa ứng dụng vào sử dụng. Đảm bảo kết quả cuối cùng đáp ứng 
+được yêu cầu phần mềm.
+- Đánh giá chất lượng sản phẩm.
+- Phạm vi kiểm thử
+- Quy trình kiểm thử được thực hiện qua các công đoạn:
+o Kiểm thử thiết kế: kiểm tra giao diện thiết kế có đúng với đặc tả. 
+o Kiểm thử chấp nhận: kiểm thử chức năng hệ thống có hoạt động và đáp 
+ứng đặc tả yêu cầu.
+o Kiểm thử chức năng: kiểm thử chức năng có xử lý đúng.
+o Kiểm thử cài đặt: tìm và sửa các lỗi xảy ra khi kiểm thử.
+Phạm vi kiểm thử
+- Kiểm thử thiết kế: kiểm tra giao diện thiết kế có đúng với đặc tả hay không?
+- Kiểm thử chấp nhận: kiểm thử chức năng hệ thống có hoạt động và đáp ứng 
+đặc tả yêu cầu hay không?
+- Kiểm thử chức năng: kiểm thử chức năng có xử lý đúng dữ liệu hay không?
+- Kiểm thử cài đặt: tìm và sửa các lỗi xảy ra khi kiểm thử.
+Môi trường kiểm thử
+Kiểm thử sẽ được thực hiện trên môi trường production:
+- Phần cứng: Xiaomi 11T, Samsung Note 10 Lite.
+- Phần mềm: MIUI 14 (Android 13), OneUI 5.1 (Android 13).
+Lịch trình kiểm thử
+Quá trình kiểm thử sẽ được thực hiện theo kế hoạch sau:
+Phiên bản Ngày bắt đầu Ngày kết thúc
+1.0 20/04/2023 25/4/2023141
+Quản lý rủi ro
+Bảng 4.1: Rủi ro trong quá trình kiểm thử
+STT Tên rủi ro Giải pháp
+1 Thiết bị hư hỏng Đổi thiết bị
+2 Đường truyền không ổn định Đổi đường truyền ổn 
+định hơn
+Các tiêu chí đầu ra
+- Kiểm thử thành công: khi kết quả kiểm thử đúng với kết quả mong đợi
+(không còn lỗi cái đặt, giao diện đúng thiết kế, chức năng đúng với đặc tả)
+- Kiểm thử thất bại: kết quả kiểm thử không đúng với kết quả mong đợi hoặc 
+xảy ra lỗi.
+Kịch bản kiểm thử
+Bảng 4.2: Bảng tài liệu tham khảo cho quá trình kiểm thử
+Ứng dụng quản lý hoạt động vùng nuôi cá tra 
+Tài liệu tham khảo Tài liệu đặc tả yêu cầu: Ứng dụng quản lý hoạt động vùng 
+nuôi cá tra 
+Tạo bởi Nguyễn Cao Đức, Trần Quốc Khánh
+Bảng 4.3: Kịch bản kiểm thử
+ID 
+KBKT
+Mã chức 
+năng
+Mô tả chức năng Độ quan 
+trọng
+Số lượng 
+THKT
+01 UC_01 Kiểm tra người dùng có thể đăng ký tài 
+khoản không
+P1 4
+02 UC_02 Kiểm tra người dùng có thể đăng nhập 
+thành công
+P1 2
+03 UC_03 Kiểm tra người dùng có đăng xuất tài 
+khoản thành công
+P1 1
+13 UC_13 Kiểm tra xem người dùng có thể tạo 1 tài 
+khoản mới không
+P1 1142
+14 UC_14 Kiểm tra xem người dùng có thể tạo 
+nhiều tài khoản mới không
+P1 3
+15 UC_15 Kiểm tra xem người dùng có thể xóa tài 
+khoản được không
+P1 3
+16 UC_16 Kiểm tra xem người dùng có thể phân 
+quyền tài khoản không
+P1 3
+17 UC_17 Kiểm tra người dùng có thể xem tổng 
+quan nhiệm vụ có 
+P1 1
+18 UC_18 Kiểm tra người dùng có thể tạo nhiệm vụ 
+mới không
+P1 2
+19 UC_19 Kiểm tra người dùng có thể xem nhiệm 
+vụ đã hoàn thành không
+P1 1
+20 UC_20 Kiểm tra người dùng có thể xem nhiệm 
+vụ chưa hoàn thành không
+P1 1
+21 UC_21 Kiểm tra người dùng có thể nhấn hoàn 
+thành nhiệm vụ
+P1 1
+22 UC_22 Kiểm tra người dùng có xem được bình 
+luận của nhiệm vụ
+P1 1
+23 UC_23 Kiểm tra người dùng có bình luận được 
+nhiệm vụ
+P1 1
+24 UC_24 Kiểm tra người dùng có xem được danh 
+sách người chưa hoàn thành nhiệm vụ
+P1 1
+25 UC_25 Kiểm tra người dùng có xem được danh 
+sách người đã hoàn thành nhiệm vụ
+P1 1
+26 UC_26 Kiểm tra người dùng có xem được danh 
+sách nhân sự trong vùng nuôi
+P1 3
+27 UC_27 Kiểm tra người dùng có xem được thông 
+tin nhân sự.
+P1 1143
+28 UC_28 Kiểm tra người dùng có thể chuyển công 
+tác nhân sự
+P1 1
+39 UC_39 Kiểm tra trưởng vùng và trưởng khu có 
+thể xem thông tin ao 
+P1 1
+40 UC_40 Kiểm tra công nhân có tạo được báo cáo 
+cá bênh không
+P1 3
+41 UC_41 Kiểm tra trưởng vùng và trưởng khu có 
+chỉnh sửa được nhiệm vụ đã giao không
+P2 2
+42 UC_42 Kiểm tra trưởng vùng và trưởng khu có 
+xóa được nhiệm vụ đã giao không
+P3 2
+43 UC_43 Kiểm tra người dùng có thể xem danh 
+sách báo cáo cá bệnh
+P1 1
+44 UC_44 Kiểm tra người dùng có thể xem chi tiết 
+báo cáo cá bệnh
+P1 1
+45 UC_45 Kiểm tra người dùng có thể tạo phác đồ 
+điều trị không
+P1 2
+46 UC_46 Kiểm tra người dùng có thể xem phác đồ 
+đang chờ duyệt
+P1 1
+47 UC_47 Kiểm tra người dùng có thể xem phác đồ 
+bị từ chối
+P1 1
+48 UC_48 Kiểm tra người dùng có thể xem phác đồ 
+được chấp nhận 
+P1 1
+50 UC_50 Kiểm tra người dùng có thể xóa phác đồ 
+điều trị
+P1 2
+51 UC_51 Kiểm tra xem người dùng có thể chỉnh 
+sửa phác đồ điều trị
+P1 2
+52 UC_52 Kiểm tra xem trưởng khu có thể hoàn 
+thành điều trị của phác đồ
+P1 2144
+53 UC_53 Kiểm tra trưởng vùng có thể chấp nhận 
+phác đồ của trưởng khu gửi lên
+P1 1
+54 UC_54 Kiểm tra trưởng vùng có thể từ chối phác 
+đồ của trưởng khu gửi lên
+P1 1
+55 UC_55 Kiểm tra người dùng có thể xem danh 
+sách nhiệm vụ cố định hay không
+P1 1
+56 UC_56 Kiểm tra công nhân có thể cập nhật 
+lượng thức ăn đã cho ăn không
+P1 2
+57 UC_57 Kiểm tra công nhân có thể cập nhật chất 
+lượng nước không
+P1 2
+59 UC_59 Kiểm tra công nhân có hoàn thành việc 
+điều trị cá không
+P1 1
+60 UC_60 Kiểm tra công nhân có thể báo cáo cá 
+bệnh
+P1 2
+65 UC_65 Kiểm tra trưởng vùng và trưởng khu có 
+thể chỉnh sửa nhiệm vụ đã giao cho cấp 
+dưới
+P1 2
+66 UC_66 Kiểm tra trưởng vùng và trưởng khu có 
+thể xóa nhiệm vụ đã giao
+P1 2
+71 UC_71 Kiểm tra người dùng có thể kiểm tra 
+bệnh cá thông qua hình ảnh
+P2 3
+72 UC_72 Kiểm tra trưởng khu và trưởng vùng có 
+thể xem được hình ảnh báo cáo việc trị 
+bệnh cá từ công nhân
+P1 1145
+Trường hợp kiểm thử
+Bảng 4.4: Trường hợp kiểm thử
+ID ID 
+KBKT
+Tiêu đề Bước thực hiện KQ mong đợi KQ thực tế KQ Độ 
+ưu 
+tiên
+Loại 
+kiểm 
+thử
+1 01 Kiểm tra có thông báo 
+nếu số điện thoại đã có 
+trong CSDL
+1. Mở ứng dụng
+2. Chọn đăng ký
+3. Chọn công ty
+4. Chọn điền thông tin đăng ký
+5. Nhấn đăng ký
+Thông báo số điện 
+thoại đã có trong 
+CSDL
+Thông báo số 
+điện thoại đã có 
+trong CSDL
+PASS P1 UI
+2 01 Kiểm tra OTP có được 
+gửi đến người dùng
+1. Mở ứng dụng
+2. Chọn đăng ký
+3. Chọn công ty
+4. Chọn điền thông tin đăng ký
+5. Nhấn đăng ký
+Mã OTP được gửi 
+đến người dùng qua 
+tin nhắn
+Mã OTP được 
+gửi đến người 
+dùng qua tin 
+nhắn
+PASS P1 UI, 
+Func
+3 01 Kiểm tra có thông báo 
+lỗi khi nhập sai OTP
+1. Mở ứng dụng
+2. Chọn đăng ký
+3. Chọn công ty
+4. Chọn điền thông tin đăng ký
+Ứng dụng sẽ thông 
+báo lỗi tương ứng và 
+yêu cầu người dùng 
+nhập lại mã OTP.
+Ứng dụng sẽ 
+thông báo lỗi 
+tương ứng và 
+yêu cầu người 
+PASS P1 UI146
+5. Nhấn đăng ký
+6. Nhập OTP
+dùng nhập lại 
+mã OTP.
+4 01 Kiểm tra người dùng 
+có thể tạo tài khoản 
+thành công không
+1. Mở ứng dụng
+2. Chọn đăng ký
+3. Chọn công ty
+4. Chọn điền thông tin đăng ký
+5. Nhấn đăng ký
+6. Nhập OTP
+7. Nhập thông tin
+Ứng dụng chuyển 
+đến màn hình chính 
+với vai trò là Admin
+Ứng dụng 
+chuyển đến 
+màn hình chính 
+với vai trò là 
+Admin
+PASS P1 UI, 
+Func
+5 02 Kiểm tra có thông báo 
+lỗi khi nhập sai tài 
+khoản hoặc mật khẩu
+1. Mở ứng dụng
+3. Nhập dữ liệu
+4. Nhấn đăng nhập
+Ứng dụng sẽ thông 
+báo lỗi tướng ứng 
+sau đó yêu cầu 
+người dùng nhập lại.
+Ứng dụng sẽ 
+thông báo lỗi 
+tướng ứng sau 
+đó yêu cầu 
+người dùng 
+nhập lại.
+PASS P1 UI
+6 02 Kiểm tra người dùng 
+có đăng nhập thành 
+công không
+1. Mở ứng dụng
+3. Nhập dữ liệu
+4. Nhấn đăng nhập
+Chuyển đến màn 
+hình với quyền 
+tương ứng của tài 
+khoản
+Chuyển đến 
+màn hình với 
+quyền tương 
+ứng của tài 
+khoản
+PASS P1 UI, 
+Func147
+7 03 Kiểm tra người dùng 
+có đăng xuất thành 
+công
+1. Mở ứng dụng
+2. Chọn biểu tượng đăng xuất
+Thông báo đang 
+đăng xuất và chuyển 
+đến màn hình đăng 
+nhập
+Thông báo đang 
+đăng xuất và 
+chuyển đến 
+màn hình đăng 
+nhập
+PASS P1 UI, 
+Func
+41 13 Kiểm tra xem tài 
+khoản có tạo thành 
+công không
+1. Mở ứng dụng
+2. Chọn tài khoản
+3. Chọn tạo tài khoản
+4. Chọn tạo 1 tài khoản
+5. Nhập các thông tin
+6. Chọn tiếp tục
+Thông báo tạo tài 
+khoản thành công và 
+tài khoản được tạo
+Thông báo tạo 
+tài khoản thành 
+công và tài 
+khoản được tạo
+PASS P1 UI, 
+Func
+42 14 Kiểm tra xem ứng 
+dụng có hiện hướng 
+dẫn sử dụng không
+1. Mở ứng dụng
+2. Chọn tài khoản
+3. Chọn tạo tài khoản
+4. Chọn tạo nhiều tài khoản
+Hiển thị hướng dẫn 
+sử dụng
+Hiển thị hướng 
+dẫn sử dụng
+PASS P1 UI, 
+Func
+43 14 Kiểm tra xem ứng 
+dụng có thông báo khi 
+tập tin excel không hợp 
+lệ
+1. Mở ứng dụng
+2. Chọn tài khoản
+3. Chọn tạo tài khoản
+4. Chọn tạo nhiều tài khoản
+5. Nhấn Tạo
+Ứng dụng thông báo 
+lỗi tương ứng và yêu 
+cầu người dùng 
+chọn một tập tin 
+khác.
+Ứng dụng 
+thông báo lỗi 
+tương ứng và 
+yêu cầu người 
+dùng chọn một 
+PASS P1 UI148
+6. Chọn tập tin excel tập tin khác.
+44 14 Kiểm tra xem ứng 
+dụng có tạo thành công 
+các tài khoản trong tập 
+tin excel
+1. Mở ứng dụng
+2. Chọn tài khoản
+3. Chọn tạo tài khoản
+4. Chọn tạo nhiều tài khoản
+5. Nhấn Tạo
+6. Chọn tập tin excel
+ứng dụng lần lượt 
+tạo các tài khoản 
+trong tập tin mà 
+người dùng chọn và 
+thông báo tạo tài 
+khoản thành công
+ứng dụng lần 
+lượt tạo các tài 
+khoản trong tập 
+tin mà người 
+dùng chọn và 
+thông báo tạo 
+tài khoản thành 
+công
+PASS P1 UI, 
+Func
+45 15 Kiểm tra xem người 
+dùng có thể lọc tài 
+khoản hay không
+1. Mở ứng dụng
+2/ Chọn tài khoản
+3. Chọn xóa tài khoản
+4. Chọn biểu tượng lọc
+5. Hiển thị hộp thoại lọc, chọn 
+kiểu lọc
+6. Chọn áp dụng
+Danh sách tài khoản 
+hiển thị tài khoản 
+phù hợp với các tiêu 
+chí đã chọn
+Danh sách tài 
+khoản hiển thị 
+tài khoản phù 
+hợp với các tiêu 
+chí đã chọn
+PASS P1 UI, 
+Func
+46 15 Kiểm tra xem người 
+dùng có thể tìm kiểm 
+tài khoản không
+1. Mở ứng dụng
+2/ Chọn tài khoản
+3. Chọn xóa tài khoản
+4. Nhập tên tài khoản vào ô tìm 
+Hiển thị danh sách 
+tài khoản có tên đã 
+nhập
+Hiển thị danh 
+sách tài khoản 
+có tên đã nhập
+PASS P1 UI, 
+Func149
+kiếm
+47 15 Kiểm tra xem người 
+dùng có thể xóa tài 
+khoản thành công 
+không
+1. Mở ứng dụng
+2. Chọn tài khoản
+3. Chọn xóa tài khoản
+4. Chọn tài khoản cần xóa
+5, Nhấn xóa
+6, Hiển thị hộp thoại xác nhận 
+xóa
+7, Nhấn Xóa
+Hiển thị hộp thoại 
+xác nhận xóa, xóa 
+tài khoản và thông 
+báo xóa thành công
+Hiển thị hộp 
+thoại xác nhận 
+xóa, xóa tài 
+khoản và thông 
+báo xóa thành 
+công
+PASS P1 UI, 
+Func
+48 16 Kiểm tra xem người 
+dùng có thể lọc tài 
+khoản hay không
+1. Mở ứng dụng
+2/ Chọn tài khoản
+3. Chọn phân quyền tài khoản
+4. Chọn biểu tượng lọc
+5. Hiển thị hộp thoại lọc, chọn 
+kiểu lọc
+6. Chọn áp dụng
+Danh sách tài khoản 
+hiển thị tài khoản 
+phù hợp với các tiêu 
+chí đã chọn
+Danh sách tài 
+khoản hiển thị 
+tài khoản phù 
+hợp với các tiêu 
+chí đã chọn
+PASS P1 UI, 
+Func
+49 16 Kiểm tra xem người 
+dùng có thể tìm kiểm 
+tài khoản không
+1. Mở ứng dụng
+2. Chọn tài khoản
+3. Chọn phân quyền tài khoản
+4. Nhập tên tài khoản vào ô tìm 
+Hiển thị danh sách 
+tài khoản có tên đã 
+nhập
+Hiển thị danh 
+sách tài khoản 
+có tên đã nhập
+PASS P1 UI, 
+Func150
+kiếm
+50 16 Kiểm tra xem người 
+dùng có phân quyền tài 
+khoản thành công 
+không
+1. Mở ứng dụng
+2. Chọn tài khoản
+3. Chọn phân quyền tài khoản
+4. Chọn các tài khoản cần sửa 
+quyền.
+5. Chọn quyền tài khoản
+6, Chọn chỉnh sửa
+Chỉnh sửa quyền và 
+thông báo chỉnh sửa 
+thành công
+Chỉnh sửa 
+quyền và thông 
+báo chỉnh sửa 
+thành công
+PASS P1 UI, 
+Func
+51 17 Kiểm tra có hiển thị 
+thông tin tổng quan 
+nhiệm vụ
+1. Mở ứng dụng
+2. Chọn nhiệm vụ
+Hiển thị biểu đồ 
+tổng quan
+Hiển thị biểu đồ 
+tổng quan
+PASS P1 UI
+52 18 Kiểm tra có thông báo 
+khi chưa nhập đủ 
+thông tin
+1. Mở ứng dụng
+2. Chọn nhiệm vụ
+3. Chọn tạo mới
+4. Nhập thông tin
+5. Nhấn tạo
+Hiển thị thông báo 
+lỗi
+Hiển thị thông 
+báo lỗi
+PASS P1 UI
+53 18 Kiểm tra có tạo mới 
+thành công nhiệm vụ
+1. Mở ứng dụng
+2. Chọn nhiệm vụ
+3. Chọn tạo mới
+Thông báo tạo mới 
+thành công
+Thông báo tạo 
+mới thành công
+PASS P1 UI, 
+Func151
+4. Nhập thông tin
+5. Nhấn tạo
+54 19 Kiểm tra có hiển thị 
+nhiệm vụ danh sách đã 
+hoàn thành 
+1. Mở ứng dụng
+2. Chọn nhiệm vụ
+3. Chọn tab đã hoàn thành
+Hiển thị danh sách 
+nhiệm vụ đã hoàn 
+thành
+Hiển thị danh 
+sách nhiệm vụ 
+đã hoàn thành
+PASS P1 UI
+55 20 Kiểm tra có hiển thị 
+nhiệm vụ danh sách 
+chưa hoàn thành 
+1. Mở ứng dụng
+2. Chọn nhiệm vụ
+3. Chọn tab chưa hoàn thành
+Hiển thị danh sách 
+nhiệm vụ chưa hoàn 
+thành
+Hiển thị danh 
+sách nhiệm vụ 
+chưa hoàn 
+thành
+PASS P1 UI
+56 21 Kiểm tra khi người 
+dùng nhấn hoàn thành 
+nhiệm vụ nhiệm vụ có 
+thay đổi trạng thái
+1. Mở ứng dụng
+2. Chọn nhiệm vụ
+3. Chọn tab chưa hoàn thành
+4, Nhấn giữ nhiệm vụ
+5, Chọn hành thành
+Trạng thái nhiệm vụ 
+chuyển sang hoàn 
+thành, nhiệm vụ 
+chuyển từ tab chưa 
+hoàn thành sang tab 
+hoàn thành
+Trạng thái 
+nhiệm vụ 
+chuyển sang 
+hoàn thành, 
+nhiệm vụ 
+chuyển từ tab 
+chưa hoàn 
+thành sang tab 
+hoàn thành
+PASS P1 UI, 
+Func
+57 22 Kiểm tra bình luận 1. Mở ứng dụng Hiển thị danh sách Hiển thị danh PASS P1 UI152
+nhiệm vụ có được hiển 
+thị
+2. Chọn "Nhiệm vụ"
+3. Chọn tab chưa hoàn thành
+4, Chọn xem chi tiết của một 
+nhiệm vụ
+các bình luận của 
+nhiệm vụ
+sách các bình 
+luận của nhiệm 
+vụ
+58 23 Kiểm tra bình luận có 
+được gửi thành công
+1. Mở ứng dụng
+2. Chọn "Nhiệm vụ"
+3. Chọn tab chưa hoàn thành
+4, Chọn xem chi tiết của một 
+nhiệm vụ
+5. Nhập bình luận
+6. Nhấn biểu tượng gửi
+Bình luận được 
+thêm và hiển thị lên 
+danh sách bình luận
+Bình luận được 
+thêm và hiển thị 
+lên danh sách 
+bình luận
+PASS P1 UI, 
+Func
+59 24 Kiểm tra có mở hộp 
+thoại và hiển thị danh 
+sách người chưa hoàn 
+thành nhiệm vụ
+1. Mở ứng dụng
+2. Chọn "Nhiệm vụ"
+3. Chọn tab chưa hoàn thành
+4, Chọn xem chi tiết của một 
+nhiệm vụ
+5. Chọn danh sách chưa hoàn 
+thành nhiệm vụ
+Hiển thị hộp thoại 
+danh sách người 
+chưa hoàn thành 
+nhiệm vụ
+Hiển thị hộp 
+thoại danh sách 
+người chưa 
+hoàn thành 
+nhiệm vụ
+PASS P1 UI
+60 25 Kiểm tra có mở hộp 
+thoại và hiển thị danh 
+1. Mở ứng dụng
+2. Chọn "Nhiệm vụ"
+Hiển thị hộp thoại 
+danh sách người đã 
+Hiển thị hộp 
+thoại danh sách 
+PASS P1 UI153
+sách người đã hoàn 
+thành nhiệm vụ
+3. Chọn tab chưa hoàn thành
+4, Chọn xem chi tiết của một 
+nhiệm vụ
+5. Chọn danh sách đã hoàn thành 
+nhiệm vụ
+hoàn thành nhiệm 
+vụ
+người đã hoàn 
+thành nhiệm vụ
+61 26 Kiểm tra danh sách 
+nhân sự trong vùng 
+nuôi có được hiển thị
+1. Mở ứng dụng
+2. Chọn "Nhân sụ"
+3. Chọn "Xem thông tin"
+Hiển thị danh sách 
+nhân sự trong vùng
+Hiển thị danh 
+sách nhân sự 
+trong vùng
+PASS P1 UI
+62 26 Kiểm tra người dùng 
+có thể tìm kiếm theo 
+tên nhân sự
+1. Mở ứng dụng
+2. Chọn "Nhân sụ"
+3. Chọn "Xem thông tin"
+4. Nhập tên nhân sự
+Hiển thị danh sách 
+nhân sự có tên trùng 
+với từ khóa đã nhập
+Hiển thị danh 
+sách nhân sự có 
+tên trùng với từ 
+khóa đã nhập
+PASS P1 UI, 
+Func
+63 26 Kiểm tra người dùng 
+có thể lọc nhân sự theo 
+ao hoặc khu
+1. Mở ứng dụng
+2. Chọn "Nhân sụ"
+3. Chọn "Xem thông tin"
+4. Chọn biểu tượng loc
+5. Chọn ao hoặc khu
+Hiển thị danh sach 
+nhân sự trong ao 
+hoặc khu đã chọn
+Hiển thị danh 
+sach nhân sự 
+trong ao hoặc 
+khu đã chọn
+PASS P2 UI, 
+Func
+64 27 Kiểm tra hộp thoại 
+chứathông tin nhân sự 
+1. Mở ứng dụng
+2. Chọn "Nhân sụ"
+Hiển thị hộp thoại 
+chưa thông tin của 
+Hiển thị hộp 
+thoại chưa 
+PASS P1 UI154
+có được hiển thị 3. Chọn "Xem thông tin"
+4. Chọn 1 nhân sự
+nhân sự được chọn thông tin của 
+nhân sự được 
+chọn
+65 28 Kiểm tra nhân sự có 
+được chuyển công tác 
+thành công
+1. Mở ứng dụng
+2. Chọn "Nhân sự"
+3. Chọn "Chuyển công tác"
+4. Chọn nhân sự
+5. Chọn nơi chuyển công tác
+6. Nhấn đổi
+Nhân sự được đổi 
+công tác sang nơi đã 
+chọn và hiển thị 
+thông báo thành 
+công
+Nhân sự được 
+đổi công tác 
+sang nơi đã 
+chọn và hiển thị 
+thông báo thành 
+công
+PASS P1 UI, 
+Func
+83 39 Kiểm tra thông tin ao 
+có được hiển thị
+1. Mở ứng dụng
+2. Chọn một ao muốn xem thông 
+tin
+Hiển thị thông tin 
+chi tiết ao
+Hiển thị thông 
+tin chi tiết ao
+PASS P1 UI
+84 40 Kiểm tra có hiển thị 
+hộp thoại tạo báo cáo 
+cá bênh không
+1. Mở ứng dụng
+2. Chọn "Cá bệnh"
+Hiển thị hộp thoại 
+tạo báo cáo cá bệnh
+Hiển thị hộp 
+thoại tạo báo 
+cáo cá bệnh
+PASS P1 UI
+85 40 Kiểm tra công nhân có 
+tạo được báo cáo cá 
+bênh không
+1. Mở ứng dụng
+2. Chọn "Cá bệnh"
+3. Chọn hình ảnh và nhập phỏng 
+đoán nếu có
+Chuyển báo cáo cá 
+bệnh đến trưởng khu 
+và thông báo đã tạo 
+báo cáo thành công
+Chuyển báo cáo 
+cá bệnh đến 
+trưởng khu và 
+thông báo đã 
+PASS P1 UI, 
+Func155
+4. Chọn tạo tạo báo cáo 
+thành công
+86 40 Kiểm tra nếu công 
+nhân không chọn hình 
+ảnh thì có tạo được báo 
+cáo hay không
+1. Mở ứng dụng
+2. Chọn "Cá bệnh"
+3. Chọn tạo
+Thông báo phải 
+chọn ảnh cá bệnh
+Thông báo phải 
+chọn ảnh cá 
+bệnh
+PASS P1 UI, 
+Func
+87 41 Kiểm tra có hiển thị 
+hộp thoại chỉnh sửa 
+nhiệm vụ khi trưởng 
+vùng và trưởng khu 
+chọn chỉnh sửa hay 
+không
+1. Mở ứng dụng
+2. Chọn "Nhiệm vụ"
+3. Chọn "Chưa hoàn thành"
+4. Chọn ngày
+5. Chọn nhiệm vụ cần chỉnh sửa
+6. Chọn biểu tượng chỉnh sửa
+Hiển thị hộp thoại 
+chỉnh sửa nhiệm vụ
+Hiển thị hộp 
+thoại chỉnh sửa 
+nhiệm vụ
+PASS P2 UI
+88 41 Kiểm tra trưởng vùng 
+và trưởng khu có chỉnh 
+sửa được nhiệm vụ đã 
+giao không
+1. Mở ứng dụng
+2. Chọn "Nhiệm vụ"
+3. Chọn "Chưa hoàn thành"
+4. Chọn ngày
+5. Chọn nhiệm vụ cần chỉnh sửa
+6. Chọn biểu tượng chỉnh sửa
+7. Nhập các thông tin cần chỉnh 
+sửa
+Đóng hộp thoại 
+chỉnh sửa nhiệm vụ 
+và thông báo đã 
+chỉnh sửa thành 
+công
+Đóng hộp thoại 
+chỉnh sửa 
+nhiệm vụ và 
+thông báo đã 
+chỉnh sửa thành 
+công
+PASS P2 UI, 
+Func156
+8. Chọn lưu
+89 42 Kiểm tra có hiển thị 
+hộp thoại xác nhận xóa 
+nhiệm vụ khi trưởng 
+vùng và trưởng khu 
+chọn vào biểu tượng 
+xóa hay không
+1. Mở ứng dụng
+2. Chọn "Nhiệm vụ"
+3. Chọn "Chưa hoàn thành"
+4. Chọn ngày
+5. Chọn nhiệm vụ cần xóa
+6. Chọn vào biểu tượng xóa
+Hiển thị hộp thoại 
+xác nhận xóa nhiệm 
+vụ
+Hiển thị hộp 
+thoại xác nhận 
+xóa nhiệm vụ
+PASS P2 UI
+90 42 Kiểm tra trưởng vùng 
+và trưởng khu có xóa 
+được nhiệm vụ hay 
+không
+1. Mở ứng dụng
+2. Chọn "Nhiệm vụ"
+3. Chọn "Chưa hoàn thành"
+4. Chọn ngày
+5. Chọn nhiệm vụ cần xóa
+6. Chọn vào biểu tượng xóa
+7. Chọn xóa
+Xóa nhiệm vụ và 
+thông báo đã xóa 
+thành công
+Xóa nhiệm vụ 
+và thông báo đã 
+xóa thành công
+PASS P2 UI, 
+Func
+91 43 Kiểm tra danh sách 
+báo cáo cá bệnh có 
+hiện thị theo ngày đã 
+chọn
+1. Mở ứng dụng
+2. Chọn "Cá bệnh"
+3. Chọn ngày xem
+Danh sách báo cáo 
+cá bệnh được hiển 
+thị theo ngày đã 
+chọn
+Danh sách báo 
+cáo cá bệnh 
+được hiển thị 
+theo ngày đã 
+chọn
+PASS P1 UI157
+92 44 Kiểm tra có hiển thị 
+hộp thoại chi tiết cá 
+bệnh không
+1. Mở ứng dụng
+2. Chọn "Cá bệnh"
+3. Chọn ngày xem
+4. Chọn xem chi tiết
+Hiển thị hộp thoại 
+chứa thông tin chi 
+tiết cá bệnh
+Hiển thị hộp 
+thoại chứa 
+thông tin chi 
+tiết cá bệnh
+PASS P1 UI
+93 45 Kiểm tra có hiển thị 
+hộp thoại tạo phác đồ
+1. Mở ứng dụng
+2. Chọn cá bệnh
+3. Chọn 1 báo cáo 
+4. Chọn tạo phác đồ
+Hiển thị hộp thoại 
+tạo phác đồ
+Hiển thị hộp 
+thoại tạo phác 
+đồ
+PASS P1 UI
+94 45 Kiểm tra có tạo phác 
+đồ thành công không
+1. Mở ứng dụng
+2. Chọn cá bệnh
+3. Chọn 1 báo cáo 
+4. Chọn tạo phác đồ
+Phác đồ được tạo và 
+thông báo 
+Phác đồ được 
+tạo và thông 
+báo 
+PASS P1
+95 46 Kiểm tra có hiển thị 
+danh sách phác đồ 
+đang chờ duyệt theo 
+ngày đã chọn
+1. Mở ứng dụng
+2. Chọn "Diều trị"
+3. Chọn "Chờ xử lý"
+4. Chọn ngày muốn xem
+Hiển thị danh sách 
+phác đồ đang chờ 
+duyệt
+Hiển thị danh 
+sách phác đồ 
+đang chờ duyệt
+PASS P1 UI
+96 47 Kiểm tra có hiển thị 
+danh sách phác đồ bị 
+từ chối theo ngày đã 
+1. Mở ứng dụng
+2. Chọn "Diều trị"
+3. Chọn "Từ chối"
+Hiển thị danh sách 
+phác đồ bị từ chối
+Hiển thị danh 
+sách phác đồ bị 
+từ chối
+PASS P1 UI158
+chọn 4. Chọn ngày muốn xem
+97 48 Kiểm tra có hiển thị 
+danh sách phác đồ đượ 
+chấp nhận theo ngày 
+đã chọn
+1. Mở ứng dụng
+2. Chọn "Diều trị"
+3. Chọn "Chấp nhận"
+4. Chọn ngày muốn xem
+Hiển thị danh sách 
+phác đồ được chấp 
+nhận
+Hiển thị danh 
+sách phác đồ 
+được chấp nhận
+PASS P1 UI
+98 50 Kiểm tra có hiển thị 
+hộp thoại xác nhận xóa
+1. Mở ứng dụng
+2. Chọn "Diều trị"
+3. Chọn 1 phác đồ
+4. Chọn biểu tượng thùng rác
+Hiển thị hộp thoại 
+xác nhận xóa
+Hiển thị hộp 
+thoại xác nhận 
+xóa
+PASS P1 UI
+99 50 Kiểm tra có xóa thành 
+công phác đồ không
+1. Mở ứng dụng
+2. Chọn "Diều trị"
+3. Chọn 1 phác đồ
+4. Chọn biểu tượng thùng rác
+5. Chọn xóa
+Phác đồ bị xóa và 
+thông báo xóa phác 
+đồ thành công
+Phác đồ bị xóa 
+và thông báo 
+xóa phác đồ 
+thành công
+PASS P1 UI, 
+Func
+100 51 Kiểm tra có hiện hộp 
+thoại chỉnh sửa khi 
+người dùng nhấn vào 
+biểu tượng chỉnh sửa 
+không`
+1. Mở ứng dụng
+2. Chọn "Diều trị"
+3. Chọn 1 phác đồ
+4. Chọn biểu tượng chỉnh sửa
+Hiển thị hộp thoại 
+chỉnh sửa chứa 
+thông tin của phác 
+đồ
+Hiển thị hộp 
+thoại chỉnh sửa 
+chứa thông tin 
+của phác đồ
+PASS P1 UI159
+101 51 Kiểm tra người dùng 
+có chỉnh sửa phác đồ 
+thành công không
+1. Mở ứng dụng
+2. Chọn "Diều trị"
+3. Chọn 1 phác đồ
+4. Chọn biểu tượng chỉnh sửa
+5. Chỉnh sửa phác đồ
+6. Chọn "Sửa"
+Thông tin phác đồ 
+được chỉnh sửa, 
+hiển thị thông báo 
+thành công
+Thông tin phác 
+đồ được chỉnh 
+sửa, 
+hiển thị thông 
+báo thành công
+PASS P1 UI, 
+Func
+102 52 Kiểm tra hộp thoại xác 
+nhận hoàn thành có 
+được hiển thị
+1. Mở ứng dụng
+2. Chọn "Diều trị"
+3. Chọn tab "Chấp nhận"
+4. Chọn 1 phác đồ
+5. Chọn Hoàn thành
+Hiển thị xác nhận 
+hoàn thành điều trị
+Hiển thị xác 
+nhận hoàn 
+thành điều trị
+PASS P1 UI
+103 52 Kiểm tra xem phác đồ 
+cóchuyển trạng thái 
+của phác đồ từ “chấp 
+nhận” sang hoàn thành 
+và xóa phác đồ khỏi 
+danh sách chấp nhận.
+1. Mở ứng dụng
+2. Chọn "Diều trị"
+3. Chọn tab "Chấp nhận"
+4. Chọn 1 phác đồ
+5. Chọn Hoàn thành
+6, Xác nhận hoàn thành
+Chuyển trạng thái 
+của phác đồ từ 
+“chấp nhận” sang 
+hoàn thành và xóa 
+phác đồ khỏi danh 
+sách chấp nhận.
+Chuyển trạng 
+thái của phác 
+đồ từ “chấp 
+nhận” sang 
+hoàn thành và 
+xóa phác đồ 
+khỏi danh sách 
+chấp nhận.
+PASS P1 UI, 
+Func
+104 53 Kiểm tra trạng thái của 1. Mở ứng dụng Trạng thái phác đồ Trạng thái phác PASS P1 UI, 160
+phác đồ có chuyển từ 
+chờ xử lý sang chấp 
+nhận
+2. Chọn "Diều trị"
+3. Chọn tab "Chờ xử lý"
+4. Chọn 1 phác đồ
+5. Chọn Chấp nhận
+chuyển sang Chấp 
+nhận và xóa phác đồ 
+khỏi danh sách chờ 
+xử lý 
+đồ chuyển sang 
+Chấp nhận và 
+xóa phác đồ 
+khỏi danh sách 
+chờ xử lý 
+Func
+105 54 Kiểm tra trạng thái của 
+phác đồ có chuyển từ 
+chờ xử lý sang từ chối
+1. Mở ứng dụng
+2. Chọn "Diều trị"
+3. Chọn tab "Chờ xử lý"
+4. Chọn 1 phác đồ
+5. Chọn Từ chối
+Trạng thái phác đồ 
+chuyển sang từ chối 
+và xóa phác đồ khỏi 
+danh sách chờ xử lý 
+Trạng thái phác 
+đồ chuyển sang 
+từ chối và xóa 
+phác đồ khỏi 
+danh sách chờ 
+xử lý 
+PASS P1 UI, 
+Func
+106 55 Kiểm tra danh sách 
+nhiệm vụ cố định có 
+hiển thị theo ngày đã 
+chọn
+1. Mở ứng dụng
+2. Chọn "Nhiệm vụ"
+3. Chọn tab "Nhiệm vụ cố định"
+4. Người dùng chọn ngày
+Hiển thị danh sách 
+nhiệm vụ cố định 
+theo ngày đã chọn
+Hiển thị danh 
+sách nhiệm vụ 
+cố định theo 
+ngày đã chọn
+PASS P1 UI
+107 56 Kiểm tra có hiển thị 
+hộp thoại nhập lượng 
+thức ăn
+1. Mở ứng dụng
+2. Chọn lần cho ăn
+3. Hiển thị hộp thoại nhập lượng 
+thức ăn
+Hiển thị hộp thoại 
+nhập lương thức ăn
+Hiển thị hộp 
+thoại nhập 
+lương thức ăn
+PASS P1 UI161
+108 56 Kiểm tra người dùng 
+lưu lượng thức ăn đã 
+cho ăn thành công 
+không
+1. Mở ứng dụng
+2. Chọn lần cho ăn
+3. Hiển thị hộp thoại nhập lượng 
+thức ăn
+4, Nhập lượng thức ăn
+5, Lưu
+Lưu thông tin lượng 
+thức ăn đã nhập, 
+thông báo cập nhật 
+lượng thức ăn thành 
+công.
+Lưu thông tin 
+lượng thức ăn 
+đã nhập, thông 
+báo cập nhật 
+lượng thức ăn 
+thành công.
+PASS P1 UI, 
+Func
+109 57 Kiểm tra có hiển thị 
+hộp thoại nhập chất 
+lượng nước
+1. Mở ứng dụng
+2. Chọn thông số muốn nhập
+3. Hiển thị hộp thoại nhập chất 
+lượng nước
+Hiển thị hộp thoại 
+nhập chất lượng 
+nước
+Hiển thị hộp 
+thoại nhập chất 
+lượng nước
+PASS P1 UI
+110 57 Kiểm tra người dùng 
+chỉ số thành công 
+không
+1. Mở ứng dụng
+2. Chọn thông số muốn nhập 
+3. Hiển thị hộp thoại nhập chất 
+lượng nước
+4, Nhập chỉ số
+5, Lưu
+Lưu chỉ số đã nhập, 
+thông báo cập nhật 
+thành công.
+Lưu chỉ số đã 
+nhập, thông báo 
+cập nhật thành 
+công.
+PASS P1 UI, 
+Func
+112 59 Kiểm tra có thành công 
+hoàn thành điều trị cá
+1. Mở ứng dung
+2. Chọn "Hoàn thành"
+Trừ lượng thuốc đã 
+sử dụng trong kho, 
+thông báo đã hoàn 
+thành điều trị
+Trừ lượng 
+thuốc đã sử 
+dụng trong kho, 
+thông báo đã 
+PASS P1 UI, 
+Func162
+hoàn thành điều 
+trị
+113 60 Kiểm tra có hiển thị 
+hộp thoại tạo báo cáo 
+cá bệnh.
+1. Mở ứng dung
+2. Chọn "Cá bệnh"
+Hiển thị hộp thoại 
+tạo báo cáo cá bệnh
+Hiển thị hộp 
+thoại tạo báo 
+cáo cá bệnh
+PASS P1 UI
+114 60 Kiểm tra có báo cáo cá 
+bệnh thành công không
+1. Mở ứng dung
+2. Chọn "Cá bệnh"
+3, Nhập thông tin như ảnh, 
+phỏng đoán
+Chuyển báo cáo đến 
+trưởng khu và thông 
+báo tạo báo cáo 
+thành công 
+Chuyển báo cáo 
+đến trưởng khu 
+và thông báo 
+tạo báo cáo 
+thành công 
+PASS P1 UI, 
+Func
+125 65 Kiểm tra hộp thoại 
+chỉnh sửa nhiệm vụ có 
+được hiển thị
+1. Mở ứng dung
+2. Chọn nhiệm vụ
+3. Chọn thẻ chưa hoàn thành
+4. Chọn 1 nhiệm vụ cần chỉnh 
+sửa và nhấn vào biểu tượng 
+chỉnh sửa
+Hộp thoại chỉnh sửa 
+nhiệm vụ được hiển 
+thị
+Hộp thoại chỉnh 
+sửa nhiệm vụ 
+được hiển thị
+PASS P1 UI
+126 65 Kiểm tra thông tin 
+nhiệm vụ có được 
+chỉnh sửa thành công
+1. Mở ứng dung
+2. Chọn nhiệm vụ
+3. Chọn thẻ chưa hoàn thành
+Thông tin nhiệm vụ 
+được thay đổi và 
+thông báo chỉnh sửa 
+Thông tin 
+nhiệm vụ được 
+thay đổi và 
+PASS P1 UI, 
+Func163
+4. Chọn 1 nhiệm vụ cần chỉnh 
+sửa và nhấn vào biểu tượng 
+chỉnh sửa
+5. Nhập các thông tin cần chỉnh 
+sửa
+6. Nhấn lưu
+thông tin thành công thông báo chỉnh 
+sửa thông tin 
+thành công
+127 66 Kiểm tra hộp thoại xác 
+nhận xóa nhiệm vụ 
+được hiển thị
+1. Mở ứng dung 
+2. Chọn nhiệm vụ 
+3. Chọn thẻ chưa hoàn thành 
+4. Chọn 1 nhiệm vụ cần xóa và 
+nhấn vào biểu tượng xóa
+Hộp thoại xác nhận 
+xóa nhiệm vụ được 
+hiển thị
+Hộp thoại xác 
+nhận xóa nhiệm 
+vụ được hiển 
+thị
+PASS P1 UI
+128 66 Kiểm tra nhiệm vụ có 
+được xóa thành công
+1. Mở ứng dung
+2. Chọn nhiệm vụ
+3. Chọn thẻ chưa hoàn thành
+4. Chọn 1 nhiệm vụ cần xóa và 
+nhấn vào biểu tượng xóa
+5. Chọn xóa
+Nhiệm vụ được xóa, 
+thông báo đã xóa 
+nhiệm vụ thành 
+công
+Nhiệm vụ được 
+xóa, thông báo 
+đã xóa nhiệm 
+vụ thành công
+PASS P1 UI, 
+Func
+137 71 Kiểm tra hộp thoại xin 
+quyền camera có được 
+hiển thị
+1. Mở ứng dụng
+2. Chọn kiểm tra bệnh
+3. Chọn "Chụp ảnh từ camera"
+Hộp thoại xin phép 
+quyền chụp ảnh và 
+quay video được 
+Hộp thoại xin 
+phép quyền 
+chụp ảnh và 
+PASS P1 UI164
+hiển thi quay video 
+được hiển thi
+138 71 Kiểm tra người dùng 
+có thể chọn ảnh từ thư 
+viện
+1. Mở ứng dụng
+2. Chọn kiểm tra bệnh
+3. Chọn "Chọn ảnh từ thư viện"
+Ung dụng chuyển 
+đến thư viện ảnh
+Ung dụng 
+chuyển đến thư 
+viện ảnh
+PASS P1 UI
+139 71 Kiểm tra hình ảnh có 
+dược phân tích và đưa 
+ra kết quả chuẩn đoán
+1. Mở ứng dụng 
+2. Chọn kiểm tra bệnh
+3. Chọn ảnh
+Ảnh được hiển thị 
+cùng với kết quả 
+chuẩn đoán
+Ảnh được hiển 
+thị cùng với kết 
+quả chuẩn đoán
+PASS P1 UI, 
+Func
+140 72 Kiểm tra hình ảnh báo 
+cáo việc trị bệnh cá có 
+được hiển thị
+1. Mở ứng dụng
+2. Chọn 1 ao muốn xem
+3. Chọn “Xem ảnh báo cáo hôm 
+nay” trong thẻ điều trị
+Hiển thị hình ảnh 
+báo cáo bệnh cá 
+trong ngày hôm nay
+Hiển thị hình 
+ảnh báo cáo 
+bệnh cá trong 
+ngày hôm nay
+PASS P1 UI165
+PHẦN KẾT LUẬN
+Đề tài “Phần mềm quản lý hoạt động vùng nuôi cá tra” có tính thực tiễn cao. Người 
+thực hiện đề tài đã học được nhiều kỹ năng và công nghệ mới trong quá trình làm 
+việc. Sau khi hoàn thành đề tài, người thực hiện đã đạt được những kết quả nhất 
+định về mặt kỹ thuật, nghiệp vụ và quy trình phần mềm. Tuy nhiên, cũng còn một 
+số điểm hạn chế cần khắc phục. Tuy nhiên, ứng dụng và hệ thống có thể phát triển 
+thêm nhiều hướng trong tương lai.
+1. Kết quả đạt được
+Sản phẩm cuối cùng của quá trình thực hiện là một ứng dụng có đầy đủ các tính 
+năng đã được nêu ra ở các phần trước với giao diện và trải nghiệm người dùng thân 
+thiện. Về mặt kỹ thuật Người thực hiện đã học được nhiều kỹ thuật lập trình 
+Android như sử dụng các thành phần giao diện phức tạp: Tablayout, Viewpager, 
+Dialog, Material Design, tích hợp bản đồ vào ứng dụng bằng Mapbox SDK, tích 
+hợp AI thông qua công cụ Teachable Machine của Google. Đặc biệt là kỹ thuật kết 
+hợp giữa Android và Mapbox giúp người dùng có thể tương tác với bản đồ và góp 
+phần vào dữ liệu GIS một cách mới lạ là vẽ trên bản đồ.
+Ngoài ra, người thực hiện cũng thành công trong việc sử dụng các thư viện nâng 
+cao và mới mẻ trong Android như MPAndroidChart, MapBox, JistiMeet… để tạo ra 
+các tính năng và giao diện đẹp mắt, dễ sử dụng cho người dùng. Đây cũng là một 
+thành tựu lớn cho người thực hiện đề tài.
+Hơn nữa, đề tài cũng thành công trong việc xây dựng được cơ sở dữ liệu về địa lý -
+GIS, dữ liệu được lưu trữ trong cơ sở dữ liệu, không phụ thuộc vào một nền tảng 
+bản đồ cố định mà có thể sử dụng trên nhiều nền tảng hỗ trợ GIS khác nhau. Dữ liệu 
+được cập nhật và sử dụng với sự kết hợp hài hòa của các thành phần Android và 
+Mapbox, cũng như cách thiết kế giao diện để tương tác giữa người và bản đồ một 
+cách hợp lý.
+Về mặt nghiệp vụ, người thực hiện đã tìm hiểu, học hỏi được nhiều điều về quá 
+trình nuôi trồng thủy sản cũng như nuôi cá tra công nghiệp. Tăng thêm kiến thức về 
+các thuật ngữ trong ngành thủy sản, hiểu được các khâu trong quá trình nuôi trồng 
+từ chuẩn bị ao, thả giống, theo dõi tăng trưởng, theo dõi nước, thức ăn đến thu 
+hoạch. Những kiến thức mới về mặt nghiệp vụ có được thông qua quá trình thực 
+hiện đề tài là nền tảng để người thực hiện có thể làm tốt hơn các dự án liên quan 
+trong tương lai.166
+Về sản phẩm thực tế được xây dựng trong quá trình thực hiện, ứng dụng đáp ứng 
+được các yêu cầu về mặt nghiệp vụ cũng như đặc tả được đưa ra, giúp người dùng 
+quản lý việc nuôi trồng thủy sản của mình, ghi nhận lại nhật ký nuôi trồng, lên kế 
+hoạch và lịch trình cho việc nuôi trồng. Ứng dụng đã có đáp ứng đầy đủ các điều 
+kiện để có thể được tải lên cửa hàng ứng dụng của Google (Play Store).
+Và quan trọng nhất, qua quá trình thực hiện đề tài, người thực hiện đã được củng cố 
+về quy trình phát triển phần mềm. Đây là một cơ hội lớn để người thực hiện có thể 
+củng cố lại các khâu trong quy trình phát triển bản thân trong tương lai.
+Có thể khẳng định rằng, tất cả các khâu trong một quy trình phát triển phần mềm 
+đều rất quan trọng và góp phần vào sản phẩm phần mềm được phát triển cuối cùng. 
+Các khâu được thực hiện một cách hợp lý sẽ mang lại hiệu quả rất to lớn, giúp 
+người xây dựng phần mềm có thể tập trung giải quyết đúng vấn đề cần giải quyết ở 
+các giai đoạn cần thiết. Phân tích yêu cầu phần mềm để thu thập các yêu cầu về 
+nghiệp vụ, giao diện thiết kế hệ thống đã được mô tả ở giai đoạn phân tích yêu cầu 
+phần mềm, giai đoạn cài đặt đã cài đặt những gì đã được thiết kế ở giai đoạn thiết 
+kế. Tiếp đó là giai đoạn kiểm thử lại những gì đã cài đặt. Trong quá trình phát triển 
+phần mềm còn có thêm các khâu triển khai để đưa ứng dụng vào sử dụng thực tế và 
+giai đoạn bảo trì hệ thống trong quá trình sử dụng.
+2. Hạn chế
+Phần mềm đã khá hoàn thiện về mặt chức năng và đáp ứng được các mục tiêu đặt 
+ra, nhưng vẫn còn một số hạn chế nhất định về mặt chức năng cũng như trải nghiệm 
+người dùng.
+Phần mềm chưa hỗ trợ người dùng các cài đặt khác nhau như thời gian nhận thông 
+báo, các tính năng lên lịch trình trong tương lai, chọn nhiều ảnh cho một báo cáo 
+bệnh hoặc một phác đồ điều trị. Trải nghiệm sử dụng việc tạo phác đồ điều trị cũng 
+chưa được tối ưu hóa tốt nhất. Thời gian để tải dữ liệu từ cơ sở dữ liệu về cũng khá 
+chậm khiến cho trải nghiệm người dùng chưa thật sự tốt.
+3. Hướng phát triển
+Phần mềm quản lý hoạt động vùng nuôi cá tra có rất nhiều hướng phát triển và có 
+thể mở rộng trong tương lai để tăng trải nghiệm người dùng hơn nữa cũng như có 
+thể đóng góp nhiều hơn nữa trong lĩnh vực thủy sản.167
+Với sản phẩm đang có hiện tải, có thể phát triển thêm các phần liên quan đến thông 
+báo và thông báo một lịch trình đã được cài đặt sẵn.
+Ứng dụng IoT để do được môi trường một cách nhanh chóng và tự động.
+Phần quy trình cần được cải thiện để người dùng có thể định nghĩa được một quy 
+trình thống nhất và áp dụng cho nhiều vụ nuôi khác nhau cũng như người dùng sẽ 
+có khả năng chia sẻ quy trình với nhau.
+Với đặc tả và các tính năng đã được xây dụng sẵn có thể phát triển thêm trên một 
+nền tảng khác như IOS hay ứng dụng web.
+Phát triển thêm một trang đăng tin tức cho người dùng cập nhật tình hình nuôi cũng 
+như san sẻ kinh nghiệm giữa các vùng nuôi với nhau như một mạng xã hội. Phát 
+triển thêm một từ điển về cá tra như bệnh trên cá, giống cá, nguồn thức ăn, thuốc… 
+Phát triển tính năng cập nhật giá thức ăn, giá bán cá hiện tại trên thị trường.168
+TÀI LIỆU THAM KHẢO
+[1] Mapbox Android SDK Documentation - Mapbox – 2023
+[2] Nguyễn Minh Kiên – Xây dựng hệ thống quản lý vùng nuôi tôm phân hệ phần 
+mềm Android - 12/2022
+[3] Huỳnh Minh Nhật – Phát triển phần mềm xác định diện tích và vị trí ao nuôi 
+của nông dân trên công nghệ GPS và GIS – 12/2021
+[4] Wikipedia – Hệ thống thông tin địa lý (Hệ thống thông tin địa lý) -
+https://vi.wikipedia.org/wiki/Hệ_thống_thông_tin_địa_lý
+[5] Trương Quốc Định, Phan Tấn Tài - Phân tích thiết kế hệ thống thông tin –
+2018
+[6] Đặng Văn Đức - Phân tích thiết kế Hướng đối tượng bằng UML - 2002

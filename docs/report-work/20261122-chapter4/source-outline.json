@@ -1,0 +1,3517 @@
+[
+  {
+    "i": 0,
+    "style": "normal",
+    "text": "TRƯỜNG ĐẠI HỌC CẦN THƠ"
+  },
+  {
+    "i": 1,
+    "style": "normal",
+    "text": "TRƯỜNG CÔNG NGHỆ THÔNG TIN VÀ TRUYỀN THÔNG"
+  },
+  {
+    "i": 2,
+    "style": "normal",
+    "text": "LUẬN VĂN TỐT NGHIỆP ĐẠI HỌC"
+  },
+  {
+    "i": 3,
+    "style": "normal",
+    "text": "NGÀNH KỸ THUẬT PHẦN MỀM"
+  },
+  {
+    "i": 4,
+    "style": "normal",
+    "text": "Đề tài"
+  },
+  {
+    "i": 5,
+    "style": "normal",
+    "text": "XÂY DỰNG WEBSITE ĐĂNG KÝ VÀ HỌC TẬP TRỰC TUYẾN CÁC KHÓA HỌC LẬP TRÌNH CHO TRUNG TÂM ĐÀO TẠO"
+  },
+  {
+    "i": 6,
+    "style": "normal",
+    "text": "Sinh viên Nguyễn Công Chức"
+  },
+  {
+    "i": 7,
+    "style": "normal",
+    "text": "Mã số B2303800"
+  },
+  {
+    "i": 8,
+    "style": "normal",
+    "text": "Khóa 49"
+  },
+  {
+    "i": 9,
+    "style": "normal",
+    "text": "Cần Thơ, tháng … năm …"
+  },
+  {
+    "i": 10,
+    "style": "normal",
+    "text": "TRƯỜNG ĐẠI HỌC CẦN THƠ"
+  },
+  {
+    "i": 11,
+    "style": "normal",
+    "text": "TRƯỜNG CÔNG NGHỆ THÔNG TIN VÀ TRUYỀN THÔNG"
+  },
+  {
+    "i": 12,
+    "style": "normal",
+    "text": "KHOA CÔNG NGHỆ PHẦN MỀM"
+  },
+  {
+    "i": 13,
+    "style": "normal",
+    "text": "LUẬN VĂN TỐT NGHIỆP ĐẠI HỌC"
+  },
+  {
+    "i": 14,
+    "style": "normal",
+    "text": "NGÀNH KỸ THUẬT PHẦN MỀM"
+  },
+  {
+    "i": 15,
+    "style": "normal",
+    "text": "Đề tài"
+  },
+  {
+    "i": 16,
+    "style": "normal",
+    "text": "XÂY DỰNG WEBSITE ĐĂNG KÝ VÀ HỌC TẬP TRỰC TUYẾN CÁC KHÓA HỌC LẬP TRÌNH CHO TRUNG TÂM ĐÀO TẠO"
+  },
+  {
+    "i": 17,
+    "style": "normal",
+    "text": "Người hướng dẫn ThS. Phan Huy Cường"
+  },
+  {
+    "i": 18,
+    "style": "normal",
+    "text": "Sinh viên thực hiện Nguyễn Công Chức"
+  },
+  {
+    "i": 19,
+    "style": "normal",
+    "text": "Mã số B2303800"
+  },
+  {
+    "i": 20,
+    "style": "normal",
+    "text": "Khóa 49"
+  },
+  {
+    "i": 21,
+    "style": "normal",
+    "text": "Cần Thơ, tháng … năm …"
+  },
+  {
+    "i": 22,
+    "style": "Heading 1",
+    "text": "LỜI CẢM ƠN"
+  },
+  {
+    "i": 23,
+    "style": "normal",
+    "text": "Em xin chân thành cảm ơn ThS. Phan Huy Cường, giảng viên hướng dẫn đề tài Xây dựng website đăng ký và học tập trực tuyến các khóa học lập trình cho trung tâm đào tạo. Em trân trọng sự hướng dẫn của thầy trong quá trình thực hiện luận văn."
+  },
+  {
+    "i": 24,
+    "style": "normal",
+    "text": "Em xin cảm ơn quý thầy cô Khoa Công nghệ phần mềm, Trường Công nghệ thông tin và Truyền thông, Trường Đại học Cần Thơ đã giảng dạy và giúp em có nền tảng kiến thức để thực hiện đề tài. Những kiến thức về phân tích yêu cầu, thiết kế hệ thống, lập trình và kiểm thử là cơ sở để em xây dựng sản phẩm và trình bày báo cáo."
+  },
+  {
+    "i": 25,
+    "style": "normal",
+    "text": "Em cũng xin cảm ơn gia đình và bạn bè đã quan tâm, hỗ trợ em trong thời gian học tập và thực hiện luận văn."
+  },
+  {
+    "i": 26,
+    "style": "normal",
+    "text": "Bản báo cáo và chương trình có thể còn những điểm chưa đầy đủ. Em mong nhận được góp ý từ thầy cô để tiếp tục chỉnh sửa và hoàn thiện."
+  },
+  {
+    "i": 27,
+    "style": "normal",
+    "text": "Cần Thơ, ngày … tháng … năm …"
+  },
+  {
+    "i": 28,
+    "style": "normal",
+    "text": "Sinh viên thực hiện"
+  },
+  {
+    "i": 29,
+    "style": "normal",
+    "text": "Nguyễn Công Chức"
+  },
+  {
+    "i": 30,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 31,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 32,
+    "style": "normal",
+    "text": "MỤC LỤC"
+  },
+  {
+    "i": 33,
+    "style": "normal",
+    "text": "CHƯƠNG 2 CƠ SỞ LÝ THUYẾT\t1"
+  },
+  {
+    "i": 34,
+    "style": "normal",
+    "text": "2.1 Mô hình ứng dụng web và phương thức trao đổi dữ liệu\t1"
+  },
+  {
+    "i": 35,
+    "style": "normal",
+    "text": "2.1.1 Mô hình máy khách và máy chủ\t1"
+  },
+  {
+    "i": 36,
+    "style": "normal",
+    "text": "2.1.2 HTTP, API và dữ liệu JSON\t1"
+  },
+  {
+    "i": 37,
+    "style": "normal",
+    "text": "2.2 Ngôn ngữ lập trình TypeScript\t1"
+  },
+  {
+    "i": 38,
+    "style": "normal",
+    "text": "2.3 Các công nghệ xây dựng giao diện\t1"
+  },
+  {
+    "i": 39,
+    "style": "normal",
+    "text": "2.3.1 Vue 3\t1"
+  },
+  {
+    "i": 40,
+    "style": "normal",
+    "text": "2.3.2 Vue Router\t1"
+  },
+  {
+    "i": 41,
+    "style": "normal",
+    "text": "2.3.3 Pinia\t1"
+  },
+  {
+    "i": 42,
+    "style": "normal",
+    "text": "2.3.4 Vuetify và Tailwind CSS\t1"
+  },
+  {
+    "i": 43,
+    "style": "normal",
+    "text": "2.3.5 Vite\t1"
+  },
+  {
+    "i": 44,
+    "style": "normal",
+    "text": "2.3.6 Axios\t1"
+  },
+  {
+    "i": 45,
+    "style": "normal",
+    "text": "2.4 Các công nghệ xây dựng máy chủ\t1"
+  },
+  {
+    "i": 46,
+    "style": "normal",
+    "text": "2.4.1 Node.js\t1"
+  },
+  {
+    "i": 47,
+    "style": "normal",
+    "text": "2.4.2 NestJS và cách tổ chức chương trình\t1"
+  },
+  {
+    "i": 48,
+    "style": "normal",
+    "text": "2.4.3 Kiểm tra đầu vào và xử lý phản hồi\t1"
+  },
+  {
+    "i": 49,
+    "style": "normal",
+    "text": "2.5 Cơ sở dữ liệu MongoDB và thư viện Mongoose\t1"
+  },
+  {
+    "i": 50,
+    "style": "normal",
+    "text": "2.5.1 Mô hình dữ liệu MongoDB\t1"
+  },
+  {
+    "i": 51,
+    "style": "normal",
+    "text": "2.5.2 Schema, model và chỉ mục trong Mongoose\t1"
+  },
+  {
+    "i": 52,
+    "style": "normal",
+    "text": "2.6 Xác thực và kiểm soát quyền truy cập\t1"
+  },
+  {
+    "i": 53,
+    "style": "normal",
+    "text": "2.6.1 Xác thực bằng JWT và duy trì phiên đăng nhập\t1"
+  },
+  {
+    "i": 54,
+    "style": "normal",
+    "text": "2.6.2 Băm mật khẩu bằng Argon2 và xác minh OTP\t1"
+  },
+  {
+    "i": 55,
+    "style": "normal",
+    "text": "2.6.3 Phân quyền và các biện pháp hỗ trợ\t1"
+  },
+  {
+    "i": 56,
+    "style": "normal",
+    "text": "2.7 Gửi email bằng Nodemailer và SMTP\t1"
+  },
+  {
+    "i": 57,
+    "style": "normal",
+    "text": "2.8 Thanh toán qua payOS và mã QR chuyển khoản\t1"
+  },
+  {
+    "i": 58,
+    "style": "normal",
+    "text": "2.8.1 Liên kết thanh toán và mã QR\t1"
+  },
+  {
+    "i": 59,
+    "style": "normal",
+    "text": "2.8.2 Webhook và kiểm tra dữ liệu giao dịch\t1"
+  },
+  {
+    "i": 60,
+    "style": "normal",
+    "text": "2.9 Công cụ kiểm thử và tài liệu API\t1"
+  },
+  {
+    "i": 61,
+    "style": "normal",
+    "text": "2.9.1 Kiểm thử bằng Vitest\t1"
+  },
+  {
+    "i": 62,
+    "style": "normal",
+    "text": "2.9.2 Tài liệu API bằng OpenAPI và Swagger\t1"
+  },
+  {
+    "i": 63,
+    "style": "normal",
+    "text": "2.10 Tổng kết chương\t1"
+  },
+  {
+    "i": 64,
+    "style": "normal",
+    "text": "CHƯƠNG 3 THIẾT KẾ VÀ CÀI ĐẶT GIẢI PHÁP\t1"
+  },
+  {
+    "i": 65,
+    "style": "normal",
+    "text": "3.1 Kiến trúc tổng quan của hệ thống\t1"
+  },
+  {
+    "i": 66,
+    "style": "normal",
+    "text": "3.1.1 Các thành phần và sự liên kết\t1"
+  },
+  {
+    "i": 67,
+    "style": "normal",
+    "text": "3.1.2 Tổ chức mã nguồn\t1"
+  },
+  {
+    "i": 68,
+    "style": "normal",
+    "text": "3.2 Sơ đồ phân rã chức năng\t1"
+  },
+  {
+    "i": 69,
+    "style": "normal",
+    "text": "3.2.1 Phân rã chức năng tổng quát\t1"
+  },
+  {
+    "i": 70,
+    "style": "normal",
+    "text": "3.2.2 Chức năng của khách truy cập và học viên\t1"
+  },
+  {
+    "i": 71,
+    "style": "normal",
+    "text": "3.2.3 Chức năng của giảng viên\t1"
+  },
+  {
+    "i": 72,
+    "style": "normal",
+    "text": "3.2.4 Chức năng của quản trị viên\t1"
+  },
+  {
+    "i": 73,
+    "style": "normal",
+    "text": "3.3 Thiết kế dữ liệu\t1"
+  },
+  {
+    "i": 74,
+    "style": "normal",
+    "text": "3.3.1 Mối liên hệ và cách lưu trữ\t1"
+  },
+  {
+    "i": 75,
+    "style": "normal",
+    "text": "3.3.2 Tài khoản người dùng\t1"
+  },
+  {
+    "i": 76,
+    "style": "normal",
+    "text": "3.3.3 Mã xác minh qua email\t1"
+  },
+  {
+    "i": 77,
+    "style": "normal",
+    "text": "3.3.4 Mã làm mới phiên\t1"
+  },
+  {
+    "i": 78,
+    "style": "normal",
+    "text": "3.3.5 Danh mục khóa học\t1"
+  },
+  {
+    "i": 79,
+    "style": "normal",
+    "text": "3.3.6 Khóa học\t1"
+  },
+  {
+    "i": 80,
+    "style": "normal",
+    "text": "3.3.7 Cấu trúc chương trong khóa học\t1"
+  },
+  {
+    "i": 81,
+    "style": "normal",
+    "text": "3.3.8 Cấu trúc bài học trong chương\t1"
+  },
+  {
+    "i": 82,
+    "style": "normal",
+    "text": "3.3.9 Cấu trúc câu hỏi trắc nghiệm\t1"
+  },
+  {
+    "i": 83,
+    "style": "normal",
+    "text": "3.3.10 Đăng ký học\t1"
+  },
+  {
+    "i": 84,
+    "style": "normal",
+    "text": "3.3.11 Tiến độ từng bài học\t1"
+  },
+  {
+    "i": 85,
+    "style": "normal",
+    "text": "3.3.12 Kết quả trả lời câu hỏi\t1"
+  },
+  {
+    "i": 86,
+    "style": "normal",
+    "text": "3.3.13 Chứng chỉ hoàn thành\t1"
+  },
+  {
+    "i": 87,
+    "style": "normal",
+    "text": "3.3.14 Đơn hàng mua khóa học\t1"
+  },
+  {
+    "i": 88,
+    "style": "normal",
+    "text": "3.3.15 Giao dịch thanh toán\t1"
+  },
+  {
+    "i": 89,
+    "style": "normal",
+    "text": "3.3.16 Hỏi đáp tại bài học\t1"
+  },
+  {
+    "i": 90,
+    "style": "normal",
+    "text": "3.3.17 Đánh giá khóa học\t1"
+  },
+  {
+    "i": 91,
+    "style": "normal",
+    "text": "3.3.18 Báo cáo vi phạm\t1"
+  },
+  {
+    "i": 92,
+    "style": "normal",
+    "text": "3.3.19 Thông báo trong hệ thống\t1"
+  },
+  {
+    "i": 93,
+    "style": "normal",
+    "text": "3.4 Thiết kế giao diện\t1"
+  },
+  {
+    "i": 94,
+    "style": "normal",
+    "text": "3.4.1 Tổ chức các khu vực sử dụng\t1"
+  },
+  {
+    "i": 95,
+    "style": "normal",
+    "text": "3.4.2 Giao diện đăng nhập và đăng ký\t1"
+  },
+  {
+    "i": 96,
+    "style": "normal",
+    "text": "3.4.3 Giao diện tìm kiếm và xem khóa học\t1"
+  },
+  {
+    "i": 97,
+    "style": "normal",
+    "text": "3.4.4 Giao diện học tập và tra cứu chứng chỉ\t1"
+  },
+  {
+    "i": 98,
+    "style": "normal",
+    "text": "3.4.5 Giao diện quản lý khóa học và biên soạn\t1"
+  },
+  {
+    "i": 99,
+    "style": "normal",
+    "text": "3.5 Cài đặt các chức năng và luồng xử lý chính\t1"
+  },
+  {
+    "i": 100,
+    "style": "normal",
+    "text": "3.5.1 Xác thực tài khoản và xử lý yêu cầu API\t1"
+  },
+  {
+    "i": 101,
+    "style": "normal",
+    "text": "3.5.2 Biên soạn, xét duyệt và công bố khóa học\t1"
+  },
+  {
+    "i": 102,
+    "style": "normal",
+    "text": "3.5.3 Đăng ký học và thanh toán khóa Pro\t1"
+  },
+  {
+    "i": 103,
+    "style": "normal",
+    "text": "3.5.4 Học tuần tự, ghi nhận tiến độ và chấm trắc nghiệm\t1"
+  },
+  {
+    "i": 104,
+    "style": "normal",
+    "text": "3.5.5 Cấp và tra cứu chứng chỉ\t1"
+  },
+  {
+    "i": 105,
+    "style": "normal",
+    "text": "3.5.6 Hỏi đáp, đánh giá và xử lý vi phạm\t1"
+  },
+  {
+    "i": 106,
+    "style": "normal",
+    "text": "3.5.7 Tải lên và cung cấp học liệu\t1"
+  },
+  {
+    "i": 107,
+    "style": "normal",
+    "text": "3.6 Cấu hình và chạy hệ thống\t1"
+  },
+  {
+    "i": 108,
+    "style": "normal",
+    "text": "3.6.1 Cấu hình môi trường\t1"
+  },
+  {
+    "i": 109,
+    "style": "normal",
+    "text": "3.6.2 Chạy chương trình trong môi trường phát triển\t1"
+  },
+  {
+    "i": 110,
+    "style": "normal",
+    "text": "3.6.3 Phân phối bản dựng và kết nối dịch vụ\t1"
+  },
+  {
+    "i": 111,
+    "style": "normal",
+    "text": "3.7 Tổng kết chương\t1"
+  },
+  {
+    "i": 112,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 113,
+    "style": "Heading 1",
+    "text": "DANH MỤC BẢNG VÀ HÌNH"
+  },
+  {
+    "i": 114,
+    "style": "Heading 2",
+    "text": "Danh mục bảng"
+  },
+  {
+    "i": 115,
+    "style": "normal",
+    "text": "Bảng 1.1 Các tác nhân và phạm vi sử dụng\t1"
+  },
+  {
+    "i": 116,
+    "style": "normal",
+    "text": "Bảng 1.2 Danh mục chức năng của NextCode\t1"
+  },
+  {
+    "i": 117,
+    "style": "normal",
+    "text": "Bảng 1.3 Đặc tả UC01 đăng ký tài khoản và xác thực email\t1"
+  },
+  {
+    "i": 118,
+    "style": "normal",
+    "text": "Bảng 1.4 Đặc tả UC02 đăng nhập, duy trì phiên và đăng xuất\t1"
+  },
+  {
+    "i": 119,
+    "style": "normal",
+    "text": "Bảng 1.5 Đặc tả UC03 khôi phục mật khẩu\t1"
+  },
+  {
+    "i": 120,
+    "style": "normal",
+    "text": "Bảng 1.6 Đặc tả UC04 quản lý hồ sơ cá nhân và đổi mật khẩu\t1"
+  },
+  {
+    "i": 121,
+    "style": "normal",
+    "text": "Bảng 1.7 Đặc tả UC05 xem và đánh dấu đã đọc thông báo\t1"
+  },
+  {
+    "i": 122,
+    "style": "normal",
+    "text": "Bảng 1.8 Đặc tả UC06 tìm kiếm, lọc và xem chi tiết khóa học\t1"
+  },
+  {
+    "i": 123,
+    "style": "normal",
+    "text": "Bảng 1.9 Đặc tả UC07 tra cứu chứng chỉ công khai\t1"
+  },
+  {
+    "i": 124,
+    "style": "normal",
+    "text": "Bảng 1.10 Đặc tả UC08 đăng ký khóa học miễn phí\t1"
+  },
+  {
+    "i": 125,
+    "style": "normal",
+    "text": "Bảng 1.11 Đặc tả UC09 đặt mua khóa Pro và tạo yêu cầu thanh toán\t1"
+  },
+  {
+    "i": 126,
+    "style": "normal",
+    "text": "Bảng 1.12 Đặc tả UC10 thanh toán và quản lý đơn hàng cá nhân\t1"
+  },
+  {
+    "i": 127,
+    "style": "normal",
+    "text": "Bảng 1.13 Đặc tả UC11 học bài giảng và lưu tiến độ\t1"
+  },
+  {
+    "i": 128,
+    "style": "normal",
+    "text": "Bảng 1.14 Đặc tả UC12 làm trắc nghiệm cuối bài\t1"
+  },
+  {
+    "i": 129,
+    "style": "normal",
+    "text": "Bảng 1.15 Đặc tả UC13 nhận, xem và in chứng chỉ hoàn thành\t1"
+  },
+  {
+    "i": 130,
+    "style": "normal",
+    "text": "Bảng 1.16 Đặc tả UC14 đánh giá và nhận xét khóa học\t1"
+  },
+  {
+    "i": 131,
+    "style": "normal",
+    "text": "Bảng 1.17 Đặc tả UC15 thảo luận hỏi đáp tại bài giảng\t1"
+  },
+  {
+    "i": 132,
+    "style": "normal",
+    "text": "Bảng 1.18 Đặc tả UC16 báo cáo bình luận hoặc đánh giá vi phạm\t1"
+  },
+  {
+    "i": 133,
+    "style": "normal",
+    "text": "Bảng 1.19 Đặc tả UC17 tạo và quản lý thông tin khóa học\t1"
+  },
+  {
+    "i": 134,
+    "style": "normal",
+    "text": "Bảng 1.20 Đặc tả UC18 biên soạn chương, bài giảng và trắc nghiệm\t1"
+  },
+  {
+    "i": 135,
+    "style": "normal",
+    "text": "Bảng 1.21 Đặc tả UC19 gửi duyệt và quản lý công bố khóa học\t1"
+  },
+  {
+    "i": 136,
+    "style": "normal",
+    "text": "Bảng 1.22 Đặc tả UC20 theo dõi học viên và tiến độ theo khóa\t1"
+  },
+  {
+    "i": 137,
+    "style": "normal",
+    "text": "Bảng 1.23 Đặc tả UC21 xử lý báo cáo vi phạm\t1"
+  },
+  {
+    "i": 138,
+    "style": "normal",
+    "text": "Bảng 1.24 Đặc tả UC22 quản lý đơn hàng và xác nhận thanh toán\t1"
+  },
+  {
+    "i": 139,
+    "style": "normal",
+    "text": "Bảng 1.25 Đặc tả UC23 quản lý người dùng và phân quyền\t1"
+  },
+  {
+    "i": 140,
+    "style": "normal",
+    "text": "Bảng 1.26 Các mức hạn chế tài khoản khi xử lý vi phạm\t1"
+  },
+  {
+    "i": 141,
+    "style": "normal",
+    "text": "Bảng 2.1 Vai trò của các nhóm công nghệ trong NextCode\t1"
+  },
+  {
+    "i": 142,
+    "style": "normal",
+    "text": "Bảng 3.1 Tổ chức mã nguồn của NextCode\t1"
+  },
+  {
+    "i": 143,
+    "style": "normal",
+    "text": "Bảng 3.2 Các thuộc tính của User\t1"
+  },
+  {
+    "i": 144,
+    "style": "normal",
+    "text": "Bảng 3.3 Các thuộc tính của Otp\t1"
+  },
+  {
+    "i": 145,
+    "style": "normal",
+    "text": "Bảng 3.4 Các thuộc tính của RefreshToken\t1"
+  },
+  {
+    "i": 146,
+    "style": "normal",
+    "text": "Bảng 3.5 Các thuộc tính của Category\t1"
+  },
+  {
+    "i": 147,
+    "style": "normal",
+    "text": "Bảng 3.6 Các thuộc tính của Course\t1"
+  },
+  {
+    "i": 148,
+    "style": "normal",
+    "text": "Bảng 3.7 Các thuộc tính của Chapter\t1"
+  },
+  {
+    "i": 149,
+    "style": "normal",
+    "text": "Bảng 3.8 Các thuộc tính của Lesson\t1"
+  },
+  {
+    "i": 150,
+    "style": "normal",
+    "text": "Bảng 3.9 Các thuộc tính của QuizQuestion\t1"
+  },
+  {
+    "i": 151,
+    "style": "normal",
+    "text": "Bảng 3.10 Các thuộc tính của Enrollment\t1"
+  },
+  {
+    "i": 152,
+    "style": "normal",
+    "text": "Bảng 3.11 Các thuộc tính của LessonProgress\t1"
+  },
+  {
+    "i": 153,
+    "style": "normal",
+    "text": "Bảng 3.12 Các thuộc tính của QuizAttempt\t1"
+  },
+  {
+    "i": 154,
+    "style": "normal",
+    "text": "Bảng 3.13 Các thuộc tính của Certificate\t1"
+  },
+  {
+    "i": 155,
+    "style": "normal",
+    "text": "Bảng 3.14 Các thuộc tính của Order\t1"
+  },
+  {
+    "i": 156,
+    "style": "normal",
+    "text": "Bảng 3.15 Các thuộc tính của PaymentTransaction\t1"
+  },
+  {
+    "i": 157,
+    "style": "normal",
+    "text": "Bảng 3.16 Các thuộc tính của LessonComment\t1"
+  },
+  {
+    "i": 158,
+    "style": "normal",
+    "text": "Bảng 3.17 Các thuộc tính của CourseReview\t1"
+  },
+  {
+    "i": 159,
+    "style": "normal",
+    "text": "Bảng 3.18 Các thuộc tính của Report\t1"
+  },
+  {
+    "i": 160,
+    "style": "normal",
+    "text": "Bảng 3.19 Các thuộc tính của Notification\t1"
+  },
+  {
+    "i": 161,
+    "style": "normal",
+    "text": "Bảng 3.20 Một số API đại diện của hệ thống\t1"
+  },
+  {
+    "i": 162,
+    "style": "normal",
+    "text": "Bảng 3.21 Chuyển trạng thái công bố khóa học\t1"
+  },
+  {
+    "i": 163,
+    "style": "normal",
+    "text": "Bảng 3.22 Các nhóm cấu hình đang sử dụng\t1"
+  },
+  {
+    "i": 164,
+    "style": "Heading 2",
+    "text": "Danh mục hình"
+  },
+  {
+    "i": 165,
+    "style": "normal",
+    "text": "Hình 1.1 Sơ đồ use case tổng quát của NextCode\t1"
+  },
+  {
+    "i": 166,
+    "style": "normal",
+    "text": "Hình 1.2 Sơ đồ use case của khách truy cập và học viên\t1"
+  },
+  {
+    "i": 167,
+    "style": "normal",
+    "text": "Hình 1.3 Sơ đồ use case của giảng viên\t1"
+  },
+  {
+    "i": 168,
+    "style": "normal",
+    "text": "Hình 1.4 Sơ đồ use case của quản trị viên\t1"
+  },
+  {
+    "i": 169,
+    "style": "normal",
+    "text": "Hình 2.1 Mô hình trao đổi dữ liệu giữa các thành phần của NextCode\t1"
+  },
+  {
+    "i": 170,
+    "style": "normal",
+    "text": "Hình 3.1 Kiến trúc tổng quan của NextCode\t1"
+  },
+  {
+    "i": 171,
+    "style": "normal",
+    "text": "Hình 3.2 Phân rã chức năng tổng quát của NextCode\t1"
+  },
+  {
+    "i": 172,
+    "style": "normal",
+    "text": "Hình 3.3 Phân rã chức năng của khách truy cập và học viên\t1"
+  },
+  {
+    "i": 173,
+    "style": "normal",
+    "text": "Hình 3.4 Phân rã chức năng của giảng viên\t1"
+  },
+  {
+    "i": 174,
+    "style": "normal",
+    "text": "Hình 3.5 Phân rã chức năng của quản trị viên\t1"
+  },
+  {
+    "i": 175,
+    "style": "normal",
+    "text": "Hình 3.6 Liên kết dữ liệu tài khoản, khóa học và học tập\t1"
+  },
+  {
+    "i": 176,
+    "style": "normal",
+    "text": "Hình 3.7 Liên kết dữ liệu thanh toán và tương tác\t1"
+  },
+  {
+    "i": 177,
+    "style": "normal",
+    "text": "Hình 3.8 Giao diện đăng nhập tài khoản\t1"
+  },
+  {
+    "i": 178,
+    "style": "normal",
+    "text": "Hình 3.9 Giao diện đăng ký tài khoản\t1"
+  },
+  {
+    "i": 179,
+    "style": "normal",
+    "text": "Hình 3.10 Giao diện tìm kiếm khóa học theo từ khóa\t1"
+  },
+  {
+    "i": 180,
+    "style": "normal",
+    "text": "Hình 3.11 Giao diện chi tiết khóa học\t1"
+  },
+  {
+    "i": 181,
+    "style": "normal",
+    "text": "Hình 3.12 Giao diện tra cứu chứng chỉ\t1"
+  },
+  {
+    "i": 182,
+    "style": "normal",
+    "text": "Hình 3.13 Giao diện danh sách khóa học được phân công\t1"
+  },
+  {
+    "i": 183,
+    "style": "normal",
+    "text": "Hình 3.14 Giao diện biên soạn nội dung khóa học\t1"
+  },
+  {
+    "i": 184,
+    "style": "normal",
+    "text": "Hình 3.15 Luồng xử lý thanh toán và cấp quyền học\t1"
+  },
+  {
+    "i": 185,
+    "style": "normal",
+    "text": "Hình 3.16 Luồng hoàn thành bài học và cập nhật tiến độ\t1"
+  },
+  {
+    "i": 186,
+    "style": "Heading 1",
+    "text": "CAM KẾT KẾT QUẢ"
+  },
+  {
+    "i": 187,
+    "style": "normal",
+    "text": "Tôi là Nguyễn Công Chức, mã số sinh viên B2303800, sinh viên khóa 49 ngành Kỹ thuật phần mềm, Khoa Công nghệ phần mềm. Tôi thực hiện đề tài Xây dựng website đăng ký và học tập trực tuyến các khóa học lập trình cho trung tâm đào tạo dưới sự hướng dẫn của ThS. Phan Huy Cường."
+  },
+  {
+    "i": 188,
+    "style": "normal",
+    "text": "Tôi chịu trách nhiệm về tính trung thực của nội dung trình bày, kết quả thực hiện và các thông tin được sử dụng trong luận văn. Các nguồn tài liệu, phần mềm và nội dung tham khảo được ghi nhận theo quy định."
+  },
+  {
+    "i": 189,
+    "style": "normal",
+    "text": "Những kết quả được trình bày là kết quả có căn cứ từ sản phẩm và quá trình kiểm tra. Các nội dung chưa thực hiện hoặc chưa được đánh giá trong điều kiện thực tế được phân biệt với chức năng đã có."
+  },
+  {
+    "i": 190,
+    "style": "normal",
+    "text": "Tôi cam kết kiểm tra và chịu trách nhiệm đối với bản luận văn được nộp chính thức."
+  },
+  {
+    "i": 191,
+    "style": "normal",
+    "text": "Cần Thơ, ngày … tháng … năm …"
+  },
+  {
+    "i": 192,
+    "style": "normal",
+    "text": "Sinh viên thực hiện"
+  },
+  {
+    "i": 193,
+    "style": "normal",
+    "text": "Nguyễn Công Chức"
+  },
+  {
+    "i": 194,
+    "style": "Heading 1",
+    "text": "TÓM LƯỢC"
+  },
+  {
+    "i": 195,
+    "style": "normal",
+    "text": "Đề tài xây dựng NextCode, một website phục vụ đăng ký và học các khóa lập trình trực tuyến cho trung tâm đào tạo. Hệ thống hướng đến việc liên kết giới thiệu khóa học, đăng ký, thanh toán, học tập và ghi nhận hoàn thành trong một quy trình thống nhất."
+  },
+  {
+    "i": 196,
+    "style": "normal",
+    "text": "Học viên có thể tìm kiếm khóa học, đăng ký khóa miễn phí hoặc thanh toán khóa Pro, học qua video và tài liệu, làm câu hỏi trắc nghiệm, trao đổi tại bài học và theo dõi tiến độ. Khi hoàn thành nội dung theo điều kiện của hệ thống, học viên được cấp chứng chỉ có mã tra cứu. Phía trung tâm có chức năng phân công giảng viên, biên soạn và xét duyệt khóa học, quản lý tài khoản, theo dõi học viên, kiểm tra đơn hàng và xử lý báo cáo vi phạm."
+  },
+  {
+    "i": 197,
+    "style": "normal",
+    "text": "Phần giao diện sử dụng Vue 3, Vuetify và Tailwind CSS. Phần xử lý sử dụng NestJS và TypeScript, kết nối MongoDB qua Mongoose. Hệ thống tích hợp gửi mã xác thực qua email và thanh toán bằng mã QR thông qua payOS."
+  },
+  {
+    "i": 198,
+    "style": "normal",
+    "text": "Sản phẩm đã có các chức năng cốt lõi phục vụ quy trình trên. Kết quả chạy bộ kiểm thử tự động hiện có cho thấy 66 trường hợp kiểm thử trong 8 tệp đều đạt. Kết quả này phản ánh phạm vi kiểm thử hiện có, chưa thay thế việc kiểm thử toàn bộ giao diện, đo hiệu năng hoặc đánh giá khi vận hành tại trung tâm."
+  },
+  {
+    "i": 199,
+    "style": "normal",
+    "text": "Đề tài chưa triển khai lớp học trực tiếp theo lịch, chấm bài lập trình tự động và ứng dụng di động riêng. Các giới hạn về lưu trữ nội dung, đối soát và vận hành thực tế cần được tiếp tục kiểm tra trước khi sử dụng rộng rãi."
+  },
+  {
+    "i": 200,
+    "style": "normal",
+    "text": "Từ khóa: học lập trình trực tuyến, quản lý khóa học, theo dõi tiến độ, thanh toán QR, NextCode."
+  },
+  {
+    "i": 201,
+    "style": "Heading 1",
+    "text": "ABSTRACT"
+  },
+  {
+    "i": 202,
+    "style": "normal",
+    "text": "This thesis develops NextCode, a website for a training center to offer and manage online programming courses. It connects course discovery, enrollment, payment, learning activities, and completion records in one workflow."
+  },
+  {
+    "i": 203,
+    "style": "normal",
+    "text": "Students can search for courses, enroll in free courses or purchase Pro courses, study video and reading materials, answer quizzes, join lesson discussions, and track their progress. The system issues a certificate with a verification code after the required course activities are completed. Management functions cover instructor assignment, content preparation, course approval, user administration, student monitoring, order tracking, and moderation reports."
+  },
+  {
+    "i": 204,
+    "style": "normal",
+    "text": "The frontend uses Vue 3, Vuetify, and Tailwind CSS. The backend uses NestJS and TypeScript, with MongoDB accessed through Mongoose. Email verification and QR payments through payOS support account registration and paid enrollment."
+  },
+  {
+    "i": 205,
+    "style": "normal",
+    "text": "The current implementation contains the main functions of this workflow. All 66 tests across the eight existing automated test files passed during verification. This result applies to the tested scope and does not establish full interface coverage, performance under load, or effectiveness in an operating training center."
+  },
+  {
+    "i": 206,
+    "style": "normal",
+    "text": "Live classes, automated programming assessment, and a separate mobile application are outside the current scope. Content storage, payment reconciliation, and operational conditions require further evaluation before broader use."
+  },
+  {
+    "i": 207,
+    "style": "normal",
+    "text": "Keywords: online programming education, course management, learning progress, QR payment, NextCode."
+  },
+  {
+    "i": 208,
+    "style": "Heading 1",
+    "text": "PHẦN I GIỚI THIỆU"
+  },
+  {
+    "i": 209,
+    "style": "Heading 2",
+    "text": "1 Đặt vấn đề"
+  },
+  {
+    "i": 210,
+    "style": "normal",
+    "text": "Học lập trình là một quá trình tích lũy kiến thức và vận dụng kiến thức đó qua từng bài học. Người mới bắt đầu cần được hướng dẫn từ những nội dung cơ bản trước khi tiếp cận các nội dung phức tạp hơn. Với hình thức học trực tuyến, video và tài liệu giúp người học chủ động lựa chọn thời gian, xem lại bài giảng và tiếp tục học theo khả năng của mình. Để việc học có định hướng, các nội dung này cần được sắp xếp thành khóa học với trình tự và yêu cầu hoàn thành rõ ràng."
+  },
+  {
+    "i": 211,
+    "style": "normal",
+    "text": "Đối với một trung tâm đào tạo, cung cấp khóa học trực tuyến còn gắn với nhiều công việc ngoài biên soạn bài giảng. Trung tâm cần giới thiệu khóa học, tiếp nhận đăng ký, xác nhận học phí và cấp quyền học cho từng học viên. Trong quá trình học, giảng viên cần giải đáp thắc mắc, còn trung tâm cần theo dõi kết quả và ghi nhận những học viên đã hoàn thành khóa học. Các công việc này có quan hệ với nhau và cùng sử dụng thông tin về học viên, khóa học và quá trình tham gia."
+  },
+  {
+    "i": 212,
+    "style": "normal",
+    "text": "Nếu thông tin đăng ký, giao dịch và kết quả học tập được quản lý riêng bằng bảng tính, tin nhắn hoặc các đường dẫn chia sẻ, người phụ trách phải đối chiếu lại ở nhiều nơi. Chẳng hạn, sau khi học viên thanh toán, trung tâm cần xác định giao dịch thuộc khóa học nào và cập nhật quyền truy cập tương ứng. Khi học viên yêu cầu xác nhận hoàn thành, trung tâm cũng cần có căn cứ về những bài đã học và kết quả kiểm tra. Vì vậy, bài toán đặt ra là xây dựng một hệ thống liên kết được các công việc này, đồng thời cho phép mỗi người thực hiện đúng nhiệm vụ của mình."
+  },
+  {
+    "i": 213,
+    "style": "normal",
+    "text": "Từ yêu cầu trên, đề tài Xây dựng website đăng ký và học tập trực tuyến các khóa học lập trình cho trung tâm đào tạo được thực hiện với sản phẩm mang tên NextCode. Website hỗ trợ học viên tìm hiểu khóa học, đăng ký tham gia, thanh toán đối với khóa có thu phí và học theo nội dung đã biên soạn. Đồng thời, hệ thống cung cấp khu vực làm việc cho giảng viên và quản trị viên để tổ chức nội dung, quản lý việc cung cấp khóa học và theo dõi quá trình học tập. Qua đó, đề tài hướng đến việc xây dựng một quy trình thống nhất từ khi giới thiệu khóa học đến khi ghi nhận kết quả của học viên."
+  },
+  {
+    "i": 214,
+    "style": "Heading 2",
+    "text": "2 Lịch sử giải quyết vấn đề"
+  },
+  {
+    "i": 215,
+    "style": "Heading 3",
+    "text": "2.1 Các nền tảng học tập đã có"
+  },
+  {
+    "i": 216,
+    "style": "normal",
+    "text": "Việc tổ chức học tập qua website đã được áp dụng theo nhiều hướng. Các hệ thống quản lý học tập chú trọng tổ chức hoạt động và theo dõi kết quả, trong khi các nền tảng cung cấp khóa học giúp người học tìm kiếm và lựa chọn nội dung phù hợp. Trong phạm vi đề tài, Moodle và F8 được tham khảo để tìm hiểu hai cách tiếp cận này."
+  },
+  {
+    "i": 217,
+    "style": "normal",
+    "text": "Moodle cung cấp chức năng theo dõi hoàn thành hoạt động học tập. Giảng viên có thể thiết lập điều kiện như người học đã xem nội dung, đạt mức điểm quy định hoặc tự đánh dấu hoàn thành. Người học được hiển thị những việc cần thực hiện để hoàn tất hoạt động. Chức năng này cho thấy tiến độ học cần gắn với các điều kiện cụ thể, giúp người học biết việc cần làm và giúp người phụ trách có căn cứ theo dõi."
+  },
+  {
+    "i": 218,
+    "style": "normal",
+    "text": "F8 là nền tảng cung cấp các khóa học lập trình bằng tiếng Việt. Website giới thiệu các khóa miễn phí và khóa Pro có thu phí, kèm thông tin như tên khóa, giảng viên, số bài và thời lượng. Cách trình bày này giúp người học xem xét nội dung và hình thức tham gia trước khi lựa chọn khóa học. Đối với đề tài, F8 là nguồn tham khảo về cách giới thiệu khóa học lập trình và tổ chức thông tin phục vụ người tự học."
+  },
+  {
+    "i": 219,
+    "style": "normal",
+    "text": "Hai nền tảng trên giải quyết những khía cạnh liên quan trực tiếp đến đề tài. Moodle gợi mở cách quản lý điều kiện hoàn thành, còn F8 cho thấy cách cung cấp thông tin khóa học cho người học lập trình. Việc tham khảo tập trung vào các cách tổ chức này để xác định giải pháp phù hợp với hoạt động của một trung tâm đào tạo."
+  },
+  {
+    "i": 220,
+    "style": "Heading 3",
+    "text": "2.2 Hướng giải quyết được kế thừa"
+  },
+  {
+    "i": 221,
+    "style": "normal",
+    "text": "NextCode vận dụng cách tổ chức khóa học thành chương và bài, giúp học viên theo dõi trình tự học và nhận biết phần nội dung đã hoàn thành. Video, nội dung văn bản, tài liệu và câu hỏi trắc nghiệm được đặt trong bài học để người học tiếp cận kiến thức và kiểm tra lại mức độ hiểu bài. Tiến độ được lưu theo từng học viên và từng khóa học để có thể tiếp tục học ở những lần truy cập sau."
+  },
+  {
+    "i": 222,
+    "style": "normal",
+    "text": "Bên cạnh hoạt động học tập, đề tài tập trung liên kết việc đăng ký với quyền tham gia khóa học. Khóa miễn phí cho phép học viên đăng ký trực tiếp, còn khóa có thu phí yêu cầu xác nhận thanh toán trước khi cấp quyền học. Ở phía trung tâm, nội dung do giảng viên phụ trách được gửi xét duyệt trước khi công bố. Cách tổ chức này phù hợp với phạm vi một trung tâm quản lý khóa học và phân công người biên soạn, đồng thời tạo cơ sở để theo dõi quá trình từ chuẩn bị nội dung đến cung cấp khóa học cho học viên."
+  },
+  {
+    "i": 223,
+    "style": "Heading 2",
+    "text": "3 Mục tiêu đề tài"
+  },
+  {
+    "i": 224,
+    "style": "Heading 3",
+    "text": "3.1 Mục tiêu tổng quát"
+  },
+  {
+    "i": 225,
+    "style": "normal",
+    "text": "Xây dựng website NextCode phục vụ đăng ký và học tập trực tuyến các khóa học lập trình cho một trung tâm đào tạo. Hệ thống cần hỗ trợ học viên chủ động học theo nội dung có sẵn, đồng thời giúp trung tâm quản lý tập trung khóa học, việc tham gia và kết quả học tập."
+  },
+  {
+    "i": 226,
+    "style": "Heading 3",
+    "text": "3.2 Mục tiêu cụ thể"
+  },
+  {
+    "i": 227,
+    "style": "normal",
+    "text": "Đối với việc lựa chọn và tham gia khóa học, website cần cung cấp thông tin về nội dung, giảng viên và học phí, hỗ trợ tìm kiếm khóa học và đăng ký bằng tài khoản cá nhân. Với khóa có thu phí, thông tin đơn hàng và kết quả thanh toán cần được liên kết với đúng học viên và khóa học để cấp quyền truy cập sau khi giao dịch được xác nhận."
+  },
+  {
+    "i": 228,
+    "style": "normal",
+    "text": "Đối với hoạt động học tập, hệ thống cần trình bày bài giảng theo thứ tự, lưu tiến độ và cho phép học viên tiếp tục phần đang học. Các bài có câu hỏi trắc nghiệm cần ghi nhận kết quả làm bài. Việc hoàn thành bài và khóa học phải được xác định theo điều kiện đã đặt ra, làm căn cứ cấp chứng chỉ hoàn thành và tra cứu thông tin chứng chỉ."
+  },
+  {
+    "i": 229,
+    "style": "normal",
+    "text": "Đối với giảng viên, website cần hỗ trợ biên soạn chương, bài giảng, tài liệu và câu hỏi trắc nghiệm trong những khóa học được phân công. Giảng viên có thể gửi nội dung để xét duyệt, theo dõi học viên và trả lời các câu hỏi liên quan đến khóa học mình phụ trách."
+  },
+  {
+    "i": 230,
+    "style": "normal",
+    "text": "Đối với quản trị viên, hệ thống cần cung cấp công cụ tạo khóa học, phân công giảng viên, xét duyệt nội dung và quản lý trạng thái công bố. Đồng thời, quản trị viên cần theo dõi người dùng, đơn hàng, giao dịch và xử lý các báo cáo về nội dung không phù hợp."
+  },
+  {
+    "i": 231,
+    "style": "normal",
+    "text": "Về mặt kỹ thuật, website cần kiểm tra quyền truy cập theo nhiệm vụ của người dùng và bảo vệ nội dung học theo điều kiện tham gia. Dữ liệu về đăng ký, thanh toán và tiến độ cần được xử lý thống nhất giữa giao diện và máy chủ. Các trường hợp xử lý chính cần được kiểm thử để xác định mức độ đáp ứng yêu cầu của sản phẩm."
+  },
+  {
+    "i": 232,
+    "style": "Heading 2",
+    "text": "4 Đối tượng và phạm vi nghiên cứu"
+  },
+  {
+    "i": 233,
+    "style": "Heading 3",
+    "text": "4.1 Đối tượng nghiên cứu"
+  },
+  {
+    "i": 234,
+    "style": "normal",
+    "text": "Đối tượng nghiên cứu của đề tài là quy trình đăng ký, cung cấp và quản lý việc học các khóa lập trình trực tuyến tại một trung tâm đào tạo. Các vấn đề được xem xét gồm cách tổ chức nội dung khóa học, điều kiện tham gia, xác nhận học phí, theo dõi tiến độ, hỗ trợ học viên và ghi nhận hoàn thành. Mối liên hệ giữa các thông tin này là cơ sở để xác định chức năng và thiết kế dữ liệu cho hệ thống."
+  },
+  {
+    "i": 235,
+    "style": "normal",
+    "text": "Các nhóm người sử dụng được xem xét gồm khách truy cập, học viên, giảng viên và quản trị viên. Khách truy cập tìm hiểu thông tin công khai trước khi đăng ký tài khoản. Học viên tham gia và học các khóa học. Giảng viên phụ trách nội dung và hỗ trợ việc học, còn quản trị viên tổ chức và quản lý hoạt động của website. Dịch vụ gửi thư điện tử và dịch vụ thanh toán được nghiên cứu ở vai trò phối hợp với hệ thống để xác thực tài khoản và xử lý giao dịch."
+  },
+  {
+    "i": 236,
+    "style": "Heading 3",
+    "text": "4.2 Phạm vi nghiên cứu"
+  },
+  {
+    "i": 237,
+    "style": "normal",
+    "text": "Đề tài xây dựng ứng dụng hoạt động trên trình duyệt, phục vụ mô hình một trung tâm đào tạo quản lý và cung cấp các khóa học lập trình. Nội dung được biên soạn trước dưới dạng video, bài đọc, tài liệu đính kèm và câu hỏi trắc nghiệm. Học viên tự lựa chọn thời gian học, thực hiện các bài theo trình tự và được lưu lại tiến độ. Hai hình thức tham gia được triển khai là khóa miễn phí và khóa Pro có thu phí."
+  },
+  {
+    "i": 238,
+    "style": "normal",
+    "text": "Phạm vi chức năng bao gồm quản lý tài khoản, giới thiệu và tìm kiếm khóa học, đăng ký tham gia, thanh toán bằng mã QR, học và kiểm tra trắc nghiệm, hỏi đáp, đánh giá khóa học, cấp và tra cứu chứng chỉ hoàn thành. Phía quản lý bao gồm biên soạn và xét duyệt khóa học, phân công giảng viên, theo dõi học viên, đơn hàng, giao dịch và xử lý báo cáo vi phạm."
+  },
+  {
+    "i": 239,
+    "style": "normal",
+    "text": "Đề tài tập trung vào hình thức tự học qua nội dung có sẵn. Các nội dung như tổ chức lớp học qua cuộc gọi video, ứng dụng di động riêng và chấm bài lập trình tự động nằm ngoài phạm vi thực hiện. Chứng chỉ trong hệ thống ghi nhận việc hoàn thành khóa học theo các điều kiện của website. Việc đánh giá sản phẩm tập trung vào chức năng và quy trình xử lý, chưa bao gồm nghiên cứu tác động đến kết quả học tập tại một trung tâm đang vận hành."
+  },
+  {
+    "i": 240,
+    "style": "Heading 2",
+    "text": "5 Nội dung nghiên cứu"
+  },
+  {
+    "i": 241,
+    "style": "Heading 3",
+    "text": "5.1 Quy trình thực hiện"
+  },
+  {
+    "i": 242,
+    "style": "normal",
+    "text": "Trước hết, đề tài tìm hiểu cách tổ chức khóa học trực tuyến và xác định những công việc cần hỗ trợ cho học viên, giảng viên và người quản lý trung tâm. Các nền tảng liên quan được tham khảo để xem xét cách giới thiệu khóa học, tổ chức bài giảng và theo dõi hoàn thành. Từ đó, yêu cầu được phân tích theo quá trình chuẩn bị khóa học, tiếp nhận đăng ký, học tập và ghi nhận kết quả."
+  },
+  {
+    "i": 243,
+    "style": "normal",
+    "text": "Tiếp theo, các yêu cầu được mô tả bằng sơ đồ chức năng, sơ đồ trường hợp sử dụng và các luồng xử lý. Giai đoạn này làm rõ ai được thực hiện từng công việc, điều kiện trước khi thực hiện và kết quả cần lưu. Những tình huống như chưa thanh toán, chưa hoàn thành bài trước hoặc truy cập khóa học không được phân công cũng được xem xét để xác định cách hệ thống phản hồi."
+  },
+  {
+    "i": 244,
+    "style": "normal",
+    "text": "Trên cơ sở phân tích, đề tài thiết kế kiến trúc, cấu trúc dữ liệu và giao diện. Phần giao diện tiếp nhận thao tác và trình bày thông tin cho người dùng. Phần máy chủ kiểm tra dữ liệu, quyền truy cập và xử lý các quy tắc của hệ thống. Các nhóm chức năng được xây dựng và kết nối với nhau, trong đó việc xác nhận thanh toán cần dẫn đến quyền học, còn kết quả hoàn thành bài cần được phản ánh vào tiến độ khóa học."
+  },
+  {
+    "i": 245,
+    "style": "normal",
+    "text": "Sau khi cài đặt, các chức năng được kiểm tra dựa trên yêu cầu và kết quả mong đợi. Nội dung kiểm tra tập trung vào những tình huống quan trọng của tài khoản, quản lý khóa học, thanh toán, tiến độ, hỏi đáp và đánh giá. Kết quả được dùng để phát hiện sai lệch, điều chỉnh chương trình và xác định những nội dung cần tiếp tục hoàn thiện. Đồng thời, báo cáo trình bày thiết kế và hướng dẫn cài đặt để làm rõ cách tổ chức và vận hành sản phẩm."
+  },
+  {
+    "i": 246,
+    "style": "Heading 3",
+    "text": "5.2 Công nghệ và công cụ sử dụng"
+  },
+  {
+    "i": 247,
+    "style": "normal",
+    "text": "Hệ thống sử dụng TypeScript để phát triển cả giao diện và phần xử lý trên máy chủ. Giao diện được xây dựng bằng Vue 3, kết hợp Vuetify và Tailwind CSS để tổ chức các trang, biểu mẫu và thành phần hiển thị. Vite hỗ trợ chạy ứng dụng trong quá trình phát triển và tạo bản đóng gói giao diện. Vue Router quản lý việc chuyển trang, Pinia quản lý thông tin dùng chung và Axios trao đổi dữ liệu với máy chủ."
+  },
+  {
+    "i": 248,
+    "style": "normal",
+    "text": "Phần máy chủ được xây dựng bằng NestJS trên môi trường Node.js. Mã nguồn được chia theo các nhóm công việc như tài khoản, khóa học, đăng ký học, đơn hàng và chứng chỉ. MongoDB lưu trữ dữ liệu của hệ thống, còn Mongoose hỗ trợ mô tả cấu trúc và truy xuất dữ liệu. Cách tổ chức này phân chia trách nhiệm giữa các phần của chương trình và làm rõ nơi xử lý từng nghiệp vụ."
+  },
+  {
+    "i": 249,
+    "style": "normal",
+    "text": "Trong các chức năng kết nối dịch vụ, Nodemailer được dùng để gửi thư điện tử xác thực tài khoản và hỗ trợ khôi phục mật khẩu. PayOS hỗ trợ tạo yêu cầu thanh toán và kiểm tra kết quả giao dịch cho khóa có thu phí. Mật khẩu được băm bằng Argon2 trước khi lưu, còn JWT hỗ trợ xác thực các yêu cầu truy cập. Vitest được sử dụng để xây dựng và chạy các kiểm thử tự động. Chi tiết lựa chọn và cách áp dụng các công nghệ được trình bày trong phần thiết kế và cài đặt giải pháp."
+  },
+  {
+    "i": 250,
+    "style": "Heading 2",
+    "text": "6 Những đóng góp chính của đề tài"
+  },
+  {
+    "i": 251,
+    "style": "normal",
+    "text": "Đề tài xây dựng được website NextCode với các chức năng phục vụ cả học viên và trung tâm đào tạo. Sản phẩm tổ chức việc giới thiệu khóa học, đăng ký, thanh toán và học tập trong cùng một hệ thống. Thông tin tham gia được gắn với từng tài khoản và khóa học, giúp học viên xem lại các khóa đã đăng ký và tiếp tục quá trình học của mình."
+  },
+  {
+    "i": 252,
+    "style": "normal",
+    "text": "Trong quản lý học tập, hệ thống lưu tiến độ từng bài và kết quả trắc nghiệm, kiểm tra điều kiện mở bài tiếp theo và ghi nhận hoàn thành khóa học. Thông tin chứng chỉ được lưu cùng học viên và khóa học, có mã để tra cứu. Khu vực hỏi đáp gắn với nội dung học, giúp học viên gửi thắc mắc và giảng viên theo dõi việc hỗ trợ trong phạm vi phụ trách."
+  },
+  {
+    "i": 253,
+    "style": "normal",
+    "text": "Đối với hoạt động của trung tâm, sản phẩm phân định công việc biên soạn của giảng viên với việc tạo, phân công và xét duyệt khóa học của quản trị viên. Các chức năng quản lý người dùng, đơn hàng, giao dịch và báo cáo vi phạm bổ sung công cụ theo dõi hoạt động của website. Bên cạnh sản phẩm, luận văn hệ thống hóa yêu cầu, thiết kế và các luồng xử lý chính, tạo tài liệu phục vụ việc kiểm tra và tiếp tục phát triển hệ thống."
+  },
+  {
+    "i": 254,
+    "style": "Heading 2",
+    "text": "7 Bố cục luận văn"
+  },
+  {
+    "i": 255,
+    "style": "normal",
+    "text": "Luận văn được tổ chức thành ba phần chính."
+  },
+  {
+    "i": 256,
+    "style": "normal",
+    "text": "Phần I Giới thiệu trình bày lý do thực hiện đề tài, các hướng giải quyết liên quan, mục tiêu, đối tượng và phạm vi nghiên cứu. Phần này cũng nêu nội dung thực hiện, công nghệ sử dụng và những đóng góp chính của đề tài."
+  },
+  {
+    "i": 257,
+    "style": "normal",
+    "text": "Phần II Nội dung trình bày bài toán và giải pháp xây dựng hệ thống. Chương 1 Mô tả bài toán xác định các nhóm người dùng, yêu cầu chức năng, yêu cầu chất lượng và các quy trình cần giải quyết. Chương 2 Cơ sở lý thuyết giải thích các kiến thức và công nghệ được sử dụng. Các chương tiếp theo trình bày thiết kế, cài đặt giải pháp, kiểm thử và đánh giá sản phẩm."
+  },
+  {
+    "i": 258,
+    "style": "normal",
+    "text": "Phần III Kết luận tổng hợp kết quả đạt được, những hạn chế và hướng phát triển của đề tài. Cuối luận văn là tài liệu tham khảo và các phụ lục hướng dẫn cài đặt, sử dụng hệ thống."
+  },
+  {
+    "i": 259,
+    "style": "Heading 1",
+    "text": "PHẦN II NỘI DUNG"
+  },
+  {
+    "i": 260,
+    "style": "Heading 1",
+    "text": "CHƯƠNG 1 MÔ TẢ BÀI TOÁN"
+  },
+  {
+    "i": 261,
+    "style": "normal",
+    "text": "NextCode được xây dựng để một trung tâm đào tạo cung cấp các khóa học lập trình và quản lý quá trình tham gia của học viên trên cùng một website. Chương này làm rõ những công việc hệ thống cần giải quyết, người thực hiện từng công việc và các điều kiện xử lý. Nội dung được trình bày từ mô tả hoạt động chung đến sơ đồ trường hợp sử dụng, đặc tả chức năng và yêu cầu chất lượng, làm cơ sở cho phần thiết kế và cài đặt."
+  },
+  {
+    "i": 262,
+    "style": "Heading 2",
+    "text": "1.1 Mô tả bài toán"
+  },
+  {
+    "i": 263,
+    "style": "Heading 3",
+    "text": "1.1.1 Hoạt động cung cấp và học khóa học trực tuyến"
+  },
+  {
+    "i": 264,
+    "style": "normal",
+    "text": "Trung tâm đào tạo có nhiều khóa học lập trình dành cho những trình độ và nhu cầu khác nhau. Mỗi khóa cần có thông tin giới thiệu, người phụ trách và nội dung được sắp xếp thành chương, bài. Trước khi cung cấp cho học viên, trung tâm cần kiểm tra nội dung và quyết định khóa nào được công bố. Giảng viên được phân công chịu trách nhiệm chuẩn bị bài giảng và hỗ trợ những vấn đề liên quan đến việc học trong khóa."
+  },
+  {
+    "i": 265,
+    "style": "normal",
+    "text": "Người có nhu cầu học truy cập website để tìm hiểu nội dung, giảng viên và học phí. Khi quyết định tham gia, người dùng đăng ký tài khoản và xác thực email. Đối với khóa miễn phí, học viên đăng ký trực tiếp để bắt đầu học. Đối với khóa Pro có thu phí, học viên tạo đơn mua, thực hiện thanh toán và được cấp quyền sau khi kết quả giao dịch được xác nhận."
+  },
+  {
+    "i": 266,
+    "style": "normal",
+    "text": "Sau khi tham gia, học viên học lần lượt các bài được mở. Hệ thống lưu vị trí đang học, mức độ hoàn thành và kết quả trắc nghiệm của từng người. Hoàn thành bài trước là căn cứ mở bài tiếp theo. Khi các bài của khóa đều hoàn thành, hệ thống ghi nhận kết quả và cấp chứng chỉ có mã tra cứu. Học viên cũng có thể trao đổi tại bài giảng và gửi đánh giá khóa học khi đủ điều kiện."
+  },
+  {
+    "i": 267,
+    "style": "normal",
+    "text": "Ở phía trung tâm, người quản lý cần theo dõi tài khoản, khóa học, học viên và đơn hàng. Những phản ánh về bình luận hoặc đánh giá được tiếp nhận để giảng viên và quản trị viên xem xét theo thẩm quyền. Vì vậy, hệ thống phải liên kết được thông tin học tập với thông tin quản lý, đồng thời phân biệt rõ ai được xem, chỉnh sửa hoặc xác nhận từng loại dữ liệu."
+  },
+  {
+    "i": 268,
+    "style": "Heading 3",
+    "text": "1.1.2 Nội dung khóa học và hình thức tham gia"
+  },
+  {
+    "i": 269,
+    "style": "normal",
+    "text": "Một khóa học gồm phần giới thiệu và phần nội dung học tập. Phần giới thiệu cung cấp tên, mô tả, trình độ, giảng viên và thông tin học phí. Các thông tin như danh mục, đối tượng phù hợp, kiến thức đầu vào và kết quả học tập mong đợi có thể được bổ sung để người học lựa chọn. Phần nội dung được chia thành chương và bài theo thứ tự do người biên soạn xác định."
+  },
+  {
+    "i": 270,
+    "style": "normal",
+    "text": "Bài học có thể sử dụng video, nội dung đọc và tài liệu đính kèm. Giảng viên có thể bổ sung ghi chép, tóm tắt và câu hỏi trắc nghiệm. Những nội dung này thuộc bài giảng; phần ghi chép do người biên soạn cung cấp không được mô tả thành sổ ghi chép cá nhân của học viên. Việc hỗ trợ tệp và cách hiển thị cụ thể được trình bày ở phần cài đặt."
+  },
+  {
+    "i": 271,
+    "style": "normal",
+    "text": "Khóa miễn phí và khóa Pro dùng chung cách tổ chức nội dung và lưu tiến độ, nhưng khác điều kiện tham gia. Khóa miễn phí có giá bằng không và không yêu cầu thanh toán. Khóa Pro có học phí, có thể có giá ưu đãi hợp lệ và được mua bằng một đơn hàng. Quyền tham gia được lưu riêng cho mỗi học viên và mỗi khóa, không phụ thuộc vào việc người đó đã mở trang giới thiệu bao nhiêu lần."
+  },
+  {
+    "i": 272,
+    "style": "Heading 3",
+    "text": "1.1.3 Các tác nhân và phạm vi sử dụng"
+  },
+  {
+    "i": 273,
+    "style": "normal",
+    "text": "Tác nhân là người hoặc dịch vụ bên ngoài có trao đổi với hệ thống. Trong phạm vi nghiệp vụ của báo cáo, NextCode có tác nhân sử dụng và hai dịch vụ phối hợp. Bảng 1.1 trình bày trách nhiệm của từng tác nhân. Quyền thực hiện một công việc còn phụ thuộc vào khóa học được phân công, việc tham gia của học viên và trạng thái của đối tượng đang xử lý."
+  },
+  {
+    "i": 274,
+    "style": "normal",
+    "text": "Bảng 1.1 Các tác nhân và phạm vi sử dụng"
+  },
+  {
+    "i": 275,
+    "style": "normal",
+    "text": "Dịch vụ email hỗ trợ gửi mã xác thực và mã khôi phục mật khẩu. payOS cung cấp yêu cầu thanh toán và kết quả để NextCode đối chiếu giao dịch. Các dịch vụ này không quyết định tiến độ học hoặc điều kiện cấp chứng chỉ; những công việc đó do hệ thống xử lý theo dữ liệu học tập đã lưu."
+  },
+  {
+    "i": 276,
+    "style": "Heading 2",
+    "text": "1.2 Phân tích yêu cầu chức năng"
+  },
+  {
+    "i": 277,
+    "style": "normal",
+    "text": "Yêu cầu chức năng được xác định theo các công việc mà người dùng cần thực hiện. Sơ đồ trường hợp sử dụng, còn gọi là sơ đồ use case, thể hiện tác nhân tham gia và các chức năng liên quan. Mỗi mã UC trong sơ đồ được dùng thống nhất trong danh mục và bảng đặc tả để người đọc có thể đối chiếu giữa hình vẽ và phần mô tả."
+  },
+  {
+    "i": 278,
+    "style": "Heading 3",
+    "text": "1.2.1 Sơ đồ use case tổng quát"
+  },
+  {
+    "i": 279,
+    "style": "normal",
+    "text": "Hình 1.1 trình bày phạm vi chung của NextCode. Khách truy cập sử dụng các chức năng công khai và tạo tài khoản. Học viên tham gia các chức năng đăng ký, thanh toán và học tập. Giảng viên biên soạn, theo dõi và hỗ trợ khóa được phân công. Quản trị viên quản lý việc cung cấp khóa học và các công việc vận hành. Hai dịch vụ ngoài phối hợp với nhóm xác thực tài khoản và thanh toán."
+  },
+  {
+    "i": 280,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 281,
+    "style": "normal",
+    "text": "Hình 1.1 Sơ đồ use case tổng quát của NextCode"
+  },
+  {
+    "i": 282,
+    "style": "Heading 3",
+    "text": "1.2.2 Sơ đồ use case của khách truy cập và học viên"
+  },
+  {
+    "i": 283,
+    "style": "normal",
+    "text": "Hình 1.2 mô tả quá trình từ tìm hiểu khóa học đến tham gia và hoàn thành. Đăng ký tài khoản và đăng ký khóa học là hai công việc khác nhau. Tài khoản xác định người sử dụng, còn bản đăng ký khóa xác định quyền học và tiến độ trong một khóa cụ thể. Với khóa Pro, tạo đơn và xác nhận thanh toán được tách thành hai trường hợp để làm rõ thời điểm phát sinh quyền học."
+  },
+  {
+    "i": 284,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 285,
+    "style": "normal",
+    "text": "Hình 1.2 Sơ đồ use case của khách truy cập và học viên"
+  },
+  {
+    "i": 286,
+    "style": "normal",
+    "text": "Các chức năng mở bài tiếp theo và cấp chứng chỉ được thực hiện khi đạt điều kiện tương ứng. Bài có trắc nghiệm yêu cầu thêm kết quả kiểm tra trước khi hoàn thành. Vì vậy, thao tác xem một bài hoặc mở trang chứng chỉ không tự làm thay đổi kết quả học tập."
+  },
+  {
+    "i": 287,
+    "style": "Heading 3",
+    "text": "1.2.3 Sơ đồ use case của giảng viên"
+  },
+  {
+    "i": 288,
+    "style": "normal",
+    "text": "Hình 1.3 thể hiện công việc của giảng viên trong những khóa được phân công. Giảng viên tổ chức nội dung, xem thử bài học, gửi hoặc thu hồi yêu cầu duyệt, theo dõi tiến độ học viên và giải đáp thắc mắc. Với báo cáo vi phạm, giảng viên là người xem xét trong phạm vi phụ trách; những trường hợp vượt thẩm quyền được chuyển lên quản trị viên."
+  },
+  {
+    "i": 289,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 290,
+    "style": "normal",
+    "text": "Hình 1.3 Sơ đồ use case của giảng viên"
+  },
+  {
+    "i": 291,
+    "style": "Heading 3",
+    "text": "1.2.4 Sơ đồ use case của quản trị viên"
+  },
+  {
+    "i": 292,
+    "style": "normal",
+    "text": "Hình 1.4 thể hiện trách nhiệm tổ chức và quản lý của trung tâm. Quản trị viên tạo khóa, quy định học phí, phân công giảng viên và quyết định công bố. Những công việc quản lý người dùng, đơn hàng và hạn chế tài khoản do quản trị viên thực hiện. Quản trị viên cũng có thể xem thử, biên soạn và theo dõi học viên của các khóa để hỗ trợ hoạt động chung."
+  },
+  {
+    "i": 293,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 294,
+    "style": "normal",
+    "text": "Hình 1.4 Sơ đồ use case của quản trị viên"
+  },
+  {
+    "i": 295,
+    "style": "Heading 3",
+    "text": "1.2.5 Danh mục chức năng của hệ thống"
+  },
+  {
+    "i": 296,
+    "style": "normal",
+    "text": "Bảng 1.2 liệt kê 23 trường hợp sử dụng chính. Các thao tác nhỏ có cùng mục đích được mô tả trong một trường hợp, chẳng hạn tạo và sửa hồ sơ hoặc gửi duyệt và thu hồi yêu cầu duyệt. Phần đặc tả tiếp theo làm rõ điều kiện và kết quả của từng trường hợp."
+  },
+  {
+    "i": 297,
+    "style": "normal",
+    "text": "Bảng 1.2 Danh mục chức năng của NextCode"
+  },
+  {
+    "i": 298,
+    "style": "Heading 2",
+    "text": "1.3 Đặc tả các trường hợp sử dụng"
+  },
+  {
+    "i": 299,
+    "style": "normal",
+    "text": "Mỗi bảng đặc tả nêu tác nhân, mục đích, điều kiện thực hiện, luồng xử lý chính, những tình huống khác và kết quả. Luồng chính mô tả trường hợp thực hiện thành công. Những tình huống khác chỉ rõ cách xử lý khi dữ liệu hoặc điều kiện chưa phù hợp. Các bước được trình bày theo công việc người dùng nhìn thấy và kết quả hệ thống cần bảo đảm."
+  },
+  {
+    "i": 300,
+    "style": "Heading 3",
+    "text": "1.3.1 Đăng ký tài khoản và xác thực email"
+  },
+  {
+    "i": 301,
+    "style": "normal",
+    "text": "Bảng 1.3 Đặc tả UC01 đăng ký tài khoản và xác thực email"
+  },
+  {
+    "i": 302,
+    "style": "Heading 3",
+    "text": "1.3.2 Đăng nhập, duy trì phiên và đăng xuất"
+  },
+  {
+    "i": 303,
+    "style": "normal",
+    "text": "Bảng 1.4 Đặc tả UC02 đăng nhập, duy trì phiên và đăng xuất"
+  },
+  {
+    "i": 304,
+    "style": "Heading 3",
+    "text": "1.3.3 Khôi phục mật khẩu"
+  },
+  {
+    "i": 305,
+    "style": "normal",
+    "text": "Bảng 1.5 Đặc tả UC03 khôi phục mật khẩu"
+  },
+  {
+    "i": 306,
+    "style": "Heading 3",
+    "text": "1.3.4 Quản lý hồ sơ cá nhân và đổi mật khẩu"
+  },
+  {
+    "i": 307,
+    "style": "normal",
+    "text": "Bảng 1.6 Đặc tả UC04 quản lý hồ sơ cá nhân và đổi mật khẩu"
+  },
+  {
+    "i": 308,
+    "style": "Heading 3",
+    "text": "1.3.5 Xem và đánh dấu đã đọc thông báo"
+  },
+  {
+    "i": 309,
+    "style": "normal",
+    "text": "Bảng 1.7 Đặc tả UC05 xem và đánh dấu đã đọc thông báo"
+  },
+  {
+    "i": 310,
+    "style": "Heading 3",
+    "text": "1.3.6 Tìm kiếm, lọc và xem chi tiết khóa học"
+  },
+  {
+    "i": 311,
+    "style": "normal",
+    "text": "Bảng 1.8 Đặc tả UC06 tìm kiếm, lọc và xem chi tiết khóa học"
+  },
+  {
+    "i": 312,
+    "style": "Heading 3",
+    "text": "1.3.7 Tra cứu chứng chỉ công khai"
+  },
+  {
+    "i": 313,
+    "style": "normal",
+    "text": "Bảng 1.9 Đặc tả UC07 tra cứu chứng chỉ công khai"
+  },
+  {
+    "i": 314,
+    "style": "Heading 3",
+    "text": "1.3.8 Đăng ký khóa học miễn phí"
+  },
+  {
+    "i": 315,
+    "style": "normal",
+    "text": "Bảng 1.10 Đặc tả UC08 đăng ký khóa học miễn phí"
+  },
+  {
+    "i": 316,
+    "style": "Heading 3",
+    "text": "1.3.9 Đặt mua khóa Pro và tạo yêu cầu thanh toán"
+  },
+  {
+    "i": 317,
+    "style": "normal",
+    "text": "Bảng 1.11 Đặc tả UC09 đặt mua khóa Pro và tạo yêu cầu thanh toán"
+  },
+  {
+    "i": 318,
+    "style": "Heading 3",
+    "text": "1.3.10 Thanh toán và quản lý đơn hàng cá nhân"
+  },
+  {
+    "i": 319,
+    "style": "normal",
+    "text": "Bảng 1.12 Đặc tả UC10 thanh toán và quản lý đơn hàng cá nhân"
+  },
+  {
+    "i": 320,
+    "style": "Heading 3",
+    "text": "1.3.11 Học bài giảng và lưu tiến độ"
+  },
+  {
+    "i": 321,
+    "style": "normal",
+    "text": "Bảng 1.13 Đặc tả UC11 học bài giảng và lưu tiến độ"
+  },
+  {
+    "i": 322,
+    "style": "Heading 3",
+    "text": "1.3.12 Làm trắc nghiệm cuối bài"
+  },
+  {
+    "i": 323,
+    "style": "normal",
+    "text": "Bảng 1.14 Đặc tả UC12 làm trắc nghiệm cuối bài"
+  },
+  {
+    "i": 324,
+    "style": "Heading 3",
+    "text": "1.3.13 Nhận, xem và in chứng chỉ hoàn thành"
+  },
+  {
+    "i": 325,
+    "style": "normal",
+    "text": "Bảng 1.15 Đặc tả UC13 nhận, xem và in chứng chỉ hoàn thành"
+  },
+  {
+    "i": 326,
+    "style": "Heading 3",
+    "text": "1.3.14 Đánh giá và nhận xét khóa học"
+  },
+  {
+    "i": 327,
+    "style": "normal",
+    "text": "Bảng 1.16 Đặc tả UC14 đánh giá và nhận xét khóa học"
+  },
+  {
+    "i": 328,
+    "style": "Heading 3",
+    "text": "1.3.15 Thảo luận hỏi đáp tại bài giảng"
+  },
+  {
+    "i": 329,
+    "style": "normal",
+    "text": "Bảng 1.17 Đặc tả UC15 thảo luận hỏi đáp tại bài giảng"
+  },
+  {
+    "i": 330,
+    "style": "Heading 3",
+    "text": "1.3.16 Báo cáo bình luận hoặc đánh giá vi phạm"
+  },
+  {
+    "i": 331,
+    "style": "normal",
+    "text": "Bảng 1.18 Đặc tả UC16 báo cáo bình luận hoặc đánh giá vi phạm"
+  },
+  {
+    "i": 332,
+    "style": "Heading 3",
+    "text": "1.3.17 Tạo và quản lý thông tin khóa học"
+  },
+  {
+    "i": 333,
+    "style": "normal",
+    "text": "Bảng 1.19 Đặc tả UC17 tạo và quản lý thông tin khóa học"
+  },
+  {
+    "i": 334,
+    "style": "Heading 3",
+    "text": "1.3.18 Biên soạn chương, bài giảng và trắc nghiệm"
+  },
+  {
+    "i": 335,
+    "style": "normal",
+    "text": "Bảng 1.20 Đặc tả UC18 biên soạn chương, bài giảng và trắc nghiệm"
+  },
+  {
+    "i": 336,
+    "style": "Heading 3",
+    "text": "1.3.19 Gửi duyệt và quản lý công bố khóa học"
+  },
+  {
+    "i": 337,
+    "style": "normal",
+    "text": "Bảng 1.21 Đặc tả UC19 gửi duyệt và quản lý công bố khóa học"
+  },
+  {
+    "i": 338,
+    "style": "Heading 3",
+    "text": "1.3.20 Theo dõi học viên và tiến độ theo khóa"
+  },
+  {
+    "i": 339,
+    "style": "normal",
+    "text": "Bảng 1.22 Đặc tả UC20 theo dõi học viên và tiến độ theo khóa"
+  },
+  {
+    "i": 340,
+    "style": "Heading 3",
+    "text": "1.3.21 Xử lý báo cáo vi phạm"
+  },
+  {
+    "i": 341,
+    "style": "normal",
+    "text": "Bảng 1.23 Đặc tả UC21 xử lý báo cáo vi phạm"
+  },
+  {
+    "i": 342,
+    "style": "Heading 3",
+    "text": "1.3.22 Quản lý đơn hàng và xác nhận thanh toán"
+  },
+  {
+    "i": 343,
+    "style": "normal",
+    "text": "Bảng 1.24 Đặc tả UC22 quản lý đơn hàng và xác nhận thanh toán"
+  },
+  {
+    "i": 344,
+    "style": "Heading 3",
+    "text": "1.3.23 Quản lý người dùng và phân quyền"
+  },
+  {
+    "i": 345,
+    "style": "normal",
+    "text": "Bảng 1.25 Đặc tả UC23 quản lý người dùng và phân quyền"
+  },
+  {
+    "i": 346,
+    "style": "Heading 2",
+    "text": "1.4 Quy trình nghiệp vụ và các quy tắc xử lý"
+  },
+  {
+    "i": 347,
+    "style": "Heading 3",
+    "text": "1.4.1 Từ chuẩn bị khóa học đến cung cấp cho học viên"
+  },
+  {
+    "i": 348,
+    "style": "normal",
+    "text": "Quy trình bắt đầu khi quản trị viên tạo thông tin khóa học và phân công giảng viên. Giảng viên xây dựng chương, bài và các tài liệu cần thiết, sau đó gửi duyệt. Hệ thống kiểm tra các điều kiện bắt buộc trước khi tiếp nhận yêu cầu. Quản trị viên xem nội dung để phê duyệt hoặc trả về nháp kèm lý do."
+  },
+  {
+    "i": 349,
+    "style": "normal",
+    "text": "Khóa có bốn trạng thái chính: nháp, chờ duyệt, đã duyệt và đang ẩn. Gửi duyệt chuyển từ nháp sang chờ duyệt. Thu hồi hoặc từ chối đưa khóa chờ duyệt về nháp. Phê duyệt cho phép công bố, còn ẩn làm ngừng công bố khóa đã duyệt. Việc hiển thị lại khóa đang ẩn thuộc quyền quản trị viên và vẫn cần kiểm tra điều kiện sẵn sàng."
+  },
+  {
+    "i": 350,
+    "style": "normal",
+    "text": "Điều kiện bắt buộc gồm thông tin tên, mô tả, trình độ và học phí hợp lệ; khóa phải có chương và mỗi chương phải có bài. Khi bài sử dụng video, thời lượng cần hợp lệ. Khóa Pro sử dụng video tải lên theo quy tắc biên soạn hiện tại. Những thông tin được phép để trống không được mô tả thành điều kiện chặn công bố. Ghi chép và tóm tắt còn thiếu ở khóa Pro được ghi nhận là cảnh báo, không phải lỗi bắt buộc."
+  },
+  {
+    "i": 351,
+    "style": "normal",
+    "text": "Giảng viên được sửa nội dung khóa nháp hoặc đã công bố trong phạm vi phân công. Nếu giảng viên chỉnh nội dung khóa đã công bố, chương trình đưa khóa về nháp. Do việc học phụ thuộc vào trạng thái công bố, trung tâm cần sắp xếp thời điểm chỉnh sửa và xét duyệt để hạn chế gián đoạn truy cập của học viên."
+  },
+  {
+    "i": 352,
+    "style": "Heading 3",
+    "text": "1.4.2 Đăng ký và xác nhận quyền học"
+  },
+  {
+    "i": 353,
+    "style": "normal",
+    "text": "Với khóa miễn phí, bản đăng ký hợp lệ là căn cứ cho phép học. Với khóa Pro, hệ thống tạo đơn chờ, lấy thông tin thanh toán và chờ kết quả xác nhận. Sau khi xác nhận, hệ thống lưu giao dịch, hoàn tất đơn và tạo bản đăng ký học. Một học viên chỉ có một bản đăng ký cho cùng khóa; yêu cầu kiểm tra lại giao dịch không được tạo thêm quyền học trùng."
+  },
+  {
+    "i": 354,
+    "style": "normal",
+    "text": "Giá và mã giảm giá được xử lý từ dữ liệu trên máy chủ. Đơn hàng lưu số tiền tại thời điểm tạo để có căn cứ đối chiếu. Học viên không được tự quyết định tổng tiền bằng dữ liệu gửi từ trình duyệt. Các mã giảm giá được xử lý theo những quy tắc cấu hình sẵn."
+  },
+  {
+    "i": 355,
+    "style": "normal",
+    "text": "Thông báo từ payOS được kiểm tra tính hợp lệ và đối chiếu với đơn cùng số tiền cần trả. Nếu số tiền nhận chưa đủ, hệ thống chưa cấp quyền học. Hệ thống còn có cách chủ động lấy lại trạng thái thanh toán. Việc người dùng quay về trang thanh toán hoặc gặp lỗi kết nối không được xem là bằng chứng đã thanh toán."
+  },
+  {
+    "i": 356,
+    "style": "normal",
+    "text": "Đơn có các trạng thái chờ thanh toán, hoàn tất, đã hủy và hết hạn. Thời hạn chờ được cấu hình, giá trị mặc định hiện tại là 15 phút. Trạng thái hết hạn được kiểm tra trong các xử lý truy vấn và đối chiếu liên quan. Trường hợp cần xác nhận thủ công phải có căn cứ thanh toán và được lưu rõ phương thức, người xác nhận, thời điểm thực hiện. Dữ liệu giả lập phục vụ kiểm thử cần được phân biệt khi xem số liệu doanh thu."
+  },
+  {
+    "i": 357,
+    "style": "Heading 3",
+    "text": "1.4.3 Học tuần tự và ghi nhận hoàn thành"
+  },
+  {
+    "i": 358,
+    "style": "normal",
+    "text": "Khi bắt đầu một khóa, hệ thống mở bài đầu tiên và lưu tiến độ riêng cho học viên. Bài kế tiếp được mở khi bài trước đã hoàn thành. Học viên có thể quay lại bài đã học để xem lại nội dung. Việc thay đổi địa chỉ trang trên trình duyệt không thay thế được kiểm tra quyền truy cập ở máy chủ."
+  },
+  {
+    "i": 359,
+    "style": "normal",
+    "text": "Với bài có video, quy tắc hiện tại yêu cầu xem ít nhất 60% thời lượng để đạt điều kiện xem. Nếu bài không có trắc nghiệm, đạt điều kiện xem là căn cứ hoàn thành bài. Với bài đọc không có video, học viên thực hiện thao tác xác nhận hoàn thành phần đọc. Đây là quy tắc ghi nhận hoạt động học trong chương trình, chưa phải phép đo độc lập về mức độ nắm vững kiến thức."
+  },
+  {
+    "i": 360,
+    "style": "normal",
+    "text": "Với bài có trắc nghiệm, học viên cần đạt yêu cầu kiểm tra để hoàn thành. Bài chỉ có một câu yêu cầu trả lời đúng câu đó. Bài có từ hai câu yêu cầu tỷ lệ trả lời đúng ít nhất 70%. Máy chủ chấm theo câu trả lời hợp lệ; bài chưa đạt có thể được làm lại. Đối với bài có video, phần trắc nghiệm chỉ được mở khi học viên đạt điều kiện xem."
+  },
+  {
+    "i": 361,
+    "style": "normal",
+    "text": "Tiến độ khóa được tính từ số bài đã hoàn thành trên tổng số bài. Khi toàn bộ bài hoàn thành và khóa có nội dung, hệ thống ghi nhận hoàn thành khóa và cấp chứng chỉ gắn với học viên, khóa học. Chứng chỉ đã có được sử dụng lại khi truy cập. Người có mã có thể tra cứu thông tin công khai; việc in được thực hiện qua trình duyệt. Chế độ xem thử của người quản lý không làm phát sinh chứng chỉ học viên."
+  },
+  {
+    "i": 362,
+    "style": "Heading 3",
+    "text": "1.4.4 Hỏi đáp, đánh giá và xử lý phản ánh"
+  },
+  {
+    "i": 363,
+    "style": "normal",
+    "text": "Hỏi đáp được gắn với từng bài để người học và giảng viên trao đổi đúng nội dung. Học viên cần tham gia khóa và bài đã được mở. Giảng viên phụ trách có quyền điều phối trong khóa mình dạy. Với khóa của giảng viên khác đang công bố, giảng viên có thể tham gia trao đổi nhưng không nhận quyền quản lý nội dung của khóa đó."
+  },
+  {
+    "i": 364,
+    "style": "normal",
+    "text": "Đánh giá khóa học được gắn với từng học viên và mỗi người có một đánh giá cho một khóa. Tạo đánh giá mới yêu cầu đã hoàn thành khóa. Nếu học viên đã có đánh giá trước khi khóa bổ sung bài mới, chương trình vẫn giữ quyền sửa đánh giá hợp lệ theo quy tắc hiện tại. Đánh giá đã bị ẩn do vi phạm không được sửa để tự đưa trở lại hiển thị. Điểm tổng hợp chỉ tính từ những đánh giá đang được hiển thị."
+  },
+  {
+    "i": 365,
+    "style": "normal",
+    "text": "Báo cáo nội dung được xử lý theo hai tuyến. Giảng viên xem xét trong phạm vi phụ trách, có thể giữ nội dung, ẩn và nhắc nhở hoặc chuyển lên quản trị viên. Quản trị viên có quyền xử lý các trường hợp toàn hệ thống và áp dụng hạn chế tài khoản. Những báo cáo cùng trỏ đến một nội dung được xem xét liên quan để tránh ghi nhận lặp một vi phạm. Hệ thống lưu kết quả và thông báo cho người liên quan."
+  },
+  {
+    "i": 366,
+    "style": "normal",
+    "text": "Bảng 1.26 Các mức hạn chế tài khoản khi xử lý vi phạm"
+  },
+  {
+    "i": 367,
+    "style": "normal",
+    "text": "Các mức trong Bảng 1.26 được áp dụng khi quản trị viên chọn xử lý bằng hình thức hạn chế tài khoản. Người xử lý vẫn phải xem xét báo cáo và mức độ vi phạm. Chương trình không tự hiểu nội dung bằng trí tuệ nhân tạo để kết luận một bình luận hoặc đánh giá có vi phạm hay không."
+  },
+  {
+    "i": 368,
+    "style": "Heading 2",
+    "text": "1.5 Dữ liệu và các mối liên hệ nghiệp vụ"
+  },
+  {
+    "i": 369,
+    "style": "normal",
+    "text": "Thông tin tài khoản xác định người sử dụng, vai trò và trạng thái hoạt động. Thông tin khóa học xác định nội dung được cung cấp, giảng viên phụ trách và điều kiện tham gia. Chương và bài thuộc cấu trúc nội dung của khóa. Một khóa có thể có nhiều học viên, còn một học viên có thể tham gia nhiều khóa."
+  },
+  {
+    "i": 370,
+    "style": "normal",
+    "text": "Bản đăng ký nối học viên với khóa học và lưu tình trạng tham gia. Tiến độ bài học gắn với bản đăng ký và bài cụ thể, nhờ đó hai học viên học cùng bài vẫn có kết quả độc lập. Kết quả trắc nghiệm cung cấp thông tin về câu trả lời. Chứng chỉ nối người hoàn thành với khóa và mã tra cứu tương ứng."
+  },
+  {
+    "i": 371,
+    "style": "normal",
+    "text": "Đơn hàng xác định người mua, khóa được mua và số tiền cần trả. Giao dịch lưu thông tin xác nhận tiền cho đơn. Bản đăng ký học là kết quả cấp quyền sau xác nhận, nên thông tin đơn, giao dịch và quyền học có liên quan nhưng không thay thế cho nhau. Bình luận, đánh giá, báo cáo và thông báo tiếp tục gắn với người dùng và nội dung liên quan để có thể theo dõi khi cần kiểm tra. Thiết kế cấu trúc lưu trữ cụ thể được trình bày trong chương thiết kế và cài đặt."
+  },
+  {
+    "i": 372,
+    "style": "Heading 2",
+    "text": "1.6 Yêu cầu phi chức năng"
+  },
+  {
+    "i": 373,
+    "style": "normal",
+    "text": "Yêu cầu phi chức năng mô tả những điều kiện về chất lượng và vận hành mà các chức năng cần đáp ứng. Các yêu cầu dưới đây là căn cứ thiết kế và kiểm tra sản phẩm; kết quả đáp ứng sẽ được đánh giá theo phạm vi kiểm thử, không mặc nhiên được coi là đã đạt chỉ vì được nêu trong chương này."
+  },
+  {
+    "i": 374,
+    "style": "Heading 3",
+    "text": "1.6.1 Dễ sử dụng và dễ tiếp cận"
+  },
+  {
+    "i": 375,
+    "style": "normal",
+    "text": "Giao diện cần giúp người dùng nhận biết khóa miễn phí hoặc có phí, trạng thái thanh toán, bài đang học và điều kiện còn thiếu. Các thao tác chính như đăng ký, tiếp tục học và nộp trắc nghiệm cần có tên gọi rõ ràng. Dữ liệu nhập sai phải được chỉ ra ở vị trí phù hợp để người dùng sửa, tránh thông báo chỉ có mã lỗi kỹ thuật."
+  },
+  {
+    "i": 376,
+    "style": "normal",
+    "text": "Cách trình bày cần nhất quán giữa các trang và thích ứng với kích thước màn hình sử dụng. Danh sách khóa học, biểu mẫu, bài giảng và trang thanh toán là những khu vực cần được kiểm tra riêng. Khi chưa có dữ liệu hoặc đang tải thông tin, website cần hiển thị tình trạng tương ứng để người dùng biết thao tác tiếp theo."
+  },
+  {
+    "i": 377,
+    "style": "Heading 3",
+    "text": "1.6.2 Bảo vệ tài khoản và dữ liệu"
+  },
+  {
+    "i": 378,
+    "style": "normal",
+    "text": "Mật khẩu và mã xác thực cần được bảo vệ trước khi lưu. Mã xác thực phải có thời hạn, giới hạn số lần nhập sai và khoảng chờ gửi lại. Các yêu cầu nhạy cảm cần được kiểm soát tần suất. Thông tin bí mật dùng cho email, cơ sở dữ liệu và thanh toán không được gửi xuống giao diện cho người sử dụng."
+  },
+  {
+    "i": 379,
+    "style": "normal",
+    "text": "Máy chủ phải kiểm tra phiên, vai trò và đối tượng được phép thao tác. Học viên chỉ truy cập dữ liệu cá nhân và nội dung đủ điều kiện học; giảng viên chỉ quản lý trong phạm vi phân công. Tệp tải lên cần được kiểm tra loại và giới hạn dung lượng. Khi triển khai lên Internet, hệ thống cần kết nối được bảo vệ và cấu hình truy cập phù hợp với địa chỉ triển khai."
+  },
+  {
+    "i": 380,
+    "style": "Heading 3",
+    "text": "1.6.3 Tính đúng đắn và khả năng phục hồi"
+  },
+  {
+    "i": 381,
+    "style": "normal",
+    "text": "Thông tin giá, giao dịch, quyền học và tiến độ cần được xử lý thống nhất. Những yêu cầu gửi lại vì mạng chậm không được làm phát sinh quyền tham gia hoặc chứng chỉ trùng. Kết quả thanh toán phải có thể kiểm tra lại khi có gián đoạn giữa xác nhận đơn và cấp quyền học. Khi lỗi xảy ra, hệ thống cần phản hồi đúng tình trạng, giữ được dữ liệu đã lưu và cho phép tiếp tục xử lý có căn cứ."
+  },
+  {
+    "i": 382,
+    "style": "normal",
+    "text": "Dữ liệu và tệp bài giảng cần có phương án sao lưu, khôi phục khi vận hành. Việc lựa chọn nơi lưu, tần suất sao lưu và cách kiểm tra khôi phục phải phù hợp với môi trường sử dụng. Đây là yêu cầu vận hành cần được chuẩn bị và kiểm chứng, không được suy ra chỉ từ việc ứng dụng đã có cơ sở dữ liệu."
+  },
+  {
+    "i": 383,
+    "style": "Heading 3",
+    "text": "1.6.4 Khả năng đáp ứng"
+  },
+  {
+    "i": 384,
+    "style": "normal",
+    "text": "Các danh sách cần giới hạn lượng dữ liệu trả về theo từng lần tải. Khi gửi tệp, gửi mã xác thực hoặc kiểm tra giao dịch, giao diện cần báo đang xử lý để hạn chế thao tác lặp. Các tác vụ tải video và tài liệu cần được kiểm tra theo dung lượng nội dung và điều kiện mạng thực tế."
+  },
+  {
+    "i": 385,
+    "style": "normal",
+    "text": "Thời gian phản hồi, số người sử dụng đồng thời và khả năng phục vụ video cần được đo trong môi trường thử cụ thể. Khi đánh giá, kết quả cần đi kèm cấu hình, dữ liệu và điều kiện mạng sử dụng. Những chức năng đã được kiểm tra và những nội dung còn cần đánh giá khi triển khai phải được phân biệt rõ."
+  },
+  {
+    "i": 386,
+    "style": "Heading 3",
+    "text": "1.6.5 Khả năng bảo trì và điều kiện vận hành"
+  },
+  {
+    "i": 387,
+    "style": "normal",
+    "text": "Chương trình cần được tổ chức theo các nhóm công việc để thuận tiện sửa lỗi và bổ sung chức năng. Thông tin cấu hình nên tách khỏi mã xử lý để có thể điều chỉnh giữa môi trường phát triển và vận hành. Việc thay đổi một quy tắc như điều kiện hoàn thành bài phải được kiểm tra ở cả giao diện và máy chủ để tránh thông tin hướng dẫn khác kết quả xử lý."
+  },
+  {
+    "i": 388,
+    "style": "normal",
+    "text": "Hệ thống phụ thuộc vào kết nối cơ sở dữ liệu, dịch vụ email, dịch vụ thanh toán và nơi lưu học liệu. Môi trường triển khai cần bảo đảm dữ liệu, tệp vẫn còn sau khi khởi động lại hoặc cập nhật ứng dụng. Việc cài đặt cần ghi rõ các thành phần, thông tin cấu hình phải chuẩn bị và cách kiểm tra kết nối trước khi đưa vào sử dụng."
+  },
+  {
+    "i": 389,
+    "style": "Heading 2",
+    "text": "1.7 Phân tích và lựa chọn hướng giải quyết"
+  },
+  {
+    "i": 390,
+    "style": "normal",
+    "text": "Bài toán có thể được giải quyết bằng cách kết hợp các công cụ riêng lẻ, cấu hình một nền tảng học tập có sẵn hoặc xây dựng website theo quy trình đã xác định. Việc lựa chọn cần xem xét mức độ phù hợp với công việc của trung tâm, khả năng kết nối dữ liệu và trách nhiệm duy trì hệ thống."
+  },
+  {
+    "i": 391,
+    "style": "normal",
+    "text": "Kết hợp trang giới thiệu, bảng tính, nơi chia sẻ video và nhân sự kiểm tra chuyển khoản giúp bắt đầu với ít công việc phát triển. Tuy nhiên, người phụ trách phải tự nối thông tin giữa các nguồn để biết học viên đã trả tiền, được học bài nào và đã hoàn thành hay chưa. Những điều kiện mở bài, kiểm tra trắc nghiệm và tra cứu chứng chỉ cần thêm thao tác hoặc công cụ để quản lý."
+  },
+  {
+    "i": 392,
+    "style": "normal",
+    "text": "Nền tảng học tập có sẵn cung cấp các chức năng tổ chức bài học và theo dõi kết quả. Khi áp dụng cho trung tâm, cần đánh giá thêm cách cấu hình quyền biên soạn, xét duyệt nội dung, kết nối thanh toán và chi phí vận hành. Mức độ đáp ứng phụ thuộc nền tảng và cấu hình cụ thể; không thể kết luận mọi giải pháp có sẵn đều không phù hợp."
+  },
+  {
+    "i": 393,
+    "style": "normal",
+    "text": "Trong phạm vi luận văn, đề tài chọn xây dựng website NextCode để chủ động liên kết các bước từ quản lý khóa, đăng ký và thanh toán đến học tập và ghi nhận hoàn thành. Giải pháp này cho phép thiết lập trực tiếp quyền hạn, dữ liệu và điều kiện xử lý đã phân tích. Đổi lại, việc phát triển, kiểm thử, bảo vệ dữ liệu và chuẩn bị môi trường vận hành là trách nhiệm cần được thực hiện cùng với xây dựng chức năng."
+  },
+  {
+    "i": 394,
+    "style": "Heading 2",
+    "text": "1.8 Tổng kết chương"
+  },
+  {
+    "i": 395,
+    "style": "normal",
+    "text": "Chương 1 đã xác định bài toán cung cấp khóa học lập trình trực tuyến và trách nhiệm của các tác nhân trong NextCode. Các sơ đồ và 23 bảng đặc tả làm rõ chức năng, điều kiện và kết quả cần xử lý. Những quy tắc về công bố khóa học, thanh toán, tiến độ, chứng chỉ và xử lý phản ánh tạo cơ sở để thiết kế dữ liệu và các thành phần chương trình. Chương tiếp theo trình bày các kiến thức và công nghệ làm cơ sở cho việc xây dựng giải pháp."
+  },
+  {
+    "i": 396,
+    "style": "Heading 1",
+    "text": "CHƯƠNG 2 CƠ SỞ LÝ THUYẾT"
+  },
+  {
+    "i": 397,
+    "style": "normal",
+    "text": "Chương này trình bày các kiến thức và công nghệ được sử dụng để xây dựng website học lập trình trực tuyến NextCode. Nội dung đi từ cách ứng dụng web trao đổi dữ liệu đến công nghệ giao diện, xử lý nghiệp vụ, lưu trữ và các dịch vụ hỗ trợ. Mỗi công nghệ được giải thích theo chức năng của nó và liên hệ với công việc cụ thể trong hệ thống. Đây là cơ sở để trình bày thiết kế và cài đặt giải pháp ở các chương sau."
+  },
+  {
+    "i": 398,
+    "style": "Heading 2",
+    "text": "2.1 Mô hình ứng dụng web và phương thức trao đổi dữ liệu"
+  },
+  {
+    "i": 399,
+    "style": "Heading 3",
+    "text": "2.1.1 Mô hình máy khách và máy chủ"
+  },
+  {
+    "i": 400,
+    "style": "normal",
+    "text": "Ứng dụng web là phần mềm người dùng truy cập thông qua trình duyệt. Trong mô hình máy khách và máy chủ, máy khách tiếp nhận thao tác và hiển thị kết quả. Máy chủ nhận yêu cầu, thực hiện công việc cần thiết rồi gửi phản hồi. Cơ sở dữ liệu lưu giữ thông tin để có thể sử dụng lại sau khi người dùng đóng trình duyệt hoặc kết thúc phiên làm việc."
+  },
+  {
+    "i": 401,
+    "style": "normal",
+    "text": "NextCode tổ chức giao diện bằng Vue và phần xử lý máy chủ bằng NestJS. MongoDB lưu dữ liệu về tài khoản, khóa học, đăng ký học, đơn hàng và kết quả học tập. Khi học viên mở danh sách khóa học, trình duyệt yêu cầu dữ liệu từ máy chủ. Máy chủ truy vấn các khóa được phép hiển thị rồi trả kết quả để giao diện trình bày. Khi giảng viên sửa bài học, dữ liệu cũng đi qua máy chủ để kiểm tra quyền và điều kiện trước khi được lưu."
+  },
+  {
+    "i": 402,
+    "style": "normal",
+    "text": "Việc phân chia trách nhiệm giúp xác định nơi xử lý từng công việc. Giao diện có thể kiểm tra một ô nhập liệu để người dùng sửa ngay, nhưng quyết định chấp nhận dữ liệu vẫn thuộc máy chủ. Tương tự, việc ẩn một nút trên màn hình chỉ hỗ trợ cách sử dụng. Máy chủ vẫn cần kiểm tra quyền đối với yêu cầu thực sự được gửi đến."
+  },
+  {
+    "i": 403,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 404,
+    "style": "normal",
+    "text": "Hình 2.1 Mô hình trao đổi dữ liệu giữa các thành phần của NextCode"
+  },
+  {
+    "i": 405,
+    "style": "Heading 3",
+    "text": "2.1.2 HTTP, API và dữ liệu JSON"
+  },
+  {
+    "i": 406,
+    "style": "normal",
+    "text": "HTTP là giao thức quy định cách máy khách gửi yêu cầu và máy chủ trả phản hồi trên web. Một yêu cầu thể hiện địa chỉ cần truy cập, loại thao tác, thông tin đi kèm và dữ liệu gửi lên nếu có. Phản hồi chứa mã trạng thái cùng nội dung kết quả. Chẳng hạn, máy chủ có thể trả dữ liệu khi xử lý thành công hoặc trả thông báo khi người dùng chưa đăng nhập."
+  },
+  {
+    "i": 407,
+    "style": "normal",
+    "text": "API là giao diện để các thành phần phần mềm trao đổi dữ liệu và yêu cầu thực hiện công việc. API web của NextCode được tổ chức theo nhóm tài nguyên như người dùng, khóa học và đơn hàng. Các phương thức HTTP được dùng theo mục đích: GET để lấy dữ liệu, POST để tạo dữ liệu hoặc thực hiện một hành động, PATCH để cập nhật và DELETE để xóa. Cách tổ chức này kế thừa nguyên tắc giao tiếp theo tài nguyên của REST, giúp phía giao diện biết cần gửi yêu cầu đến đâu và mong đợi kết quả nào."
+  },
+  {
+    "i": 408,
+    "style": "normal",
+    "text": "Phần lớn dữ liệu nghiệp vụ được trao đổi dưới dạng JSON. Đây là cách biểu diễn dữ liệu bằng các cặp tên và giá trị, có thể chứa danh sách hoặc các đối tượng lồng nhau. Một khóa học có thể được trả về với tên, học phí và danh sách chương. JSON dùng cho thông tin mô tả; video, hình ảnh và tài liệu được tải hoặc truy cập qua các đường dẫn tệp tương ứng."
+  },
+  {
+    "i": 409,
+    "style": "normal",
+    "text": "Trong NextCode, các API nghiệp vụ có tiền tố /api/v1. Giao diện gọi các API này thay vì kết nối trực tiếp với MongoDB. Vì vậy, quy tắc tính tiền, xác định quyền học và ghi nhận hoàn thành được xử lý tại máy chủ trước khi phản ánh lên màn hình."
+  },
+  {
+    "i": 410,
+    "style": "Heading 2",
+    "text": "2.2 Ngôn ngữ lập trình TypeScript"
+  },
+  {
+    "i": 411,
+    "style": "normal",
+    "text": "TypeScript là ngôn ngữ phát triển từ JavaScript, bổ sung khả năng khai báo và kiểm tra kiểu dữ liệu. Kiểu dữ liệu cho biết một giá trị được sử dụng dưới dạng nào, chẳng hạn số, chuỗi hoặc một đối tượng có các thuộc tính xác định. Công cụ kiểm tra kiểu giúp phát hiện một số cách sử dụng không phù hợp trong lúc phát triển, trước khi chương trình được thực thi."
+  },
+  {
+    "i": 412,
+    "style": "normal",
+    "text": "NextCode dùng TypeScript ở cả giao diện và máy chủ. Phía giao diện khai báo cấu trúc của dữ liệu nhận từ API để sử dụng trong trang và thành phần. Phía máy chủ dùng lớp, kiểu dữ liệu và các khai báo liên quan để mô tả thông tin đầu vào, dữ liệu lưu trữ và kết quả xử lý. Ví dụ, học phí là giá trị số, còn trạng thái khóa học được biểu diễn bằng một tập giá trị xác định. Các khai báo này giúp người phát triển hiểu dữ liệu đang được xử lý và giảm nhầm lẫn khi sửa chương trình."
+  },
+  {
+    "i": 413,
+    "style": "normal",
+    "text": "Kiểm tra kiểu trong mã nguồn có giới hạn riêng. Dữ liệu do người dùng gửi đến có thể khác với kiểu đã khai báo, còn một phép tính đúng kiểu vẫn có thể sai quy tắc nghiệp vụ. Vì vậy, đề tài kết hợp TypeScript với kiểm tra dữ liệu tại máy chủ và các điều kiện xử lý trong từng chức năng. TypeScript hỗ trợ việc lập trình, còn việc chấp nhận yêu cầu phụ thuộc dữ liệu thực tế và quy tắc của hệ thống."
+  },
+  {
+    "i": 414,
+    "style": "Heading 2",
+    "text": "2.3 Các công nghệ xây dựng giao diện"
+  },
+  {
+    "i": 415,
+    "style": "Heading 3",
+    "text": "2.3.1 Vue 3"
+  },
+  {
+    "i": 416,
+    "style": "normal",
+    "text": "Vue là công nghệ xây dựng giao diện dựa trên HTML, CSS và JavaScript. Vue cho phép chia giao diện thành các thành phần, mỗi thành phần phụ trách một phần hiển thị và tương tác. Cơ chế phản ứng của Vue theo dõi dữ liệu được sử dụng trên giao diện và cập nhật phần hiển thị liên quan khi dữ liệu thay đổi."
+  },
+  {
+    "i": 417,
+    "style": "normal",
+    "text": "Mã nguồn NextCode sử dụng Vue 3 với Composition API. Các thành phần khai báo dữ liệu, giá trị tính toán và hàm xử lý theo công việc của màn hình. Khi kết quả API thay đổi danh sách khóa học, Vue cập nhật danh sách đang hiển thị. Khi học viên chọn một bài học khác, nội dung của khu vực học được thay đổi theo lựa chọn đó. Người phát triển không phải tự tìm và sửa từng phần tử HTML cho các thay đổi này."
+  },
+  {
+    "i": 418,
+    "style": "normal",
+    "text": "Một tệp thành phần Vue có thể chứa phần mô tả giao diện, phần xử lý bằng TypeScript và phần định dạng. Những thành phần dùng chung như biểu mẫu, hộp thoại và khu vực điều hướng được sử dụng tại nhiều màn hình. Cách tổ chức này giúp tách phần trình bày thành những đơn vị dễ đọc và giúp các trang có cách tương tác nhất quán. Dữ liệu lâu dài như tiến độ hoặc đơn hàng vẫn phải được lấy từ máy chủ hoặc gửi về máy chủ để lưu."
+  },
+  {
+    "i": 419,
+    "style": "Heading 3",
+    "text": "2.3.2 Vue Router"
+  },
+  {
+    "i": 420,
+    "style": "normal",
+    "text": "Vue Router quản lý việc điều hướng giữa các màn hình của ứng dụng Vue. Thư viện liên kết địa chỉ trên trình duyệt với thành phần cần hiển thị và hỗ trợ truyền tham số qua đường dẫn. Nhờ đó, một ứng dụng có thể cung cấp nhiều màn hình trong cùng một hệ thống giao diện."
+  },
+  {
+    "i": 421,
+    "style": "normal",
+    "text": "NextCode dùng Vue Router cho các khu vực xem khóa học, học tập, quản lý nội dung và quản trị. Mã khóa học hoặc mã bài học trong địa chỉ giúp màn hình xác định dữ liệu cần lấy. Các tuyến đường còn khai báo yêu cầu đăng nhập và nhóm vai trò được phép truy cập. Trước khi chuyển trang, chương trình kiểm tra trạng thái tài khoản để điều hướng người dùng đến khu vực phù hợp."
+  },
+  {
+    "i": 422,
+    "style": "normal",
+    "text": "Việc kiểm tra tuyến đường giúp tránh hiển thị màn hình không phù hợp với người dùng. Đối với những thao tác như sửa khóa học hoặc xem dữ liệu quản trị, máy chủ tiếp tục kiểm tra quyền khi nhận yêu cầu. Hai bước này phục vụ hai mục đích liên quan: hướng dẫn người dùng trên giao diện và kiểm soát thao tác với dữ liệu."
+  },
+  {
+    "i": 423,
+    "style": "Heading 3",
+    "text": "2.3.3 Pinia"
+  },
+  {
+    "i": 424,
+    "style": "normal",
+    "text": "Trạng thái giao diện là dữ liệu mà ứng dụng đang sử dụng tại một thời điểm, chẳng hạn người dùng đã đăng nhập hay đang chờ phản hồi. Khi nhiều thành phần cùng cần một dữ liệu, việc lưu riêng ở từng nơi dễ dẫn đến hiển thị không thống nhất. Pinia cung cấp nơi quản lý trạng thái dùng chung cho ứng dụng Vue để các thành phần có thể cùng đọc và cập nhật."
+  },
+  {
+    "i": 425,
+    "style": "normal",
+    "text": "Trong NextCode, Pinia quản lý trạng thái xác thực. Nơi lưu trữ này giữ thông tin người dùng, mã truy cập và trạng thái của các thao tác đăng nhập. Thanh điều hướng, trang tài khoản và bộ điều hướng có thể sử dụng cùng một thông tin để xác định cách hiển thị. Khi đăng xuất hoặc làm mới phiên thất bại, trạng thái được xóa để giao diện trở về trạng thái phù hợp."
+  },
+  {
+    "i": 426,
+    "style": "normal",
+    "text": "Pinia không thay thế cơ sở dữ liệu. Mã truy cập trong trạng thái của NextCode được giữ trong bộ nhớ của ứng dụng đang chạy. Khi tải lại trang, giao diện thực hiện quy trình khôi phục phiên qua máy chủ. Những dữ liệu chỉ phục vụ một màn hình vẫn có thể được quản lý ngay trong thành phần hoặc các hàm xử lý dùng chung của giao diện."
+  },
+  {
+    "i": 427,
+    "style": "Heading 3",
+    "text": "2.3.4 Vuetify và Tailwind CSS"
+  },
+  {
+    "i": 428,
+    "style": "normal",
+    "text": "Vuetify cung cấp các thành phần giao diện dành cho Vue, chẳng hạn nút bấm, trường nhập liệu, hộp thoại, bảng và khu vực bố trí nội dung. Việc sử dụng thành phần có sẵn giúp các màn hình có hình thức và cách tương tác thống nhất, đồng thời giảm công việc xây dựng lại những thành phần thông dụng."
+  },
+  {
+    "i": 429,
+    "style": "normal",
+    "text": "NextCode tích hợp Vuetify trong phần khởi tạo giao diện. Các trang sử dụng thành phần của thư viện để tổ chức biểu mẫu, hiển thị thông tin và tiếp nhận thao tác. Chẳng hạn, biểu mẫu đăng nhập cần trường nhập, nút gửi và vùng thông báo; trang quản lý cần bảng dữ liệu cùng hộp thoại cho các thao tác liên quan. Việc dùng thành phần chung giúp những công việc tương tự có cách sử dụng gần nhau."
+  },
+  {
+    "i": 430,
+    "style": "normal",
+    "text": "Tailwind CSS là công cụ định dạng giao diện bằng các lớp CSS có mục đích cụ thể, như đặt khoảng cách, kích thước chữ, màu sắc và cách bố trí. Các lớp được kết hợp trực tiếp trên phần tử cần trình bày. Tailwind cũng hỗ trợ áp dụng định dạng theo kích thước màn hình để bố cục có thể thay đổi khi vùng hiển thị thay đổi."
+  },
+  {
+    "i": 431,
+    "style": "normal",
+    "text": "Mã nguồn NextCode sử dụng Tailwind cùng Vuetify và CSS riêng. Vuetify cung cấp nhiều thành phần tương tác, còn Tailwind hỗ trợ điều chỉnh bố cục và hình thức của từng vùng nội dung. Việc kết hợp cần giữ cách đặt khoảng cách, màu và cỡ chữ nhất quán giữa các trang. Mức độ hiển thị tốt trên các thiết bị còn phụ thuộc thiết kế từng màn hình và việc kiểm tra thực tế."
+  },
+  {
+    "i": 432,
+    "style": "Heading 3",
+    "text": "2.3.5 Vite"
+  },
+  {
+    "i": 433,
+    "style": "normal",
+    "text": "Vite là công cụ hỗ trợ phát triển và đóng gói ứng dụng giao diện. Trong quá trình lập trình, máy chủ phát triển của Vite cung cấp ứng dụng cho trình duyệt và cập nhật phần mã vừa thay đổi. Khi tạo bản để triển khai, lệnh dựng ứng dụng tập hợp mã nguồn và các tài nguyên cần thiết thành các tệp sử dụng cho môi trường chạy thực tế."
+  },
+  {
+    "i": 434,
+    "style": "normal",
+    "text": "NextCode cấu hình Vite với phần hỗ trợ Vue và Tailwind CSS. Khi phát triển trên máy cá nhân, các yêu cầu bắt đầu bằng /api và /public được chuyển tiếp đến máy chủ NestJS. Cấu hình này giúp giao diện gọi API và lấy tệp trong cùng quá trình làm việc. Lệnh dựng giao diện kết hợp kiểm tra kiểu bằng vue-tsc với đóng gói bằng Vite, để phát hiện vấn đề về kiểu trước khi tạo bản dựng."
+  },
+  {
+    "i": 435,
+    "style": "normal",
+    "text": "Máy chủ phát triển và bản dựng phục vụ hai giai đoạn khác nhau. Cấu hình chuyển tiếp khi phát triển giúp kết nối các thành phần trên máy lập trình; cách công bố địa chỉ API và phân phối tệp giao diện khi triển khai cần được thiết lập theo môi trường vận hành. Vì vậy, chương này xem Vite là công cụ phát triển và dựng giao diện của đề tài."
+  },
+  {
+    "i": 436,
+    "style": "Heading 3",
+    "text": "2.3.6 Axios"
+  },
+  {
+    "i": 437,
+    "style": "normal",
+    "text": "Axios là thư viện gửi yêu cầu HTTP. Thư viện hỗ trợ thiết lập cấu hình dùng chung và các hàm chặn yêu cầu hoặc phản hồi để xử lý trước khi dữ liệu được chuyển đến bước tiếp theo. Nhờ vậy, những công việc lặp lại khi gọi API có thể được tập trung tại một nơi."
+  },
+  {
+    "i": 438,
+    "style": "normal",
+    "text": "Phía giao diện NextCode tạo một đối tượng Axios dùng chung cho các API. Trước khi gửi yêu cầu cần xác thực, chương trình bổ sung mã truy cập vào phần đầu yêu cầu. Khi nhận phản hồi cho biết mã truy cập không còn hợp lệ, chương trình có thể yêu cầu làm mới phiên rồi thực hiện lại yêu cầu. Các yêu cầu cùng chờ làm mới được phối hợp để hạn chế việc gửi nhiều yêu cầu làm mới đồng thời."
+  },
+  {
+    "i": 439,
+    "style": "normal",
+    "text": "Axios phụ trách việc trao đổi với máy chủ, còn thành phần giao diện quyết định cách thể hiện dữ liệu và thông báo. Ví dụ, màn hình có thể chuyển sang trạng thái đang tải khi bắt đầu gọi API rồi hiển thị danh sách hoặc thông báo lỗi sau khi nhận kết quả. Máy chủ vẫn là nơi xác định yêu cầu có được chấp nhận hay không."
+  },
+  {
+    "i": 440,
+    "style": "Heading 2",
+    "text": "2.4 Các công nghệ xây dựng máy chủ"
+  },
+  {
+    "i": 441,
+    "style": "Heading 3",
+    "text": "2.4.1 Node.js"
+  },
+  {
+    "i": 442,
+    "style": "normal",
+    "text": "Node.js là môi trường thực thi JavaScript bên ngoài trình duyệt. Node.js cung cấp các chức năng để xây dựng máy chủ, làm việc với tệp và giao tiếp qua mạng. Cơ chế xử lý vào ra bất đồng bộ cho phép chương trình tiếp tục xử lý công việc khác trong khi chờ một thao tác như đọc dữ liệu hoặc nhận phản hồi mạng hoàn thành."
+  },
+  {
+    "i": 443,
+    "style": "normal",
+    "text": "Trong NextCode, Node.js chạy phần ứng dụng NestJS sau khi mã nguồn được dựng. Các công việc như truy vấn MongoDB, gửi email và gọi dịch vụ thanh toán thường phải chờ hệ thống khác phản hồi. Mã nguồn sử dụng các hàm bất đồng bộ để tiếp nhận và xử lý kết quả khi chúng có sẵn. Khả năng đáp ứng thực tế vẫn phụ thuộc nội dung công việc, cách viết chương trình và tài nguyên của môi trường chạy."
+  },
+  {
+    "i": 444,
+    "style": "Heading 3",
+    "text": "2.4.2 NestJS và cách tổ chức chương trình"
+  },
+  {
+    "i": 445,
+    "style": "normal",
+    "text": "NestJS là khung phát triển ứng dụng máy chủ trong hệ sinh thái Node.js. Chương trình được chia thành các module theo chức năng. Bên trong module, controller tiếp nhận yêu cầu còn service thực hiện công việc xử lý. NestJS hỗ trợ cơ chế cung cấp phụ thuộc, nghĩa là khung chương trình tạo và truyền các đối tượng cần thiết cho thành phần sử dụng chúng."
+  },
+  {
+    "i": 446,
+    "style": "normal",
+    "text": "NextCode phân chia máy chủ thành các module như xác thực, người dùng, khóa học, đăng ký học, đơn hàng và chứng chỉ. Một yêu cầu sửa khóa học được controller tương ứng tiếp nhận rồi chuyển cho service. Service kiểm tra điều kiện nghiệp vụ và sử dụng lớp truy cập dữ liệu để lấy hoặc cập nhật thông tin. Kết quả sau đó được trả về giao diện qua API."
+  },
+  {
+    "i": 447,
+    "style": "normal",
+    "text": "Sự phân chia này giúp giữ trách nhiệm rõ ràng trong mã nguồn. Controller mô tả đầu vào và đường dẫn của thao tác. Service quyết định có chấp nhận thao tác hay không và cần thay đổi dữ liệu nào. Các model Mongoose thực hiện công việc với MongoDB. Phần hiển thị được Vue xử lý tại trình duyệt, còn máy chủ NestJS chủ yếu trả dữ liệu cho các API."
+  },
+  {
+    "i": 448,
+    "style": "Heading 3",
+    "text": "2.4.3 Kiểm tra đầu vào và xử lý phản hồi"
+  },
+  {
+    "i": 449,
+    "style": "normal",
+    "text": "Dữ liệu đầu vào cần được kiểm tra trước khi tham gia xử lý nghiệp vụ. NestJS hỗ trợ mô tả dữ liệu nhận vào bằng các lớp DTO và kiểm tra chúng thông qua ValidationPipe. Các thư viện class-validator và class-transformer hỗ trợ khai báo điều kiện hợp lệ và chuyển dữ liệu nhận được sang dạng đối tượng cần dùng."
+  },
+  {
+    "i": 450,
+    "style": "normal",
+    "text": "Trong NextCode, bước kiểm tra chung được cấu hình tại điểm khởi động máy chủ. Các thuộc tính gửi lên phải phù hợp với khai báo kiểm tra của DTO. Khi yêu cầu có thuộc tính ngoài danh sách cho phép, cấu hình hiện tại từ chối yêu cầu. Những kiểm tra như email có đúng định dạng hoặc một giá trị có phải số thuộc phạm vi kiểm tra dữ liệu. Những điều kiện như ai sở hữu khóa học hoặc đơn hàng đã được thanh toán chưa tiếp tục được xử lý trong các thành phần nghiệp vụ."
+  },
+  {
+    "i": 451,
+    "style": "normal",
+    "text": "Máy chủ còn sử dụng guard để kiểm tra điều kiện truy cập, interceptor để định dạng kết quả và bộ xử lý ngoại lệ để trả thông báo lỗi theo cấu trúc chung. Việc thống nhất cách phản hồi giúp giao diện đọc kết quả và hiển thị lỗi theo một quy ước. Một lỗi về định dạng dữ liệu, thiếu quyền hoặc không tìm thấy đối tượng cần được thông báo phù hợp để người dùng biết có thể làm gì tiếp theo."
+  },
+  {
+    "i": 452,
+    "style": "Heading 2",
+    "text": "2.5 Cơ sở dữ liệu MongoDB và thư viện Mongoose"
+  },
+  {
+    "i": 453,
+    "style": "Heading 3",
+    "text": "2.5.1 Mô hình dữ liệu MongoDB"
+  },
+  {
+    "i": 454,
+    "style": "normal",
+    "text": "MongoDB là hệ quản trị cơ sở dữ liệu tổ chức dữ liệu dưới dạng tài liệu. Mỗi tài liệu chứa các trường dữ liệu và được lưu trong một tập hợp. Trường có thể chứa giá trị đơn, một tài liệu con hoặc một danh sách. Các đối tượng liên quan có thể được lưu lồng trong một tài liệu hoặc liên kết bằng mã tham chiếu, tùy cách ứng dụng truy cập và cập nhật dữ liệu."
+  },
+  {
+    "i": 455,
+    "style": "normal",
+    "text": "Một khóa học trong NextCode có nhiều chương, mỗi chương có các bài học và những thông tin liên quan. Cấu trúc lồng nhau của MongoDB được dùng để lưu các thành phần nội dung này trong dữ liệu khóa học. Khi lấy nội dung khóa học, chương trình có thể đọc cấu trúc chương và bài từ dữ liệu tương ứng."
+  },
+  {
+    "i": 456,
+    "style": "normal",
+    "text": "Những thông tin có vòng đời hoặc cách sử dụng riêng được tổ chức thành các tập hợp riêng. Chẳng hạn, bản ghi đăng ký học liên kết học viên với khóa học, còn đơn hàng lưu thông tin của quá trình mua khóa. Cách tham chiếu giúp biểu diễn quan hệ giữa các đối tượng mà không phải đưa toàn bộ dữ liệu tài khoản hoặc khóa học vào từng bản ghi liên quan. Việc chọn lưu lồng hay tham chiếu cần dựa vào nhu cầu đọc, cập nhật và quản lý dữ liệu của từng chức năng."
+  },
+  {
+    "i": 457,
+    "style": "Heading 3",
+    "text": "2.5.2 Schema, model và chỉ mục trong Mongoose"
+  },
+  {
+    "i": 458,
+    "style": "normal",
+    "text": "Mongoose là thư viện làm việc với MongoDB trong ứng dụng Node.js. Schema mô tả cấu trúc dữ liệu, kiểu của từng trường và các quy định liên quan. Model được tạo từ schema cung cấp các thao tác để tạo, đọc, sửa và xóa dữ liệu. Những khai báo này giúp ứng dụng làm việc với các tài liệu theo cấu trúc đã xác định."
+  },
+  {
+    "i": 459,
+    "style": "normal",
+    "text": "NextCode khai báo schema cho người dùng, khóa học, đơn hàng, đăng ký học và các dữ liệu nghiệp vụ khác. Các module NestJS nhận model tương ứng để truy vấn MongoDB. Chẳng hạn, service đăng ký học dùng model để tìm bản ghi giữa một học viên và một khóa học, từ đó xử lý quyền học hoặc cập nhật tiến độ."
+  },
+  {
+    "i": 460,
+    "style": "normal",
+    "text": "Chỉ mục là cấu trúc hỗ trợ việc tìm dữ liệu theo những trường xác định. Chỉ mục duy nhất còn được dùng để ngăn các giá trị trùng trong phạm vi đã khai báo. Schema đăng ký học của NextCode khai báo chỉ mục duy nhất trên cặp học viên và khóa học. Quy định này thể hiện yêu cầu mỗi học viên chỉ có một bản ghi đăng ký đối với cùng một khóa học, còn thông tin học tập được cập nhật trên bản ghi đó."
+  },
+  {
+    "i": 461,
+    "style": "normal",
+    "text": "Cấu trúc dữ liệu và chỉ mục cần đi cùng các điều kiện xử lý của ứng dụng. Việc lưu được một tài liệu đúng schema chưa đủ để kết luận thao tác đúng nghiệp vụ. Với đăng ký học, máy chủ còn phải kiểm tra điều kiện của khóa và kết quả thanh toán khi cần. Những quan hệ và ràng buộc cụ thể sẽ được trình bày trong phần thiết kế dữ liệu."
+  },
+  {
+    "i": 462,
+    "style": "Heading 2",
+    "text": "2.6 Xác thực và kiểm soát quyền truy cập"
+  },
+  {
+    "i": 463,
+    "style": "Heading 3",
+    "text": "2.6.1 Xác thực bằng JWT và duy trì phiên đăng nhập"
+  },
+  {
+    "i": 464,
+    "style": "normal",
+    "text": "Xác thực là bước xác định người đang sử dụng tài khoản. Sau khi thông tin đăng nhập được kiểm tra, máy chủ có thể cấp một mã để người dùng gửi kèm các yêu cầu tiếp theo. JWT là định dạng biểu diễn các thông tin xác nhận trong một mã có thể trao đổi giữa các bên. Với JWT được ký, bên nhận có thể kiểm tra chữ ký để phát hiện dữ liệu bị thay đổi."
+  },
+  {
+    "i": 465,
+    "style": "normal",
+    "text": "NextCode sử dụng JWT làm mã truy cập. Mã chứa các thông tin như mã người dùng, email, vai trò và thời hạn hiệu lực. Khi giao diện gọi API cần đăng nhập, Axios gửi mã này theo dạng Bearer trong phần đầu yêu cầu. Guard xác thực của máy chủ kiểm tra mã rồi cung cấp thông tin người dùng cho bước xử lý tiếp theo. Chữ ký dùng để kiểm tra tính hợp lệ; nội dung JWT được ký không vì thế trở thành dữ liệu bí mật."
+  },
+  {
+    "i": 466,
+    "style": "normal",
+    "text": "Mã truy cập có thời hạn ngắn để giới hạn thời gian sử dụng. Để người dùng không phải nhập mật khẩu sau mỗi lần mã truy cập hết hạn, hệ thống cấp thêm mã làm mới. Trong mã nguồn NextCode, mã làm mới là chuỗi ngẫu nhiên, được lưu dưới dạng băm trong cơ sở dữ liệu và gửi cho trình duyệt bằng cookie HttpOnly. Thuộc tính này ngăn mã JavaScript trên trang đọc trực tiếp giá trị cookie. Khi chạy trong môi trường production, cookie còn được cấu hình chỉ gửi qua kết nối bảo mật."
+  },
+  {
+    "i": 467,
+    "style": "normal",
+    "text": "Khi làm mới phiên hợp lệ, máy chủ thu hồi mã làm mới cũ rồi cấp bộ mã mới. Máy chủ cũng kiểm tra trạng thái tài khoản trong bước này. Giao diện giữ mã truy cập trong bộ nhớ và có thể khôi phục phiên qua cookie khi tải lại trang. Đăng xuất thu hồi mã làm mới để chấm dứt khả năng tiếp tục làm mới phiên. Các bước này cần được hiểu cùng thời hạn của mã truy cập đang có."
+  },
+  {
+    "i": 468,
+    "style": "Heading 3",
+    "text": "2.6.2 Băm mật khẩu bằng Argon2 và xác minh OTP"
+  },
+  {
+    "i": 469,
+    "style": "normal",
+    "text": "Băm là cách chuyển một giá trị thành kết quả dùng để kiểm tra đối chiếu, thay vì lưu giá trị gốc. Khi người dùng đăng nhập, hệ thống kiểm tra mật khẩu nhập vào với bản băm đã lưu. Argon2 là thuật toán được thư viện node-argon2 cung cấp để băm và xác minh mật khẩu trong ứng dụng Node.js."
+  },
+  {
+    "i": 470,
+    "style": "normal",
+    "text": "NextCode dùng Argon2 cho mật khẩu, mã làm mới và mã xác minh OTP. Mật khẩu không được lưu trực tiếp ở dạng người dùng đã nhập. Khi kiểm tra một giá trị, chương trình sử dụng chức năng xác minh của thư viện với bản băm tương ứng. Người dùng quên mật khẩu được thực hiện quy trình đặt mật khẩu mới sau khi xác minh, thay vì yêu cầu hệ thống cung cấp lại mật khẩu cũ."
+  },
+  {
+    "i": 471,
+    "style": "normal",
+    "text": "OTP là mã xác minh có thời hạn, được dùng cho một mục đích cụ thể. NextCode tạo mã gồm sáu chữ số bằng chức năng sinh số ngẫu nhiên của Node.js rồi gửi qua email khi đăng ký hoặc đặt lại mật khẩu. Bản ghi OTP chứa mục đích, thời điểm hết hạn, số lần nhập sai và tình trạng đã sử dụng. Những điều kiện này giúp máy chủ quyết định một mã còn được chấp nhận hay cần yêu cầu gửi mã mới."
+  },
+  {
+    "i": 472,
+    "style": "Heading 3",
+    "text": "2.6.3 Phân quyền và các biện pháp hỗ trợ"
+  },
+  {
+    "i": 473,
+    "style": "normal",
+    "text": "Phân quyền xác định người đã đăng nhập được làm những công việc nào. NextCode phân chia vai trò để tách hoạt động học tập, biên soạn, quản trị và kế toán. Vai trò được kiểm tra tại các API có yêu cầu tương ứng. Đối với dữ liệu cụ thể, chương trình còn kiểm tra quan hệ giữa người dùng và đối tượng, chẳng hạn giảng viên có được phân công cho khóa học cần sửa hay học viên có đăng ký khóa đang truy cập hay không."
+  },
+  {
+    "i": 474,
+    "style": "normal",
+    "text": "Máy chủ sử dụng Helmet để thiết lập một số trường HTTP hỗ trợ bảo vệ trình duyệt, cấu hình CORS để quy định nguồn giao diện được phép trao đổi dữ liệu và dùng Throttler để giới hạn tần suất yêu cầu. Các cơ chế này hỗ trợ kiểm soát cách ứng dụng được truy cập. Chúng cần được kết hợp với xác thực, kiểm tra quyền và điều kiện nghiệp vụ của từng thao tác."
+  },
+  {
+    "i": 475,
+    "style": "Heading 2",
+    "text": "2.7 Gửi email bằng Nodemailer và SMTP"
+  },
+  {
+    "i": 476,
+    "style": "normal",
+    "text": "SMTP là giao thức dùng để chuyển thư điện tử. Nodemailer là thư viện giúp ứng dụng Node.js tạo và gửi email thông qua máy chủ thư. Chương trình thiết lập nơi nhận thư gửi đi, phương thức kết nối và thông tin xác thực của tài khoản gửi. Nội dung thư được cung cấp khi thực hiện thao tác gửi."
+  },
+  {
+    "i": 477,
+    "style": "normal",
+    "text": "Trong NextCode, dịch vụ email sử dụng Nodemailer để gửi mã xác minh đăng ký và mã đặt lại mật khẩu. Máy chủ tạo mã, lưu thông tin phục vụ kiểm tra rồi yêu cầu dịch vụ email gửi mã đến địa chỉ của người dùng. Người dùng nhập mã nhận được trên giao diện, còn máy chủ kiểm tra thời hạn, mục đích và tình trạng sử dụng trước khi chấp nhận."
+  },
+  {
+    "i": 478,
+    "style": "normal",
+    "text": "Thông tin kết nối máy chủ thư được đọc từ cấu hình môi trường để có thể thay đổi theo nơi vận hành. Việc gửi yêu cầu thành công đến máy chủ thư không đồng nghĩa người dùng chắc chắn đã đọc được email. Vì vậy, giao diện có chức năng gửi lại mã theo điều kiện của hệ thống, còn dịch vụ gửi thư cần xử lý trường hợp kết nối hoặc xác thực không thành công."
+  },
+  {
+    "i": 479,
+    "style": "Heading 2",
+    "text": "2.8 Thanh toán qua payOS và mã QR chuyển khoản"
+  },
+  {
+    "i": 480,
+    "style": "Heading 3",
+    "text": "2.8.1 Liên kết thanh toán và mã QR"
+  },
+  {
+    "i": 481,
+    "style": "normal",
+    "text": "payOS cung cấp API tạo liên kết thanh toán và tra cứu thông tin thanh toán. Khi tạo liên kết, hệ thống gửi các thông tin như mã đơn hàng, số tiền, nội dung thanh toán và địa chỉ quay lại. Dữ liệu yêu cầu có chữ ký kiểm tra theo quy định của dịch vụ."
+  },
+  {
+    "i": 482,
+    "style": "normal",
+    "text": "NextCode thực hiện việc tích hợp tại máy chủ bằng các yêu cầu HTTP đến payOS. Sau khi xác định số tiền phải thanh toán từ dữ liệu của hệ thống, máy chủ tạo thông tin thanh toán để giao diện hiển thị. Mã QR chứa thông tin chuyển khoản giúp học viên dùng ứng dụng ngân hàng điền thông tin thuận tiện hơn. Mã QR là phương tiện cung cấp thông tin thanh toán; kết quả giao dịch phải được kiểm tra qua dữ liệu xác nhận."
+  },
+  {
+    "i": 483,
+    "style": "normal",
+    "text": "Mã nguồn cũng có chức năng tạo đường dẫn hình mã QR theo thông tin chuyển khoản. Việc hiển thị hình mã QR và việc xác định đã nhận tiền là hai bước khác nhau. Quyền học khóa có phí được xử lý theo trạng thái thanh toán mà máy chủ đã xác minh, không chỉ dựa vào thao tác đóng trang thanh toán hoặc quay lại giao diện."
+  },
+  {
+    "i": 484,
+    "style": "Heading 3",
+    "text": "2.8.2 Webhook và kiểm tra dữ liệu giao dịch"
+  },
+  {
+    "i": 485,
+    "style": "normal",
+    "text": "Webhook là cách một dịch vụ chủ động gửi thông báo đến địa chỉ của hệ thống khi có sự kiện. Với thanh toán, payOS gửi thông tin giao dịch cho máy chủ NextCode. Máy chủ có thể tiếp nhận kết quả mà không phụ thuộc việc người dùng còn mở màn hình thanh toán hay không. Ngoài thông báo này, chương trình còn có thao tác lấy trạng thái liên kết thanh toán để cập nhật kết quả."
+  },
+  {
+    "i": 486,
+    "style": "normal",
+    "text": "Thông báo nhận được cần được kiểm tra trước khi làm thay đổi đơn hàng. NextCode sử dụng HMAC SHA-256 với khóa kiểm tra được cấu hình để đối chiếu chữ ký dữ liệu từ payOS. Cơ chế này giúp kiểm tra thông báo theo dữ liệu và khóa mà hai bên sử dụng. Khóa kiểm tra thuộc cấu hình phía máy chủ và không được gửi cho giao diện."
+  },
+  {
+    "i": 487,
+    "style": "normal",
+    "text": "Sau khi kiểm tra thông báo, chương trình đối chiếu mã đơn, số tiền và thông tin giao dịch theo điều kiện xử lý. Khi kết quả được chấp nhận, máy chủ ghi nhận thanh toán và xử lý đăng ký học tương ứng. Việc xử lý cần nhận biết giao dịch đã ghi nhận vì thông báo có thể được gửi lại. Các bước này liên kết dữ liệu thanh toán với quyền học và là cơ sở cho quy trình mua khóa học trong đề tài."
+  },
+  {
+    "i": 488,
+    "style": "Heading 2",
+    "text": "2.9 Công cụ kiểm thử và tài liệu API"
+  },
+  {
+    "i": 489,
+    "style": "Heading 3",
+    "text": "2.9.1 Kiểm thử bằng Vitest"
+  },
+  {
+    "i": 490,
+    "style": "normal",
+    "text": "Kiểm thử tự động thực hiện những tình huống đã được mô tả bằng mã rồi so sánh kết quả nhận được với kết quả mong đợi. Vitest là công cụ chạy kiểm thử trong hệ sinh thái JavaScript và TypeScript. Công cụ hỗ trợ khai báo các trường hợp kiểm tra, kiểm tra kết quả và thay thế thành phần phụ thuộc khi cần tách riêng phần đang được kiểm thử."
+  },
+  {
+    "i": 491,
+    "style": "normal",
+    "text": "Mã nguồn NextCode có các tệp kiểm thử cho những service phía máy chủ và sử dụng Vitest để chạy chúng. Trong kiểm thử đơn vị, dữ liệu hoặc model có thể được thay bằng đối tượng mô phỏng. Cách làm này cho phép kiểm tra phản ứng của service trước dữ liệu đầu vào và trạng thái đã chuẩn bị mà không phải vận hành toàn bộ các dịch vụ ngoài."
+  },
+  {
+    "i": 492,
+    "style": "normal",
+    "text": "Ví dụ, với xử lý đơn hàng, một tình huống có thể kiểm tra điều kiện chấp nhận trạng thái thanh toán; với học tập, một tình huống có thể kiểm tra điều kiện hoàn thành. Việc mô phỏng giúp tập trung vào quy tắc đang xét, còn kết nối thực tế giữa giao diện, máy chủ, cơ sở dữ liệu và dịch vụ ngoài cần được kiểm tra theo phạm vi riêng. Kết quả kiểm thử cụ thể sẽ được trình bày trong chương kiểm thử và đánh giá."
+  },
+  {
+    "i": 493,
+    "style": "Heading 3",
+    "text": "2.9.2 Tài liệu API bằng OpenAPI và Swagger"
+  },
+  {
+    "i": 494,
+    "style": "normal",
+    "text": "OpenAPI là cách mô tả API HTTP theo một cấu trúc có thể đọc và xử lý bằng công cụ. Nội dung mô tả gồm đường dẫn, phương thức, dữ liệu đầu vào và các phản hồi. Thư viện Swagger dành cho NestJS hỗ trợ tạo tài liệu từ khai báo trong chương trình và cung cấp giao diện xem, gửi thử yêu cầu API."
+  },
+  {
+    "i": 495,
+    "style": "normal",
+    "text": "NextCode cấu hình Swagger tại đường dẫn /api/docs. Người phát triển có thể xem các nhóm API, dữ liệu cần gửi và yêu cầu xác thực khi kiểm tra từng chức năng. Những khai báo tại controller và DTO giúp tài liệu gắn với cấu trúc chương trình. Nội dung mô tả vẫn cần được cập nhật khi hành vi API thay đổi để người sử dụng tài liệu hiểu đúng."
+  },
+  {
+    "i": 496,
+    "style": "normal",
+    "text": "Giao diện Swagger hỗ trợ kiểm tra từng yêu cầu và theo dõi phản hồi. Kết quả một lần gửi thử chỉ phản ánh tình huống đã thực hiện. Vì vậy, tài liệu API và kiểm thử tự động bổ sung cho nhau trong quá trình phát triển: một bên làm rõ cách gọi API, bên còn lại kiểm tra có hệ thống các điều kiện đã được xác định."
+  },
+  {
+    "i": 497,
+    "style": "Heading 2",
+    "text": "2.10 Tổng kết chương"
+  },
+  {
+    "i": 498,
+    "style": "normal",
+    "text": "Bảng 2.1 tóm tắt vai trò của các nhóm công nghệ trong NextCode. Các nhóm này phối hợp để thực hiện những yêu cầu đã phân tích ở Chương 1."
+  },
+  {
+    "i": 499,
+    "style": "normal",
+    "text": "Bảng 2.1 Vai trò của các nhóm công nghệ trong NextCode"
+  },
+  {
+    "i": 500,
+    "style": "normal",
+    "text": "Những kiến thức trên giải thích cách các thành phần có thể phối hợp để đáp ứng bài toán đã nêu ở Chương 1. Trên cơ sở đó, phần tiếp theo của báo cáo sẽ trình bày kiến trúc cụ thể, thiết kế dữ liệu, giao diện và cách cài đặt các chức năng của NextCode."
+  },
+  {
+    "i": 501,
+    "style": "Heading 1",
+    "text": "CHƯƠNG 3 THIẾT KẾ VÀ CÀI ĐẶT GIẢI PHÁP"
+  },
+  {
+    "i": 502,
+    "style": "normal",
+    "text": "Chương này trình bày cách tổ chức và cài đặt NextCode để giải quyết bài toán đăng ký và học các khóa lập trình trực tuyến. Nội dung gồm kiến trúc hệ thống, phân rã chức năng, cấu trúc dữ liệu, giao diện và cách xử lý các quy trình chính. Các phần được liên kết theo công việc thực tế, từ chuẩn bị khóa học đến đăng ký, thanh toán, học tập và ghi nhận kết quả."
+  },
+  {
+    "i": 503,
+    "style": "Heading 2",
+    "text": "3.1 Kiến trúc tổng quan của hệ thống"
+  },
+  {
+    "i": 504,
+    "style": "Heading 3",
+    "text": "3.1.1 Các thành phần và sự liên kết"
+  },
+  {
+    "i": 505,
+    "style": "normal",
+    "text": "NextCode được tổ chức thành phần giao diện và phần máy chủ. Giao diện Vue chạy trong trình duyệt, cung cấp các trang xem khóa học, học tập và quản lý. Máy chủ NestJS tiếp nhận yêu cầu qua API, kiểm tra dữ liệu, kiểm tra quyền và thực hiện nghiệp vụ. MongoDB lưu thông tin để các bước của một quy trình có thể sử dụng lại dữ liệu đã ghi nhận."
+  },
+  {
+    "i": 506,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 507,
+    "style": "normal",
+    "text": "Hình 3.1 Kiến trúc tổng quan của NextCode"
+  },
+  {
+    "i": 508,
+    "style": "normal",
+    "text": "Ngoài cơ sở dữ liệu, máy chủ kết nối đến máy chủ thư qua SMTP để gửi mã xác minh và đến payOS để xử lý thông tin thanh toán. Các hình ảnh, video và tài liệu tải lên được lưu trong thư mục public của ứng dụng máy chủ. Cơ sở dữ liệu lưu đường dẫn và thông tin mô tả của những tệp này."
+  },
+  {
+    "i": 509,
+    "style": "normal",
+    "text": "Trình duyệt gọi API tại /api/v1 để lấy hoặc thay đổi dữ liệu nghiệp vụ. Chẳng hạn, khi mở danh sách khóa học, giao diện gửi bộ lọc đến máy chủ. Máy chủ chỉ chọn các khóa đã duyệt, truy vấn dữ liệu liên quan và trả danh sách để trình bày. Với yêu cầu tạo đơn, máy chủ lấy giá từ dữ liệu khóa học rồi tính số tiền trước khi liên hệ payOS."
+  },
+  {
+    "i": 510,
+    "style": "normal",
+    "text": "Một yêu cầu học tập cũng đi qua máy chủ để kiểm tra đăng ký và tình trạng bài học. Phản hồi chứa dữ liệu cần cho màn hình, còn hình ảnh, video hoặc tài liệu được truy cập qua đường dẫn tương ứng. Cách cung cấp tệp hiện tại được trình bày riêng tại mục 3.5.7 để phân biệt dữ liệu nghiệp vụ với tệp nội dung."
+  },
+  {
+    "i": 511,
+    "style": "Heading 3",
+    "text": "3.1.2 Tổ chức mã nguồn"
+  },
+  {
+    "i": 512,
+    "style": "normal",
+    "text": "Phần giao diện nằm trong client, còn mã nguồn máy chủ nằm tại src ở thư mục gốc. Bảng 3.1 trình bày trách nhiệm của các nhóm thư mục chính."
+  },
+  {
+    "i": 513,
+    "style": "normal",
+    "text": "Bảng 3.1 Tổ chức mã nguồn của NextCode"
+  },
+  {
+    "i": 514,
+    "style": "normal",
+    "text": "Ở máy chủ, controller nhận yêu cầu, service xử lý nghiệp vụ và model Mongoose làm việc với dữ liệu. Ở giao diện, trang ghép các thành phần hiển thị và sử dụng dịch vụ gọi API. Pinia giữ trạng thái xác thực dùng chung, còn dữ liệu riêng của màn hình được quản lý tại trang hoặc hàm xử lý liên quan."
+  },
+  {
+    "i": 515,
+    "style": "Heading 2",
+    "text": "3.2 Sơ đồ phân rã chức năng"
+  },
+  {
+    "i": 516,
+    "style": "Heading 3",
+    "text": "3.2.1 Phân rã chức năng tổng quát"
+  },
+  {
+    "i": 517,
+    "style": "normal",
+    "text": "Các chức năng được chia theo nhóm công việc thay vì theo tên thư viện hoặc tệp chương trình. Mức tổng quát gồm quản lý tài khoản, tra cứu khóa học, đăng ký và thanh toán, học tập, biên soạn nội dung và quản trị. Các nhóm cùng sử dụng dữ liệu tài khoản, khóa học và kết quả xử lý để tiếp nối quy trình."
+  },
+  {
+    "i": 518,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 519,
+    "style": "normal",
+    "text": "Hình 3.2 Phân rã chức năng tổng quát của NextCode"
+  },
+  {
+    "i": 520,
+    "style": "normal",
+    "text": "Sơ đồ phân rã cho biết một nhóm công việc bao gồm những chức năng nào. Quyền thực hiện từng chức năng còn phụ thuộc vai trò và dữ liệu liên quan. Ví dụ, cùng là xem tiến độ, học viên xem kết quả của mình, giảng viên xem học viên trong khóa được phân công, còn quản trị viên xem theo phạm vi quản lý."
+  },
+  {
+    "i": 521,
+    "style": "Heading 3",
+    "text": "3.2.2 Chức năng của khách truy cập và học viên"
+  },
+  {
+    "i": 522,
+    "style": "normal",
+    "text": "Khách truy cập có thể tìm kiếm, lọc, xem mô tả khóa học và tra cứu chứng chỉ bằng mã. Khi muốn đăng ký học, người dùng tạo tài khoản, xác minh email rồi đăng nhập. Học viên đã đăng nhập có thêm các chức năng đăng ký khóa miễn phí, mua khóa Pro, học theo thứ tự, làm trắc nghiệm, xem tiến độ và chứng chỉ."
+  },
+  {
+    "i": 523,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 524,
+    "style": "normal",
+    "text": "Hình 3.3 Phân rã chức năng của khách truy cập và học viên"
+  },
+  {
+    "i": 525,
+    "style": "normal",
+    "text": "Nhóm tài khoản dùng cho cập nhật hồ sơ, đổi mật khẩu và quản lý phiên đăng nhập. Nhóm đơn hàng ghi nhận việc mua khóa và kết quả thanh toán. Nhóm học tập liên kết quyền học với bài học được mở, kết quả trả lời và tình trạng hoàn thành. Hỏi đáp, phản ánh nội dung và đánh giá khóa học là những hoạt động gắn với quá trình sử dụng; điều kiện đánh giá được kiểm tra tại máy chủ."
+  },
+  {
+    "i": 526,
+    "style": "Heading 3",
+    "text": "3.2.3 Chức năng của giảng viên"
+  },
+  {
+    "i": 527,
+    "style": "normal",
+    "text": "Giảng viên làm việc với các khóa được phân công. Các công việc chính gồm tổ chức chương, bài học, học liệu và câu hỏi; kiểm tra nội dung trước khi gửi duyệt; xem thử khóa; theo dõi học viên; giải đáp và xử lý phản ánh trong phạm vi được giao. Việc tạo khóa nền, phân công giảng viên và quyết định công bố thuộc quản trị viên."
+  },
+  {
+    "i": 528,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 529,
+    "style": "normal",
+    "text": "Hình 3.4 Phân rã chức năng của giảng viên"
+  },
+  {
+    "i": 530,
+    "style": "normal",
+    "text": "Chế độ xem thử cho phép giảng viên xem các bài trong khóa và làm thử câu hỏi. Chương trình trả kết quả xem thử mà không ghi nhận đây là tiến độ học của học viên. Khi xử lý phản ánh, giảng viên có thể bỏ qua, ẩn nội dung kèm nhắc nhở hoặc chuyển lên quản trị viên. Các trường hợp thuộc thẩm quyền quản trị viên được tách khỏi phạm vi xử lý của giảng viên."
+  },
+  {
+    "i": 531,
+    "style": "Heading 3",
+    "text": "3.2.4 Chức năng của quản trị viên"
+  },
+  {
+    "i": 532,
+    "style": "normal",
+    "text": "Quản trị viên quản lý người dùng, khởi tạo khóa học, định giá, phân công giảng viên và xét duyệt công bố. Ngoài ra, quản trị viên có thể xem nội dung, theo dõi học viên, xử lý phản ánh ở tuyến cuối, xem đơn hàng và xác nhận thanh toán thủ công. Hình 3.5 tổng hợp các nhóm công việc này."
+  },
+  {
+    "i": 533,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 534,
+    "style": "normal",
+    "text": "Hình 3.5 Phân rã chức năng của quản trị viên"
+  },
+  {
+    "i": 535,
+    "style": "normal",
+    "text": "Mã nguồn còn định nghĩa vai trò ACCOUNTANT cho các API quản lý đơn hàng và tuyến /dashboard/orders. Liên kết đến màn hình đơn hàng trong menu quản lý hiện chỉ được hiển thị cho quản trị viên; bố cục quản lý chưa tách riêng cách trình bày cho kế toán. Vì vậy, cần phân biệt quyền gọi chức năng với cách bố trí các lối truy cập trên giao diện."
+  },
+  {
+    "i": 536,
+    "style": "Heading 2",
+    "text": "3.3 Thiết kế dữ liệu"
+  },
+  {
+    "i": 537,
+    "style": "Heading 3",
+    "text": "3.3.1 Mối liên hệ và cách lưu trữ"
+  },
+  {
+    "i": 538,
+    "style": "normal",
+    "text": "Dữ liệu được chia thành ba nhóm liên quan. Nhóm tài khoản lưu người dùng và thông tin xác thực. Nhóm khóa học và học tập lưu nội dung, đăng ký, tiến độ, câu trả lời và chứng chỉ. Nhóm vận hành lưu đơn hàng, giao dịch, hỏi đáp, đánh giá, báo cáo vi phạm và thông báo. Các nhóm liên kết bằng mã của đối tượng cần tham chiếu."
+  },
+  {
+    "i": 539,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 540,
+    "style": "normal",
+    "text": "Hình 3.6 Liên kết dữ liệu tài khoản, khóa học và học tập"
+  },
+  {
+    "i": 541,
+    "style": "normal",
+    "text": "Một học viên có thể đăng ký nhiều khóa và một khóa có nhiều học viên. Enrollment biểu diễn từng quan hệ đăng ký này. LessonProgress liên kết bản đăng ký với từng bài học. Certificate liên kết học viên với khóa đã hoàn thành. Trong cấu trúc nội dung, Chapter, Lesson và QuizQuestion được lưu lồng trong Course, nên mã bài và mã câu hỏi được tra trong khóa học thay vì truy vấn một tập hợp bài học riêng."
+  },
+  {
+    "i": 542,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 543,
+    "style": "normal",
+    "text": "Hình 3.7 Liên kết dữ liệu thanh toán và tương tác"
+  },
+  {
+    "i": 544,
+    "style": "normal",
+    "text": "Đơn hàng liên kết học viên với khóa được mua. Giao dịch thanh toán liên kết với đơn, đồng thời lưu các mã và số tiền phục vụ tra cứu. Bình luận và đánh giá liên kết người viết với khóa học; báo cáo chỉ đến nội dung bị phản ánh theo loại đối tượng. Thông báo gắn với người nhận và được lưu trong ứng dụng."
+  },
+  {
+    "i": 545,
+    "style": "normal",
+    "text": "Các bảng sau mô tả tên trường theo schema. ObjectId là kiểu mã định danh của MongoDB; trong phần giải thích, mã tham chiếu dùng để tìm đối tượng liên quan. Mỗi tài liệu lưu riêng có trường _id. Các schema có timestamps tự ghi createdAt và updatedAt; riêng QuizAttempt dùng attemptedAt và tắt timestamps. Chapter, Lesson và QuizQuestion cũng có _id riêng, nhưng không có hai trường thời gian tạo và cập nhật tự động."
+  },
+  {
+    "i": 546,
+    "style": "normal",
+    "text": "Mô hình hiện có 15 tập hợp dữ liệu theo các schema lưu riêng. Những cấu trúc như lịch sử vi phạm, phản ứng bình luận hoặc quy tắc mã giảm giá không được tính thành tập hợp riêng. Lịch sử và phản ứng được lưu lồng trong tài liệu cha, còn các mã giảm giá hiện được khai báo trong mã xử lý đơn hàng."
+  },
+  {
+    "i": 547,
+    "style": "Heading 3",
+    "text": "3.3.2 Tài khoản người dùng"
+  },
+  {
+    "i": 548,
+    "style": "normal",
+    "text": "Lưu chung tài khoản của học viên, giảng viên, quản trị viên và kế toán. Vai trò và trạng thái được lưu trên từng tài khoản, không tách thành các tập hợp người dùng riêng."
+  },
+  {
+    "i": 549,
+    "style": "normal",
+    "text": "Tập hợp lưu trữ: users. Model trong chương trình: User."
+  },
+  {
+    "i": 550,
+    "style": "normal",
+    "text": "Bảng 3.2 Các thuộc tính của User"
+  },
+  {
+    "i": 551,
+    "style": "Heading 3",
+    "text": "3.3.3 Mã xác minh qua email"
+  },
+  {
+    "i": 552,
+    "style": "normal",
+    "text": "Phục vụ xác minh đăng ký và đặt lại mật khẩu. Mã được đối chiếu bằng bản băm, cùng với mục đích, thời hạn và số lần nhập sai."
+  },
+  {
+    "i": 553,
+    "style": "normal",
+    "text": "Tập hợp lưu trữ: otps. Model trong chương trình: Otp."
+  },
+  {
+    "i": 554,
+    "style": "normal",
+    "text": "Bảng 3.3 Các thuộc tính của Otp"
+  },
+  {
+    "i": 555,
+    "style": "Heading 3",
+    "text": "3.3.4 Mã làm mới phiên"
+  },
+  {
+    "i": 556,
+    "style": "normal",
+    "text": "Liên kết mã làm mới với tài khoản. Mỗi lần làm mới hợp lệ thu hồi bản ghi cũ và tạo mã mới."
+  },
+  {
+    "i": 557,
+    "style": "normal",
+    "text": "Tập hợp lưu trữ: refreshtokens. Model trong chương trình: RefreshToken."
+  },
+  {
+    "i": 558,
+    "style": "normal",
+    "text": "Bảng 3.4 Các thuộc tính của RefreshToken"
+  },
+  {
+    "i": 559,
+    "style": "Heading 3",
+    "text": "3.3.5 Danh mục khóa học"
+  },
+  {
+    "i": 560,
+    "style": "normal",
+    "text": "Lưu tên nhóm nội dung để phân loại và lọc khóa học."
+  },
+  {
+    "i": 561,
+    "style": "normal",
+    "text": "Tập hợp lưu trữ: categories. Model trong chương trình: Category."
+  },
+  {
+    "i": 562,
+    "style": "normal",
+    "text": "Bảng 3.5 Các thuộc tính của Category"
+  },
+  {
+    "i": 563,
+    "style": "Heading 3",
+    "text": "3.3.6 Khóa học"
+  },
+  {
+    "i": 564,
+    "style": "normal",
+    "text": "Đây là tài liệu trung tâm của nội dung học tập. Cấu trúc chương, bài học và câu hỏi được lưu lồng trong trường chapters."
+  },
+  {
+    "i": 565,
+    "style": "normal",
+    "text": "Tập hợp lưu trữ: courses. Model trong chương trình: Course."
+  },
+  {
+    "i": 566,
+    "style": "normal",
+    "text": "Bảng 3.6 Các thuộc tính của Course"
+  },
+  {
+    "i": 567,
+    "style": "Heading 3",
+    "text": "3.3.7 Cấu trúc chương trong khóa học"
+  },
+  {
+    "i": 568,
+    "style": "normal",
+    "text": "Mỗi chương có mã riêng và nằm trong danh sách chapters của một khóa học. Đây là tài liệu con, không phải một tập hợp riêng trong MongoDB."
+  },
+  {
+    "i": 569,
+    "style": "normal",
+    "text": "Bảng 3.7 Các thuộc tính của Chapter"
+  },
+  {
+    "i": 570,
+    "style": "Heading 3",
+    "text": "3.3.8 Cấu trúc bài học trong chương"
+  },
+  {
+    "i": 571,
+    "style": "normal",
+    "text": "Bài học là đơn vị được theo dõi tiến độ. Đường dẫn video hoặc tài liệu được lưu tại bài học, còn nội dung tệp nằm trên nơi lưu trữ tương ứng."
+  },
+  {
+    "i": 572,
+    "style": "normal",
+    "text": "Bảng 3.8 Các thuộc tính của Lesson"
+  },
+  {
+    "i": 573,
+    "style": "Heading 3",
+    "text": "3.3.9 Cấu trúc câu hỏi trắc nghiệm"
+  },
+  {
+    "i": 574,
+    "style": "normal",
+    "text": "Câu hỏi được lưu trong quizQuestions của bài học. Đáp án đúng được dùng tại máy chủ khi chấm và không có trong dữ liệu câu hỏi trước khi học viên nộp bài."
+  },
+  {
+    "i": 575,
+    "style": "normal",
+    "text": "Bảng 3.9 Các thuộc tính của QuizQuestion"
+  },
+  {
+    "i": 576,
+    "style": "Heading 3",
+    "text": "3.3.10 Đăng ký học"
+  },
+  {
+    "i": 577,
+    "style": "normal",
+    "text": "Liên kết một học viên với một khóa học và lưu kết quả tổng hợp của quá trình học. Cặp studentId và courseId có chỉ mục duy nhất."
+  },
+  {
+    "i": 578,
+    "style": "normal",
+    "text": "Tập hợp lưu trữ: enrollments. Model trong chương trình: Enrollment."
+  },
+  {
+    "i": 579,
+    "style": "normal",
+    "text": "Bảng 3.10 Các thuộc tính của Enrollment"
+  },
+  {
+    "i": 580,
+    "style": "Heading 3",
+    "text": "3.3.11 Tiến độ từng bài học"
+  },
+  {
+    "i": 581,
+    "style": "normal",
+    "text": "Một bản ghi đăng ký có nhiều bản ghi tiến độ bài học. Cặp enrollmentId và lessonId có chỉ mục duy nhất."
+  },
+  {
+    "i": 582,
+    "style": "normal",
+    "text": "Tập hợp lưu trữ: lesson_progresses. Model trong chương trình: LessonProgress."
+  },
+  {
+    "i": 583,
+    "style": "normal",
+    "text": "Bảng 3.11 Các thuộc tính của LessonProgress"
+  },
+  {
+    "i": 584,
+    "style": "Heading 3",
+    "text": "3.3.12 Kết quả trả lời câu hỏi"
+  },
+  {
+    "i": 585,
+    "style": "normal",
+    "text": "Mỗi phương án nộp cho một câu hỏi tạo một bản ghi kết quả. Dữ liệu được lưu theo câu hỏi và thời điểm trả lời, không có tập hợp riêng cho toàn bộ một lần làm bài."
+  },
+  {
+    "i": 586,
+    "style": "normal",
+    "text": "Tập hợp lưu trữ: quiz_attempts. Model trong chương trình: QuizAttempt."
+  },
+  {
+    "i": 587,
+    "style": "normal",
+    "text": "Bảng 3.12 Các thuộc tính của QuizAttempt"
+  },
+  {
+    "i": 588,
+    "style": "Heading 3",
+    "text": "3.3.13 Chứng chỉ hoàn thành"
+  },
+  {
+    "i": 589,
+    "style": "normal",
+    "text": "Mỗi cặp học viên và khóa học có tối đa một bản ghi chứng chỉ. Mã chứng chỉ được dùng để tra cứu công khai."
+  },
+  {
+    "i": 590,
+    "style": "normal",
+    "text": "Tập hợp lưu trữ: certificates. Model trong chương trình: Certificate."
+  },
+  {
+    "i": 591,
+    "style": "normal",
+    "text": "Bảng 3.13 Các thuộc tính của Certificate"
+  },
+  {
+    "i": 592,
+    "style": "Heading 3",
+    "text": "3.3.14 Đơn hàng mua khóa học"
+  },
+  {
+    "i": 593,
+    "style": "normal",
+    "text": "Lưu thông tin mua một khóa học Pro, số tiền đã tính và dữ liệu hướng dẫn thanh toán. Giá tại thời điểm mua được lưu trong đơn hàng."
+  },
+  {
+    "i": 594,
+    "style": "normal",
+    "text": "Tập hợp lưu trữ: orders. Model trong chương trình: Order."
+  },
+  {
+    "i": 595,
+    "style": "normal",
+    "text": "Bảng 3.14 Các thuộc tính của Order"
+  },
+  {
+    "i": 596,
+    "style": "Heading 3",
+    "text": "3.3.15 Giao dịch thanh toán"
+  },
+  {
+    "i": 597,
+    "style": "normal",
+    "text": "Lưu lần ghi nhận giao dịch gắn với đơn hàng. Mã reference có chỉ mục duy nhất để hạn chế ghi trùng cùng một mã tham chiếu."
+  },
+  {
+    "i": 598,
+    "style": "normal",
+    "text": "Tập hợp lưu trữ: payment_transactions. Model trong chương trình: PaymentTransaction."
+  },
+  {
+    "i": 599,
+    "style": "normal",
+    "text": "Bảng 3.15 Các thuộc tính của PaymentTransaction"
+  },
+  {
+    "i": 600,
+    "style": "Heading 3",
+    "text": "3.3.16 Hỏi đáp tại bài học"
+  },
+  {
+    "i": 601,
+    "style": "normal",
+    "text": "Câu hỏi và câu trả lời dùng chung một tập hợp. parentId liên kết câu trả lời với nội dung cấp trên; để trống với câu hỏi ban đầu."
+  },
+  {
+    "i": 602,
+    "style": "normal",
+    "text": "Tập hợp lưu trữ: lesson_comments. Model trong chương trình: LessonComment."
+  },
+  {
+    "i": 603,
+    "style": "normal",
+    "text": "Bảng 3.16 Các thuộc tính của LessonComment"
+  },
+  {
+    "i": 604,
+    "style": "Heading 3",
+    "text": "3.3.17 Đánh giá khóa học"
+  },
+  {
+    "i": 605,
+    "style": "normal",
+    "text": "Lưu một đánh giá cho mỗi cặp học viên và khóa học. Điểm sao và phần nhận xét được lưu cùng bản ghi."
+  },
+  {
+    "i": 606,
+    "style": "normal",
+    "text": "Tập hợp lưu trữ: course_reviews. Model trong chương trình: CourseReview."
+  },
+  {
+    "i": 607,
+    "style": "normal",
+    "text": "Bảng 3.17 Các thuộc tính của CourseReview"
+  },
+  {
+    "i": 608,
+    "style": "Heading 3",
+    "text": "3.3.18 Báo cáo vi phạm"
+  },
+  {
+    "i": 609,
+    "style": "normal",
+    "text": "Lưu yêu cầu xem xét một câu hỏi, câu trả lời hoặc nhận xét khóa học, cùng trạng thái và kết quả giải quyết."
+  },
+  {
+    "i": 610,
+    "style": "normal",
+    "text": "Tập hợp lưu trữ: reports. Model trong chương trình: Report."
+  },
+  {
+    "i": 611,
+    "style": "normal",
+    "text": "Bảng 3.18 Các thuộc tính của Report"
+  },
+  {
+    "i": 612,
+    "style": "Heading 3",
+    "text": "3.3.19 Thông báo trong hệ thống"
+  },
+  {
+    "i": 613,
+    "style": "normal",
+    "text": "Lưu thông báo liên quan việc nhắc nhở, xử lý vi phạm, khôi phục và kết quả báo cáo. Đây là dữ liệu thông báo trên ứng dụng."
+  },
+  {
+    "i": 614,
+    "style": "normal",
+    "text": "Tập hợp lưu trữ: notifications. Model trong chương trình: Notification."
+  },
+  {
+    "i": 615,
+    "style": "normal",
+    "text": "Bảng 3.19 Các thuộc tính của Notification"
+  },
+  {
+    "i": 616,
+    "style": "Heading 2",
+    "text": "3.4 Thiết kế giao diện"
+  },
+  {
+    "i": 617,
+    "style": "Heading 3",
+    "text": "3.4.1 Tổ chức các khu vực sử dụng"
+  },
+  {
+    "i": 618,
+    "style": "normal",
+    "text": "Giao diện được chia thành khu vực công khai, khu vực tài khoản, phòng học và khu vực quản lý. Khu vực công khai dùng thanh điều hướng để chuyển giữa danh sách khóa học và tra cứu chứng chỉ. Các trang đăng nhập, đăng ký và khôi phục mật khẩu dùng bố cục dành cho tài khoản. Phòng học dành phần lớn diện tích cho nội dung bài, còn khu vực quản lý có thanh điều hướng theo công việc."
+  },
+  {
+    "i": 619,
+    "style": "normal",
+    "text": "Các ảnh trong mục này được lấy từ ứng dụng đang chạy trên máy. Nội dung và số lượng khóa hiển thị phụ thuộc dữ liệu tại thời điểm chụp. Ảnh dùng để minh họa cách bố trí và thao tác trên màn hình; các điều kiện xử lý được giải thích cùng mã nguồn ở mục 3.5."
+  },
+  {
+    "i": 620,
+    "style": "Heading 3",
+    "text": "3.4.2 Giao diện đăng nhập và đăng ký"
+  },
+  {
+    "i": 621,
+    "style": "normal",
+    "text": "Trang đăng nhập tập trung vào hai thông tin là email và mật khẩu. Nút gửi có trạng thái đang xác thực để người dùng biết yêu cầu đang được xử lý. Đường dẫn quên mật khẩu và đăng ký tài khoản được đặt gần biểu mẫu để người dùng chuyển sang công việc cần thiết. Khi có lỗi, thông báo được đặt ngay trong vùng đăng nhập."
+  },
+  {
+    "i": 622,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 623,
+    "style": "normal",
+    "text": "Hình 3.8 Giao diện đăng nhập tài khoản"
+  },
+  {
+    "i": 624,
+    "style": "normal",
+    "text": "Trang đăng ký thu thập thông tin tài khoản và gửi yêu cầu tạo tài khoản chờ xác minh. Sau bước này, người dùng nhập OTP nhận qua email. Quy trình đặt lại mật khẩu cũng có màn hình nhập email và xác minh, nhưng sử dụng mục đích OTP khác với đăng ký. Việc chia thành từng bước giúp người dùng biết mình đang cung cấp thông tin hay đang xác nhận địa chỉ email."
+  },
+  {
+    "i": 625,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 626,
+    "style": "normal",
+    "text": "Hình 3.9 Giao diện đăng ký tài khoản"
+  },
+  {
+    "i": 627,
+    "style": "Heading 3",
+    "text": "3.4.3 Giao diện tìm kiếm và xem khóa học"
+  },
+  {
+    "i": 628,
+    "style": "normal",
+    "text": "Trang khóa học đặt ô tìm kiếm ở phần đầu và bộ lọc bên cạnh kết quả. Người dùng có thể lọc theo loại khóa, danh mục, trình độ, khoảng giá và mức đánh giá, đồng thời chọn cách sắp xếp. Mỗi thẻ khóa trình bày các thông tin cần cho lựa chọn ban đầu như tên, giảng viên, số bài, thời lượng và học phí. Hình 3.10 minh họa kết quả tìm kiếm theo từ khóa."
+  },
+  {
+    "i": 629,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 630,
+    "style": "normal",
+    "text": "Hình 3.10 Giao diện tìm kiếm khóa học theo từ khóa"
+  },
+  {
+    "i": 631,
+    "style": "normal",
+    "text": "Trang chi tiết đặt tên, mô tả, cấu trúc nội dung và thông tin đăng ký trong cùng màn hình. Nội dung chương và tiêu đề bài giúp người dùng biết phạm vi khóa học trước khi đăng ký. Phần đánh giá cho biết kết quả phản hồi của học viên đã có quyền đánh giá. Nút đăng ký hoặc mua khóa được xử lý theo loại khóa và trạng thái tài khoản."
+  },
+  {
+    "i": 632,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 633,
+    "style": "normal",
+    "text": "Hình 3.11 Giao diện chi tiết khóa học"
+  },
+  {
+    "i": 634,
+    "style": "Heading 3",
+    "text": "3.4.4 Giao diện học tập và tra cứu chứng chỉ"
+  },
+  {
+    "i": 635,
+    "style": "normal",
+    "text": "Phòng học hiển thị video hoặc nội dung tài liệu ở vùng chính, danh sách chương và bài ở bên cạnh. Danh sách thể hiện bài đang học, bài đã hoàn thành và bài còn khóa. Khi chuyển bài, chương trình lấy dữ liệu bài tương ứng và vị trí học đã ghi nhận. Những thành phần trắc nghiệm, tài liệu và hỏi đáp được sử dụng theo nội dung của bài."
+  },
+  {
+    "i": 636,
+    "style": "normal",
+    "text": "Với học viên, thao tác tiếp tục học phụ thuộc đăng ký và tiến độ thực tế. Với giảng viên hoặc quản trị viên xem thử, giao diện thông báo đây là chế độ xem khóa và không lưu tiến độ học viên. Cùng một vùng hiển thị bài học được sử dụng với hai phạm vi xử lý khác nhau để phục vụ học tập và kiểm tra nội dung."
+  },
+  {
+    "i": 637,
+    "style": "normal",
+    "text": "Trang tra cứu chứng chỉ cho phép nhập mã hoặc truy cập đường dẫn chứa mã. Khi có kết quả, màn hình hiển thị thông tin chứng chỉ, người học, khóa học và tình trạng hợp lệ. Người tra cứu không cần đăng nhập, phù hợp nhu cầu đối chiếu chứng chỉ đã được cấp."
+  },
+  {
+    "i": 638,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 639,
+    "style": "normal",
+    "text": "Hình 3.12 Giao diện tra cứu chứng chỉ"
+  },
+  {
+    "i": 640,
+    "style": "Heading 3",
+    "text": "3.4.5 Giao diện quản lý khóa học và biên soạn"
+  },
+  {
+    "i": 641,
+    "style": "normal",
+    "text": "Khu vực quản lý sử dụng thanh điều hướng bên trái và vùng làm việc chính. Giảng viên xem danh sách khóa được phân công, tìm theo tên, lọc trạng thái và mở màn hình biên soạn hoặc theo dõi học viên. Quản trị viên sử dụng thêm các công việc quản lý người dùng, công bố khóa và đơn hàng theo quyền được cấp."
+  },
+  {
+    "i": 642,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 643,
+    "style": "normal",
+    "text": "Hình 3.13 Giao diện danh sách khóa học được phân công"
+  },
+  {
+    "i": 644,
+    "style": "normal",
+    "text": "Màn hình biên soạn chia nội dung thành các thẻ như thông tin, nội dung và trạng thái duyệt. Trong phần nội dung, chương và bài được đặt theo thứ tự. Các nút thêm, sửa, xóa và đổi vị trí nằm cạnh đối tượng cần thao tác. Câu hỏi trắc nghiệm được gắn với từng bài để người biên soạn kiểm tra được mối liên hệ giữa bài học và phần đánh giá cuối bài."
+  },
+  {
+    "i": 645,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 646,
+    "style": "normal",
+    "text": "Hình 3.14 Giao diện biên soạn nội dung khóa học"
+  },
+  {
+    "i": 647,
+    "style": "normal",
+    "text": "Trang theo dõi học viên trình bày danh sách đăng ký và kết quả theo khóa. Việc giới hạn dữ liệu theo giảng viên được thực hiện ở máy chủ, nên người dùng chỉ nhận dữ liệu thuộc phạm vi được phép. Các màn hình quản lý phản ánh và đơn hàng cũng sử dụng danh sách, bộ lọc và thao tác trên từng bản ghi; cách kiểm tra quyền và trạng thái được trình bày ở các mục tiếp theo."
+  },
+  {
+    "i": 648,
+    "style": "Heading 2",
+    "text": "3.5 Cài đặt các chức năng và luồng xử lý chính"
+  },
+  {
+    "i": 649,
+    "style": "Heading 3",
+    "text": "3.5.1 Xác thực tài khoản và xử lý yêu cầu API"
+  },
+  {
+    "i": 650,
+    "style": "normal",
+    "text": "Khi đăng ký, máy chủ kiểm tra dữ liệu, chuẩn hóa email và kiểm tra tài khoản đã tồn tại. Mật khẩu được băm bằng Argon2. Tài khoản được tạo ở trạng thái chờ xác minh hoặc được cập nhật theo điều kiện của tài khoản đang chờ. Máy chủ tạo OTP, lưu bản băm cùng thời hạn và gửi mã qua email. Khi người dùng nhập mã hợp lệ cho mục đích đăng ký, tài khoản được chuyển sang trạng thái hoạt động."
+  },
+  {
+    "i": 651,
+    "style": "normal",
+    "text": "Đăng nhập kiểm tra tài khoản và mật khẩu trước khi cấp mã truy cập JWT cùng mã làm mới ngẫu nhiên. Mã truy cập được gửi kèm các yêu cầu API. Mã làm mới được giữ trong cookie HttpOnly và được đối chiếu với bản băm trong cơ sở dữ liệu khi khôi phục phiên. Làm mới thành công thu hồi mã cũ và cấp mã mới; sử dụng lại mã đã thu hồi dẫn đến xử lý thu hồi các mã làm mới của tài khoản."
+  },
+  {
+    "i": 652,
+    "style": "normal",
+    "text": "Ở máy chủ, guard xác thực kiểm tra mã truy cập, còn guard vai trò kiểm tra nhóm quyền đã khai báo tại API. Service tiếp tục kiểm tra quyền đối với dữ liệu cụ thể. Ví dụ, giảng viên phải phụ trách khóa học cần sửa; học viên phải có đăng ký khi truy cập bài học. Giao diện kiểm tra tuyến đường để hỗ trợ điều hướng theo tài khoản, nhưng yêu cầu vẫn phải được máy chủ chấp nhận."
+  },
+  {
+    "i": 653,
+    "style": "normal",
+    "text": "Bảng 3.20 Một số API đại diện của hệ thống"
+  },
+  {
+    "i": 654,
+    "style": "normal",
+    "text": "Các API dùng cấu trúc phản hồi chung với thông tin thành công, mã trạng thái, dữ liệu và thời điểm xử lý. Trường hợp không hợp lệ được trả thành lỗi phù hợp để giao diện thông báo. Các đường dẫn ở Bảng 3.20 là ví dụ đại diện; những API thêm, sửa hoặc xóa chi tiết được tổ chức trong từng controller tương ứng."
+  },
+  {
+    "i": 655,
+    "style": "Heading 3",
+    "text": "3.5.2 Biên soạn, xét duyệt và công bố khóa học"
+  },
+  {
+    "i": 656,
+    "style": "normal",
+    "text": "Quản trị viên tạo khóa nền và xác định loại khóa, giá, mô tả cùng giảng viên phụ trách. Giảng viên biên soạn chương, bài, tài liệu và câu hỏi trong khóa được giao. Những thao tác đổi thứ tự được kiểm tra để danh sách mã gửi lên khớp với đối tượng đang có. Các tổng số chương, bài và thời lượng được tính lại từ nội dung thay vì yêu cầu người biên soạn nhập riêng."
+  },
+  {
+    "i": 657,
+    "style": "normal",
+    "text": "Trước khi gửi duyệt hoặc phê duyệt, hàm kiểm tra điều kiện sẵn sàng xem xét thông tin khóa và cấu trúc nội dung. Ví dụ, khóa phải có chương, mỗi chương phải có bài, giá phải phù hợp loại khóa và bài có video cần thời lượng hợp lệ. Các thiếu sót làm khóa chưa đủ điều kiện được phân biệt với nhắc nhở bổ sung nội dung như ghi chép và tóm tắt của bài Pro."
+  },
+  {
+    "i": 658,
+    "style": "normal",
+    "text": "Bảng 3.21 Chuyển trạng thái công bố khóa học"
+  },
+  {
+    "i": 659,
+    "style": "normal",
+    "text": "Khi chuyển trạng thái, service kiểm tra người thực hiện và trạng thái hiện tại. Lệnh cập nhật có điều kiện khớp trạng thái đã đọc; nếu trạng thái bị thay đổi trước đó, chương trình yêu cầu tải lại. Dữ liệu công khai chỉ được lấy từ khóa APPROVED. Giảng viên hiện được chỉnh sửa nội dung của khóa DRAFT hoặc APPROVED theo điều kiện trong service, còn các trạng thái khác chịu giới hạn tương ứng."
+  },
+  {
+    "i": 660,
+    "style": "Heading 3",
+    "text": "3.5.3 Đăng ký học và thanh toán khóa Pro"
+  },
+  {
+    "i": 661,
+    "style": "normal",
+    "text": "Đối với khóa miễn phí đã duyệt, service kiểm tra học viên chưa đăng ký rồi tạo bản Enrollment và các bản tiến độ bài. Bài đầu tiên được mở, các bài còn lại chờ điều kiện học tiếp. Khóa Pro không được đăng ký trực tiếp bằng API đăng ký miễn phí; quyền học được tạo thông qua xử lý đơn hàng đã hoàn tất."
+  },
+  {
+    "i": 662,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 663,
+    "style": "normal",
+    "text": "Hình 3.15 Luồng xử lý thanh toán và cấp quyền học"
+  },
+  {
+    "i": 664,
+    "style": "normal",
+    "text": "Khi mua khóa Pro, máy chủ lấy giá từ khóa học và kiểm tra quyền sở hữu trước khi tạo đơn. Nếu có mã giảm giá, service đối chiếu với các quy tắc được khai báo trong mã nguồn và tính lại số tiền. Đơn hàng lưu giá gốc, giá ưu đãi, phần giảm và số phải trả ở thời điểm tạo. Hiện tại dự án chưa có một tập hợp hoặc màn hình riêng để quản trị mã giảm giá."
+  },
+  {
+    "i": 665,
+    "style": "normal",
+    "text": "Sau khi có thông tin đơn, máy chủ gọi payOS để tạo liên kết và dữ liệu thanh toán. Học viên chuyển khoản bằng thông tin được hiển thị. Kết quả được tiếp nhận qua webhook hoặc được tra cứu lại từ payOS. Webhook được kiểm tra chữ ký trước khi đối chiếu với đơn. Với thông báo giao dịch thành công, số tiền thấp hơn finalAmount được ghi nhận là chưa đủ; dữ liệu đạt điều kiện được chuyển sang bước hoàn tất đơn."
+  },
+  {
+    "i": 666,
+    "style": "normal",
+    "text": "Bước hoàn tất ghi nhận giao dịch, cập nhật đơn COMPLETED và gọi service đăng ký học. Mã tham chiếu giao dịch có chỉ mục duy nhất; việc cấp quyền học kiểm tra bản đăng ký đã tồn tại để tránh tạo thêm bản cho cùng học viên và khóa. Những cập nhật này được thực hiện qua các lệnh lưu liên tiếp trong service. Mã hiện tại không gói toàn bộ quá trình vào một giao dịch cơ sở dữ liệu bao trùm nhiều tài liệu."
+  },
+  {
+    "i": 667,
+    "style": "normal",
+    "text": "Quản trị viên hoặc kế toán ở API có thể xác nhận thủ công đơn đang chờ hoặc đã hết hạn theo điều kiện chương trình, nhưng không xác nhận đơn đã hủy. Dữ liệu giao dịch thủ công lưu mã người xác nhận, vai trò và thời điểm. Chế độ giả lập thanh toán là công cụ phục vụ phát triển và trình diễn, chỉ hoạt động khi được bật và môi trường không phải production."
+  },
+  {
+    "i": 668,
+    "style": "Heading 3",
+    "text": "3.5.4 Học tuần tự, ghi nhận tiến độ và chấm trắc nghiệm"
+  },
+  {
+    "i": 669,
+    "style": "normal",
+    "text": "Service sắp xếp chương và bài theo trường order để xác định thứ tự học. Khi học viên mở một bài, máy chủ kiểm tra bản đăng ký, khóa và tình trạng bài. Bài LOCKED bị từ chối truy cập theo API học tập. Bài đang mở được trả nội dung cùng thông tin tiến độ. Với học viên chưa đạt phần trắc nghiệm, đáp án đúng không có trong dữ liệu câu hỏi trả về."
+  },
+  {
+    "i": 670,
+    "style": "normal",
+    "text": ""
+  },
+  {
+    "i": 671,
+    "style": "normal",
+    "text": "Hình 3.16 Luồng hoàn thành bài học và cập nhật tiến độ"
+  },
+  {
+    "i": 672,
+    "style": "normal",
+    "text": "Với video có thời lượng, chương trình ghi nhận vị trí gần nhất và số giây đã xem. Máy chủ giới hạn các giá trị trong phạm vi thời lượng, đồng thời giữ số giây xem không giảm so với kết quả đã ghi nhận. Điều kiện thời gian xem trong mã hiện tại là đạt tối thiểu 60 phần trăm thời lượng. Trường watchedFully biểu thị đã đạt điều kiện này, dù tên trường có thể gợi cách hiểu đã xem toàn bộ video. Bài đọc không có thời lượng video được xử lý theo thao tác xác nhận đọc của giao diện."
+  },
+  {
+    "i": 673,
+    "style": "normal",
+    "text": "Bài không có trắc nghiệm được hoàn thành khi đạt điều kiện nội dung tương ứng. Bài có trắc nghiệm còn cần kết quả đạt. Khi nộp bài, service kiểm tra đủ câu trả lời, không lặp mã câu hỏi và phương án nằm trong danh sách lựa chọn. Từng câu được chấm bằng đáp án tại máy chủ và lưu vào QuizAttempt. Một câu hỏi yêu cầu trả lời đúng; từ hai câu trở lên yêu cầu tỷ lệ đúng ít nhất 70 phần trăm."
+  },
+  {
+    "i": 674,
+    "style": "normal",
+    "text": "Khi một bài hoàn thành, chương trình chuyển trạng thái bài sang COMPLETED và mở bài tiếp theo nếu còn. Tỷ lệ tiến độ khóa được tính bằng số bài đã hoàn thành chia tổng số bài rồi làm tròn thành phần trăm. Khi tất cả bài đã hoàn thành và tổng số bài lớn hơn 0, Enrollment được ghi nhận COMPLETED cùng thời gian hoàn thành. Quy tắc này dùng số bài hoàn thành, không dùng trực tiếp tỷ lệ tổng thời gian xem video để tính tiến độ khóa."
+  },
+  {
+    "i": 675,
+    "style": "normal",
+    "text": "Giảng viên và quản trị viên có nhánh xử lý xem thử. Nhánh này trả nội dung và kết quả làm thử để kiểm tra bài học mà không tạo tiến độ học viên hoặc cấp chứng chỉ như một lần học thật. Vì vậy, số liệu trong chế độ xem thử không được dùng để kết luận học viên đã hoàn thành."
+  },
+  {
+    "i": 676,
+    "style": "Heading 3",
+    "text": "3.5.5 Cấp và tra cứu chứng chỉ"
+  },
+  {
+    "i": 677,
+    "style": "normal",
+    "text": "Sau khi Enrollment hoàn thành, service học tập gọi chức năng cấp chứng chỉ. Chức năng này tìm chứng chỉ theo học viên và khóa trước khi tạo. Nếu đã có, chương trình sử dụng bản hiện tại. Nếu chưa có, chương trình sinh mã, lưu người học, khóa, thời điểm cấp và đường dẫn tra cứu. Chỉ mục duy nhất trên cặp học viên và khóa bổ sung ràng buộc ở nơi lưu trữ."
+  },
+  {
+    "i": 678,
+    "style": "normal",
+    "text": "Giao diện trình bày chứng chỉ từ dữ liệu trả về và hỗ trợ in qua trình duyệt. Trường qrCode trong bản ghi lưu đường dẫn xác thực, còn fileUrl được gán trống khi cấp mới. Do đó, chức năng hiện tại được mô tả là cấp dữ liệu chứng chỉ, hiển thị và in trên giao diện. Việc tải một tệp PDF chứng chỉ được máy chủ tạo sẵn không phải luồng đang được cài đặt ở service này."
+  },
+  {
+    "i": 679,
+    "style": "normal",
+    "text": "Khi tra cứu công khai, máy chủ chuẩn hóa mã, tìm chứng chỉ và lấy thông tin người học, khóa cùng giảng viên để trả kết quả. Kết quả còn cho biết trạng thái có phải VALID hay không. Schema định nghĩa cả REVOKED, nhưng giá trị được định nghĩa trong dữ liệu không tự chứng minh đã có đầy đủ quy trình quản lý thu hồi trên giao diện."
+  },
+  {
+    "i": 680,
+    "style": "Heading 3",
+    "text": "3.5.6 Hỏi đáp, đánh giá và xử lý vi phạm"
+  },
+  {
+    "i": 681,
+    "style": "normal",
+    "text": "Hỏi đáp gắn với khóa và bài học. Câu hỏi và câu trả lời được lưu chung trong LessonComment; câu trả lời chỉ đến nội dung cấp trên qua parentId. Mỗi nội dung có người viết, thời điểm, phản ứng và tình trạng hiển thị. Khi tạo hoặc tương tác, service kiểm tra quyền tiếp cận phần thảo luận và các hạn chế bình luận đang áp dụng cho tài khoản."
+  },
+  {
+    "i": 682,
+    "style": "normal",
+    "text": "Đánh giá khóa học được lưu theo cặp học viên và khóa, với điểm từ 1 đến 5 và nhận xét tùy nội dung người dùng gửi. Học viên được tạo đánh giá khi khóa đã hoàn thành; người đã có đánh giá có thể chỉnh sửa theo điều kiện service, kể cả khi khóa được bổ sung bài làm thay đổi tiến độ. Điểm tổng hợp của khóa được tính lại từ các đánh giá được phép hiển thị."
+  },
+  {
+    "i": 683,
+    "style": "normal",
+    "text": "Khi có phản ánh, Report lưu người gửi, loại nội dung, tác giả, khóa và lý do. Giảng viên xử lý các báo cáo chờ thuộc khóa phụ trách trong phạm vi được phép. Báo cáo liên quan nội dung của chính giảng viên hoặc đã chuyển cấp thuộc quản trị viên. Quản trị viên là tuyến cuối và có quyền áp dụng hạn chế tài khoản theo quy tắc xử lý."
+  },
+  {
+    "i": 684,
+    "style": "normal",
+    "text": "Các báo cáo đang xử lý cùng trỏ đến một nội dung được xét theo nhóm khi có quyết định. Trường violationRecorded giúp tránh cộng lặp vi phạm cho cùng một bình luận hoặc đánh giá. Kết quả được lưu ở báo cáo, lịch sử tài khoản và các thông báo liên quan. Các thông báo này hiển thị trong ứng dụng; dịch vụ email của dự án phục vụ OTP đăng ký và đặt lại mật khẩu."
+  },
+  {
+    "i": 685,
+    "style": "Heading 3",
+    "text": "3.5.7 Tải lên và cung cấp học liệu"
+  },
+  {
+    "i": 686,
+    "style": "normal",
+    "text": "Module tải lên tiếp nhận hình ảnh, video và tài liệu theo từng loại. Chương trình kiểm tra định dạng, kích thước và một số dấu hiệu nội dung tệp trước khi chấp nhận. Giới hạn hiện tại là 5 MB cho ảnh, 1 GB cho video và 25 MB cho tài liệu. Ảnh hỗ trợ JPEG, PNG, WebP; video hỗ trợ MP4, WebM; tài liệu hỗ trợ PDF, DOCX, TXT và Markdown."
+  },
+  {
+    "i": 687,
+    "style": "normal",
+    "text": "Tệp được đặt tên phù hợp trước khi lưu trong các vùng của thư mục public. Thông tin trả về được gắn vào khóa học, bài học hoặc hồ sơ. Đối với DOCX, mã nguồn có phần đọc văn bản để phục vụ hiển thị; giao diện dùng thành phần xem tài liệu theo dạng nội dung phù hợp. Quy tắc biên soạn video có sự phân biệt giữa khóa miễn phí và Pro, trong đó đầu vào mã nhúng YouTube của khóa Pro bị kiểm tra tại các bước liên quan."
+  },
+  {
+    "i": 688,
+    "style": "normal",
+    "text": "Máy chủ hiện công bố thư mục public qua /public/. Các kiểm tra quyền của API học tập kiểm soát việc lấy dữ liệu bài qua API, còn đường dẫn tệp tĩnh được phục vụ theo cấu hình này. Cách triển khai hiện tại chưa có cơ chế phân phối video theo chữ ký hết hạn hoặc hệ thống bảo vệ sao chép video. Việc mô tả quyền học trong báo cáo vì vậy được gắn đúng với các kiểm tra đã cài đặt."
+  },
+  {
+    "i": 689,
+    "style": "Heading 2",
+    "text": "3.6 Cấu hình và chạy hệ thống"
+  },
+  {
+    "i": 690,
+    "style": "Heading 3",
+    "text": "3.6.1 Cấu hình môi trường"
+  },
+  {
+    "i": 691,
+    "style": "normal",
+    "text": "Máy chủ sử dụng ConfigModule để đọc cấu hình môi trường. Các nhóm thông tin chính gồm cổng chạy, địa chỉ giao diện, kết nối MongoDB, mã truy cập, email, OTP và thanh toán. Bảng 3.22 nêu các biến đang được đọc cho những nhóm chức năng này; giá trị bí mật được thiết lập riêng tại môi trường chạy."
+  },
+  {
+    "i": 692,
+    "style": "normal",
+    "text": "Bảng 3.22 Các nhóm cấu hình đang sử dụng"
+  },
+  {
+    "i": 693,
+    "style": "normal",
+    "text": "Các biến được mô tả theo cách sử dụng trong mã, không chỉ theo tên xuất hiện trong tệp cấu hình mẫu. Chẳng hạn, mã làm mới hiện là chuỗi ngẫu nhiên và có thời hạn bảy ngày trong phần xử lý xác thực. Các thiết lập JWT_REFRESH_SECRET và JWT_REFRESH_TTL có mặt trong tệp mẫu nhưng không được dùng để tạo JWT làm mới trong luồng hiện tại."
+  },
+  {
+    "i": 694,
+    "style": "Heading 3",
+    "text": "3.6.2 Chạy chương trình trong môi trường phát triển"
+  },
+  {
+    "i": 695,
+    "style": "normal",
+    "text": "Để chạy từ mã nguồn, môi trường cần Node.js, trình quản lý gói và kết nối MongoDB tương ứng. Phần máy chủ được cài các gói theo package của thư mục gốc, còn giao diện có package riêng trong client. Sau khi chuẩn bị cấu hình, lệnh npm run start:dev ở thư mục gốc chạy máy chủ và lệnh npm run dev trong client chạy giao diện bằng Vite."
+  },
+  {
+    "i": 696,
+    "style": "normal",
+    "text": "Theo cấu hình mặc định, máy chủ nhận yêu cầu tại cổng 3000 và giao diện tại cổng 5173. Vite chuyển tiếp /api và /public đến máy chủ trong quá trình phát triển. Có thể dùng npm run dev:all ở thư mục gốc để chạy máy chủ cùng các cổng giao diện phục vụ việc sử dụng nhiều phiên. Tài liệu API được cung cấp tại /api/docs trên địa chỉ máy chủ."
+  },
+  {
+    "i": 697,
+    "style": "normal",
+    "text": "Trước khi tạo bản chạy, lệnh npm run build dựng máy chủ; lệnh npm run build trong client kiểm tra kiểu và đóng gói giao diện. Bộ kiểm thử phía máy chủ được gọi bằng npm test. Mã nguồn còn có lệnh seed phục vụ dữ liệu mẫu và từ chối chạy khi NODE_ENV là production. Việc nạp mẫu là thao tác chuẩn bị dữ liệu riêng, không phải bước tự động bắt buộc mỗi lần khởi động."
+  },
+  {
+    "i": 698,
+    "style": "Heading 3",
+    "text": "3.6.3 Phân phối bản dựng và kết nối dịch vụ"
+  },
+  {
+    "i": 699,
+    "style": "normal",
+    "text": "Lệnh npm run start:prod chạy phần máy chủ đã dựng. Bản dựng giao diện trong client/dist cần được phân phối bởi dịch vụ phục vụ tệp tĩnh phù hợp với nơi vận hành. Cấu hình máy chủ hiện công bố public cho học liệu, còn mã khởi động chưa có bước tự phục vụ toàn bộ bản dựng giao diện. Địa chỉ API, chính sách nguồn giao diện và cách xử lý các đường dẫn Vue Router cần được đặt theo môi trường công bố."
+  },
+  {
+    "i": 700,
+    "style": "normal",
+    "text": "Khi kết nối thanh toán thật, payOS cần gửi được thông báo đến đường dẫn /api/v1/payments/payos/webhook của máy chủ. Cấu hình SMTP cũng cần kết nối được máy chủ thư đã chọn. Thư mục public và cơ sở dữ liệu là hai phần dữ liệu cần được lưu giữ khi thay đổi hoặc khởi động lại bản chạy. Thông tin kết nối và khóa kiểm tra thuộc cấu hình máy chủ."
+  },
+  {
+    "i": 701,
+    "style": "Heading 2",
+    "text": "3.7 Tổng kết chương"
+  },
+  {
+    "i": 702,
+    "style": "normal",
+    "text": "Chương 3 đã trình bày các nhóm chức năng, kiến trúc, dữ liệu, giao diện và cách cài đặt NextCode. Các luồng xử lý liên kết tài khoản, khóa học, thanh toán và tiến độ theo điều kiện đã xác định. Phần cấu hình làm rõ cách chạy chương trình và kết nối các dịch vụ. Những nội dung này là cơ sở để kiểm thử và đánh giá ở chương tiếp theo."
+  }
+]

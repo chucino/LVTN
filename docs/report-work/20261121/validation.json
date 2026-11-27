@@ -1,0 +1,78 @@
+{
+  "documentUrl": "https://docs.google.com/document/d/1-WIL19DZ6CdsUXOJozIw5RJ4FdWNqiAV3AU-OKuY_TQ",
+  "reviewDate": "2026-11-21",
+  "scope": "Từ bìa đến hết Chương 1",
+  "pages": 32,
+  "student": "Nguyễn Công Chức",
+  "studentId": "B2303800",
+  "cohort": "49",
+  "supervisor": "ThS. Phan Huy Cường",
+  "abstractWordCounts": {
+    "vietnamese": 329,
+    "english": 211
+  },
+  "checks": {
+    "headings": 73,
+    "images": 3,
+    "tables": 2,
+    "footnotes": 2,
+    "useCases": [
+      "01",
+      "02",
+      "03",
+      "04",
+      "05",
+      "06",
+      "07",
+      "08",
+      "09",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20"
+    ],
+    "unexpectedMarkers": false,
+    "last": " hiện tại và để các mở rộng được đánh giá trong giai đoạn tiếp theo.\n1.8 Tổng kết chương\nChương 1 đã mô tả bài toán đăng ký và học tập trực tuyến của NextCode, xác định tác nhân, phạm vi chức năng và các trường hợp sử dụng chính. Những quy tắc về công bố khóa, thanh toán, mở bài, đánh giá và chứng chỉ làm rõ điều kiện để hệ thống xử lý thống nhất.\n"
+  },
+  "automatedTests": {
+    "files": 8,
+    "passed": 66,
+    "failed": 0
+  },
+  "pendingMetadata": [
+    "Tháng và năm nộp luận văn",
+    "Ngày ký lời cảm ơn và cam kết"
+  ],
+  "sources": {
+    "rules": "https://docs.google.com/document/d/1HkwmhpTfBHd2MLvs6SLyC-Mf1E4GapTs",
+    "samples": [
+      "https://drive.google.com/file/d/10MMWTYLazJ84HA6UocyhYPJHTI84VuR8/view",
+      "https://drive.google.com/file/d/1AHeMqn3GjcM7BH4aNtcu04R6YUSQsFh2/view"
+    ]
+  },
+  "format": {
+    "paper": "A4",
+    "font": "Times New Roman",
+    "bodyPt": 13,
+    "lineSpacing": 1.2,
+    "marginsCm": {
+      "top": 3,
+      "bottom": 3,
+      "left": 3.5,
+      "right": 2
+    }
+  },
+  "notes": [
+    "Khung ba chương lấy từ mẫu quy định mới nhất của người dùng.",
+    "Mục lục có liên kết đến tiêu đề; số trang đối chiếu theo bản xuất hiện tại và cần cập nhật khi viết thêm các chương.",
+    "Bản PDF luanvan-verified.pdf và ảnh trang chỉ phục vụ kiểm tra nội bộ.",
+    "Không chỉnh sửa mã nguồn ứng dụng."
+  ]
+}

@@ -1,0 +1,748 @@
+[
+  {
+    "_type": "UMLUseCaseDiagram",
+    "_id": "adcd380e3b2b4ac2b1a216e5651ca369",
+    "name": "04_usecase_quan_tri_vien",
+    "documentation": "SƠ ĐỒ USE CASE PHÂN RÃ – QUẢN TRỊ VIÊN"
+  },
+  {
+    "_type": "UMLUseCaseSubject",
+    "_id": "14a8e82e676a4f559f94ee8d5c7393e4",
+    "name": "PHÂN HỆ HỆ THỐNG QUẢN TRỊ TRUNG TÂM (/dashboard)"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "d4e5c6d7fd3b49efb5c733076fac352f",
+    "name": "Xem Dashboard tổng quan\n(Khóa học, Người dùng, Doanh thu)"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "7f50113cf75d4f599a02d56f5c78980d",
+    "name": "UC17\nQuản lý khóa học nền"
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "e590c85b375d4deebb2f172b37cda31d",
+    "source": {
+      "$ref": "7f50113cf75d4f599a02d56f5c78980d"
+    },
+    "target": {
+      "$ref": "541a3ff39a584ac2aea72e37161c5ece"
+    }
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "97f2b29cbe284e07b0a52d3e964ca596",
+    "source": {
+      "$ref": "7f50113cf75d4f599a02d56f5c78980d"
+    },
+    "target": {
+      "$ref": "58b2241ef96d477a93fff1967785d590"
+    }
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "AAAAAAGh/6kNqdaVYXA=",
+    "source": {
+      "$ref": "7f50113cf75d4f599a02d56f5c78980d"
+    },
+    "target": {
+      "$ref": "541a3ff39a584ac2aea72e37161c5ece"
+    }
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "AAAAAAGh/6kSW9alkec=",
+    "source": {
+      "$ref": "7f50113cf75d4f599a02d56f5c78980d"
+    },
+    "target": {
+      "$ref": "58b2241ef96d477a93fff1967785d590"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "541a3ff39a584ac2aea72e37161c5ece",
+    "name": "Tạo khóa học nền, định giá\nFREE/PRO & phân công Giảng viên"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "58b2241ef96d477a93fff1967785d590",
+    "name": "Chỉnh sửa thông tin nền /\nđổi Giảng viên / xóa khóa\nNháp hoặc Ẩn"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "673429edb60743229860119de20c9866",
+    "name": "UC18 & UC11\nBiên soạn nội dung\n& xem thử mọi khóa học"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "d63f48d0d9e64a268c9432ccd5430d64",
+    "name": "UC19\nKiểm duyệt & xuất bản\nkhóa học"
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "AAAAAAGh/6kwWdbVM0o=",
+    "source": {
+      "$ref": "d63f48d0d9e64a268c9432ccd5430d64"
+    },
+    "target": {
+      "$ref": "ef61c96a633f425488fca12591de7584"
+    }
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "AAAAAAGh/6k0s9bln+k=",
+    "source": {
+      "$ref": "d63f48d0d9e64a268c9432ccd5430d64"
+    },
+    "target": {
+      "$ref": "a040edc1001143a8a20de61c3399f2d4"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "ef61c96a633f425488fca12591de7584",
+    "name": "Phê duyệt xuất bản (APPROVED)\n/ hiện lại khóa ẩn"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "a040edc1001143a8a20de61c3399f2d4",
+    "name": "Từ chối kèm lý do (DRAFT)\n/ ẩn khóa học (HIDDEN)"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "74b6b7cef6b044799deaa91fab7d8408",
+    "name": "UC20\nTheo dõi học viên & tiến độ\ncủa mọi khóa học"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "03b2506c464347cea18277ab5e7d4307",
+    "name": "UC22\nQuản lý đơn hàng, doanh thu\n& đối soát thanh toán"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "a68c21325d8e4fbdacd5986e97eb504d",
+    "name": "Đồng bộ trạng thái thanh toán\ntừ cổng payOS"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "dceb19cd9e694458b8e313a49039d8d7",
+    "source": {
+      "$ref": "a68c21325d8e4fbdacd5986e97eb504d"
+    },
+    "target": {
+      "$ref": "03b2506c464347cea18277ab5e7d4307"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "27bd0a6342e947e78e2d02bd2b6e62f5",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "cc4a69ed7dad44ef9ec7562b8dfa0070",
+      "_parent": {
+        "$ref": "27bd0a6342e947e78e2d02bd2b6e62f5"
+      },
+      "reference": {
+        "$ref": "a68c21325d8e4fbdacd5986e97eb504d"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "d97f5e537baf4c58b2ca73f425d1af30",
+      "_parent": {
+        "$ref": "27bd0a6342e947e78e2d02bd2b6e62f5"
+      },
+      "reference": {
+        "$ref": "778a0a62074d4eff84f0e4cf6f2f9da3"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "AAAAAAGh/6ptq9c3H5I=",
+    "source": {
+      "$ref": "a68c21325d8e4fbdacd5986e97eb504d"
+    },
+    "target": {
+      "$ref": "03b2506c464347cea18277ab5e7d4307"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6rUodeLxy4=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6rUodeMIn8=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6rUodeLxy4="
+      },
+      "reference": {
+        "$ref": "a68c21325d8e4fbdacd5986e97eb504d"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6rUodeNgok=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6rUodeLxy4="
+      },
+      "reference": {
+        "$ref": "778a0a62074d4eff84f0e4cf6f2f9da3"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "9261b2d7ffa9468f875192413e29f93b",
+    "name": "Xác nhận thanh toán thủ công\n& mở quyền học khóa PRO"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "9634c7813f314ce497d0dfde555bcf55",
+    "source": {
+      "$ref": "9261b2d7ffa9468f875192413e29f93b"
+    },
+    "target": {
+      "$ref": "03b2506c464347cea18277ab5e7d4307"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "c7e9bdacce9c4f33a6bcecd4e0bae00f",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "218d27a34c8447fe9b65a048f1646170",
+      "_parent": {
+        "$ref": "c7e9bdacce9c4f33a6bcecd4e0bae00f"
+      },
+      "reference": {
+        "$ref": "9261b2d7ffa9468f875192413e29f93b"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "397328d6ded5489ab2ac3b9f39f6cac8",
+      "_parent": {
+        "$ref": "c7e9bdacce9c4f33a6bcecd4e0bae00f"
+      },
+      "reference": {
+        "$ref": "778a0a62074d4eff84f0e4cf6f2f9da3"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "AAAAAAGh/6ppe9cnjm0=",
+    "source": {
+      "$ref": "9261b2d7ffa9468f875192413e29f93b"
+    },
+    "target": {
+      "$ref": "03b2506c464347cea18277ab5e7d4307"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6rPx9dXCgU=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6rPx9dY9+Q=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6rPx9dXCgU="
+      },
+      "reference": {
+        "$ref": "9261b2d7ffa9468f875192413e29f93b"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6rPx9dZPfY=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6rPx9dXCgU="
+      },
+      "reference": {
+        "$ref": "778a0a62074d4eff84f0e4cf6f2f9da3"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "5b591ac4e9f74693b78b16e5287a9ccb",
+    "name": "UC23\nQuản lý người dùng\n& phân quyền RBAC"
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "AAAAAAGh/6kfn9a10dU=",
+    "source": {
+      "$ref": "5b591ac4e9f74693b78b16e5287a9ccb"
+    },
+    "target": {
+      "$ref": "1055ecb7af624a54ac690cd045e6f0b0"
+    }
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "AAAAAAGh/6kjw9bF/fk=",
+    "source": {
+      "$ref": "5b591ac4e9f74693b78b16e5287a9ccb"
+    },
+    "target": {
+      "$ref": "7f5f896f852a454a891178c2bf95c064"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "1055ecb7af624a54ac690cd045e6f0b0",
+    "name": "Tạo tài khoản mới\nkích hoạt ngay (ACTIVE)"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "7f5f896f852a454a891178c2bf95c064",
+    "name": "Phân quyền vai trò &\nkhóa / mở khóa tài khoản\n(LOCKED / ACTIVE)"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "151e157120df4714a698f6cfa5ceeeb9",
+    "name": "UC21 – Tuyến 2\nXử lý báo cáo vi phạm\ntoàn hệ thống"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "99bb1629cbc74152a21a6d704f418669",
+    "name": "Áp dụng thang xử phạt\nlũy tiến 5 cấp\n(Cấm bình luận / Khóa tài khoản)"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "73ec52382ba3485db3cfd492085ec356",
+    "source": {
+      "$ref": "99bb1629cbc74152a21a6d704f418669"
+    },
+    "target": {
+      "$ref": "151e157120df4714a698f6cfa5ceeeb9"
+    }
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "AAAAAAGh/6pKd9cTqRA=",
+    "source": {
+      "$ref": "99bb1629cbc74152a21a6d704f418669"
+    },
+    "target": {
+      "$ref": "151e157120df4714a698f6cfa5ceeeb9"
+    }
+  },
+  {
+    "_type": "UMLActor",
+    "_id": "3b4b44e38bcd4a3c8e5b14db7b1bfc37",
+    "name": "Quản trị viên\n(Admin)"
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "5c21cbcb51fc48749fc83a066b36bb16",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "0849dbe08d804ba7b2328d04000fa4f2",
+      "_parent": {
+        "$ref": "5c21cbcb51fc48749fc83a066b36bb16"
+      },
+      "reference": {
+        "$ref": "3b4b44e38bcd4a3c8e5b14db7b1bfc37"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "f94b1e1a681f41ae98b98a7a5271cc8c",
+      "_parent": {
+        "$ref": "5c21cbcb51fc48749fc83a066b36bb16"
+      },
+      "reference": {
+        "$ref": "d4e5c6d7fd3b49efb5c733076fac352f"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "4cdb4e52deb94ff0afdd00ef83c53cf8",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "1558eef2a6b24c1f817b420556e05191",
+      "_parent": {
+        "$ref": "4cdb4e52deb94ff0afdd00ef83c53cf8"
+      },
+      "reference": {
+        "$ref": "3b4b44e38bcd4a3c8e5b14db7b1bfc37"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "1130b2b3b9214fcdb979078c19eb6aaf",
+      "_parent": {
+        "$ref": "4cdb4e52deb94ff0afdd00ef83c53cf8"
+      },
+      "reference": {
+        "$ref": "7f50113cf75d4f599a02d56f5c78980d"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "8e3732b010d54873a3710be2c0e2071a",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "b9add0e93dfe452eaa10aa1c37452329",
+      "_parent": {
+        "$ref": "8e3732b010d54873a3710be2c0e2071a"
+      },
+      "reference": {
+        "$ref": "3b4b44e38bcd4a3c8e5b14db7b1bfc37"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "ec3e35581f1c46709899ec15343b7bb9",
+      "_parent": {
+        "$ref": "8e3732b010d54873a3710be2c0e2071a"
+      },
+      "reference": {
+        "$ref": "673429edb60743229860119de20c9866"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "9ac0ddd3071747d08f5de5b560b35e32",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "c381037b10654126b87f15c0e9265aa1",
+      "_parent": {
+        "$ref": "9ac0ddd3071747d08f5de5b560b35e32"
+      },
+      "reference": {
+        "$ref": "3b4b44e38bcd4a3c8e5b14db7b1bfc37"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "babbd3e1a4a1446db1364208b75d1096",
+      "_parent": {
+        "$ref": "9ac0ddd3071747d08f5de5b560b35e32"
+      },
+      "reference": {
+        "$ref": "d63f48d0d9e64a268c9432ccd5430d64"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "c1d0d0a80aa44cfbaa49f3c4bde3d035",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "14cfb28987de45cc93ad87881742d9d3",
+      "_parent": {
+        "$ref": "c1d0d0a80aa44cfbaa49f3c4bde3d035"
+      },
+      "reference": {
+        "$ref": "3b4b44e38bcd4a3c8e5b14db7b1bfc37"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "0ca0751eba6c4e178085be655ce2ad9b",
+      "_parent": {
+        "$ref": "c1d0d0a80aa44cfbaa49f3c4bde3d035"
+      },
+      "reference": {
+        "$ref": "74b6b7cef6b044799deaa91fab7d8408"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "19b8fc30e93c4165b46eb877d7a55ac3",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "5a3f522f4a0a4b27aea16b1d99c93c2e",
+      "_parent": {
+        "$ref": "19b8fc30e93c4165b46eb877d7a55ac3"
+      },
+      "reference": {
+        "$ref": "3b4b44e38bcd4a3c8e5b14db7b1bfc37"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "ad94e78fd71c4f4f97f5283acc33400e",
+      "_parent": {
+        "$ref": "19b8fc30e93c4165b46eb877d7a55ac3"
+      },
+      "reference": {
+        "$ref": "03b2506c464347cea18277ab5e7d4307"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "3e25cefa4f1046fb8cf1da0536f36efe",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "665faa89c3ab4787b29122cf12bcebb5",
+      "_parent": {
+        "$ref": "3e25cefa4f1046fb8cf1da0536f36efe"
+      },
+      "reference": {
+        "$ref": "3b4b44e38bcd4a3c8e5b14db7b1bfc37"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "755e4800a5f94e2bb33757b8f2cd3184",
+      "_parent": {
+        "$ref": "3e25cefa4f1046fb8cf1da0536f36efe"
+      },
+      "reference": {
+        "$ref": "5b591ac4e9f74693b78b16e5287a9ccb"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "85112f8d2e0a4e81b7c03e929f9e98b2",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "e2691bed3634496ea9f8eae60c280461",
+      "_parent": {
+        "$ref": "85112f8d2e0a4e81b7c03e929f9e98b2"
+      },
+      "reference": {
+        "$ref": "3b4b44e38bcd4a3c8e5b14db7b1bfc37"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "dbde2e5448a9499bbeb0d869bc1be055",
+      "_parent": {
+        "$ref": "85112f8d2e0a4e81b7c03e929f9e98b2"
+      },
+      "reference": {
+        "$ref": "151e157120df4714a698f6cfa5ceeeb9"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6uFPdgYWOg=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6uFPdgZBdw=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6uFPdgYWOg="
+      },
+      "reference": {
+        "$ref": "3b4b44e38bcd4a3c8e5b14db7b1bfc37"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6uFPdgaUkw=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6uFPdgYWOg="
+      },
+      "reference": {
+        "$ref": "d63f48d0d9e64a268c9432ccd5430d64"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6uLYNhMvS4=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6uLYNhNPxc=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6uLYNhMvS4="
+      },
+      "reference": {
+        "$ref": "3b4b44e38bcd4a3c8e5b14db7b1bfc37"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6uLYdhOLcY=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6uLYNhMvS4="
+      },
+      "reference": {
+        "$ref": "74b6b7cef6b044799deaa91fab7d8408"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6uRndiAYiI=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6uRndiBaiQ=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6uRndiAYiI="
+      },
+      "reference": {
+        "$ref": "3b4b44e38bcd4a3c8e5b14db7b1bfc37"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6uRndiC9OU=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6uRndiAYiI="
+      },
+      "reference": {
+        "$ref": "5b591ac4e9f74693b78b16e5287a9ccb"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6uW0Ni0b8Y=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6uW0Ni1Sds=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6uW0Ni0b8Y="
+      },
+      "reference": {
+        "$ref": "3b4b44e38bcd4a3c8e5b14db7b1bfc37"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6uW0Ni2ygg=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6uW0Ni0b8Y="
+      },
+      "reference": {
+        "$ref": "d4e5c6d7fd3b49efb5c733076fac352f"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6ubvdjoDYo=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6ubvdjpaNA=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6ubvdjoDYo="
+      },
+      "reference": {
+        "$ref": "3b4b44e38bcd4a3c8e5b14db7b1bfc37"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6ubvdjqLeo=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6ubvdjoDYo="
+      },
+      "reference": {
+        "$ref": "7f50113cf75d4f599a02d56f5c78980d"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6ugl9kcOQ8=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6ugl9kdI+g=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6ugl9kcOQ8="
+      },
+      "reference": {
+        "$ref": "3b4b44e38bcd4a3c8e5b14db7b1bfc37"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6ugl9ketOE=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6ugl9kcOQ8="
+      },
+      "reference": {
+        "$ref": "673429edb60743229860119de20c9866"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6ul7dlQeVA=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6ul7dlR8/M=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6ul7dlQeVA="
+      },
+      "reference": {
+        "$ref": "3b4b44e38bcd4a3c8e5b14db7b1bfc37"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6ul7dlS04g=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6ul7dlQeVA="
+      },
+      "reference": {
+        "$ref": "151e157120df4714a698f6cfa5ceeeb9"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6uq7NmEals=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6uq7NmF9b0=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6uq7NmEals="
+      },
+      "reference": {
+        "$ref": "3b4b44e38bcd4a3c8e5b14db7b1bfc37"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6uq7NmG5k4=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6uq7NmEals="
+      },
+      "reference": {
+        "$ref": "03b2506c464347cea18277ab5e7d4307"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLActor",
+    "_id": "778a0a62074d4eff84f0e4cf6f2f9da3",
+    "name": "Cổng thanh toán\n(VietQR payOS)"
+  }
+]

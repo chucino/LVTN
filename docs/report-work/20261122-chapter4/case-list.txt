@@ -1,0 +1,74 @@
+1 auth.service.spec.ts
+1. nên throw BadRequestException nếu password và confirmPassword không khớp khi đăng ký
+2. nên throw ConflictException nếu email đã tồn tại và đã được kích hoạt (status ACTIVE)
+3. nên tạo người dùng pending, tạo OTP và gửi email khi đăng ký hợp lệ
+4. nên throw BadRequestException nếu Admin tự hạ quyền ADMIN của chính mình
+5. nên throw NotFoundException nếu không tìm thấy user cần phân quyền
+6. nên phân quyền thành công và thu hồi refresh token của user được phân quyền
+2 course-manage.service.spec.ts
+1. blocks instructors from accessing another instructor course in the service
+2. denies access to unsupported roles in the service, not only in the route guard
+3. filters instructor lists by JWT identity and paginates in MongoDB
+4. computes permissions from both course state and ownership
+5. reports readiness blockers and non-blocking PRO lesson warnings (allowing lessons without video)
+6. allows valid DRAFT to PENDING transition with a conditional status update
+7. supports withdraw, reject, approve, hide, and re-approve transitions
+8. rejects invalid status transitions with 409
+9. blocks instructor edits while the course is PENDING
+10. clears PRO-only lesson fields and resets pricing when changing DRAFT to FREE
+11. rejects reorder requests that do not contain exactly the existing chapter IDs
+12. reorders chapters and assigns continuous order values
+13. rejects quiz answers outside the zero-based options range
+14. rejects null for non-nullable patch fields while allowing nullable lesson notes and optional video/text/files
+15. allows creating and approving courses with empty optional fields or short strings without minimum length limits
+3 courses.service.spec.ts
+1. filters approved courses and applies effective-price sort and database pagination
+2. rejects an inverted price range
+3. orders featured courses by rating and recency and limits results
+4. validates page limits and rejects a featured limit above twelve
+5. returns only approved public detail fields and excludes lesson secrets and private instructor data
+6. returns 404 for malformed or non-approved course ids
+4 enrollments.service.spec.ts
+1. cho phép học viên đăng ký khóa học FREE ngay lập tức và chỉ mở bài đầu tiên
+2. chặn đăng ký trực tiếp khóa học PRO khi chưa qua luồng thanh toán
+3. kiểm soát học tuần tự, làm trắc nghiệm 1 câu (100%) & nhiều câu (>=70%), và cấp chứng chỉ khi hoàn thành
+4. Quản lý học viên: Giảng viên chỉ xem được khóa của mình, Admin xem được tất cả
+5. Chế độ Xem như học viên (Preview Mode): Giảng viên và Admin mở khóa toàn bộ bài giảng và làm thử trắc nghiệm không lưu DB
+5 questions.service.spec.ts
+1. maps accumulated violations to the 5 penalty tiers
+2. keeps a hidden root comment as a placeholder when it still has visible replies
+3. fully hides a hidden root comment that has no visible replies
+4. returns myCommentBannedUntil while the viewer is banned
+5. forbids commenting when lesson is still LOCKED for student
+6. blocks commenting while the account is banned from commenting
+7. toggles LIKE reaction on and off
+8. creates an ESCALATED report when the target is the course instructor
+9. creates a PENDING report when the target is a student
+10. instructor deletes (soft hides) a student comment, adds +1 violation once and resolves all duplicate reports
+11. does not add another violation when the comment was already recorded
+12. syncs DISMISSED status to every duplicate report of the same comment
+13. escalates all duplicate PENDING reports to ESCALATED without adding a violation
+14. forbids instructor from applying penalties or touching ESCALATED reports
+15. rejects resolving an already processed report
+16. admin applies a 24h comment ban at the 6th violation, stacking on the existing ban
+17. admin locks the account immediately for a severe violation
+18. forbids admin from escalating a report
+19. marks the assigned course instructor with isCourseAuthor = true and other instructors with isCourseAuthor = false
+20. forbids another instructor from accessing lesson Q&A when the course is not APPROVED
+6 reviews.service.spec.ts
+1. chặn học viên chưa hoàn thành 100% khóa học gửi đánh giá
+2. cho phép học viên hoàn thành 100% gửi đánh giá, giữ quyền sửa kể cả khi khóa học thêm bài mới và ưu tiên đánh giá có chữ lên đầu
+3. chặn viết nhận xét chữ khi đang bị cấm bình luận (#035), và khi xóa mềm đánh giá vi phạm thì tự động trừ khỏi điểm trung bình khóa học
+7 orders.service.spec.ts
+1. tính chữ ký tạo link thanh toán và xác thực chữ ký Webhook payOS chuẩn HMAC-SHA256
+2. tính toán đúng giá khóa học Pro từ DB và áp dụng mã giảm giá NEXTCODE10 / TEST2K
+3. chặn tạo đơn hàng nếu học viên đã sở hữu khóa học
+4. xử lý Webhook payOS thành công, cập nhật trạng thái COMPLETED và mở khóa học Pro
+5. từ chối giả lập thanh toán khi PAYMENT_SIMULATION_ENABLED=false hoặc NODE_ENV=production
+8 uploads.service.spec.ts
+1. detects JPEG, PNG and WEBP magic bytes accurately
+2. detects MP4 and WEBM video magic bytes accurately
+3. accepts a valid PNG image and returns its /public/images/courses URL, then deletes it safely
+4. accepts a valid MP4 video in public/videos and deletes it safely
+5. rejects and deletes a spoofed file whose magic bytes are not an image or video
+6. ignores external URLs or path traversal attempts in deleteLocalFile

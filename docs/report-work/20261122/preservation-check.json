@@ -1,0 +1,36 @@
+{
+  "source": "C:\\Users\\congchuc\\OneDrive - zzz\\đề tài luận văn\\báo cáo\\kết\\LUANVAN.docx",
+  "output": "C:\\Users\\congchuc\\OneDrive - zzz\\đề tài luận văn\\báo cáo\\kết\\LUANVAN_Phan_I_da_viet_lai.docx",
+  "source_sha256": "aade906939fb9d88e7978af7e22d682d4893f537f320823f4a1a1ca3545d60ba",
+  "output_sha256": "b25a630d95ba4c3bd14ae14ce1865555dcd8d2f78247b3c4164a5a3f96ce3fc2",
+  "changed_zip_members": [
+    "word/document.xml"
+  ],
+  "source_untouched": true,
+  "toc_xml_unchanged": true,
+  "before_part_i_bytes_unchanged": true,
+  "after_part_i_bytes_unchanged": true,
+  "headings_preserved": [
+    "PHẦN I GIỚI THIỆU",
+    "1 Đặt vấn đề",
+    "2 Lịch sử giải quyết vấn đề",
+    "2.1 Các nền tảng học tập đã có",
+    "2.2 Hướng giải quyết được kế thừa",
+    "3 Mục tiêu đề tài",
+    "3.1 Mục tiêu tổng quát",
+    "3.2 Mục tiêu cụ thể",
+    "4 Đối tượng và phạm vi nghiên cứu",
+    "4.1 Đối tượng nghiên cứu",
+    "4.2 Phạm vi nghiên cứu",
+    "5 Nội dung nghiên cứu",
+    "5.1 Quy trình thực hiện",
+    "5.2 Công nghệ và công cụ sử dụng",
+    "6 Những đóng góp chính của đề tài",
+    "7 Bố cục luận văn"
+  ],
+  "original_part_i_paragraphs": 47,
+  "new_part_i_paragraphs": 51,
+  "new_part_i_characters": 13464,
+  "new_part_i_space_separated_words": 2954,
+  "footnotes_preserved": true
+}

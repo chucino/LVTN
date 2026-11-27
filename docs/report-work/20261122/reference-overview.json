@@ -1,0 +1,838 @@
+[
+  {
+    "page": 1,
+    "text": "ĐẠI HỌC CẦN THƠ\nTRƯỜNG CÔNG NGHỆ THÔNG TIN - TRUYỀN THÔNG\nLUẬN VĂN TỐT NGHIỆP ĐẠI HỌC\nNGÀNH KỸ THUẬT PHẦN MỀM\nĐề tài\nXÂY DỰNG HỆ THỐNG FREELANCE MARKETPLACE\nDÙNG REACTJS VÀ JAVA SPRING CÓ TÍCH HỢP HỆ\nTHỐNG GỢI Ý VÀ CHATBOT\nSinh viên: Tạ Quang Vinh\nMã số: B2110156\nKhóa: 47\nCần Thơ, 04/2026"
+  },
+  {
+    "page": 2,
+    "text": "TRƯỜNG CÔNG NGHỆ THÔNG TIN VÀ TRUYỀN THÔNG\nKHOA CÔNG NGHỆ PHẦN MỀM\n(Developing a Freelance Marketplace System Using\nReactJS and Java Spring with Integrated Recommendation\nand Chatbot Features)\nGiảng viên hướng dẫn: Sinh viên thực hiện:\nTS. Nguyễn Công Danh Họ tên: Tạ Quang Vinh\nMSSV: B2110156"
+  },
+  {
+    "page": 3,
+    "text": "XÁC NHẬN CHỈNH SỬA LUẬN VĂN THEO YÊU CẦU CỦA HỘI ĐỒNG\nTên luận văn (tiếng Việt và tiếng Anh): Xây dựng hệ thống freelance marketplace dùng\nReactJS và Java Spring có tích h ợp hệ thống gợi ý và chatbot  (Developing a freelance\nmarketplace system using ReactJS and Java Spring with integrated recommendation and\nchatbot features).\nHọ tên sinh viên: Tạ Quang Vinh MASV: B2110156\nMã lớp: DI2196A2\nĐã báo cáo tại hội đồng ngành: Kỹ thuật phần mềm\nNgày báo cáo: 21/04/2026\nHội đồng báo cáo gồm:\n1. TS.GVCC. Phan Phương Lan\n2. Ths.GVC. Trương Thị Thanh Tuyền\n3. TS. Nguyễn Công Danh\nLuận văn đã được chỉnh sửa theo góp ý của Hội đồng.\nCần Thơ, ngày ..... tháng ..... năm 2026\nGiáo viên hướng dẫn\n(Ký và ghi họ tên)"
+  },
+  {
+    "page": 4,
+    "text": "LỜI CẢM ƠN\nLời đầu tiên, em xin được bày tỏ lòng biết ơn sâu sắc đến Ban Giám hiệu Trường\nĐại học Cần Thơ đã tạo mọi điều kiện tốt nhất về cơ sở vật chất và môi trường học tập.\nEm cũng xin gửi lời tri ân chân thành tới toàn thể quý thầy cô, công nhân viên chức của\ntrường, đặc biệt là các thầy cô thuộc Khoa Công nghệ phần mềm (Trường Công nghệ\nThông tin và Truyền thông) đã tận tình truyền đạt những kiến thức và kinh nghiệm quý\nbáu.\nEm đặc biệt cảm ơn Thầy Nguyễn Công Danh vì sự tận tâm hướng dẫn, giúp em\ncó được nền tảng vững chắc để hoàn thành bài luận văn này. Đồng thời, em cũng xin\nbày tỏ lòng biết ơn sâu sắc đến cô Phan Phương Lan  và cô Trương Thị Thanh Tuyền ,\nnhững người đã đóng góp ý kiến để nâng cao chất lượng bài viết của em.\nCuối cùng, em xin dành lời tri ân sâu sắc nhất đến gia đình, ba mẹ và những\nngười thân yêu – những người đã luôn là điểm tựa tinh thần, tiếp thêm sức mạnh để em\nkiên trì theo đuổi con đường học vấn. Em cũng không quên cảm ơn những người bạn đã\nđồng hành v"
+  },
+  {
+    "page": 5,
+    "text": "NHẬN XÉT CỦA CÁN BỘ HƯỚNG DẪN\nCần Thơ, ngày 21 tháng 04 năm 2026\nCán bộ hướng dẫn\nTS. Nguyễn Công Danh"
+  },
+  {
+    "page": 6,
+    "text": "NHẬN XÉT CỦA CÁN BỘ PHẢN BIỆN\nCán bộ phản biện"
+  },
+  {
+    "page": 7,
+    "text": "MỤC LỤC"
+  },
+  {
+    "page": 8,
+    "text": ""
+  },
+  {
+    "page": 9,
+    "text": "4.2. Phương pháp và thuật toán áp dụng trong hệ thống của đề tài ..... 150"
+  },
+  {
+    "page": 10,
+    "text": "5.4.6 Kiểm thử quy trình nhắn tin giữa Nhà tuyển dụng và Freelancer"
+  },
+  {
+    "page": 11,
+    "text": "DANH MỤC BẢNG"
+  },
+  {
+    "page": 12,
+    "text": "Tạ Quang Vinh B2110156"
+  },
+  {
+    "page": 13,
+    "text": "DANH MỤC HÌNH"
+  },
+  {
+    "page": 14,
+    "text": "Hình 3-44: Giao diện Freelancer nhập thông tin mạng xã hội trong quá trình Đăng ký\nHình 3-45: Giao diện Freelancer nhập trong tin tóm lược về bản thân trong quá trình"
+  },
+  {
+    "page": 15,
+    "text": ""
+  },
+  {
+    "page": 16,
+    "text": "TÓM TẮT ĐỀ TÀI\nBối cảnh: Trong bối cảnh kỷ nguyên số, thị trường lao động đã trải qua một cuộc chuyển\nmình mạnh mẽ, mở ra những hình thức tìm việc và làm việc hoàn toàn mới. Giờ đây,\nviệc kết nối giữa người tìm việc và nhà tuyển dụng không chỉ gói gọn trong các phương\nthức truyền thống mà còn diễn ra sôi nổi trên không gian mạng, đặc biệt là thông qua các\nnền tảng việc làm trực tuyến và làm việc tự do (freelance). Sự ra đời của những nền tảng\ntoàn cầu như Upwork, Freelancer.com hay Fiverr đã tạo ra một thị trường lao động không\nbiên giới, cho phép người lao động trên khắp thế giới dễ dàng tiếp cận với các dự án và\ncơ hội việc làm linh hoạt. Những nền tảng này đã đóng vai trò như một cầu nối hiệu quả,\nphá vỡ rào cản địa lý và thay đổi tư duy làm việc cố định. Tuy nhiên, những nền tản g\nnày vẫn còn nhiều hạn chế. Giao diện phức tạp, trải nghiệm người dùng chưa được tối\nưu, cùng với việc thiếu các tính năng gợi ý công việc phù hợp với kỹ năng cá nhân, đã\ntạo ra những rào cản đáng kể. Hơn "
+  },
+  {
+    "page": 17,
+    "text": "ABSTRACT\nContext: In the digital era, the labor market has undergone significant transformation\nwith the rise of online freelance platforms such as Upwork, Freelancer.com, and Fiverr.\nThese platforms have created a borderless job market, allowing workers worldwide to\naccess flexible opportunities and breaking down geographical barriers. However, they\nstill face limitations including complicated interfaces, suboptimal user experience, lack\nof intelligent job recommendations based on personal skills, and cumbersome payment\nand project management processes.\nObjective: This project aims to develop a user-friendly and intuitive freelance platform\nsuitable for both beginners and professionals, with a focus on optimizing user\nexperience, integrating an intelligent job recommendation system, simplifying project\nmanagement, and ensuring data security using services like Stripe and Cloudinary.\nMethodology: The platform is built using a monolithic architecture with Java Spring\nBoot for the backen"
+  },
+  {
+    "page": 18,
+    "text": ""
+  },
+  {
+    "page": 19,
+    "text": "PHẦN 1: GIỚI THIỆU\nPhần GIỚI THIỆU của luận văn sẽ nêu rõ bối cảnh nghiên cứu, lý do lựa chọn đề\ntài, các mục tiêu cần đạt, phạm vi nghiên cứu, cùng với các công nghệ và phương\npháp được áp dụng để phát triển nền tảng website hỗ trợ kết nối và quản lý công việc\ncho các freelancer. Qua đó, mang đến cho người đọc cái nhìn tổng quan về nội dung\nvà định hướng phát triển của đề tài.\n1. Đặt vấn đề\nTrong bối cảnh xã hội hiện đại, nhu cầu làm việc tự do và kết nối giữa người lao\nđộng độc lập với các doanh nghiệp ngày càng tăng cao, kéo theo yêu cầu ngày càng\nkhắt khe về chất lượng dịch vụ kết nối việc làm. Việc nâng cao trải nghiệm người\ndùng không ch ỉ dừng lại ở thông tin cơ bản mà còn cần ứng dụng mạnh mẽ công\nnghệ thông tin để đơn giản hóa và tối ưu hóa quy trình đăng dự án, đấu thầu và hợp\ntác.\nMột trong những giải pháp quan trọng trong quá trình chuyển đổi số của ngành\nlao động tự do là xây dựng hệ thống freelancer trực tuyến – nơi người dùng có thể dễ\ndàng tra cứu dự án, kiểm tra cơ hội"
+  },
+  {
+    "page": 20,
+    "text": "- Trong nước\nvlance.vn: là một trong những nền tảng làm việc tự do (freelancer) hàng\nđầu tại Việt Nam. Ra đời với sứ mệnh kết nối freelancer và khách hàng trong\nnước, Vlance hoạt động như một cầu nối an toàn và hiệu quả, giúp các doanh\nnghiệp, cá nhân tìm kiếm được nhân sự tự do phù hợp cho các dự án của mình.\nVlance.vn nổi bật nhờ việc tập trung vào thị trường Việt Nam , giúp các doanh\nnghiệp và freelancer trong nước dễ dàng trao đổi và thanh toán. Nền tảng này\ncung cấp đa dạng lĩnh vực công việc, từ lập trình, thiết kế, marketing đến viết nội\ndung.\nFreelancerv1.iet.vn: là nền tảng tiên phong, uy tín kết nối nhà tuyển dụng\nvới freelancer chất lượng cao. Nền tảng này tập trung vào chất lượng  bằng cách\nsàng lọc freelancer, giúp nhà tuyển dụng an tâm về dự án. Đồng thời, đây cũng là\ngiải pháp cho cả hai bên, tạo cơ hội việc làm và tăng thu nhập cho người lao động\ntự do.\nHình 1: Website freelancerviet.vn"
+  },
+  {
+    "page": 21,
+    "text": "Hình 2: Website FreelancerViet\n- Ngoài nước:\nfreelancer.com: là một trong những nền tảng kết nối freelancer và khách\nhàng lớn nhất thế giới, được thành lập vào năm 2009 tại Úc bởi Matt Barrie. Nền\ntảng này hoạt động như một \"chợ việc làm\" trực tuyến, nơi các doanh nghiệp, cá\nnhân có nhu cầu thuê ngoài (outsourcing) có thể đăng tải các dự án và tìm kiếm\nfreelancer phù hợp. Freelancer.com cung cấp các công cụ thanh toán bảo vệ quyền\nlợi cho cả hai bên. Chẳng hạn, tính năng \"Escrow\" (thanh toán ký quỹ) giúp đảm\nbảo rằng freelancer chỉ nhận được tiền khi dự án hoàn thành  và người thuê hài\nlòng. Ngoài ra, nền tảng này còn có nhiều công cụ hữu ích như chat trực tuyến,\ntheo dõi tiến độ công việc, quản lý dự án... giúp quy trình hợp tác diễn ra thuận\nlợi."
+  },
+  {
+    "page": 22,
+    "text": "Hình 3: Website freelancer.com\nupwork.com: là một trong những nền tảng làm việc tự do (freelancer) lớn\nvà uy tín nhất trên thế giới. Ra đời vào năm 2015 từ sự hợp nhất của hai nền tảng\ntiên phong là Elance và oDesk, Upwork đã trở thành một \"chợ việc làm\" toàn cầu,\nkết nối các doanh nghiệp và cá nhâ n có nhu cầu thuê nhân sự với hàng triệu\nfreelancer có chuyên môn cao từ khắp nơi.  Một trong những ưu điểm lớn của\nUpwork là hệ thống thanh toán an toàn, giúp bảo vệ quyền lợi của cả hai bên. Bên\ncạnh đó, Upwork còn đảy mạnh người dùng bằng hai hình thức thanh toán: Dự án\ngiá cố định (Fixed-Price), nơi tiền được ký quỹ trước và chỉ giải ngân khi công\nviệc hoàn thành; và Dự án theo giờ (Hourly), sử dụng ứng dụng theo dõi thời gian\nvà chụp màn hình để đảm bảo tính minh bạch."
+  },
+  {
+    "page": 23,
+    "text": "Hình 4: Website upwork.com\n3. Mục tiêu đề tài\n- Mục tiêu tổng quát: Xây dựng hệ thống freelancer marketplace giúp người nối\nngười lao động với khách hàng một cách thuận tiện và dễ dàng. Hỗ trợ các\nfreelancer nhanh tìm được công việc đúng với kỹ năng mình có, đồng thời\ngiúp khách hàng tìm được những chuyên gia phù hợp thực hiện các dự án.\n- Mục tiệu cụ thể:\n+ Xây dựng một website freelancer với giao diện thân thiện, dễ sử dụng.\n+ Tích hợp cổng thanh toán trực tuyến để đảm bảo giao dịch an toàn, nhanh\nchóng.\n+ Tối ưu hóa quy trình đăng dự án, đấu thầu và quản lý công việc, nâng cao\nhiệu quả hoạt động cho cả freelancer và khách hàng.\n4. Đối tượng nghiên cứu và phạm vi nghiên cứu\n4.1 Đối tượng nghiên cứu:\n- Về công nghệ:\n+ Spring: Sử dụng Spring Framework (Spring Boot) để xây dựng\nbackend, tận dụng mô hình MVC và Restful API để xử lý các yêu cầu\ntừ phía client.\n+ React: Phát triển giao diện người dùng (frontend) với React, đảm bảo\ntính tương tác cao và trải nghiệm mượt mà."
+  },
+  {
+    "page": 24,
+    "text": "+ PostgreSQL: Cơ sở dữ liệu quan hệ để lưu trữ thông tin người dùng, dự\nán, giao dịch, và các dữ liệu liên quan.\n+ Cloudinary: Quản lý và lưu trữ hình ảnh, tài liệu hoặc các tệp đa\nphương tiện liên quan đến dự án và hồ sơ người dùng.\n+ Restful API: Kết nối giữa frontend và backend, đảm bảo giao tiếp dữ\nliệu hiệu quả và bảo mật.\n+ Mô hình MVC: Ứng dụng mô hình Model-View-Controller để tổ chức\nmã nguồn, tăng khả năng bảo trì và mở rộng hệ thống.\n- Freelancer: Những cá nhân làm việc tự do, tìm kiếm cơ hội dự án trong các\nlĩnh vực như thiết kế, lập trình\n- Client: Các cá nhân hoặc tổ chức có nhu cầu thuê freelancer để thực hiện các\ndự án ngắn hạn hoặc dài hạn\n4.2 Phạm vi nghiên cứu\nVề mặt lý thuyết\n- Nghiên cứu tập trung vào việc phát triển một website freelance\nmarketplace với các tính năng cốt lõi như đăng dự án, đấu thầu, quản lý\ncông việc, và thanh toán trực tuyến.\n- Ứng dụng công nghệ SpringBoot và ReactJS để xây dựng nền tảng.\n- Tích hợp hệ thống gợi ý công việc phù hợp cơ bản và cổn"
+  },
+  {
+    "page": 25,
+    "text": "5. Nội dung nghiên cứu\n5.1. Quy trình nghiên cứu\nKhảo sát và công nghệ liên quan:\n- Nghiên cứu nền tảng kiến trúc:  tìm hiểu mô hình MVC (Model -View-\nController) nhằm xây dựng hệ thống có cấu trúc chặt chẽ, tách bạch giữa giao\ndiện, logic và dữ liệu.\n- Lựa chọn công nghệ chủ chốt: Đề tài tập trung vào việc áp dụng các công nghệ\ntiên tiến như Spring Boot và Spring Security cho backend, React và Redux\ncho frontend, kết hợp với JPA và PostgreSQL để quản lý dữ liệu. Ngoài ra,\nem sử dụng Cloudinary để quản lý tệp đa phương tiện.\n- Ứng dụng trí tuệ nhân tạo: khảo sát các kỹ thuật AI để tích hợp chatbot sử\ndụng các mô hình ngôn ngữ lớn (LLM), cung cấp khả năng hỗ trợ và hướng\ndẫn tự động cho người dùng.\n- Đảm bảo an toàn hệ thống: Các phương pháp bảo mật như JWT, mã hóa dữ\nliệu và bảo vệ Restful API đã được nghiên cứu kỹ lưỡng để đảm bảo an toàn\ntuyệt đối cho người dùng.\nPhân tích và thiết kế hệ thống:\n- Xác định các chức năng cốt lõi: Các tính năng chính của hệ thống được xác\nđịnh rõ ràng, "
+  },
+  {
+    "page": 26,
+    "text": "- Lưu trữ : PostgreSQL được sử dụng để lưu trữ dữ liệu chính. Cloudinary được\ndùng để quản lý các tệp đa phương tiện.\n- Tích hợp hỗ trợ và thanh toán: Chatbot được tích hợp qua API của các mô\nhình ngôn ngữ lớn, và các cổng thanh toán như Stripe  được kết nối qua Restful\nAPI, đảm bảo giao dịch an toàn và nhanh chóng.\nKiểm thử và đánh giá:\n- Kiểm thử phần mềm: em đã thực hiện kiểm thử đơn vị và kiểm thử tích hợp\ncho cả backend (JUnit, Mockito) và frontend (Jest, React Testing Library).\n- Đánh giá hiệu suất và bảo mật: Hiệu suất tìm kiếm được đánh giá kỹ lưỡng.\nHệ thống cũng trải qua các bài kiểm tra bảo mật để đảm bảo tính toàn vẹn.\nKết quả và định hướng tương lai:\n- Tổng kết thành tựu: Đề tài đã hoàn thành việc xây dựng một nền tảng\nfreelancer hoàn chỉnh, tích hợp các tính năng cốt lõi.\n- Đề xuất cải tiến: Em đã phân tích những hạn chế và đưa ra các đề xuất cải tiến\ntrong tương lai như nâng cấp khả năng tìm kiếm bằng Elasticsearch hoặc tối\nưu hóa chatbot.\n5.2   Các công nghệ và công cụ "
+  },
+  {
+    "page": 27,
+    "text": "Đóng góp của đề tài\n- Nền tảng toàn diện: Đề tài đã xây dựng một nền tảng freelancer đầy đủ chức\nnăng, hỗ trợ hiệu quả cho cả người làm việc tự do và khách hàng.\n- Tìm kiếm nâng cao: Việc tích hợp hệ thống gợi ý mang lại khả năng tìm kiếm\nvượt trội, giúp người dùng dễ dàng tìm thấy đối tác hoặc công việc phù hợp.\n- Hệ thống bảo mật vững chắc: Ứng dụng Spring Security và JWT đã tạo ra một\nmôi trường giao dịch an toàn và đáng tin cậy.\n- Trải nghiệm người dùng được nâng cao: Chatbot thông minh và giao diện\nReact mượt mà đã cải thiện đáng kể trải nghiệm người dùng, giúp tối ưu hóa\nhiệu suất làm việc.\n6. Bố cục luận văn\nLuận văn được tổ chức thành ba phần chính: Phần giới thiệu, Phần nội dung và\nPhần kết luận,\nPhần giới thiệu\n− Đặt vấn đề: Trình bày lý do chọn đề tài, tóm tắt lịch sử và thực trạng giải\nquyết vấn đề trong lĩnh vực freelance marketplace.\n− Mục tiêu đề tài: Xác định mục tiêu tổng quát và mục tiêu cụ thể của việc\nnghiên cứu và phát triển hệ thống.\n− Đối tượng, phạm vi và nội du"
+  },
+  {
+    "page": 28,
+    "text": "phù hợp và chatbot hỗ trợ người dùng thông qua việc tích hợp các thuật\ntoán và API trí tuệ nhân tạo, tập trung vào thiết kế luồng xử lý, giao diện\nvà phương thức lưu trữ kết quả.\n− Kiểm thử và đánh giá: Mô tả mục tiêu, kế hoạch kiểm thử, các trường\nhợp kiểm thử, kết quả thực thi và đánh giá hiệu quả chức năng, hiệu suất\ncủa hệ thống.\nPhần kết luận\n− Trình bày các kết quả đạt được sau khi hoàn thành hệ thống (về lý thuyết\nvà thực hành).\n− Nêu hướng phát triển, hạn chế hiện tại và khả năng ứng dụng thực tiễn\ncủa hệ thống trong tương lai.\nNgoài ra, luận văn còn có phần Tài liệu tham khảo liệt kê các nguồn tài liệu, sách,\nbài giảng và website đã tham khảo trong quá trình thực hiện.\n7. Kế hoạch làm dự án\nBẢNG KẾ HOẠCH\nThời gian\nNhiệm vụ 1 2 3 4 5 6 7 8 9 10 11 12\nPhân tích yêu cầu X\nĐặc tả  X\nThiết kế   X X X\nCode hệ thống     X X X X X\nTích hợp          X X\nKiểm thử            X\nViết báo cáo X X X       X X X"
+  },
+  {
+    "page": 29,
+    "text": "PHẦN 2: NỘI DUNG\nCHƯƠNG 1: MÔ TẢ BÀI TOÁN\nPhần này sẽ đi sâu vào việc xác định và trình bày chi tiết về bài toán của hệ thống,\nbao gồm mô tả tổng thể, các chức năng cụ thể và cơ chế hoạt động. Bên cạnh đó,  làm rõ\ncác yêu cầu cần thiết để hệ thống vận hành hiệu quả. Để minh họa quyền hạn của người\ndùng, sơ đồ use case sẽ được sử dụng để phân quyền cho từng vai trò khác nhau, đảm\nbảo tính  đúng đắn. Cuối cùng, em sẽ trình bày chi tiết các yêu cầu chức năng và phi\nchức năng, bao gồm cả phân tích đánh giá và đề xuất giải pháp tiếp cận, cùng với các\nyêu cầu khác để hoàn thiện hệ thống.\n1.1 Mô tả bài toán:\nHệ thống freelancer được thiết kế với ba loại người dùng chính, mỗi loại đóng vai trò\nriêng biệt để đảm bảo hoạt động mượt mà và hiệu quả của nền tảng. Dưới đây là mô tả\nchi tiết về từng loại:\na. Freelancers:\nFreelancers là những cá nhân làm việc tự do, đăng ký tài khoản để tham gia nền\ntảng. Họ có thể tạo hồ sơ cá nhân, trưng bày kỹ năng, kinh nghiệm và portfolio để\nthu hút khách hàng. V"
+  },
+  {
+    "page": 30,
+    "text": "minh bạch và an toàn trong giao dịch.\nc. Quản trị viên:\nQuản trị viên hệ thống thường là người vận hành nền tảng, với quyền hạn cao\nnhất để duy trì và giám sát toàn bộ hệ thống. Vai trò của họ bao gồm quản lý tài\nkhoản người dùng (xác minh, khóa/mở khóa), giải quyết tranh chấp giữa Freelancer\nvà Nhà tuyển dụng , giám sát giao dịch thanh toán, cập nhật nội dung hệ thống, và\nphân tích dữ liệu qua PostgreSQL để cải thiện hiệu suất. Quản trị viên có thể truy cập\ntất cả các tính năng, bao gồm chỉnh sửa dự án nếu cần, tích hợp chatbot nâng cao, và\nđảm bảo bảo mật qua Re stful API và mô hình MVC. Họ không tham gia trực tiếp\nvào dự án mà tập trung vào việc duy trì tính ổn định và tuân thủ quy định của hệ\nthống.\n1.2 Phân tích yêu cầu\n1.2.1 Sơ đồ usecase\n1.2.1.1 Sơ đồ usecase tổng quát\nHình 1-1 minh họa sơ đồ trường hợp sử dụng (Use Case) tổng quát của hệ\nthống Freelancer Marketplace , khắc họa mối tương quan giữa các nhóm chức\nnăng và bốn tác nhân chính bao gồm: Freelancer, Nhà tuyển dụng (Clie"
+  },
+  {
+    "page": 31,
+    "text": "Hình 1- 1: Sơ đồ Use Case tổng quan của hệ thống\n1.2.1.2 Sơ đồ usecase của tác nhân Freelancer\nHình 1-2 trình bày chi tiết phân hệ chức năng dành riêng cho tác nhân\nFreelancer trong hệ sinh thái Freelancer Marketplace. Các chức năng được thiết kế\nbao quát toàn bộ quy trình làm việc của người lao động tự do, từ giai đoạn tiếp cận\nthị trường (Tìm kiếm dự án, Xem thông tin nhà tuyển dụng), giai đoạn tham gia\nđấu thầu (Ứng tuyển dự án, Xem danh sách proposal), cho đến giai đoạn thực hiện\nvà hoàn tất hợp đồng (Nộp deadline, Đánh dấu hoàn thành milestone, Đánh giá).\nĐể đảm bảo tính bảo mật và cá nhân hóa dữ liệu như Quản lý hồ sơ hay Xem thống"
+  },
+  {
+    "page": 32,
+    "text": "kê doanh thu, hệ thống yêu cầu tác nhân phải hoàn tất quy trình đăng ký và xác\nthực đăng nhập trước khi thực hiện các tương tác chuyên sâu.\nHình 1-1: Sơ đồ UseCase của Freelancer\n1.2.1.3 Sơ đồ usecase của tác nhân Nhà tuyển dụng\nHình 1-3 minh họa các chức năng trọng tâm của tác nhân Nhà tuyển dụng\n(Client) – thực thể khởi tạo nhu cầu công việc trên hệ thống. Quy trình bắt đầu từ\nviệc thiết lập sự hiện diện thông qua Đăng ký tài khoản  và Đăng dự án. Khách\nhàng đóng vai trò chủ động trong việc quản lý nhân sự bằng cách Gửi lời mời\ntham gia, Xem và so sánh các đề xuất  để đi đến quyết định Chấp nhận đề xuất .\nTrong giai đoạn vận hành dự án, tác nhân này thực hiện các nghiệp vụ tài chính\nvà quản lý tiến độ như Ký quỹ milestone và theo dõi Báo cáo tuần. Cuối cùng, để\nduy trì chất lượng cộng đồng, hệ thống cung cấp các công cụ phản hồi như Báo\ncáo vi phạm và Đánh giá freelancer dựa trên kết quả thực tế."
+  },
+  {
+    "page": 33,
+    "text": "Hình 1-2: Sơ đồ UseCase của Client\n1.2.1.4 Sơ đồ usecase của tác nhân Quản trị viên\nĐối với tác nhân  Quản trị viên, hình 1-4  thể hiện quyền hạn quản trị tập\ntrung vào việc duy trì trật tự và an toàn hệ thống. Chức năng quan trọng nhất là\nQuản lý người dùng , bao gồm các quyền thực thi mở rộng như Kích hoạt tài\nkhoản, Khóa tài khoản vi phạm hoặc Xóa kỹ năng không phù hợp. Admin đóng\nvai trò là bộ lọc cuối cùng, đảm bảo các tài khoản hoạt động trên sàn đều tuân thủ"
+  },
+  {
+    "page": 34,
+    "text": "đúng quy định và tiêu chuẩn cộng đồng thông qua cơ chế kiểm duyệt đa lớp.\nHình 1-3: Sơ đồ Use Case Admin"
+  },
+  {
+    "page": 35,
+    "text": "Bảng liệt kê các chức năng của hệ thống\nBảng 1-1: Bảng chức năng của hệ thống\nSTT Mã chức năng Tên chức năng Mô tả\n1 AUTH_01 Đăng ký tài khoản Cho phép người dùng khởi tạo\ntài khoản mới (vai trò\nFreelancer hoặc Client) thông\nqua địa chỉ Email hoặc Số điện\nthoại. Hệ thống thực hiện kiểm\ntra tính duy nhất của dữ liệu.\n2 AUTH_02 Đăng nhập Xác thực danh tính người dùng\nvào hệ thống dựa trên thông tin\nđịnh danh (Email/Username) và\nmật khẩu đã mã hóa.\n3 AUTH_03 Đăng xuất Chấm dứt phiên làm việc\n(Session) hiện tại. Hỗ trợ tùy\nchọn hủy bỏ phiên làm việc trên\ntất cả các thiết bị đã đăng nhập.\n4 PROJ_00 Tìm kiếm dự án Cho phép người dùng truy vấn\ndanh sách dự án dựa trên từ\nkhóa liên quan đến tiêu đề hoặc\nnội dung mô tả công việc.\n5 PROJ_01 Lọc dự án Tối ưu hóa kết quả tìm kiếm\nthông qua bộ lọc đa điều kiện:\nkỹ năng chuyên môn, khoảng\nngân sách, loại hợp đồng (Trọn\ngói/Theo giờ) và trạng thái dự\nán.\n6 PROJ_03 Đăng tuyển dự án Cho phép Client khởi tạo dự án\nmới với đầy đủ thông số: Hình\nthức than"
+  },
+  {
+    "page": 36,
+    "text": "8 PROJ_05 Chỉnh sửa thông\ntin dự án\nCho phép Client thay đổi các\nthông tin của dự án đã đăng như\ntiêu đề, mô tả, kỹ năng yêu cầu\nhoặc ngân sách khi dự án chưa\nbắt đầu thực hiện.\n9 PROJ_06 Xóa dự án Cho phép Client gỡ bỏ một dự\nán khỏi hệ thống khi không còn\nnhu cầu tuyển dụng hoặc đã\nđăng nhầm.\n10 MSG_01 Hệ thống nhắn tin\nthời gian thực\nCung cấp kênh giao tiếp thời\ngian thực (Real-time) giữa\nClient và Freelancer, hỗ trợ gửi\ntệp tin đa phương tiện và lưu trữ\nlịch sử trao đổi.\n11 REV_01 Đánh giá &\nReview\nCho phép hai bên thực hiện\nđánh giá xếp hạng (Rating) và\nviết nhận xét (Feedback) sau\nkhi hợp đồng hoàn thành nhằm\nxây dựng hệ thống uy tín người\n12 PROP_01 Gửi đề xuất (Bid) Freelancer gửi hồ sơ ứng tuyển\nbao gồm: Thư giới thiệu (Cover\nletter), mức giá đề xuất, lộ trình\nthực hiện và các tệp tin năng\nlực (Portfolio).\n13 PROP_02 So sánh các đề xuất Cung cấp giao diện bảng so\nsánh đa chiều giúp Client đánh\ngiá các Freelancer dựa trên mức\ngiá, thời gian hoàn thành, kỹ\nnăng và điểm đánh giá "
+  },
+  {
+    "page": 37,
+    "text": "16 PROP_05 Xem hồ sơ\nFreelancer\nTruy xuất và hiển thị chi tiết\nthông tin chuyên môn, lịch sử\nlàm việc và các đánh giá\ntrướcđó của Freelancer ngay từ\ngiao diện quản lý đề xuất.\n17 PROP_06 Cập nhật đề xuất Cho phép Freelancer điều chỉnh\ncác điều khoản và thông tin\ntrong bản đề xuất đã gửi trước\nkhi Client thực hiện phê duyệt.\n18 PROP_07 Xóa đề xuất Cho phép Freelancer rút lại đề\nxuất ứng tuyển khỏi dự án.\n19 CON_01 Quản lý hợp đồng Hợp đồng tự động được tạo khi\nproposal được chấp nhận, hiển\nthị rõ các điều khoản, milestone\n(Fixed) hoặc hourly rate, thời\ngian bắt đầu/kết thúc.\n20 MILE_00\nĐánh dấu\nmilestone hoàn\nthành\n(Fixed_price)\nFreelancer gửi yêu cầu hoàn\nthành milestone → khách hàng\nduyệt → sau 14 ngày bảo vệ\n(hoặc ngay nếu khách hàng\nđồng ý release sớm), tiền tự\nđộng chuyển vào tài khoản\nfreelancer.\n21 MILE_01 Tạo milestone Đối với dự án fixed_price\nfreelancer có thể tạo các\nmilestone để đánh dấu tiến độ\n22 MILE_02 Chỉnh sửa\nmilestone\nFreelancer chỉnh sửa milestone\ncủa mình có phù hợ"
+  },
+  {
+    "page": 38,
+    "text": "nghiệm làm việc, học vấn,\nportfolio, chứng chỉ, mức giá\ngiờ, ngôn ngữ, múi giờ, v.v.\n27 WORKLY_00 Gửi báo cáo tuần Đối với dự án hourly_rate, sau\nkhi client đã chấp nhận hợp\nđồng thì mỗi thứ 6 hàng tuần\nclient sẽ nhận được email báo\ncáo những gì freelancer đã làm\nđược trong tuần đó\n28 ADM_01 Quản lý danh mục Admin thực hiện thêm mới,\nchỉnh sửa tên hoặc xóa các danh\nmục nghề nghiệp trên hệ thống.\n29 ADM_02 Quản lý Kỹ năng Admin quản lý danh sách kỹ\nnăng chi tiết và thiết lập mối\nquan hệ giữa kỹ năng đó với\ncác danh mục tương ứng.\n30 ADM_03 Quản lý trạng thái\ntài khoản\nCho phép Admin tạm khóa\n(Block) hoặc kích hoạt lại\n(Active) tài khoản của\nFreelancer hoặc Client dựa trên\nhành vi của họ trên nền tảng.\n31 REC_01 Gợi ý dự án phù\nhợp\nHệ thống tự động phân tích tập\nhợp kỹ năng của Freelancer và\nđối chiếu với yêu cầu của các\ndự án đang tuyển dụng để đưa\nra danh sách các dự án có độ\ntương quan cao nhất.\n32 REC_02 Gợi ý Freelancer\nphù hợp\nHệ thống tự động quét danh\nsách Freelancer trên nền tản"
+  },
+  {
+    "page": 39,
+    "text": "Bảng 1-2: Chức năng đăng ký tài khoản\nTên UseCase: Đăng ký ID: AUTH_01\nTác nhân: Freelancer, Client Mức độ cần thiết: Bắt buộc\nPhân loại: Quan trọng\nĐiều kiện: Người dùng chưa có tài khoản\nMô tả tóm tắt: Hệ thống hỗ trợ quy trình đăng ký tài khoản mới, yêu cầu người\ndùng cung cấp thông tin cá nhân và hoàn tất xác thực bằng mã OTP (One -Time\nPassword).\nLuồng xử lý bình thường của sự kiện:\n1. Khách hàng chọn chức năng “Đăng ký” trên giao diện người dùng.\n2. Hệ thống hiển thị giao diện đăng ký gồm nhiều bước.\n3. Khách hàng điền đầy đủ các thông tin đăng ký được yêu cầu ở mỗi bước gồm:\nBước 1:  Họ tên, email, mật khẩu\nBước 2: Xác nhận username\nBước 3: Xác thực OTP (nhập mã được gửi qua email)\nBước 4: Chọn vai trò → Freelancer hoặc Client\nBước 5: (Chỉ hiển thị nếu chọn Freelancer) Chọn các kỹ năng mà bản thân có\nBước 6: (Chỉ hiển thị nếu chọn Freelancer) Mô tả ngắn về bản thân (bio)\n4. Người dùng kiểm tra lại toàn bộ thông tin và nhấn nút “Đăng ký”.\n5. Hệ thống thực hiện kiểm tra:\n- Định dạ"
+  },
+  {
+    "page": 40,
+    "text": "dùng sửa lại thông tin\n- 5a3. Tiếp tục quy trình từ bước người dùng đã sửa\nKết quả mong đợi: Khách hàng tạo tài khoản mới thành công và hệ thống điều\nhướng đến trang chủ\n1.2.2.2 Chức năng đăng nhập\nBảng 1-3: Chức năng đăng nhập\nTên UseCase: Đăng nhập ID: AUTH_02\nTác nhân: Freelancer, Client, Admin Mức độ cần thiết: Bắt buộc\nĐiều kiện: Người dùng đã có tài khoản hợp lệ trong hệ thống\nMô tả tóm tắt:  Người dùng thực hiện đăng nhập vào hệ thống bằng cách cung\ncấp thông tin xác thực (email hoặc số điện thoại và mật khẩu) để truy cập các chức\nnăng tương ứng với vai trò của mình.\n1.  Người dùng truy cập màn hình đăng nhập của hệ thống.\n2.  Người dùng nhập thông tin đăng nhập:\n• Email hoặc số điện thoại\n• Mật khẩu\n3.  Người dùng nhấn nút “Đăng nhập”\n4.  Hệ thống thực hiện kiểm tra:\n• Định dạng thông tin đầu vào có hợp lệ không\n• Tài khoản có tồn tại trong hệ thống không\n• Thông tin đăng nhập (email/số điện thoại + mật khẩu) có khớp không\n5.  Nếu thông tin hợp lệ:\n• Hệ thống xác thực thành côn"
+  },
+  {
+    "page": 41,
+    "text": "- Người dùng đăng nhập thành công vào hệ thống\n- Được chuyển hướng đến giao diện chính phù hợp với vai trò\n- Nhận được thông báo xác nhận đăng nhập thành công\n- Có thể sử dụng toàn bộ các chức năng được cấp quyền theo vai trò\n1.2.2.3 Chức năng đăng xuất\nBảng 1-4: Chức năng đăng xuất\nTên UseCase: Đăng xuất ID: AUTH_03\nĐiều kiện: Người dùng đã đăng nhập thành công vào hệ thống\nMô tả tóm tắt:  Thực hiện đăng xuất khỏi hệ thống để kết thúc phiên làm việc\nhiện tại, đảm bảo tài khoản được bảo mật\n1. Người dùng nhấn nút “Log out” trên giao diện\n2. Hệ thống xác nhận yêu cầu đăng xuất\n3. Hệ thống xóa hết trạng thái bảo mật trên trang trình duyệt\n4. Người dùng được chuyển hướng trang đăng nhập của hệ thống\n- Phiên làm việc của người dùng bị hủy\n- Người dùng được đảm bảo bảo mật tài khoản\n1.2.2.4 Chức năng Tìm kiếm dự án\nBảng 1-5: Chức năng Tìm kiếm dự án\nTên UseCase: Tìm kiếm dự án ID: PROJ_00\nTác nhân: Freelancer Mức độ cần thiết: Cao\nĐiều kiện: Người dùng freelancer đã đăng nhập thành công vào"
+  },
+  {
+    "page": 42,
+    "text": "theo các tiêu chí liên quan (tiêu đề, mô tả, kỹ năng yêu cầu, v.v.).\n1. Freelancer truy cập trang chủ hoặc trang danh sách dự án (Projects Listing).\n2. Freelancer nhập từ khóa (keyword) vào thanh tìm kiếm (search bar) và nhấn\nEnter hoặc nút Tìm kiếm.\n3. Hệ thống thực hiện:\n• Kiểm tra và làm sạch từ khóa (trim, loại bỏ ký tự đặc biệt nếu cần)\n• Tìm kiếm trong cơ sở dữ liệu trên các trường liên quan:\no Tiêu đề dự án\no Mô tả dự án\n• Áp dụng tìm kiếm full-text để tìm kết quả gần đúng\n4. Hệ thống trả về danh sách dự án phù hợp\n5. Hiển thị kết quả dưới dạng danh sách (grid/list view) kèm:\n• Tiêu đề dự án\n• Mô tả ngắn gọn\n• Ngân sách (nếu công khai)\n• Thời hạn dự kiến\n• Số lượng đề xuất hiện tại (nếu có)\n• Trạng thái dự án (Open, In Progress, Closed)\nHiển thị số lượng kết quả tìm thấy (ví dụ: “Tìm thấy 124 dự án phù hợp”) và hỗ\ntrợ phân trang (pagination).\n3a. Từ khóa không hợp lệ hoặc rỗng:\n• Hệ thống hiển thị thông báo: “Vui lòng nhập từ khóa để tìm kiếm.” hoặc\ngiữ nguyên danh sách dự án ph"
+  },
+  {
+    "page": 43,
+    "text": "1.2.2.5 Chức năng Lọc dự án\nBảng 1-6: Chức năng lọc dự án\nTên UseCase: Lọc dự án ID: PROJ_01\nPhân loại: Quan trong\nMô tả tóm tắt:  Freelancer sử dụng các bộ lọc (filter) ở sidebar để thu hẹp danh\nsách dự án theo các tiêu chí cụ thể: loại dự án (Fixed Price hoặc Hourly), mức\nngân sách, và kỹ năng yêu cầu, nhằm tìm thấy các dự án phù hợp nhất với khả\nnăng và mong muốn của mình.\n1. Freelancer truy cập trang danh sách dự án (Projects)\n2. Ở thanh sidebar bên trái hệ thống hiển thị các bộ lọc khả dụng, bao gồm:\n• Loại dự án:\no Fixed Price (Giá cố định)\no Hourly (Theo giờ)\n• Ngân sách (Budget):\no Khoảng giá (ví dụ: $0 –$100, $100 –$500, $500 –$1000, $1000+,\nCustom range)\n• Kỹ năng yêu cầu (Skills):\no Danh sách kỹ năng phổ biến (checkbox hoặc multi-select)\no Có thể có ô tìm kiếm nhanh kỹ năng\n3.  Freelancer tick chọn (checkbox), chọn khoảng giá, hoặc nhập giá trị tùy chỉnh\nvào các bộ lọc mong muốn.\n4.  Khi người dùng thay đổi bất kỳ bộ lọc nào:\n• Hệ thống tự động áp dụng bộ lọc (filter realtim"
+  },
+  {
+    "page": 44,
+    "text": "o Bỏ bớt một số kỹ năng\no Xem tất cả dự án đang mở\n- Freelancer nhanh chóng thu hẹp danh sách dự án xuống còn những dự án\nthực sự phù hợp với loại hình công việc, mức ngân sách và kỹ năng của\nmình\n- Giao diện phản hồi nhanh, mượt mà (realtime filtering)\n- Người dùng dễ dàng điều chỉnh, xóa hoặc reset bộ lọc\n- Tăng khả năng Freelancer tìm thấy và ứng tuyển vào các dự án chất lượng\ncao, phù hợp với chuyên môn\n1.2.2.6 Chức năng Đăng tuyển dự án\nBảng 1-7: Chức năng Đăng tuyển dự án\nTên UseCase: Đăng tuyển dự án ID: PROJ_02\nTác nhân: Khách hàng Mức độ cần thiết: Cao\nĐiều kiện:\n1. Khách hàng đã đăng nhập thành công vào hệ thống.\n2. Tài khoản của khách hàng đang ở trạng thái hoạt động (không bị khóa/blocked).\nMô tả tóm tắt: Chức năng này cho phép Khách hàng tạo một bài đăng tuyển dụng\nmới, cung cấp đầy đủ thông tin về yêu cầu công việc, ngân sách và thời gian để\ncác Freelancer có thể tìm kiếm và gửi đề xuất (Proposal).\n1. Khởi tạo: Khách hàng chọn chức năng \"Đăng dự án\" (Post a Job) trên than"
+  },
+  {
+    "page": 45,
+    "text": "7. Xác nhận : Khách hàng kiểm tra lại thông tin và nhấn nút \"Đăng tin\"\n(Submit/Post).\n8. Kiểm tra: Hệ thống kiểm tra tính hợp lệ của dữ liệu (các trường bắt buộc, định\ndạng số tiền, file đính kèm).\n9. Lưu trữ: Nếu dữ liệu hợp lệ, hệ thống lưu thông tin dự án mới vào cơ sở dữ liệu\nvới trạng thái \"Đang mở\" (Open).\n10. Thông báo: Hệ thống hiển thị thông báo \"Đăng dự án thành công\" và chuyển\nhướng Khách hàng đến trang chi tiết dự án vừa tạo.\nE1. Dữ liệu không hợp lệ:\n- Tại bước 8, nếu Khách hàng bỏ trống các trường bắt buộc (Tiêu đề, Mô tả, Ngân\nsách) hoặc nhập sai định dạng.\n- Hệ thống hiển thị thông báo lỗi cụ thể ngay tại trường thông tin tương ứng.\n- Luồng xử lý quay lại bước 3 để Khách hàng chỉnh sửa.\nE2. Hủy bỏ:\n- Tại bất kỳ bước nào trước bước 7, nếu Khách hàng chọn \"Hủy bỏ\" (Cancel).\n- Hệ thống xác nhận lại hành động.\n- Nếu đồng ý, hệ thống hủy thao tác và quay về trang Dashboard.\n- Dự án mới được tạo thành công và lưu trong cơ sở dữ liệu.\n- Dự án hiển thị công khai trên trang \"Tìm"
+  },
+  {
+    "page": 46,
+    "text": "chi tiết\" của một dự án bất kỳ.\n2. Truy vấn dữ liệu: Hệ thống nhận ID dự án và truy xuất thông tin từ cơ sở dữ\nliệu, bao gồm:\n- Thông tin dự án: Tiêu đề, Mô tả chi tiết, Ngân sách (Budget), Loại hợp đồng\n(Fixed/Hourly), Thời gian ước tính (Duration),.\n- Yêu cầu: Các kỹ năng (Skills) cần có, trình độ yêu cầu (Level).\n- Thông tin Client: Tên, điểm đánh giá (Rating), trạng thái xác thực (Verified)\n3. Kiểm tra quyền:\n- Nếu là Freelancer: Hiển thị nút \"Nộp đề xuất\" (Submit Proposal) và \"Lưu dự\nán\".\n- Nếu là Client (chủ dự án): Hiển thị nút \"Chỉnh sửa\" và danh sách các Proposal\nđã nhận.\n4. Hiển thị: Hệ thống hiển thị giao diện chi tiết dự án với đầy đủ các thông tin đã\ntruy xuất.\n- Người dùng nắm được đầy đủ thông tin về dự án để đưa ra quyết định ứng tuyển.\n- Các nút chức năng (Ứng tuyển, Lưu, Chỉnh sửa) hiển thị đúng theo vai trò của\nngười dùng.\n1.2.2.8 Chức năng Chỉnh sửa thông tin dự án (Edit Project)\nBảng 1-9: Chức năng chỉnh sửa thông tin dự án\nTên UseCase: Chỉnh sửa thông tin dự\nán (E"
+  },
+  {
+    "page": 47,
+    "text": "3. Chỉnh sửa: Client thực hiện thay đổi các thông tin (Tiêu đề, Mô tả, Kỹ năng,\nNgân sách...).\n4. Xác nhận: Client nhấn nút \"Cập nhật\".\n5. Kiểm tra: Hệ thống kiểm tra tính hợp lệ của dữ liệu mới.\n6. Lưu trữ: Hệ thống cập nhật bản ghi trong bảng PROJECTS và ghi nhận thời\ngian updated_at.\n7. Thông báo: Hệ thống hiển thị thông báo \"Cập nhật thành công\".\nE1. Dự án đã có hợp đồng: Nếu dự án đã chuyển sang trạng thái \"In Progress\",\nhệ thống vô hiệu hóa nút chỉnh sửa để đảm bảo tính minh bạch của hợp đồng đã\nký.\nThông tin dự án được cập nhật mới nhất để các Freelancer có thể tiếp cận chính\nxác yêu cầu của Client.\n1.2.2.9 Chức năng Xóa dự án (Delete Project)\nBảng 1-10: Chức năng xóa dự án\nTên UseCase: Xóa dự án (Delete\nProject)\nID: PROJ_06\nMô tả tóm tắt:  Cho phép Client gỡ bỏ một dự án khỏi hệ thống khi không còn\nnhu cầu tuyển dụng hoặc đã đăng nhầm.\n1. Kích hoạt: Client chọn \"Xóa dự án\" tại danh sách dự án quản lý.\n2. Xác nhận: Hệ thống hiển thị Modal cảnh báo: \"Bạn có chắc chắn muốn xóa dự\n"
+  },
+  {
+    "page": 48,
+    "text": "Dự án không còn xuất hiện trên trang tìm kiếm và danh sách dự án đang hoạt\nđộng.\n1.2.2.10 Chức năng Nhắn tin trực tuyến\nBảng 1-11: Chức năng Nhắn tin trực tuyến\nTên UseCase: Nhắn tin trực tuyến ID: MSG_01\nTác nhân: Freelancer và Khách hàng Mức độ cần thiết: Cao\n1. Khách hàng và freelancer đã đăng nhập thành công vào hệ thống.\nMô tả tóm tắt: Chức năng cho phép Freelancer và Client trao đổi thông tin, đàm\nphán công việc và gửi tài liệu đính kèm theo thời gian thực (Real-time) mà không\ncần tải lại trang.\n1. Khởi tạo hội thoại: Người dùng nhấn nút \"Nhắn tin\" (Message) trên hồ sơ đối\ntác hoặc từ danh sách Proposal/Hợp đồng.\n2. Hiển thị: Hệ thống tải giao diện khung chat, hiển thị lịch sử tin nhắn cũ (nếu\ncó) được truy xuất từ cơ sở dữ liệu.\n3. Soạn thảo: Người dùng nhập nội dung văn bản hoặc chọn tệp đính kèm (ảnh,\ntài liệu) và nhấn \"Gửi\" (Send).\n4. Xử lý gửi (Client -side): Ứng dụng React gửi yêu cầu qua kênh WebSocket\n(hoặc API) đến máy chủ.\n5. Xử lý trung gian (Server -side): Server (Jav"
+  },
+  {
+    "page": 49,
+    "text": "thái \"Đã gửi\".\nE1. Gửi tệp quá dung lượng/Sai định dạng:\n- Người dùng tải lên file > 25MB hoặc file .exe.\n- Hệ thống báo lỗi \"Định dạng không hỗ trợ hoặc file quá lớn\".\n- Hủy thao tác gửi file.\n- Tin nhắn được gửi và nhận tức thì (độ trễ thấp).\n- Lịch sử trò chuyện được đồng bộ hóa chính xác giữa hai bên.\n- Thông báo tin nhắn mới xuất hiện đúng lúc.\n1.2.2.11 Chức năng Đánh giá & Phản hồi\nBảng 1-12: Chức năng đánh giá và phản hồi\nTên UseCase: Đánh giá & Phản hồi ID: REV_01\nTác nhân: Freelancer và Khách hàng\n(Client)\nMức độ cần thiết: Cao\nMô tả tóm tắt: Sau khi một hợp đồng kết thúc, hệ thống cho phép cả Freelancer\nvà Client để lại đánh giá (số sao) và nhận xét (văn bản) về đối phương nhằm xây\ndựng hồ sơ uy tín cho cộng đồng.\n1. Kích hoạt: Sau khi hợp đồng được xác nhận hoàn thành, hệ thống gửi thông\nbáo và hiển thị nút \"Đánh giá\" (Review) trong chi tiết hợp đồng của cả hai bên.\n2. Hiển thị form: Hệ thống hiển thị giao diện đánh giá bao gồm:\n- Chọn mức độ hài lòng theo số sao (1 - 5 sao)"
+  },
+  {
+    "page": 50,
+    "text": "sở dữ liệu (Bảng REVIEWS).\n6. Cập nhật chỉ số uy tín: Hệ thống tự động tính toán lại điểm trung bình (Average\nRating) hiển thị trên Profile của người nhận đánh giá.\n7. Hiển thị: Đánh giá được hiển thị công khai trên hồ sơ của người được đánh giá\nvà trong chi tiết dự án.\nE1. Bỏ trống thông tin bắt buộc:\n- Người dùng nhấn gửi nhưng chưa chọn số sao.\n- Hệ thống báo lỗi \"Vui lòng chọn mức điểm đánh giá\" và yêu cầu nhập lại.\n- Đánh giá được lưu trữ thành công và hiển thị công khai trên Profile.\n- Điểm uy tín của người dùng được cập nhật chính xác.\n- Hệ thống minh bạch thông tin giúp các bên ra quyết định hợp tác trong tương lai\ndễ dàng hơn.\n1.2.2.12 Chức năng Gửi đề xuất (Bid)\nBảng 1-13: Chức năng gửi đề xuất\nTên UseCase: Gửi đề xuất (Bid) ID: PROP_01\nMô tả tóm tắt:  Cho phép Freelancer ứng tuyển vào một dự án bằng cách cung\ncấp mức giá, thời gian hoàn thành, thư ứng tuyển và các tài liệu chứng minh năng\nlực.\n1. Kích hoạt: Freelancer nhấn nút \"Gửi đề xuất\" (Apply/Submit Proposal) tại trang\n"
+  },
+  {
+    "page": 51,
+    "text": "5. Xác nhận: Freelancer nhấn nút \"Gửi\" (Submit).\n6. Kiểm tra: Hệ thống kiểm tra dữ liệu và đảm bảo file đính kèm đúng định dạng.\n7. Lưu trữ: Lưu thông tin vào bảng PROPOSALS trong PostgreSQL, thiết lập\ntrạng thái ban đầu là \"Pending\".\n8. Thông báo: Hệ thống gửi thông báo đến Client (chủ dự án) về việc có đề xuất\nmới.\nE1. Mức giá không hợp lệ:\n- Freelancer nhập giá thấp hơn mức tối thiểu hoặc cao hơn ngân sách dự án quá\nnhiều (tùy cài đặt).\n- Hệ thống hiển thị cảnh báo yêu cầu điều chỉnh lại mức giá.\n- Đề xuất được lưu thành công và hiển thị trong danh sách ứng tuyển của Client.\n- Freelancer có thể theo dõi trạng thái đề xuất trong trang \"My Proposals\".\n1.2.2.13 Chức năng So sánh đề xuất\nBảng 1-14: Chức năng so sánh đề xuất\nTên UseCase: So sánh đề xuất ID: PROP_02\nTác nhân: Client (Khách hàng) Mức độ cần thiết: Cao\nMô tả tóm tắt:  Cho phép Client chọn nhiều đề xuất cùng lúc để hiển thị dưới\ndạng bảng so sánh đối chiếu, giúp dễ dàng đánh giá sự khác biệt về giá thầu, thời\ngian và năng lự"
+  },
+  {
+    "page": 52,
+    "text": "- Thời gian hoàn thành dự kiến.\n- Điểm đánh giá trung bình (Rating).\n- Số dự án đã hoàn thành.\n- Các kỹ năng chính (Top Skills).\n- Nội dung rút gọn của thư ứng tuyển.\nE1. Chọn quá ít đề xuất:\n- Client chỉ chọn 1 đề xuất và nhấn so sánh.\n- Hệ thống báo lỗi: \"Vui lòng chọn ít nhất 2 đề xuất để so sánh\".\n- Hiển thị bảng so sánh trực quan, dễ nhìn.\n- Giúp Client tiết kiệm thời gian lọc ứng viên và đưa ra quyết định chính xác hơn.\n1.2.2.14 Chức năng Chấp nhận đề xuất\nBảng 1-15: Chức năng chấp nhận đề xuất\nTên UseCase: Chấp nhận đề xuất ID: PROP_03\nMô tả tóm tắt:  Client phê duyệt một đề xuất ưng ý nhất. Hệ thống sẽ tự động\nđóng việc nhận hồ sơ, chuyển trạng thái dự án sang giai đoạn thực hiện và thiết\nlập hợp đồng giữa hai bên.\n1. Kích hoạt: Tại danh sách đề xuất hoặc bảng so sánh, Client nhấn nút \"Chấp\nnhận\" (Accept Proposal) cho một Freelancer cụ thể.\n2. Xác nhận điều khoản: Hệ thống hiển thị bản tóm tắt các thỏa thuận (Giá thầu,\nDeadline, Các Milestone) và yêu cầu Client xác nhận.\n3. Xử "
+  },
+  {
+    "page": 53,
+    "text": "- Hợp đồng mới được tạo lập thành công.\n- Freelancer và Client có thể bắt đầu trao đổi chi tiết trong phân hệ Quản lý hợp\nđồng.\n- Dự án không còn xuất hiện trên danh sách tìm kiếm công khai.\n1.2.2.15 Chức năng Mời ứng tuyển\nBảng 1-16: Chức năng mời ứng tuyển\nTên UseCase: Mời ứng tuyển ID: PROP_04\nMô tả tóm tắt:  Cho phép Client gửi lời mời trực tiếp đến một hoặc nhiều\nFreelancer cụ thể tham gia ứng tuyển vào dự án của mình, giúp tăng tỷ lệ tìm được\nứng viên chất lượng.\n1. Tại trang chi tiết án, khách hàng click vào tab các ứng viên tìm năng.\n2. Khách hàng duyệt qua từng ứng viên xem thông tin của họ bằng cách click vào\nnút “Xem thông tin”\n3. Sau khi thông tin ứng viên xong, khách hàng có thể click vào nút “Mời ứng\ntuyển”. hệ thống tự động gửi lời mời đến email của ứng viên mời tham gia dự\nán\nE1. Freelancer đã được mời trước đó:\n- Hệ thống kiểm tra và thông báo: \"Bạn đã gửi lời mời cho Freelancer này trong\ndự án hiện tại\" và vô hiệu hóa nút gửi.\n- Lời mời được gửi thành công.\n- Dự án xu"
+  },
+  {
+    "page": 54,
+    "text": "Bảng 1-17: Chức năng Xem hồ sơ Freelancer từ danh sách đề xuất\nTên UseCase: Xem hồ sơ Freelancer từ\ndanh sách đề xuất\nID: PROP_05\n3. Freelancer đã gửi đề xuất\nMô tả tóm tắt:  Cho phép Client truy cập nhanh vào hồ sơ cá nhân đầy đủ của\nFreelancer ngay từ giao diện danh sách đề xuất để kiểm tra kỹ năng, kinh nghiệm\nvà các đánh giá từ các dự án trước đó.\n1. Truy cập danh sách: Client xem danh sách các đề xuất (Proposals) đã nhận cho\nmột dự án.\n2. Kích hoạt: Client nhấn vào Tên, Ảnh đại diện (Avatar) hoặc nút \"Xem hồ sơ\"\n(View Profile) của một Freelancer trong danh sách.\n3. Truy xuất dữ liệu: Hệ thống lấy ID của Freelancer và truy vấn thông tin chi tiết\ntừ cơ sở dữ liệu (Bảng FREELANCERS, SKILLS, EXPERIENCES, REVIEWS).\n4. Hiển thị: Hệ thống mở một cửa sổ phụ (Modal/Popup) hoặc chuyển hướng đến\ntrang Profile của Freelancer đó, bao gồm:\n- Thông tin cá nhân: Ảnh, tên, vị trí công việc, mức giá theo giờ.\n- Năng lực: Danh sách kỹ năng (Skills), Danh mục sản phẩm (Portfolio).\n- Lịch sử & Uy tín:"
+  },
+  {
+    "page": 55,
+    "text": "Bảng 1-18: Chức năng cập nhật đề xuất\nTên UseCase: Cập nhật đề xuất ID: PROP_06\nTác nhân: Freelancer Mức độ cần thiết: Trung bình\nPhân loại: Cần thiết\n1. Freelancer đã đăng nhập thành công vào hệ thống.\n3. Freelancer đã gửi đề xuất cho dự án này trước đó.\n4. Đề xuất vẫn đang ở trạng thái \"Chờ xử lý\" (Pending).\n5. Client chưa thực hiện chấp nhận (Accept) hoặc từ chối (Reject) đề xuất này.\nMô tả tóm tắt: Cho phép Freelancer chỉnh sửa các thông tin đã gửi trong bản đề\nxuất như: giá thầu, thời gian thực hiện, thư ứng tuyển hoặc các tệp đính kèm.\n1. Kích hoạt: Freelancer truy cập vào mục \"Đề xuất của tôi\" (My Proposals), chọn\nđề xuất muốn sửa và nhấn nút \"Chỉnh sửa\" (Edit).\n2. Hiển thị thông tin cũ: Hệ thống hiển thị form chứa toàn bộ dữ liệu hiện tại của\nbản đề xuất đó.\n3. Chỉnh sửa: Freelancer thực hiện thay đổi các thông tin cần thiết (ví dụ: giảm\ngiá thầu sau khi thương thảo với Client).\n4. Xác nhận: Freelancer nhấn nút \"Cập nhật\" (Update).\n5. Kiểm tra: Hệ thống kiểm tra tính hợp lệ của"
+  },
+  {
+    "page": 56,
+    "text": "3. Đề xuất đang ở trạng thái \"Chờ xử lý\" (Pending) hoặc \"Đã mời\" (Invited).\n4. Dự án chưa được chốt (Hợp đồng chưa được ký).\nMô tả tóm tắt:\nCho phép Freelancer rút lại bản đề xuất đã gửi. Sau khi hủy, đề xuất sẽ không còn\nhiển thị trong danh sách xét duyệt của Client.\n1. Kích hoạt: Freelancer truy cập vào trang \"Quản lý đề xuất\" (My Proposals).\n2. Chọn đề xuất: Freelancer tìm đến dự án muốn rút lui và nhấn nút \"Hủy đề xuất\"\n(Withdraw/Delete).\n3. Xác nhận: Hệ thống hiển thị thông báo xác nhận: \"Bạn có chắc chắn muốn rút\nlại đề xuất này không? Hành động này không thể hoàn tác.\"\n4. Nhập lý do (Tùy chọn): Freelancer có thể chọn lý do hủy (ví dụ: \"Đã tìm được\nviệc khác\", \"Ngân sách không phù hợp\",...).\n5. Xử lý hệ thống:\n- Hệ thống thực hiện thay đổi trạng thái đề xuất thành \"Withdrawn\" (hoặc xóa\nbản ghi tùy theo thiết kế DB).\n- Cập nhật lại số lượng đề xuất hiện tại của dự án.\n6. Thông báo: Hệ thống gửi thông báo cho Client: \"Một ứng viên đã rút lại đề xuất\ncủa họ cho dự án [Tên dự án]\".\nE"
+  },
+  {
+    "page": 57,
+    "text": "Use Case Chấp nhận đề xuất (PROP_03) đã thực hiện thành công.)\nMô tả tóm tắt:   Sau khi Client nhấn chấp nhận đề xuất, hệ thống tự động trích\nxuất thông tin từ dự án và đề xuất để khởi tạo một Hợp đồng điện tử, thiết lập các\nđiều khoản và mốc thời gian làm việc.\n1. Trích xuất dữ liệu: Hệ thống lấy các thông tin liên quan từ bản ghi Project và\nProposal vừa được duyệt, bao gồm:\n- Thông tin Client và Freelancer.\n- Mức phí thỏa thuận (Total Price hoặc Hourly Rate).\n- Thời hạn hoàn thành (Deadline).\n- Danh sách các mốc thanh toán (Milestones) đã thỏa thuận.\n2. Khởi tạo bản ghi:  Hệ thống tạo một bản ghi mới trong bảng CONTRACTS\nvới trạng thái ACTIVE.\n3. Đồng bộ hóa trạng thái:\n- Chuyển trạng thái dự án thành IN_PROGRESS.\n- Khóa các chức năng chỉnh sửa thông tin dự án/đề xuất để bảo đảm tính nguyên\ntrạng.\n4. Thông báo: Gửi email xác nhận kèm bản tóm tắt hợp đồng cho cả hai bên.\n- Hợp đồng điện tử được thiết lập với đầy đủ giá trị pháp lý trên nền tảng.\n- Freelancer chính thức bắt đầu công vi"
+  },
+  {
+    "page": 58,
+    "text": "thành và nhấn nút \"Đánh dấu hoàn thành\" (Mark as Completed).\n2. Hiển thị Modal: Hệ thống hiển thị một Modal yêu cầu Freelancer bàn giao sản\nphẩm, bao gồm:\n- Trường nhập mô tả nội dung bàn giao (Message).\n- Khu vực tải lên tệp tin (File Upload).\n3. Tải lên sản phẩm:  Freelancer chọn các tệp tin sản phẩm (mã nguồn, tài liệu,\nhình ảnh...) từ máy tính.\n4. Gửi bàn giao: Freelancer nhấn nút \"Gửi bàn giao\" (Submit Work).\n- Lưu các tệp tin vào bộ lưu trữ (Cloudinary/S3).\n- Cập nhật trạng thái Milestone từ FUNDED sang SUBMITTED (hoặc\nUNDER_REVIEW).\n- Ghi nhận thời gian bàn giao vào bảng MILESTONES.\nE1. Tổng tiền Milestone không khớp:\n- Nếu tổng số tiền của các Milestone cộng lại không bằng tổng giá thầu của\nProposal.\n- Hệ thống báo lỗi: \"Tổng giá trị các Milestone phải bằng với tổng mức giá đề\nxuất\" và yêu cầu chỉnh sửa lại.\nE2. Thiếu thông tin Milestone:\n- Freelancer để trống tên hoặc số tiền của một giai đoạn.\n- Hệ thống ngăn chặn việc gửi và đánh dấu đỏ các trường thiếu.\n- Danh sách Mileston"
+  },
+  {
+    "page": 59,
+    "text": "4. Loại dự án được xác định là Fixed Price (Trọn gói).\nMô tả tóm tắt:  Trong quá trình soạn thảo Proposal, Freelancer chia nhỏ dự án\nthành các giai đoạn (Milestones). Mỗi giai đoạn đi kèm với mô tả công việc, thời\nhạn và số tiền yêu cầu thanh toán sau khi hoàn thành.\n1. Kích hoạt: Tại form gửi Proposal, sau khi nhập mức giá tổng và thư ứng tuyển,\nhệ thống hiển thị khu vực \"Thiết lập lộ trình thanh toán (Milestones)\".\n2. Thêm Milestone: Freelancer nhấn nút \"Thêm giai đoạn\" (Add Milestone).\n3. Nhập thông tin giai đoạn: Freelancer nhập các thông tin:\n- Tiêu đề/Tên giai đoạn (ví dụ: Thiết kế giao diện, Hoàn thiện Backend...).\n- Mô tả ngắn gọn công việc sẽ bàn giao.\n- Thời hạn dự kiến hoàn thành giai đoạn này.\n- Số tiền yêu cầu cho giai đoạn này (VND/USD).\n4. Tính toán tự động: Hệ thống tự động tính tổng số tiền của các Milestone và so\nsánh với tổng giá thầu đã nhập ở trên.\n5. Kiểm tra & Điều chỉnh:  Freelancer có thể thêm, sửa hoặc xóa các dòng\nMilestone cho đến khi phù hợp.\n6. Hoàn tất: F"
+  },
+  {
+    "page": 60,
+    "text": "Bảng 1-23: Chức năng chỉnh sửa milestone\nTên UseCase: Chỉnh sửa Milestone ID: MILE_02\n3. Đề xuất (Proposal) đang ở trạng thái \"Chờ xử lý\" (Pending).\n4. Freelancer đang thực hiện chức năng Chỉnh sửa đề xuất (PROP_06).\nMô tả tóm tắt:  Cho phép Freelancer thay đổi lộ trình thực hiện, điều chỉnh số\ntiền hoặc nội dung bàn giao của từng giai đoạn (Milestone) trong bản đề xuất đã\ngửi.\n1. Kích hoạt:  Tại giao diện Chỉnh sửa đề xuất, hệ thống hiển thị danh sách các\nMilestone hiện tại của đề xuất đó.\n2. Chỉnh sửa nội dung:  Freelancer thay đổi tên, mô tả hoặc thời hạn của các\nMilestone hiện có.\n3. Điều chỉnh ngân sách: Freelancer cập nhật số tiền cho từng giai đoạn.\n4. Thay đổi số lượng:\n- Freelancer có thể thêm Milestone mới (Add).\n- Freelancer có thể xóa Milestone không cần thiết (Remove).\n5. Kiểm tra ràng buộc: Hệ thống liên tục cập nhật tổng số tiền của các Milestone\nvà đối chiếu với tổng mức giá thầu (Bid Amount) của đề xuất.\n6. Xác nhận cập nhật: Freelancer nhấn \"Cập nhật đề xuất\".\n7. Lưu "
+  },
+  {
+    "page": 61,
+    "text": "Bảng 1-24: Mô tả chức năng xóa milestone\nTên UseCase: Xóa Milestone ID: MILE_03\n3. Đề xuất (Proposal) đang ở trạng thái soạn thảo hoặc \"Chờ xử lý\" (Pending).\nMô tả tóm tắt: Cho phép Freelancer loại bỏ một giai đoạn thanh toán không còn\ncần thiết khỏi lộ trình dự kiến ban đầu trong bản đề xuất.\n1. Kích hoạt: Tại giao diện Chỉnh sửa đề xuất, Freelancer tìm đến dòng Milestone\nmuốn loại bỏ.\n2. Thực hiện xóa:  Freelancer nhấn vào biểu tượng \"Thùng rác\" hoặc nút \"Xóa\"\n(Remove) bên cạnh Milestone đó.\n3. Xác nhận tạm thời: Hệ thống loại bỏ dòng Milestone đó khỏi giao diện hiển thị\n(React State).\n4. Tái tính toán: Hệ thống tự động cập nhật lại tổng số tiền của các Milestone còn\nlại.\n5. Cảnh báo: Hệ thống hiển thị thông báo nhắc nhở Freelancer điều chỉnh lại số\ntiền ở các Milestone khác hoặc thay đổi tổng giá thầu để đảm bảo tính cân bằng\nngân sách.\n6. Xác nhận lưu: Freelancer nhấn \"Cập nhật đề xuất\" để hoàn tất việc xóa trên cơ\nsở dữ liệu.\n- Milestone được loại bỏ khỏi danh sách đề xuất.\n- Tổng"
+  },
+  {
+    "page": 62,
+    "text": "3. Dự án thuộc loại Fixed Price  và Hợp đồng (Contract) đang ở trạng thái\nACTIVE.\n4. Milestone mục tiêu đang ở trạng thái PENDING hoặc UNFUNDED.\n5. Client đã đăng nhập và là chủ sở hữu hợp đồng.\nMô tả tóm tắt:  Client thực hiện chuyển tiền cho một Milestone cụ thể vào hệ\nthống trung gian (Escrow) thông qua cổng thanh toán Stripe. Số tiền này sẽ được\nhệ thống giữ lại cho đến khi công việc hoàn thành.\n1. Kích hoạt: Tại trang Chi tiết hợp đồng (Contract Details), Client tìm đến danh\nsách Milestone và nhấn nút \"Ký quỹ\" (Fund/Escrow) bên cạnh Milestone tương\nứng.\n2. Hiển thị xác nhận : Hệ thống hiển thị một Modal tóm tắt thông tin: Tên\nMilestone và Số tiền cần ký quỹ.\n3. Nhập thông tin thanh toán:  Client nhập thông tin thẻ ngân hàng/phương thức\nthanh toán ngay trên form (Stripe Elements).\n4. Gửi yêu cầu: Client nhấn nút \"Xác nhận thanh toán\".\n5. Xử lý thanh toán (Stripe):\n- Hệ thống gửi yêu cầu đến API của Stripe.\n- Stripe thực hiện xác thực thẻ và trừ tiền từ tài khoản Client.\n6. Nhận kết"
+  },
+  {
+    "page": 63,
+    "text": "1. Freelancer  đã đăng nhập thành công vào hệ thống.\n3. Hợp đồng thuộc loại Hourly Rate và đang ở trạng thái ACTIVE.\nMô tả tóm tắt: Cho phép Freelancer ghi lại chính xác số giờ làm việc thực tế cho\ntừng đầu mục công việc thông qua bộ đếm thời gian trực tuyến, kèm theo mô tả\nchi tiết công việc đã thực hiện.\n1. Truy cập:  Freelancer truy cập vào trang Chi tiết hợp đồng (Hourly Contract\nDetails).\n2. Bắt đầu (Start):  Freelancer nhấn nút \"Start\" để kích hoạt bộ đếm. Hệ thống\nghi nhận thời gian bắt đầu (Start Time).\n3. Làm việc: Bộ đếm thời gian trên giao diện React hiển thị thời gian trôi qua theo\nthời gian thực.\n4. Kết thúc (Stop): Freelancer nhấn nút \"Stop\" để dừng bộ đếm.\n5. Nhập nội dung: Hệ thống hiển thị Modal yêu cầu Freelancer nhập \"Mô tả công\nviệc đã làm trong phiên này\" (Work Description).\n6. Xác nhận: Freelancer nhấn \"Lưu log\" (Save Log).\n7. Xử lý hệ thống:\n- Tính toán tổng thời gian (Duration = Stop Time - Start Time).\n- Lưu bản ghi vào bảng TIME_LOGS trong cơ sở dữ liệu.\n8. Cậ"
+  },
+  {
+    "page": 64,
+    "text": "Tác nhân: Người dùng (Freelancer,\nClient)\n1. Người dùng đã đăng nhập thành công vào hệ thống.\nMô tả tóm tắt: Cho phép người dùng cập nhật, chỉnh sửa các thông tin cá nhân,\nnăng lực chuyên môn, kinh nghiệm và các thông tin định danh khác để hoàn thiện\nhồ sơ trên nền tảng.\n1. Truy cập: Người dùng chọn mục \"Hồ sơ của tôi\" (My Profile) hoặc \"Chỉnh sửa\nhồ sơ\" (Edit Profile).\n2. Hiển thị thông tin: Hệ thống truy xuất dữ liệu hiện tại từ bảng USERS và các\nbảng liên quan (FREELANCERS, SKILLS, EXPERIENCES) để hiển thị lên\nform.\n3. Cập nhật thông tin cơ bản: Người dùng thay đổi ảnh đại diện (Avatar), Họ tên,\nĐịa chỉ, Số điện thoại, Múi giờ.\n4. Chuyên môn hóa (Dành cho Freelancer):\n- Nhập Tiêu đề chuyên môn (Professional Title) và Mô tả bản thân (Bio).\n- Thiết lập Mức giá theo giờ (Hourly Rate).\n- Chọn/Cập nhật danh sách kỹ năng (Skills) từ bộ lọc có sẵn.\n5. Cập nhật hồ sơ năng lực: Người dùng thêm/sửa/xóa các mục trong lịch sử học\nvấn, kinh nghiệm làm việc và các chứng chỉ hoặc dự án đã thực hiệ"
+  },
+  {
+    "page": 65,
+    "text": "1. Khách hàng đã có tài khoản hệ thống.\n3. Hợp đồng thuộc loại Hourly Rate và đang ở trạng thái ACTIVE\nMô tả tóm tắt: Vào lúc 17h00 thứ Sáu hàng tuần, hệ thống tự động tổng hợp tất\ncả nhật ký công việc của Freelancer trong tuần đó và gửi email báo cáo chi tiết\ncho Client.\n1. Kích hoạt : Đến thời điểm cấu hình (17:00 thứ Sáu hàng tuần), bộ lập lịch\n(Scheduler) của hệ thống tự động kích hoạt tiến trình.\n2. Quét dữ liệu:  Hệ thống tìm kiếm tất cả các hợp đồng Hourly Rate đang hoạt\nđộng (ACTIVE).\n3. Tổng hợp nhật ký:  Với mỗi hợp đồng, hệ thống truy xuất các bản ghi trong\nbảng TIME_LOGS có thời gian từ 00:00 thứ Hai đến 16:59 thứ Sáu của tuần hiện\ntại.\n4. Tính toán:\n- Tính tổng số giờ làm việc trong tuần.\n- Tính tổng số tiền Client cần thanh toán (Tổng giờ × Hourly Rate).\n5. Soạn nội dung email: Hệ thống tạo nội dung email bao gồm:\n- Tên dự án và tên Freelancer.\n- Danh sách chi tiết các đầu mục công việc (Description) và thời gian tương\n- Tổng kết chi phí trong tuần.\n6. Gửi email: Hệ thống"
+  },
+  {
+    "page": 66,
+    "text": "Tác nhân: Quản trị viên (Admin) Mức độ cần thiết: Cao\nQuản trị viên đã đăng nhập thành công vào hệ thống.\nMô tả tóm tắt: Admin thực hiện thêm mới, chỉnh sửa tên hoặc xóa các danh mục\nnghề nghiệp trên hệ thống.\n1. Thêm mới: Admin nhập tên Danh mục mới → Hệ thống kiểm tra trùng lặp →\nLưu vào bảng CATEGORIES.\n2. Chỉnh sửa: Admin chọn Category → Thay đổi tên → Hệ thống cập nhật tất cả\ncác bản ghi liên quan.\n3. Xóa: Admin nhấn Xóa → Hệ thống kiểm tra nếu có dự án/skill đang thuộc\ncategory này thì cảnh báo hoặc chuyển sang trạng thái \"Ẩn\".\nDanh mục được cập nhật chính xác, hiển thị đồng bộ ở bộ lọc tìm kiếm của User.\n1.2.2.29 Chức năng Quản lý Kỹ năng\nBảng 1-30: Chức năng Quản lý kỹ năng\nTên UseCase: Quản lý Kỹ năng ID: ADM_02\nMô tả tóm tắt:  Admin quản lý danh sách kỹ năng chi tiết và thiết lập mối quan\nhệ giữa kỹ năng đó với các danh mục tương ứng.\n1. Truy cập: Admin vào trang dashboard.\n2. Thêm Skill mới:\n- Admin nhấn \"Thêm Skill\".\n- Nhập Tên Skill (ví dụ: Java, React).\n- Chọn một Danh mụ"
+  },
+  {
+    "page": 67,
+    "text": "Kết quả mong đợi: Kỹ năng được phân loại đúng vào các Category, giúp người\ndùng dễ dàng tìm kiếm theo chuyên môn.\n1.2.2.30 Chức năng Quản lý trạng thái tài khoản\nBảng 1-31: Chức năng Quản lý trạng thái tài khoản\nTên UseCase: Quản lý trạng thái tài\nkhoản\nID: ADM_03\nQuản trị viên đã đăng nhập vào hệ thống với quyền Admin.\nMô tả tóm tắt: Cho phép Admin tạm khóa (Block) hoặc kích hoạt lại (Active) tài\nkhoản của Freelancer hoặc Client dựa trên hành vi của họ trên nền tảng.\n1. Truy cập: Admin vào trang \"Quản lý người dùng\" (User Management).\n2. Tìm kiếm: Admin sử dụng bộ lọc (tên, email, vai trò) để tìm tài khoản cần xử\nlý.\n3. Kiểm tra trạng thái:  Hệ thống hiển thị trạng thái hiện tại (ACTIVE hoặc\nBLOCKED).\n4. Thực hiện thay đổi:\n- Nếu tài khoản đang Active : Admin nhấn nút \"Khóa tài khoản\" (Block). Hệ\nthống yêu cầu nhập lý do khóa (tùy chọn).\n- Nếu tài khoản đang Blocked: Admin nhấn nút \"Mở khóa\" (Unblock/Active).\n5. Xác nhận: Admin xác nhận thao tác trong Modal cảnh báo.\n6. Xử lý hệ thống"
+  },
+  {
+    "page": 68,
+    "text": "1.2.2.31 Chức năng Gợi ý dự án phù hợp\nBảng 1-32: Chức năng Gợi ý dự án phù hợp\nTên UseCase: Gợi ý dự án phù hợp ID: REC_01\nFreelancer đã cập nhật danh sách kỹ năng trong hồ sơ cá nhân.\nMô tả tóm tắt: Hệ thống tự động phân tích tập hợp kỹ năng của Freelancer và\nđối chiếu với yêu cầu của các dự án đang tuyển dụng để đưa ra danh sách các dự\nán có độ tương quan cao nhất.\n1.  Thu Thập Và Tiền Xử Lý Dữ Liệu:  Hệ thống lấy danh sách kỹ năng từ hồ sơ\ncủa freelancer (từ FREELANCER_SKILLS) và yêu cầu kỹ năng của các dự án\nđang mở (từ PROJECT_SKILLS). Thực hiện tiền xử lý: chuẩn hóa văn bản\n(lowercase, remove stop words, lemmatization) để chuẩn bị cho embedding.\n2.  Chuyển Đổi Vector (Embedding):  Sử dụng mô hình machine learning như\nBERT hoặc FastText để chuyển đổi danh sách kỹ năng của freelancer và dự án\nthành các vector số trong không gian đa chiều. Embedding được lưu trữ trong\nvector database (ví dụ: FAISS) để tối ưu hóa truy vấn.\n3.  Tính Toán Độ Phù Hợp (Scoring):\n• Tính toán độ tương đồn"
+  },
+  {
+    "page": 69,
+    "text": "1.2.2.32 Chức năng Gợi ý Freelancer phù hợp\nBảng 1-33: Chức năng Gợi ý Freelancer phù hợp\nTên UseCase: Gợi ý Freelancer phù\nID: REC_02\n1. Dự án của Client đã được đăng và đang ở trạng thái OPEN.\n2. Dự án có danh sách kỹ năng yêu cầu cụ thể..\nMô tả tóm tắt: Hệ thống tự động quét danh sách Freelancer trên nền tảng, so\nkhớp kỹ năng chuyên môn của họ với yêu cầu của dự án để đưa ra danh sách các\nứng viên sáng giá nhất.\n1.  Tiền Xử Lý Dữ Liệu (Preprocessing) : Hệ thống tự động trích xuất văn bản\ntừ hồ sơ freelancer (Bio, Skills) và các dự án đang mở (Description, Title,\nRequired Skills). Sau đó, chuẩn hóa dữ liệu bằng cách: chuyển về chữ thường\n(lowercase), loại bỏ từ dừng (stop words), lemmatization (chuẩn hóa từ vựng), và\nxử lý ngôn ngữ đa dạng (ví dụ: hỗ trợ tiếng Việt nếu cần). Dữ liệu được lưu trữ\ntrong vector database (như FAISS hoặc Pinecone) để tối ưu hóa truy vấn sau này.\n2.  Chuyển Đổi Vector (Embedding): Sử dụng mô hình nhúng văn bản tiên tiến\nnhư BERT (hoặc multilingual BERT cho"
+  },
+  {
+    "page": 70,
+    "text": "0.1). Sắp xếp kết quả theo score giảm dần, giới hạn top 20 -50 kết quả để tránh\noverload.\n6.  Hiển Thị (Display): Trả về danh sách dự án được cá nhân hóa, hiển thị trên\ngiao diện người dùng (dashboard hoặc email notification). Mỗi kết quả kèm theo\nlý do match (ví dụ: \"Kỹ năng khớp 85%: Python, Machine Learning\") và liên kết\nđể apply nhanh. Hỗ trợ lọc thêm (sort by ngân sách hoặc thời gian đăng).\nKhách hàng nhận được danh sách gợi các freelancer phù hợp với dự án của mình\n1.3 Yêu cầu phi chức năng\n1.3.1 Yêu cầu thực thi\n- Hạ tầng mạng: Hệ thống yêu cầu được triển khai trên hạ tầng mạng có băng thông\nổn định và kết nối Internet liên tục để đảm bảo tính sẵn sàng (Availability) của\ncác dịch vụ trực tuyến.\n- Môi trường thực thi: Môi trường máy chủ (Server) và phía người dùng (Client)\ncần được cấu hình đầy đủ các phần mềm nền tảng, thư viện (libraries), framework\nvà các gói phụ thuộc (dependencies) tương thích để hệ thống vận hành mượt mà,\ntránh các lỗi xung đột phần mềm hoặc thiếu tài nguyê"
+  },
+  {
+    "page": 71,
+    "text": "1.3.3 Yêu cầu bảo mật\n- Mã hóa thông tin định danh: Các thông tin nhạy cảm của người dùng, đặc biệt là\nmật khẩu, bắt buộc phải được băm (hashing) bằng các thuật toán mạnh như\nBCrypt hoặc Argon2 trước khi lưu trữ vào cơ sở dữ liệu. Việc này đảm bảo ngay\ncả khi dữ liệu bị rò rỉ, mật khẩu gốc của người dùng vẫn được bảo vệ.\n- Kiểm soát truy cập (Access Control): Hệ thống áp dụng mô hình Kiểm soát truy\ncập dựa trên vai trò (Role -Based Access Control - RBAC). Theo đó, hệ thống\nthực hiện phân quyền nghiêm ngặt, đảm bảo người dùng chỉ có thể truy cập tài\nnguyên và thực hiện các chức năng nằm trong phạm vi cho phép của vai trò (Role)\nmà họ nắm giữ.\n1.3.4 Các đặc điểm chất lượng khác\n- Sự tương thích và Đáp ứng nghiệp vụ (Functional Adequacy): Hệ thống không\nchỉ dừng lại ở việc cung cấp các tính năng cơ bản mà phải đảm bảo sự tương thích\ntuyệt đối với các kịch bản nghiệp vụ thực tế như: quản lý gói thầu, quy trình phê\nduyệt công việc và trung chuyển dữ liệu giữa Freelancer và Client. Mọi luồng"
+  },
+  {
+    "page": 72,
+    "text": "giúp tối thiểu hóa rủi ro hệ thống khi thực hiện các thay đổi, sửa lỗi hoặc cập nhật\ncông nghệ mới mà không gây gián đoạn đến các dịch vụ đang vận hành.\n- Trải nghiệm người dùng và Tính khả dụng (Usability): Giao diện được xây dựng\ndựa trên các tiêu chuẩn UX/UI hiện đại, tập trung vào sự tinh giản và trực quan.\nMục tiêu là giúp người dùng ở nhiều trình độ công nghệ khác nhau đều có thể\nthao tác đăng tin hoặc tìm kiếm việc làm một cách hiệu quả nhất.\n1.3.5 Các yêu cầu khác\n- Hệ thống ưu tiên sử dụng ngôn ngữ phổ thông, thuật ngữ chuyên ngành được đơn\ngiản hóa để phù hợp với nhiều đối tượng người dùng từ nhiều lĩnh vực khác nhau.\nCách diễn đạt và hệ thống chỉ dẫn trên giao diện được thiết kế dựa trên nguyên\ntắc nhất quán, giúp người dùng dễ dàng định vị và thực hiện thao tác mà không\ncần qua đào tạo phức tạp."
+  },
+  {
+    "page": 73,
+    "text": "CHƯƠNG 2: CƠ SỞ LÝ THUYẾT\nChương này tập trung hệ thống hóa các kiến thức nền tảng và các giải pháp công nghệ\nchủ đạo được lựa chọn để xây dựng hệ thống kết nối Freelancer. Để đảm bảo tính ổn\nđịnh, bảo mật và khả năng quản trị dữ liệu chặt chẽ, đề tài triển khai kiến trúc phía máy\nchủ dựa trên ngôn ngữ Java kết hợp với hệ sinh thái Spring Framework, trọng tâm là\nSpring Boot, Spring Data JPA và giải pháp bảo mật Spring Security. Dữ liệu hệ thống\nđược lưu trữ và quản lý bởi hệ quản trị cơ sở dữ liệu quan hệ PostgreSQL, đảm bảo tính\ntoàn vẹn và hiệu năng xử lý các truy vấn phức tạp. Về mặt tương tác người dùng, thư\nviện ReactJS cùng công cụ quản lý trạng thái Redux được ứng dụng kết hợp với các\nframework giao diện như Tailwind CSS và Material UI (MUI) nhằm tối ưu hóa trải\nnghiệm và tính thẩm mỹ. Bên cạnh các công cụ phát triển, chương này cũng đi sâu vào\nphân tích các khái niệm về kiến trúc MVC, tiêu chuẩn giao tiếp RESTful API.\n2.1 Tổng quan về hệ thống Freelancer Marketplace\nHệ thống kế"
+  },
+  {
+    "page": 74,
+    "text": "2.2 Ngôn ngữ lập trình Java\nHình 2-1: Logo Java (Nguồn: https://logos-world.net/java-logo/)\nJava là ngôn ngữ lập trình hướng đối tượng (OOP) đa năng, nổi bật với tính độc lập nền\ntảng cao nhờ cơ chế máy ảo Java (JVM). Trong dự án này, Java được lựa chọn làm nền\ntảng chính cho phần backend bởi khả năng xử lý đa luồng vượt trội, hệ thống kiểu dữ\nliệu chặt chẽ (strongly typed) cùng hệ sinh thái và cộng đồng hỗ trợ cực kỳ phong phú.\nNhững đặc điểm này đặc biệt phù hợp khi xây dựng các nghiệp vụ phức tạp của một sàn\ngiao dịch freelancer, chẳng hạn như quản lý quy trình chào thầu, theo dõi tiến độ dự án\nhay tính toán doanh thu, hoa hồng theo thời gian thực.\nNhững điểm mạnh nổi bật của Java trong hệ thống:\n- Bảo mật vượt trội Java cung cấp môi trường thực thi an toàn (sandbox) ngay từ cấp\nđộ máy ảo, giúp ngăn chặn hiệu quả các mã độc hoặc hành vi xâm nhập trái phép,\nđảm bảo an toàn cho dữ liệu người dùng và các giao dịch tài chính trên nền tảng.\n- Khả năng xử lý đa luồng mạnh mẽ Đây chính là "
+  },
+  {
+    "page": 75,
+    "text": "2.3 Framework Spring Boot\nHình 2-2: Logo SpringBoot (Nguồn: sping-logo)\nSpring Boot là một module quan trọng trong hệ sinh thái Spring Framework, được thiết\nkế nhằm đơn giản hóa đáng kể quá trình phát triển, cấu hình và triển khai ứng dụng Java.\nVới nguyên tắc cốt lõi “Convention over Configuration” (Ưu tiên quy ước thay vì cấ u\nhình thủ công), Spring Boot loại bỏ gần như toàn bộ các file XML phức tạp và mã\nboilerplate truyền thống, thay vào đó cung cấp các Spring Boot Starters  – những gói\nkhởi tạo sẵn chứa đầy đủ các dependency cần thiết cho từng loại ứng dụng (Web,\nSecurity, Data JPA, Messaging, v.v.).\nTrong dự án sàn giao dịch freelancer này, việc lựa chọn Spring Boot mang lại lợi thế lớn\nvề tốc độ triển khai và khả năng bảo trì lâu dài, đặc biệt khi xây dựng các API RESTful,\nxử lý giao dịch thời gian thực, quản lý người dùng đa vai trò và tích hợp các dịch vụ bên\nthứ ba.\nNhững điểm mạnh nổi bật của Spring Boot:\n- Tăng tốc độ phát triển vượt trội: Nhờ hệ thống Starters phong phú, l"
+  },
+  {
+    "page": 76,
+    "text": "cung cấp hàng loạt endpoint sẵn có để theo dõi sức khỏe ứng dụng theo thời gian\nthực: metrics (CPU, RAM, threads), health checks (database, cache), environment\ninfo, logging, và thậm chí tích hợp dễ dàng với Prometheus + Grafana để giám\nsát chuyên sâu.\n- Hỗ trợ triển khai linh hoạt và hiện đại : Ứng dụng Spring Boot có thể được đóng\ngói thành một file JAR độc lập (executable JAR) với server nhúng (Tomcat, Jetty\nhoặc Undertow), dễ dàng triển khai trên cloud (Docker, Kubernetes, Heroku,\nAWS Elastic Beanstalk) mà không cần cấu hình server riêng.\n- Cộng đồng lớn và hệ sinh thái phong phú : Hàng ngàn thư viện bên thứ ba (như\nSpring Security, Spring Cloud, Spring Data, v.v.) được tối ưu hóa hoàn hảo cho\nSpring Boot, giúp dễ dàng tích hợp OAuth2, JWT, microservices, message queue\n(Kafka/RabbitMQ), cache (Redis), và nhiều tính năng nâng cao khác.\n2.4 Spring Data JPA và Hibernate\nHình 2-3: Logo JPA (Nguồn: velog.io)\nSpring Data JPA là module quan trọng thuộc Spring Framework, được thiết kế nhằm"
+  },
+  {
+    "page": 77,
+    "text": "annotation, lập trình viên gần như không cần viết SQL thủ công. Điều này đặc\nbiệt hữu ích khi xử lý các nghiệp vụ phức tạp như tìm kiếm dự án theo kỹ năng,\nlọc theo ngân sách, hoặc quản lý lịch sử giao dịch.\n- Tối ưu hiệu năng truy vấn vượt trội : Hibernate hỗ trợ Lazy Loading (chỉ tải dữ\nliệu liên quan khi thực sự cần), Eager Loading khi phù hợp, cùng với Second -\nLevel Cache và Query Cache. Các cơ chế này giúp giảm đáng kể số lượng truy\nvấn đến database, đặc biệt hiệu quả trong các tình huống có nh iều người dùng\ntruy cập đồng thời (ví dụ: hàng nghìn freelancer xem danh sách dự án cùng lúc).\n- Tính linh hoạt và khả năng chuyển đổi cơ sở dữ liệu dễ dàng: Nhờ lớp trừu tượng\nORM, hệ thống có thể chuyển đổi giữa các RDBMS (PostgreSQL, MySQL,\nMariaDB, Oracle, SQL Server…) chỉ bằng cách thay đổi driver và cấu hình\ndatasource trong application.properties/application.yml, mà không cần chỉnh sửa\nlogic nghiệp vụ hay repository. Điều này mang lại lợi thế lớn khi mở rộng hạ tầng\nhoặc tối ưu chi "
+  },
+  {
+    "page": 78,
+    "text": "- Bảo vệ toàn diện trước các cuộc tấn công phổ biến : Spring Security tích hợp sẵn\ncác biện pháp phòng thủ mạnh mẽ như:\n+ Chống CSRF (Cross-Site Request Forgery) bằng token CSRF tự động.\n+ Ngăn chặn Session Fixation bằng cách tạo session ID mới sau khi đăng\nnhập.\n+ Bảo vệ chống Clickjacking thông qua header X-Frame-Options.\n+ Hỗ trợ CORS cấu hình chi tiết để cho phép truy cập từ domain frontend\nan toàn. Những tính năng này giúp hệ thống chống chịu tốt trước các\nmối đe dọa web phổ biến, đặc biệt quan trọng khi có nhiều người dùng\ntương tác thời gian thực.\n- Phân quyền linh hoạt và chi tiết : Spring Security cho phép thiết lập quyền hạn ở\nnhiều cấp độ\n- Hỗ trợ các chuẩn bảo mật hiện đại và dễ mở rộng : Framework cung cấp đầy đủ\ncác provider xác thực (In -Memory, JDBC, LDAP, Custom UserDetailsService),\ntích hợp dễ dàng với JWT cho stateless authentication, OAuth2 cho single sign -\non, và thậm chí hỗ trợ Multi-Factor Authentication (MFA) nếu cần nâng cấp sau\n- Dễ cấu hình và tích hợp: Với "
+  },
+  {
+    "page": 79,
+    "text": "integrity) nghiêm ngặt. Với lịch sử phát triển hơn 30 năm và cộng đồng lớn mạnh,\nPostgreSQL là lựa chọn lý tưởng cho các nền tảng thương mại dịch vụ như sàn giao dịch\nfreelancer – nơi cần lưu trữ an toàn, chính xác hồ sơ người dùng, dự án, đề xuất thầu,\nhợp đồng, lịch sử giao dịch và các thông tin tài chính nhạy cảm.\nTrong dự án này, PostgreSQL đóng vai trò là cơ sở dữ liệu chính (primary database), kết\nhợp hoàn hảo với Spring Data JPA + Hibernate để xử lý các truy vấn phức tạp như tìm\nkiếm dự án theo kỹ năng, tính toán doanh thu, lọc theo ngân sách hoặc theo dõi tiến độ\ncông việc theo thời gian thực.\nNhững điểm mạnh nổi bật của PostgreSQL trong hệ thống:\n- Hỗ trợ kiểu dữ liệu phong phú và linh hoạt : Ngoài các kiểu dữ liệu truyền thống\n(số, chuỗi, ngày tháng), PostgreSQL xuất sắc trong việc xử lý dữ liệu phi cấu trúc\nnhư JSON và JSONB (binary JSON). Điều này cho phép lưu trữ thông tin tùy\nbiến một cách tự nhiên và hiệu quả, ví dụ:\n+ Danh sách kỹ năng của Freelancer dưới dạng mảng JSON"
+  },
+  {
+    "page": 80,
+    "text": "+ Báo cáo doanh thu theo thời gian.\n- Khả năng mở rộng và tính sẵn sàng cao : Hỗ trợ streaming replication, logical\nreplication, connection pooling (PgBouncer), và dễ dàng tích hợp với các công cụ\nnhư TimescaleDB (cho dữ liệu time -series), PostGIS (nếu cần địa lý). Điều này\ngiúp hệ thống dễ dàng scale lên khi lượng người dùng tăng mạnh.\n2.7 Thư viện ReactJS\nHình 2-6: Logo React (Nguồn: wikimedia)\nReactJS (thường gọi tắt là React) là một thư viện JavaScript mã nguồn mở do Facebook\nphát triển, được thiết kế đặc biệt để xây dựng giao diện người dùng (UI) phức tạp, tương\ntác cao dựa trên kiến trúc component-based. Thay vì thao tác trực tiếp với DOM, React\nsử dụng Virtual DOM – một bản sao nhẹ của DOM thực tế – để tối ưu hóa việc cập nhật\ngiao diện, giúp ứng dụng phản hồi nhanh chóng và tiết kiệm tài nguyên.\nTrong dự án sàn giao dịch freelancer này, ReactJS được chọn làm công nghệ chính cho\nphần frontend, mang lại trải nghiệm người dùng mượt mà, hiện đại khi freelancer tìm\nkiếm dự án, xem "
+  },
+  {
+    "page": 81,
+    "text": "đồng nhất, giảm thời gian phát triển và dễ dàng bảo trì khi cần thay đổi\nthiết kế.\n- Hiệu suất vượt trội với Virtual DOM : Mọi thay đổi trạng thái (state) đều được\nReact so sánh với Virtual DOM trước khi áp dụng lên DOM thật, chỉ cập nhật\nphần thay đổi thực sự (diffing & reconciliation). Kết quả là giao diện phản hồi\ncực nhanh, đặc biệt khi freelancer lọc dự án, chuyển tab hoặc nhận thông báo mới\nmà không gây giật lag.\n- Hệ sinh thái phong phú và tích hợp linh hoạt: React có hệ sinh thái khổng lồ:\n+ React Router cho điều hướng SPA (Single Page Application).\n+ Redux / Redux Toolkit hoặc Context API + useReducer để quản lý trạng\nthái toàn cục (ví dụ: thông tin người dùng, trạng thái đăng nhập, giỏ hàng\ndự án, số dư ví).\n+ Material-UI, Ant Design, Tailwind CSS hoặc Chakra UI để xây dựng giao\ndiện đẹp, responsive nhanh chóng.\n+ Axios hoặc React Query cho gọi API, caching và đồng bộ dữ liệu realtime.\nSự kết hợp này đảm bảo dữ liệu (như danh sách dự án, thông báo chat,\nprofile) luôn nhất quá"
+  },
+  {
+    "page": 82,
+    "text": "nhất cho các ứng dụng React, được lấy cảm hứng từ kiến trúc Flux của Facebook. Với\ntriết lý cốt lõi “Single Source of Truth” (một nguồn sự thật duy nhất), Redux giúp lưu\ntrữ toàn bộ trạng thái ứng dụng tại một nơi trung tâm (store), thay vì phân tán trong các\ncomponent. Điều này đặc biệt hữu ích cho các ứng dụng phức tạp như sàn giao dịch\nfreelancer, nơi trạng thái cần được đồng bộ giữa nhiều trang và component (ví dụ: thông\ntin người dùng, danh sách dự án đang xem, trạng thái chat, số dư ví, hoặc thông báo\nrealtime).\nTrong dự án này, Redux (kết hợp với Redux Toolkit – phiên bản hiện đại, khuyến nghị)\nđược sử dụng để quản lý trạng thái toàn cục một cách hiệu quả, giúp giao diện người\ndùng luôn nhất quán và dễ dự đoán mà không cần truyền props qua nhiều tầng component\n(prop drilling).\nNhững điểm mạnh nổi bật của Redux trong hệ thống:\n- Trạng thái tập trung và dễ dự đoán: Toàn bộ dữ liệu trạng thái được lưu trữ trong\nmột object duy nhất (global store). Mọi thay đổi trạng thái đều phải đi"
+  },
+  {
+    "page": 83,
+    "text": "dàng phát hiện và sửa lỗi khi trạng thái ứng dụng trở nên phức tạp (ví dụ:\ntại sao danh sách dự án không cập nhật sau khi lọc).\n- Hiệu suất tốt với memoization : Redux kết hợp với Reselect (hoặc selector trong\nRTK) để tính toán dữ liệu phái sinh (derived state) một cách hiệu quả, tránh re -\nrender không cần thiết. Ví dụ: tính tổng ngân sách các dự án đang theo dõi mà\nkhông phải tính lại mỗi lần render.\n- Dễ mở rộng và tích hợp realtime : Redux dễ dàng kết hợp với WebSocket (qua\nmiddleware như redux -socket.io) để cập nhật realtime: nhận thông báo mới khi\ncó đề xuất thầu, chat tin nhắn, hoặc thay đổi trạng thái dự án. Ngoài ra, Redux hỗ\ntrợ persist (lưu state vào localStorage) để giữ trạng thái sau khi refresh trang.\n2.9 Framework Tailwind CSS\nHình 2-8: Logo tailwindcss (Nguồn: wikimedia)\nTailwind CSS là một framework CSS utility-first (tiếp cận theo lớp tiện ích) mã nguồn\nmở, được thiết kế để giúp lập trình viên xây dựng giao diện nhanh chóng, tùy chỉnh cao\nmà không cần viết quá nhiều "
+  },
+  {
+    "page": 84,
+    "text": "xl:) để áp dụng style theo kích thước màn hình.\n- Kích thước file CSS nhỏ gọn nhờ PurgeCSS: Tailwind tích hợp PurgeCSS (hoặc\nJIT mode trong Tailwind v3+) để chỉ giữ lại các class thực sự được sử dụng trong\nmã nguồn. Kết quả: file CSS production chỉ vài KB thay vì hàng trăm KB như\ncác framework truyền thống.\n- Hệ sinh thái phong phú và cộng đồng lớn: Tailwind hoạt động hoàn hảo với React,\nNext.js, Vite, và các component library như Headless UI (cho modal, dropdown),\nDaisyUI hoặc Flowbite (nếu muốn thêm component sẵn). Ngoài ra, Tailwind có\nhàng ngàn plugin và theme miễn phí trên cộng đồng.\n2.10 Material UI (MUI)\nHình 2-9: Logo MUI (Nguồn: logowik )\nMaterial-UI (MUI) – Thư viện component React theo chuẩn Material Design\nMaterial-UI, thường được gọi tắt là MUI, là một thư viện component React mã nguồn\nmở phổ biến nhất, được xây dựng dựa trên nguyên tắc thiết kế Material Design của\nGoogle. MUI cung cấp bộ sưu tập các thành phần giao diện người dùng (UI components)\nsẵn có, được thiết kế chu"
+  },
+  {
+    "page": 85,
+    "text": "nguyên tắc Material Design, bao gồm hệ thống màu sắc, typography, spacing,\nelevation (độ nổi), animation và interaction patterns. Điều này đảm bảo giao diện\nluôn mang tính thẩm mỹ cao, hiện đại và quen thuộc với người dùng trên toàn\ncầu.\n- Hệ thống theme mạnh mẽ và linh hoạt : MUI cung cấp cơ chế theme toàn cục\n(global theme) dựa trên object JavaScript, cho phép tùy chỉnh sâu rộng về màu\nsắc chính/phụ, typography, breakpoints, shape (độ bo góc), shadows và\ntransitions. Theme có thể được kế thừa, override và tùy chỉnh theo từng\ncomponent, đảm bảo tính nhất quán thiết kế trên toàn ứng dụng.\n- Hỗ trợ responsive và accessibility (a11y) : MUI tích hợp sẵn các công cụ hỗ trợ\nresponsive design (qua breakpoints) và tuân thủ các tiêu chuẩn accessibility\n(WCAG). Các component đều được tối ưu để hỗ trợ screen reader, keyboard\nnavigation và contrast ratio phù hợp, giúp ứng dụng dễ tiếp cận hơn vớ i mọi đối\ntượng người dùng.\n- Tính tùy chỉnh và mở rộng cao : MUI sử dụng cơ chế styled -components ho"
+  },
+  {
+    "page": 86,
+    "text": "2.11 Mô hình MVC\nHình 2-10: Mô hình MVC (Nguồn: Vietnix)\nMô hình MVC là một trong những kiến trúc thiết kế (design pattern) cổ điển và được\nsử dụng rộng rãi nhất trong phát triển ứng dụng web, desktop và mobile. Nó được giới\nthiệu lần đầu vào những năm 1970 trong ngôn ngữ Smalltalk, sau đó trở thành chuẩn\nmực cho nhiều framework hiện đại như Spring MVC (Java), ASP.NET MVC (C#),\nRuby on Rails, Laravel (PHP), Django (Python), và cả các ứng dụng frontend như\nAngular.\nMVC chia ứng dụng thành ba thành phần chính, mỗi thành phần chịu trách nhiệm một\nphần riêng biệt, giúp mã nguồn được tổ chức rõ ràng, dễ bảo trì, dễ mở rộng và dễ kiểm\nthử.\nCác thành phần chính của mô hình MVC:\nModel (Mô hình) Đại diện cho dữ liệu và logic nghiệp vụ của ứng dụng. Model\nchịu trách nhiệm:\n- Quản lý dữ liệu (lưu trữ, truy xuất, cập nhật).\n- Thực hiện các quy tắc kinh doanh (business rules).\n- Không quan tâm đến cách dữ liệu được hiển thị hoặc tương tác với người\ndùng. Model thường tương tác trực tiếp với cơ sở d"
+  },
+  {
+    "page": 87,
+    "text": "Controller (Bộ điều khiển) Đóng vai trò trung gian, xử lý các yêu cầu từ người dùng\nvà điều phối luồng dữ liệu giữa Model và View. Controller:\n- Nhận request từ client (qua URL, form submit, API call).\n- Xử lý input, gọi Model để thực hiện nghiệp vụ.\n- Lấy kết quả từ Model và chuyển cho View để hiển thị.\n- Không chứa logic hiển thị hay logic lưu trữ dữ liệu.\nLuồng hoạt động cơ bản của MVC:\n1. Người dùng gửi request (click button, truy cập URL).\n2. Controller nhận request và xử lý.\n3. Controller gọi Model để thực hiện logic nghiệp vụ và lấy dữ liệu.\n4. Model trả kết quả cho Controller.\n5. Controller chọn View phù hợp và truyền dữ liệu vào View.\n6. View render dữ liệu thành giao diện và gửi response về cho người dùng.\nLợi ích chính của mô hình MVC:\n- Tách biệt trách nhiệm (Separation of Concerns): Mỗi thành phần chỉ làm một\nviệc, giúp mã nguồn sạch sẽ, dễ đọc và dễ bảo trì.\n- Dễ kiểm thử: Model, View và Controller có thể được unit test độc lập.\n- Tái sử dụng cao: Model có thể được dùng l"
+  },
+  {
+    "page": 88,
+    "text": "Hình 2-11: Logo RestAPI (Nguồn:capellasolutions )\nRESTful API (Representational State Transfer) là một phong cách kiến trúc thiết kế\ndịch vụ web, dựa trên các nguyên tắc được định nghĩa rõ ràng nhằm tạo ra các giao\ndiện lập trình ứng dụng dễ hiểu, dễ sử dụng và dễ mở rộng. Kiến trúc này tận dụng tối\nđa các đặc tính của giao thức HTTP để xây dựng các dịch vụ client-server phân tách,\nstateless và có khả năng cache.\nCác nguyên tắc cốt lõi của RESTful API:\n- Phân tách rõ ràng giữa client và server Client chịu trách nhiệm giao diện và trải\nnghiệm người dùng, server chịu trách nhiệm xử lý logic nghiệp vụ và lưu trữ dữ\nliệu. Sự tách biệt này cho phép phát triển, bảo trì và mở rộng độc lập hai thành\nphần.\n- Stateless (không lưu trạng thái) Mỗi request từ client đến server phải chứa đầy\nđủ thông tin cần thiết để xử lý, không phụ thuộc vào trạng thái của các request\ntrước đó. Server không lưu trữ thông tin phiên của client, giúp hệ thống dễ dàng\nmở rộng quy mô ngang.\n- Cacheable Các phản hồi từ "
+  },
+  {
+    "page": 89,
+    "text": "2.13 Axios\nHình 2-12: Logo Axios (Nguồn: wikimedia)\nAxios là một thư viện HTTP client dựa trên Promise, được thiết kế để thực hiện các\nyêu cầu mạng (HTTP requests) một cách đơn giản, hiệu quả và đáng tin cậy trong cả\nmôi trường trình duyệt (browser) và Node.js. Được phát triển từ năm 2014, Axios\nnhanh chóng trở thành lựa chọn hàng đầu cho các lập trình viên JavaScript/TypeScript\nkhi xây dựng ứng dụng frontend (đặc biệt với React, Vue, Angular) hoặc các script\nphía server.\nAxios nổi bật nhờ cú pháp sạch sẽ, hỗ trợ đầy đủ các tính năng hiện đại của HTTP, và\ntích hợp mượt mà với các thư viện quản lý trạng thái cũng như các framework\nfrontend. Nó được sử dụng rộng rãi trong các dự án thực tế để giao tiếp với RESTful\nAPI, GraphQL endpoint hoặc bất kỳ dịch vụ web nào.\nNhững điểm mạnh nổi bật của Axios:\n- Cú pháp đơn giản và dễ đọc: Axios sử dụng API dựa trên Promise với cấu trúc\nrõ ràng, dễ hiểu hơn so với Fetch API gốc của trình duyệt. Các phương thức như\nget, post, put, delete được thiết k"
+  },
+  {
+    "page": 90,
+    "text": "Điều này giúp lập trình viên dễ dàng xây dựng hệ thống thông báo lỗi thân thiện\nvới người dùng.\n- Hỗ trợ transform dữ liệu tự động: Tự động parse JSON response thành object\nJavaScript (và ngược lại khi gửi JSON). Ngoài ra, hỗ trợ\ntransformRequest/transformResponse để tùy chỉnh dữ liệu trước/sau khi\ngửi/nhận.\n- Tích hợp tốt với các tính năng nâng cao\n+ Cancel request (qua CancelToken hoặc AbortController).\n+ Timeout tự động.\n+ Progress tracking cho upload/download lớn.\n+ Hỗ trợ FormData cho upload file.\n+ Xử lý query params phức tạp (paramsSerializer).\n- Tương thích đa nền tảng: Axios hoạt động tốt trên cả browser\n(XMLHttpRequest) và Node.js (http/https module), giúp code có thể tái sử dụng\ngiữa frontend và backend nếu cần.\n2.14 Stripe API\nHình 2-13: Logo Stripe (Nguồn: wikimedia)\nStripe API là bộ giao diện lập trình ứng dụng (API) toàn diện do Stripe cung cấp, được\nthiết kế để tích hợp xử lý thanh toán trực tuyến, quản lý hóa đơn, đăng ký định kỳ\n(subscriptions), chuyển khoản và các dị"
+  },
+  {
+    "page": 91,
+    "text": "endpoint.\nCác nguyên tắc và đặc điểm cốt lõi của Stripe API:\n- RESTful và resource-oriented: Mọi thứ trong Stripe đều được coi là object (tài\nnguyên), như Customer, PaymentIntent, Charge, Subscription, Product, Price…\nCác endpoint có cấu trúc dự đoán được, dễ hiểu và nhất quán (ví dụ:\n/v1/payment_intents, /v1/customers).\n- Stateless và idempotent: Mỗi request độc lập, không phụ thuộc trạng thái trước\nđó. Nhiều hoạt động hỗ trợ idempotency key để tránh trùng lặp (ví dụ: tạo thanh\ntoán nhiều lần mà không charge double).\n- Test mode và Live mode riêng biệt: Sử dụng API key khác nhau:\n+ Publishable key (pk_...) cho client-side (an toàn để expose).\n+ Secret key (sk_...) cho server-side (phải giữ bí mật).\n+ Restricted key để giới hạn quyền truy cập. Test mode sử dụng dữ liệu giả\nlập, không ảnh hưởng đến tiền thật.\n- Xác thực và bảo mật cao Tất cả request đều yêu cầu authentication qua API key.\nStripe tuân thủ PCI DSS Level 1, hỗ trợ tokenization để không lưu thông tin thẻ\nnhạy cảm trên serve"
+  },
+  {
+    "page": 92,
+    "text": "2.14 Cloudinary\nHình 2-14: Logo Cloudinary (Nguồn: wikimedia)\nCloudinary là một dịch vụ đám mây (cloud-based) chuyên biệt cho việc quản lý, tối ưu\nhóa, chuyển đổi và phân phối hình ảnh cũng như video. Được thiết kế dành riêng cho\ncác nhà phát triển web và ứng dụng di động, Cloudinary giúp loại bỏ hoàn toàn những\nphức tạp liên quan đến việc xử lý media trên server, đồng thời mang lại hiệu suất cao,\nkhả năng tùy chỉnh mạnh mẽ và trải nghiệm người dùng tốt nhất trên mọi thiết bị.\nCloudinary hoạt động theo mô hình SaaS (Software as a Service), cung cấp API\nRESTful và SDK cho hầu hết các ngôn ngữ lập trình phổ biến (JavaScript, React,\nNode.js, Java, Python, PHP, Ruby, .NET, v.v.). Nó kết hợp lưu trữ, xử lý động (on-the-\nfly transformation), tối ưu hóa tự động và CDN toàn cầu để phân phối nội dung nhanh\nCác nguyên tắc và đặc điểm cốt lõi của Cloudinary:\n- Media as a Service: Hình ảnh và video được coi là tài nguyên có thể truy cập\nqua URL duy nhất, với mọi thao tác xử lý được thực hiện động "
+  },
+  {
+    "page": 93,
+    "text": "trăm điểm POP (Point of Presence) trên thế giới, đảm bảo thời gian tải media\ncực nhanh, giảm latency và cải thiện Core Web Vitals.\n- Bảo mật và kiểm soát truy cập: Hỗ trợ signed URL, private media, token-based\nauthentication, IP whitelisting, và các chính sách bảo mật để ngăn chặn truy cập\ntrái phép."
+  },
+  {
+    "page": 94,
+    "text": "CHƯƠNG 3: THIẾT KẾ VÀ CÀI ĐẶT GIẢI PHÁP\nNội dung chương này tập trung trình bày kiến trúc tổng thể của hệ thống, đi sâu phân\ntích các module cốt lõi, cơ chế vận hành cũng như sự tương tác giữa chúng. Đồng thời,\nchương cũng cung cấp các bản đặc tả thiết kế và mô hình chi tiết nhằm đáp ứng yêu\ncầu nghiệp vụ của từng nhóm người dùng cụ thể.\n3.1 Kiến trúc tổng quan\n3.1.1 Thiết kế kiến trúc tổng quan\nMô hình kiến trúc của ứng dụng được xây dựng theo hướng tách biệt Frontend và\nBackend, giao tiếp thông qua chuẩn RESTful API (xem Hình 3-1). Phía máy chủ (Server-\nside) vận hành trên nền tảng Java Spring Boot mạnh mẽ kết hợp với PostgreSQL để đảm\nbảo tính toàn vẹn dữ liệu giao dịch phức tạp. Trong khi đó, phía máy trạm (Client -side)\nsử dụng thư viện React.js để xây dựng trải nghiệm người dùn g đơn trang (SPA) mượt\nmà. Kiến trúc này đảm bảo hệ thống có khả năng chịu tải cao và dễ dàng mở rộng theo\nchiều ngang.\nHình 3-1: Sơ đồ thiết kế hệ thống\nCác thành phần cốt lõi cấu thành nên hệ thống Freel"
+  },
+  {
+    "page": 95,
+    "text": "- Phía Client (React.js Ecosystem):\n+ Giao diện người dùng được xây dựng theo mô hình Ứng dụng đơn trang\n(Single Page Application) sử dụng thư viện React.js, giúp tối ưu hóa tốc\nđộ tải trang và mang lại trải nghiệm mượt mà.\n+ Hệ thống sử dụng các thư viện bổ trợ mạnh mẽ như Redux để quản lý trạng\nthái (state) tập trung, React Router để điều hướng và các bộ UI Kit như\nMaterial UI, Tailwind CSS để xây dựng giao diện hiện đại, đáp ứng tốt\ntrên đa thiết bị.\n+ Tầng Client thực hiện giao tiếp với máy chủ thông qua thư viện Axios, gửi\ncác yêu cầu HTTP đến các điểm cuối (endpoints) của hệ thống Backend.\n- Phía Back-End Server (Java Spring Boot):\n+ Máy chủ ứng dụng đóng vai trò xử lý logic nghiệp vụ chính, được phát\ntriển trên nền tảng Java Spring Boot. Đây là một framework mạnh mẽ,\ncung cấp khả năng bảo mật cao và quản lý giao dịch (transaction) chặt chẽ.\n+ Hệ thống tích hợp Spring Security để đảm nhiệm vai trò xác thực và phân\nquyền người dùng, đảm bảo an toàn dữ liệu cho các giao dịch giữa\nF"
+  },
+  {
+    "page": 96,
+    "text": "+ Stripe: Cổng thanh toán trực tuyến giúp thực hiện các giao dịch nạp tiền,\nthanh toán phí dịch vụ và rút tiền an toàn.\n+ Cloudinary: Nền tảng điện toán đám mây chuyên dụng để lưu trữ và tối ưu\nhóa hình ảnh hồ sơ (profile) cũng như các tài liệu minh chứng dự án\n(portfolio).\n+ Email Service: Hệ thống tin nhắn mới và các xác nhận giao dịch quan trọng\nđến người dùng.\n3.2 Mô hình MVC của hệ thống\n3.2.1 Thiết kế mô hình MVC\nHình 3-2: Sơ đồ Mô hình MVC của hệ thống\nHình 3-2 minh họa cấu trúc tổng thể của hệ thống dựa trên mô hình MVC (Model - View\n- Controller) kết hợp cùng phân hệ Gợi ý việc làm/ứng viên (Recommendation System)\nthuật toán based -content. Việc ứng dụng kiến trúc này giúp chuẩn hóa quy trình phát\ntriển, tách biệt các tầng xử lý dữ liệu và giao diện, tạo nền tảng vững chắc cho việc tích\nhợp các tính năng phức tạp trên sàn giao dịch. Các thành phần cụ thể bao gồm:\nTầng Hiển thị (View): Đảm nhiệm vai trò cung cấp giao diện tương tác cho người dùng"
+  },
+  {
+    "page": 97,
+    "text": "trên trình duyệt. Các thành phần chính bao gồm: FreelancerDashboardView,\nProjectsView, ClientDashboardView, ProposalView, CompareProposalView,\nPostProjectView, cùng các màn hình chi tiết về hồ sơ và hợp đồng ,v..v. Tầng này có\nnhiệm vụ tiếp nhận thao tác từ phía người dùng (Freelancer và Nhà tuyển dụng) như:\nđăng dự án, gửi đề xuất (proposal), so sánh ứng viên, và quản lý tiến độ công việc.\nTầng Điều khiển (Controller): Đóng vai trò điều phối dòng dữ liệu và xử lý các logic\nnghiệp vụ của sàn giao dịch. Controller tiếp nhận các yêu cầu (HTTP Requests) từ tầng\nView thông qua các API chuyên biệt như: ProjectController (quản lý dự án),\nProposalController (xử lý đề xuất), StripeController (xử lý thanh toán), và\nAuthController (xác thực người dùng). Sau khi xử lý logic, Controller sẽ điều hướng yêu\ncầu đến tầng Model hoặc hệ thống gợi ý để lấy kết quả và phản hồi lại cho giao diện.\nTầng Dữ liệu (Model): Quản lý toàn bộ cấu trúc thông tin và các quy tắc nghiệp vụ liên\nquan đến cơ sở dữ liệu P"
+  },
+  {
+    "page": 98,
+    "text": "3.3. Sơ đồ phân rã chức năng\n3.2.1 Sơ đồ phân rã chức năng Nhà tuyển dụng (Client)\nHình 3-3: Sơ đồ phân rã chức năng của Nhà tuyển dụng\nHình 3-3 minh họa sơ đồ phân rã chức năng dành cho vai trò Client trong hệ thống. Để\ntối ưu hóa quy trình tuyển dụng và quản lý nhân sự từ xa, hệ thống cung cấp cho Client\nmột bộ công cụ toàn diện từ khâu đăng tin đến khâu thanh toán. Cụ thể, Client có thể\nthực hiện các nhóm chức năng chính sau:\n- Quản lý tài khoản: Chỉnh sửa thông tin cá nhân, cập nhật hồ sơ doanh nghiệp và\nđổi mật khẩu để đảm bảo an toàn tài khoản thông qua lớp bảo mật Spring Security.\n- Quản lý dự án: Đăng tin tuyển dụng mới với đầy đủ mô tả công việc, kỹ năng yêu\ncầu và ngân sách; đồng thời có thể chỉnh sửa hoặc xóa dự án tùy theo nhu cầu\nthực tế.\n- Quản lý ứng viên và Đấu thầu: Xem danh sách các đề xuất (Proposals) từ\nFreelancer, so sánh các mức giá thầu, xem hồ sơ năng lực chi tiết và thực hiện\nmời các ứng viên tiềm năng tham gia đấu thầu. Client có quyền chấp nhận hoặc\ntừ chối đ"
+  },
+  {
+    "page": 99,
+    "text": "báo cáo hàng tuần đối với các dự án tính phí theo giờ (Hourly rate).\n- Quản lý tài chính và Đánh giá: Thực hiện nạp tiền vào ví hệ thống, theo dõi các\nkhoản chi trả dự án và gửi phản hồi, chấm điểm sao cho Freelancer sau khi kết\nthúc dự án để xây dựng cộng đồng minh bạch.\n- Đăng xuất: Kết thúc phiên làm việc và xóa bỏ các token xác thực trên trình duyệt.\nSơ đồ thể hiện rõ quy trình khép kín giúp Client quản lý dự án hiệu quả. Mọi dữ liệu về\ndự án và giao dịch tài chính đều được xử lý thông qua các API RESTful của Spring Boot\nvà lưu trữ bền vững trong cơ sở dữ liệu PostgreSQL, đảm bảo tính toàn vẹn và bảo m ật\ncao cho nhà tuyển dụng.\n3.2.2 Sơ đồ phân rã chức năng Freelancer\nHình 3-4: Sơ đồ phân rã chức năng của Freelancer\nHình 3-4 minh họa sơ đồ phân rã chức năng dành cho vai trò Freelancer trong hệ thống.\nĐể hỗ trợ người dùng xây dựng sự nghiệp trực tuyến và quản lý công việc hiệu quả, hệ\nthống cung cấp một quy trình khép kín từ việc hoàn thiện hồ sơ đến quản lý thu nhập.\nCụ thể, Freel"
+  },
+  {
+    "page": 100,
+    "text": "- Quản lý hồ sơ cá nhân: Đây là trung tâm xây dựng thương hiệu cá nhân, cho phép\nngười dùng thêm, sửa hoặc xóa các chứng chỉ nghề nghiệp, trình độ học vấn và\ndanh mục kỹ năng chuyên môn. Đặc biệt, chức năng quản lý Portfolio giúp\nFreelancer đăng tải các sản phẩm thực tế đã thực hiện để minh chứng năng lực\nvới nhà tuyển dụng.\n- Tìm kiếm dự án và Đấu thầu: Hệ thống cung cấp bộ lọc thông minh cho phép tìm\nkiếm dự án theo từ khóa, danh mục kỹ năng, mức ngân sách hoặc loại hình dự án\n(trọn gói hoặc theo giờ). Freelancer có thể xem chi tiết yêu cầu và thực hiện gửi\nđề xuất đấu thầu để ứng tuyển vào các dự án phù hợp.\n- Xem gợi ý công việc: Dựa trên các kỹ năng đã khai báo trong hồ sơ, hệ thống sẽ\ntự động hiển thị danh sách các công việc tiềm năng, giúp tối ưu hóa thời gian tìm\nkiếm dự án cho người dùng.\n- Quản lý công việc: Theo dõi trạng thái các dự án đã đấu thầu, trực tiếp nhắn tin\nvà trao đổi yêu cầu với khách hàng. Trong quá trình làm việc, Freelancer thực\nhiện gửi file sản phẩm, báo cá"
+  },
+  {
+    "page": 101,
+    "text": "3.2.3 Sơ đồ phân rã chức năng Quản trị viên (Admin)\nHình 3-5: Sơ đồ phân rã chức năng của Admin\nHình 3-5 minh họa các chức năng dành cho vai trò Quản trị viên trong hệ thống. Admin\nđóng vai trò là người điều phối cao nhất, đảm bảo tính minh bạch và ổn định cho toàn\nbộ nền tảng kết nối freelancer. Thông qua giao diện quản trị tập trung, Admin có thể\nthực hiện các nhóm chức năng cốt lõi sau:\n- Quản lý người dùng: Kiểm soát danh sách người dùng trên toàn hệ thống, thực\nhiện kích hoạt tài khoản mới hoặc khóa các tài khoản vi phạm chính sách cộng\nđồng để đảm bảo môi trường làm việc lành mạnh.\n- Quản lý danh mục: Thiết lập và duy trì cấu trúc ngành nghề của hệ thống bằng\ncách thêm, chỉnh sửa hoặc xóa các lĩnh vực ngành nghề (như IT, Marketing,\nDesign...). Việc quản lý tốt danh mục giúp người dùng dễ dàng phân loại và tìm\nkiếm dự án.\n- Quản lý kỹ năng: Quản trị thư viện kỹ năng chuyên môn phong phú. Admin có\nquyền thêm mới các kỹ năng xu hướng, chỉnh sửa hoặc loại bỏ các kỹ năng không\ncòn phù"
+  },
+  {
+    "page": 102,
+    "text": "sát hoạt động. Các chức năng này được xây dựng dựa trên sự phối hợp chặt chẽ giữa\ngiao diện quản lý hiện đại và hệ thống API bảo mật phía Backend, giúp Admin điều hành\nnền tảng một cách chuyên nghiệp và hiệu quả.\n3.4 Mô hình dữ liệu\n3.3.1 Sơ đồ thực thể quan hệ - ERD\nHình 3-6: Sơ đồ ERD của hệ thống"
+  },
+  {
+    "page": 103,
+    "text": "3.3.2. Bảng mô tả các thuộc tính của sơ đồ thực thể liên kết\n3.3.2.1. Bảng Freelancer\nBảng 3-1: Mô tả thuộc tính thực thể Freelancer\nTên trường Kiểu dữ\nliệu\nKhóa\nchính\nngoại\nĐược\nrỗng\nGiá trị\nmặc\nđịnh\nDiễn giải\nfreelancer_id Long X  Không  Mã\nfreelancer\nfirst_name String   Không  Tên\nlast_name String   Không  Họ\nemail String   Không  Địa chỉ\nemail\n(duy\nnhất)\nusername String   Không  Tên đăng\nnhập\npwd_hash String   Không  Mật khấu\nđã được\nmã hóa\nphone_number String   Có  Số điện\nthoại\nprofile_image String   Có  Đường\ndẫn ảnh\nđại diện\nis_verified Boolean   Không False Trạng\nthái xác\nminh\nhourly_rate Decimal   Có  Giá theo\ngiờ\ntitle String   Có  Tiêu đề\nnghề\nnghiệp\nDescription Text   Có  Mô tả bản\nthân\nis_blocked Boolean   Không False Trạng\nthái bị\nkhóa"
+  },
+  {
+    "page": 104,
+    "text": "created_at Timestamp   Không  Currnent\nTime\ntạo tài\nupdated_at Timestamp   Có  Thời gian\ncập nhật\ncuối\n3.3.2.2. Bảng Client\nBảng 3-2: Mô tả thuộc tính thực thể Client\nmặc định\nclient_id Long X\nKhông\nMã khách\nhàng\nfirst_name String\nTên khách\nlast_name String\nHọ khách\nUsername String\nTên đăng\npwd_hash String\nMật khẩu\nEmail String\nĐịa chỉ\nPicture String\nCó\nẢnh đại\ndiện\nphone_number String\nSố điện\nWallet Double\nKhông 0 Số dư ví/Tài\nDescription Text\nMô tả về\ncông ty/cá\nis_verified Boolean\nKhông FALSE Trạng thái\nxác minh\nis_blocked Boolean\nbị khóa\nreset_link String\nLink đặt lại\nmật khẩu\nlogin_token String\nToken đăng"
+  },
+  {
+    "page": 105,
+    "text": "Bio String\nTiểu sử\nngắn\n3.3.2.3. Bảng Admin\nBảng 3-3: Mô tả thuộc tính thực thể Admin\nadmin_id Long X\nMã quản trị\nviên\nTên quản trị\nHọ quản trị\nTitle String\nChức\ndanh/Vị trí\nprofile_image String\nẢnh hồ sơ\n3.3.2.4. Bảng Category\nBảng 3-5: Mô tả thuộc tính thực thể Category\ncategory_id Long X\nMã danh\nmục\ncategory_name String\nTên danh\ncategory_image String\ndiện danh\ncreated_at Timestamp\nKhông Now() Ngày tạo\nupdated_at Timestamp\nKhông Now() Ngày cập"
+  },
+  {
+    "page": 106,
+    "text": "nhật\n3.2.2.5. Bảng Skill\nBảng 3-6: Mô tả thuộc tính thực thể Skill\nTên\ntrường\nKiểu dữ\nskill_id Long X\nMã kỹ\nnăng\nname String\nTên kỹ\n3.2.2.6. Bảng Project\nBảng 3-7: Mô tả thuộc tính thực thể Project\nproject_id Long X\nMã dự án\ntitle String\nTiêu đề dự\ndescription Text\nMô tả chi tiết\ncông việc\nbudget Double\nGiá trị ngân\nsách (số)\nisinternship Boolean\nKhông FALSE Có phải thực\ntập không\nduration String\nThời gian dự\nkiến hoàn\nconnections Integer\nSố lượt kết\nnối yêu cầu\nstatus String\nKhông Open' Trạng thái\n(Mở, Đang\nlàm, Xong)"
+  },
+  {
+    "page": 107,
+    "text": "start_time Timestamp\nThời gian bắt\nđầu\nend_time Timestamp\nThời gian kết\nthúc\n3.2.2.7. Bảng Budget\nBảng 3-8: Mô tả thuộc tính thực thể Budget\nbudget_id Long X\nMã cấu hình\nngân sách\ntype String\nLoại (Cố định\nhoặc Theo giờ)\nvalue Double\nGiá trị quy\n3.4.2.8. Bảng Review\nBảng 3-9: Mô tả thuộc tính thực thể Review\nreview_id Long X\nMã đánh\ngiá\nrating Integer\nSố sao (1-5)\ncomment Text\nNội dung\nđánh giá\ndate Timestamp\nKhông Current\nNgày đánh\ntestimonial_back Text\nPhản hồi từ\nproject_id Long\nX Không\nLiên kết tới\ndự án\nclient_id Long\nNgười viết\nfreelancer_id Long\nNgười nhận"
+  },
+  {
+    "page": 108,
+    "text": "3.4.2.9 Bảng Proposal\nBảng 3-10: Mô tả thuộc tính thực thể Proposal\nproposal_id Long X\nMã bản chào\nNội dung giới\nthiệu\nfiles String\nĐường dẫn tài\nliệu đính kèm\nproposal_price Decimal\nGiá đề xuất\ndelivery_days Integer\nSố ngày hoàn\nKhông Pending' Trạng thái\n(Pending,\nAccepted,\nRejected)\nNgày gửi\nproposal\nDự án ứng\ntuyển\nFreelancer ứng\n3.4.2.10 Bảng Contract\nBảng 3-11: Mô tả thuộc tính thực thể Contract\ncontract_id Long X\nMã hợp đồng\nLoại hợp đồng\n(Fixed/Hourly)\namount Decimal\nTổng giá trị hợp\nstart_date Timestamp\nNgày bắt đầu"
+  },
+  {
+    "page": 109,
+    "text": "end_date Timestamp\nNgày kết thúc dự\nkiến\nKhông Active' Trạng thái hợp\nproposal_id Long\nDựa trên proposal\nnào\n3.4.2.11 Bảng Milestone\nBảng 3-12: Mô tả thuộc tính thực thể Milestone\nmilestone_id Long X\nMã giai đoạn\nTên giai đoạn\nSố tiền cho giai\nđoạn này\nNgày kết thúc\ndự kiến\n(Pending, Paid,\nCancelled)\ncontract_id Long\nThuộc hợp\nđồng nào\n3.4.2.12 Bảng Portfolio\nBảng 3-13: Mô tả thuộc tính thực thể Portfolio\nTên trường Kiểu\ndữ liệu\nportfolio_id Long X\nMã sản phẩm\nproject_title String\nTên dự án đã làm\nurl String\nLink sản phẩm\n(Github/Live)\ncompletion_date Date\nNgày hoàn thành\nThuộc về\nFreelancer nào"
+  },
+  {
+    "page": 110,
+    "text": "3.4.2.13 Bảng Payment\nBảng 3-14: Mô tả thuộc tính thực thể Payment\npayment_id Long X\nMã giao dịch\nSố tiền giao\ndịch\npayment_type String\n(Deposit,\nWithdrawal,\nMilestone\nPay)\ntransaction_id String\nMã tham chiếu\ntừ cổng thanh\ntoán\nKhông Processing' Trạng thái\ngiao dịch\npaid_at Timestamp\nThời gian thực\nthanh toán\nX Có\nLiên kết hợp\nđồng (nếu có)\n3.4.2.14 Bảng Message\nBảng 3-15: Mô tả thuộc tính thực thể Message\nmessage_id Long X\nMã tin nhắn\ncontent Text\nsender_type String\nLoại người gửi\n(CLIENT/FLC)\nsent_at Timestamp\nKhông Current Thời gian gửi\nroom_id String\nID phòng chat\n(hoặc Project ID)"
+  },
+  {
+    "page": 111,
+    "text": "3.4.2.15 Bảng Clarification\nBảng 3-16: Mô tả thuộc tính thực thể Clarification\nclarification_id Long X\nMã yêu cầu\nlàm rõ\nquestion Text\nCâu hỏi của\nanswer Text\nCâu trả lời\ncủa Client\nquestion_at Timestamp\nThời điểm\nhỏi\nanswer_at Timestamp\ntrả lời\nNgười đặt\ncâu hỏi\n3.4.2.16 Bảng Education\nBảng 3-17: Mô tả thuộc tính thực thể Education\neducation_id Long X\nMã học vấn\norganization String\nTên trường đại\nhọc/tổ chức\ndegree String\nBằng cấp (Cử\nnhân, Kỹ sư...)\narea_study String\nChuyên ngành\nstart_date Date\nend_date Date\nMô tả thêm"
+  },
+  {
+    "page": 112,
+    "text": "3.4.2.17 Bảng Certification\nBảng 3-18: Mô tả thuộc tính thực thể Certification\ncertification_id Long X\nMã chứng chỉ\nTên chứng chỉ\nTổ chức cấp\nTrạng thái (đã\ncấp/đang chờ)\nNgày cấp\nNgày hết hạn\nĐường dẫn ảnh\nhoặc link xác\nthực\n3.4.2.18 Bảng Experience\nBảng 3-19: Mô tả thuộc tính thực thể Experience\nexperience_id Long X\nMã kinh nghiệm\nTên công ty/tổ\nchức\nVị trí (VD: Java\nDeveloper)\n(rỗng nếu hiện\ntại)\nChi tiết công việc\nđã làm"
+  },
+  {
+    "page": 113,
+    "text": "3.4.2.19 Bảng Invitation\nBảng 3-20: Mô tả thuộc tính thực thể Invitation\ninvitation_id Long X\nMã lời mời\nNội dung tin\nnhắn mời\nThời gian gửi\nlời mời\nDeclined)\nLời mời thuộc\ndự án nào\nNgười gửi lời\nmời (Client)\nNgười nhận lời\nmời (Freelancer)"
+  },
+  {
+    "page": 114,
+    "text": "3.5. Thiết kế giao diện\n3.5.1. Thiết kế giao diện đăng nhập\nHình 3-7: Thiết kế giao diện Đăng nhập\n3.5.2 Thiết kế giao diện cho tác nhân Quản trị viên.\nHệ thống cung cấp cho Quản trị viên một bảng điều khiển trung tâm (Admin Panel)\nvới cái nhìn toàn diện về hoạt động vận hành. Tại đây, người quản trị có thể theo dõi\ncác chỉ số quan trọng thông qua bộ công cụ Tổng quan (bao gồm số lượng dự án, trạng\nthái hoạt động, tổng số freelancer...). Đồng thời, giao diện tích hợp các chức năng cho\nphép kiểm soát toàn bộ hệ thống như: Quản lý tài khoản, Quản lý danh mục và Quản lý\nkỹ năng"
+  },
+  {
+    "page": 115,
+    "text": "Hình 3-8: Thiết kế giao diện Quản trị viên"
+  },
+  {
+    "page": 116,
+    "text": "Hình 3-9: Thiết kế giao diện Quản lý tài khoản\nPhân hệ \"Quản lý tài khoản\"  (Hình 3-9), hệ thống cung cấp bảng dữ liệu tập trung, cho\nphép theo dõi toàn bộ người dùng cùng các thuộc tính quan trọng như vai trò, trạng thái\nhoạt động và các thao tác quản lý trực tiếp. Thanh tìm kiếm thông minh được tích hợp\nphía trên bảng dữ liệu giúp quản trị viên truy vấn, sàng lọc và kiểm soát người dùng một\ncách hiệu quả, đảm bảo tính bảo mật và duy trì sự ổn định cho toàn bộ hệ sinh thái\nFreelancerHub."
+  },
+  {
+    "page": 117,
+    "text": "Hình 3-10: Thiết kế giao diện Quản lý danh mục\nGiao diện Quản trị viên - Phân hệ Quản lý danh mục  (Hình 3-10): Đây là công cụ đắc\nlực giúp quản trị viên kiểm soát và cấu trúc hóa các lĩnh vực hoạt động trên hệ thống\nFreelancerHub. Bảng dữ liệu được thiết kế tập trung với các thuộc tính: mã định danh\n(ID), hình ảnh đại diện, tên danh mục và số lượng kỹ năng liên kết, kèm theo cột \"Hành\nđộng\" cho phép thực hiện các thao tác thêm, sửa, xóa trực tiếp. Việc phân loại và quản\nlý danh mục khoa học thông qua bảng điều khiển này là nền tảng cốt lõi để đảm bảo hệ\nthống luôn được cập nhật và phản ánh đúng các xu hướng công việc thực tế."
+  },
+  {
+    "page": 118,
+    "text": "Hình 3-11: Thiết kế giao diện Quản lý kỹ năng\nGiao diện Quản trị viên - Phân hệ Quản lý kỹ năng (Hình 3-11): Đây là công cụ cho phép\nquản trị viên duy trì và cập nhật hệ thống từ vựng kỹ năng (skill set) dùng để kết nối giữa\nFreelancer và nhu cầu công việc. Bảng quản lý hiển thị các thông tin: mã định danh (ID),\ntên kỹ năng, danh mục liên quan và mô tả chi tiết. Tính năng \"+Tạo kỹ năng mới\" được\ntích hợp trực tiếp, hỗ trợ quản trị viên mở rộng hệ thống kỹ năng một cách linh hoạt.\nViệc chuẩn hóa dữ liệu tại module này đóng vai trò quan trọng trong việc đảm bảo tính\nchính xác cho công cụ tìm kiếm và thuật toán gợi ý ứng viên của hệ thống."
+  },
+  {
+    "page": 119,
+    "text": "3.5.3 Thiết kế giao diện cho tác nhân Freelancer\nHình 3-12: Thiết kế giao diện trang tìm kiếm dự án\nTrang Tìm kiếm dự án  (Hình 3-12): cung cấp bộ lọc thông minh giúp Freelancer sàng\nlọc công việc theo kỹ năng và nhu cầu. Giao diện hiển thị danh sách dự án trực quan kèm\nthanh tìm kiếm để tối ưu hóa thời gian tiếp cận cơ hội mới.\nChi tiết dự án & Tương tác: Khi xem một dự án cụ thể, Freelancer có thể truy cập 3\nphân khu chức năng:"
+  },
+  {
+    "page": 120,
+    "text": "Hình 3-14: Thiết kế giao diện trang trao đổi dự án\nHình 3-13: Thiết kế giao diện trang chi tiết dự án"
+  },
+  {
+    "page": 121,
+    "text": "Trang Chi tiết dự án (Hình 3-13): Nắm bắt đầy đủ mô tả và yêu cầu từ khách hàng\nTrao đổi (Hình 3-14): Khu vực tích hợp Form đặt câu hỏi và danh sách hỏi đáp để\nlàm rõ các vấn đề kỹ thuật trực tiếp với Client.\nHình 3-15: Thiết kế giao diện hiển thị hồ sơ đề xuất\nHồ sơ đề xuất: (Hình 3-15) Cho phép Freelancer theo dõi các phương án đã gửi và sử\ndụng \"Form tạo đề xuất\" ở cột phải để nộp báo giá/giải pháp mới."
+  },
+  {
+    "page": 122,
+    "text": "Hình 3-16: Thiết kế giao diện Trang Hồ sơ cá nhân của Freelancer\nTrang Hồ sơ cá nhân (Hình 3-16): Đây là \"bản CV điện tử\" giúp Freelancer xây dựng uy\ntín. Giao diện cho phép cập nhật linh hoạt các thông tin cốt lõi như: Mô tả bản thân, Kỹ\nnăng, Học vấn, Kinh nghiệm và các Chứng chỉ chuyên môn."
+  },
+  {
+    "page": 123,
+    "text": "Hình 3-17: Thiết kế giao diện trang Hợp đồng điện tử\nTrang Hợp đồng điện tử (Hình 3-17): Sau khi đề xuất được chấp nhận, hệ thống tự động\nthiết lập giao diện hợp đồng. Tại đây hiển thị rõ các mốc thời gian (milestones) cần hoàn\nthành, tóm tắt nội dung cam kết và tích hợp phần Phản hồi/Đánh giá sau khi hợp đồng kết\nthúc để đảm bảo quyền lợi hai bên."
+  },
+  {
+    "page": 124,
+    "text": "3.5.4 Thiết kế giao diện cho tác nhân Nhà tuyển dụng\nHình 3-18: Thiết kế giao diện trang Dashboard của Nhà tuyển dụng\nGiao diện Bảng điều khiển dành cho khách hàng (Hình 3-18): Đây là trung tâm quản trị\ngiúp nhà tuyển dụng theo dõi toàn bộ hoạt động trên hệ thống một cách trực quan. Giao\ndiện được thiết kế với các thẻ thống kê tổng quát bao gồm: tổng số dự án, các dự án đang\nvận hành, trạng thái thanh toán và tổng chi tiêu thự c tế. Bên dưới là các phân khu chức\nnăng hỗ trợ giám sát tiến độ thực hiện (Theo dõi dự án), quản lý danh sách các tin tuyển\ndụng (Dự án đã đăng) và tra cứu lịch sử giao dịch (Thanh toán gần đây), giúp khách hàng\nkiểm soát quy trình làm việc và ngân sách dự án một cách tối ưu."
+  },
+  {
+    "page": 125,
+    "text": "Hình 3-19: Thiết kế giao diện trang Chi tiết hợp đồng của Nhà tuyển dụng\nGiao diện Chi tiết hợp đồng (Hình 3-19): Sau khi đề xuất dự án được chấp nhận, hệ thống\nsẽ tự động khởi tạo giao diện hợp đồng điện tử để làm cơ sở pháp lý và kỹ thuật cho sự\nhợp tác giữa hai bên. Trang này hiển thị tập trung các thông tin cốt lõi bao gồm: tên hợp\nđồng, bản tóm tắt các điều khoản cam kết và danh sách các cột mốc (milestones) cụ thể\ngắn liền với nút thanh toán tương ứng cho từng giai đoạn. Ngoài ra, hệ thống tích hợp\nsẵn phân hệ Phản hồi & Đánh giá, chỉ được kích hoạt sau khi hợp đồng hoàn thành, nhằm\nđảm bảo tính khách quan và bảo vệ quyền lợi tối đa cho cả Freelancer lẫn khách hàng."
+  },
+  {
+    "page": 126,
+    "text": "Hình 3-20: Thiết kế giao diện Cửa sổ Thanh toán\nGiao diện Cửa sổ lớp phủ (Modal) thanh toán (Hình 3-20): Nhằm tối ưu hóa luồng tương\ntác và duy trì sự tập trung của người dùng trên trang Chi tiết hợp đồng, hệ thống sử dụng\ncơ chế Modal để hiển thị các tác vụ thanh toán. Khi người dùng kích hoạt nút thanh toán,\nmột cửa sổ lớp phủ (Overlay) sẽ xuất hiện phía trên nền giao diện hiện tại, yêu cầu cung\ncấp và xác thực các thông tin định danh thanh toán. Phương thức thiết kế này giúp người\ndùng hoàn tất giao dịch một cách nhanh chóng, đồng thời giữ nguyên bối cảnh làm việc\ntrên hợp đồng, giảm thiểu độ trễ do tải lại trang và nâng cao tính liền mạch cho trải\nnghiệm người dùng cuối."
+  },
+  {
+    "page": 127,
+    "text": "Hình 3-21: Thiết kế giao diện hiển thị danh sách ứng viên tiềm năng\nGiao diện Danh sách ứng viên đề xuất (Hình 3-21): Trang này đóng vai trò là công cụ\nhỗ trợ ra quyết định cho nhà tuyển dụng sau khi đăng tải dự án. Giao diện liệt kê chi tiết\ndanh sách các ứng có tiềm năng thích hợp làm dự án, đi kèm với các thao tác nhanh như\n\"Xem thông tin\" (để đánh giá kỹ năng, kinh  nghiệm của Freelancer) và \"Mời đấu thầu\"\n(Hệ thống gửi email mời tham gia đấu thầu)."
+  },
+  {
+    "page": 128,
+    "text": "Hình 3-22: Thiết kế giao diện trang Hồ sơ năng lực của Freelancer\nTrang Hồ sơ năng lực Freelancer (Hình 3-22): Đây là giao diện chuyên sâu giúp nhà\ntuyển dụng đánh giá năng lực ứng viên trước khi ra quyết định mời đấu thầu. Trang cung\ncấp cái nhìn toàn diện về Freelancer bao gồm: thông tin định danh cơ bản, phần giới\nthiệu bản thân, quá trình kinh nghiệm làm việ c, hệ thống chứng chỉ chuyên môn và đặc\nbiệt là lịch sử đánh giá từ các khách hàng trước đó. Cấu trúc trang được tổ chức mạch\nlạc, kết hợp với nút \"Gửi tin nhắn\" tích hợp sẵn, giúp nhà tuyển dụng dễ dàng liên hệ\ntrực tiếp để trao đổi chi tiết về yêu cầu công việc, từ đó đảm bảo sự phù hợp cao nhất\ncho dự án."
+  },
+  {
+    "page": 129,
+    "text": "Hình 3-23: Thiết kế giao diện Đăng dự án\nGiao diện Đăng dự án (Hình 3-23): Trang này đóng vai trò là cửa ngõ cho phép nhà\ntuyển dụng khởi tạo các nhu cầu công việc trên hệ thống. Giao diện được thiết kế tối\ngiản với các trường thông tin trọng yếu bao gồm: tiêu đề dự án, mô tả chi tiết, loại hình\ndự án, kỹ năng yêu cầu, phạm vi  công việc và ngân sách dự định. Mỗi trường dữ liệu\nđều được tích hợp nút chỉnh sửa trực tiếp, giúp nhà tuyển dụng linh hoạt hiệu chỉnh nội\ndung trước khi xác nhận đăng tải. Quy trình này đảm bảo các thông tin đầu vào được\nchuẩn hóa, tạo nền tảng vững chắc để hệ thống kết nối dự án đến đúng các ứng viên phù\nhợp.\n3.6. Kết quả thực hiện yêu cầu chức năng\n3.6.1. Chức năng Đăng ký\nMục đích: chức năng đăng ký là giúp người dùng khởi tạo danh tính cá nhân và xác\nđịnh vai trò cụ thể trong hệ thống là Freelancer hay Client."
+  },
+  {
+    "page": 130,
+    "text": "Hình 3-24: Giao diện đăng ký – Nhập Họ tên, Email, Mật khẩu\nHình 3-25: Giao diện đăng ký - Nhập username"
+  },
+  {
+    "page": 131,
+    "text": "Hình 3-26: Giao diện đăng ký - Chọn vai trò"
+  },
+  {
+    "page": 132,
+    "text": "Hình 3-27: Giao diện đăng ký - Chọn kỹ năng"
+  },
+  {
+    "page": 133,
+    "text": "Hình 3-28: Giao diện đăng ký - Nhập liên kết mạng xã hội\nHình 3-29: Giao diện đăng ký - Viết tóm tắt về bản thân"
+  },
+  {
+    "page": 134,
+    "text": "Bảng 3-24: Các thành phần được sử dụng trong giao diện đăng ký\nSTT Loại điều khiển Nội dung thực hiện Giá trị mặc định\n1 TextField Cho phép người dùng nhập Họ (First Name).\n2 TextField Cho phép người dùng nhập Tên (Last Name).\n3 TextField Cho phép người dùng nhập địa chỉ Email để đăng ký\ntài khoản.\n4 TextField Cho phép người dùng thiết lập mật khẩu bí mật\n(masking characters).\n5 Checkbox Xác nhận đồng ý với Điều khoản người dùng và Chính\nsách quyền riêng tư.\n6 Button Gửi thông tin đăng ký cơ bản và chuyển sang bước\nthiết lập tên đăng nhập.\n7 Link Liên kết điều hướng người dùng đã có tài khoản sang\ntrang Đăng nhập.\n8 TextField Cho phép người dùng thiết lập tên đăng nhập\n(Username) duy nhất.\n9 Button Xác nhận tên đăng nhập và chuyển sang bước chọn loại\n10 Radio Lựa chọn vai trò người dùng là \"Freelancer\" (Người\ntìm việc).\n11 Radio Lựa chọn vai trò người dùng là \"Nhà tuyển dụng\"\n(Người thuê).\n12 TextField Tìm kiếm các kỹ năng chuyên môn để thêm vào hồ sơ.\n13 Checkbox Danh mục các nhóm ngà"
+  },
+  {
+    "page": 135,
+    "text": "21 Button Tiếp tục sang bước tóm tắt chuyên môn.\n22 TextArea Cho phép người dùng viết đoạn giới thiệu bản thân\nngắn gọn (10-100 từ).\n23 Button Quay lại bước liên kết mạng xã hội.\n24 Button Hoàn tất quá trình đăng ký và khởi tạo hồ sơ.\n- Dữ liệu được sử dụng\nBảng 3-25: Dữ liệu được sử dụng trong chức năng Đăng ký\nSTT Tên bảng Phương thức Thêm Sửa Xóa Truy vấn\n1 User X\n2 Skill    X\n3 Category    X\n4 freelancer X"
+  },
+  {
+    "page": 136,
+    "text": "Hình 3-30: : Lưu đồ chức năng Đăng ký\n3.6.2 Chức năng đăng nhập\nMục đích: chức năng đăng nhập là xác thực danh tính người dùng và cấp quyền truy\ncập vào các không gian làm việc cá nhân hóa dựa trên vai trò đã đăng ký."
+  },
+  {
+    "page": 137,
+    "text": "Hình 3-31: Giao diện chức năng Đăng nhập\n- Các thành phần trong giao diện:\nBảng 3-26: Các thành phần trong giao diện Đăng nhập\n1 TextField Cho phép người dùng nhập địa\nchỉ Email để xác thực tài khoản.\n2 TextField Cho phép người dùng nhập mật\nkhẩu bí mật (kèm biểu tượng\nkhóa).\n3 Link Liên kết điều hướng đến trang\nkhôi phục mật khẩu khi người\ndùng quên.\n4 Button Gửi thông tin đăng nhập lên hệ\nthống để xác thực quyền truy\ncập.\n5 Link Liên kết điều hướng người dùng\nmới đến trang đăng ký tài khoản."
+  },
+  {
+    "page": 138,
+    "text": "Bảng 3-27: Dữ liệu được sử dụng cho chức năng Đăng nhập\n1 User    X\n- Lưu đồ chức năng\n-\nHình 3-32: Lưu đồ chức năng Đăng nhập"
+  },
+  {
+    "page": 139,
+    "text": "3.6.3 Chức năng tìm kiếm dự án\nHình 3-33: Giao diện Trang tìm dự án\nBảng 3-28: Các thành phần trong Trang tìm kiếm dự án\nSTT Loại điều khiển Nội dung thực hiện\nGiá\ntrị\n1 TextField Ô nhập từ khóa để tìm kiếm dự án theo tên hoặc nội dung mô\ntả.\n2 Button Nút bấm để kích hoạt lệnh tìm kiếm dự án."
+  },
+  {
+    "page": 140,
+    "text": "3 Select\n(Dropdown)\nLựa chọn tiêu chí sắp xếp danh sách kết quả (ví dụ: Mới\nnhất, Cũ nhất).\n4 Radio Group Nhóm lựa chọn loại hình ngân sách (Tất cả, Giá cố định,\nTheo giờ).\n5, 6 TextField\n(Small)\nNhập khoảng giá tối thiểu và tối đa để lọc ngân sách.\n7 Radio Group Nhóm lựa chọn phạm vi thời gian dự án (Dưới 1 tháng, 1-3\ntháng...).\n8 Radio Group Nhóm lựa chọn mức độ kinh nghiệm yêu cầu (Mới bắt đầu,\nTrung bình, Chuyên gia).\n9 Radio Group Nhóm lựa chọn khối lượng thời gian làm việc (Bán thời gian,\nToàn thời gian, Linh hoạt).\n10 Autocomplete Cho phép người dùng nhập hoặc chọn nhanh các kỹ năng yêu\ncầu từ danh sách có sẵn.\n11 Button Nút xác nhận áp dụng tất cả các tiêu chí lọc đã chọn.\n12 Button Xem chi tiết dự án\nBảng 3-29: Dữ liệu được sử dụng trong chức năng Tìm kiếm dự án\n1 freelancer    X\n3 Project    X\n4 Budget    X"
+  },
+  {
+    "page": 141,
+    "text": "Hình 3-34: Lưu đồ chức năng tìm kiếm dự án"
+  },
+  {
+    "page": 142,
+    "text": "3.6.4 Chức năng đấu thầu dự án\nHình 3-35: Giao diện chức năng Đấu thầu dự án\n- Các thành phần trong giao diện Đấu thầu dự án\nBảng 3-30: Các thành phần trong giao điện Đấu thầu dự án\n1 Tabs Cho phép chuyển đổi giữa các tab: Chi tiết dự án,\nTrao đổi, Hồ sơ đề xuất, Ứng viên tiềm năng.\n2 TextField Nhập số tiền freelancer chào thầu cho dự án (đơn vị\nUSD)."
+  },
+  {
+    "page": 143,
+    "text": "3 TextField Nhập tổng số ngày dự kiến freelancer sẽ hoàn thành\ndự án.\n4 TextArea Nhập nội dung thư ngỏ, giới thiệu bản thân và phương\nán triển khai dự án.\n5 TextField Nhập tên hoặc mô tả ngắn gọn cho cột mốc thanh toán\nthứ nhất.\n6 TextField Nhập giá trị tiền thù lao cho cột mốc thanh toán thứ\nnhất.\n7 TextField Nhập số ngày dự kiến hoàn thành cột mốc thứ nhất.\n8 Button\n(Icon)\nNút bấm để xóa cột mốc thanh toán tương ứng khỏi\ndanh sách.\n9 Button\n(Link)\nThành phần cho phép người dùng thêm các hàng cột\nmốc thanh toán mới.\n10 Button Nút bấm để xác nhận và gửi toàn bộ thông tin đề xuất\nthầu lên hệ thống.\nBảng 3-31: Dữ liệu được sử dụng trong chức năng Đấu thầu dự án\n1 Project    X\n3 Budget    X\n4 Proposal X\n5 Milestone X X X\n6 Budget    X"
+  },
+  {
+    "page": 144,
+    "text": "Hình 3-36: Lưu đồ chức năng Đấu thầu dự án"
+  },
+  {
+    "page": 145,
+    "text": "3.6.5 Chức năng trao đổi thông tin dự án\nHình 3-37: Giao diện chức năng Trao đổi/Làm rõ về dự án\nCác thành phần trong giao diện\nBảng 3-32: Các thành phần trong giao diện Trao đổi/Làm rõ về dự án\nSTT\nLoại\nđiều\nkhiển\nNội dung thực hiện Giá trị mặc định\n1 TextArea Cho phép người dùng nhập nội dung câu hỏi\nhoặc thắc mắc cần làm rõ về dự án.\nNhập câu hỏi\ncủa bạn...\n2 Button Nút bấm để gửi nội dung câu hỏi lên hệ thống để\nkhách hàng phản hồi.\nGỬI CÂU HỎI"
+  },
+  {
+    "page": 146,
+    "text": "Hình 3-38: Lưu đồ chức năng Trao đổi/Làm rõ dự án\nBảng 3-33: Dữ liệu được sử dụng cho chức năng Trao đổi làm rõ Dự án\n2 Freelancer    X\n3 Client    X\n3 Clarification X  X X"
+  },
+  {
+    "page": 147,
+    "text": "3.6.6 Chức năng xem các đề xuất đã ứng tuyển\nHình 3-39: Giao diện chức năng Xem hồ sơ đề xuất\nBảng 3-34: Dữ liệu được sử dụng cho chức năng Xem hồ sơ đề xuất\n2 Budget    X\n3 Milestone    X\n4 Proposal    X\n5 Freelancer    X"
+  },
+  {
+    "page": 148,
+    "text": "3.7. Kết quả thực hiện yêu cầu giao diện\n3.7.1 Giao diện trang Đăng ký\nChức năng Đăng ký người dùng: Hệ thống triển khai quy trình đăng ký theo phân đoạn\n(multi-step registration) nhằm tối ưu hóa trải nghiệm người dùng cuối. Thay vì yêu cầu\ncung cấp toàn bộ dữ liệu trong một biểu mẫu duy nhất, hệ thống chia nhỏ quy trình\nthành các bước logic, cho phép người dùng từng bước hoàn thiện hồ sơ. Cách tiếp cận\nnày giúp giảm thiểu độ phức tạp, tạo cảm giác mạch lạc và giúp hệ thống có thể thu\nthập thông tin người dùng một cách có cấu trúc, tạo tiền đề vững chắc cho việc cá nhân\nhóa trải nghiệm sau khi đăng ký thành công.\nHình 3-40: Giao diện chức năng Đăng ký\nNgười dùng thực hiện đăng ký qua email cá nhân. Đây là bước xác thực cơ bản, đảm\nbảo tính định danh người dùng trước khi truy cập vào các tính năng tiếp theo của hệ"
+  },
+  {
+    "page": 149,
+    "text": "Hình 3-41: Giao diện người dùng nhập username\nngười dùng thiết lập định danh (Username) duy nhất trên nền tảng. Giá trị này đóng vai\ntrò là \"địa chỉ số\" để người dùng xuất hiện trên cộng đồng và không được phép thay\nđổi sau khi khởi tạo nhằm đảm bảo tính ổn định trong nhận diện thương hiệu cá nhân.\nHình 3-42: Giao diện người dùng chọn vai trò trong quá trình Đăng ký\nngười dùng lựa chọn vai trò chính: Freelancer hoặc Nhà tuyển dụng (Hình 3-42). Dựa\ntrên lựa chọn này, hệ thống sẽ tự động điều hướng luồng nghiệp vụ (workflow) và các\ntính năng hiển thị tương ứng, đảm bảo trải nghiệm chuyên biệt cho từng nhóm đối tượng."
+  },
+  {
+    "page": 150,
+    "text": "Hình 3-43: Giao diện Freelancer chọn kỹ năng khi đăng ký tài khoản\nNgười dùng thực hiện lựa chọn các kỹ năng chuyên môn từ hệ thống danh mục có sẵn\ncủa FreelancerHub. Quy trình này giúp hệ thống xây dựng cơ sở dữ liệu về năng lực của\nFreelancer, từ đó hỗ trợ thuật toán gợi ý dự án phù hợp trong tương lai. (Hình 3-43)"
+  },
+  {
+    "page": 151,
+    "text": "Hệ thống khuyến khích người dùng liên kết các tài khoản mạng xã hội nghề nghiệp như\nLinkedIn, GitHub hoặc Facebook. Việc này không chỉ tiết kiệm thời gian nhập liệu mà\ncòn giúp \"xây dựng lòng tin\" với khách hàng thông qua bằng chứng về uy tín nghề nghiệp\nthực tế. (Hình 3-44)"
+  },
+  {
+    "page": 152,
+    "text": "Hình 3-45: Giao diện Freelancer nhập trong tin tóm lược về bản thân trong quá trình đăng ký\nBước cuối cùng yêu cầu người dùng đúc kết giá trị bản thân qua một bản tóm tắt chuyên\nmôn ngắn gọn. Đây là điểm nhấn quan trọng giúp khách hàng nắm bắt nhanh năng lực\ncủa Freelancer ngay từ cái nhìn đầu tiên trước khi quyết định gửi lời mời hợp tác. (Hình\n3-45)"
+  },
+  {
+    "page": 153,
+    "text": "3.7.2. Giao diện trang Đăng nhập\nHình 3-46: Giao diện Đăng nhập\nGiao diện Đăng nhập (Login  – Hình 3-46): Đây là cổng xác thực dành cho người dùng\nđã có tài khoản trên hệ thống. Giao diện được thiết kế tối giản, tập trung vào việc nhập\nliệu Email và Mật khẩu, kèm theo các tùy chọn hỗ trợ như \"Quên mật khẩu\" và ghi nhớ\nđăng nhập, giúp người dùng truy cập vào  tài khoản cá nhân một cách nhanh chóng và\nbảo mật."
+  },
+  {
+    "page": 154,
+    "text": "3.7.3 Giao diện dành cho Quản trị viên\nHình 3-47: Giao diện Bảng điều khiển của Admin\nBảng điều khiển Quản trị viên (Admin Dashboard  – Hình 3-47): Đây là giao diện tổng\nquan cung cấp cái nhìn toàn diện về tình trạng hoạt động của hệ thống FreelancerHub.\nTại đây, quản trị viên có thể theo dõi các chỉ số quan trọng như tổng số người dùng, số\nlượng dự án mới và các thống kê liên quan đến hoạt động củ a cộng đồng, giúp người\nquản trị nắm bắt nhanh trạng thái hệ thống để đưa ra các quyết định vận hành kịp thời."
+  },
+  {
+    "page": 155,
+    "text": "Hình 3-48: Giao diện Quản lý tài khoản\nPhân hệ Quản lý tài khoản (Hình 3-48): Trang quản trị được thiết kế tập trung, cho phép\nquản trị viên theo dõi và kiểm soát toàn bộ người dùng trong hệ thống FreelancerHub.\nBảng dữ liệu bao gồm các thông tin trọng yếu như: ID người dùng, Họ tên, Email, Vai\ntrò (Freelancer/Khách hàng), Trạng thái (Hoạt động/Bị khóa) và cột \"Hành động\" cho\nphép thay đổi trạng thái tài khoản trực tiếp. Chức năng tìm kiếm và bộ lọc được tích hợp\ngiúp quản trị viên truy vấn nhanh chóng, đảm bảo tính bảo mật và duy trì sự ổn định, kỷ\nluật cho cộng đồng người dùng trên hệ thống."
+  },
+  {
+    "page": 156,
+    "text": "Hình 3-49: Quản lý danh mục\nGiao diện Tạo/Cập nhật Kỹ năng mới  (Hình 3-49): Là một phân hệ nhỏ nhưng quan\ntrọng trong Admin Panel, giao diện này cho phép quản trị viên thêm mới các kỹ năng\nchuyên môn vào danh mục hệ thống. Với các trường thông tin cụ thể như \"Tên kỹ năng\"\nvà \"Danh mục liên quan\", hệ thống đảm bảo sự đồng bộ và c hính xác trong việc phân\nloại năng lực người dùng, từ đó tối ưu hóa cơ chế tìm kiếm và kết nối dự án."
+  },
+  {
+    "page": 157,
+    "text": "3.7.4 Giao diện dành cho Freelancer\nHình 3-50: Giao diện Bảng điều khiển Freelancer\nGiao diện Dashboard của Freelancer (Hình  3-50 ): Đây là trung tâm điều khiển  giúp\nFreelancer quản lý toàn bộ hoạt động nghề nghiệp của mình trên hệ thống. Việc tập trung"
+  },
+  {
+    "page": 158,
+    "text": "hóa các thông số quan trọng giúp người dùng quản lý thời gian hiệu quả, đảm bảo tiến\nđộ công việc và nắm bắt nhanh các cơ hội hợp tác mới từ nhà tuyển dụng.\nHình 3-51: Giao diện Trang tìm kiếm dự án\nGiao diện Tìm kiếm dự án (Hình 3-51): Đây là trung tâm kết nối giữa Freelancer và các\ncơ hội công việc trên nền tảng. Giao diện được thiết kế để hỗ trợ hai chế độ làm việc:\ntìm kiếm chủ động và tìm kiếm thụ động. Ở chế độ mặc định, hệ thống tự động kích hoạt\nThuật toán gợi ý đề xuất (Recommendation Engine), trình bày danh sách các dự án phù\nhợp nhất dựa trên kỹ năng, lịch sử hoạt động và hồ sơ năng lực của chính Freelancer đó.\nPhương thức này giúp cá nhân hóa luồng trải nghiệm, giúp người dùng tiết kiệm thời"
+  },
+  {
+    "page": 159,
+    "text": "gian sàng lọc và tiếp cận nhanh chóng với những dự án có độ tương thích cao nhất với\nchuyên môn của họ. Ngoài ra, thanh công cụ tìm kiếm và bộ lọc nâng cao cho phép người\ndùng chủ động truy vấn dự án theo nhu cầu thực tế khi cần thiết."
+  },
+  {
+    "page": 160,
+    "text": "Hình 3-52: Giao diện trang Chi tiết dự án\nGiao diện Chi tiết dự án (Hình 3-52): Đây là trang thông tin chuyên sâu cho phép\nFreelancer tiếp cận đầy đủ các yêu cầu công việc. Giao diện được tổ chức trực quan, bao\ngồm: tiêu đề dự án, ngân sách, phạm vi thực hiện và mô tả kỹ thuật chi tiết. Đặc biệt,"
+  },
+  {
+    "page": 161,
+    "text": "khu vực \"Thông tin khách hàng\" giúp Freelancer đánh giá mức độ uy tín trước khi quyết\nđịnh hợp tác. Nút \"Gửi đề xuất\" (Proposal) được đặt ở vị trí chiến lược, cho phép người\ndùng thực hiện hành động ứng tuyển ngay lập tức. Cấu trúc này không chỉ giúp\nFreelancer nắm bắt toàn bộ yêu cầu dự án mà còn hỗ trợ quá trình ra quyết định một cách\nnhanh chóng và chính xác.\nHình 3-53: Giao diện Chi tiết dự án – Trao đổi/Làm rõ\nTrao đổi dự án (Hình 3-53): Tab \"Trao đổi\" được tích hợp ngay trong trang Chi tiết dự\nán, đóng vai trò là cầu nối giao tiếp trực tiếp giữa nhà tuyển dụng và Freelancer. Giao\ndiện được thiết kế theo mô hình nhắn tin thời gian thực (real -time chat), cho phép các\nbên thảo luận sâu về yêu cầu kỹ thuật, làm rõ các cột mốc dự án và giải quyết các thắc\nmắc phát sinh trong quá trình đấu thầu. Việc lưu vết toàn bộ nội dung trao đổi ngay trong"
+  },
+  {
+    "page": 162,
+    "text": "ngữ cảnh dự án không chỉ giúp minh bạch hóa thông tin, mà còn tạo ra cơ sở dữ liệu đối\nchiếu quan trọng nếu xảy ra tranh chấp sau này, từ đó nâng cao tính bảo mật và sự tin\ntưởng cho môi trường làm việc cộng tác.\nHình 3-54: Chi tiết dự án – Hồ sơ đề xuất\nQuản lý Hồ sơ đề xuất (Hình 3-54): Tab \"Hồ sơ đề xuất\" là công cụ quản trị cốt lõi giúp\nnhà tuyển dụng đánh giá và sàng lọc các ứng viên đã tham gia đấu thầu dự án. Danh sách\nhiển thị trực quan thông tin của từng Freelancer, bao gồm: hồ sơ cá nhân, mức giá đề\nxuất và thư ngỏ . Cơ chế này cho phép nhà tuyển dụng so sánh trực tiếp năng lực giữa\ncác ứng viên trong cùng một không gian làm việc, hỗ trợ việc ra quyết định c họn người\nthực hiện một cách minh bạch và chuẩn xác dựa trên các thông số thực tế."
+  },
+  {
+    "page": 163,
+    "text": ""
+  },
+  {
+    "page": 164,
+    "text": "Hình 3-55: Giao diện Chi tiết hợp đồng\nGiao diện Chi tiết hợp đồng (Hình 3.55): Đây là trang nghiệp vụ trọng tâm, nơi hiện thực\nhóa các cam kết giữa nhà tuyển dụng và Freelancer sau khi đạt được thỏa thuận. Giao\ndiện được thiết kế để theo dõi chặt chẽ tiến độ dự án thông qua cơ chế cột mốc\n(Milestones). Mỗi cột mốc thể hiện rõ phạm vi công việc, thời hạn hoàn thành và trạng\nthái thanh toán tương ứng. Việc quản lý hợp đồng trên một không gian tập trung như thế\nnày đảm bảo tính minh bạch, giúp các bên kiểm soát rủi ro và giải quyết tranh chấp dựa\ntrên dữ liệu thời gian thực, đồng thời tích hợp sẵn các thao tác nghiệp vụ cần thiết như\nphê duyệt kết quả hoặc thực hiện thanh toán trực tuyến."
+  },
+  {
+    "page": 165,
+    "text": "Hình 3-56: Giao diện Hồ sơ cá nhân\nGiao diện Quản lý Hồ sơ Freelancer (Hình 3-56): Đây là phân hệ cá nhân hóa dành riêng\ncho Freelancer, giúp quản lý và cập nhật thông tin chuyên môn. Giao diện được thiết kế"
+  },
+  {
+    "page": 166,
+    "text": "để người dùng có thể dễ dàng chỉnh sửa các thông tin cốt lõi như: thông tin định danh,\nkỹ năng chuyên môn, kinh nghiệm thực tế và các bằng chứng chứng minh năng lực. Việc\ncho phép cập nhật dữ liệu một cách linh hoạt không chỉ giúp Freelancer duy trì sự chuyên\nnghiệp, mà còn đảm bảo dữ liệu năng lực luôn ở trạng thái mới nhất, giúp thuật toán gợi\ný của hệ thống hoạt động chính xác hơn trong việc kết nối với các cơ hội công việc phù\n3.7.5 Giao diện dành cho Client\nHình 3-57: Giao diện Bảng điều khiển của Nhà tuyển dụng\nGiao diện Bảng điều khiển dành cho khách hàng (Client Dashboard – Hình 3-57) được"
+  },
+  {
+    "page": 167,
+    "text": "thiết kế để cung cấp cái nhìn tổng quan về tình hình dự án và thanh toán. Trang gồm bốn\nthẻ thống kê chính: Tổng dự án, Dự án đang hoạt động, Thanh toán đang chờ và Tổng\nchi tiêu. Phần Theo dõi Dự án hiển thị thông tin các dự án đang thực hiện với tên dự án,\nthông tin freelancer, hạn chót và tiến độ. Phần Dự án Đã Đăng cho biết tình trạng các dự\nán đang được đăng tuyển. Phần Thanh toán Gần đây liệt kê các khoản thanh toán gần\nđây kèm trạng thái và nút thanh toán qua Stripe. Giao diện sử dụng màu sắc phân biệt rõ\nràng giữa các trạng thái, giúp khách hàng dễ dàng quản lý dự án và theo dõi dòng tiền\nmột cách trực quan và hiệu quả.\nChức năng đăng dự án\nĐăng dự án Để đảm bảo tính chặt chẽ và đầy đủ của thông tin đầu vào, chức năng đăng\ndự án được triển khai theo mô hình Quy trình đa bước) . Cách tiếp cận này giúp chia\nnhỏ các nhóm dữ liệu phức tạp thành từng phần cụ thể, bao gồm: xác định tiêu đề/mục\ntiêu, thiết lập yêu cầu kỹ thuật/kỹ năng, cấu trúc ngân sách/thời gian, và kiểm duyệt\nthông"
+  },
+  {
+    "page": 168,
+    "text": "chi tiết về công việc. Tại đây, người dùng có thể trình bày rõ ràng các hạng mục cần\nthực hiện, mục tiêu chính và các tiêu chuẩn về chất lượng mà dự án hướng tới. Việc\ncung cấp nội dung mô tả đầy đủ và có cấu trúc không chỉ giúp Freelancer hiểu rõ yêu\ncầu, đánh giá đúng độ khó của công việc, mà còn là căn cứ then chốt để hệ thống thực\nhiện phân tích từ khóa, từ đó tối ưu hóa khả năng gợi ý dự án đến đúng đối tượng\nFreelancer có năng lực phù hợp nhất.\nHình 3-59: Giao diện nhập thông tin dự án"
+  },
+  {
+    "page": 169,
+    "text": "Hình 3-60: Giao diện chỉnh sửa Tiêu đề dự án"
+  },
+  {
+    "page": 170,
+    "text": "Hình 3-61: Giao diện chỉnh sửa Mô tả dự án"
+  },
+  {
+    "page": 171,
+    "text": "Hình 3-62: Giao diện chỉnh sửa Danh mục dự án"
+  },
+  {
+    "page": 172,
+    "text": "Hình 3-63: Giao diện chỉnh sửa Kỹ năng dự án"
+  },
+  {
+    "page": 173,
+    "text": "Hình 3-64: Giao diện chỉnh sửa phạm vị dự án"
+  },
+  {
+    "page": 174,
+    "text": "Hình 3-65: Giao diện thêm ngân sách dự án"
+  },
+  {
+    "page": 175,
+    "text": "Hình 3-66: Giao diện các tùy chọn nâng cao khi đăng tuyển dự án"
+  },
+  {
+    "page": 176,
+    "text": ""
+  },
+  {
+    "page": 177,
+    "text": "Hình 3-67: Giao diện trang Chi tiết hợp đồng dành cho Nhà tuyển dụng\nGiao diện Chi tiết Hợp đồng : Đây là trang quản trị nghiệp vụ dành cho nhà tuyển dụng\nđể giám sát toàn bộ vòng đời của một hợp đồng đã ký kết. Giao diện được xây dựng\nnhằm cung cấp cái nhìn tổng quát và quyền kiểm soát chi tiết đối với tiến độ thực hiện\ncông việc. Thông qua hệ thống các cột mốc (Milestones), nhà tuyển dụng có thể theo dõi\nthời hạn hoàn thành, kiểm tra kết quả công việc do Freelan cer gửi lên và trực tiếp thực\nhiện phê duyệt hoặc thanh toán dựa trên các hạng mục đã thỏa thuận. Thiết kế tập tru ng\nvào sự minh bạch, giúp nhà tuyển dụng quản lý hiệu quả nguồn lực và đảm bảo dự án\nluôn bám sát tiến độ đề ra."
+  },
+  {
+    "page": 178,
+    "text": "Hình 3-68: Modal thanh toán milestone\nGiao diện Modal Thanh toán (Hình 3-68): Đây là thành phần giao diện quan trọng\nđược kích hoạt khi nhà tuyển dụng (Client) thực hiện lệnh thanh toán cho một cột mốc"
+  },
+  {
+    "page": 179,
+    "text": "công việc.\nHình 3-69: Danh sách ứng viên tiềm năng\nGợi ý Ứng viên Tiềm năng (Hình 3-69): Đây là trang nghiệp vụ nơi hệ thống chủ động\nđề xuất danh sách các Freelancer có khả năng thực hiện dự án tốt nhất dựa trên thuật\ntoán so khớp. Hệ thống thực hiện phân tích các thuộc tính như: tập kỹ năng (skills), lịch\nsử hoàn thành dự án, điểm đánh giá uy tín (rating) và sự tương quan giữa hồ sơ Freelancer"
+  },
+  {
+    "page": 180,
+    "text": "với yêu cầu chi tiết của dự án. Giao diện này không chỉ rút ngắn đáng kể thời gian sàng\nlọc hồ sơ cho nhà tuyển dụng mà còn giúp đảm bảo chất lượng nhân sự được chọn, từ\nđó nâng cao tỷ lệ thành công của dự án ngay từ giai đoạn đầu hợp tác.\nHình 3-70: Giao diện Hồ sơ ứng viên"
+  },
+  {
+    "page": 181,
+    "text": "Giao diện Hồ sơ Ứng viên : Đây là trang nghiệp vụ cho phép nhà tuyển dụng (Client)\nthực hiện quá trình đánh giá và sàng lọc nhân sự chi tiết trước khi quyết định hợp tác.\nGiao diện được thiết kế để hiển thị đầy đủ thông tin chuyên môn của Freelancer, bao\ngồm: hồ sơ năng lực, các chứng chỉ chuyên môn, lịch sử dự án đã thực hiện và các đánh\ngiá từ khách hàng cũ. Việc trình bày các thông số này giúp nhà tuyển dụng có cái nhìn\nkhách quan về năng lực của Freelancer, từ đó xây dựng niềm tin và đưa ra các quyết định\nnhân sự dựa trên dữ liệu thực tế."
+  },
+  {
+    "page": 182,
+    "text": "CHƯƠNG 4: HỆ THỐNG GỢI Ý VÀ CHATBOT\n4.1. Hệ thống gợi ý\n4.1. Tổng quan về hệ thống gợi ý\n4.1.1. Khái niệm hệ thống gợi ý\nTrong bối cảnh bùng nổ dữ liệu số, người dùng internet thường xuyên đối mặt với tình\ntrạng \"quá tải thông tin\" (Information Overload), khiến việc tìm kiếm các nội dung phù\nhợp trở nên khó khăn và tốn kém thời gian. Hệ thống gợi ý (Recommender System - RS)\nra đời như một giải pháp lọc thông tin thông minh, được thiết kế để dự đoán mức độ \"ưa\nthích\" (preference) hoặc \"đánh giá\" (rating) mà người dùng sẽ dành cho một đối tượng\ncụ thể (sản phẩm, dịch vụ, bản tin...).\nVề bản chất, hệ thống này vận dụng các kỹ thuật khai phá dữ liệu và học máy để phân\ntích các mẫu hành vi trong quá khứ, hồ sơ nhân khẩu học và lịch sử giao dịch. Không\nchỉ dừng lại ở việc hỗ trợ tìm kiếm, RS còn đóng vai trò chiến lược trong các nền tảng\ntrực tuyến nhằm:\n- Cá nhân hóa trải nghiệm: Biến đổi giao diện thụ động thành luồng thông tin chủ\nđộng, phù hợp với từng cá nhân.\n- Tối ưu hóa doanh thu và "
+  },
+  {
+    "page": 183,
+    "text": "Đặc điểm: Mô hình này có ưu điểm là không phụ thuộc vào cộng đồng\nngười dùng khác, tuy nhiên thường gặp hạn chế về \"sự quá chuyên biệt\" (Over-\nspecialization), khiến người dùng khó tiếp cận các nội dung hoàn toàn mới lạ.\n- Lọc cộng tác (Collaborative Filtering - CF): Khác với lọc dựa trên nội dung, lọc\ncộng tác khai thác trí tuệ đám đông, xây dựng các đề xuất dựa trên hành vi tương\ntác và đánh giá của cộng đồng người dùng. Phương pháp này bao gồm hai cách\ntiếp cận chính:\n+ Dựa trên người dùng (User -based): Tìm kiếm những người dùng có sở thích\ntương tự (neighbors) và gợi ý những mục mà nhóm người này thích.\n+ Dựa trên mục tin (Item -based): Tìm kiếm sự tương đồng giữa các sản phẩm\ndựa trên lịch sử mua sắm hoặc đánh giá của người dùng.\nĐặc điểm:  Lọc cộng tác có khả năng khám phá những sở thích tiềm ẩn\n(serendipity) nhưng thường gặp khó khăn với vấn đề \"dữ liệu thưa\" (Sparsity\nproblem) khi số lượng người dùng và sản phẩm tăng lên nhanh chóng.\n- Hệ thống gợi ý kết hợp (Hybrid Recommende"
+  },
+  {
+    "page": 184,
+    "text": "Thách thức lớn nhất đối với Freelancer trên các nền tảng việc làm là phải sàng\nlọc hàng trăm dự án mới mỗi ngày để tìm ra công việc phù hợp với kỹ năng của\nmình. Hệ thống gợi ý của FreelancerHub giải quyết vấn đề này bằng cách:\n- Tự động khớp lệnh kỹ năng: Phân tích hồ sơ năng lực (Profile), kỹ năng\nchuyên môn (Skills) và lịch sử nhận việc của Freelancer để đề xuất các dự án có\nđộ tương thích cao nhất.\n- Giảm thiểu thời gian tìm kiếm (Search Cost): Thay vì phải chủ động tìm\nkiếm theo từ khóa, hệ thống chủ động đưa các dự án tiềm năng đến người dùng,\ngiúp Freelancer tiếp cận công việc nhanh chóng trước khi dự án hết hạn nộp hồ\n- Giải quyết vấn đề \"Khởi đầu lạnh\": Đối với Freelancer mới gia nhập chưa\ncó lịch sử làm việc, hệ thống có thể dựa trên các thuộc tính khai báo ban đầu\n(Content-based) để đưa ra các gợi ý phù hợp, giúp họ nhanh chóng có được dự án\nđầu tiên.\nb. Đối với Client (Nhà tuyển dụng): Tối ưu hóa quy trình tuyển dụng\nỞ chiều ngược lại, Nhà tuyển dụng thường gặp khó khăn tro"
+  },
+  {
+    "page": 185,
+    "text": "Switching Hybrid (Lai ghép có trọng số và chuyển đổi). Kiến trúc này cho phép hệ thống\nvận hành linh hoạt bằng cách sử dụng các bộ lọc nghiệp vụ (ngân sách, trạng thái dự án),\nsau đó kết hợp sức mạnh của phân tích nội dung và hành vi cộng đồng để đưa ra da nh\nsách đề xuất tối ưu nhất.\nHệ thống hoạt động theo mô hình Client-Server với sự phân tách nhiệm vụ rõ ràng:\n• Backend Server (Spring Boot): Đóng vai trò là bộ điều phối, chịu trách nhiệm\ntruy xuất dữ liệu, áp dụng các bộ lọc nghiệp vụ, gọi API tính toán và tổng hợp kết\nquả.\n• Flask Service (External Service): Đảm nhận các tác vụ tính toán phức tạp như so\nkhớp vector kỹ năng (Embedding Matching) và chạy thuật toán lọc cộng tác\n(Matrix Factorization/Neural CF).\n4.3 Quy trình xử lý dữ liệu và thuật toán\n4.3.1. Module gợi ý Dự án cho Freelancer (recommendProjects)\nQuy trình này nhằm mục đích tìm kiếm các dự án phù hợp nhất với hồ sơ năng lực của\nFreelancer.\n1. Giai đoạn 1: Lọc ứng viên và Tiền xử lý (Candidate Generation & Pre-\nprocess"
+  },
+  {
+    "page": 186,
+    "text": "- Kết quả trả về là một danh sách các projectId tiềm năng từ dịch vụ AI\n(cf-recommend).\n4. Giai đoạn 4: Lai ghép và Tổng hợp (Hybrid Aggregation)\n- Kết quả từ hai luồng trên được hợp nhất (Union), đồng thời loại bỏ các\nkết quả trùng lặp (distinct).\n- Kết quả cuối cùng được phân trang (Pagination) trước khi trả về cho\nClient, đảm bảo hiệu năng hệ thống.\n4.3.2. Module gợi ý Freelancer cho Nhà tuyển dụng (recommendFreelancers)\nQuy trình này phức tạp hơn do phải tuân thủ các ràng buộc chặt chẽ về ngân sách và\nchất lượng ứng viên.\n1. Giai đoạn 1: Bộ lọc nghiệp vụ (Hard Constraints Filtering)\nTrước khi đưa vào thuật toán gợi ý, danh sách Freelancer được lọc qua các điều\nkiện tiên quyết:\no Trạng thái ứng tuyển: Loại bỏ những Freelancer đã nộp hồ sơ vào dự án\n(hasApplied) để tránh gợi ý trùng lặp.\no Ngân sách (Budget Matching): Chỉ giữ lại các Freelancer có mức lương\ntheo giờ (hourlyRate) nằm trong khoảng ngân sách (min-max) của dự án.\nĐây là bước quan trọng để đảm bảo tính khả thi của hợp đồn"
+  },
+  {
+    "page": 187,
+    "text": "o Danh sách cuối cùng là sự kết hợp của Content-Based (đã được lọc kỹ\nlưỡng) và Collaborative Filtering.\n4.4. Công thức tính điểm đề xuất\n4.4.1 Công thức tổng quát cho Gợi ý Freelancer\nĐể xếp hạng một Freelancer f cho một dự án p, hệ thống tính toán tổng điểm S(p, f) dựa\ntrên sự kết hợp có trọng số giữa kỹ năng chuyên môn và uy tín cá nhân.\nCông thức được thiết lập như sau:\nS(p, f) = α x Simskill(𝑉𝑝, 𝑉𝑓) + β x Scorerating(f)\n- α= 0.8: Trọng số ưu tiên cho sự phù hợp về năng lực chuyên môn. Việc đặt\ntrọng số cao giúp đảm bảo ứng viên đáp ứng tốt các yêu cầu kỹ thuật của dự án.\n- β= 0.2: Trọng số ưu tiên cho mức độ uy tín. Đây là yếu tố đảm bảo an toàn cho\nnhà tuyển dụng dựa trên lịch sử làm việc của freelancer.\n- Vp, Vf: Các vector đặc trưng (Embeddings) của dự án và freelancer trong không\ngian n chiều.\n- Simskill: Hàm tính toán độ tương đồng Cosine giữa các vector kỹ năng.\n- Scorerating(f): Điểm đánh giá đã được chuẩn hóa của freelancer.\nThành phần 1: Độ tương đồng nội dung (Content Si"
+  },
+  {
+    "page": 188,
+    "text": "Vì điểm đánh giá của Freelancer thường nằm trong thang điểm 5, hệ thống thực hiện\nchuẩn hóa (Normalization) để đưa về cùng miền giá trị với điểm kỹ năng nhằm tránh\ngây sai lệch khi cộng tổng.\nHàm calculateFreelancerRating thực hiện tính trung bình cộng các TestimonialModel:\nScorerating(f) =\n∑ 𝑟𝑖𝑛𝑖=1\n𝑛 .  5\n𝑟𝑖: Số sao đánh giá của dự án thứ i.\nn: Tổng số lượng đánh giá mà freelancer đã nhận được.\nHệ số 5n ở mẫu số giúp chuyển đổi điểm trung bình từ thang điểm 5 về thang điểm\nchuẩn [0,1]\nQuy trình Gợi ý Freelancer cho Nhà tuyển dụng (Client)\nKhác với luồng gợi ý dự án, quy trình gợi ý ứng viên cho Nhà tuyển dụng được thiết kế\nkhắt khe hơn nhằm tối ưu hóa chi phí và đảm bảo chất lượng công việc.\na. Các bộ lọc tiền xử lý (Pre-ranking Filters)\nTrước khi áp dụng công thức tính điểm, hệ thống thực hiện sàng lọc dựa trên các ràng\nbuộc thực tế của dự án:\n• Loại bỏ ứng viên đã nộp hồ sơ: Đảm bảo danh sách gợi ý luôn là những gương\nmặt mới tiềm năng.\n• Ràng buộc ngân sách (Budget Matching): Hệ th"
+  },
+  {
+    "page": 189,
+    "text": "được ưu điểm của cả hai. Hệ thống không chỉ gợi ý dựa trên kỹ năng cứng mà\ncòn dựa trên xu hướng hành vi của cộng đồng.\n• Giải quyết bài toán thực tế qua các bộ lọc nghiệp vụ: Khác với các mô hình lý\nthuyết, việc tích hợp hàm isFreelancerInBudget và kiểm tra hasApplied đảm bảo\ncác gợi ý có tính thực tiễn cao, giúp Client tiết kiệm ngân sách và Freelancer\nkhông bị lãng phí thời gian vào các dự án không khả thi.\n• Kiến trúc linh hoạt và khả năng mở rộng: Việc tách biệt tầng xử lý nghiệp vụ\n(Java Spring Boot) và tầng tính toán AI (Python) thông qua REST API cho phép\nhệ thống dễ dàng nâng cấp thuật toán mà không ảnh hưởng đến logic ứng dụng.\n• Khắc phục vấn đề \"Khởi đầu lạnh\" (Cold Start): Nhờ ưu tiên trọng số cho\nLọc nội dung (α = 0.8), các Freelancer mới hoặc dự án mới đăng vẫn có thể\nnhận được đề xuất chính xác ngay cả khi chưa có dữ liệu tương tác lịch sử.\nHạn chế:\n• Phụ thuộc vào chất lượng dữ liệu đầu vào: Hiệu quả của hệ thống phụ thuộc\nlớn vào việc Freelancer và Client cung cấp đầy"
+  },
+  {
+    "page": 190,
+    "text": "Xây dựng module tự động điều chỉnh trọng số $\\alpha$ và $\\beta$ dựa trên phản\nhồi thực tế của người dùng (như tỷ lệ click -through rate hoặc tỷ lệ chấp nhận lời\nmời làm việc).\n3. Hệ thống gợi ý theo thời gian thực (Real-time Recommendation):\nTích hợp các nền tảng xử lý dòng dữ liệu (như Apache Kafka) để cập nhật ngay\nlập tức các gợi ý khi Freelancer vừa cập nhật kỹ năng mới hoặc Client vừa xem\nmột hồ sơ ứng viên.\n4. Hệ thống gợi ý có tính giải thích (Explainable AI - XAI):\nBổ sung tính năng giải thích cho người dùng biết \"Tại sao tôi nhận được gợi ý\nnày?\". Ví dụ: \"Gợi ý dự án này vì bạn có 90% kỹ năng phù hợp với yêu cầu Java\nvà Spring Boot\". Điều này giúp tăng mức độ tin tưởng của người dùng đối với hệ\n5. Gợi ý đa mục tiêu (Multi-objective Recommendation):\nMở rộng công thức tính điểm để bao gồm thêm các yếu tố như: vị trí địa lý, ngôn\nngữ giao tiếp, và thời gian hoàn thành dự án dự kiến để tăng độ khớp (matching)\ntoàn diện.\n4.2. Chatbot\n4.2.1 Tổng quan tích hợp\nChức năng chatbot dự án"
+  },
+  {
+    "page": 191,
+    "text": "Trong giao diện tạo dự án, người dùng nhập nội dung câu hỏi/đề nghị (ví dụ:\n“Tôi nên đặt ngân sách khoảng bao nhiêu?”, “Viết lại title ngắn gọn hơn”, “Cần\nthêm kỹ năng gì?”). Đồng thời hệ thống thu thập trạng thái hiện tại của bản nháp\nproject (các trường title, description, scope, budget, skills… nếu đã có).\n2. Khởi tạo ngữ cảnh dự án (Project Context)\nTrước khi gửi yêu cầu tới AI, hệ thống tổng hợp “ngữ cảnh dự án” từ các dữ liệu\nngười dùng đang chỉnh sửa. Ngữ cảnh này giúp AI hiểu được trạng thái hiện tại\ncủa project để trả lời phù hợp, tránh gợi ý chung chung hoặc mâu thuẫn với nội\ndung đã có.\n3. Khởi tạo yêu cầu AI\nỨng dụng gửi yêu cầu đến lớp xử lý AI của hệ thống (backend). Yêu cầu bao\ngồm:\n• Thông điệp người dùng (user message)\n• Ngữ cảnh project hiện tại (project context)\n• (Tùy chọn) thông tin brief ban đầu nếu project đã từng được AI gợi ý\ntrước đó\n4. Kiểm soát truy cập và giới hạn tần suất (Rate limit)\nBackend thực hiện kiểm tra người dùng đăng nhập hợp lệ và áp dụng giới h"
+  },
+  {
+    "page": 192,
+    "text": "Sau khi có kết quả từ AI, hệ thống thực hiện một số xử lý bổ sung để tối ưu trải\nnghiệm:\n• Phân loại phản hồi theo nhóm (gợi ý/tip/câu hỏi/cảnh báo/thông tin…)\n• Xác định phản hồi có cần người dùng cung cấp thêm thông tin hay không\n• Gợi ý thêm một số “tips” nhanh dựa theo chủ đề người dùng đang hỏi (ví\ndụ: budget, timeline, skills)\n7. Hiển thị kết quả trên giao diện\nPhản hồi của AI được hiển thị trực tiếp trong giao diện chatbot. Người dùng có\nthể:\n• Tiếp tục hỏi để làm rõ yêu cầu\n• Dựa theo gợi ý để chỉnh sửa thủ công các trường trong form tạo project\n8. Ghi log theo dõi (tùy chọn/ẩn trong hệ thống)\nHệ thống ghi nhận thông tin phục vụ vận hành như:\n• Model đang sử dụng\n• Tokens/chi phí ước lượng\n• Trạng thái thành công/thất bại\nDữ liệu này hỗ trợ giám sát chất lượng và tối ưu chi phí.\n4.2.3 Xử lý và lưu trữ kết quả phản hồi (định hướng)\nKết quả phản hồi của chatbot hiện được sử dụng chủ yếu để hướng dẫn người dùng\nchỉnh sửa. Tùy theo định hướng phát triển, hệ thống có thể mở rộng the"
+  },
+  {
+    "page": 193,
+    "text": "• Backend trung gian giúp bảo vệ khóa API, kiểm soát rate limit và ghi log chi phí.\n• Nếu không lưu lịch sử hội thoại theo phiên, chatbot có thể thiếu “trí nhớ” đa lượt\nvà dễ trả lời lặp.\n• Nếu phản hồi chỉ dạng text, việc cập nhật tự động các trường (title/budget/skills)\nchưa tối ưu."
+  },
+  {
+    "page": 194,
+    "text": "CHƯƠNG 5: KIỂM THỬ VÀ ĐÁNH GIÁ\n5.1. Kiểm thử\n5.1.1. Mục tiêu\n- Xác thực chức năng: Thực hiện kiểm thử toàn diện nhằm đối soát và xác nhận\nmức độ tương thích giữa các tính năng thực tế với tài liệu đặc tả yêu cầu phần\nmềm (SRS).\n- Quản trị rủi ro và khắc phục: Chủ động nhận diện các lỗ hổng kỹ thuật và rủi ro\nvận hành, từ đó triển khai các biện pháp xử lý và tối ưu hóa hệ thống một cách\ntriệt để.\n- Hệ thống hóa tài liệu: Xây dựng bộ chỉ dẫn kỹ thuật và tài liệu hóa quy trình vận\nhành nhằm phục vụ công tác quản trị, nâng cấp hệ thống trong tương lai.\n5.1.2. Phạm vi kiểm thử\nDựa trên danh mục các chức năng của hệ thống, phạm vi kiểm thử được xây dựng\nnhằm xác thực toàn diện các quy trình nghiệp vụ. Các kịch bản kiểm soát được triển\n- Chức năng đăng ký tài khoản\n- Chức năng đăng nhập\n- Chức năng đăng dự án\n- Chức năng quản lý cột mốc (Milestone)\n- Chức năng nhắn tin giữa Nhà tuyển dụng và Freelancer\n- Chức năng quản lý danh mục\n- Chức năng quản lý tài khoản người dùng\n- Chức năng mời đấu t"
+  },
+  {
+    "page": 195,
+    "text": "nguồn lực và tiến độ thực hiện. Giai đoạn tiếp theo tập trung vào việc thiết kế bộ kịch\nbản kiểm thử (Test Scenarios) và các trường hợp kiểm thử (Test Cases) để tối ưu hóa độ\nbao phủ tính năng. Sau khi hoàn tất chuẩn bị môi trường và dữ liệu mẫu, quá trình  thực\nthi sẽ được tiến hành theo các cấp độ từ kiểm thử đơn vị (Unit Test), kiểm thử tích hợp\n(Integration Test) đến kiểm thử hệ thống và chấp nhận (System & UAT). Toàn bộ kết\nquả, bao gồm các lỗi (bugs) phát sinh, được ghi nhận và đánh giá định kỳ để kiểm  soát\nchất lượng. Cuối cùng, hệ thống trải qua các đợt sửa lỗi và kiểm thử hồi quy (Regression\nTesting) nhằm đảm bảo sự ổn định tuyệt đối trước khi vận hành thực tế\n5.2.2. Tiêu chí kiểm thử\n- Độ tin cậy về chức năng (Functional Reliability): Kiểm chứng tính đúng đắn của\ncác luồng xử lý dữ liệu, đảm bảo kết quả đầu ra chính xác dựa trên các điều kiện\nđầu vào tương ứng theo đặc tả SRS.\n- Tính khả dụng (Usability): Kiểm chứng mức độ thân thiện của giao diện người\ndùng (UI), đảm bảo qu"
+  },
+  {
+    "page": 196,
+    "text": "thử\nTS_REG Đăng ký  10\nTS_LOGIN Đăng nhập 4\nTS_JOB_POST Kiểm thử quy trình Đăng dự án 4\nTS_MILESTONE Kiểm thử quản lý cột mốc 5\nTS_CHAT Kiểm thử quy trình nhắn tin giữa Nhà tuyển dụng\nvà Freelancer\nTS_CATEGORY Kiểm thử chức năng quản lý danh mục 2\nTS_ACC_MA Kiểm thử chức năng quản lý tài khoản người dùng 3\nTS_INVITATION Kiểm thử chức năng mời đấu thầu 5\nTS_PROFILE Kiểm thử chức năng quản lý hồ sơ cá nhân 9\nTS_COMP_PRO Kiểm thử chức năng so sánh đề xuất 6\n5.4. Đánh giá kết quả kiểm thử\n5.4.1. Kiểm thử chức năng Đăng ký\nBảng 5-2: Kiểm thử chức năng Đăng ký\nTest\nCase ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng\nTC001\nKiểm tra đăng ký\nthành công với\nthông tin hợp lệ\n(Freelancer)\nTài khoản được tạo, hệ\nthống gửi email xác nhận\nvà điều hướng đến trang\nthiết lập hồ sơ.\nTài khoản được\ntạo, hệ thống gửi\nemail xác nhận và\nđiều hướng đến\ntrang thiết lập hồ\nĐạt\nTC002\nTài khoản được tạo, điều\nhướng đến trang\nDashboard dành cho người\nthuê.\ntạo, điều hướng\nđến trang\nDashboard dành\ncho ngư"
+  },
+  {
+    "page": 197,
+    "text": "TC004\nEmail không đúng\nđịnh dạng (thiếu\n@, thiếu .com...)\nkhông hợp lệ. Vui lòng\nkiểm tra lại.\"\n\"Email không hợp\nlệ. Vui lòng kiểm\ntra lại.\"\nTC005\nKiểm tra mật khẩu\nquá ngắn (Dưới 8\nký tự)\nHiển thị thông báo \"Mật\nkhẩu phải có ít nhất 8 ký\ntự.\"\n\"Mật khẩu phải có\nít nhất 8 ký tự.\"\nTC006\nkhông có ký tự đặc\nbiệt/số (nếu hệ\nthống yêu cầu)\nkhẩu phải bao gồm chữ\ncái, số và ký tự đặc biệt.\"\n\"Mật khẩu phải\nbao gồm chữ cái,\nsố và ký tự đặc\nbiệt.\"\nTC007\nvà \"Nhập lại mật\nkhẩu\" không khớp\nkhẩu xác nhận không\ntrùng khớp.\"\n\"Mật khẩu xác\nnhận không trùng\nkhớp.\"\nTC008\nKiểm tra để trống\ncác trường bắt\nbuộc (Họ tên,\nEmail, Mật khẩu)\nHiển thị thông báo \"Vui\nlòng điền đầy đủ các\ntrường thông tin bắt buộc.\"\n\"Vui lòng điền đầy\nđủ các trường\nthông tin bắt\nbuộc.\"\nTC009\nKiểm tra khi chưa\ntích chọn \"Đồng ý\nvới Điều khoản sử\ndụng\"\nHiển thị thông báo \"Bạn\nphải đồng ý với điều\nkhoản dịch vụ để tiếp tục.\"\n\"Bạn phải đồng ý\nvới điều khoản\ndịch vụ để tiếp\ntục.\"\nTC010\nKiểm tra nhập Họ\ntên chứa ký tự số\nhoặc ký tự đặc bi"
+  },
+  {
+    "page": 198,
+    "text": "Đăng nhập với\nEmail và Mật\nkhẩu hợp lệ\nĐăng nhập thành công, điều\nhướng vào trang Dashboard\ntương ứng với vai trò.\nĐăng nhập thành\ncông, điều hướng\nvào trang\nDashboard tương\nứng với vai trò.\nEmail không tồn\ntại\nhoặc mật khẩu không chính\nxác.\"\n\"Email hoặc mật\nkhẩu không chính\nTC003 Đăng nhập với sai mật khẩu Hiển thị thông báo \"Email hoặc mật khẩu không chính xác.\" Hiển thị thông báo \"Email hoặc mật khẩu không chính xác.\" Đạt\nĐể trống trường\nEmail hoặc Mật\nkhẩu\nHiển thị thông báo \"Vui lòng\nnhập đầy đủ Email và Mật\nkhẩu.\"\n\"Vui lòng nhập\nđầy đủ Email và\nMật khẩu.\"\n5.4.3 Kiểm thử quy trình Đăng dự án\nBảng 5-4: Kiểm thử chức năng Đăng dự án\nTest Case\nID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng\nTC_PRO_01\nKiểm tra đăng dự\nán với đầy đủ\nDự án được lưu vào hệ\nthống, hiển thị thông báo\n\"Đăng tin thành công\" và\nchuyển đến trang chi tiết\nDự án được lưu vào\nhệ thống, hiển thị\nthông báo \"Đăng tin\nthành công\" và\nchuyển đến trang chi\ntiết dự án.\nTC_PRO_02\nKiểm tra để\ntrống các trường\nbắt "
+  },
+  {
+    "page": 199,
+    "text": "ngắn (ví dụ < 10\nvui lòng mô tả rõ\nràng hơn.\"\nTC_PRO_04\nKiểm tra nhập\nngân sách là số\nâm hoặc bằng 0\n\"Ngân sách phải là số\ndương lớn hơn 0.\"\n\"Ngân sách phải là\nsố dương lớn hơn 0.\"\n5.4.4 Kiểm thử quy trình Gửi báo giá và Đề xuất Milestone\nBảng 5-5: Kiểm thử chức năng Gửi báo giá và Đề xuất Milestone\nTC_PRS_06\nFreelancer gửi báo\ngiá với đầy đủ thông\ntin (Giá, thời gian\nhoàn thành, thư giới\nthiệu)\nĐề xuất được lưu, hiển\nthị thông báo \"Gửi đề\nxuất thành công\".\nĐề xuất được lưu,\nhiển thị thông báo\n\"Gửi đề xuất\nthành công\".\nTC_PRS_07\nFreelancer bỏ trống\nphần \"Thư giới\nthiệu\" (Cover Letter)\nlòng nhập nội dung đề\nxuất của bạn.\"\nnội dung đề xuất\ncủa bạn.\"\nTC_PRS_08\nMột Freelancer cố\ntình gửi báo giá lần\nthứ 2 cho cùng 1 dự\nHệ thống thông báo\n\"Bạn đã gửi đề xuất cho\ndự án này rồi.\"\nHệ thống thông\nbáo \"Bạn đã gửi\nđề xuất cho dự án\nnày rồi.\"\nTC_PRS_09\nFreelancer thực hiện\nchỉnh sửa báo giá đã\ngửi\nThông tin báo giá được\ncập nhật mới nhất trong\ndanh sách của Client.\nThông tin báo giá\nđược cập nhật "
+  },
+  {
+    "page": 200,
+    "text": "5.4.5  Kiểm thử quản lý Cột mốc\nBảng 5-6: Kiểm thử chức năng Quản lý cột mốc\nTC_MIL_01\nFreelancer tạo\ndanh sách\nMilestone khi gửi\nProposal (Tên,\nSố tiền, Hạn nộp)\nCác Milestone được lưu tạm\ncùng với Proposal, hiển thị\nđúng cấu trúc phân kỳ.\nCác Milestone\nđược lưu tạm\ncùng với\nProposal, hiển thị\nđúng cấu trúc\nphân kỳ.\nTC_MIL_02\nKiểm tra tổng số\ntiền các\nMilestone phải\nbằng với tổng giá\ntrị báo giá\nHệ thống báo lỗi nếu tổng\ntiền Milestone khác với tổng\nngân sách đề xuất.\nHệ thống báo lỗi\nnếu tổng tiền\nMilestone khác\nvới tổng ngân\nsách đề xuất.\nTC_MIL_03\nClient nhấn\n\"Chấp nhận\nProposal\"\n(Approve)\nHệ thống tự động chuyển\ntoàn bộ Milestone của\nProposal đó vào danh sách\ncông việc chính thức.\nHệ thống tự động\nchuyển toàn bộ\nMilestone của\nProposal đó vào\ndanh sách công\nviệc chính thức.\nTC_MIL_04\nClient ký quỹ\n(Deposit) cho\nMilestone sau khi\nduyệt\nTiền được trừ từ ví Client\nvào Escrow, Milestone\nchuyển từ \"Pending\" sang\n\"Funded\".\nTiền được trừ từ\nví Client vào\nEscrow,\nMilestone chuyển\ntừ \"Pendi"
+  },
+  {
+    "page": 201,
+    "text": "Bảng 5-7: Kiểm thử chức năng nhắn tin giữa Nhà tuyển dụng và Freelancer\nTestcaseID Kịch bản Kết quả mong đợi Kết quả thực thi\nTình\ntrạng\nTC_MS_02\nFreelancer nhắn tin\ncho Client từ trang\nchi tiết dự án\nTin nhắn được gửi đi,\nClient nhận được thông\nbáo tin nhắn mới.\nTin nhắn được gửi\nđi, Client nhận\nđược thông báo tin\nnhắn mới. Đạt\nTC_MS_03\nKiểm tra nhắn tin\nthời gian thực (Real-\ntime)\nTin nhắn hiển thị ngay\nlập tức ở cả hai phía mà\nkhông cần tải lại trang.\nTin nhắn hiển thị\nngay lập tức ở cả\nhai phía mà không\ncần tải lại trang. Đạt\nTC_MS_04\nGửi tệp đính kèm\nqua khung Chat\n(Hình ảnh, PDF,\nDocx)\nTệp được tải lên thành\ncông, đối phương có thể\nnhấn vào để tải về hoặc\nxem trước.\nTệp được tải lên\nthành công, đối\nphương có thể\nnhấn vào để tải về\nhoặc xem trước. Đạt\nTC_MS_05\nGửi tệp tin có dung\nlượng vượt quá giới\nhạn (ví dụ > 25MB)\nHệ thống chặn gửi và\nhiển thị thông báo \"Dung\nlượng tệp quá lớn\".\nHệ thống chặn gửi\nvà hiển thị thông\nbáo \"Dung lượng\ntệp quá lớn\". Đạt\nTC_MS_06\nGửi tin nhắn trống\n("
+  },
+  {
+    "page": 202,
+    "text": "TC_MS_09\nKiểm tra lịch sử tin\nnhắn khi load lại\ntrang\nToàn bộ nội dung trò\nchuyện cũ được tải đầy\nđủ theo đúng trình tự\nthời gian.\nToàn bộ nội dung\ntrò chuyện cũ\nđược tải đầy đủ\ntheo đúng trình tự\nthời gian. Đạt\n5.4.7 Kiểm thử chức năng quản lý danh mục\nBảng 5-8: Kiểm thử chức năng Quản lý danh mục\nTest case\nTC_AD_01 Thêm danh mục mới Danh mục mới hiển thị trong danh sách Admin và trang đăng dự án của Client.\nDanh mục mới\nhiển thị trong\nAdmin và trang\nđăng dự án của\nTC_AD_03 Sửa tên danh mục đang có sẵn\nTên mới được cập nhật đồng\nbộ trên toàn bộ hệ thống\n(các bài đăng cũ cũng đổi\ntheo).\nTên mới được\ncập nhật đồng\nbộ trên toàn bộ\nhệ thống (các\nbài đăng cũ\ncũng đổi theo).\n5.4.8 Kiểm thử chức năng quản lý tài khoản người dùng\nBảng 5-9: Kiểm thử chức năng quản lý tài khoản người dùng\nTC_AD_06\nTìm kiếm người\ndùng theo Email\nhoặc Tên\nHiển thị chính xác thông\ntin tài khoản cần tìm.\nHiển thị chính\nxác thông tin tài\nkhoản cần tìm. Đạt\nTC_AD_08\nKhóa tài khoản\n(Deactivate/Ban)\nngười dùng vi\nphạm\n"
+  },
+  {
+    "page": 203,
+    "text": "TC_AD_09\nMở khóa tài khoản\n(Reactivate)\nNgười dùng có thể đăng\nnhập lại bình thường với\ndữ liệu cũ được giữ\nnguyên.\nNgười dùng có\nthể đăng nhập lại\nbình thường với\ndữ liệu cũ được\ngiữ nguyên. Đạt\n5.4.9 Kiểm thử chức năng mời đấu thầu\nBảng 5-10: Kiểm thử chức năng mời đấu thầu\nTC_INV_03\nsách Freelancer\nphù hợp với yêu\ncầu dự án vừa\nđăng\nHệ thống hiển thị danh\nsách ứng viên có kỹ năng\nvà đánh giá (Rating) cao\nnhất cho công việc đó.\nHệ thống hiển\nthị danh sách\nứng viên có\nkỹ năng và\n(Rating) cao\nnhất cho công\nviệc đó.\nTC_INV_04\nClient nhấn nút\n\"Mời\" một\nFreelancer cụ thể\ntừ danh sách gợi ý\nHệ thống hiển thị thông\nbáo \"Đã gửi lời mời thành\ncông\"; nút \"Mời\" chuyển\nsang trạng thái \"Đã mời\".\nthị thông báo\n\"Đã gửi lời\nmời thành\ncông\"; nút\n\"Mời\" chuyển\nsang trạng\nthái \"Đã\nmời\".\nTC_INV_05\nKiểm tra việc gửi\nEmail mời thầu tự\nđộng sau khi\nClient nhấn \"Mời\"\nFreelancer nhận được\nEmail có tiêu đề, mô tả\nngắn và link trực tiếp dẫn\nđến dự án.\nnhận được\nEmail có tiêu\nđề, mô tả\nngắn và link\ntrực tiếp dẫn"
+  },
+  {
+    "page": 204,
+    "text": "TC_INV_06\nKiểm tra tính hợp\nlệ của liên kết\n(Link) trong Email\nKhi Freelancer click vào\nlink, hệ thống điều hướng\nđúng đến trang chi tiết dự\nán đó.\nKhi\nclick vào link,\nhệ thống điều\nhướng đúng\nđến trang chi\ntiết dự án đó.\nTC_INV_08 Kiểm tra giới hạn lời mời\nClient không được phép\ngửi lời mời lần thứ 2 cho\ncùng một Freelancer trong\ncùng một dự án.\nClient không\nđược phép\ngửi lời mời\nlần thứ 2 cho\ncùng một\ntrong cùng\n5.4.10 Kiểm thử chức năng quản lý hồ sơ cá nhân của freelancer\nBảng 5-11: Kiểm thử chức năng quản lý hồ sơ cá nhân của freelancer\nTC_PF_01\n[Skill] Thêm kỹ năng\nmới từ danh sách có\nsẵn\nKỹ năng được thêm vào\nhồ sơ và hiển thị dưới\ndạng các thẻ (tags).\nKỹ năng được\nthêm vào hồ sơ và\nhiển thị dưới dạng\ncác thẻ (tags).\nTC_PF_02\n[Skill] Tìm kiếm và\nthêm kỹ năng không\ncó trong danh sách\n(nếu hệ thống cho\nphép)\nHệ thống cho phép nhập\nmới hoặc hiển thị thông\nbáo \"Kỹ năng này chưa\ncó, yêu cầu Admin\nthêm\".\nHệ thống cho\nphép nhập mới\nhoặc hiển thị\nthông báo \"Kỹ\nnăng này chưa có,\nyêu cầu "
+  },
+  {
+    "page": 205,
+    "text": "TC_PF_04\n[Exp] Thêm mới kinh\nnghiệm làm việc (Vị\ntrí, Công ty, Thời gian,\nMô tả)\nThông tin được lưu\nthành công; hệ thống tự\nđộng tính toán tổng số\nnăm kinh nghiệm.\nThông tin được\nlưu thành công;\nhệ thống tự động\ntính toán tổng số\nTC_PF_05\n[Exp] Nhập ngày kết\nthúc công việc nhỏ\nhơn ngày bắt đầu\nHệ thống báo lỗi \"Ngày\nkết thúc phải sau ngày\nbắt đầu\".\n\"Ngày kết thúc\nphải sau ngày bắt\nđầu\".\nTC_PF_06\n[Edu] Thêm mới học\nvấn (Trường, Chuyên\nngành, Năm tốt\nnghiệp)\nThông tin học vấn hiển\nthị đúng trình tự thời\ngian (mới nhất lên đầu).\nThông tin học vấn\nhiển thị đúng\ntrình tự thời gian\n(mới nhất lên\nđầu).\nTC_PF_07\n[Edu] Chỉnh sửa hoặc\nXóa thông tin học\nvấn/kinh nghiệm đã có\nDữ liệu được cập nhật\nchính xác và phản ánh\nngay lập tức trên trang\nxem hồ sơ (View\nProfile).\nDữ liệu được cập\nnhật chính xác và\nphản ánh ngay lập\ntức trên trang xem\nhồ sơ (View\nTC_PF_08 [Logic] Kiểm tra hiển thị hồ sơ đối với Client\nClient có thể xem đầy\nđủ Skill, Exp, Edu của\nFreelancer dưới dạng\nđịnh dạng chuyên\nnghiệp.\nCl"
+  },
+  {
+    "page": 206,
+    "text": "TC_COMP_02\nChọn 2 Proposal\nvà nhấn nút \"So\nsánh\"\nHệ thống hiển thị bảng\nso sánh gồm 2 cột với\ncác thông tin: Giá thầu,\nThời gian, Kỹ năng,\nRating.\nthị bảng so sánh\ngồm 2 cột với\ncác thông tin:\nGiá thầu, Thời\ngian, Kỹ năng,\nTC_COMP_03\nChọn 3 Proposal\nso sánh đầy đủ 3 cột\nthông tin song song.\nđầy đủ 3 cột\nthông tin song\nsong.\nTC_COMP_04\nCố tình chọn 4\nProposal để so\nsánh\nHệ thống ngăn chặn việc\ntích chọn hoặc thông báo\n\"Chỉ được chọn tối đa 3\nProposal\".\nHệ thống ngăn\nchặn việc tích\nchọn hoặc thông\nbáo \"Chỉ được\nchọn tối đa 3\nTC_COMP_05\nthông tin so sánh\nchi tiết\nCác tiêu chí (Giá,\nMilestone, Số dự án đã\nlàm) phải được căn chỉnh\nhàng ngang để dễ đối\nchiếu.\nCác tiêu chí\n(Giá, Milestone,\nSố dự án đã làm)\nphải được căn\nchỉnh hàng\nngang để dễ đối\nTC_COMP_08\nKiểm tra khi các\nProposal có đơn vị\ntiền tệ khác nhau\n(nếu có)\nHệ thống phải tự động\nquy đổi hoặc hiển thị rõ\nđơn vị để Client không bị\nnhầm lẫn.\nHệ thống phải tự\nđộng quy đổi\nhoặc hiển thị rõ\nđơn vị để Client\nkhông bị nhầm\nlẫn.\nTC_COMP_09"
+  },
+  {
+    "page": 207,
+    "text": "Phần III: KẾT LUẬN VÀ HƯỚNG PHÁT TRIỂN\n1. Kết quả đạt được\n1.1. Về lý thuyết\nThông qua quá trình triển khai dự án, em đã nắm vững quy trình phát triển phần mềm\ntoàn diện, từ giai đoạn khảo sát yêu cầu, thiết lập kiến trúc hệ thống đến vận hành thực\ntế. Việc xây dựng một nền tảng kết nối nhân lực tự do (Freelance Platform) giúp em hiểu\nsâu sắc về các nghiệp vụ đặc thù như: cơ chế đấu thầu (bidding), quản trị hồ sơ năng lực\n(portfolio) và quy trình phối hợp làm việc giữa Nhà tuyển dụng và Freelancer.\nVề mặt kỹ thuật, em đã ứng dụng thành thạo mô hình kiến trúc phân lớp (Layered\nArchitecture) với sự kết hợp của hệ sinh thái Java Spring (Spring Boot, Spring Security,\nSpring Data JPA) và hệ quản trị dữ liệu PostgreSQL. Ở tầng giao diện, việc triển khai\nReact cùng thư viện quản lý trạng thái Redux đã giúp em tối ưu hóa hiệu suất truyền tải\ndữ liệu và trải nghiệm người dùng. Bên cạnh đó, các kỹ năng về xác thực bảo mật qua\nJWT và thiết kế giao diện theo chuẩn MUI/Tailwind cũng được củng cố mạ"
+  },
+  {
+    "page": 208,
+    "text": "bộ, chưa tích hợp kênh trò chuyện trực tuyến (Live Chat) để hỗ trợ thương lượng\nnhanh.\n- Hệ thống cảnh báo: Các cơ chế lọc nội dung độc hại và thông báo đẩy (Push\nNotification) đến người dùng vẫn đang ở mức cơ bản, cần được nâng cấp thêm.\n2. Hướng phát triển\nĐể khắc phục các tồn tại nêu trên, em định hướng nâng cấp hệ thống theo các mục tiêu\nsau:\n- Tối ưu hóa UI/UX đa nền tảng: Áp dụng phương pháp thiết kế Responsive\nchuyên sâu để mang lại sự đồng bộ cho người dùng trên cả nền tảng web và\nthiết bị di động.\n- Xây dựng trung tâm xử lý khiếu nại: Phát triển module quản lý tranh chấp, cho\nphép lưu trữ bằng chứng và cung cấp công cụ để Quản trị viên can thiệp xử lý\ncông bằng.\n- Tích hợp giao tiếp thời gian thực: Triển khai WebSockets để hỗ trợ tính năng\nchat trực tiếp và cập nhật thông báo tức thì, giúp tăng tỷ lệ chốt dự án thành\ncông.\n- Tăng cường bảo mật và kiểm duyệt: Ứng dụng các thư viện kiểm tra nội dung tự\nđộng để ngăn chặn các tin tuyển dụng không phù hợp và đảm bảo tính chất\nlượng"
+  },
+  {
+    "page": 209,
+    "text": "TÀI LIỆU THAM KHẢO\n[1] Spring Boot. Spring Boot Reference Documentation. Truy cập tại:\nhttps://docs.spring.io/spring-boot/index.html (Sử dụng để xây dựng Backend và\nRESTful API).\n[2]  React Team. React Documentation. Truy cập tại: https://react.dev/ (Sử dụng để\nphát triển giao diện người dùng và quản lý Component).\n[3]  Redux Maintainers. Redux Toolkit Guide. Truy cập tại: https://redux-\ntoolkit.js.org/ (Sử dụng để quản lý trạng thái tập trung cho các chức năng của Client và\nFreelancer).\n[4]  Spring Security Team. Spring Security Documentation. Truy cập tại:\nhttps://docs.spring.io/spring-security/reference/index.html (Sử dụng để thực hiện xác\nthực JWT và phân quyền người dùng).\n[5] PostgreSQL Global Development Group. PostgreSQL 15 Documentation. Truy\ncập tại: https://www.postgresql.org/docs/15/index.html (Sử dụng để quản trị và tối ưu\nhóa cơ sở dữ liệu hệ thống).\n[6] Material UI. MUI Core Documentation. Truy cập tại: https://mui.com/core/ (Sử\ndụng để thiết kế giao diện Dashboard và cá"
+  }
+]

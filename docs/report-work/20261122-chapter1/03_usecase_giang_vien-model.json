@@ -1,0 +1,578 @@
+[
+  {
+    "_type": "UMLUseCaseDiagram",
+    "_id": "56563088e47c407887154ca94b541bcf",
+    "name": "03_usecase_giang_vien",
+    "documentation": "SƠ ĐỒ USE CASE PHÂN RÃ – GIẢNG VIÊN"
+  },
+  {
+    "_type": "UMLUseCaseSubject",
+    "_id": "0f235e80ba344977b88ac3e3be07a593",
+    "name": "PHÂN HỆ KHÔNG GIAN GIẢNG VIÊN (/dashboard)"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "06f7eb92843b4638b7eb59297ddfe0f3",
+    "name": "Xem thống kê khóa học\nđược phân công"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "52d982979cc94ba3a8669f831a80f403",
+    "name": "UC18\nBiên soạn nội dung khóa học\nđược phân công"
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "1c6b892e87c145448b27ed26b0df22f0",
+    "source": {
+      "$ref": "52d982979cc94ba3a8669f831a80f403"
+    },
+    "target": {
+      "$ref": "6065816d025440bc9a83b1288e5a14ce"
+    }
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "3a959783253a4492872885022edda814",
+    "source": {
+      "$ref": "52d982979cc94ba3a8669f831a80f403"
+    },
+    "target": {
+      "$ref": "5b92de2f0fff46e2962ac8f39a25a3ad"
+    }
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "AAAAAAGh/6Zbn4U8QLU=",
+    "source": {
+      "$ref": "52d982979cc94ba3a8669f831a80f403"
+    },
+    "target": {
+      "$ref": "5b92de2f0fff46e2962ac8f39a25a3ad"
+    }
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "AAAAAAGh/6ZuCoVOJKk=",
+    "source": {
+      "$ref": "52d982979cc94ba3a8669f831a80f403"
+    },
+    "target": {
+      "$ref": "6065816d025440bc9a83b1288e5a14ce"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "6065816d025440bc9a83b1288e5a14ce",
+    "name": "Quản lý & sắp xếp\nChương (Chapter)"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "5b92de2f0fff46e2962ac8f39a25a3ad",
+    "name": "Quản lý & sắp xếp Bài giảng\n(Video / Bài đọc / File / Ghi chép)"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "38e768ec156e47198da3e8e074f2c317",
+    "name": "Quản lý câu hỏi\ntrắc nghiệm (QuizQuestion)"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "e5aa46bf8baa456a832635ed12b0ebe6",
+    "source": {
+      "$ref": "38e768ec156e47198da3e8e074f2c317"
+    },
+    "target": {
+      "$ref": "5b92de2f0fff46e2962ac8f39a25a3ad"
+    }
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "AAAAAAGh/6ZIW4UqW6w=",
+    "source": {
+      "$ref": "38e768ec156e47198da3e8e074f2c317"
+    },
+    "target": {
+      "$ref": "5b92de2f0fff46e2962ac8f39a25a3ad"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "00d3e3f897d14eaea5e1c54dac4efeba",
+    "name": "UC11 / UC12\nXem thử khóa học ở chế độ\nHọc viên (Preview Mode)"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "69c8a5d312cf4fb7a3a9304f6fe13d23",
+    "name": "UC19\nGửi duyệt khóa học\n(DRAFT → PENDING) /\nThu hồi về Nháp"
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "0ff711101abd48bc93103db53c878be2",
+    "source": {
+      "$ref": "69c8a5d312cf4fb7a3a9304f6fe13d23"
+    },
+    "target": {
+      "$ref": "e9489e0da4ea4a25a68dc9378329e69f"
+    }
+  },
+  {
+    "_type": "UMLInclude",
+    "_id": "AAAAAAGh/6YfCoUYMv0=",
+    "source": {
+      "$ref": "69c8a5d312cf4fb7a3a9304f6fe13d23"
+    },
+    "target": {
+      "$ref": "e9489e0da4ea4a25a68dc9378329e69f"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "e9489e0da4ea4a25a68dc9378329e69f",
+    "name": "Kiểm tra điều kiện sẵn sàng\nkhóa học (Readiness Check)"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "6ca5d9dc9165467d98a25b075acc30bd",
+    "name": "UC20\nTheo dõi danh sách, tiến độ\n& chứng chỉ học viên trong khóa"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "be2f8e2244174eb4b2f661720430a803",
+    "name": "UC15\nGiải đáp câu hỏi & điều phối\nbình luận trong khóa mình dạy"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "4172628afd014eef80664011f8d09627",
+    "name": "UC21 – Tuyến 1\nXử lý báo cáo vi phạm\nthuộc khóa mình dạy"
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "992487e2f77e4ba09c63faf92bcb0886",
+    "name": "Bỏ qua báo cáo\n(DISMISS)"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "04fe0fed29e84c86ab8b77df8e1211f9",
+    "source": {
+      "$ref": "992487e2f77e4ba09c63faf92bcb0886"
+    },
+    "target": {
+      "$ref": "4172628afd014eef80664011f8d09627"
+    }
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "AAAAAAGh/6XZioUAkCs=",
+    "source": {
+      "$ref": "992487e2f77e4ba09c63faf92bcb0886"
+    },
+    "target": {
+      "$ref": "4172628afd014eef80664011f8d09627"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "2eb21a326add4b80a1925697add3fa8b",
+    "name": "Ẩn nội dung vi phạm\n& gửi nhắc nhở\n(DELETE_AND_REMIND)"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "fd5f22047ae641c4a51e69c16c1e18d8",
+    "source": {
+      "$ref": "2eb21a326add4b80a1925697add3fa8b"
+    },
+    "target": {
+      "$ref": "4172628afd014eef80664011f8d09627"
+    }
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "AAAAAAGh/6XVfYTwhJo=",
+    "source": {
+      "$ref": "2eb21a326add4b80a1925697add3fa8b"
+    },
+    "target": {
+      "$ref": "4172628afd014eef80664011f8d09627"
+    }
+  },
+  {
+    "_type": "UMLUseCase",
+    "_id": "20b42693fb894eabb9b498156ed71659",
+    "name": "Chuyển cấp báo cáo\nlên Admin (ESCALATE)"
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "6cbaf0bc035c41c893c3937c027de715",
+    "source": {
+      "$ref": "20b42693fb894eabb9b498156ed71659"
+    },
+    "target": {
+      "$ref": "4172628afd014eef80664011f8d09627"
+    }
+  },
+  {
+    "_type": "UMLExtend",
+    "_id": "AAAAAAGh/6XRoITgE/Y=",
+    "source": {
+      "$ref": "20b42693fb894eabb9b498156ed71659"
+    },
+    "target": {
+      "$ref": "4172628afd014eef80664011f8d09627"
+    }
+  },
+  {
+    "_type": "UMLActor",
+    "_id": "6061cb89bbae4531bd45b1d6b46cab3c",
+    "name": "Giảng viên\n(Instructor)"
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "fad1587f7a554dc8b06e627e0699088c",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "1c0187cf063245e5807ca01d35058f8b",
+      "_parent": {
+        "$ref": "fad1587f7a554dc8b06e627e0699088c"
+      },
+      "reference": {
+        "$ref": "6061cb89bbae4531bd45b1d6b46cab3c"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "0451cbae4310484996c979126ce741e7",
+      "_parent": {
+        "$ref": "fad1587f7a554dc8b06e627e0699088c"
+      },
+      "reference": {
+        "$ref": "06f7eb92843b4638b7eb59297ddfe0f3"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "703358f861d244728de7543585e28f78",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "ee06ea15c26b4937a9fda10c4991dd84",
+      "_parent": {
+        "$ref": "703358f861d244728de7543585e28f78"
+      },
+      "reference": {
+        "$ref": "6061cb89bbae4531bd45b1d6b46cab3c"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "c326853fe5424a0cbab0f8117b63f90e",
+      "_parent": {
+        "$ref": "703358f861d244728de7543585e28f78"
+      },
+      "reference": {
+        "$ref": "52d982979cc94ba3a8669f831a80f403"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "ba52efb0aa584b09aa6377b66ae250ea",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "0a5b2d8a70084d69927687d23a80a128",
+      "_parent": {
+        "$ref": "ba52efb0aa584b09aa6377b66ae250ea"
+      },
+      "reference": {
+        "$ref": "6061cb89bbae4531bd45b1d6b46cab3c"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "ebdc40ac106d48ddb08b9ed287410503",
+      "_parent": {
+        "$ref": "ba52efb0aa584b09aa6377b66ae250ea"
+      },
+      "reference": {
+        "$ref": "00d3e3f897d14eaea5e1c54dac4efeba"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "39f3d654f0774d1e9f2ab223f4b8198f",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "0eb7a4d636c14eac949eb93ece38c240",
+      "_parent": {
+        "$ref": "39f3d654f0774d1e9f2ab223f4b8198f"
+      },
+      "reference": {
+        "$ref": "6061cb89bbae4531bd45b1d6b46cab3c"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "c4cb4fc51a3845bd986ed887e3dd481a",
+      "_parent": {
+        "$ref": "39f3d654f0774d1e9f2ab223f4b8198f"
+      },
+      "reference": {
+        "$ref": "69c8a5d312cf4fb7a3a9304f6fe13d23"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "1182688897984f04bea0e32d54e0d8b5",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "b978e6a909a54e4e8a8d071d25cf4f8d",
+      "_parent": {
+        "$ref": "1182688897984f04bea0e32d54e0d8b5"
+      },
+      "reference": {
+        "$ref": "6061cb89bbae4531bd45b1d6b46cab3c"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "03ad63aefec3430baf45aee0ef9fd109",
+      "_parent": {
+        "$ref": "1182688897984f04bea0e32d54e0d8b5"
+      },
+      "reference": {
+        "$ref": "6ca5d9dc9165467d98a25b075acc30bd"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "5940bca523c94bef87735af71f6add60",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "3f868493737d4219aea16d962b4cee01",
+      "_parent": {
+        "$ref": "5940bca523c94bef87735af71f6add60"
+      },
+      "reference": {
+        "$ref": "6061cb89bbae4531bd45b1d6b46cab3c"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "c28d343de9174c238753d875281d020e",
+      "_parent": {
+        "$ref": "5940bca523c94bef87735af71f6add60"
+      },
+      "reference": {
+        "$ref": "be2f8e2244174eb4b2f661720430a803"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "4ce65c80e76c4226b949beec929ef6b0",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "be630718b46c43a999f45a5bdfc9ac36",
+      "_parent": {
+        "$ref": "4ce65c80e76c4226b949beec929ef6b0"
+      },
+      "reference": {
+        "$ref": "6061cb89bbae4531bd45b1d6b46cab3c"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "cf05579d54f54582b934cc5bab37bfd6",
+      "_parent": {
+        "$ref": "4ce65c80e76c4226b949beec929ef6b0"
+      },
+      "reference": {
+        "$ref": "4172628afd014eef80664011f8d09627"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6d7LocKPLI=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6d7LocLLPE=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6d7LocKPLI="
+      },
+      "reference": {
+        "$ref": "6061cb89bbae4531bd45b1d6b46cab3c"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6d7LocM0+E=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6d7LocKPLI="
+      },
+      "reference": {
+        "$ref": "06f7eb92843b4638b7eb59297ddfe0f3"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6d/roc+TIE=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6d/roc/Qa0=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6d/roc+TIE="
+      },
+      "reference": {
+        "$ref": "6061cb89bbae4531bd45b1d6b46cab3c"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6d/rodASyc=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6d/roc+TIE="
+      },
+      "reference": {
+        "$ref": "52d982979cc94ba3a8669f831a80f403"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6eFPYdyIj8=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6eFPYdz4dA=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6eFPYdyIj8="
+      },
+      "reference": {
+        "$ref": "6061cb89bbae4531bd45b1d6b46cab3c"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6eFPYd0YxE=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6eFPYdyIj8="
+      },
+      "reference": {
+        "$ref": "00d3e3f897d14eaea5e1c54dac4efeba"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6eKMoemsIY=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6eKMoen7TI=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6eKMoemsIY="
+      },
+      "reference": {
+        "$ref": "6061cb89bbae4531bd45b1d6b46cab3c"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6eKMoeoqL0=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6eKMoemsIY="
+      },
+      "reference": {
+        "$ref": "69c8a5d312cf4fb7a3a9304f6fe13d23"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6ePdofazZY=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6ePdofb6oc=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6ePdofazZY="
+      },
+      "reference": {
+        "$ref": "6061cb89bbae4531bd45b1d6b46cab3c"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6ePdofcxyM=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6ePdofazZY="
+      },
+      "reference": {
+        "$ref": "6ca5d9dc9165467d98a25b075acc30bd"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6eT+ogO6pM=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6eT+ogPISA=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6eT+ogO6pM="
+      },
+      "reference": {
+        "$ref": "6061cb89bbae4531bd45b1d6b46cab3c"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6eT+ogQxoY=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6eT+ogO6pM="
+      },
+      "reference": {
+        "$ref": "be2f8e2244174eb4b2f661720430a803"
+      },
+      "navigable": "navigable"
+    }
+  },
+  {
+    "_type": "UMLAssociation",
+    "_id": "AAAAAAGh/6eZ74hCCOs=",
+    "end1": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6eZ74hDr4c=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6eZ74hCCOs="
+      },
+      "reference": {
+        "$ref": "6061cb89bbae4531bd45b1d6b46cab3c"
+      }
+    },
+    "end2": {
+      "_type": "UMLAssociationEnd",
+      "_id": "AAAAAAGh/6eZ74hEqrA=",
+      "_parent": {
+        "$ref": "AAAAAAGh/6eZ74hCCOs="
+      },
+      "reference": {
+        "$ref": "4172628afd014eef80664011f8d09627"
+      },
+      "navigable": "navigable"
+    }
+  }
+]

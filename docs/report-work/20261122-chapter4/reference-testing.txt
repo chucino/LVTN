@@ -1,0 +1,852 @@
+PAGE 194
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 160  
+  
+ CHƯƠNG 5: KIỂM THỬ VÀ ĐÁNH GIÁ 
+ 5.1. Kiểm thử 
+5.1.1. Mục tiêu 
+- Xác thực chức năng: Thực hiện kiểm thử toàn diện nhằm đối soát và xác nhận 
+mức độ tương thích giữa các tính năng thực tế với tài liệu đặc tả yêu cầu phần 
+mềm (SRS). 
+- Quản trị rủi ro và khắc phục: Chủ động nhận diện các lỗ hổng kỹ thuật và rủi ro 
+vận hành, từ đó triển khai các biện pháp xử lý và tối ưu hóa hệ thống một cách 
+triệt để. 
+- Hệ thống hóa tài liệu: Xây dựng bộ chỉ dẫn kỹ thuật và tài liệu hóa quy trình vận 
+hành nhằm phục vụ công tác quản trị, nâng cấp hệ thống trong tương lai. 
+5.1.2. Phạm vi kiểm thử 
+Dựa trên danh mục các chức năng của hệ thống, phạm vi kiểm thử được xây dựng 
+nhằm xác thực toàn diện các quy trình nghiệp vụ. Các kịch bản kiểm soát được triển 
+khai như sau: 
+- Chức năng đăng ký tài khoản  
+- Chức năng đăng nhập  
+- Chức năng đăng dự án  
+- Chức năng quản lý cột mốc (Milestone)  
+- Chức năng nhắn tin giữa Nhà tuyển dụng và Freelancer  
+- Chức năng quản lý danh mục  
+- Chức năng quản lý tài khoản người dùng  
+- Chức năng mời đấu thầu  
+- Chức năng quản lý hồ sơ cá nhân của Freelancer  
+- Chức năng so sánh các đề xuất 
+ 5.2. Nội dung kiểm thử 
+5.2.1 Cách tiếp cận 
+Quy trình kiểm thử được triển khai theo lộ trình hệ thống, bắt đầu bằng việc phân tích 
+chuyên sâu các yêu cầu kỹ thuật và nghiệp vụ cốt lõi của hệ thống. Dựa trên nền tảng 
+đó, một kế hoạch kiểm thử chi tiết được thiết lập nhằm xác định rõ phạm vi, mục tiêu , 
+
+PAGE 195
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 161  
+nguồn lực và tiến độ thực hiện. Giai đoạn tiếp theo tập trung vào việc thiết kế bộ kịch 
+bản kiểm thử (Test Scenarios) và các trường hợp kiểm thử (Test Cases) để tối ưu hóa độ 
+bao phủ tính năng. Sau khi hoàn tất chuẩn bị môi trường và dữ liệu mẫu, quá trình  thực 
+thi sẽ được tiến hành theo các cấp độ từ kiểm thử đơn vị (Unit Test), kiểm thử tích hợp 
+(Integration Test) đến kiểm thử hệ thống và chấp nhận (System & UAT). Toàn bộ kết 
+quả, bao gồm các lỗi (bugs) phát sinh, được ghi nhận và đánh giá định kỳ để kiểm  soát 
+chất lượng. Cuối cùng, hệ thống trải qua các đợt sửa lỗi và kiểm thử hồi quy (Regression 
+Testing) nhằm đảm bảo sự ổn định tuyệt đối trước khi vận hành thực tế 
+5.2.2. Tiêu chí kiểm thử 
+- Độ tin cậy về chức năng (Functional Reliability): Kiểm chứng tính đúng đắn của 
+các luồng xử lý dữ liệu, đảm bảo kết quả đầu ra chính xác dựa trên các điều kiện 
+đầu vào tương ứng theo đặc tả SRS. 
+- Tính khả dụng (Usability): Kiểm chứng mức độ thân thiện của giao diện người 
+dùng (UI), đảm bảo quy trình tương tác (UX) diễn ra mạch lạc, thuận tiện và tối 
+ưu hóa trải nghiệm người dùng trên hệ thống. 
+- Tính Tương thích (Compatibility): Đảm bảo website vận hành nhất quán và không 
+xảy ra lỗi hiển thị trên các nền tảng trình duyệt phổ biến cũng như các thiết bị có 
+kích thước màn hình khác nhau. 
+5.2.3. Tiêu chí đình chỉ và yêu cầu đánh giá lại 
+- Điều kiện tạm dừng kiểm thử: Quá trình kiểm tra sẽ được đình chỉ nếu phát hiện 
+các khiếm khuyết mức độ cao gây mất ổn định hệ thống hoặc khi thiếu hụt dữ liệu 
+đầu vào. Hoạt động này chỉ được tái khởi động sau khi các tác nhân gây gián đoạn 
+đã được xử lý. 
+ 
+- Tiêu chí phê duyệt hoàn thành: Việc kiểm thử được coi là hoàn tất khi và chỉ khi 
+toàn bộ các trường hợp kiểm thử (Test Cases) đã được chạy, các sai lệch (Defects) 
+được ghi nhận và xử lý, đồng thời kết quả cuối cùng đáp ứng được sự mong đợi 
+của người dùng và các yêu cầu đặc tả. 
+ 5.3. Kịch bản kiểm thử 
+Bảng 5-1: Kịch bảng kiểm thử 
+Mã kịch bản 
+kiểm thử 
+Tên kịch bản kiểm thử Số trường 
+hợp kiểm 
+
+PAGE 196
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 162  
+thử 
+TS_REG Đăng ký  10 
+TS_LOGIN Đăng nhập 4 
+TS_JOB_POST Kiểm thử quy trình Đăng dự án 4 
+TS_MILESTONE Kiểm thử quản lý cột mốc 5 
+TS_CHAT Kiểm thử quy trình nhắn tin giữa Nhà tuyển dụng 
+và Freelancer 
+8 
+TS_CATEGORY Kiểm thử chức năng quản lý danh mục 2 
+TS_ACC_MA Kiểm thử chức năng quản lý tài khoản người dùng 3 
+TS_INVITATION Kiểm thử chức năng mời đấu thầu 5 
+TS_PROFILE Kiểm thử chức năng quản lý hồ sơ cá nhân 9 
+TS_COMP_PRO Kiểm thử chức năng so sánh đề xuất 6 
+ 
+ 5.4. Đánh giá kết quả kiểm thử 
+5.4.1. Kiểm thử chức năng Đăng ký 
+Bảng 5-2: Kiểm thử chức năng Đăng ký 
+Test 
+Case ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+TC001 
+Kiểm tra đăng ký 
+thành công với 
+thông tin hợp lệ 
+(Freelancer) 
+Tài khoản được tạo, hệ 
+thống gửi email xác nhận 
+và điều hướng đến trang 
+thiết lập hồ sơ. 
+Tài khoản được 
+tạo, hệ thống gửi 
+email xác nhận và 
+điều hướng đến 
+trang thiết lập hồ 
+sơ. 
+Đạt 
+TC002 
+Kiểm tra đăng ký 
+thành công với 
+thông tin hợp lệ 
+(Client) 
+Tài khoản được tạo, điều 
+hướng đến trang 
+Dashboard dành cho người 
+thuê. 
+Tài khoản được 
+tạo, điều hướng 
+đến trang 
+Dashboard dành 
+cho người thuê. 
+Đạt 
+TC003 
+Kiểm tra với 
+Email đã tồn tại 
+trong hệ thống 
+Hiển thị thông báo "Email 
+này đã được sử dụng. Vui 
+lòng chọn email khác hoặc 
+đăng nhập." 
+Hiển thị thông báo 
+"Email này đã 
+được sử dụng. Vui 
+lòng chọn email 
+khác hoặc đăng 
+nhập." 
+Đạt 
+
+PAGE 197
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 163  
+TC004 
+Kiểm tra với 
+Email không đúng 
+định dạng (thiếu 
+@, thiếu .com...) 
+Hiển thị thông báo "Email 
+không hợp lệ. Vui lòng 
+kiểm tra lại." 
+Hiển thị thông báo 
+"Email không hợp 
+lệ. Vui lòng kiểm 
+tra lại." 
+Đạt 
+TC005 
+Kiểm tra mật khẩu 
+quá ngắn (Dưới 8 
+ký tự) 
+Hiển thị thông báo "Mật 
+khẩu phải có ít nhất 8 ký 
+tự." 
+Hiển thị thông báo 
+"Mật khẩu phải có 
+ít nhất 8 ký tự." 
+Đạt 
+TC006 
+Kiểm tra mật khẩu 
+không có ký tự đặc 
+biệt/số (nếu hệ 
+thống yêu cầu) 
+Hiển thị thông báo "Mật 
+khẩu phải bao gồm chữ 
+cái, số và ký tự đặc biệt." 
+Hiển thị thông báo 
+"Mật khẩu phải 
+bao gồm chữ cái, 
+số và ký tự đặc 
+biệt." 
+Đạt 
+TC007 
+Kiểm tra mật khẩu 
+và "Nhập lại mật 
+khẩu" không khớp 
+Hiển thị thông báo "Mật 
+khẩu xác nhận không 
+trùng khớp." 
+Hiển thị thông báo 
+"Mật khẩu xác 
+nhận không trùng 
+khớp." 
+Đạt 
+TC008 
+Kiểm tra để trống 
+các trường bắt 
+buộc (Họ tên, 
+Email, Mật khẩu) 
+Hiển thị thông báo "Vui 
+lòng điền đầy đủ các 
+trường thông tin bắt buộc." 
+Hiển thị thông báo 
+"Vui lòng điền đầy 
+đủ các trường 
+thông tin bắt 
+buộc." 
+Đạt 
+TC009 
+Kiểm tra khi chưa 
+tích chọn "Đồng ý 
+với Điều khoản sử 
+dụng" 
+Hiển thị thông báo "Bạn 
+phải đồng ý với điều 
+khoản dịch vụ để tiếp tục." 
+Hiển thị thông báo 
+"Bạn phải đồng ý 
+với điều khoản 
+dịch vụ để tiếp 
+tục." 
+Đạt 
+TC010 
+Kiểm tra nhập Họ 
+tên chứa ký tự số 
+hoặc ký tự đặc biệt 
+Hiển thị thông báo "Họ tên 
+không được chứa số hoặc 
+ký tự đặc biệt." 
+Hiển thị thông báo 
+"Họ tên không 
+được chứa số hoặc 
+ký tự đặc biệt." 
+Đạt 
+ 
+5.4.2. Chức năng Đăng nhập 
+Bảng 5-3: Kiểm thử chức năng Đăng nhập 
+Test 
+Case ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+
+PAGE 198
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 164  
+TC001 
+Đăng nhập với 
+Email và Mật 
+khẩu hợp lệ 
+Đăng nhập thành công, điều 
+hướng vào trang Dashboard 
+tương ứng với vai trò. 
+Đăng nhập thành 
+công, điều hướng 
+vào trang 
+Dashboard tương 
+ứng với vai trò. 
+Đạt 
+TC002 
+Đăng nhập với 
+Email không tồn 
+tại 
+Hiển thị thông báo "Email 
+hoặc mật khẩu không chính 
+xác." 
+Hiển thị thông báo 
+"Email hoặc mật 
+khẩu không chính 
+xác." 
+Đạt 
+TC003 Đăng nhập với sai mật khẩu Hiển thị thông báo "Email hoặc mật khẩu không chính xác." Hiển thị thông báo "Email hoặc mật khẩu không chính xác." Đạt 
+TC004 
+Để trống trường 
+Email hoặc Mật 
+khẩu 
+Hiển thị thông báo "Vui lòng 
+nhập đầy đủ Email và Mật 
+khẩu." 
+Hiển thị thông báo 
+"Vui lòng nhập 
+đầy đủ Email và 
+Mật khẩu." 
+Đạt 
+ 
+ 
+5.4.3 Kiểm thử quy trình Đăng dự án 
+Bảng 5-4: Kiểm thử chức năng Đăng dự án 
+Test Case 
+ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+TC_PRO_01 
+Kiểm tra đăng dự 
+án với đầy đủ 
+thông tin hợp lệ 
+Dự án được lưu vào hệ 
+thống, hiển thị thông báo 
+"Đăng tin thành công" và 
+chuyển đến trang chi tiết 
+dự án. 
+Dự án được lưu vào 
+hệ thống, hiển thị 
+thông báo "Đăng tin 
+thành công" và 
+chuyển đến trang chi 
+tiết dự án. 
+Đạt 
+TC_PRO_02 
+Kiểm tra để 
+trống các trường 
+bắt buộc (Tiêu 
+đề, Mô tả, Ngân 
+sách) 
+Hiển thị thông báo "Vui 
+lòng điền đầy đủ các 
+thông tin bắt buộc." 
+Hiển thị thông báo 
+"Vui lòng điền đầy 
+đủ các thông tin bắt 
+buộc." 
+Đạt 
+TC_PRO_03 Kiểm tra nhập tiêu đề dự án quá Hiển thị thông báo "Tiêu đề quá ngắn, vui lòng mô tả rõ ràng hơn." Hiển thị thông báo "Tiêu đề quá ngắn, Đạt 
+
+PAGE 199
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 165  
+ngắn (ví dụ < 10 
+ký tự) 
+vui lòng mô tả rõ 
+ràng hơn." 
+TC_PRO_04 
+Kiểm tra nhập 
+ngân sách là số 
+âm hoặc bằng 0 
+Hiển thị thông báo 
+"Ngân sách phải là số 
+dương lớn hơn 0." 
+Hiển thị thông báo 
+"Ngân sách phải là 
+số dương lớn hơn 0." 
+Đạt 
+ 
+5.4.4 Kiểm thử quy trình Gửi báo giá và Đề xuất Milestone 
+Bảng 5-5: Kiểm thử chức năng Gửi báo giá và Đề xuất Milestone 
+Test Case 
+ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+TC_PRS_06 
+Freelancer gửi báo 
+giá với đầy đủ thông 
+tin (Giá, thời gian 
+hoàn thành, thư giới 
+thiệu) 
+Đề xuất được lưu, hiển 
+thị thông báo "Gửi đề 
+xuất thành công". 
+Đề xuất được lưu, 
+hiển thị thông báo 
+"Gửi đề xuất 
+thành công". 
+Đạt 
+TC_PRS_07 
+Freelancer bỏ trống 
+phần "Thư giới 
+thiệu" (Cover Letter) 
+Hiển thị thông báo "Vui 
+lòng nhập nội dung đề 
+xuất của bạn." 
+Hiển thị thông báo 
+"Vui lòng nhập 
+nội dung đề xuất 
+của bạn." 
+Đạt 
+TC_PRS_08 
+Một Freelancer cố 
+tình gửi báo giá lần 
+thứ 2 cho cùng 1 dự 
+án 
+Hệ thống thông báo 
+"Bạn đã gửi đề xuất cho 
+dự án này rồi." 
+Hệ thống thông 
+báo "Bạn đã gửi 
+đề xuất cho dự án 
+này rồi." 
+Đạt 
+TC_PRS_09 
+Freelancer thực hiện 
+chỉnh sửa báo giá đã 
+gửi 
+Thông tin báo giá được 
+cập nhật mới nhất trong 
+danh sách của Client. 
+Thông tin báo giá 
+được cập nhật mới 
+nhất trong danh 
+sách của Client. 
+Đạt 
+TC_PRS_08 
+Client xem danh 
+sách các Freelancer 
+đã chào giá 
+Hiển thị đầy đủ danh 
+sách, mức giá và đánh 
+giá (Rating) của từng 
+Freelancer. 
+Hiển thị đầy đủ 
+danh sách, mức 
+giá và đánh giá 
+(Rating) của từng 
+Freelancer. 
+Đạt 
+TC_PRS_09 
+Client nhấn "Chấp 
+nhận" (Accept) một 
+báo giá cụ thể 
+Hệ thống chuyển sang 
+trang chi tiết Hợp đồng 
+Hệ thống chuyển 
+sang trang chi tiết 
+Hợp đồng 
+Đạt 
+ 
+
+PAGE 200
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 166  
+5.4.5  Kiểm thử quản lý Cột mốc 
+Bảng 5-6: Kiểm thử chức năng Quản lý cột mốc 
+Test Case 
+ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+TC_MIL_01 
+Freelancer tạo 
+danh sách 
+Milestone khi gửi 
+Proposal (Tên, 
+Số tiền, Hạn nộp) 
+Các Milestone được lưu tạm 
+cùng với Proposal, hiển thị 
+đúng cấu trúc phân kỳ. 
+Các Milestone 
+được lưu tạm 
+cùng với 
+Proposal, hiển thị 
+đúng cấu trúc 
+phân kỳ. 
+Đạt 
+TC_MIL_02 
+Kiểm tra tổng số 
+tiền các 
+Milestone phải 
+bằng với tổng giá 
+trị báo giá 
+Hệ thống báo lỗi nếu tổng 
+tiền Milestone khác với tổng 
+ngân sách đề xuất. 
+Hệ thống báo lỗi 
+nếu tổng tiền 
+Milestone khác 
+với tổng ngân 
+sách đề xuất. 
+Đạt 
+TC_MIL_03 
+Client nhấn 
+"Chấp nhận 
+Proposal" 
+(Approve) 
+Hệ thống tự động chuyển 
+toàn bộ Milestone của 
+Proposal đó vào danh sách 
+công việc chính thức. 
+Hệ thống tự động 
+chuyển toàn bộ 
+Milestone của 
+Proposal đó vào 
+danh sách công 
+việc chính thức. 
+Đạt 
+TC_MIL_04 
+Client ký quỹ 
+(Deposit) cho 
+Milestone sau khi 
+duyệt 
+Tiền được trừ từ ví Client 
+vào Escrow, Milestone 
+chuyển từ "Pending" sang 
+"Funded". 
+Tiền được trừ từ 
+ví Client vào 
+Escrow, 
+Milestone chuyển 
+từ "Pending" 
+sang "Funded". 
+Đạt 
+TC_MIL_05 
+Freelancer nộp 
+sản phẩm cho 
+một Milestone cụ 
+thể 
+Hệ thống ghi nhận thời gian 
+nộp, cho phép đính kèm 
+file/link và báo cho Client. 
+Hệ thống ghi 
+nhận thời gian 
+nộp, cho phép 
+đính kèm file/link 
+và báo cho 
+Client. 
+Đạt 
+ 
+ 
+ 
+
+PAGE 201
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 167  
+5.4.6 Kiểm thử quy trình nhắn tin giữa Nhà tuyển dụng và Freelancer 
+Bảng 5-7: Kiểm thử chức năng nhắn tin giữa Nhà tuyển dụng và Freelancer 
+TestcaseID Kịch bản Kết quả mong đợi Kết quả thực thi 
+Tình 
+trạng 
+TC_MS_02 
+Freelancer nhắn tin 
+cho Client từ trang 
+chi tiết dự án 
+Tin nhắn được gửi đi, 
+Client nhận được thông 
+báo tin nhắn mới. 
+Tin nhắn được gửi 
+đi, Client nhận 
+được thông báo tin 
+nhắn mới. Đạt 
+TC_MS_03 
+Kiểm tra nhắn tin 
+thời gian thực (Real-
+time) 
+Tin nhắn hiển thị ngay 
+lập tức ở cả hai phía mà 
+không cần tải lại trang. 
+Tin nhắn hiển thị 
+ngay lập tức ở cả 
+hai phía mà không 
+cần tải lại trang. Đạt 
+TC_MS_04 
+Gửi tệp đính kèm 
+qua khung Chat 
+(Hình ảnh, PDF, 
+Docx) 
+Tệp được tải lên thành 
+công, đối phương có thể 
+nhấn vào để tải về hoặc 
+xem trước. 
+Tệp được tải lên 
+thành công, đối 
+phương có thể 
+nhấn vào để tải về 
+hoặc xem trước. Đạt 
+TC_MS_05 
+Gửi tệp tin có dung 
+lượng vượt quá giới 
+hạn (ví dụ > 25MB) 
+Hệ thống chặn gửi và 
+hiển thị thông báo "Dung 
+lượng tệp quá lớn". 
+Hệ thống chặn gửi 
+và hiển thị thông 
+báo "Dung lượng 
+tệp quá lớn". Đạt 
+TC_MS_06 
+Gửi tin nhắn trống 
+(chỉ có khoảng 
+trắng) 
+Nút gửi bị vô hiệu hóa 
+hoặc hệ thống không 
+thực hiện lệnh gửi. 
+Nút gửi bị vô hiệu 
+hóa hoặc hệ thống 
+không thực hiện 
+lệnh gửi. Đạt 
+TC_MS_07 
+Kiểm tra trạng thái 
+tin nhắn (Đã gửi/Đã 
+xem) 
+Hiển thị đúng trạng thái 
+"Sent" hoặc "Read" khi 
+đối phương đã mở tin 
+nhắn. 
+Hiển thị đúng 
+trạng thái "Sent" 
+hoặc "Read" khi 
+đối phương đã mở 
+tin nhắn. Đạt 
+TC_MS_08 
+Kiểm tra hiển thị 
+thông báo tin nhắn 
+mới (Notification 
+Badge) 
+Hiển thị số lượng tin 
+nhắn chưa đọc trên biểu 
+tượng chiếc chuông hoặc 
+tin nhắn. 
+Hiển thị số lượng 
+tin nhắn chưa đọc 
+trên biểu tượng 
+chiếc chuông hoặc 
+tin nhắn. Đạt 
+
+PAGE 202
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 168  
+TC_MS_09 
+Kiểm tra lịch sử tin 
+nhắn khi load lại 
+trang 
+Toàn bộ nội dung trò 
+chuyện cũ được tải đầy 
+đủ theo đúng trình tự 
+thời gian. 
+Toàn bộ nội dung 
+trò chuyện cũ 
+được tải đầy đủ 
+theo đúng trình tự 
+thời gian. Đạt 
+ 
+5.4.7 Kiểm thử chức năng quản lý danh mục 
+Bảng 5-8: Kiểm thử chức năng Quản lý danh mục 
+Test case 
+ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+TC_AD_01 Thêm danh mục mới Danh mục mới hiển thị trong danh sách Admin và trang đăng dự án của Client. 
+Danh mục mới 
+hiển thị trong 
+danh sách 
+Admin và trang 
+đăng dự án của 
+Client. 
+Đạt 
+TC_AD_03 Sửa tên danh mục đang có sẵn 
+Tên mới được cập nhật đồng 
+bộ trên toàn bộ hệ thống 
+(các bài đăng cũ cũng đổi 
+theo). 
+Tên mới được 
+cập nhật đồng 
+bộ trên toàn bộ 
+hệ thống (các 
+bài đăng cũ 
+cũng đổi theo). 
+Đạt 
+ 
+5.4.8 Kiểm thử chức năng quản lý tài khoản người dùng 
+Bảng 5-9: Kiểm thử chức năng quản lý tài khoản người dùng 
+TestcaseID Kịch bản Kết quả mong đợi Kết quả thực thi 
+Tình 
+trạng 
+TC_AD_06 
+Tìm kiếm người 
+dùng theo Email 
+hoặc Tên 
+Hiển thị chính xác thông 
+tin tài khoản cần tìm. 
+Hiển thị chính 
+xác thông tin tài 
+khoản cần tìm. Đạt 
+TC_AD_08 
+Khóa tài khoản 
+(Deactivate/Ban) 
+người dùng vi 
+phạm 
+Người dùng bị đăng xuất 
+ngay lập tức và không thể 
+đăng nhập lại. 
+Người dùng bị 
+đăng xuất ngay 
+lập tức và không 
+thể đăng nhập lại. Đạt 
+
+PAGE 203
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 169  
+TC_AD_09 
+Mở khóa tài khoản 
+(Reactivate) 
+Người dùng có thể đăng 
+nhập lại bình thường với 
+dữ liệu cũ được giữ 
+nguyên. 
+Người dùng có 
+thể đăng nhập lại 
+bình thường với 
+dữ liệu cũ được 
+giữ nguyên. Đạt 
+ 
+ 
+5.4.9 Kiểm thử chức năng mời đấu thầu 
+Bảng 5-10: Kiểm thử chức năng mời đấu thầu 
+Test Case 
+ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+TC_INV_03 
+Client xem danh 
+sách Freelancer 
+phù hợp với yêu 
+cầu dự án vừa 
+đăng 
+Hệ thống hiển thị danh 
+sách ứng viên có kỹ năng 
+và đánh giá (Rating) cao 
+nhất cho công việc đó. 
+Hệ thống hiển 
+thị danh sách 
+ứng viên có 
+kỹ năng và 
+đánh giá 
+(Rating) cao 
+nhất cho công 
+việc đó. 
+Đạt 
+TC_INV_04 
+Client nhấn nút 
+"Mời" một 
+Freelancer cụ thể 
+từ danh sách gợi ý 
+Hệ thống hiển thị thông 
+báo "Đã gửi lời mời thành 
+công"; nút "Mời" chuyển 
+sang trạng thái "Đã mời". 
+Hệ thống hiển 
+thị thông báo 
+"Đã gửi lời 
+mời thành 
+công"; nút 
+"Mời" chuyển 
+sang trạng 
+thái "Đã 
+mời". 
+Đạt 
+TC_INV_05 
+Kiểm tra việc gửi 
+Email mời thầu tự 
+động sau khi 
+Client nhấn "Mời" 
+Freelancer nhận được 
+Email có tiêu đề, mô tả 
+ngắn và link trực tiếp dẫn 
+đến dự án. 
+Freelancer 
+nhận được 
+Email có tiêu 
+đề, mô tả 
+ngắn và link 
+trực tiếp dẫn 
+đến dự án. 
+Đạt 
+
+PAGE 204
+ 
+ 
+CBHD: TS. Nguyễn Công Danh  
+ 170  
+TC_INV_06 
+Kiểm tra tính hợp 
+lệ của liên kết 
+(Link) trong Email 
+Khi Freelancer click vào 
+link, hệ thống điều hướng 
+đúng đến trang chi tiết dự 
+án đó. 
+Khi 
+Freelancer 
+click vào link, 
+hệ thống điều 
+hướng đúng 
+đến trang chi 
+tiết dự án đó. 
+Đạt 
+TC_INV_08 Kiểm tra giới hạn lời mời 
+Client không được phép 
+gửi lời mời lần thứ 2 cho 
+cùng một Freelancer trong 
+cùng một dự án. 
+Client không 
+được phép 
+gửi lời mời 
+lần thứ 2 cho 
+cùng một 
+Freelancer 
+trong cùng 
+một dự án. 
+Đạt 
+ 
+5.4.10 Kiểm thử chức năng quản lý hồ sơ cá nhân của freelancer 
+Bảng 5-11: Kiểm thử chức năng quản lý hồ sơ cá nhân của freelancer 
+Test Case 
+ID Kịch bản Kết quả mong đợi Kết quả thực thi Tình trạng 
+TC_PF_01 
+[Skill] Thêm kỹ năng 
+mới từ danh sách có 
+sẵn 
+Kỹ năng được thêm vào 
+hồ sơ và hiển thị dưới 
+dạng các thẻ (tags). 
+Kỹ năng được 
+thêm vào hồ sơ và 
+hiển thị dưới dạng 
+các thẻ (tags). 
+Đạt 
+TC_PF_02 
+[Skill] Tìm kiếm và 
+thêm kỹ năng không 
+có trong danh sách 
+(nếu hệ thống cho 
+phép) 
+Hệ thống cho phép nhập 
+mới hoặc hiển thị thông 
+báo "Kỹ năng này chưa 
+có, yêu cầu Admin 
+thêm". 
+Hệ thống cho 
+phép nhập mới 
+hoặc hiển thị 
+thông báo "Kỹ 
+năng này chưa có, 
+yêu cầu Admin 
+thêm". 
+Đạt 
+TC_PF_03 [Skill] Xóa kỹ năng hiện có 
+Kỹ năng bị loại bỏ khỏi 
+hồ sơ và không còn 
+xuất hiện trong bộ lọc 
+tìm kiếm Freelancer. 
+Kỹ năng bị loại 
+bỏ khỏi hồ sơ và 
+không còn xuất 
+hiện trong bộ lọc 
+tìm kiếm 
+Freelancer. 
+Đạt 
