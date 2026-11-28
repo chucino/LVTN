@@ -1,21 +1,27 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import {
   AlertCircle,
   ArrowRight,
-  BookOpen,
-  CirclePlus,
+  BarChart3,
+  CreditCard,
+  PieChart,
   PlayCircle,
   Users,
 } from 'lucide-vue-next';
 import { useAuthStore } from '@/stores/auth.store';
 import { manageCourseService } from '@/services/manage-courses.api';
+import { ordersApi } from '@/services/orders.api';
 import { usersApi } from '@/services/users.api';
 import { formatCourseDuration, formatCoursePrice } from '@/lib/course-format';
 import CourseStatusBadge from '@/components/manage/CourseStatusBadge.vue';
 import ManageCourseThumbnail from '@/components/manage/ManageCourseThumbnail.vue';
 import type { ManageCourseItem } from '@/types/manage-course';
+import type { ManageOrdersStats } from '@/types/order';
 import type { ManageUserStats } from '@/types/user';
+
+const DONUT_RADIUS = 42;
+const DONUT_CIRCUMFERENCE = 2 * Math.PI * DONUT_RADIUS;
 
 const authStore = useAuthStore();
 const isAdmin = computed(() => authStore.user?.role === 'ADMIN');
@@ -29,6 +35,7 @@ const courseCounts = ref({
   draft: 0,
   pending: 0,
   approved: 0,
+  hidden: 0,
 });
 
 const userStats = ref<ManageUserStats>({
@@ -39,20 +46,178 @@ const userStats = ref<ManageUserStats>({
   locked: 0,
 });
 
+const orderStats = ref<ManageOrdersStats>({
+  totalOrders: 0,
+  completedOrders: 0,
+  pendingOrders: 0,
+  cancelledOrders: 0,
+  totalRevenue: 0,
+});
+
+const courseChartSegments = computed(() => {
+  const total = courseCounts.value.total;
+  const rawItems = [
+    {
+      key: 'approved',
+      label: 'Đã duyệt xuất bản',
+      count: courseCounts.value.approved,
+      color: '#059669',
+      dotClass: 'bg-[#059669]',
+      barClass: 'bg-[#059669]',
+    },
+    {
+      key: 'draft',
+      label: 'Đang biên soạn (Nháp)',
+      count: courseCounts.value.draft,
+      color: '#2563eb',
+      dotClass: 'bg-[#2563eb]',
+      barClass: 'bg-[#2563eb]',
+    },
+    {
+      key: 'pending',
+      label: 'Chờ phê duyệt',
+      count: courseCounts.value.pending,
+      color: '#d97706',
+      dotClass: 'bg-[#d97706]',
+      barClass: 'bg-[#d97706]',
+    },
+    {
+      key: 'hidden',
+      label: 'Đã ẩn',
+      count: courseCounts.value.hidden,
+      color: '#64748b',
+      dotClass: 'bg-[#64748b]',
+      barClass: 'bg-[#64748b]',
+    },
+  ];
+
+  let accLength = 0;
+  return rawItems.map((item) => {
+    const ratio = total > 0 ? item.count / total : 0;
+    const percent = Math.round(ratio * 100);
+    const segmentLength = ratio * DONUT_CIRCUMFERENCE;
+    const dashArray = `${segmentLength} ${DONUT_CIRCUMFERENCE}`;
+    const dashOffset = -accLength;
+    accLength += segmentLength;
+    return {
+      ...item,
+      percent,
+      dashArray,
+      dashOffset,
+    };
+  });
+});
+
+const userChartBars = computed(() => {
+  const total = userStats.value.total;
+  const items = [
+    {
+      key: 'students',
+      label: 'Học viên (STUDENT)',
+      count: userStats.value.students,
+      barClass: 'bg-[#2563eb]',
+    },
+    {
+      key: 'instructors',
+      label: 'Giảng viên (INSTRUCTOR)',
+      count: userStats.value.instructors,
+      barClass: 'bg-[#0f766e]',
+    },
+    {
+      key: 'admins',
+      label: 'Quản trị (ADMIN)',
+      count: userStats.value.admins,
+      barClass: 'bg-[#4f46e5]',
+    },
+    {
+      key: 'locked',
+      label: 'Đã khóa (LOCKED)',
+      count: userStats.value.locked,
+      barClass: 'bg-[#e11d48]',
+    },
+  ];
+
+  return items.map((item) => {
+    const percent = total > 0 ? Math.round((item.count / total) * 100) : 0;
+    const widthPercent = total > 0 ? Math.max(item.count > 0 ? 6 : 0, percent) : 0;
+    return {
+      ...item,
+      percent,
+      widthPercent,
+    };
+  });
+});
+
+const orderCompletionRate = computed(() => {
+  const total = orderStats.value.totalOrders;
+  if (total <= 0) return 0;
+  return Math.round((orderStats.value.completedOrders / total) * 100);
+});
+
+const orderChartColumns = computed(() => {
+  const total = orderStats.value.totalOrders;
+  const maxCount = Math.max(
+    1,
+    orderStats.value.completedOrders,
+    orderStats.value.pendingOrders,
+    orderStats.value.cancelledOrders,
+  );
+  const items = [
+    {
+      key: 'completed',
+      label: 'Hoàn tất',
+      count: orderStats.value.completedOrders,
+      barClass: 'bg-[#059669]',
+      textClass: 'text-[#047857]',
+    },
+    {
+      key: 'pending',
+      label: 'Chờ thanh toán',
+      count: orderStats.value.pendingOrders,
+      barClass: 'bg-[#d97706]',
+      textClass: 'text-[#b45309]',
+    },
+    {
+      key: 'cancelled',
+      label: 'Đã hủy / Hết hạn',
+      count: orderStats.value.cancelledOrders,
+      barClass: 'bg-[#94a3b8]',
+      textClass: 'text-muted',
+    },
+  ];
+
+  return items.map((item) => {
+    const percent = total > 0 ? Math.round((item.count / total) * 100) : 0;
+    const heightPercent =
+      item.count > 0 ? Math.max(16, Math.round((item.count / maxCount) * 100)) : 6;
+    return {
+      ...item,
+      percent,
+      heightPercent,
+    };
+  });
+});
+
 function formatUpdatedAt(value: string): string {
   const date = new Date(value);
   return Number.isNaN(date.getTime()) ? '—' : date.toLocaleDateString('vi-VN');
 }
 
-async function loadDashboardData() {
-  loading.value = true;
-  error.value = null;
+async function loadDashboardData(silent: boolean | Event = false) {
+  const isSilent = silent === true;
+  if (!isSilent) {
+    loading.value = true;
+    error.value = null;
+  }
   try {
-    const [allRes, draftRes, pendingRes, approvedRes] = await Promise.all([
+    const [allRes, draftRes, pendingRes, approvedRes, hiddenRes] = await Promise.all([
       manageCourseService.list({ page: 1, limit: 5, sort: 'updated_desc' }),
       manageCourseService.list({ page: 1, limit: 1, status: 'DRAFT' }),
       manageCourseService.list({ page: 1, limit: 1, status: 'PENDING' }),
       manageCourseService.list({ page: 1, limit: 1, status: 'APPROVED' }),
+      manageCourseService.list({ page: 1, limit: 1, status: 'HIDDEN' }).catch(() => ({
+        total: 0,
+      })),
     ]);
 
     recentCourses.value = allRes.items;
@@ -61,74 +226,85 @@ async function loadDashboardData() {
       draft: draftRes.total,
       pending: pendingRes.total,
       approved: approvedRes.total,
+      hidden: hiddenRes.total,
     };
 
     if (isAdmin.value) {
-      const usersRes = await usersApi.listManageUsers({ page: 1, limit: 1 });
+      const [usersRes, ordersRes] = await Promise.all([
+        usersApi.listManageUsers({ page: 1, limit: 1 }),
+        ordersApi
+          .getManageOrders({ page: 1, limit: 1 })
+          .catch(() => ({ stats: orderStats.value })),
+      ]);
       userStats.value = usersRes.stats;
+      orderStats.value = ordersRes.stats;
     }
   } catch (err: any) {
-    error.value =
-      err?.response?.data?.message ||
-      err?.message ||
-      'Không thể tải dữ liệu tổng quan quản trị.';
+    if (!isSilent) {
+      error.value =
+        err?.response?.data?.message ||
+        err?.message ||
+        'Không thể tải dữ liệu tổng quan quản trị.';
+    }
   } finally {
-    loading.value = false;
+    if (!isSilent) {
+      loading.value = false;
+    }
   }
 }
 
+let dashboardSyncChannel: BroadcastChannel | null = null;
+let lastDashboardRefreshAt = 0;
+
+function handleDashboardFocus() {
+  if (typeof document !== 'undefined' && document.visibilityState !== 'visible') {
+    return;
+  }
+  const now = Date.now();
+  if (now - lastDashboardRefreshAt < 2500) return;
+  lastDashboardRefreshAt = now;
+  void loadDashboardData(true);
+}
+
 onMounted(() => {
-  void loadDashboardData();
+  lastDashboardRefreshAt = Date.now();
+  void loadDashboardData(false);
+  window.addEventListener('focus', handleDashboardFocus);
+  document.addEventListener('visibilitychange', handleDashboardFocus);
+
+  if (typeof BroadcastChannel !== 'undefined') {
+    try {
+      dashboardSyncChannel = new BroadcastChannel('nextcode-manage-course-sync');
+      dashboardSyncChannel.onmessage = () => {
+        lastDashboardRefreshAt = Date.now();
+        void loadDashboardData(true);
+      };
+    } catch {
+      dashboardSyncChannel = null;
+    }
+  }
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener('focus', handleDashboardFocus);
+  document.removeEventListener('visibilitychange', handleDashboardFocus);
+  if (dashboardSyncChannel) {
+    dashboardSyncChannel.close();
+    dashboardSyncChannel = null;
+  }
 });
 </script>
 
 <template>
   <section data-ui class="space-y-8">
-    <!-- Top Workspace Header -->
+    <!-- Top Workspace Header (Đã lược bỏ các nút lối tắt và dòng mô tả thừa) -->
     <div class="bg-surface p-6 sm:p-8">
-      <div class="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-        <div>
-          <p class="text-xs font-medium text-muted">
-            {{ isAdmin ? 'Hệ thống Quản trị NextCode' : 'Không gian Giảng viên NextCode' }}
-          </p>
-          <h1 class="mt-1 font-display text-2xl font-normal tracking-tight text-ink sm:text-3xl">
-            Xin chào, {{ authStore.user?.fullName }}
-          </h1>
-          <p class="mt-2 max-w-2xl text-sm leading-6 text-muted">
-            {{
-              isAdmin
-                ? 'Quản lý toàn bộ khóa học nền, phân công giảng viên, phê duyệt nội dung xuất bản và quản trị tài khoản người dùng trên hệ thống.'
-                : 'Theo dõi các khóa học bạn được phân công, biên soạn chương, bài giảng video và câu hỏi trắc nghiệm để gửi quản trị viên kiểm duyệt.'
-            }}
-          </p>
-        </div>
-
-        <div class="flex flex-wrap items-center gap-2.5">
-          <router-link
-            v-if="isAdmin"
-            :to="{ name: 'ManageCourseCreate' }"
-            class="manage-button-primary"
-          >
-            <CirclePlus class="h-4 w-4" />
-            Tạo khóa học mới
-          </router-link>
-          <router-link
-            :to="{ name: 'ManageCourses' }"
-            class="manage-button-secondary"
-          >
-            <BookOpen class="h-4 w-4" />
-            {{ isAdmin ? 'Quản lý khóa học' : 'Khóa học được phân công' }}
-          </router-link>
-          <router-link
-            v-if="isAdmin"
-            :to="{ name: 'ManageUsers' }"
-            class="manage-button-secondary"
-          >
-            <Users class="h-4 w-4" />
-            Quản lý người dùng
-          </router-link>
-        </div>
-      </div>
+      <p class="text-xs font-medium text-muted">
+        {{ isAdmin ? 'Hệ thống Quản trị NextCode' : 'Không gian Giảng viên NextCode' }}
+      </p>
+      <h1 class="mt-1 font-display text-2xl font-normal tracking-tight text-ink sm:text-3xl">
+        Xin chào, {{ authStore.user?.fullName }}
+      </h1>
     </div>
 
     <!-- Error Alert -->
@@ -259,6 +435,241 @@ onMounted(() => {
           <span class="text-xs font-medium text-muted">Đã khóa (LOCKED)</span>
           <p class="mt-2 font-display text-2xl font-normal tabular-nums text-brand-soft">{{ userStats.locked }}</p>
         </router-link>
+      </div>
+    </div>
+
+    <!-- Khu vực Biểu đồ trực quan (Admin: 3 biểu đồ toàn diện | Giảng viên: 2 biểu đồ khóa học) -->
+    <div>
+      <div class="mb-3 flex items-center justify-between">
+        <h2 class="text-sm font-semibold text-ink">
+          {{ isAdmin ? 'Biểu đồ phân tích hệ thống' : 'Biểu đồ trạng thái khóa học được phân công' }}
+        </h2>
+      </div>
+
+      <!-- Admin: Bộ 3 biểu đồ -->
+      <div v-if="isAdmin" class="grid gap-4 lg:grid-cols-3">
+        <!-- Biểu đồ 1: Phân bổ trạng thái khóa học (Donut SVG) -->
+        <div class="flex flex-col justify-between bg-surface p-5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-ink">Tỷ lệ trạng thái khóa học</span>
+            <PieChart class="h-4 w-4 text-brand-soft" />
+          </div>
+
+          <div class="my-5 flex items-center gap-5">
+            <div class="relative h-28 w-28 shrink-0">
+              <svg viewBox="0 0 100 100" class="h-full w-full -rotate-90">
+                <circle
+                  cx="50"
+                  cy="50"
+                  :r="DONUT_RADIUS"
+                  fill="none"
+                  stroke="#eef2f8"
+                  stroke-width="12"
+                />
+                <circle
+                  v-for="seg in courseChartSegments"
+                  :key="seg.key"
+                  cx="50"
+                  cy="50"
+                  :r="DONUT_RADIUS"
+                  fill="none"
+                  :stroke="seg.color"
+                  stroke-width="12"
+                  :stroke-dasharray="seg.dashArray"
+                  :stroke-dashoffset="seg.dashOffset"
+                  stroke-linecap="butt"
+                />
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span class="text-xl font-extrabold tabular-nums text-ink">
+                  {{ courseCounts.total }}
+                </span>
+                <span class="text-[10px] font-medium text-muted">Khóa học</span>
+              </div>
+            </div>
+
+            <div class="min-w-0 flex-1 space-y-2">
+              <div
+                v-for="seg in courseChartSegments"
+                :key="seg.key"
+                class="flex items-center justify-between gap-2 text-xs"
+              >
+                <div class="flex min-w-0 items-center gap-2">
+                  <span class="h-2.5 w-2.5 shrink-0 rounded-full" :class="seg.dotClass" />
+                  <span class="truncate text-muted">{{ seg.label }}</span>
+                </div>
+                <span class="shrink-0 font-bold tabular-nums text-ink">
+                  {{ seg.count }} ({{ seg.percent }}%)
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-surface-3 pt-3 text-xs text-muted">
+            Tỷ lệ đã xuất bản công khai:
+            <strong class="tabular-nums text-ink">
+              {{ courseChartSegments[0]?.percent ?? 0 }}%
+            </strong>
+          </div>
+        </div>
+
+        <!-- Biểu đồ 2: Cơ cấu tài khoản người dùng (Horizontal Bars) -->
+        <div class="flex flex-col justify-between bg-surface p-5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-ink">Cơ cấu tài khoản theo vai trò</span>
+            <Users class="h-4 w-4 text-brand-soft" />
+          </div>
+
+          <div class="my-5 space-y-3.5">
+            <div v-for="bar in userChartBars" :key="bar.key" class="space-y-1.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-medium text-muted">{{ bar.label }}</span>
+                <span class="font-bold tabular-nums text-ink">
+                  {{ bar.count }} ({{ bar.percent }}%)
+                </span>
+              </div>
+              <div class="h-2.5 w-full overflow-hidden rounded-full bg-surface-2">
+                <div
+                  class="h-full rounded-full transition-all duration-300"
+                  :class="bar.barClass"
+                  :style="{ width: `${bar.widthPercent}%` }"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div class="border-t border-surface-3 pt-3 text-xs text-muted">
+            Tổng số tài khoản trên hệ thống:
+            <strong class="tabular-nums text-ink">{{ userStats.total }}</strong>
+          </div>
+        </div>
+
+        <!-- Biểu đồ 3: Tình trạng đơn hàng & Doanh thu khóa học Pro (Column Chart) -->
+        <div class="flex flex-col justify-between bg-surface p-5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-ink">Đơn hàng & Doanh thu khóa Pro</span>
+            <CreditCard class="h-4 w-4 text-brand-soft" />
+          </div>
+
+          <div class="mt-3 flex items-baseline justify-between bg-ground px-3.5 py-2.5">
+            <span class="text-xs font-medium text-muted">Doanh thu thực nhận</span>
+            <span class="text-base font-extrabold tabular-nums text-[#f05123]">
+              {{ formatCoursePrice(orderStats.totalRevenue) }}
+            </span>
+          </div>
+
+          <div class="my-4 grid h-28 grid-cols-3 items-end gap-3 px-2 pt-4">
+            <div
+              v-for="col in orderChartColumns"
+              :key="col.key"
+              class="flex h-full flex-col items-center justify-end"
+            >
+              <span class="mb-1 text-xs font-extrabold tabular-nums" :class="col.textClass">
+                {{ col.count }}
+              </span>
+              <div class="flex h-16 w-full items-end justify-center bg-surface-2 p-1">
+                <div
+                  class="w-full transition-all duration-300"
+                  :class="col.barClass"
+                  :style="{ height: `${col.heightPercent}%` }"
+                />
+              </div>
+              <span class="mt-1.5 truncate text-[11px] font-medium text-muted">
+                {{ col.label }}
+              </span>
+            </div>
+          </div>
+
+          <div class="border-t border-surface-3 pt-3 text-xs text-muted">
+            Tổng {{ orderStats.totalOrders }} đơn · Tỷ lệ hoàn tất:
+            <strong class="tabular-nums text-teal">{{ orderCompletionRate }}%</strong>
+          </div>
+        </div>
+      </div>
+
+      <!-- Giảng viên: Bộ 2 biểu đồ khóa học được phân công -->
+      <div v-else class="grid gap-4 lg:grid-cols-2">
+        <div class="flex flex-col justify-between bg-surface p-5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-ink">Phân bổ trạng thái khóa học</span>
+            <PieChart class="h-4 w-4 text-brand-soft" />
+          </div>
+
+          <div class="my-5 flex items-center gap-6">
+            <div class="relative h-28 w-28 shrink-0">
+              <svg viewBox="0 0 100 100" class="h-full w-full -rotate-90">
+                <circle
+                  cx="50"
+                  cy="50"
+                  :r="DONUT_RADIUS"
+                  fill="none"
+                  stroke="#eef2f8"
+                  stroke-width="12"
+                />
+                <circle
+                  v-for="seg in courseChartSegments"
+                  :key="seg.key"
+                  cx="50"
+                  cy="50"
+                  :r="DONUT_RADIUS"
+                  fill="none"
+                  :stroke="seg.color"
+                  stroke-width="12"
+                  :stroke-dasharray="seg.dashArray"
+                  :stroke-dashoffset="seg.dashOffset"
+                  stroke-linecap="butt"
+                />
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+                <span class="text-xl font-extrabold tabular-nums text-ink">
+                  {{ courseCounts.total }}
+                </span>
+                <span class="text-[10px] font-medium text-muted">Khóa học</span>
+              </div>
+            </div>
+
+            <div class="min-w-0 flex-1 space-y-2">
+              <div
+                v-for="seg in courseChartSegments"
+                :key="seg.key"
+                class="flex items-center justify-between gap-2 text-xs"
+              >
+                <div class="flex min-w-0 items-center gap-2">
+                  <span class="h-2.5 w-2.5 shrink-0 rounded-full" :class="seg.dotClass" />
+                  <span class="truncate text-muted">{{ seg.label }}</span>
+                </div>
+                <span class="shrink-0 font-bold tabular-nums text-ink">
+                  {{ seg.count }} ({{ seg.percent }}%)
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-col justify-between bg-surface p-5">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold text-ink">Tiến độ biên soạn & xuất bản</span>
+            <BarChart3 class="h-4 w-4 text-brand-soft" />
+          </div>
+
+          <div class="my-5 space-y-3.5">
+            <div v-for="seg in courseChartSegments" :key="seg.key" class="space-y-1.5">
+              <div class="flex items-center justify-between text-xs">
+                <span class="font-medium text-muted">{{ seg.label }}</span>
+                <span class="font-bold tabular-nums text-ink">
+                  {{ seg.count }} khóa ({{ seg.percent }}%)
+                </span>
+              </div>
+              <div class="h-2.5 w-full overflow-hidden rounded-full bg-surface-2">
+                <div
+                  class="h-full rounded-full transition-all duration-300"
+                  :class="seg.barClass"
+                  :style="{ width: `${Math.max(seg.count > 0 ? 6 : 0, seg.percent)}%` }"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
 

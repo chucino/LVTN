@@ -110,20 +110,38 @@ function syncKeyword() {
   keyword.value = routeString(route.query.keyword);
 }
 
-async function fetchList() {
-  await load(makeQuery());
+async function fetchList(silent: boolean | Event = false) {
+  await load(makeQuery(), silent === true);
 }
 
 watch(
   () => route.fullPath,
   () => {
     syncKeyword();
-    void fetchList();
+    void fetchList(false);
   },
   { immediate: true },
 );
 
 let keywordTimer: ReturnType<typeof setTimeout> | undefined;
+let syncChannel: BroadcastChannel | null = null;
+let lastListRefreshAt = 0;
+
+function triggerSilentListRefresh() {
+  if (pendingAction.value || busyCourseId.value || loading.value) return;
+  const now = Date.now();
+  if (now - lastListRefreshAt < 2000) return;
+  lastListRefreshAt = now;
+  void fetchList(true);
+}
+
+function handleVisibilityOrFocus() {
+  if (typeof document !== 'undefined' && document.visibilityState !== 'visible') {
+    return;
+  }
+  triggerSilentListRefresh();
+}
+
 watch(keyword, (value) => {
   if (keywordTimer) clearTimeout(keywordTimer);
   keywordTimer = setTimeout(() => {
@@ -133,9 +151,31 @@ watch(keyword, (value) => {
 });
 onUnmounted(() => {
   if (keywordTimer) clearTimeout(keywordTimer);
+  if (syncChannel) {
+    syncChannel.close();
+    syncChannel = null;
+  }
+  window.removeEventListener('focus', handleVisibilityOrFocus);
+  document.removeEventListener('visibilitychange', handleVisibilityOrFocus);
 });
 
 onMounted(async () => {
+  lastListRefreshAt = Date.now();
+  window.addEventListener('focus', handleVisibilityOrFocus);
+  document.addEventListener('visibilitychange', handleVisibilityOrFocus);
+
+  if (typeof BroadcastChannel !== 'undefined') {
+    try {
+      syncChannel = new BroadcastChannel('nextcode-manage-course-sync');
+      syncChannel.onmessage = () => {
+        lastListRefreshAt = 0;
+        triggerSilentListRefresh();
+      };
+    } catch {
+      syncChannel = null;
+    }
+  }
+
   await catalog.loadCatalog(isAdmin.value).catch(() => undefined);
 });
 
@@ -208,13 +248,6 @@ const hasFilters = computed(
         <h1 class="mt-1 font-display text-2xl font-normal tracking-tight text-ink sm:text-3xl">
           {{ isAdmin ? 'Tất cả khóa học' : 'Khóa học được phân công' }}
         </h1>
-        <p class="mt-1 text-sm text-muted">
-          {{
-            isAdmin
-              ? 'Tạo khóa học nền, phân công giảng viên và kiểm duyệt nội dung.'
-              : 'Biên soạn chương, bài giảng và trắc nghiệm cho các khóa học bạn được phân công.'
-          }}
-        </p>
       </div>
       <router-link
         v-if="isAdmin"

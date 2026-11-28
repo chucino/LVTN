@@ -4,7 +4,6 @@ import { useRoute, useRouter } from 'vue-router';
 import {
   ArrowLeft,
   BookOpen,
-  ClipboardList,
   CreditCard,
   Flag,
   LayoutDashboard,
@@ -50,24 +49,18 @@ const links = computed(() => [
     to: { name: 'ManageCourses' },
     icon: BookOpen,
     active:
-      (route.name === 'ManageCourses' && route.query.status !== 'PENDING') ||
+      route.name === 'ManageCourses' ||
       route.name === 'ManageCourseCreate' ||
       route.name === 'ManageCourseEdit' ||
       route.name === 'ManageCourseStudents',
   },
-  {
-    label: 'Báo cáo vi phạm',
-    to: { name: 'ManageReports' },
-    icon: Flag,
-    active: route.name === 'ManageReports',
-  },
   ...(isAdmin.value
     ? [
         {
-          label: 'Khóa học chờ duyệt',
-          to: { name: 'ManageCourses', query: { status: 'PENDING' } },
-          icon: ClipboardList,
-          active: route.name === 'ManageCourses' && route.query.status === 'PENDING',
+          label: 'Quản lý người dùng',
+          to: { name: 'ManageUsers' },
+          icon: Users,
+          active: route.name === 'ManageUsers',
         },
         {
           label: 'Đơn hàng & Thanh toán',
@@ -75,14 +68,14 @@ const links = computed(() => [
           icon: CreditCard,
           active: route.name === 'ManageOrders',
         },
-        {
-          label: 'Quản lý người dùng',
-          to: { name: 'ManageUsers' },
-          icon: Users,
-          active: route.name === 'ManageUsers',
-        },
       ]
     : []),
+  {
+    label: 'Báo cáo vi phạm',
+    to: { name: 'ManageReports' },
+    icon: Flag,
+    active: route.name === 'ManageReports',
+  },
 ]);
 
 async function logout() {
@@ -154,7 +147,7 @@ async function logout() {
 
     <div class="relative z-10 mx-auto flex max-w-[1600px]">
       <aside
-        data-ui class="fixed inset-y-14 left-0 z-20 no-radius flex w-60 flex-col justify-between border-r border-surface-3 bg-surface p-4 transition-transform lg:sticky lg:top-14 lg:h-[calc(100svh-3.5rem)] lg:translate-x-0"
+        data-ui class="fixed inset-y-14 left-0 z-20 no-radius flex w-64 shrink-0 flex-col justify-between border-r border-surface-3 bg-surface p-4 transition-transform lg:sticky lg:top-14 lg:h-[calc(100svh-3.5rem)] lg:translate-x-0"
         :class="mobileNavOpen ? 'translate-x-0' : '-translate-x-full'"
       >
         <nav class="space-y-1" aria-label="Điều hướng quản lý">
@@ -162,12 +155,12 @@ async function logout() {
             v-for="link in links"
             :key="link.label"
             :to="link.to"
-            class="flex items-center gap-3 px-3 py-2.5 text-sm font-medium transition-colors"
+            class="flex items-center gap-2.5 whitespace-nowrap px-3 py-2.5 text-sm font-medium transition-colors"
             :class="link.active ? 'bg-tint text-brand-soft' : 'text-muted hover:bg-surface-2 hover:text-ink'"
             @click="mobileNavOpen = false"
           >
             <component :is="link.icon" class="h-4 w-4 shrink-0" />
-            {{ link.label }}
+            <span>{{ link.label }}</span>
           </router-link>
         </nav>
 

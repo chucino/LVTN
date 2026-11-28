@@ -11,12 +11,10 @@ import {
   CreditCard,
   Crown,
   Download,
-  ExternalLink,
   PlayCircle,
   QrCode,
   RefreshCw,
   ShieldCheck,
-  Sparkles,
   Tag,
   XCircle,
 } from 'lucide-vue-next';
@@ -54,7 +52,6 @@ const couponError = ref<string | null>(null);
 
 const creatingOrder = ref(false);
 const syncingPayment = ref(false);
-const simulatingPayment = ref(false);
 const cancellingOrder = ref(false);
 const actionError = ref<string | null>(null);
 const actionSuccess = ref<string | null>(null);
@@ -125,8 +122,7 @@ function startOrderMonitoring(): void {
     if (
       activeOrder.value &&
       activeOrder.value.status === 'PENDING' &&
-      !syncingPayment.value &&
-      !simulatingPayment.value
+      !syncingPayment.value
     ) {
       void handleSyncPayment(true);
     }
@@ -276,7 +272,7 @@ async function handleSyncPayment(silent = false): Promise<void> {
     if (updated.status === 'COMPLETED') {
       stopTimers();
       actionSuccess.value =
-        'Hệ thống đã nhận được thanh toán từ payOS và mở khóa học Pro cho bạn!';
+        'Hệ thống đã nhận được thanh toán và mở khóa học Pro cho bạn!';
     } else if (!silent && updated.status === 'PENDING') {
       actionSuccess.value =
         'Hệ thống đang chờ ngân hàng xác nhận giao dịch. Sau khi chuyển khoản, trạng thái sẽ tự động cập nhật sau 2–5 giây.';
@@ -291,25 +287,6 @@ async function handleSyncPayment(silent = false): Promise<void> {
     if (!silent) {
       syncingPayment.value = false;
     }
-  }
-}
-
-async function handleSimulatePayment(): Promise<void> {
-  if (!activeOrder.value || simulatingPayment.value) return;
-  simulatingPayment.value = true;
-  actionError.value = null;
-  actionSuccess.value = null;
-
-  try {
-    const updated = await ordersApi.simulateOrderPayment(activeOrder.value.id);
-    activeOrder.value = updated;
-    stopTimers();
-    actionSuccess.value =
-      'Đã xác nhận thanh toán thành công (chế độ mô phỏng). Khóa học Pro đã được mở khóa!';
-  } catch (err) {
-    actionError.value = getCourseErrorMessage(err);
-  } finally {
-    simulatingPayment.value = false;
   }
 }
 
@@ -452,9 +429,6 @@ onBeforeUnmount(() => {
                     : 'Xác nhận đơn hàng & Ưu đãi'
               }}
             </h1>
-            <p class="mt-1.5 text-sm text-muted">
-              Thanh toán tự động 24/7 qua cổng VietQR payOS, mở khóa bài giảng ngay sau khi chuyển khoản.
-            </p>
           </div>
 
           <div
@@ -621,16 +595,6 @@ onBeforeUnmount(() => {
                   <Download class="h-3.5 w-3.5" />
                   <span>Tải ảnh QR</span>
                 </a>
-                <a
-                  v-if="activeOrder.checkoutUrl"
-                  :href="activeOrder.checkoutUrl"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="inline-flex items-center gap-1.5 bg-slate-200 px-3 py-1.5 text-xs font-semibold text-slate-900 hover:bg-slate-300"
-                >
-                  <ExternalLink class="h-3.5 w-3.5" />
-                  <span>Mở trang payOS</span>
-                </a>
               </div>
             </div>
 
@@ -711,7 +675,7 @@ onBeforeUnmount(() => {
             </div>
           </div>
 
-          <!-- Thanh hành động kiểm tra / giả lập -->
+          <!-- Thanh hành động kiểm tra -->
           <div class="space-y-3 bg-ground p-4">
             <div class="flex flex-wrap items-center justify-between gap-3">
               <button
@@ -729,24 +693,6 @@ onBeforeUnmount(() => {
                     syncingPayment
                       ? 'Đang đối soát với payOS...'
                       : 'Tôi đã chuyển khoản · Kiểm tra ngay'
-                  }}
-                </span>
-              </button>
-
-              <button
-                v-if="activeOrder.simulationEnabled"
-                type="button"
-                :disabled="simulatingPayment"
-                class="manage-button-secondary !min-h-11"
-                title="Dùng khi demo bảo vệ luận văn mà không cần chuyển tiền thật"
-                @click="handleSimulatePayment"
-              >
-                <Sparkles class="h-4 w-4 text-amber-400" />
-                <span>
-                  {{
-                    simulatingPayment
-                      ? 'Đang giả lập...'
-                      : 'Giả lập thanh toán (Demo)'
                   }}
                 </span>
               </button>
@@ -981,17 +927,6 @@ onBeforeUnmount(() => {
               }}
             </span>
           </button>
-
-          <ul class="space-y-2.5 bg-ground p-4 text-xs leading-5 text-muted">
-            <li class="flex items-start gap-2">
-              <CheckCircle2 class="mt-0.5 h-4 w-4 shrink-0 text-teal" />
-              <span>Mã QR tạo trực tiếp từ cổng payOS (VietQR Pro - MB Bank), tự động điền sẵn số tài khoản, số tiền và nội dung.</span>
-            </li>
-            <li class="flex items-start gap-2">
-              <CheckCircle2 class="mt-0.5 h-4 w-4 shrink-0 text-teal" />
-              <span>Mở khóa toàn bộ lộ trình học tập và cấp chứng chỉ ngay khi hoàn thành khóa học.</span>
-            </li>
-          </ul>
         </aside>
       </div>
     </template>

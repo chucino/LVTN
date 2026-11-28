@@ -714,7 +714,7 @@ function submit() {
                   Video hiện tại: <code class="text-ink">{{ form.existingUploadedUrl }}</code>
                 </p>
                 <p v-else class="text-xs text-muted">
-                  Hỗ trợ định dạng MP4, WEBM (dung lượng tối đa 1GB). Thời lượng sẽ được trích xuất tự động ngay khi chọn file.
+                  Hỗ trợ định dạng MP4, WEBM (dung lượng tối đa 1GB).
                 </p>
 
                 <span v-if="errors.videoUrl" class="manage-field-error">{{
@@ -750,7 +750,7 @@ function submit() {
           </div>
 
           <p v-else class="bg-ground p-3 text-xs text-muted">
-            Bài giảng này đang chọn chế độ <strong>Không dùng video</strong> (chỉ hiển thị Nội dung bài đọc / File tài liệu và câu hỏi trắc nghiệm nếu có).
+            Bài giảng này đang chọn chế độ <strong>Không dùng video</strong>.
           </p>
 
           <!-- Thời lượng tự động trích xuất (Chỉ hiển thị khi có video) -->

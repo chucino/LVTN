@@ -7,6 +7,19 @@ import type {
   ManageCourseStatus,
 } from '@/types/manage-course';
 
+const COURSE_SYNC_CHANNEL = 'nextcode-manage-course-sync';
+
+function notifyCourseSync(courseId?: string) {
+  if (typeof window === 'undefined' || typeof BroadcastChannel === 'undefined') return;
+  try {
+    const channel = new BroadcastChannel(COURSE_SYNC_CHANNEL);
+    channel.postMessage({ type: 'course-updated', courseId, timestamp: Date.now() });
+    channel.close();
+  } catch {
+    // Ignore BroadcastChannel errors in unsupported contexts
+  }
+}
+
 export function useManageCourseList() {
   const items = ref<ManageCourseItem[]>([]);
   const total = ref(0);
@@ -16,10 +29,12 @@ export function useManageCourseList() {
   const error = ref<string | null>(null);
   let latestLoad = 0;
 
-  async function load(query: ManageCourseQuery) {
+  async function load(query: ManageCourseQuery, silent = false) {
     const requestId = ++latestLoad;
-    loading.value = true;
-    error.value = null;
+    if (!silent) {
+      loading.value = true;
+      error.value = null;
+    }
     try {
       const result = await manageCourseService.list(query);
       if (requestId !== latestLoad) return;
@@ -27,11 +42,11 @@ export function useManageCourseList() {
       total.value = result.total;
       totalPages.value = result.totalPages;
     } catch (cause) {
-      if (requestId === latestLoad) {
+      if (requestId === latestLoad && !silent) {
         error.value = getManageErrorMessage(cause, 'Không thể tải danh sách khóa học.');
       }
     } finally {
-      if (requestId === latestLoad) loading.value = false;
+      if (requestId === latestLoad && !silent) loading.value = false;
     }
   }
 
@@ -47,6 +62,7 @@ export function useManageCourseList() {
       if (action === 'delete') await manageCourseService.delete(courseId);
       else if (action === 'reject') await manageCourseService.reject(courseId, reason ?? '');
       else await manageCourseService.transition(courseId, action);
+      notifyCourseSync(courseId);
     } catch (cause) {
       error.value = getManageErrorMessage(cause, 'Không thể thực hiện thao tác.');
       throw cause;

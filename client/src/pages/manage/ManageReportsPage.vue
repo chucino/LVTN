@@ -230,14 +230,6 @@ onMounted(() => {
         <h1 class="mt-1 text-2xl font-extrabold text-ink">
           Báo cáo vi phạm bình luận
         </h1>
-        <p class="mt-1.5 max-w-3xl text-sm text-muted">
-          <template v-if="isAdmin">
-            Tuyến 2: Admin xử lý các báo cáo được Giảng viên chuyển lên và báo cáo nhắm vào Giảng viên. Mức phạt được áp dụng tự động theo số lần vi phạm tích lũy của tài khoản.
-          </template>
-          <template v-else>
-            Tuyến 1: Giảng viên xử lý báo cáo nhắm vào học viên thuộc khóa học mình phụ trách. Trường hợp tái phạm nhiều lần hoặc nghiêm trọng, hãy chuyển báo cáo lên Admin.
-          </template>
-        </p>
       </div>
 
       <button

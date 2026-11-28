@@ -28,13 +28,16 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
       envFilePath: '.env',
     }),
 
-    // Giới hạn tần suất request (chống brute force OTP và login)
+    // Giới hạn tần suất request chung cho toàn hệ thống (các route OTP/login có @Throttle chặt riêng)
     ThrottlerModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (config: ConfigService) => [
         {
           ttl: config.get<number>('THROTTLE_TTL', 60000),
-          limit: config.get<number>('THROTTLE_LIMIT', 20),
+          limit: Math.max(
+            300,
+            Number(config.get<number>('THROTTLE_LIMIT', 300)) || 300,
+          ),
         },
       ],
       inject: [ConfigService],

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ArrowUp } from 'lucide-vue-next';
+
 function scrollToTop() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -9,10 +11,16 @@ function scrollToTop() {
     <div class="mx-auto max-w-[1440px] px-[var(--margin)] py-14">
       <div class="grid gap-10 md:grid-cols-12">
         <div class="md:col-span-5">
-          <router-link to="/" class="inline-flex items-center gap-2.5">
+          <button
+            type="button"
+            class="inline-flex cursor-pointer items-center gap-2.5 text-left transition-opacity hover:opacity-90"
+            title="Cuộn lên đầu trang"
+            aria-label="NextCode - Cuộn lên đầu trang"
+            @click="scrollToTop"
+          >
             <img src="/logo.jpg" alt="Logo NextCode" width="36" height="36" class="h-9 w-9 rounded-lg bg-white object-contain p-1" />
             <span class="text-xl font-bold">NextCode</span>
-          </router-link>
+          </button>
           <p class="mt-4 max-w-sm text-sm leading-6 text-white/70">
             Nền tảng học lập trình trực tuyến với giáo trình chia theo chương, bài giảng video và bài trắc nghiệm sau mỗi bài.
           </p>
@@ -50,7 +58,15 @@ function scrollToTop() {
 
       <div class="mt-12 flex flex-wrap items-center justify-between gap-3 text-xs text-white/60">
         <p>© {{ new Date().getFullYear() }} NextCode. Học lập trình có lộ trình.</p>
-        <button type="button" class="transition-colors hover:text-white" @click="scrollToTop">Lên đầu trang</button>
+        <button
+          type="button"
+          class="inline-flex h-9 w-9 items-center justify-center rounded-lg border border-white/15 bg-white/10 text-white/80 transition-colors hover:border-white/30 hover:bg-white/20 hover:text-white"
+          title="Lên đầu trang"
+          aria-label="Lên đầu trang"
+          @click="scrollToTop"
+        >
+          <ArrowUp class="h-4 w-4" />
+        </button>
       </div>
     </div>
   </footer>

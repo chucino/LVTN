@@ -148,9 +148,6 @@ onMounted(() => {
         <h1 class="text-2xl font-bold text-ink">
           Quản lý đơn hàng & Đối soát thanh toán
         </h1>
-        <p class="mt-1 text-sm text-muted">
-          Theo dõi giao dịch khóa học Pro qua cổng VietQR payOS, đối soát tự động hoặc xác nhận thủ công.
-        </p>
       </div>
       <button
         type="button"

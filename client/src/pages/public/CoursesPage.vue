@@ -462,7 +462,7 @@ onBeforeUnmount(() => {
           <div class="mb-6 hidden items-center lg:flex">
             <p class="text-base text-muted">
               <template v-if="results">
-                Tìm thấy <span class="font-medium text-ink">{{ results.total }}</span> giáo trình
+                Tìm thấy <span class="font-medium text-ink">{{ results.total }}</span> khóa học
               </template>
             </p>
           </div>
@@ -488,7 +488,7 @@ onBeforeUnmount(() => {
             v-else-if="results?.items.length === 0"
             data-ui class="border border-surface-3 bg-surface px-8 py-16"
           >
-            <h2 class="text-2xl font-normal text-ink">Chưa tìm thấy giáo trình phù hợp</h2>
+            <h2 class="text-2xl font-normal text-ink">Chưa tìm thấy khóa học phù hợp</h2>
             <p class="mt-2 text-base text-muted">Hãy thử đổi từ khóa hoặc đặt lại bộ lọc tìm kiếm.</p>
             <button type="button" class="mt-6 bg-brand px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-brand-hover" @click="clearFilters">
               Đặt lại bộ lọc
@@ -496,7 +496,7 @@ onBeforeUnmount(() => {
           </div>
           <template v-else-if="results">
             <div class="mb-4 text-sm text-muted lg:hidden">
-              Tìm thấy <span class="font-medium text-ink">{{ results.total }}</span> giáo trình
+              Tìm thấy <span class="font-medium text-ink">{{ results.total }}</span> khóa học
             </div>
             <div class="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
               <CourseCard v-for="course in results.items" :key="course.id" :course="course" />

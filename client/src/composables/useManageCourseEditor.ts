@@ -10,6 +10,19 @@ import type {
   ManageQuizQuestionPayload,
 } from '@/types/manage-course';
 
+const COURSE_SYNC_CHANNEL = 'nextcode-manage-course-sync';
+
+function broadcastCourseSync(courseId?: string) {
+  if (typeof window === 'undefined' || typeof BroadcastChannel === 'undefined') return;
+  try {
+    const channel = new BroadcastChannel(COURSE_SYNC_CHANNEL);
+    channel.postMessage({ type: 'course-updated', courseId, timestamp: Date.now() });
+    channel.close();
+  } catch {
+    // Ignore BroadcastChannel errors in unsupported contexts
+  }
+}
+
 export function useManageCourseEditor() {
   const course = ref<ManageCourseDetail | null>(null);
   const loading = ref(false);
@@ -31,6 +44,22 @@ export function useManageCourseEditor() {
     }
   }
 
+  /**
+   * Làm mới ngầm thông tin & trạng thái khóa học mà không bật skeleton loading
+   * để tự động cập nhật khi Giảng viên gửi duyệt hoặc Admin duyệt khóa học.
+   */
+  async function refreshSilently(courseId: string) {
+    if (!courseId || loading.value || busyKey.value) return;
+    try {
+      const fresh = await manageCourseService.get(courseId);
+      if (!busyKey.value) {
+        course.value = fresh;
+      }
+    } catch {
+      // Ignore transient background refresh errors
+    }
+  }
+
   async function perform<T>(
     key: string,
     request: () => Promise<T>,
@@ -42,6 +71,7 @@ export function useManageCourseEditor() {
     try {
       const value = await request();
       onSuccess?.(value);
+      broadcastCourseSync(course.value?.id);
       return value;
     } catch (cause) {
       error.value = getManageErrorMessage(cause);
@@ -215,6 +245,7 @@ export function useManageCourseEditor() {
     isSaving,
     error,
     load,
+    refreshSilently,
     create,
     update,
     transition,

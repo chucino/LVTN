@@ -438,7 +438,7 @@ function save() {
                 Đã chọn: <strong class="font-semibold">{{ selectedFile.name }}</strong> ({{ formatFileSize(selectedFile.size) }}) — Ảnh sẽ được tải lên server khi bấm Lưu.
               </p>
               <p v-else class="text-xs text-muted">
-                Hỗ trợ định dạng JPG, PNG, WEBP (tối đa 5MB). Khuyến nghị tỉ lệ 16:9.
+                Hỗ trợ định dạng JPG, PNG, WEBP (tối đa 5MB).
               </p>
               <span v-if="errors.thumbnail" class="manage-field-error">{{ errors.thumbnail }}</span>
             </div>

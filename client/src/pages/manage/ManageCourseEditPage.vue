@@ -67,11 +67,76 @@ function beforeUnload(event: BeforeUnloadEvent) {
   event.returnValue = '';
 }
 
+let syncTimer: ReturnType<typeof setInterval> | undefined;
+let syncChannel: BroadcastChannel | null = null;
+let lastRefreshAt = 0;
+
+function triggerSilentRefresh(force = false) {
+  if (
+    isCreating.value ||
+    !courseId.value ||
+    dirty.value ||
+    editorIsSaving.value ||
+    editorLoading.value
+  ) {
+    return;
+  }
+  const now = Date.now();
+  if (!force && now - lastRefreshAt < 2000) return;
+  lastRefreshAt = now;
+  void editor.refreshSilently(courseId.value);
+}
+
+function handleVisibilityOrFocus() {
+  if (typeof document !== 'undefined' && document.visibilityState !== 'visible') {
+    return;
+  }
+  triggerSilentRefresh();
+}
+
 onMounted(() => {
+  lastRefreshAt = Date.now();
   window.addEventListener('beforeunload', beforeUnload);
+  window.addEventListener('focus', handleVisibilityOrFocus);
+  document.addEventListener('visibilitychange', handleVisibilityOrFocus);
   void catalog.loadCatalog(isAdmin.value).catch(() => undefined);
+
+  if (typeof BroadcastChannel !== 'undefined') {
+    try {
+      syncChannel = new BroadcastChannel('nextcode-manage-course-sync');
+      syncChannel.onmessage = () => {
+        triggerSilentRefresh(true);
+      };
+    } catch {
+      syncChannel = null;
+    }
+  }
+
+  syncTimer = setInterval(() => {
+    if (typeof document !== 'undefined' && document.visibilityState !== 'visible') {
+      return;
+    }
+    // Chỉ kiểm tra định kỳ khi đang mở tab Trạng thái và chờ đối phương chuyển trạng thái (Admin chờ Giảng viên gửi duyệt DRAFT -> PENDING, hoặc Giảng viên chờ Admin duyệt PENDING -> APPROVED)
+    if (activeTab.value !== 'status' || !editorCourse.value) return;
+    const currentStatus = editorCourse.value.status;
+    const isAdminWaitingSubmit = isAdmin.value && currentStatus === 'DRAFT';
+    const isInstructorWaitingApprove = !isAdmin.value && currentStatus === 'PENDING';
+    if (isAdminWaitingSubmit || isInstructorWaitingApprove) {
+      triggerSilentRefresh();
+    }
+  }, 5000);
 });
-onUnmounted(() => window.removeEventListener('beforeunload', beforeUnload));
+
+onUnmounted(() => {
+  window.removeEventListener('beforeunload', beforeUnload);
+  window.removeEventListener('focus', handleVisibilityOrFocus);
+  document.removeEventListener('visibilitychange', handleVisibilityOrFocus);
+  if (syncTimer) clearInterval(syncTimer);
+  if (syncChannel) {
+    syncChannel.close();
+    syncChannel = null;
+  }
+});
 
 watch(
   [isCreating, courseId],
@@ -96,6 +161,9 @@ function setTab(tab: ManageCourseTab) {
   void router.replace({
     query: { ...route.query, tab },
   });
+  if (tab === 'status' || !dirty.value) {
+    triggerSilentRefresh();
+  }
 }
 
 async function saveInfo(

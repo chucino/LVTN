@@ -422,7 +422,7 @@ async function handleChangePassword() {
 </script>
 
 <template>
-  <div data-ui class="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+  <div data-ui class="mx-auto max-w-[1380px] px-4 py-8 sm:px-6 lg:px-8">
     <!-- Profile Header -->
     <section class="bg-surface p-6 sm:p-8">
       <div class="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
@@ -479,127 +479,19 @@ async function handleChangePassword() {
           </div>
         </div>
       </div>
-
-      <!-- Navigation Tabs -->
-      <div
-        class="mt-8 flex gap-1 overflow-x-auto bg-ground p-1"
-        role="tablist"
-        aria-label="Các mục trang cá nhân"
-      >
-        <button
-          type="button"
-          role="tab"
-          :aria-selected="activeTab === 'info'"
-          class="inline-flex items-center gap-2 whitespace-nowrap px-4 py-2.5 text-sm font-medium transition-colors"
-          :class="
-            activeTab === 'info'
-              ? 'bg-surface-2 text-ink'
-              : 'text-muted hover:bg-surface hover:text-ink'
-          "
-          @click="selectTab('info')"
-        >
-          <UserRound class="h-4 w-4" />
-          Thông tin cá nhân
-        </button>
-
-        <button
-          v-if="isStudent"
-          type="button"
-          role="tab"
-          :aria-selected="activeTab === 'courses'"
-          class="inline-flex items-center gap-2 whitespace-nowrap px-4 py-2.5 text-sm font-medium transition-colors"
-          :class="
-            activeTab === 'courses'
-              ? 'bg-surface-2 text-ink'
-              : 'text-muted hover:bg-surface hover:text-ink'
-          "
-          @click="selectTab('courses')"
-        >
-          <BookOpen class="h-4 w-4" />
-          <span>Khóa học của tôi</span>
-          <span
-            v-if="myCourses.length > 0"
-            class="rounded-full bg-tint px-2 py-0.5 text-xs font-bold tabular-nums text-brand-soft"
-          >
-            {{ myCourses.length }}
-          </span>
-        </button>
-
-        <button
-          v-if="isStudent"
-          type="button"
-          role="tab"
-          :aria-selected="activeTab === 'certificates'"
-          class="inline-flex items-center gap-2 whitespace-nowrap px-4 py-2.5 text-sm font-medium transition-colors"
-          :class="
-            activeTab === 'certificates'
-              ? 'bg-surface-2 text-ink'
-              : 'text-muted hover:bg-surface hover:text-ink'
-          "
-          @click="selectTab('certificates')"
-        >
-          <Award class="h-4 w-4" />
-          <span>Chứng chỉ của tôi</span>
-          <span
-            v-if="myCertificates.length > 0"
-            class="rounded-full bg-teal-tint px-2 py-0.5 text-xs font-bold tabular-nums text-teal"
-          >
-            {{ myCertificates.length }}
-          </span>
-        </button>
-
-        <button
-          v-if="isStudent"
-          type="button"
-          role="tab"
-          :aria-selected="activeTab === 'orders'"
-          class="inline-flex items-center gap-2 whitespace-nowrap px-4 py-2.5 text-sm font-medium transition-colors"
-          :class="
-            activeTab === 'orders'
-              ? 'bg-surface-2 text-ink'
-              : 'text-muted hover:bg-surface hover:text-ink'
-          "
-          @click="selectTab('orders')"
-        >
-          <CreditCard class="h-4 w-4" />
-          <span>Đơn hàng & Giao dịch</span>
-          <span
-            v-if="myOrders.length > 0"
-            class="rounded-full bg-tint px-2 py-0.5 text-xs font-bold tabular-nums text-brand-soft"
-          >
-            {{ myOrders.length }}
-          </span>
-        </button>
-
-        <button
-          type="button"
-          role="tab"
-          :aria-selected="activeTab === 'security'"
-          class="inline-flex items-center gap-2 whitespace-nowrap px-4 py-2.5 text-sm font-medium transition-colors"
-          :class="
-            activeTab === 'security'
-              ? 'bg-surface-2 text-ink'
-              : 'text-muted hover:bg-surface hover:text-ink'
-          "
-          @click="selectTab('security')"
-        >
-          <KeyRound class="h-4 w-4" />
-          Đổi mật khẩu & Bảo mật
-        </button>
-      </div>
     </section>
 
-    <!-- Tab 1: Personal Info & Avatar -->
-    <section
-      v-if="activeTab === 'info'"
-      class="mt-6 grid gap-6 lg:grid-cols-3"
-    >
+    <!-- Main Layout: Left Vertical Navigation Sidebar + Right Content -->
+    <div class="mt-6 flex flex-col gap-6 lg:flex-row">
+      <div class="flex min-w-0 flex-1 flex-col">
+        <!-- Tab 1: Personal Info & Avatar -->
+        <section
+          v-if="activeTab === 'info'"
+          class="grid flex-1 gap-6 lg:grid-cols-3"
+        >
       <!-- Avatar Upload Card -->
       <div class="bg-surface p-6">
         <h2 class="text-base font-semibold text-ink">Ảnh đại diện</h2>
-        <p class="mt-1 text-xs leading-5 text-muted">
-          Tải ảnh trực tiếp từ máy tính. Bạn có thể xem trước ảnh mới trước khi bấm Lưu hồ sơ.
-        </p>
 
         <input
           ref="avatarInputRef"
@@ -665,9 +557,6 @@ async function handleChangePassword() {
       >
         <div>
           <h2 class="text-lg font-semibold text-ink">Cập nhật thông tin cá nhân</h2>
-          <p class="mt-1 text-xs text-muted">
-            Thông tin họ tên sẽ được sử dụng để in trên Chứng chỉ hoàn thành khóa học.
-          </p>
         </div>
 
         <div
@@ -768,10 +657,10 @@ async function handleChangePassword() {
       </form>
     </section>
 
-    <!-- Tab 2: Enrolled Courses & Learning Progress -->
+        <!-- Tab 2: Enrolled Courses & Learning Progress -->
     <section
       v-else-if="activeTab === 'courses'"
-      class="mt-6 space-y-6 bg-surface p-6 sm:p-8"
+      class="flex-1 space-y-6 bg-surface p-6 sm:p-8"
     >
       <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
@@ -953,14 +842,11 @@ async function handleChangePassword() {
     <!-- Tab 3: My Certificates -->
     <section
       v-else-if="activeTab === 'certificates'"
-      class="mt-6 space-y-6 bg-surface p-6 sm:p-8"
+      class="flex-1 space-y-6 bg-surface p-6 sm:p-8"
     >
       <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
           <h2 class="text-lg font-semibold text-ink">Chứng chỉ của tôi</h2>
-          <p class="mt-1 text-xs text-muted">
-            Chứng chỉ được cấp tự động khi bạn hoàn thành 100% bài giảng và bài kiểm tra trắc nghiệm của khóa học.
-          </p>
         </div>
 
         <router-link
@@ -1028,16 +914,13 @@ async function handleChangePassword() {
     <!-- Tab 4: Orders & Payment History -->
     <section
       v-else-if="activeTab === 'orders'"
-      class="mt-6 space-y-6 bg-surface p-6 sm:p-8"
+      class="flex-1 space-y-6 bg-surface p-6 sm:p-8"
     >
       <div class="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
           <h2 class="text-lg font-semibold text-ink">
             Đơn hàng & Lịch sử thanh toán
           </h2>
-          <p class="mt-1 text-xs text-muted">
-            Quản lý các đơn hàng khóa học Pro và lịch sử giao dịch qua cổng VietQR payOS.
-          </p>
         </div>
 
         <div class="flex flex-wrap items-center gap-2">
@@ -1257,10 +1140,10 @@ async function handleChangePassword() {
     <!-- Tab 5: Password & Security -->
     <section
       v-else-if="activeTab === 'security'"
-      class="mt-6 max-w-2xl"
+      class="flex flex-1 flex-col"
     >
       <form
-        class="space-y-6 bg-surface p-6 sm:p-8"
+        class="flex-1 space-y-6 bg-surface p-6 sm:p-8"
         @submit.prevent="handleChangePassword"
       >
         <div>
@@ -1375,5 +1258,101 @@ async function handleChangePassword() {
         </div>
       </form>
     </section>
+      </div>
+
+      <!-- Left Vertical Navigation Sidebar -->
+      <aside
+        class="order-first w-full shrink-0 bg-surface p-3.5 lg:w-64"
+      >
+        <nav
+          class="flex flex-col gap-1"
+          role="tablist"
+          aria-label="Các mục trang cá nhân"
+        >
+          <button
+            type="button"
+            role="tab"
+            :aria-selected="activeTab === 'info'"
+            class="flex w-full items-center gap-2.5 whitespace-nowrap rounded-lg px-3.5 py-2.5 text-left text-sm transition-colors"
+            :class="
+              activeTab === 'info'
+                ? 'bg-tint font-semibold text-brand-soft'
+                : 'font-medium text-muted hover:bg-surface-2 hover:text-ink'
+            "
+            @click="selectTab('info')"
+          >
+            <UserRound class="h-4 w-4 shrink-0" />
+            <span>Thông tin cá nhân</span>
+          </button>
+
+          <button
+            v-if="isStudent"
+            type="button"
+            role="tab"
+            :aria-selected="activeTab === 'courses'"
+            class="flex w-full items-center gap-2.5 whitespace-nowrap rounded-lg px-3.5 py-2.5 text-left text-sm transition-colors"
+            :class="
+              activeTab === 'courses'
+                ? 'bg-tint font-semibold text-brand-soft'
+                : 'font-medium text-muted hover:bg-surface-2 hover:text-ink'
+            "
+            @click="selectTab('courses')"
+          >
+            <BookOpen class="h-4 w-4 shrink-0" />
+            <span>Khóa học của tôi</span>
+          </button>
+
+          <button
+            v-if="isStudent"
+            type="button"
+            role="tab"
+            :aria-selected="activeTab === 'certificates'"
+            class="flex w-full items-center gap-2.5 whitespace-nowrap rounded-lg px-3.5 py-2.5 text-left text-sm transition-colors"
+            :class="
+              activeTab === 'certificates'
+                ? 'bg-tint font-semibold text-brand-soft'
+                : 'font-medium text-muted hover:bg-surface-2 hover:text-ink'
+            "
+            @click="selectTab('certificates')"
+          >
+            <Award class="h-4 w-4 shrink-0" />
+            <span>Chứng chỉ của tôi</span>
+          </button>
+
+          <button
+            v-if="isStudent"
+            type="button"
+            role="tab"
+            :aria-selected="activeTab === 'orders'"
+            class="flex w-full items-center gap-2.5 whitespace-nowrap rounded-lg px-3.5 py-2.5 text-left text-sm transition-colors"
+            :class="
+              activeTab === 'orders'
+                ? 'bg-tint font-semibold text-brand-soft'
+                : 'font-medium text-muted hover:bg-surface-2 hover:text-ink'
+            "
+            @click="selectTab('orders')"
+          >
+            <CreditCard class="h-4 w-4 shrink-0" />
+            <span>Đơn hàng & Giao dịch</span>
+          </button>
+
+          <button
+            type="button"
+            role="tab"
+            :aria-selected="activeTab === 'security'"
+            class="flex w-full items-center gap-2.5 whitespace-nowrap rounded-lg px-3.5 py-2.5 text-left text-sm transition-colors"
+            :class="
+              activeTab === 'security'
+                ? 'bg-tint font-semibold text-brand-soft'
+                : 'font-medium text-muted hover:bg-surface-2 hover:text-ink'
+            "
+            @click="selectTab('security')"
+          >
+            <KeyRound class="h-4 w-4 shrink-0" />
+            <span>Đổi mật khẩu & Bảo mật</span>
+          </button>
+        </nav>
+      </aside>
+    </div>
   </div>
 </template>

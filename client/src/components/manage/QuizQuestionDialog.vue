@@ -79,7 +79,6 @@ function submit() {
       <div class="flex items-center justify-between gap-3">
         <div>
           <h2 class="text-base font-semibold text-ink">{{ question ? 'Sửa câu trắc nghiệm' : 'Thêm câu trắc nghiệm' }}</h2>
-          <p class="mt-1 text-xs text-muted">Chọn đáp án đúng; chỉ số gửi API bắt đầu từ 0.</p>
         </div>
         <button type="button" class="p-1.5 text-muted hover:bg-surface-2 hover:text-ink" aria-label="Đóng" :disabled="busy" @click="emit('cancel')"><X class="h-4 w-4" /></button>
       </div>

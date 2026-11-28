@@ -294,9 +294,6 @@ async function submitCreateUser() {
         <h1 class="mt-1 font-display text-2xl font-normal tracking-tight text-ink sm:text-3xl">
           Quản lý người dùng & Phân quyền
         </h1>
-        <p class="mt-1 text-sm text-muted">
-          Quản lý toàn bộ tài khoản Học viên, Giảng viên, Kế toán và Quản trị viên trong hệ thống.
-        </p>
       </div>
       <button
         type="button"
